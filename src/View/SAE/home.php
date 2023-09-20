@@ -1,2 +1,2 @@
 <?php
-echo "Bienvenue sur la page d'accueil de mon site";
+echo '<div class="container">Bienvenue sur la page daccueil de mon site</div>';
