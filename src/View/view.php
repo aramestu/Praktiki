@@ -6,19 +6,40 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/charte-graphique-UM.css">
+    <link rel="stylesheet" href="assets/css/nav.css">
 </head>
 <body>
 <header>
-    <nav>
-        <a href="frontController.php?action=readAll">Voitures</a>
-        <a href="frontController.php?action=readAll&controller=utilisateur">Utilisateurs</a>
-        <a href="frontController.php?action=readAll&controller=trajet">Trajets</a>
-    </nav>
+      <a href="#" class="logo">Logo</a>
+
+      <input type="checkbox" id="check" />
+      <label for="check" class="icons">
+        <i class="bx bx-menu" id="menu-icon"></i>
+        <i class="bx bx-x" id="close-icon"></i>
+      </label>
+
+      <nav class="navbar">
+        <a href="#" class="nav-item" style="--i: 0">Home</a>
+        <a href="#" class="nav-item" style="--i: 1">About</a>
+        <a href="#" class="nav-item" style="--i: 2">Gallery</a>
+        <a href="#" class="nav-item" style="--i: 3">Services</a>
+        <a href="#" class="nav-item" style="--i: 4">Contact</a>
+      </nav>
 </header>
 <main>
     <?php
     require __DIR__ . "/{$cheminVueBody}";
     ?>
+    <?php
+        require __DIR__ . "/{$cheminVueBody}";
+        ?>
+        <?php
+            require __DIR__ . "/{$cheminVueBody}";
+            ?>
+            <?php
+                require __DIR__ . "/{$cheminVueBody}";
+                ?>
+
 </main>
 <footer>
     <p>
