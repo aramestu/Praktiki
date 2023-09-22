@@ -1,4 +1,22 @@
 :root {
     --rougeUM: #FF5660;
-    --bleuSO: #4BC2BC;
+    --bleuUM: #4BC2BC;
+
+    --white: #ECF0F1;
+    --grey0: #BDC3C7;
+
+    --grey1: #95A5A6;
+    --grey2: #7F8C8D;
+
+    --darkBlue1: #34495E;
+    --darkBlue2: #2C3E50;
+
+    --yellow: #F1C40F;
+    --orange: #E67E22;
+    --emerald: #2ECC71;
+    --green: #27AE60;
+    --lightBlue: #3498DB;
+    --blue: #2980B9;
+    --purple: #9B59B6;
+    --wisteria: #8E44AD;
 }

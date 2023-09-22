@@ -5,6 +5,7 @@
     <title><?php echo $pagetitle; ?></title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/charte-graphique-UM.css">
 </head>
 <body>
 <header>
