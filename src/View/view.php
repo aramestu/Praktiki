@@ -44,6 +44,8 @@
         <p>Mathias | Product Owner</p>
         <p>Clément | Dev PHP</p>
         <p>Thibaut | Dev PHP</p>
+        <p>Norman | Dev BD</p>
+        <p>Soren | Dev FRONT</p>
         </div>
         <div class="VBox">
             <p>
