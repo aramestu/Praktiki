@@ -51,7 +51,7 @@
             </p>
             </div>
     </div>
-    <p>Copiright 2021</p>
+    <p>Copiright 2023 - Tous droits réservés</p>
     </div>
 </footer>
 
