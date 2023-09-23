@@ -18,13 +18,27 @@
             </label>
 
       <nav class="navbar">
-        <a href="#" class="nav-item" style="--i: 0">Acceuil</a>
-        <a href="#" class="nav-item" style="--i: 1">Alternance</a>
-        <a href="#" class="nav-item" style="--i: 2">Stages</a>
-        <a href="#" class="nav-item" style="--i: 3">Contact</a>
-        <a href="#" class="nav-item" style="--i: 4">Connexion</a>
-      </nav>
+                  <a href="frontController.php?action=home" class="nav-item" data-action="home">Acceuil</a>
+                  <a href="frontController.php?action=alter" class="nav-item" data-action="alter">Alternance</a>
+                  <a href="frontController.php?action=stage" class="nav-item" data-action="stage">Stages</a>
+                  <a href="frontController.php?action=contact" class="nav-item" data-action="contact">Contact</a>
+                  <a href="frontController.php?action=connect" class="nav-item" data-action="connect">Connexion</a>
+              </nav>
 </header>
+
+<script>
+        // Get the current action from the URL
+        const currentAction = window.location.search.split('=')[1];
+
+        // Find the corresponding navigation item and add the 'active' class
+        const navItems = document.querySelectorAll('.navbar .nav-item');
+        navItems.forEach(item => {
+            if (item.getAttribute('data-action') === currentAction) {
+                item.classList.add('active');
+            }
+        });
+    </script>
+
 <main>
     <?php
     require __DIR__ . "/{$cheminVueBody}";
