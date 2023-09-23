@@ -278,7 +278,7 @@ main{
 /*---START FOOTER---*/
 footer {
     position: relative;
-    color: var(--black);
+    color: var(--grey3);
     width: 100%;
     text-align: center;
     font-size: 12px;
