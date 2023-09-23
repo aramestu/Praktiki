@@ -107,6 +107,7 @@ input:not(:placeholder-shown) ~ label {
     text-decoration: underline;
 }
 
+/*
 #checkbox {
     width: 13px;
     height: 13px;
@@ -125,3 +126,5 @@ input:not(:placeholder-shown) ~ label {
     color: #7f8a9b;
     display: none;
 }
+
+ */
