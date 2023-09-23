@@ -33,7 +33,7 @@ header::after {
     position: absolute;
     width: 100%;
     height: 100%;
-    /*
+
     background: linear-gradient(
             90deg,
             transparent,
@@ -41,7 +41,6 @@ header::after {
             transparent
     );
 
-     */
     transition: 0.8s;
 }
 
@@ -83,7 +82,6 @@ header:hover::after {
     background: var(--bleuUM);
     color: var(--white);
 }
-
  */
 
 .nav-item {
@@ -158,7 +156,7 @@ header:hover::after {
     position: absolute;
     right: 5%;
     font-size: 2.3rem;
-    color: #fff;
+    color: var(--rougeUM);
     cursor: pointer;
     display: none;
 }
@@ -203,7 +201,7 @@ header:hover::after {
         transition: all 0.3s ease;
     }
 
-    #check:checked ~ .navbar {
+    #menu-icon:checked ~ .navbar {
         height: 17.7rem;
     }
 
