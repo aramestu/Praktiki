@@ -22,7 +22,7 @@ header::before {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(50px);
+    backdrop-filter: blur(10px);
     z-index: -1;
 }
 
@@ -67,45 +67,65 @@ header:hover::after {
     color: var(--orange);
 }
 
-.nav-item:nth-child(1):active {
+.nav-item:nth-child(1):active, .nav-item:nth-child(1).active {
     color: var(--white);
     background: var(--orange);
+    box-shadow: inset 10px 10px 20px #00000020,
+    inset -10px -10px 20px #ffffff45,
+    10px 10px 10px #00000020,
+    -10px -10px 10px #ffffff45;
 }
 
 .nav-item:nth-child(2):hover {
     color: var(--green);
 }
 
-.nav-item:nth-child(2):active {
+.nav-item:nth-child(2):active, .nav-item:nth-child(2).active {
     color: var(--white);
     background: var(--green);
+    box-shadow: inset 10px 10px 20px #00000020,
+    inset -10px -10px 20px #ffffff45,
+    10px 10px 10px #00000020,
+    -10px -10px 10px #ffffff45;
 }
 
 .nav-item:nth-child(3):hover {
     color: var(--blue);
 }
 
-.nav-item:nth-child(3):active {
+.nav-item:nth-child(3):active, .nav-item:nth-child(3).active {
     color: var(--white);
     background: var(--blue);
+    box-shadow: inset 10px 10px 20px #00000020,
+    inset -10px -10px 20px #ffffff45,
+    10px 10px 10px #00000020,
+    -10px -10px 10px #ffffff45;
 }
 
 .nav-item:nth-child(4):hover {
     color: var(--wisteria);
 }
 
-.nav-item:nth-child(4):active {
+.nav-item:nth-child(4):active, .nav-item:nth-child(4).active {
     color: var(--white);
     background: var(--wisteria);
+    box-shadow: inset 10px 10px 20px #00000020,
+    inset -10px -10px 20px #ffffff45,
+    10px 10px 10px #00000020,
+    -10px -10px 10px #ffffff45;
 }
 
 .nav-item:nth-child(5):hover {
     color: var(--rougeUM);
 }
 
-.nav-item:nth-child(5):active {
+.nav-item:nth-child(5):active, .nav-item:nth-child(5).active {
     color: var(--white);
     background: var(--rougeUM);
+    box-shadow: inset 10px 10px 20px #00000020,
+    inset -10px -10px 20px #ffffff45,
+    10px 10px 10px #00000020,
+    -10px -10px 10px #ffffff45;
 }
 
 .icons {
@@ -208,6 +228,8 @@ body {
 
 /*---START MAIN---*/
 main{
+    width: 100%;
+    height: 100%;
     margin-top: 100px;
     display: flex;
     flex-direction: column;
@@ -278,6 +300,8 @@ main{
 /*---START FOOTER---*/
 footer {
     position: relative;
+    left: 0;
+    bottom: 0;
     color: var(--grey3);
     width: 100%;
     text-align: center;

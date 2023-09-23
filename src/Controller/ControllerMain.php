@@ -17,6 +17,17 @@ class ControllerMain
                 );
     }
 
+    public static function connect()
+    {
+        self::afficheVue(
+                    'view.php',
+                    [
+                        'pagetitle' => 'Connexion',
+                        'cheminVueBody' => 'SAE/connect.php',
+                    ]
+                );
+    }
+
     private static function afficheVue(string $cheminVue, array $parametres = []): void
     {
         extract($parametres); // Crée des variables à partir du tableau $parametres
