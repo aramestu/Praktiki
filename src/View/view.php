@@ -31,9 +31,28 @@
     ?>
 </main>
 <footer>
+<div class="VBox">
+<div class="HBox">
+<div class="VBox">
     <p>
-        Site de SAE 2023 Semestre 3
+        Contactez-nous !
     </p>
+    </div>
+    <div class="VBox" id="footer-team">
+        <p>Notre équipe</p>
+        <p>Lorick | Scrum Master</p>
+        <p>Mathias | Product Owner</p>
+        <p>Clément | Dev PHP</p>
+        <p>Thibaut | Dev PHP</p>
+        </div>
+        <div class="VBox">
+            <p>
+                Site de SAE 2023 Semestre 3
+            </p>
+            </div>
+    </div>
+    <p>Copiright 2021</p>
+    </div>
 </footer>
 </body>
 </html>

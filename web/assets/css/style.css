@@ -106,25 +106,3 @@ input:not(:placeholder-shown) ~ label {
     font-weight: 600;
     text-decoration: underline;
 }
-
-/*
-#checkbox {
-    width: 13px;
-    height: 13px;
-    background-color: transparent;
-    border: 0.5px solid #7f8a9b;
-    border-radius: 3px;
-    margin-right: 6px;
-    padding: 0px;
-}
-
-#checkbox:active {
-    transform: scale(0.8);
-}
-
-#checkbox-ico {
-    color: #7f8a9b;
-    display: none;
-}
-
- */
