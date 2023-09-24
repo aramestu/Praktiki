@@ -28,6 +28,17 @@ class ControllerMain
                 );
     }
 
+    public static function createAccount()
+    {
+        self::afficheVue(
+                    'view.php',
+                    [
+                        'pagetitle' => 'Créer un compte',
+                        'cheminVueBody' => 'SAE/createAccount.php',
+                    ]
+                );
+    }
+
     private static function afficheVue(string $cheminVue, array $parametres = []): void
     {
         extract($parametres); // Crée des variables à partir du tableau $parametres
