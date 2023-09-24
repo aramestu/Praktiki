@@ -21,8 +21,9 @@ header::before {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
+    background: var(--lightGrey);
+    box-shadow: 10px 10px 10px #00000020,
+    -10px -10px 10px #ffffff45;
     z-index: -1;
 }
 
@@ -62,6 +63,7 @@ header:hover::after {
     box-shadow: inset 10px 10px 20px #00000020,
     inset -10px -10px 20px #ffffff45;
     text-decoration: none;
+    transform: scale(0.95);
 }
 
 .nav-item:hover {

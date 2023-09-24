@@ -23,7 +23,7 @@
                     </div>
                 </p>
                 <p>
-                    <input type="submit" value="Connect" />
+                    <input type="submit" value="Connexion" />
                 </p>
         </form>
         <div class="create-account">

@@ -31,7 +31,7 @@ input[type="password"] {
     padding: 10px;
     margin-bottom: 15px;
     border: none;
-    border-radius: 10px;
+    border-radius: 1.5rem;
     background-color: var(--white);
     /*
     box-shadow: inset 5px 5px 10px var(--darkBlue1), inset -5px -5px 10px var(--white);
@@ -61,23 +61,29 @@ input[type="password"] {
 }
 
 input[type="submit"] {
-    background-color: var(--bleuUM);
-    color: var(--white);
+    background-color: var(--lightGrey);
+    color: var(--grey2);
     width: 100%;
     padding: 15px 0;
     border: none;
-    border-radius: 10px;
+    border-radius: 1.5rem;
     cursor: pointer;
     font-weight: bold;
     font-size : 1.2em;
-    box-shadow: 10px 10px 20px #00000020,
-    -10px -10px 20px #ffffff45;
+    box-shadow: 10px 10px 20px var(--grey0),
+    -10px -10px 20px var(--white);
     margin-top: 30px;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)
 }
 
 input[type="submit"]:hover {
-    background-color: var(--darkBlue1);
+    background-color: var(--bleuUM);
+    color: var(--white);
+}
+
+input[type="text"]:focus-within > input[type="submit"]{
+    background-color: var(--bleuUM);
+    color: var(--white);
 }
 
 input {
@@ -98,4 +104,5 @@ input:focus {
     width:20px;
     height:20px;
     opacity: 0.6;
+    margin-bottom: 8px;
 }
