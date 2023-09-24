@@ -1,6 +1,7 @@
 .container {
     background: var(--lightGrey);
     padding: 20px;
+    min-width: 330px;
     border-radius: 20px;
     box-shadow: 10px 10px 20px #00000020,
      -10px -10px 20px #ffffff45;
@@ -104,5 +105,69 @@ input:focus {
     width:20px;
     height:20px;
     opacity: 0.6;
-    margin-bottom: 8px;
+    margin-bottom: 49px;
 }
+
+
+
+/* Add this to your connect.css file */
+.password-strength {
+    width: 100%;
+    height: 10px;
+    background-color: var(--grey0);
+    border-radius: 5px;
+    margin-top: 5px;
+    overflow: hidden;
+    box-shadow: 10px 10px 20px var(--grey0),
+    -10px -10px 20px var(--white);
+}
+
+.strength-bar {
+    height: 100%;
+    width: 5%;
+    background-color: var(--rougeUM);
+    border-radius: 5px;
+    transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+
+.requirements {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10px;
+}
+
+.requirement {
+    display: flex;
+    align-items: center;
+    color: var(--darkBlue1);
+    margin-bottom: 5px;
+}
+
+.requirement-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    font-size: 16px;
+    line-height: 1;
+    color: var(--grey2);
+}
+
+.requirement-icon {
+    display: none;
+}
+
+.password-input:focus .requirement-icon {
+    display: inline;
+}
+
+.password-input {
+    position: relative;
+}
+
+#passwordHelp {
+    margin-top: 8px;
+}
+
+

@@ -27,7 +27,7 @@
                 </p>
         </form>
         <div class="create-account">
-            <p>Vous n'avez pas de compte? <a href="create_account.php">Créer un compte</a></p>
+            <p>Vous n'avez pas de compte? <a href="frontController.php?action=createAccount">Créer un compte</a></p>
         </div>
     </div>
     <script>
