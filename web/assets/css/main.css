@@ -61,6 +61,11 @@ header:hover::after {
 .nav-item:active {
     box-shadow: inset 10px 10px 20px #00000020,
     inset -10px -10px 20px #ffffff45;
+    text-decoration: none;
+}
+
+.nav-item:hover {
+    text-decoration: none;
 }
 
 .nav-item:nth-child(1):hover {
@@ -263,6 +268,13 @@ main{
 
 
 /*---START MISCELLANEOUS---*/
+legend{
+    font-size: 1.269rem;
+    font-weight: bold;
+    color: var(--black);
+    margin-bottom: 20px;
+}
+
 .HBox{
     display: flex;
     flex-direction: row;
@@ -295,6 +307,26 @@ main{
 
 .right{
     float: right;
+}
+
+a{
+    text-decoration: none;
+    color: var(--black);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)
+}
+
+a:hover{
+    text-decoration: underline;
+    color: var(--rougeUM);
+}
+
+a::after{
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: var(--rougeUM);
+    transition: width 0.3s;
 }
 /*---END MISCELLANEOUS---*/
 
