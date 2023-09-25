@@ -30,7 +30,7 @@
                     <div class="password-strength">
                         <div class="strength-bar"></div>
                     </div>
-                    <p id="passwordHelp"></p>
+                    <p id="passwordHelp">Entrez un mot de passe</p>
                     <button type="button" id="showPassword"><img id="showPasswordIconRegister" src="assets/images/eye-icon.png" alt="O" /></button>
                 </div>
             </p>
