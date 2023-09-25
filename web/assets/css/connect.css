@@ -101,7 +101,14 @@ input:focus {
     color: var(--darkBlue1);
 }
 
-#showPasswordIcon {
+#showPasswordIconConnect {
+    width:20px;
+    height:20px;
+    opacity: 0.6;
+    margin-bottom: 13px;
+}
+
+#showPasswordIconRegister {
     width:20px;
     height:20px;
     opacity: 0.6;
