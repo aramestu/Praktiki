@@ -1,13 +1,13 @@
 <?php
 
-require_once __DIR__ . '\..\src\Lib\Psr4AutoloaderClass.php';
+require_once __DIR__ . '/../src/Lib/Psr4AutoloaderClass.php';
 
 use App\SAE\Controller\ControllerMain;
 
 // instantiate the loader
 $loader = new App\Covoiturage\Lib\Psr4AutoloaderClass();
 // register the base directories for the namespace prefix
-$loader->addNamespace('App\SAE', __DIR__ . '\..\src');
+$loader->addNamespace('App\SAE', __DIR__ . '/../src');
 // register the autoloader
 $loader->register();
 
@@ -23,5 +23,6 @@ if (isset($_GET['action'])) {
 } else {
     ControllerMain::home();
 }
+
 
 ?>
