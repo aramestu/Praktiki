@@ -19,7 +19,7 @@
                     <label for="password">Mot de passe</label>
                     <div class="password-input">
                         <input type="password" name="password" id="password" required placeholder="mot de passe"/>
-                        <button type="button" id="showPassword"><img id="showPasswordIcon" src="assets/images/eye-icon.png" alt="O" /></button>
+                        <button type="button" id="showPassword"><img id="showPasswordIconConnect" src="assets/images/eye-icon.png" alt="O" /></button>
                     </div>
                 </p>
                 <p>

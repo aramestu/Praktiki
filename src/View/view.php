@@ -54,12 +54,12 @@
     </div>
     <div class="VBox" id="footer-team">
         <p>Notre équipe</p>
-        <p>Lorick | Scrum Master</p>
-        <p>Mathias | Product Owner</p>
-        <p>Clément | Dev PHP</p>
-        <p>Thibaut | Dev PHP</p>
-        <p>Norman | Dev BD</p>
-        <p>Soren | Dev FRONT</p>
+        <p>Lorick</p>
+        <p>Mathias</p>
+        <p>Clément</p>
+        <p>Thibaut</p>
+        <p>Norman</p>
+        <p>Soren</p>
         </div>
         <div class="VBox">
             <p>
