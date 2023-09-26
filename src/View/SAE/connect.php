@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Connexion</title>
+
     <link rel="stylesheet" href="assets/css/connect.css">
+
+    <script src="assets/javascript/showPassword.js"></script>
 </head>
 
 <body>
@@ -30,18 +33,6 @@
             <p>Vous n'avez pas de compte? <a href="frontController.php?action=createAccount">Créer un compte</a></p>
         </div>
     </div>
-    <script>
-        const passwordInput = document.getElementById('password');
-        const showPasswordButton = document.getElementById('showPassword');
-
-        showPasswordButton.addEventListener('click', () => {
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-            } else {
-                passwordInput.type = 'password';
-            }
-        });
-    </script>
 </body>
 
 </html>
