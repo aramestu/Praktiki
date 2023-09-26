@@ -6,6 +6,8 @@
 
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/charte-graphique-UM.css">
+
+    <script src="assets/javascript/navbar.js"></script>
 </head>
 <body>
 <header>
@@ -26,24 +28,12 @@
               </nav>
 </header>
 
-<script>
-        // Get the current action from the URL
-        const currentAction = window.location.search.split('=')[1];
-
-        // Find the corresponding navigation item and add the 'active' class
-        const navItems = document.querySelectorAll('.navbar .nav-item');
-        navItems.forEach(item => {
-            if (item.getAttribute('data-action') === currentAction) {
-                item.classList.add('active');
-            }
-        });
-    </script>
-
 <main>
     <?php
     require __DIR__ . "/{$cheminVueBody}";
     ?>
 </main>
+
 <footer>
 <div class="VBox">
 <div class="HBox">
