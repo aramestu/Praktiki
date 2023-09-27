@@ -182,4 +182,7 @@ input:focus {
     margin-top: 8px;
 }
 
+.hidden {
+    display: none;
+}
 

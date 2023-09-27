@@ -5,13 +5,10 @@
     <meta charset="UTF-8">
     <title>Création d'Offre</title>
     <link rel="stylesheet" href="assets/css/connect.css">
-    <script src="assets/javascript/passwordStrength.js"></script>
 
-    <style>
-        .hidden {
-            display: none;
-        }
-    </style>
+    <script src="assets/javascript/passwordStrength.js"></script>
+    <script src="assets/javascript/showHideToggle.js"></script>
+
 </head>
 
 <body>
@@ -26,20 +23,16 @@
                 </select>
             </p>
             <div id="stageForm">
-                <!-- Formulaire pour l'offre de stage -->
                 <p>
                     <label for="titreStage">Titre du Stage</label>
                     <input type="text" name="titreStage" id="titreStage" required placeholder="Titre du stage" />
                 </p>
-                <!-- Ajoutez d'autres champs spécifiques aux stages ici -->
             </div>
             <div id="alternanceForm" class="hidden">
-                <!-- Formulaire pour l'offre d'alternance -->
                 <p>
                     <label for="titreAlternance">Titre de l'Alternance</label>
                     <input type="text" name="titreAlternance" id="titreAlternance" placeholder="Titre de l'alternance" />
                 </p>
-                <!-- Ajoutez d'autres champs spécifiques aux alternances ici -->
             </div>
 
             <!-- Les champs communs aux deux types d'offres -->
@@ -72,35 +65,12 @@
                 <input type="date" name="dateFin" id="dateFin" required placeholder="Date de Fin" />
             </p>
 
-
             <p>
                 <input type="submit" value="Créer l'Offre" />
             </p>
         </form>
     </div>
 
-    <script>
-        const typeOffre = document.getElementById('typeOffre');
-        const stageForm = document.getElementById('stageForm');
-        const alternanceForm = document.getElementById('alternanceForm');
-
-        // Fonction pour masquer le formulaire non sélectionné
-        function toggleFormDisplay() {
-            if (typeOffre.value === 'stage') {
-                stageForm.classList.remove('hidden');
-                alternanceForm.classList.add('hidden');
-            } else if (typeOffre.value === 'alternance') {
-                stageForm.classList.add('hidden');
-                alternanceForm.classList.remove('hidden');
-            }
-        }
-
-        // Écouteur d'événement pour le changement de sélection
-        typeOffre.addEventListener('change', toggleFormDisplay);
-
-        // Appel initial pour afficher le formulaire approprié
-        toggleFormDisplay();
-    </script>
 </body>
 
 </html>
