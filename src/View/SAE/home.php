@@ -1,4 +1,6 @@
 <?php
+//un bouton qui redirige vers la vue createOffer
+echo '<div class="container"><a href="frontController.php?controller=offer&action=createOffer"><button type="button" class="btn btn-primary">Créer une offre</button></a></div>';
 echo '<div class="container">Bienvenue sur la page daccueil de mon site
 
 
