@@ -39,6 +39,16 @@ class ControllerMain
                 );
     }
 
+    public static function createOffer(){
+        self::afficheVue(
+                    'view.php',
+                    [
+                        'pagetitle' => 'Créer une offre',
+                        'cheminVueBody' => 'SAE/createOffer.php',
+                    ]
+                );
+    }
+
     private static function afficheVue(string $cheminVue, array $parametres = []): void
     {
         extract($parametres); // Crée des variables à partir du tableau $parametres

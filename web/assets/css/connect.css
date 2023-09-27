@@ -28,7 +28,9 @@ label {
 
 input[type="text"],
 input[type="number"],
-input[type="password"] {
+input[type="password"],
+input[type='date'],
+select {
     width: calc(100%);
     padding: 10px;
     margin-bottom: 15px;
@@ -40,6 +42,10 @@ input[type="password"] {
     box-shadow: inset 10px 10px 20px #00000020,
     inset -10px -10px 20px #ffffff45;
     color: var(--darkBlue1);
+}
+
+select:invalid {
+    color: var(--grey2);
 }
 
 .password-input {

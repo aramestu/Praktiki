@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <title><?php echo $pagetitle; ?></title>
 
-    <link rel="stylesheet" href="assets/css/main.css">
+ <link id="theme" rel="stylesheet" type="text/css" href="assets/css/mainIUT.css" />
     <link rel="stylesheet" href="assets/css/charte-graphique-UM.css">
 
     <script src="assets/javascript/navbar.js"></script>
 </head>
 <body>
 <header>
-      <a href="#" class="logo">Logo</a>
+      <a id="logoToggle" href="#" class="logo">Logo</a>
 
       <input type="checkbox" id="check" />
             <label for="check" class="icons">
