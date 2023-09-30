@@ -1,6 +1,6 @@
 <?php
 
-namespace App\SAE\Model;
+namespace App\SAE\Model\Repository;
 
 use App\SAE\Config\Conf;
 
