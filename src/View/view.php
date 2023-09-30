@@ -20,7 +20,7 @@
             </label>
 
       <nav class="navbar">
-                  <a href="frontController.php?action=home" class="nav-item" data-action="home">Acceuil</a>
+                  <a href="frontController.php?action=home" class="nav-item" data-action="home">Accueil</a>
                   <a href="frontController.php?action=alter" class="nav-item" data-action="alter">Alternance</a>
                   <a href="frontController.php?action=stage" class="nav-item" data-action="stage">Stages</a>
                   <a href="frontController.php?action=contact" class="nav-item" data-action="contact">Contact</a>

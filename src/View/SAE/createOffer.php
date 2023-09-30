@@ -35,7 +35,6 @@
                 </p>
             </div>
 
-            <!-- Les champs communs aux deux types d'offres -->
             <p>
                 <label for="sujet">Sujet</label>
                 <input type="text" name="sujet" id="sujet" required placeholder="Sujet" />
