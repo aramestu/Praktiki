@@ -14,7 +14,7 @@
 
 form {
     text-align: left;
-    margin-top: 20px; /* Add spacing at the top */
+    margin-top: 20px;
 }
 
 label {
@@ -67,8 +67,8 @@ select:invalid {
 }
 
 input[type="submit"] {
-    background-color: var(--lightGrey);
-    color: var(--grey2);
+    background-color: var(--bleuUM);
+    color: var(--white);
     width: 100%;
     padding: 15px 0;
     border: none;
@@ -76,15 +76,25 @@ input[type="submit"] {
     cursor: pointer;
     font-weight: bold;
     font-size : 1.2em;
-    box-shadow: 10px 10px 20px var(--grey0),
-    -10px -10px 20px var(--white);
+    box-shadow: inset 10px 10px 20px #ffffff45,
+    inset -10px -10px 20px #00000020,
+    10px 10px 10px #00000020,
+    -10px -10px 10px #ffffff45;
+
     margin-top: 30px;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)
 }
 
 input[type="submit"]:hover {
-    background-color: var(--bleuUM);
     color: var(--white);
+    opacity: 0.69;
+}
+
+input[type="submit"]:active {
+    color: var(--white);
+    box-shadow: inset 10px 10px 20px #00000020,
+    inset -10px -10px 20px #ffffff45;
+    opacity: 0.8;
 }
 
 input[type="text"]:focus-within > input[type="submit"]{
@@ -120,9 +130,6 @@ input:focus {
     margin-bottom: 49px;
 }
 
-
-
-/* Add this to your connect.css file */
 .password-strength {
     width: 100%;
     height: 10px;
