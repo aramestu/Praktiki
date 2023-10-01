@@ -1,0 +1,72 @@
+.header {
+    border-bottom: solid;
+    border-color: #707B7C;
+    border-width: 2px;
+    padding-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.information {
+    text-align: left;
+    font-size: 11px;
+}
+
+.company {
+    text-align: center;
+    flex-grow: 1;
+    padding-right: 11%;
+    align-self: flex-start;
+    margin-top: -5px;
+}
+
+.text {
+    margin-top: 15px;
+}
+
+#bold {
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 25px;
+    padding-left: 2px;
+}
+
+ul {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    list-style-position: inside;
+    list-style-type: circle;
+    border-bottom: solid;
+    border-color: #707B7C;
+    border-width: 2px;
+}
+
+ul li {
+    padding: 2px;
+}
+
+#apply {
+    background-color: var(--bleuUM);
+    color: var(--white);
+    width: 25%;
+    padding: 15px 0;
+    border: none;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    font-size : 1.2em;
+    box-shadow: inset 10px 10px 20px #ffffff45,
+    inset -10px -10px 20px #00000020,
+    10px 10px 10px #00000020,
+    -10px -10px 10px #ffffff45;
+
+    margin-top: 22px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)
+}
+
+#apply:hover {
+    color: var(--white);
+    opacity: 0.69;
+}
