@@ -1,7 +1,7 @@
 <?php
 namespace App\SAE\Model\DataObject;
 
-class ExperienceProfessionnel {
+abstract class ExperienceProfessionnel {
 
     private string $id;
     private string $sujet;

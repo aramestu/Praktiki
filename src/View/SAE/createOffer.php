@@ -13,8 +13,7 @@
 
 <body>
     <div class="container">
-        <form method="post" action="frontController.php">
-            <input name="action" value="creerDepuisFormulaire" type="hidden">
+        <form method="post" action="frontController.php?action=creerOffreDepuisFormulaire">
             <legend>Création d'Offre</legend>
             <p>
                 <label for="typeOffre">Type d'Offre</label>
@@ -27,6 +26,10 @@
                 <p>
                     <label for="titreStage">Titre du Stage</label>
                     <input type="text" name="titreStage" id="titreStage" required placeholder="Titre du stage" />
+                </p>
+                <p>
+                    <label for="gratification">Gratification</label>
+                    <input type="text" name="gratification" id="gratification" required placeholder="gratification" />
                 </p>
             </div>
             <div id="alternanceForm" class="hidden">
@@ -63,6 +66,10 @@
             <p>
                 <label for="dateFin">Date de Fin</label>
                 <input type="date" name="dateFin" id="dateFin" required placeholder="Date de Fin" />
+            </p>
+            <p>
+                <label for="siret">Siret</label>
+                <input type="text" name="siret" id="siret" required placeholder="Siret" />
             </p>
 
             <p>

@@ -27,23 +27,23 @@ class Conf {
     // L'attribut statique $databaseConfiguration 
     // s'obtient avec la syntaxe Conf::$databaseConfiguration 
     // au lieu de $this->databaseConfiguration pour un attribut non statique
-    return Configuration::$databaseConfiguration['login'];
+    return self::$databaseConfiguration['login'];
   }
 
   static public function getHostName() : string {
-    return Configuration::$databaseConfiguration['hostname'];
+    return self::$databaseConfiguration['hostname'];
   }
 
   static public function getDataBase() : string {
-    return Configuration::$databaseConfiguration['database'];
+    return self::$databaseConfiguration['database'];
   }
 
   static public function getPassword() : string {
-    return Configuration::$databaseConfiguration['password'];
+    return self::$databaseConfiguration['password'];
   }
 
   static public function getPort() : string{
-      return Configuration::$databaseConfiguration['port'];
+      return self::$databaseConfiguration['port'];
   }
 }
 ?>

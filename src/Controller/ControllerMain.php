@@ -2,7 +2,10 @@
 
 namespace App\SAE\Controller;
 
-use App\SAE\Model\ModelSAE;
+use App\SAE\Model\Repository\AlternanceRepository;
+use App\SAE\Model\Repository\Model;
+use App\SAE\Model\Repository\StageRepository;
+use App\SAE\Model\DataObject\Stage;
 
 class ControllerMain
 {
@@ -57,6 +60,35 @@ class ControllerMain
                         'cheminVueBody' => 'SAE/offer.php',
                     ]
                 );
+    }
+
+    public static function creerOffreDepuisFormulaire(): void {
+        if($_POST["typeOffre"] =="stage"){
+            $stage = StageRepository::construireDepuisTableau([
+                                                        "sujet" => $_POST["sujet"],
+                                                        "thematique" => $_POST["thematique"],
+                                                        "taches" => $_POST["taches"],
+                                                        "codePostal" => $_POST["codePostal"],
+                                                        "adresse" => $_POST["adressePostale"],
+                                                        "dateDebut" => $_POST["dateDebut"],
+                                                        "dateFin" => $_POST["dateFin"],
+                                                        "siret" => $_POST["siret"],
+                                                        "gratification" => $_POST["gratification"]
+                                                    ]);
+            StageRepository::save($stage);
+        }else if($_POST["typeOffre"] =="alternance"){
+            $alternance = AlternanceRepository::construireDepuisTableau([
+                                                        "sujet" => $_POST["sujet"],
+                                                        "thematique" => $_POST["thematique"],
+                                                        "taches" => $_POST["taches"],
+                                                        "codePostal" => $_POST["codePostal"],
+                                                        "adresse" => $_POST["adressePostale"],
+                                                        "dateDebut" => $_POST["dateDebut"],
+                                                        "dateFin" => $_POST["dateFin"],
+                                                        "siret" => $_POST["siret"],
+                                                    ]);
+            AlternanceRepository::save($alternance);
+        }
     }
 
 
