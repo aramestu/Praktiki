@@ -13,7 +13,8 @@
 
 <body>
     <div class="container">
-        <form method="post" action="login.php">
+        <form method="post" action="frontController.php">
+            <input name="action" value="creerDepuisFormulaire" type="hidden">
             <legend>Création d'Offre</legend>
             <p>
                 <label for="typeOffre">Type d'Offre</label>
