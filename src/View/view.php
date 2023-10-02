@@ -49,7 +49,7 @@
         <p>Mathias</p>
         <p>Clément</p>
         <p>Thibaut</p>
-        <p>Norman</p>
+        <a class="link" href="mailto:norman@mail.fr">Norman</a>
         <p>Soren</p>
         </div>
         <div class="VBox">
