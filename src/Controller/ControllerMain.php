@@ -59,6 +59,7 @@ class ControllerMain
                 );
     }
 
+
     private static function afficheVue(string $cheminVue, array $parametres = []): void
     {
         extract($parametres);
