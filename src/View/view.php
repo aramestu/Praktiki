@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title><?php echo $pagetitle; ?></title>
+    <link rel="icon" href="assets/images/favicon.ico">
 
  <link id="theme" rel="stylesheet" type="text/css" href="assets/css/mainIUT.css" />
     <link rel="stylesheet" href="assets/css/charte-graphique-UM.css">
