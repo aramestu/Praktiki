@@ -23,7 +23,7 @@
             <li>Date de création de l'offre</li>
             <li>Effectif entreprise</li>
             <li>téléphone (pas sûr)</li>
-            <li><a href="http://localhost/sae_web_s1/web/frontController.php?action=home">site web</a></li>
+            <li><a href="http://localhost/sae_web_s1/web/frontController.php?action=home" class="link">site web</a></li>
         </ul>
         <div class="text">
             <?php

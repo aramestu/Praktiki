@@ -1,0 +1,29 @@
+button{
+    background-color: var(--bleuUM);
+    color: var(--white);
+    width: 100%;
+    padding: 15px 0;
+    border: none;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    font-size : 1.2em;
+    box-shadow: inset 10px 10px 20px #ffffff45,
+    inset -10px -10px 20px #00000020,
+    10px 10px 10px #00000020,
+    -10px -10px 10px #ffffff45;
+    margin-top: 30px;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    color: var(--white);
+    opacity: 0.69;
+}
+
+button:active {
+    color: var(--white);
+    box-shadow: inset 10px 10px 20px #00000020,
+    inset -10px -10px 20px #ffffff45;
+    opacity: 0.8;
+}

@@ -49,6 +49,16 @@ class ControllerMain
                 );
     }
 
+    public static function displayOffer(){
+        self::afficheVue(
+                    'view.php',
+                    [
+                        'pagetitle' => 'Offre',
+                        'cheminVueBody' => 'SAE/offer.php',
+                    ]
+                );
+    }
+
     private static function afficheVue(string $cheminVue, array $parametres = []): void
     {
         extract($parametres);
