@@ -54,7 +54,7 @@
             </p>
         </form>
         <div class="create-account">
-            <p>Vous avez déjà un compte? <a href="frontController.php?action=connect">Connectez-vous</a></p>
+            <p>Vous avez déjà un compte? <a href="frontController.php?action=connect" class="link">Connectez-vous</a></p>
         </div>
     </div>
 </body>

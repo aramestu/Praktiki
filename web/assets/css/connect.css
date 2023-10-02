@@ -80,9 +80,8 @@ input[type="submit"] {
     inset -10px -10px 20px #00000020,
     10px 10px 10px #00000020,
     -10px -10px 10px #ffffff45;
-
     margin-top: 30px;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)
+    transition: all 0.3s ease-in-out;
 }
 
 input[type="submit"]:hover {
