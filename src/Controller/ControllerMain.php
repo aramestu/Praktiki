@@ -57,7 +57,7 @@ class ControllerMain
                     'view.php',
                     [
                         'pagetitle' => 'Offre',
-                        'cheminVueBody' => 'SAE/offer.php',
+                        'cheminVueBody' => 'SAE/offerList.php',
                     ]
                 );
     }
