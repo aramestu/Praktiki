@@ -103,13 +103,19 @@ header:hover::after {
     display: none;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 41200px) {
+    header {
+        padding: .9rem 16%;
+    }
+}
+
+@media (max-width: 1300px) {
     header {
         padding: .9rem 5%;
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 950px) {
     header {
         padding: 1.3rem 5%;
     }
@@ -125,7 +131,7 @@ header:hover::after {
 
     .burger {
         width: 32px;
-        height: 24px;
+        height: 0;
         cursor: pointer;
         right: 2rem;
         top: 2rem;
