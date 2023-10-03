@@ -57,7 +57,7 @@ class ControllerMain
                     'view.php',
                     [
                         'pagetitle' => 'Offre',
-                        'cheminVueBody' => 'SAE/offer.php',
+                        'cheminVueBody' => 'SAE/offerList.php',
                     ]
                 );
     }
@@ -91,10 +91,23 @@ class ControllerMain
         }
     }
 
+    // EN COURS
+    // Prend par défaut un Stage ou une Alternance
     public static function afficherFormulaireModification(){
+        $expPro = $_GET["experiencePro"];
+        $pagetitle = 'Modification Offre';
+        $cheminVueBody = 'SAE/editOffer.php';
+        if(get_class($expPro) == "Alternance"){
 
+        }
+        ControllerMain::afficheVue("editOffer.php", [
+            "pagetitle" => 'Modification Offre',
+            "cheminVueBody" => 'SAE/editOffer.php',
+            "experiencePro" => $_GET["id"]
+        ]);
     }
 
+    // EN COURS
     public static function modifierDepuisFormulaire(){
 
     }

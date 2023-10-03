@@ -10,13 +10,7 @@
 .information {
     text-align: left;
     font-size: 11px;
-
-}
-
-@media screen and (min-width: 768px) {
-    .information {
-        position: absolute;
-    }
+    padding-top: 2px;
 }
 
 .company {
@@ -36,7 +30,7 @@
 
 h2 {
     font-size: 25px;
-    padding-left: 2px;
+    padding-right: 10px;
 }
 
 ul {
@@ -75,4 +69,14 @@ ul li {
 #apply:hover {
     color: var(--white);
     opacity: 0.69;
+}
+
+.container {
+    width: 25%;
+}
+
+#list {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
 }
