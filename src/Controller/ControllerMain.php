@@ -91,6 +91,14 @@ class ControllerMain
         }
     }
 
+    public static function afficherFormulaireModification(){
+
+    }
+
+    public static function modifierDepuisFormulaire(){
+
+    }
+
 
     private static function afficheVue(string $cheminVue, array $parametres = []): void
     {
