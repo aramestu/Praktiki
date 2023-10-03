@@ -10,12 +10,18 @@
 .information {
     text-align: left;
     font-size: 11px;
+
+}
+
+@media screen and (min-width: 768px) {
+    .information {
+        position: absolute;
+    }
 }
 
 .company {
     text-align: center;
     flex-grow: 1;
-    padding-right: 11%;
     align-self: flex-start;
     margin-top: -5px;
 }
