@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title><?php echo $pagetitle; ?></title>
+    <title><?= $pagetitle ?></title>
     <link rel="icon" href="assets/images/favicon.ico">
 
  <link id="theme" rel="stylesheet" type="text/css" href="assets/css/mainIUT.css" />
@@ -12,13 +12,11 @@
 </head>
 <body>
 <header>
-      <a id="logoToggle" href="#" class="logo">Logo</a>
+      <img id="logoToggle" href="#" class="logo" src="assets/images/LOGO_UM_filet-blanc.png" />
 
-      <input type="checkbox" id="check" />
-            <label for="check" class="icons">
-              <i class="bx bx-menu" id="menu-icon"></i>
-              <i class="bx bx-x" id="close-icon"></i>
-            </label>
+                    <div class="burger">
+                        <span></span>
+                    </div>
 
       <nav class="navbar">
                   <a href="frontController.php?action=home" class="nav-item" data-action="home">Accueil</a>
@@ -61,6 +59,30 @@
     <p>Copiright 2023 - Tous droits réservés</p>
     </div>
 </footer>
+
+<script>
+const burger = document.querySelector('.burger');
+
+burger.addEventListener('click', () => {
+    burger.classList.toggle('active');
+    document.querySelector('.navbar').classList.toggle('active');
+    if (!document.querySelector('.navbar').classList.contains('active')) {
+        document.querySelector('.navbar').classList.toggle('active');;
+        document.querySelector('.navbar').style = "height:";
+        setTimeout(() => {
+            document.querySelector('.navbar').classList.toggle('active');
+            for (let i = 0; i < document.querySelectorAll('.nav-item').length; i++) {
+                  document.querySelectorAll('.nav-item')[i].style = "opacity: 0; margin-left: 2.5rem";
+            }
+        }, 500);
+    }else{
+        document.querySelector('.navbar').style = "height: 90vh";
+        for (let i = 0; i < document.querySelectorAll('.nav-item').length; i++) {
+            document.querySelectorAll('.nav-item')[i].style = "opacity: 1; margin-left: 0";
+        }
+    }
+});
+</script>
 
 </body>
 </html>
