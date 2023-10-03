@@ -1,4 +1,4 @@
-<div class="container">
+<div class="subContainer">
     <div class="header">
         <div class="information">
             <p id="bold">stage/alternance</p>

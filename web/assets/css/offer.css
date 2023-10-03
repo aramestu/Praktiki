@@ -71,12 +71,54 @@ ul li {
     opacity: 0.69;
 }
 
-.container {
+.subContainer {
     width: 25%;
+}
+@media (max-width: 41200px) {
+    .subContainer {
+        width: 21%;
+    }
+    #list{
+        flex-direction: row;
+    }
+}
+
+@media (max-width: 1300px) {
+    .subContainer {
+        width: 21%;
+    }
+    #list{
+        flex-direction: row;
+    }
+}
+
+@media (max-width: 950px) {
+    .subContainer {
+        width: 69%;
+        margin-left: 15.5%;
+    }
+    #list{
+        flex-direction: column;
+    }
 }
 
 #list {
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
+}
+
+.custom-button{
+    position: absolute;
+    top: 53%;
+    right: 50px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+#search-bar{
+    margin-bottom: 0;
 }
