@@ -60,29 +60,5 @@
     </div>
 </footer>
 
-<script>
-const burger = document.querySelector('.burger');
-
-burger.addEventListener('click', () => {
-    burger.classList.toggle('active');
-    document.querySelector('.navbar').classList.toggle('active');
-    if (!document.querySelector('.navbar').classList.contains('active')) {
-        document.querySelector('.navbar').classList.toggle('active');;
-        document.querySelector('.navbar').style = "height:";
-        setTimeout(() => {
-            document.querySelector('.navbar').classList.toggle('active');
-            for (let i = 0; i < document.querySelectorAll('.nav-item').length; i++) {
-                  document.querySelectorAll('.nav-item')[i].style = "opacity: 0; margin-left: 2.5rem";
-            }
-        }, 500);
-    }else{
-        document.querySelector('.navbar').style = "height: 90vh";
-        for (let i = 0; i < document.querySelectorAll('.nav-item').length; i++) {
-            document.querySelectorAll('.nav-item')[i].style = "opacity: 1; margin-left: 0";
-        }
-    }
-});
-</script>
-
 </body>
 </html>
