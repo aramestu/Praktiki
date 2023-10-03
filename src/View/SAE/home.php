@@ -17,6 +17,10 @@
                 <p>
                     <a href="frontController.php?controller=offer&action=displayOffer"><button type="button" class="btn btn-primary">Afficher une offre</button></a>
                 </p>
+                <p>
+                    <a href="frontController.php?controller=offer&action=afficherFormulaireModification"><button type="button" class="btn btn-primary"> Modifier une offre (URL)</button> </a>
+                </p>
+
     </div>
 
     <div class="container">Bienvenue sur la page daccueil de mon site
