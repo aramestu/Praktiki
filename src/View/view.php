@@ -11,7 +11,11 @@
     <script src="assets/javascript/navbar.js"></script>
 </head>
 <body>
+
+<div id="transition-overlay"></div>
+
 <header>
+
       <img id="logoToggle" href="#" class="logo" src="assets/images/LOGO_UM_filet-blanc.png" />
 
                     <div class="burger">
