@@ -1,9 +1,14 @@
 <div class="subContainer">
     <div class="header">
         <div class="information">
-            <p id="bold">stage/alternance</p>
-            <p>du 01/10/2023</p>
-            <p>au 20/11/2023</p>
+            <p id="bold"> <?php
+                $full_path = get_class($expPro);
+                $elements = explode('\\', $full_path);
+                $last_element = end($elements);
+                echo $last_element
+                ?></p>
+            <p>du <?= $expPro->getDateDebut()?></p>
+            <p>au <?= $expPro->getDateFin()?></p>
         </div>
         <div class="company">
             <h2>Entreprise</h2>

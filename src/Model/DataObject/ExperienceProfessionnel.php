@@ -12,6 +12,10 @@ abstract class ExperienceProfessionnel {
     private string $dateDebut;
     private string $dateFin;
     private string $siret;
+    private string $etudiant;
+    private string $enseignant;
+    private string $tuteurProfessionnel;
+
 
     public function __construct(
           string $sujet,
@@ -102,6 +106,30 @@ abstract class ExperienceProfessionnel {
 
     public function setSiret(string $siret): void {
         $this->siret = $siret;
+    }
+
+    public function getEtudiant(): string {
+        return $this->etudiant;
+    }
+
+    public function setEtudiant(string $etudiant): void {
+        $this->etudiant = $etudiant;
+    }
+
+    public function getEnseignant(): string {
+        return $this->enseignant;
+    }
+
+    public function setEnseignant(string $enseignant): void {
+        $this->enseignant = $enseignant;
+    }
+
+    public function getTuteurProfessionnel(): string {
+        return $this->tuteurProfessionnel;
+    }
+
+    public function setTuteurProfessionnel(string $tuteurProfessionnel): void {
+        $this->tuteurProfessionnel = $tuteurProfessionnel;
     }
 }
 ?>
