@@ -1,5 +1,5 @@
 # sae_web_s1
-
+Temps de travail Soren Starck : [![wakatime](https://wakatime.com/badge/user/eb7ce746-ca32-4b13-bd81-c302fffe4f7e/project/25594236-eba1-4256-b55b-f1b34f4cab36.svg)](https://wakatime.com/badge/user/eb7ce746-ca32-4b13-bd81-c302fffe4f7e/project/25594236-eba1-4256-b55b-f1b34f4cab36)
 
 
 ## Getting started
