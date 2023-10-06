@@ -30,4 +30,25 @@ class ExperienceProfessionnelRepository{
             return false;
         }
     }
+
+    public static function getAllExperienceProfessionnelByDefault() : array{
+        try{
+            $pdo = Model::getPdo();
+            $requestStatement = $pdo->prepare("SELECT * FROM ExperienceProfessionnel");
+            $requestStatement->execute();
+            $result = $requestStatement->fetchAll(\PDO::FETCH_ASSOC);
+            $tab = array();
+            foreach ($result as $item){
+                $e = new ExperienceProfessionnel($item["sujetExperienceProfessionnel"], $item["thematiqueExperienceProfessionnel"],
+                    $item["tachesExperienceProfessionnel"], $item["codePostalExperienceProfessionnel"],
+                    $item["adresseExperienceProfessionnel"], $item["dateDebutExperienceProfessionnel"],
+                    $item["dateFinExperienceProfessionnel"], $item["siret"]);
+                $e->setId($item["idExperienceProfessionnel"]);
+                array_push($tab, $e);
+            }
+            return $tab;
+        }catch (\PDOException $e){
+            return array();
+        }
+    }
 }

@@ -20,6 +20,18 @@ class ControllerMain
                 );
     }
 
+    public static function error(string $messageErreur)
+    {
+        self::afficheVue(
+                    'view.php',
+                    [
+                        'pagetitle' => 'Erreur',
+                        'cheminVueBody' => 'SAE/error.php',
+                        'messageErreur' => $messageErreur,
+                    ]
+                );
+    }
+
     public static function connect()
     {
         self::afficheVue(

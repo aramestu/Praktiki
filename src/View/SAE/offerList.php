@@ -12,12 +12,12 @@
                         <img src="assets/images/loupe.png" alt="Loupe Icon" width="20" height="20">
                     </button>
     </div>
-    <div id="list">
-        <?php
-        require __DIR__ . "/offer.php";
-        require __DIR__ . "/offer.php";
-        require __DIR__ . "/offer.php";
-        ?>
-    </div>
+
+
+
+<?php foreach ($listeExpPro as $expPro) {
+    require 'offer.php';
+} ?>
+
 </body>
 </html>

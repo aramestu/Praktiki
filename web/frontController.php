@@ -11,18 +11,25 @@ $loader->addNamespace('App\SAE', __DIR__ . '/../src');
 // register the autoloader
 $loader->register();
 
-if (isset($_GET['action'])) {
-    $action = $_GET['action'];
+$controller = isset($_GET['controller']) ? $_GET['controller'] : 'Main';
 
-    // Check if the method exists in ControllerVoiture
-    if (method_exists('App\SAE\Controller\ControllerMain', $action)) {
-        ControllerMain::$action();
+$classNameController = 'App\SAE\Controller\Controller' . $controller;
+if (class_exists($classNameController)) {
+    if (isset($_GET['action'])) {
+        $action = $_GET['action'];
+
+        if (method_exists($classNameController, $action)) {
+            $classNameController::$action();
+        } else {
+            ControllerMain::error("invalidAction");
+        }
     } else {
-        echo "Invalid action.";
+        ControllerMain::error("invalidAction");
     }
 } else {
     ControllerMain::home();
 }
+
 
 
 ?>
