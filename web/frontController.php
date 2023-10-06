@@ -24,7 +24,7 @@ if (class_exists($classNameController)) {
             ControllerMain::error("invalidAction");
         }
     } else {
-        ControllerMain::error("invalidAction");
+        ControllerMain::home();
     }
 } else {
     ControllerMain::home();
