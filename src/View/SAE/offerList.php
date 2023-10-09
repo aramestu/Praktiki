@@ -16,7 +16,7 @@
 
 
 <?php foreach ($listeExpPro as $expPro) {
-    require 'offer.php';
+    require 'smallOffer.php';
 } ?>
 
 </body>

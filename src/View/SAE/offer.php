@@ -1,7 +1,7 @@
 <div class="subContainer">
     <div class="header">
         <div class="information">
-            <p id="bold"> <?php
+            <p class="bold"> <?php
                 $full_path = get_class($expPro);
                 $elements = explode('\\', $full_path);
                 $last_element = end($elements);
