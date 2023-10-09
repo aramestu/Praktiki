@@ -104,19 +104,18 @@ class ControllerMain
     }
 
     // EN COURS
-    // Prend par défaut un Stage ou une Alternance
     public static function afficherFormulaireModification(){
-        $expPro = $_GET["experiencePro"];
+        $idExpPro = $_GET["experiencePro"];
         $pagetitle = 'Modification Offre';
         $cheminVueBody = 'SAE/editOffer.php';
-        if(get_class($expPro) == "Alternance"){
-
+        $expPro = StageRepository::getStageParId($idExpPro);
+        if(! is_null($expPro)){
+            ControllerMain::afficheVue($cheminVueBody, [
+                "pagetitle" => $pagetitle,
+                "experiencePro" => $expPro
+            ]);
         }
-        ControllerMain::afficheVue("editOffer.php", [
-            "pagetitle" => 'Modification Offre',
-            "cheminVueBody" => 'SAE/editOffer.php',
-            "experiencePro" => $_GET["id"]
-        ]);
+
     }
 
     // EN COURS

@@ -1,6 +1,4 @@
-<?php
-//$experiencePro =
-?>
+
 <!DOCTYPE html>
 <html>
 
@@ -18,14 +16,14 @@
 <div class="container">
     <form method="post" action="frontController.php?action=modifierOffreDepuisFormulaire">
         <legend>Modification d'Offre</legend>
-        <!-- <p>
+         <p>
             <label for="typeOffre">Type d'Offre</label>
             <select name="typeOffre" id="typeOffre" required>
                 <option value="stage">Stage</option>
                 <option value="alternance">Alternance</option>
             </select>
         </p>
-        <div id="stageForm"> -->
+        <div id="stageForm">
             <p>
                 <label for="titreStage">Titre du Stage</label>
                 <input type="text" name="titreStage" id="titreStage" required placeholder="Titre du stage" />
@@ -70,13 +68,9 @@
             <label for="dateFin">Date de Fin</label>
             <input type="date" name="dateFin" id="dateFin" required placeholder="Date de Fin" />
         </p>
-        <p>
-            <label for="siret">Siret</label>
-            <input type="text" name="siret" id="siret" required placeholder="Siret" />
-        </p>
 
         <p>
-            <input type="submit" value="Créer l'Offre" />
+            <input type="submit" value="Modifier l'Offre" />
         </p>
     </form>
 </div>

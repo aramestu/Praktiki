@@ -36,4 +36,5 @@ class ExperienceProfessionnelRepository{
         $stage = StageRepository::getAllStage();
         return array_merge($alternance, $stage);
     }
+
 }
