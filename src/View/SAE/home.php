@@ -23,7 +23,7 @@
 
     </div>
 
-    <div class="container">Bienvenue sur la page daccueil de mon site
+    <div class="container">Bienvenue sur la page d'accueil de mon site
 
 
 

@@ -123,18 +123,25 @@ ul li {
     margin-bottom: 0;
 }
 
-#small {
-    width: 65%;
+.small {
+    width: 90%;
     display: flex;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-#small .information {
+.small:hover{
+    background-color: #F2F2F2;
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
+.small .information {
     text-align: left;
     font-size: 11px;
     padding-top: 7px;
 }
 
-#small .information2 {
+.small .information2 {
     text-align: right;
     font-size: 11px;
     padding-top: 7px;

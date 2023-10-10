@@ -1,15 +1,20 @@
-<div class="subContainer" id="small">
+<div class="subContainer small">
     <div class="information">
-        <p class="bold">Stage/Alternance</p>
+        <p class="bold"><?php
+                                        $full_path = get_class($expPro);
+                                        $elements = explode('\\', $full_path);
+                                        $last_element = end($elements);
+                                        echo $last_element
+                                        ?></p>
         <p>Date du poste</p>
 
     </div>
     <div class="company">
         <h2>Entreprise</h2>
-        <label>adresse de l'entreprise / code postal stage</label>
+        <label><?php echo $expPro->getAdresse();?></label>
     </div>
     <div class="information2">
-        <p>du date</p>
-        <p>au date</p>
+        <p>du date <?php echo $expPro->getDateDebut();?></p>
+        <p>au date <?php echo $expPro->getDateFin();?></p>
     </div>
 </div>

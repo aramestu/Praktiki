@@ -73,7 +73,7 @@ else{
         </p>
         <p>
             <label for="dateDebut">Date de Début</label>
-            <input type="date" name="dateDebut" id="dateDebut" required placeholder="Date de Début"value="<?php echo $expPro->getDateDebut();?>"/>
+            <input type="date" name="dateDebut" id="dateDebut" required placeholder="Date de Début" value="<?php echo $expPro->getDateDebut();?>"/>
         </p>
         <p>
             <label for="dateFin">Date de Fin</label>

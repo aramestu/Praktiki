@@ -317,6 +317,21 @@ main{
     box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1), 0 4px 16px rgba(31, 38, 135, 0.1);
     z-index: 1;
 }
+
+.listeExpPro{
+color: var(--black);
+    width: 69%;
+    text-align: center;
+    font-size: 12px;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+    padding: 2%;
+    margin: 1.5%;
+    border-radius: 1.5rem;
+    box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1), 0 4px 16px rgba(31, 38, 135, 0.1);
+    z-index: 1;
+}
 /*---END CONTAINER---*/
 
 
