@@ -60,4 +60,29 @@ class AlternanceRepository{
         }
         return $AllAlternance;
     }
+
+    public static function getAlternanceParId(string $id) :?Alternance{
+        $sql = "SELECT idAlternance, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
+                codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
+                dateFinExperienceProfessionnel AS dateFin, siret, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel
+                FROM ExperienceProfessionnel e
+                JOIN Alternances a ON a.idAlternance = e.idExperienceProfessionnel
+                WHERE a.idAlternance = :id";
+        $pdoStatement = Model::getPdo()->prepare($sql);
+
+        $values = array(
+            "id" => $id,
+        );
+
+        $pdoStatement->execute($values);
+
+        $alternance = $pdoStatement->fetch();
+
+        // S'il n'y a pas d'alternance
+        if (! $alternance) {
+            return null;
+        } else {
+            return AlternanceRepository::construireDepuisTableau($alternance);
+        }
+    }
 }

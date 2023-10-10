@@ -62,12 +62,12 @@ class StageRepository{
 
     public static function getStageParId(string $id) :?Stage{
         $sql = "SELECT idStage, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
-                                                codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
-                                                dateFinExperienceProfessionnel AS dateFin, siret, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel,
-                                                gratificationStage AS gratification
-                                                FROM ExperienceProfessionnel e
-                                                JOIN Stages s ON s.idStage = e.idExperienceProfessionnel
-                                                WHERE s.idStage = :id";
+                codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
+                dateFinExperienceProfessionnel AS dateFin, siret, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel,
+                gratificationStage AS gratification
+                FROM ExperienceProfessionnel e
+                JOIN Stages s ON s.idStage = e.idExperienceProfessionnel
+                WHERE s.idStage = :id";
         $pdoStatement = Model::getPdo()->prepare($sql);
 
         $values = array(

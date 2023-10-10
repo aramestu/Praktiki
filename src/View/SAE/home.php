@@ -18,7 +18,7 @@
                     <a href="frontController.php?controller=ExpPro&action=getExpProByDefault"><button type="button" class="btn btn-primary">Afficher une offre</button></a>
                 </p>
                 <p>
-                    <a href="frontController.php?controller=Main&action=afficherFormulaireModification"><button type="button" class="btn btn-primary"> Modifier une offre (URL : &experiencePro=20)</button> </a>
+                    <a href="frontController.php?controller=Main&action=afficherFormulaireModification&experiencePro="><button type="button" class="btn btn-primary"> Modifier une offre (URL : &experiencePro=20)</button> </a>
                 </p>
 
     </div>

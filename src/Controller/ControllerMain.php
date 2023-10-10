@@ -103,19 +103,41 @@ class ControllerMain
         }
     }
 
-    // EN COURS
     public static function afficherFormulaireModification(){
         $idExpPro = $_GET["experiencePro"];
         $pagetitle = 'Modification Offre';
         $cheminVueBody = 'SAE/editOffer.php';
-        $expPro = StageRepository::getStageParId($idExpPro);
-        // Si c'est un stage
-        if(! is_null($expPro)){
+
+        $stage = StageRepository::getStageParId($idExpPro);
+
+
+        // Si c'est un stage alors c'est good
+        if(! is_null($stage)){
             ControllerMain::afficheVue('view.php', [
                 "pagetitle" => $pagetitle,
                 "cheminVueBody" => $cheminVueBody,
-                "experiencePro" => $expPro
+                "experiencePro" => $stage
             ]);
+        }
+        // On vérifie que c'est une alternance sinon on affiche un message d'erreur
+        else{
+            // On vérifie que c'est une alternance
+            $alternance = AlternanceRepository::getAlternanceParId($idExpPro);
+            if (! is_null($alternance)){
+                ControllerMain::afficheVue('view.php', [
+                    "pagetitle" => $pagetitle,
+                    "cheminVueBody" => $cheminVueBody,
+                    "experiencePro" => $alternance
+                ]);
+            }
+            else{
+                $messageErreur = 'Cette offre n existe pas !';
+                self::afficheVue('view.php', [
+                    "pagetitle" => 'error',
+                    "cheminVueBody" => 'SAE/error.php',
+                    "messageErreur" => $messageErreur
+                ]);
+            }
         }
     }
 
