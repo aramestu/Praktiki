@@ -37,7 +37,7 @@ class ExperienceProfessionnelRepository{
         return array_merge($alternance, $stage);
     }
 
-    public static function filtre(string|null $dateDebut, string|null $dateFin, string|null $optionTri) : array{
+    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null) : array{
         $resultArray = array();
         $pdo = Model::getPdo();
         $sql = $pdo->prepare("SELECT * FROM ExperienceProfessionnel");

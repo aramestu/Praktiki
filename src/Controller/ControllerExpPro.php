@@ -9,7 +9,8 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 use App\SAE\Model\DataObject\Stage;
 
 class ControllerExpPro{
-    public static function getExpProByDefault(){
+    public static function getExpProByDefault(): void
+    {
         $listeExpPro = ExperienceProfessionnelRepository::getAllExperienceProfessionnelByDefault();
         self::afficheVue(
                             'view.php',
@@ -21,7 +22,8 @@ class ControllerExpPro{
                         );
     }
 
-    public static function getExpProByFiltre(){
+    public static function getExpProByFiltre(): void
+    {
         $dateDebut = null;
         $dateFin = null;
         $optionTri = null;
@@ -35,7 +37,7 @@ class ControllerExpPro{
             $optionTri = $_GET['optionTri'];
         }
         $listeExpPro = ExperienceProfessionnelRepository::filtre($dateDebut, $dateFin, $optionTri);
-        self::afficheVue('view.php', ['listeExpPro' => $listeExpPro, 'cheminVuebody' => 'SAE/offerList.php']);
+        self::afficheVue('view.php', ['listeExpPro' => $listeExpPro, 'cheminVuebody' => 'SAE/offerListFilter.php']);
     }
 
     private static function afficheVue(string $cheminVue, array $parametres = []): void
