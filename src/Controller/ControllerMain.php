@@ -110,8 +110,9 @@ class ControllerMain
         $cheminVueBody = 'SAE/editOffer.php';
         $expPro = StageRepository::getStageParId($idExpPro);
         if(! is_null($expPro)){
-            ControllerMain::afficheVue($cheminVueBody, [
+            ControllerMain::afficheVue('view.php', [
                 "pagetitle" => $pagetitle,
+                "cheminVueBody" => $cheminVueBody,
                 "experiencePro" => $expPro
             ]);
         }

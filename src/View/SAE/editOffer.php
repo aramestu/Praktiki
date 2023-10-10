@@ -1,4 +1,9 @@
+<?php
+use App\SAE\Model\DataObject\ExperienceProfessionnel;
+//$expPro =  $experiencePro;
+//$typeOffre = $expPro->
 
+?>
 <!DOCTYPE html>
 <html>
 
@@ -26,7 +31,7 @@
         <div id="stageForm">
             <p>
                 <label for="titreStage">Titre du Stage</label>
-                <input type="text" name="titreStage" id="titreStage" required placeholder="Titre du stage" />
+                <input type="text" name="titreStage" id="titreStage" required placeholder="Titre du stage" value=<?php ?>/>
             </p>
             <p>
                 <label for="gratification">Gratification</label>
