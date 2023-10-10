@@ -114,16 +114,33 @@ class ControllerMain
             ControllerMain::afficheVue('view.php', [
                 "pagetitle" => $pagetitle,
                 "cheminVueBody" => $cheminVueBody,
-                "id" => $idExpPro
+                "experiencePro" => $expPro
             ]);
         }
-
-
     }
 
     // EN COURS
     public static function modifierDepuisFormulaire(){
+        if($_POST["typeOffre"] == "stage"){
+            $stage = StageRepository::construireDepuisTableau([
+                "idStage" => $_POST["id"],
+                "siret" => $_POST["siret"],
+                "sujet" => $_POST["sujet"],
+                "thematique" => $_POST["thematique"],
+                "taches" => $_POST["taches"],
+                "codePostal" => $_POST["codePostal"],
+                "adresse" => $_POST["adressePostale"],
+                "dateDebut" => $_POST["dateDebut"],
+                "dateFin" => $_POST["dateFin"],
 
+                "gratification" => $_POST["gratification"]
+            ]);
+            StageRepository::mettreAJour($stage);
+            echo 'Stage modifié';
+        }
+        else{
+            echo 'nop';
+        }
     }
 
 

@@ -1,11 +1,13 @@
 <?php
-use App\SAE\Model\Repository\StageRepository;
-$gratification = 0;
-$expPro = StageRepository::getStageParId($id);
-if(! is_null($expPro)){ // Si c'est un stage
-    $gratification = $expPro->getGratification();
-} else{
 
+use App\SAE\Model\DataObject\Stage;
+use App\SAE\Model\Repository\StageRepository;
+$expPro = $experiencePro;
+if(is_a($expPro, 'App\SAE\Model\DataObject\Stage')){ // Si c'est un stage
+    $gratification = $expPro->getGratification();
+}
+else{
+    $gratification = 0;
 }
 ?>
 <!DOCTYPE html>
@@ -23,7 +25,7 @@ if(! is_null($expPro)){ // Si c'est un stage
 
 <body>
 <div class="container">
-    <form method="post" action="frontController.php?action=modifierOffreDepuisFormulaire">
+    <form method="post" action="frontController.php?action=modifierDepuisFormulaire">
         <legend>Modification d'Offre</legend>
          <p>
             <label for="typeOffre">Type d'Offre</label>
@@ -79,6 +81,8 @@ if(! is_null($expPro)){ // Si c'est un stage
         </p>
 
         <p>
+            <input type="hidden" name="siret" value="<?php echo $expPro->getSiret();?>"/>
+            <input type="hidden" name="id" value="<?php echo $expPro->getId();?>"/>
             <input type="submit" value="Modifier l'Offre" />
         </p>
     </form>

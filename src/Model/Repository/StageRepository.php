@@ -1,6 +1,7 @@
 <?php
 namespace App\SAE\Model\Repository;
 
+use App\SAE\Model\DataObject\ExperienceProfessionnel;
 use App\SAE\Model\DataObject\Stage;
 
 class StageRepository{
@@ -83,5 +84,22 @@ class StageRepository{
         } else {
             return StageRepository::construireDepuisTableau($stage);
         }
+    }
+
+
+    public static function mettreAJour(Stage $stage){
+        // Il faut modifier à la fois dans ExperienceProfessionnel et dans Stage
+        ExperienceProfessionnelRepository::mettreAJour($stage);
+
+        $sql = "UPDATE Stages SET
+                gratificationStage= :gratificationTag";
+
+        $pdoStatement = Model::getPdo()->prepare($sql);
+
+        $values = array(
+            "gratificationTag" => $stage->getGratification()
+        );
+
+        $pdoStatement->execute($values);
     }
 }

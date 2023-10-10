@@ -67,4 +67,30 @@ class ExperienceProfessionnelRepository{
         $pdo->execute();
         return $pdo->fetchAll();
     }
+
+    public static function mettreAJour(ExperienceProfessionnel $exp){
+        $sql = "UPDATE ExperienceProfessionnel SET
+                sujetExperienceProfessionnel= :sujetTag,
+                thematiqueExperienceProfessionnel= :thematiqueTag,
+                tachesExperienceProfessionnel= :tacheTag,
+                codePostalExperienceProfessionnel= :codePostalTag,
+                adresseExperienceProfessionnel= :adresseTag,
+                dateDebutExperienceProfessionnel= :dateDebutTag,
+                dateFinExperienceProfessionnel= :dateFinTag 
+                WHERE idExperienceProfessionnel= :idExpPro";
+
+        $pdoStatement = Model::getPdo()->prepare($sql);
+
+        $values = array(
+            "sujetTag" => $exp->getSujet(),
+            "thematiqueTag" => $exp->getThematique(),
+            "tacheTag" => $exp->getTaches(),
+            "codePostalTag" => $exp->getCodePostal(),
+            "adresseTag" => $exp->getAdresse(),
+            "dateDebutTag" => $exp->getDateDebut(),
+            "dateFinTag" => $exp->getDateDebut(),
+            "idExpPro" => $exp->getId()
+        );
+        $pdoStatement->execute($values);
+    }
 }
