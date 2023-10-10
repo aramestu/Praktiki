@@ -37,4 +37,34 @@ class ExperienceProfessionnelRepository{
         return array_merge($alternance, $stage);
     }
 
+    public static function filtre(string|null $dateDebut, string|null $dateFin, string|null $optionTri) : array{
+        $resultArray = array();
+        $pdo = Model::getPdo();
+        $sql = $pdo->prepare("SELECT * FROM ExperienceProfessionnel");
+
+        if (!is_null($dateDebut) && is_null($dateFin) && is_null($optionTri)){
+            $sql = "SELECT * FROM ExperienceProfessionnel WHERE dateDebut = $dateDebut";
+        }
+        elseif (is_null($dateDebut) && !is_null($dateFin) && is_null($optionTri)){
+            $sql ="SELECT * FROM ExperienceProfessionnel WHERE dateFin = $dateFin";
+        }
+        elseif (is_null($dateDebut) && is_null($dateFin) && !is_null($optionTri)){
+            $sql = "SELECT * FROM ExperienceProfessionnel ORDER BY $optionTri";
+        }
+        elseif (!is_null($dateDebut) && !is_null($dateFin) && is_null($optionTri)){
+            $sql = "SELECT * FROM ExperienceProfessionel WHERE dateDebut = $dateDebut AND dateFin = $dateFin";
+        }
+        elseif (!is_null($dateDebut) && is_null($dateFin) && !is_null($optionTri)){
+            $sql = "SELECT * FROM ExperienceProfessionel WHERE dateDebut = $dateDebut ORDER BY $optionTri";
+        }
+        elseif (is_null($dateDebut) && !is_null($dateFin) && !is_null($optionTri)){
+            $sql = "SELECT * FROM ExperienceProfessionel WHERE dateFin = $dateFin ORDER BY $optionTri";
+        }
+        elseif (!is_null($dateDebut) && !is_null($dateFin) && !is_null($optionTri)){
+            $sql = "SELECT * FROM ExperienceProfessionel WHERE dateDebut = $dateDebut AND dateFin = $dateFin ORDER BY $optionTri";
+        }
+        $pdo->prepare($sql);
+        $pdo->execute();
+        return $pdo->fetchAll();
+    }
 }
