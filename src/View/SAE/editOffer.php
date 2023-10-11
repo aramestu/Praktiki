@@ -3,11 +3,11 @@
 use App\SAE\Model\DataObject\Stage;
 use App\SAE\Model\Repository\StageRepository;
 $expPro = $experiencePro;
+$gratification = 0;
+$nomExperience = 'alternance';
 if(is_a($expPro, 'App\SAE\Model\DataObject\Stage')){ // Si c'est un stage
     $gratification = $expPro->getGratification();
-}
-else{
-    $gratification = 0;
+    $nomExperience = 'stage';
 }
 ?>
 <!DOCTYPE html>
@@ -26,14 +26,7 @@ else{
 <body>
 <div class="container">
     <form method="post" action="frontController.php?action=modifierDepuisFormulaire">
-        <legend>Modification d'Offre</legend>
-         <p>
-            <label for="typeOffre">Type d'Offre</label>
-            <select name="typeOffre" id="typeOffre" required>
-                <option value="stage">Stage</option>
-                <option value="alternance">Alternance</option>
-            </select>
-        </p>
+        <legend>Modification <?php echo $nomExperience;?></legend>
         <div id="stageForm">
             <!--<p>
                 <label for="titreStage">Titre du Stage</label>
@@ -81,6 +74,7 @@ else{
         </p>
 
         <p>
+            <input type="hidden" name="typeOffre" value="<?php echo $nomExperience;?>"
             <input type="hidden" name="siret" value="<?php echo $expPro->getSiret();?>"/>
             <input type="hidden" name="id" value="<?php echo $expPro->getId();?>"/>
             <input type="submit" value="Modifier l'Offre" />
