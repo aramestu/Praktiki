@@ -4,7 +4,7 @@ namespace App\SAE\Model\Repository;
 use App\SAE\Model\DataObject\ExperienceProfessionnel;
 use App\SAE\Model\Repository\Model;
 
-class ExperienceProfessionnelRepository{
+class ExperienceProfessionnelRepository {
     public static function save(ExperienceProfessionnel $e) : bool{
         try{
             $pdo = Model::getPdo();
@@ -31,9 +31,9 @@ class ExperienceProfessionnelRepository{
         }
     }
 
-    public static function getAllExperienceProfessionnelByDefault() : array{
-        $alternance = AlternanceRepository::getAllAlternance();
-        $stage = StageRepository::getAllStage();
+    public static function getAll() : array{
+        $alternance = AlternanceRepository::getAll();
+        $stage = StageRepository::getAll();
         return array_merge($alternance, $stage);
     }
 

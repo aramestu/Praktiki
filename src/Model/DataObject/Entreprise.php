@@ -1,7 +1,7 @@
 <?php
 namespace App\SAE\Model\DataObject;
 
-class Entreprise {
+class Entreprise extends AbstractDataObject {
     private string $siret;
     private string $nom;
     private string $codePostal;

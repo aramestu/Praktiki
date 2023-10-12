@@ -11,7 +11,7 @@ use App\SAE\Model\DataObject\Stage;
 class ControllerExpPro{
     public static function getExpProByDefault(): void
     {
-        $listeExpPro = ExperienceProfessionnelRepository::getAllExperienceProfessionnelByDefault();
+        $listeExpPro = ExperienceProfessionnelRepository::getAll();
         self::afficheVue(
                             'view.php',
                             [

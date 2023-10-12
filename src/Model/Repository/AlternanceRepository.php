@@ -47,7 +47,7 @@ class AlternanceRepository{
         return $alternance;
     }
 
-    public static function getAllAlternance() : array{
+    public static function getAll() : array{
         $pdo = Model::getPdo();
         $requestStatement = $pdo->query(" SELECT idAlternance, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
                                                 codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
@@ -61,7 +61,7 @@ class AlternanceRepository{
         return $AllAlternance;
     }
 
-    public static function getAlternanceParId(string $id) :?Alternance{
+    public static function get(string $id) :?Alternance{
         $sql = "SELECT idAlternance, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
                 codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
                 dateFinExperienceProfessionnel AS dateFin, siret, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel

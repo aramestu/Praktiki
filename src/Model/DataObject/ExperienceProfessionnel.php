@@ -1,7 +1,7 @@
 <?php
 namespace App\SAE\Model\DataObject;
 
-abstract class ExperienceProfessionnel {
+abstract class ExperienceProfessionnel extends AbstractDataObject {
 
     private string $id;
     private string $sujet;

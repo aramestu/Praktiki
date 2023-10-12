@@ -45,7 +45,7 @@ class StageRepository{
         return $stage;
     }
 
-    public static function getAllStage() : array{
+    public static function getAll() : array{
         $pdo = Model::getPdo();
         $requestStatement = $pdo->query(" SELECT idStage, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
                                                 codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
@@ -60,7 +60,7 @@ class StageRepository{
         return $AllStage;
     }
 
-    public static function getStageParId(string $id) :?Stage{
+    public static function get(string $id) :?Stage{
         $sql = "SELECT idStage, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
                 codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
                 dateFinExperienceProfessionnel AS dateFin, siret, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel,

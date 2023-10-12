@@ -2,7 +2,7 @@
 namespace App\SAE\Model\Repository;
 
 use App\SAE\Model\DataObject\Entreprise;
-class EntrepriseRepository {
+class EntrepriseRepository extends AbstractRepository {
 
     public function get(string $siret): Entreprise{
         $pdo = Model::getPdo();
@@ -13,9 +13,12 @@ class EntrepriseRepository {
         return self::construireDepuisTableau($requestStatement->fetch());
     }
 
-    public function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise{
+    protected function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise{
         $entreprise = new Entreprise($entrepriseFormatTableau["siret"],$entrepriseFormatTableau["nomEntreprise"], $entrepriseFormatTableau["codePostalEntreprise"], $entrepriseFormatTableau["effectifEntreprise"], $entrepriseFormatTableau["telephoneEntreprise"], $entrepriseFormatTableau["siteWebEntreprise"]);
         return $entreprise;
     }
 
+    protected function getNomTable(): string {
+        return "Entreprises";
+    }
 }

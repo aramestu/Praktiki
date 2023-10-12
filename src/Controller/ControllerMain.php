@@ -119,7 +119,7 @@ class ControllerMain
         $pagetitle = 'Modification Offre';
         $cheminVueBody = 'SAE/editOffer.php';
 
-        $stage = StageRepository::getStageParId($idExpPro);
+        $stage = StageRepository::get($idExpPro);
 
 
         // Si c'est un stage alors c'est good
@@ -133,7 +133,7 @@ class ControllerMain
         // On vérifie que c'est une alternance sinon on affiche un message d'erreur
         else{
             // On vérifie que c'est une alternance
-            $alternance = AlternanceRepository::getAlternanceParId($idExpPro); //Dans un else pour éviter de faire 2 requêtes s'il n'y a pas besoin
+            $alternance = AlternanceRepository::get($idExpPro); //Dans un else pour éviter de faire 2 requêtes s'il n'y a pas besoin
             if (! is_null($alternance)){
                 ControllerMain::afficheVue('view.php', [
                     "pagetitle" => $pagetitle,
@@ -184,14 +184,14 @@ class ControllerMain
 
     public static function supprimerOffre(){
         $idExpPro = $_GET["experiencePro"];
-        $stage = StageRepository::getStageParId($idExpPro);
+        $stage = StageRepository::get($idExpPro);
 
         // Si c'est un stage alors c'est good
         if(! is_null($stage)){
             StageRepository::supprimer($stage);
         }
         else{
-            $alternance = AlternanceRepository::getAlternanceParId($idExpPro); //Dans un else pour éviter de faire 2 requêtes s'il n'y a pas besoin
+            $alternance = AlternanceRepository::get($idExpPro); //Dans un else pour éviter de faire 2 requêtes s'il n'y a pas besoin
             AlternanceRepository::supprimer($alternance);
         }
     }
