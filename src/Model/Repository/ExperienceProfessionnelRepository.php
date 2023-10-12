@@ -88,7 +88,7 @@ class ExperienceProfessionnelRepository{
             "codePostalTag" => $exp->getCodePostal(),
             "adresseTag" => $exp->getAdresse(),
             "dateDebutTag" => $exp->getDateDebut(),
-            "dateFinTag" => $exp->getDateDebut(),
+            "dateFinTag" => $exp->getDateFin(),
             "idExpPro" => $exp->getId()
         );
         $pdoStatement->execute($values);

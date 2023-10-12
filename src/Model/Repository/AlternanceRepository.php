@@ -85,4 +85,10 @@ class AlternanceRepository{
             return AlternanceRepository::construireDepuisTableau($alternance);
         }
     }
+
+    public static function mettreAJour(Alternance $alternance){
+
+        // Il faut modifier à la fois dans ExperienceProfessionnel
+        ExperienceProfessionnelRepository::mettreAJour($alternance);
+    }
 }

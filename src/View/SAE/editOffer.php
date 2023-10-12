@@ -2,13 +2,12 @@
 
 use App\SAE\Model\DataObject\Stage;
 use App\SAE\Model\Repository\StageRepository;
-$expPro = $experiencePro;
 $gratification = 0;
+$expPro = $experiencePro;
 $nomExperience = 'alternance';
 if(is_a($expPro, 'App\SAE\Model\DataObject\Stage')){ // Si c'est un stage
-    echo $expPro->getSiret();
-    $gratification = $expPro->getGratification();
     $nomExperience = 'stage';
+    $gratification = $expPro->getGratification();
 }
 ?>
 <!DOCTYPE html>
@@ -77,7 +76,7 @@ if(is_a($expPro, 'App\SAE\Model\DataObject\Stage')){ // Si c'est un stage
         <p>
             <input type="hidden" name="siret" value="<?php echo $expPro->getSiret();?>"/>
             <input type="hidden" name="id" value="<?php echo $expPro->getId();?>"/>
-            <input type="hidden" name="typeOffre" value="<?php echo $nomExperience;?>"/>
+            <input type="hidden" id="typeOffre" name="typeOffre" value="<?php echo $nomExperience;?>"/>
             <input type="submit" value="Modifier l'offre" />
         </p>
     </form>

@@ -143,26 +143,28 @@ class ControllerMain
 
     // EN COURS
     public static function modifierDepuisFormulaire(){
+        $tab = [
+            "sujet" => $_POST["sujet"],
+            "thematique" => $_POST["thematique"],
+            "taches" => $_POST["taches"],
+            "codePostal" => $_POST["codePostal"],
+            "adresse" => $_POST["adressePostale"],
+            "dateDebut" => $_POST["dateDebut"],
+            "dateFin" => $_POST["dateFin"],
+            "siret" => $_POST["siret"],
+        ];
         if($_POST["typeOffre"] == "stage"){
-            echo $_POST["siret"];
-            $stage = StageRepository::construireDepuisTableau([
-                "idStage" => $_POST["id"],
-                "sujet" => $_POST["sujet"],
-                "thematique" => $_POST["thematique"],
-                "taches" => $_POST["taches"],
-                "codePostal" => $_POST["codePostal"],
-                "adresse" => $_POST["adressePostale"],
-                "dateDebut" => $_POST["dateDebut"],
-                "dateFin" => $_POST["dateFin"],
-                "siret" => $_POST["siret"],
-                "gratification" => $_POST["gratification"]
-            ]);
+            $tab["gratification"] = $_POST["gratification"];
+            $tab["idStage"] = $_POST["id"];
+            $stage = StageRepository::construireDepuisTableau($tab);
             StageRepository::mettreAJour($stage);
-            echo 'Stage modifié';
         }
         elseif($_POST["typeOffre"] == "alternance"){
-            echo 'nop';
+            $tab["idAlternance"] = $_POST["id"];
+            $alternance = AlternanceRepository::construireDepuisTableau($tab);
+            AlternanceRepository::mettreAJour($alternance);
         }
+        ControllerMain::home();
     }
 
 

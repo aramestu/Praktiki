@@ -87,6 +87,7 @@ class StageRepository{
     }
 
 
+
     public static function mettreAJour(Stage $stage){
         // Il faut modifier à la fois dans ExperienceProfessionnel et dans Stage
         ExperienceProfessionnelRepository::mettreAJour($stage);
