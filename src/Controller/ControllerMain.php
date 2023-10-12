@@ -74,7 +74,16 @@ class ControllerMain
                 );
     }
 
+    public static function afficherVueEndOffer($msg){
+        self::afficheVue("view.php", [
+            "pagetitle" => "Gestion d'offre",
+            "cheminVueBody" => "SAE/endOffer.php",
+            "message" => $msg
+        ]);
+    }
+
     public static function creerOffreDepuisFormulaire(): void {
+        $msg = "Offre crée avec succés !";
         if($_POST["typeOffre"] =="stage"){
             $stage = StageRepository::construireDepuisTableau([
                                                         "sujet" => $_POST["sujet"],
@@ -88,6 +97,7 @@ class ControllerMain
                                                         "gratification" => $_POST["gratification"]
                                                     ]);
             StageRepository::save($stage);
+            self::afficherVueEndOffer($msg); // Redirection vers une page
         }else if($_POST["typeOffre"] =="alternance"){
             $alternance = AlternanceRepository::construireDepuisTableau([
                                                         "sujet" => $_POST["sujet"],
@@ -100,6 +110,7 @@ class ControllerMain
                                                         "siret" => $_POST["siret"],
                                                     ]);
             AlternanceRepository::save($alternance);
+            self::afficherVueEndOffer($msg); // Redirection vers une page
         }
     }
 
@@ -132,17 +143,14 @@ class ControllerMain
             }
             else{
                 $messageErreur = 'Cette offre n existe pas !';
-                self::afficheVue('view.php', [
-                    "pagetitle" => 'error',
-                    "cheminVueBody" => 'SAE/error.php',
-                    "messageErreur" => $messageErreur
-                ]);
+                self::error($messageErreur);
             }
         }
     }
 
     // EN COURS
     public static function modifierDepuisFormulaire(){
+        $msg = "Offre modifiée avec succés !";
         $tab = [
             "sujet" => $_POST["sujet"],
             "thematique" => $_POST["thematique"],
@@ -153,18 +161,25 @@ class ControllerMain
             "dateFin" => $_POST["dateFin"],
             "siret" => $_POST["siret"],
         ];
+        // Si c'est un stage
         if($_POST["typeOffre"] == "stage"){
-            $tab["gratification"] = $_POST["gratification"];
+            $tab["gratification"] = $_POST["gratification"]; // Un stage a une gratification à renseigner en plus
             $tab["idStage"] = $_POST["id"];
             $stage = StageRepository::construireDepuisTableau($tab);
             StageRepository::mettreAJour($stage);
+            self::afficherVueEndOffer($msg); // Redirection vers une page
         }
+        // S i c'est une alternance
         elseif($_POST["typeOffre"] == "alternance"){
             $tab["idAlternance"] = $_POST["id"];
             $alternance = AlternanceRepository::construireDepuisTableau($tab);
             AlternanceRepository::mettreAJour($alternance);
+            self::afficherVueEndOffer($msg); // Redirection vers une page
         }
-        ControllerMain::home();
+        // Si ce n'est aucun des 2 alors ce n'est pas normal
+        else{
+            self::error("Ce type d'offre n'existe pas");
+        }
     }
 
 
