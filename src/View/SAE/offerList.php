@@ -14,40 +14,6 @@
         <img src="assets/images/loupe.png" alt="Loupe Icon" width="20" height="20">
     </button>
 
-        <form method="get" style="display:none">
-            <label for="dateDebut">Dates</label>
-                    <select name="datePublication" id="datePublication">
-                        <option value="last24">Dernières 24 heures</option>
-                        <option value="lastWeek">Dernière semaine</option>
-                        <option value="lastMonth">Dernier mois</option>
-                    </select>
-
-                    <label for="dateDebut">Date de début</label>
-                                <input type="date" name="dateDebut" id="dateDebut">
-                                <label for="dateFin">Date de fin</label>
-                                <input type="date" name="dateFin" id="dateFin">
-
-                    <label for="stage">Stage</label>
-                    <input type="checkbox" name="stage" id="stage">
-                    <label for="alternance">Alternance</label>
-                    <input type="checkbox" name="alternance" id="alternance">
-
-                    <label for="codePostal">Code Postal:</label>
-                        <input type="text" id="codePostal" name="codePostal" pattern="[0-9]{5}" maxlength="5">
-
-                    <label for="optionTri">Trier par</label>
-                                <select name="optionTri" id="optionTri">
-                                    <option value="datePublication">Offres les plus récentes</option>
-                                    <option value="datePublicationInverse">Offres les plus anciennes</option>
-                                    <option value="salaireCroissant">Salaire croissant</option>
-                                    <option value="salaireDecroissant">Salaire décroissant</option>
-                                </select>
-
-                    <button type="reset">Tout effacer</button>
-
-                    <button type="button" id="rechercher">Rechercher</button>
-        </form>
-
 
     </div>
 <div class="HBox" id="center">
