@@ -3,6 +3,7 @@
 namespace App\SAE\Controller;
 
 use App\SAE\Model\Repository\AlternanceRepository;
+use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\Model;
 use App\SAE\Model\Repository\StageRepository;
 use App\SAE\Model\DataObject\Stage;
@@ -169,7 +170,7 @@ class ControllerMain
             StageRepository::mettreAJour($stage);
             self::afficherVueEndOffer($msg); // Redirection vers une page
         }
-        // S i c'est une alternance
+        // Si c'est une alternance
         elseif($_POST["typeOffre"] == "alternance"){
             $tab["idAlternance"] = $_POST["id"];
             $alternance = AlternanceRepository::construireDepuisTableau($tab);
@@ -193,6 +194,34 @@ class ControllerMain
         else{
             $alternance = AlternanceRepository::get($idExpPro); //Dans un else pour éviter de faire 2 requêtes s'il n'y a pas besoin
             AlternanceRepository::supprimer($alternance);
+        }
+    }
+
+    public static function afficherOffre() {
+        $idExpPro = $_GET["experiencePro"];
+
+        $stage = StageRepository::get($idExpPro);
+
+        if(! is_null($stage)) {
+            ControllerMain::afficheVue('view.php', [
+                "pagetitle" => "Affichage offre",
+                "cheminVueBody" => "SAE/offer.php",
+                "expPro" => $stage
+            ]);
+        }
+        else{
+            $alternance = AlternanceRepository::get($idExpPro);
+            if (! is_null($alternance)){
+                ControllerMain::afficheVue('view.php', [
+                    "pagetitle" => "Affichage offre",
+                    "cheminVueBody" => "SAE/offer.php",
+                    "expPro" => $alternance
+                ]);
+            }
+            else{
+                $messageErreur = 'Cette offre n existe pas !';
+                self::error($messageErreur);
+            }
         }
     }
 

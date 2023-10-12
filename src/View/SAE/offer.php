@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="assets/css/offer.css">
+</head>
+
 <div class="subContainer">
     <div class="header">
         <div class="information">
