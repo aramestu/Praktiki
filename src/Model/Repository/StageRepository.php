@@ -93,14 +93,28 @@ class StageRepository{
         ExperienceProfessionnelRepository::mettreAJour($stage);
 
         $sql = "UPDATE Stages SET
-                gratificationStage= :gratificationTag";
+                gratificationStage= :gratificationTag
+                WHERE idStage= :idTag";
 
         $pdoStatement = Model::getPdo()->prepare($sql);
 
         $values = array(
-            "gratificationTag" => $stage->getGratification()
+            "gratificationTag" => $stage->getGratification(),
+            "idTag" => $stage->getId()
         );
 
         $pdoStatement->execute($values);
+    }
+
+    public static function supprimer(Stage $stage){
+        $sql = "DELETE FROM Stages WHERE idStage= :idTag;";
+        $pdoStatement = Model::getPdo()->prepare($sql);
+
+        $values = array(
+            "idTag" => $stage->getId()
+        );
+
+        $pdoStatement->execute($values);
+        ExperienceProfessionnelRepository::supprimer($stage);
     }
 }

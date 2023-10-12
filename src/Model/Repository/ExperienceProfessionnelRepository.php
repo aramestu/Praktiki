@@ -93,4 +93,16 @@ class ExperienceProfessionnelRepository{
         );
         $pdoStatement->execute($values);
     }
+
+    public static function supprimer(ExperienceProfessionnel $exp){
+        $sql = "DELETE FROM `ExperienceProfessionnel` WHERE idExperienceProfessionnel= :idTag;";
+
+        $pdoStatement = Model::getPdo()->prepare($sql);
+
+        $values = array(
+            "idTag" => $exp->getId()
+        );
+
+        $pdoStatement->execute($values);
+    }
 }

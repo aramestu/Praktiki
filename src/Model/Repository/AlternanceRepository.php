@@ -91,4 +91,16 @@ class AlternanceRepository{
         // Il faut modifier à la fois dans ExperienceProfessionnel
         ExperienceProfessionnelRepository::mettreAJour($alternance);
     }
+
+    public static function supprimer(Alternance $alternance){
+        $sql = "DELETE FROM Stages WHERE idAlternance= :idTag;";
+        $pdoStatement = Model::getPdo()->prepare($sql);
+
+        $values = array(
+            "idTag" => $alternance->getId()
+        );
+
+        $pdoStatement->execute($values);
+        ExperienceProfessionnelRepository::supprimer($alternance);
+    }
 }

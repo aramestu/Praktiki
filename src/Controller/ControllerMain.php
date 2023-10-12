@@ -133,7 +133,7 @@ class ControllerMain
         // On vérifie que c'est une alternance sinon on affiche un message d'erreur
         else{
             // On vérifie que c'est une alternance
-            $alternance = AlternanceRepository::getAlternanceParId($idExpPro);
+            $alternance = AlternanceRepository::getAlternanceParId($idExpPro); //Dans un else pour éviter de faire 2 requêtes s'il n'y a pas besoin
             if (! is_null($alternance)){
                 ControllerMain::afficheVue('view.php', [
                     "pagetitle" => $pagetitle,
@@ -179,6 +179,20 @@ class ControllerMain
         // Si ce n'est aucun des 2 alors ce n'est pas normal
         else{
             self::error("Ce type d'offre n'existe pas");
+        }
+    }
+
+    public static function supprimerOffre(){
+        $idExpPro = $_GET["experiencePro"];
+        $stage = StageRepository::getStageParId($idExpPro);
+
+        // Si c'est un stage alors c'est good
+        if(! is_null($stage)){
+            StageRepository::supprimer($stage);
+        }
+        else{
+            $alternance = AlternanceRepository::getAlternanceParId($idExpPro); //Dans un else pour éviter de faire 2 requêtes s'il n'y a pas besoin
+            AlternanceRepository::supprimer($alternance);
         }
     }
 
