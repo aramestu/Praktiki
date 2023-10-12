@@ -123,6 +123,7 @@ ul li {
     margin-bottom: 0;
 }
 
+/*---START SMALL OFFER---*/
 .small {
     width: 90%;
     display: flex;
@@ -146,3 +147,4 @@ ul li {
     font-size: 11px;
     padding-top: 7px;
 }
+/*---END SMALL OFFER---*/
