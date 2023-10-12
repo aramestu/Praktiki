@@ -123,10 +123,19 @@ ul li {
     margin-bottom: 0;
 }
 
+td {
+    padding: 10px;
+}
+
+/*---START SMALL OFFER---*/
 .small {
-    width: 90%;
-    display: flex;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    max-width: 300px;
+    min-width: 20vw;
+    word-break: break-word;
 }
 
 .small:hover{
@@ -135,14 +144,28 @@ ul li {
     transform: scale(1.02);
 }
 
-.small .information {
-    text-align: left;
+.small div {
     font-size: 11px;
-    padding-top: 7px;
+    padding: 5px;
 }
 
-.small .information2 {
-    text-align: right;
-    font-size: 11px;
-    padding-top: 7px;
+h3 {
+    font-size: 15px;
 }
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
+.small .information {
+    text-align: center;
+}
+
+.small .information * {
+    margin: 5px;
+}
+/*---END SMALL OFFER---*/
