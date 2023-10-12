@@ -47,12 +47,12 @@
     </div>
     <div class="VBox" id="footer-team">
         <p>Notre équipe</p>
-        <p>Lorick</p>
-        <p>Mathias</p>
-        <p>Clément</p>
-        <p>Thibaut</p>
+        <a class="link" href="mailto:Lorick@mail.fr">Lorick</a>
+        <a class="link" href="mailto:Mathias@mail.fr">Mathias</a>
+        <a class="link" href="mailto:Clément@mail.fr">Clément</a>
+        <a class="link" href="mailto:Thibaut@mail.fr">Thibaut</a>
         <a class="link" href="mailto:norman@mail.fr">Norman</a>
-        <p>Soren</p>
+        <a class="link" href="mailto:soren.starck@free.fr">Soren</a>
         </div>
         <div class="VBox">
             <p>
