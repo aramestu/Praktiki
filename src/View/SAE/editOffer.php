@@ -6,6 +6,7 @@ $expPro = $experiencePro;
 $gratification = 0;
 $nomExperience = 'alternance';
 if(is_a($expPro, 'App\SAE\Model\DataObject\Stage')){ // Si c'est un stage
+    echo $expPro->getSiret();
     $gratification = $expPro->getGratification();
     $nomExperience = 'stage';
 }
@@ -74,10 +75,10 @@ if(is_a($expPro, 'App\SAE\Model\DataObject\Stage')){ // Si c'est un stage
         </p>
 
         <p>
-            <input type="hidden" name="typeOffre" value="<?php echo $nomExperience;?>"
             <input type="hidden" name="siret" value="<?php echo $expPro->getSiret();?>"/>
             <input type="hidden" name="id" value="<?php echo $expPro->getId();?>"/>
-            <input type="submit" value="Modifier l'Offre" />
+            <input type="hidden" name="typeOffre" value="<?php echo $nomExperience;?>"/>
+            <input type="submit" value="Modifier l'offre" />
         </p>
     </form>
 </div>

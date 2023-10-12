@@ -144,9 +144,9 @@ class ControllerMain
     // EN COURS
     public static function modifierDepuisFormulaire(){
         if($_POST["typeOffre"] == "stage"){
+            echo $_POST["siret"];
             $stage = StageRepository::construireDepuisTableau([
                 "idStage" => $_POST["id"],
-                "siret" => $_POST["siret"],
                 "sujet" => $_POST["sujet"],
                 "thematique" => $_POST["thematique"],
                 "taches" => $_POST["taches"],
@@ -154,13 +154,13 @@ class ControllerMain
                 "adresse" => $_POST["adressePostale"],
                 "dateDebut" => $_POST["dateDebut"],
                 "dateFin" => $_POST["dateFin"],
-
+                "siret" => $_POST["siret"],
                 "gratification" => $_POST["gratification"]
             ]);
             StageRepository::mettreAJour($stage);
             echo 'Stage modifié';
         }
-        else{
+        elseif($_POST["typeOffre"] == "alternance"){
             echo 'nop';
         }
     }
