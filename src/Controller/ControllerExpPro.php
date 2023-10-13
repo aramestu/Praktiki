@@ -27,6 +27,9 @@ class ControllerExpPro{
         $dateDebut = null;
         $dateFin = null;
         $optionTri = null;
+        $stage = null;
+        $alternance = null;
+        $codePostal = null;
         if (isset($_GET['dateDebut'])){
             $dateDebut = $_GET['dateDebut'];
         }
@@ -36,8 +39,17 @@ class ControllerExpPro{
         if (isset($_GET['optionTri'])){
             $optionTri = $_GET['optionTri'];
         }
-        $listeExpPro = ExperienceProfessionnelRepository::filtre($dateDebut, $dateFin, $optionTri);
-        self::afficheVue('view.php', ['listeExpPro' => $listeExpPro, 'cheminVuebody' => 'SAE/offerListFilter.php']);
+        if (isset($_GET['stage'])){
+            $stage = $_GET['stage'];
+        }
+        if (isset($_GET['alternance'])){
+            $alternance = $_GET['alternance'];
+        }
+        if (isset($_GET['codePostal'])){
+            $codePostal = $_GET['codePostal'];
+        }
+        $listeExpPro = ExperienceProfessionnelRepository::filtre($dateDebut, $dateFin, $optionTri, $stage, $alternance, $codePostal);
+        self::afficheVue('view.php', ['pagetitle' => 'Offre', 'listeExpPro' => $listeExpPro, 'cheminVueBody' => 'SAE/offerList.php']);
     }
 
     private static function afficheVue(string $cheminVue, array $parametres = []): void

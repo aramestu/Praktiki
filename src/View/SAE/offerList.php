@@ -48,7 +48,7 @@
 
 
                         <label for="codePostal">Code Postal</label>
-                        <input type="text" id="codePostal" name="codePostal" pattern="[0-9]{5}" maxlength="5" placeholder="34090">
+                        <input type="number" id="codePostal" name="codePostal" pattern="[0-9]{5}" maxlength="5" placeholder="34090">
 
                                 <select name="optionTri" id="optionTri">
                                 <option value="" disabled selected style="display:none;">Trier par</option>
@@ -60,7 +60,8 @@
                                 </select>
 
                     <button type="reset" id="reset">Tout effacer</button>
-
+                    <input type="hidden" name="action" value="getExpProByFiltre">
+                    <input type="hidden" name="controller" value="ExpPro">
                     <input type="submit" id="rechercher" value="rechercher">
         </form>
 </div>

@@ -37,8 +37,9 @@ class ExperienceProfessionnelRepository {
         return array_merge($alternance, $stage);
     }
 
-    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null) : array{
-        $resultArray = array();
+    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $stage = null, string $alternance = null, string $codePostal = null) : array|false
+    {
+        /*$resultArray = array();
         $pdo = Model::getPdo();
         $sql = $pdo->prepare("SELECT * FROM ExperienceProfessionnel");
 
@@ -65,10 +66,41 @@ class ExperienceProfessionnelRepository {
         }
         $pdo->prepare($sql);
         $pdo->execute();
-        return $pdo->fetchAll();
+        return $pdo->fetchAll();*/
+        //TODO : a finir
+        $pdo = Model::getPdo();
+        $sql = "SELECT * ";
+        if (isset($stage) && isset($alternance) || !isset($stage) && !isset($alternance)){
+            $sql .= "FROM ExperienceProfessionnel ";
+        }
+        elseif (isset($stage)){
+            $sql .= "FROM Stages s JOIN ExperienceProfessionnel e ON s.idStage = e.idExperienceProfessionnel ";
+        }
+        elseif (isset($alternance)){
+            $sql .= "FROM Alternances a JOIN ExperienceProfessionnel e ON a.idalternance = e.idExperienceProfessionnel ";
+        }
+        $sql .= "WHERE numEtudiant IS NULL ";
+
+        if (strlen($dateDebut) > 0){
+            $sql .= "AND dateDebutExperienceProfessionnel = '$dateDebut' ";
+        }
+        if (strlen($dateFin) > 0){
+            $sql .= "AND dateFinExperienceProfessionnel = '$dateFin' ";
+        }
+        if (strlen($codePostal) > 0){
+            $sql .= "AND codePostalExperienceProfesionnel = '$codePostal' ";
+        }
+        if (isset($optionTri)){
+            //TODO : cas différent
+            $sql .= "ORDER BY $optionTri";
+        }
+
+        var_dump($sql);
+        return $pdo->query($sql)->fetchAll();
     }
 
-    public static function mettreAJour(ExperienceProfessionnel $exp){
+    public static function mettreAJour(ExperienceProfessionnel $exp): void
+    {
         $sql = "UPDATE ExperienceProfessionnel SET
                 sujetExperienceProfessionnel= :sujetTag,
                 thematiqueExperienceProfessionnel= :thematiqueTag,
@@ -94,7 +126,8 @@ class ExperienceProfessionnelRepository {
         $pdoStatement->execute($values);
     }
 
-    public static function supprimer(ExperienceProfessionnel $exp){
+    public static function supprimer(ExperienceProfessionnel $exp): void
+    {
         $sql = "DELETE FROM `ExperienceProfessionnel` WHERE idExperienceProfessionnel= :idTag;";
 
         $pdoStatement = Model::getPdo()->prepare($sql);
