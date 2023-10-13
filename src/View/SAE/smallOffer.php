@@ -1,4 +1,4 @@
-<a href="frontController.php?controller=Main&action=afficherOffre&experiencePro= <?php echo rawurlencode($expPro->getId())?> " style='text-decoration:none' id="offerButton">
+<a href="frontController.php?controller=Main&action=afficherOffre&experiencePro= <?php echo rawurlencode($expPro->getId())?> " style="text-decoration:none" id="offerButton">
     <div class="subContainer small">
         <div class="header">
             <div class="left">
