@@ -88,7 +88,8 @@ class StageRepository{
 
 
 
-    public static function mettreAJour(Stage $stage){
+    public static function mettreAJour(Stage $stage): void
+    {
         // Il faut modifier à la fois dans ExperienceProfessionnel et dans Stage
         ExperienceProfessionnelRepository::mettreAJour($stage);
 
@@ -106,7 +107,8 @@ class StageRepository{
         $pdoStatement->execute($values);
     }
 
-    public static function supprimer(Stage $stage){
+    public static function supprimer(Stage $stage): void
+    {
         $sql = "DELETE FROM Stages WHERE idStage= :idTag;";
         $pdoStatement = Model::getPdo()->prepare($sql);
 
@@ -118,7 +120,8 @@ class StageRepository{
         ExperienceProfessionnelRepository::supprimer($stage);
     }
 
-    public static function search(string $keywords){
+    public static function search(string $keywords): void
+    {
         $pdo = Model::getPdo();
         $sqlBase = "SELECT * FROM Stages s
                     JOIN ExperienceProfessionnel e ON e.idExperienceProfessionnel = s.idStage";

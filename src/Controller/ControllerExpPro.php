@@ -49,7 +49,14 @@ class ControllerExpPro{
             $codePostal = $_GET['codePostal'];
         }
         $listeExpPro = ExperienceProfessionnelRepository::filtre($dateDebut, $dateFin, $optionTri, $stage, $alternance, $codePostal);
-        self::afficheVue('view.php', ['pagetitle' => 'Offre', 'listeExpPro' => $listeExpPro, 'cheminVueBody' => 'SAE/offerList.php']);
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Offre',
+                'listeExpPro' => $listeExpPro,
+                'cheminVueBody' => 'SAE/offerList.php',
+            ]
+        );
     }
 
     private static function afficheVue(string $cheminVue, array $parametres = []): void

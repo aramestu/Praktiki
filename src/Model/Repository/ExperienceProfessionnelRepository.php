@@ -34,6 +34,7 @@ class ExperienceProfessionnelRepository {
     public static function getAll() : array{
         $alternance = AlternanceRepository::getAll();
         $stage = StageRepository::getAll();
+        var_dump(array_merge($alternance, $stage));
         return array_merge($alternance, $stage);
     }
 
@@ -71,7 +72,7 @@ class ExperienceProfessionnelRepository {
         $pdo = Model::getPdo();
         $sql = "SELECT * ";
         if (isset($stage) && isset($alternance) || !isset($stage) && !isset($alternance)){
-            $sql .= "FROM ExperienceProfessionnel ";
+            $sql .= "FROM ExperienceProfessionnel e JOIN Stages s ON s.idStage = e.idExperienceProfessionnel JOIN Alternances a ON a.idalternance = e.idExperienceProfessionnel ";
         }
         elseif (isset($stage)){
             $sql .= "FROM Stages s JOIN ExperienceProfessionnel e ON s.idStage = e.idExperienceProfessionnel ";
@@ -88,14 +89,26 @@ class ExperienceProfessionnelRepository {
             $sql .= "AND dateFinExperienceProfessionnel = '$dateFin' ";
         }
         if (strlen($codePostal) > 0){
-            $sql .= "AND codePostalExperienceProfesionnel = '$codePostal' ";
+            $sql .= "AND codePostalExperienceProfessionnel = '$codePostal' ";
         }
         if (isset($optionTri)){
-            //TODO : cas différent
-            $sql .= "ORDER BY $optionTri";
+            if ($optionTri = "datePublication"){
+                //TODO : $sql .= "ORDER BY datePublication ASC"
+            }
+            if ($optionTri = "datePublicationInverse") {
+                //TODO : $sql .= "ORDER BY datePublication DESC"
+            }
+            if ($optionTri = "salaireCroissant" && isset($stage)){
+                $sql .= "ORDER BY gratificationStage ASC";
+            }
+            if ($optionTri = "salaireDecroissant" && isset($stage)) {
+                $sql .= "ORDER BY gratificationStage DESC";
+            }
         }
 
         var_dump($sql);
+        var_dump($pdo->query($sql)->fetchAll());
+
         return $pdo->query($sql)->fetchAll();
     }
 
