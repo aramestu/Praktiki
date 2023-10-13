@@ -62,33 +62,12 @@ input[type="submit"]{
     transition: all 0.3s ease-in-out;
 }
 
-#tableOffer{
-
-    position: sticky;
-    top: 0;
-}
-
 .tableResponsive{
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: 15px;
-}
-
-
-.tableResponsive :nth-child(n) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-grow: 0;
-    flex-shrink: 0;
-    transition: border 0.2s;
-}
-
-.tableResponsive :nth-child(n):after {
-    counter-increment: mycounter;
-    content: counter(mycounter);
 }
 
 /*---START SIDE FILTER---*/

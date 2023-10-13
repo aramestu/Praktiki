@@ -4,6 +4,10 @@
     <link rel="stylesheet" href="assets/css/offer.css">
 </head>
 
+<?php
+use App\SAE\Model\Repository\EntrepriseRepository;
+?>
+
 <div class="subContainer">
     <div class="header">
         <div class="information">
@@ -17,7 +21,10 @@
             <p>au <?= $expPro->getDateFin()?></p>
         </div>
         <div class="company">
-            <h2>Entreprise</h2>
+            <h2><?php
+                $entreprise = (new EntrepriseRepository())->get($expPro->getSiret());
+                echo($entreprise->getNom());
+                ?></h2>
             <label>adresse de l'entreprise / code postal stage</label>
         </div>
 

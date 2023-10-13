@@ -105,4 +105,8 @@ class ExperienceProfessionnelRepository {
 
         $pdoStatement->execute($values);
     }
+
+    public static function search(string $keywords){
+
+    }
 }

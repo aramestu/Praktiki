@@ -117,4 +117,10 @@ class StageRepository{
         $pdoStatement->execute($values);
         ExperienceProfessionnelRepository::supprimer($stage);
     }
+
+    public static function search(string $keywords){
+        $pdo = Model::getPdo();
+        $sqlBase = "SELECT * FROM Stages s
+                    JOIN ExperienceProfessionnel e ON e.idExperienceProfessionnel = s.idStage";
+    }
 }
