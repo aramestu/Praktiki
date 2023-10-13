@@ -69,7 +69,7 @@ header:hover::after {
 }
 
 .nav-item:active, .nav-item.active {
-    background: var(--bleuUM);
+    background: var(--rougeUM);
     color: var(--white);
     text-decoration: none;
     border-radius: 1.5rem;
