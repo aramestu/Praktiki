@@ -1,6 +1,7 @@
 #center{
     width:69%;
     align-items: flex-start;
+    justify-content: flex-start;
 }
 
 #sideFilter{
@@ -9,6 +10,7 @@
     align-items: center;
     flex-direction: column;
     float: left;
+    margin:0;
 }
 
 #datePublication{
@@ -63,7 +65,7 @@ input[type="submit"]{
 .tableResponsive{
     display: flex;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
     gap: 15px;
 }
@@ -74,7 +76,6 @@ input[type="submit"]{
     backdrop-filter: blur(50px);
     -webkit-backdrop-filter: blur(50px);
     padding: 2%;
-    margin: 1.5%;
     border-radius: 1.5rem;
     box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1), 0 4px 16px rgba(31, 38, 135, 0.1);
     display: flex;

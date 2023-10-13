@@ -130,17 +130,12 @@ td {
 /*---START SMALL OFFER---*/
 .small {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    border-radius: 5px;
+    border-radius: 1rem;
     padding: 5px;
     text-align: center;
-    /*
-    max-width: 300px;
-    min-width: 16vw;
-    */
-    /*width: 10%;*/
     width: 200px;
     word-break: break-word;
-    margin:10%;
+    margin-left:14%;
 }
 
 .small:hover{
