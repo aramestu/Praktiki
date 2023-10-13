@@ -25,17 +25,17 @@
             <div id="stageForm">
                 <p>
                     <label for="titreStage">Titre du Stage</label>
-                    <input type="text" name="titreStage" id="titreStage" required placeholder="Titre du stage" />
+                    <input type="text" name="titreStage" id="titreStage" required placeholder="Titre du stage" value=" " />
                 </p>
                 <p>
                     <label for="gratification">Gratification</label>
-                    <input type="number" name="gratification" id="gratification" required placeholder="gratification" />
+                    <input type="number" name="gratification" id="gratification" required placeholder="gratification" value="1" />
                 </p>
             </div>
             <div id="alternanceForm" class="hidden">
                 <p>
                     <label for="titreAlternance">Titre de l'Alternance</label>
-                    <input type="text" name="titreAlternance" id="titreAlternance" placeholder="Titre de l'alternance" />
+                    <input type="text" name="titreAlternance" id="titreAlternance" placeholder="Titre de l'alternance" value=" "/>
                 </p>
             </div>
 
