@@ -133,8 +133,9 @@ td {
     border-radius: 1rem;
     padding: 5px;
     text-align: center;
-    width: 200px;
-    height:175px;
+    min-width: max-content;
+    max-width: 305px;
+    height:155px;
     word-break: break-word;
     margin-left:14%;
 }
