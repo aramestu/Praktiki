@@ -29,7 +29,7 @@
                 </p>
                 <p>
                     <label for="gratification">Gratification</label>
-                    <input type="text" name="gratification" id="gratification" required placeholder="gratification" />
+                    <input type="number" name="gratification" id="gratification" required placeholder="gratification" />
                 </p>
             </div>
             <div id="alternanceForm" class="hidden">
@@ -69,7 +69,7 @@
             </p>
             <p>
                 <label for="siret">Siret</label>
-                <input type="text" name="siret" id="siret" required placeholder="Siret" />
+                <input type="number" name="siret" id="siret" required placeholder="Siret" />
             </p>
 
             <p>

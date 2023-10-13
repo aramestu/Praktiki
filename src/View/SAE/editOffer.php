@@ -34,7 +34,7 @@ if(is_a($expPro, 'App\SAE\Model\DataObject\Stage')){ // Si c'est un stage
             </p> -->
             <p>
                 <label for="gratification">Gratification</label>
-                <input type="text" name="gratification" id="gratification" required placeholder="gratification" value="<?php echo $gratification;?>"/>
+                <input type="number" name="gratification" id="gratification" required placeholder="gratification" value="<?php echo $gratification;?>"/>
             </p>
         </div>
         <!--<div id="alternanceForm" class="hidden">
