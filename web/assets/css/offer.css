@@ -107,17 +107,6 @@ ul li {
     justify-content: center;
 }
 
-.custom-button{
-    position: absolute;
-    top: 53%;
-    right: 50px;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    opacity: 0.6;
-}
-
 #search-bar{
     margin-bottom: 0;
 }
