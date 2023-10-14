@@ -2,7 +2,7 @@
     <link rel="stylesheet" href="assets/css/button.css">
 </head>
 <div class="container">
-    <h1><?php echo $message; ?></h1>
+    <h1><?php echo htmlspecialchars($message); ?></h1>
     <br>
     <br>
     <p>
