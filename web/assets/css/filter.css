@@ -70,6 +70,11 @@ input[type="submit"]{
     gap: 15px;
 }
 
+.tableResponsive:nth-child(2) > .subContainer{
+    color : var(--green);
+}
+
+
 /*---START SIDE FILTER---*/
 #sideFilter {
     background: rgba(0, 0, 0, 0.1);

@@ -29,7 +29,7 @@ use App\SAE\Model\Repository\EntrepriseRepository;
             <p><?php $entreprise = (new EntrepriseRepository())->get($expPro->getSiret());
                                echo($entreprise->getNom());
                                ?></p>
-            <p><img src="assets/images/map-pin-icon.png" class="mapPin"><label><?php echo $expPro->getAdresse();?> / <?php echo $expPro->getCodePostal();?></label></p>
+            <p><img src="assets/images/map-pin-icon.png" class="mapPin"><label><?php echo $expPro->getCodePostal();?></label></p>
         </div>
     </div>
 </a>

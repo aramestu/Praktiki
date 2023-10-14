@@ -70,10 +70,7 @@ ul li {
     color: var(--white);
     opacity: 0.69;
 }
-
-.subContainer {
-    width: 25%;
-}
+/*
 @media (max-width: 41200px) {
     .subContainer {
         width: 21%;
@@ -101,6 +98,8 @@ ul li {
         flex-direction: column;
     }
 }
+
+ */
 
 #list {
     display: flex;
@@ -133,9 +132,9 @@ td {
     border-radius: 1rem;
     padding: 5px;
     text-align: center;
-    min-width: max-content;
+    min-width: 225px;
     max-width: 305px;
-    height:185px;
+    height:225px;
     word-break: break-word;
     margin-left:14%;
     color: var(--darkBlue2);
@@ -152,7 +151,8 @@ td {
 }
 
 h3 {
-    font-size: 15px;
+    font-size: 14px;
+    word-break: break-word;
 }
 
 .left {
@@ -164,12 +164,21 @@ h3 {
 }
 
 .small .information {
-    text-align: center;
+    text-align: start;
+    display: flex;
+    flex-direction: column;
 }
 
 .small .information * {
     margin: 5px;
     display: -webkit-box;
+}
+
+.small h3{
+    margin-bottom: 5px;
+    width: 190px;
+    height: 55px;
+    margin-top: -5px;
 }
 
 .mapPin{
