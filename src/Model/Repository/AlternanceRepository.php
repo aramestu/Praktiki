@@ -18,7 +18,6 @@ class AlternanceRepository{
         }catch(\PDOException $e){
             return false;
         }
-
     }
 
     public static function construireDepuisTableau($alternanceFormatTableau): Alternance {

@@ -1,3 +1,11 @@
+<?php
+$loader = new App\SAE\Lib\Psr4AutoloaderClass();
+// register the autoloader
+$loader->register();
+// register the base directories for the namespace prefix
+$loader->addNamespace('App\SAE', __DIR__ . '/../../src');
+?>
+
 <!DOCTYPE html>
 <html>
 <head>

@@ -5,11 +5,12 @@ require_once __DIR__ . '/../src/Lib/Psr4AutoloaderClass.php';
 use App\SAE\Controller\ControllerMain;
 
 // instantiate the loader
-$loader = new App\Covoiturage\Lib\Psr4AutoloaderClass();
-// register the base directories for the namespace prefix
-$loader->addNamespace('App\SAE', __DIR__ . '/../src');
+$loader = new App\SAE\Lib\Psr4AutoloaderClass();
 // register the autoloader
 $loader->register();
+// register the base directories for the namespace prefix
+$loader->addNamespace('App\SAE', __DIR__ . '/../src');
+
 
 $controller = isset($_GET['controller']) ? $_GET['controller'] : 'Main';
 
