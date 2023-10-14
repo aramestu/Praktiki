@@ -8,7 +8,7 @@ use App\SAE\Model\Repository\StageRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 use App\SAE\Model\DataObject\Stage;
 
-class ControllerExpPro{
+class ControllerExpPro extends ControleurGenerique{
     public static function getExpProByDefault(): void
     {
         $listeExpPro = ExperienceProfessionnelRepository::getAll();
@@ -58,12 +58,6 @@ class ControllerExpPro{
             ]
         );
     }
-
-    private static function afficheVue(string $cheminVue, array $parametres = []): void
-        {
-            extract($parametres);
-            require __DIR__ . '/../View/' . $cheminVue;
-        }
 }
 
 

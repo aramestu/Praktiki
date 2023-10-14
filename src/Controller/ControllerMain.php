@@ -8,30 +8,11 @@ use App\SAE\Model\Repository\Model;
 use App\SAE\Model\Repository\StageRepository;
 use App\SAE\Model\DataObject\Stage;
 
-class ControllerMain
+class ControllerMain extends ControleurGenerique
 {
-    public static function home()
-    {
-        self::afficheVue(
-                    'view.php',
-                    [
-                        'pagetitle' => 'Accueil',
-                        'cheminVueBody' => 'SAE/home.php',
-                    ]
-                );
-    }
 
-    public static function error(string $messageErreur)
-    {
-        self::afficheVue(
-                    'view.php',
-                    [
-                        'pagetitle' => 'Erreur',
-                        'cheminVueBody' => 'SAE/error.php',
-                        'messageErreur' => $messageErreur,
-                    ]
-                );
-    }
+
+
 
     public static function connect()
     {
@@ -230,12 +211,5 @@ class ControllerMain
                 self::error($messageErreur);
             }
         }
-    }
-
-
-    private static function afficheVue(string $cheminVue, array $parametres = []): void
-    {
-        extract($parametres);
-        require __DIR__ . '/../View/' . $cheminVue;
     }
 }
