@@ -239,5 +239,3 @@ class ControllerMain
         require __DIR__ . '/../View/' . $cheminVue;
     }
 }
-
-?>

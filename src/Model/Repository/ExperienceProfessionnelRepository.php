@@ -12,11 +12,11 @@ class ExperienceProfessionnelRepository {
             $requestStatement = $pdo->prepare("INSERT INTO ExperienceProfessionnel(sujetExperienceProfessionnel, thematiqueExperienceProfessionnel,
                                                                                     tachesExperienceProfessionnel, codePostalExperienceProfessionnel,
                                                                                     adresseExperienceProfessionnel, dateDebutExperienceProfessionnel, 
-                                                                                    dateFinExperienceProfessionnel, siret, datePublication) 
+                                                                                    dateFinExperienceProfessionnel, siret) 
                                                     VALUES(:sujetExperienceProfessionnelTag, :thematiqueExperienceProfessionnelTag,
                                                             :tachesExperienceProfessionnelTag, :codePostalExperienceProfessionnelTag,
                                                             :adresseExperienceProfessionnelTag, :dateDebutExperienceProfessionnelTag, 
-                                                            :dateFinExperienceProfessionnelTag, :siretTag, :datePublicationTag)");
+                                                            :dateFinExperienceProfessionnelTag, :siretTag)");
             $values = array("sujetExperienceProfessionnelTag" => $e->getSujet(),
                 "thematiqueExperienceProfessionnelTag" => $e->getThematique(),
                 "tachesExperienceProfessionnelTag" => $e->getTaches(),
@@ -24,8 +24,7 @@ class ExperienceProfessionnelRepository {
                 "adresseExperienceProfessionnelTag" => $e->getAdresse(),
                 "dateDebutExperienceProfessionnelTag" => $e->getDateDebut(),
                 "dateFinExperienceProfessionnelTag" => $e->getDateFin(),
-                "siretTag" => $e->getSiret(),
-                "datePublicationTag" => date('Y-m-d'));
+                "siretTag" => $e->getSiret());
             $requestStatement->execute($values);
             return true;
         }catch (\PDOException $e){
