@@ -138,7 +138,7 @@ td {
     word-break: break-word;
     margin-left:14%;
     color: var(--darkBlue2);
-    border: 2.5px solid #F2F2F2;
+    border: 2.5px solid #F2F2F200;
 }
 
 .small:hover {

@@ -17,7 +17,7 @@ use App\SAE\Model\Repository\EntrepriseRepository;
                     $last_element = end($elements);
                     echo $last_element
                     ?></p>
-                <p>Date du poste</p>
+                <p><?php echo $expPro->getDatePublication();?></p>
             </div>
             <div class="right">
                 <p>Du <?php echo $expPro->getDateDebut();?></p>
