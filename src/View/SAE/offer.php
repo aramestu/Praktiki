@@ -8,10 +8,15 @@
 use App\SAE\Model\Repository\EntrepriseRepository;
 ?>
 
-<div class="subContainer">
+<div class="subContainer <?php
+                                                                                $full_path = get_class($expPro);
+                                                                                $elements = explode('\\', $full_path);
+                                                                                $last_element = end($elements);
+                                                                                echo $last_element
+                                                                                ?>">
     <div class="header">
         <div class="information">
-            <p class="bold"> <?php
+            <p class="bold typeExpPro"> <?php
                 $full_path = get_class($expPro);
                 $elements = explode('\\', $full_path);
                 $last_element = end($elements);
@@ -33,7 +38,7 @@ use App\SAE\Model\Repository\EntrepriseRepository;
         <li>Date de création de l'offre</li>
         <li>Effectifs : <?php echo($entreprise->getEffectif()); ?></li>
         <li>Téléphone : <?php echo($entreprise->getTelephone()); ?></li>
-        <li><a href="https://<?php echo($entreprise->getSiteWeb()); ?>" class="link">site web</a></li>
+        <li><a href="https://<?php echo($entreprise->getSiteWeb()); ?>" class="link">Site web</a></li>
     </ul>
     <div class="text">
         <p>Sujet : <?= $expPro->getSujet()?></p>

@@ -34,7 +34,7 @@ class ExperienceProfessionnelRepository {
     public static function getAll() : array{
         $alternance = AlternanceRepository::getAll();
         $stage = StageRepository::getAll();
-        var_dump(array_merge($alternance, $stage));
+        //var_dump(array_merge($alternance, $stage));
         return array_merge($alternance, $stage);
     }
 
@@ -106,8 +106,8 @@ class ExperienceProfessionnelRepository {
             }
         }
 
-        var_dump($sql);
-        var_dump($pdo->query($sql)->fetchAll());
+        //var_dump($sql);
+        //var_dump($pdo->query($sql)->fetchAll());
 
         return $pdo->query($sql)->fetchAll();
     }
