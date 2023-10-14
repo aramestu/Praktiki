@@ -86,13 +86,15 @@ class AlternanceRepository{
         }
     }
 
-    public static function mettreAJour(Alternance $alternance){
+    public static function mettreAJour(Alternance $alternance): void
+    {
 
         // Il faut modifier à la fois dans ExperienceProfessionnel
         ExperienceProfessionnelRepository::mettreAJour($alternance);
     }
 
-    public static function supprimer(Alternance $alternance){
+    public static function supprimer(Alternance $alternance): void
+    {
         $sql = "DELETE FROM Stages WHERE idAlternance= :idTag;";
         $pdoStatement = Model::getPdo()->prepare($sql);
 
@@ -102,5 +104,36 @@ class AlternanceRepository{
 
         $pdoStatement->execute($values);
         ExperienceProfessionnelRepository::supprimer($alternance);
+    }
+
+    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null) : array|false{
+        $pdo = Model::getPdo();
+        $sql = "SELECT idAlternance, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
+                codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
+                dateFinExperienceProfessionnel AS dateFin, siret, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel FROM Alternances a JOIN ExperienceProfessionnel e ON a.idalternance = e.idExperienceProfessionnel ";
+        if (strlen($dateDebut) > 0){
+            $sql .= "AND dateDebutExperienceProfessionnel = '$dateDebut' ";
+        }
+        if (strlen($dateFin) > 0){
+            $sql .= "AND dateFinExperienceProfessionnel = '$dateFin' ";
+        }
+        if (strlen($codePostal) > 0){
+            $sql .= "AND codePostalExperienceProfessionnel = '$codePostal' ";
+        }
+        if(isset($optionTri)){
+            if ($optionTri == "datePublication"){
+                //TODO : $sql .= "ORDER BY datePublication ASC"
+            }
+            if ($optionTri == "datePublicationInverse") {
+                //TODO : $sql .= "ORDER BY datePublication DESC"
+            }
+        }
+
+        $requete = $pdo->query($sql);
+        $alternanceTriee = [];
+        foreach ($requete as $result){
+            $alternanceTriee[] = self::construireDepuisTableau($result);
+        }
+        return $alternanceTriee;
     }
 }

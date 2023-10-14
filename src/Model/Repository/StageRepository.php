@@ -126,4 +126,42 @@ class StageRepository{
         $sqlBase = "SELECT * FROM Stages s
                     JOIN ExperienceProfessionnel e ON e.idExperienceProfessionnel = s.idStage";
     }
+
+    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null) : array|false{
+        $pdo = Model::getPdo();
+        $sql = "SELECT idStage, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
+                                                codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
+                                                dateFinExperienceProfessionnel AS dateFin, siret, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel,
+                                                gratificationStage AS gratification FROM Stages s JOIN ExperienceProfessionnel e ON s.idStage = e.idExperienceProfessionnel ";
+        if (strlen($dateDebut) > 0){
+            $sql .= "AND dateDebutExperienceProfessionnel = '$dateDebut' ";
+        }
+        if (strlen($dateFin) > 0){
+            $sql .= "AND dateFinExperienceProfessionnel = '$dateFin' ";
+        }
+        if (strlen($codePostal) > 0){
+            $sql .= "AND codePostalExperienceProfessionnel = '$codePostal' ";
+        }
+        if(isset($optionTri)){
+            if ($optionTri == "datePublication"){
+                //TODO : $sql .= "ORDER BY datePublication ASC"
+            }
+            if ($optionTri == "datePublicationInverse") {
+                //TODO : $sql .= "ORDER BY datePublication DESC"
+            }
+            if ($optionTri == "salaireCroissant" && isset($stage)){
+                $sql .= "ORDER BY gratificationStage ASC";
+            }
+            if ($optionTri == "salaireDecroissant" && isset($stage)) {
+                $sql .= "ORDER BY gratificationStage DESC";
+            }
+        }
+
+        $requete = $pdo->query($sql);
+        $stageTriee = [];
+        foreach ($requete as $result){
+            $stageTriee[] = self::construireDepuisTableau($result);
+        }
+        return $stageTriee;
+    }
 }
