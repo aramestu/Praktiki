@@ -36,6 +36,20 @@ class ControllerExpPro extends ControllerGenerique{
         );
     }
 
+    public static function getExpProBySearch(){
+        $keywords = urldecode($_GET['keywords']);
+        $listeExpPro = ExperienceProfessionnelRepository::search($keywords);
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Offre',
+                'listeExpPro' => $listeExpPro,
+                'keywords' => $keywords,
+                'cheminVueBody' => 'offer/offerList.php',
+            ]
+        );
+    }
+
     public static function getExpProByFiltre(): void
     {
         $dateDebut = null;

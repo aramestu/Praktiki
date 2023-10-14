@@ -180,8 +180,7 @@ class ExperienceProfessionnelRepository {
         $pdoStatement->execute($values);
     }
 
-    public static function supprimer(ExperienceProfessionnel $exp): void
-    {
+    public static function supprimer(ExperienceProfessionnel $exp): void {
         $sql = "DELETE FROM `ExperienceProfessionnel` WHERE idExperienceProfessionnel= :idTag;";
 
         $pdoStatement = Model::getPdo()->prepare($sql);
@@ -194,6 +193,8 @@ class ExperienceProfessionnelRepository {
     }
 
     public static function search(string $keywords){
-
+        $stage = StageRepository::search($keywords);
+        $alternance = AlternanceRepository::search($keywords);
+        return array_merge($stage, $alternance);
     }
 }
