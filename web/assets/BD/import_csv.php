@@ -1,11 +1,18 @@
 <?php
 // Connect to database
 namespace App\SAE\web\assets\BD;
-include("../../../src/Model/Repository/EnseignantRepository.php");
+
+//include("../../../src/Model/Repository/EnseignantRepository.php");
+use App\SAE\Model\Repository\EnseignantRepository;
+use App\SAE\Model\Repository\TuteurProfessionnelRepository;
+use App\SAE\Model\Repository\EntrepriseRepository;
+
+use App\SAE\Model\Repository\Model;
+
 include("../../../src/Config/Conf.php");
 
 if (isset($_POST["import"])) {
-    $tab = array("Departements", "Utilisateurs", "TuteurProfessionnel", "AnneeUniversitaire",
+    $tab = array("Departements", "TuteurProfessionnel", "AnneeUniversitaire",
         "Etudiants", "Entreprises", "Enseignants", "ExperienceProfessionnel", "Stages",
         "Soutenances", "Alternances", "Inscriptions");
     for ($i = 0; $i < 12; $i++) {
@@ -20,88 +27,174 @@ if (isset($_POST["import"])) {
                     continue;
                 }
 
-                /*if ($i == 0) {//Departements
+
+                if ($i == 0) {//Departements
                     $sql = "INSERT into $tab[$i] (nomDepartement)
-             values ('" . $column[10] . "')";
-                    $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
-                }*/
+             values (:nomdepartement)";
+                    $pdoStatement = Model::getPdo()->prepare($sql);
+                    $values = array(
+                        "nomdepartement" => $column[10],
+                    );
+                    $pdoStatement->execute($values);
 
-                /*else if ($i == 2) {//TuteurProfessionnel
-                    $sql = "INSERT into $tab[$i]
-             values ('" . $column[79] . "','" .  $column[78]  . "','" . $column[77] . "',
-             '" . $column[81] . "','" . $column[80] . "')";
-                    $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
-                }
-
-                else if ($i == 3) {//AnneeUniversitaire
-                    $sql = "INSERT into $tab[$i] (nomAnneeUniversitaire)
-             values ('" . $column[36] . "')";
                     $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
                 }
 
-
-                else if ($i == 4) {//Etudiants
-                    $sql = "INSERT into $tab[$i]
-             values ('" . $column[1] . "','" .  $column[2]  . "','" .  $column[3]  . "',
-             '" .  $column[6]  . "','" .  $column[7]  . "','" .  $column[5]  . "',
-             '" .  $column[45]  . "')";
-                    $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
-                }
-
-                else if ($i == 5) {//Entreprises
-                    $sql = "INSERT into $tab[$i]
-             values ('" . $column[55] . "','" .  $column[54]  . "','" .  $column[59]  . "',
-             '" .  $column[64]  . "','" .  $column[66]  . "','" .  $column[69]  . "')";
-                    $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
-                }*/
-
-                if ($i == 6) {//Enseignants
-                    if(\App\SAE\Model\Repository\EnseignantRepository::get($column[31])==null) {
+                else if ($i == 1) {//TuteurProfessionnel
+                    if (TuteurProfessionnelRepository::get($column[79]) == null) {
                         $sql = "INSERT into $tab[$i]
-             values ('" . $column[31] . "','" . $column[29] . "','" . $column[30] . "')";
+             values ( :mailtuteur, :prenomtuteur, : nomtuteur,
+             : fonctiontuteur, : telephonetuteur)";
+
+                        $pdoStatement = Model::getPdo()->prepare($sql);
+                        $values = array(
+                            "mailtuteur" => $column[79],
+                            "prenomtuteur" => $column[78],
+                            "nomtuteur" => $column[77],
+                            "fonctiontuteur" => $column[81],
+                            "telephonetuteur" => $column[80]);
+                        $pdoStatement->execute($values);
+
                         $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
                     }
-                }/*
+                }
 
+                else if ($i == 2) {//AnneeUniversitaire
+                    $sql = "INSERT into $tab[$i] (nomAnneeUniversitaire)
+             values (:nomAnnee)";
 
-                else if ($i == 7) {//ExperienceProfessionnel
+                    $pdoStatement = Model::getPdo()->prepare($sql);
+                    $values = array(
+                        "nomAnnee" => $column[36],
+                    );
+                    $pdoStatement->execute($values);
+
+                    $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
+                }
+
+                else if ($i == 3) {//Etudiants
+                    $sql = "INSERT into $tab[$i]
+             values ( :numEtu, :nomEtu, :prenomEtu,
+             :mailPerso,:mailUniv,:telephonePort,
+             :codePostal)";
+
+                    $pdoStatement = Model::getPdo()->prepare($sql);
+                    $values = array(
+                        "numEtu" => $column[1],
+                        "nomEtu" => $column[2],
+                        "prenomEtu" => $column[3],
+                        "mailPerso" => $column[6],
+                        "mailUniv" => $column[7],
+                        "telephonePort" => $column[5],
+                        "codePostal" => $column[45]
+                    );
+                    $pdoStatement->execute($values);
+
+                    $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
+                }
+
+                else if ($i == 4) {//Entreprises
+                    if (EntrepriseRepository::get($column[55]) == null) {
+                        $sql = "INSERT into $tab[$i]
+             values (:siret,:nomEnt,:codePostalEnt,
+             :effectEnt,:telEnt,:siteEnt)";
+
+                        $pdoStatement = Model::getPdo()->prepare($sql);
+                        $values = array(
+                            "siret" => $column[55],
+                            "nomEnt" => $column[54],
+                            "codePostalEnt" => $column[59],
+                            "effectEnt" => $column[64],
+                            "telEnt" => $column[66],
+                            "siteEnt" => $column[69]
+                        );
+                        $pdoStatement->execute($values);
+
+                        $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
+                    }
+                }
+
+               else if ($i == 5) {//Enseignants
+                    //if(EnseignantRepository::get($column[31])==null) {
+                    $sql = "INSERT into $tab[$i]
+             values (:mailEnsei, :nomEnsei, :prenonEnsei)";
+
+                    $pdoStatement = Model::getPdo()->prepare($sql);
+                    $values = array(
+                        "mailEnsei" => $column[31],
+                        "nomEnsei" => $column[29],
+                        "prenomEnsei" => $column[30],
+                    );
+                    $pdoStatement->execute($values);
+
+                    $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
+                    // }
+                }
+
+                else if ($i == 6) {//ExperienceProfessionnel
                     $sql = "INSERT into $tab[$i] (sujetExperienceProfessionnel, thematiqueExperienceProfessionnel , tacheExperienceProfessionnel,
                    codePostalExperienceProfessionnel, adresseExperienceProfessionnel, dateDebutExperienceProfessionnel,
                      dateFinExperienceProfessionnel, mailEtudiant, mailEnseignant, siret, mailTuteurProfessionnel)
-             values ('" . $column[19] . "','" .  $column[18]  . "','" .  $column[20]  . "',
-             '" .  $column[59]  . "','" .  $column[57]  . "','" .  $column[13]  . "','" .  $column[14]  . "'
-             ,'" .  $column[1]  . "','" .  $column[31]  . "','" .  $column[55]  . "','" .  $column[79]  . "')";
+             values (:sujet,:thematique,:taches, :codePostal,:adresse,:dateDeb,:dateFin
+             ,:numEtu,:mailEnsei,:siret,:mailTuteur)";
+
+                    $pdoStatement = Model::getPdo()->prepare($sql);
+                    $values = array(
+                        "sujet" => $column[19],
+                        "thematique" => $column[18],
+                        "taches" => $column[20],
+                        "codePostal" => $column[59],
+                        "adresse" => $column[57],
+                        "dateDeb" => $column[13],
+                        "dateFin" => $column[14],
+                        "numEtu" => $column[1],
+                        "mailEnsei" => $column[31],
+                        "siret" => $column[55],
+                        "mailTuteur" => $column[79]
+                    );
+                    $pdoStatement->execute($values);
+
                     $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
                 }
 
-                else if ($i == 8) {//stages
+                else if ($i == 7) {//stages
                     $sql = "INSERT into $tab[$i] (gratificationStage)
-             values ('" . $column[25] . "')";
+             values (:gratif)";
+
+                    $pdoStatement = Model::getPdo()->prepare($sql);
+                    $values = array(
+                        "gratif" => $column[25]
+                    );
+                    $pdoStatement->execute($values);
+
                     $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
                 }
 
-                else if ($i == 9) {//Soutenances
+                /*else if ($i == 8) {//Soutenances
                     $sql = "INSERT into $tab[$i] (dateSoutenance,heureDebutSoutenance,heureFinSoutenance,
                     salleSoutenance,noteSoutenance,mailEnseignant,idStage)
              values ('" . $column[?] . "','" . $column[?] . "','" . $column[?] . "'
                 ,'" . $column[?] . "','" . $column[?] . "','" . $column[31] . "'
                 ,'" . $column[?] . "')";
                     $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
-                }
+                } */
 
-                else if ($i == 10) {//Alternances
+                else if ($i == 9) {//Alternances
                     $sql = "INSERT into $tab[$i]
              values ()";
                     $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
-                }
-
-                else if ($tab[$i] == 11) {//Inscriptions
+                } else if ($tab[$i] == 10) {//Inscriptions
                     $sql = "INSERT into $tab[$i] (numEtudiant)
-             values ('" . $column[1] . "')";
+             values (:numEtu)";
+
+                    $pdoStatement = Model::getPdo()->prepare($sql);
+                    $values = array(
+                        "numEtu" => $column[1]
+                    );
+                    $pdoStatement->execute($values);
+
                     $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
-                }*/
-
-
+                }
 
 
             }
@@ -115,11 +208,11 @@ if (isset($_POST["import"])) {
                 $message = "Problème lors de l'importation de données CSV";
             }
         }
-
     }
+
+
 }
 //Retourner à la page index.php
 header('Location: index.php');
 exit;
 ?>
-

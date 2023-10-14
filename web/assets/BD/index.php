@@ -15,17 +15,5 @@
         <br />
     </div>
 </form>
-<?php
-// Connect to database
-
-include("../../../src/Config/Conf.php");
-$tab = array("Departements", "Utilisateurs", "TuteurProfessionnel", "AnneeUniversitaire",
-    "Etudiants", "Entreprises", "Enseignants", "ExperienceProfessionnel", "Stages",
-    "Soutenances", "Alternances", "Inscriptions");
-for ($i = 0; $i < 12; $i++) {
-    $sql = "SELECT * FROM $tab[$i]";
-    $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
-}
-?>
 </body>
 </html>
