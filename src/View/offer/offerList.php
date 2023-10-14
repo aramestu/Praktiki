@@ -9,18 +9,26 @@
 <body>
     <div class="container">
 
-<form method="get">
-    <input type="text" placeholder="Rechercher une offre" id="search-bar">
+<form method="get" action="frontController.php">
+
+    <input type="hidden" name="action" value="getExpProBySearch">
+    <input type="hidden" name="controller" value="ExpPro">
+    <input type="text" placeholder="Rechercher une offre" name="keywords" id="search-bar" <?php
+        if(isset($keywords)){
+            echo "value=\"$keywords\"";
+        }
+ ?>>
+
     <button type="submit" class="custom-button" id="search-button">
         <img src="assets/images/loupe.png" alt="Loupe Icon" width="20" height="20">
     </button>
 
-
+</form>
     </div>
 <div class="HBox" id="center">
 
 <div class="container VBox" id="sideFilter">
-
+        <form method="get" action="frontController.php">
                     <select name="datePublication" id="datePublication">
                     <option value="" disabled selected style="display:none;">Période de publication</option>
                         <option value="last24">Dernières 24 heures</option>

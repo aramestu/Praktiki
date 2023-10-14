@@ -110,22 +110,22 @@ class AlternanceRepository{
         ExperienceProfessionnelRepository::supprimer($alternance);
     }
 
-    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null) : array{
+    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null) : array {
         $pdo = Model::getPdo();
         $sql = "SELECT idAlternance, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
                 codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
                 dateFinExperienceProfessionnel AS dateFin, siret, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel FROM Alternances a JOIN ExperienceProfessionnel e ON a.idalternance = e.idExperienceProfessionnel ";
-        if (strlen($dateDebut) > 0){
+        if (strlen($dateDebut) > 0) {
             $sql .= "AND dateDebutExperienceProfessionnel = '$dateDebut' ";
         }
-        if (strlen($dateFin) > 0){
+        if (strlen($dateFin) > 0) {
             $sql .= "AND dateFinExperienceProfessionnel = '$dateFin' ";
         }
-        if (strlen($codePostal) > 0){
+        if (strlen($codePostal) > 0) {
             $sql .= "AND codePostalExperienceProfessionnel = '$codePostal' ";
         }
-        if(isset($optionTri)){
-            if ($optionTri == "datePublication"){
+        if (isset($optionTri)) {
+            if ($optionTri == "datePublication") {
                 //TODO : $sql .= "ORDER BY datePublication ASC"
             }
             if ($optionTri == "datePublicationInverse") {
@@ -135,9 +135,33 @@ class AlternanceRepository{
 
         $requete = $pdo->query($sql);
         $alternanceTriee = [];
-        foreach ($requete as $result){
+        foreach ($requete as $result) {
             $alternanceTriee[] = self::construireDepuisTableau($result);
         }
         return $alternanceTriee;
+
+    }
+
+    public static function search(string $keywords): array{
+        $sql = "SELECT idAlternance, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
+                codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
+                dateFinExperienceProfessionnel AS dateFin, siret, datePublication, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel
+                FROM ExperienceProfessionnel e
+                JOIN Alternances a ON a.idAlternance = e.idExperienceProfessionnel
+                WHERE numEtudiant IS NULL
+                AND (sujetExperienceProfessionnel LIKE '%$keywords%'
+                OR thematiqueExperienceProfessionnel LIKE '%$keywords%'
+                OR tachesExperienceProfessionnel LIKE '%$keywords%'
+                OR codePostalExperienceProfessionnel LIKE '%$keywords%'
+                OR adresseExperienceProfessionnel LIKE '%$keywords%'
+                OR siret LIKE '%$keywords%')";
+
+        $requestStatement = Model::getPdo()->query($sql);
+
+        $AllAlternance = [];
+        foreach ($requestStatement as $alternanceTab){
+            $AllAlternance[] = self::construireDepuisTableau($alternanceTab);
+        }
+        return $AllAlternance;
     }
 }

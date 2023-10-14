@@ -125,13 +125,6 @@ class StageRepository{
         ExperienceProfessionnelRepository::supprimer($stage);
     }
 
-    public static function search(string $keywords): void
-    {
-        $pdo = Model::getPdo();
-        $sqlBase = "SELECT * FROM Stages s
-                    JOIN ExperienceProfessionnel e ON e.idExperienceProfessionnel = s.idStage";
-    }
-
     public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null) : array{
         $pdo = Model::getPdo();
         $sql = "SELECT idStage, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
@@ -168,5 +161,29 @@ class StageRepository{
             $stageTriee[] = self::construireDepuisTableau($result);
         }
         return $stageTriee;
+    }
+
+    public static function search(string $keywords): array{
+        $sql = "SELECT idStage, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
+                codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
+                dateFinExperienceProfessionnel AS dateFin, siret, datePublication, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel,
+                gratificationStage AS gratification
+                FROM ExperienceProfessionnel e
+                JOIN Stages s ON s.idStage = e.idExperienceProfessionnel
+                WHERE numEtudiant IS NULL
+                AND (sujetExperienceProfessionnel LIKE '%$keywords%'
+                OR thematiqueExperienceProfessionnel LIKE '%$keywords%'
+                OR tachesExperienceProfessionnel LIKE '%$keywords%'
+                OR codePostalExperienceProfessionnel LIKE '%$keywords%'
+                OR adresseExperienceProfessionnel LIKE '%$keywords%'
+                OR siret LIKE '%$keywords%')";
+
+        $requestStatement = Model::getPdo()->query($sql);
+
+        $AllStage = [];
+        foreach ($requestStatement as $stageTab){
+            $AllStage[] = self::construireDepuisTableau($stageTab);
+        }
+        return $AllStage;
     }
 }
