@@ -70,36 +70,6 @@ ul li {
     color: var(--white);
     opacity: 0.69;
 }
-/*
-@media (max-width: 41200px) {
-    .subContainer {
-        width: 21%;
-    }
-    #list{
-        flex-direction: row;
-    }
-}
-
-@media (max-width: 1300px) {
-    .subContainer {
-        width: 21%;
-    }
-    #list{
-        flex-direction: row;
-    }
-}
-
-@media (max-width: 950px) {
-    .subContainer {
-        width: 69%;
-        margin-left: 15.5%;
-    }
-    #list{
-        flex-direction: column;
-    }
-}
-
- */
 
 #list {
     display: flex;
@@ -170,6 +140,15 @@ h3 {
     margin-top: -5px;
 }
 
+.editIcon,
+.deleteIcon,
+.backIcon{
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    opacity: 0.69;
+}
+
 .mapPin{
     width: 20px;
     height: 20px;
@@ -192,8 +171,6 @@ h3 {
     background-color: var(--wisteria);
     color: var(--white);
 }
-
-
 
 .Stage:hover{
     border-color: var(--wisteria);

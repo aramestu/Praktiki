@@ -56,8 +56,8 @@ use App\SAE\Model\Repository\StageRepository;
         <p>Thématique : <?= htmlspecialchars($expPro->getThematique())?></p>
         <p>Tâches : <?= htmlspecialchars($expPro->getTaches())?></p>
     </div>
-    <a href="frontController.php?controller=ExpPro&action=getExpProByDefault"> <button id="retour">Retour</button> </a>
+    <a href="frontController.php?controller=ExpPro&action=getExpProByDefault"><img src="assets/images/back-icon.png" class="backIcon"></button> </a>
     <button id="apply">Postuler</button>
-    <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($expPro->getId())?>"> <button id="retour">Modifier</button> </a>
-    <a href="frontController.php?controller=ExpPro&action=supprimerOffre&experiencePro=<?php echo rawurlencode($expPro->getId())?>"> <button id="retour">Supprimer</button> </a>
+    <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($expPro->getId())?>"><img src="assets/images/edit-icon.png" class="editIcon"></a>
+    <a href="frontController.php?controller=ExpPro&action=supprimerOffre&experiencePro=<?php echo rawurlencode($expPro->getId())?>"><img src="assets/images/delete-icon.png" class="deleteIcon"></a>
 </div>
