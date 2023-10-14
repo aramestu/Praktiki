@@ -27,7 +27,9 @@
                   <a href="frontController.php?controller=ExpPro&action=getExpProByDefault" class="nav-item" data-action="alter">Offres</a>
                   <a href="frontController.php?action=contact" class="nav-item" data-action="contact">Contact</a>
                   <a href="frontController.php?action=connect" class="nav-item" data-action="connect">Connexion</a>
-              </nav>
+                  <a href="frontController.php?action=import" class="nav-item" data-action="import">Importer</a>
+
+      </nav>
 </header>
 
 <main>

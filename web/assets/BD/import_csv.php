@@ -94,7 +94,7 @@ if (isset($_POST["import"])) {
                 }
 
                 else if ($i == 4) {//Entreprises
-                    if (EntrepriseRepository::get($column[55]) == null) {
+                    if (EntrepriseRepository::getStatic($column[55]) == null) {
                         $sql = "INSERT into $tab[$i]
              values (:siret,:nomEnt,:codePostalEnt,
              :effectEnt,:telEnt,:siteEnt)";
