@@ -44,6 +44,11 @@ class AlternanceRepository{
                 $alternance->setTuteurProfessionnel($alternanceFormatTableau["tuteurProfessionnel"]);
             }
         }
+        if(array_key_exists("datePublication", $alternanceFormatTableau)){
+            if(!empty($alternanceFormatTableau["datePublication"])){
+                $alternance->setDatePublication($alternanceFormatTableau["datePublication"]);
+            }
+        }
         return $alternance;
     }
 
@@ -51,7 +56,7 @@ class AlternanceRepository{
         $pdo = Model::getPdo();
         $requestStatement = $pdo->query(" SELECT idAlternance, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
                                                 codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
-                                                dateFinExperienceProfessionnel AS dateFin, siret,numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel 
+                                                dateFinExperienceProfessionnel AS dateFin, siret, datePublication, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel 
                                                 FROM ExperienceProfessionnel e
                                                 JOIN Alternances a ON a.idAlternance = e.idExperienceProfessionnel");
         $AllAlternance = [];

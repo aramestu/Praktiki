@@ -67,7 +67,7 @@
 </div>
 
 <div id="tableOffer">
-<?php require_once 'offerTable.php'; ?>
+<?php require 'offerTable.php'; ?>
 </div>
 
    </div>

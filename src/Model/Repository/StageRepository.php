@@ -42,6 +42,11 @@ class StageRepository{
                 $stage->setTuteurProfessionnel($stageFormatTableau["tuteurProfessionnel"]);
             }
         }
+        if(array_key_exists("datePublication", $stageFormatTableau)){
+            if(!empty($stageFormatTableau["datePublication"])){
+                $stage->setDatePublication($stageFormatTableau["datePublication"]);
+            }
+        }
         return $stage;
     }
 
@@ -49,8 +54,8 @@ class StageRepository{
         $pdo = Model::getPdo();
         $requestStatement = $pdo->query(" SELECT idStage, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
                                                 codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
-                                                dateFinExperienceProfessionnel AS dateFin, siret, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel,
-                                                gratificationStage AS gratification
+                                                dateFinExperienceProfessionnel AS dateFin, siret, datePublication, numEtudiant AS etudiant, mailEnseignant AS enseignant, 
+                                                mailTuteurProfessionnel AS tuteurProfessionnel, gratificationStage AS gratification
                                                 FROM ExperienceProfessionnel e
                                                 JOIN Stages s ON s.idStage = e.idExperienceProfessionnel");
         $AllStage = [];

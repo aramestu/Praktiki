@@ -12,11 +12,11 @@ class ExperienceProfessionnelRepository {
             $requestStatement = $pdo->prepare("INSERT INTO ExperienceProfessionnel(sujetExperienceProfessionnel, thematiqueExperienceProfessionnel,
                                                                                     tachesExperienceProfessionnel, codePostalExperienceProfessionnel,
                                                                                     adresseExperienceProfessionnel, dateDebutExperienceProfessionnel, 
-                                                                                    dateFinExperienceProfessionnel, siret) 
+                                                                                    dateFinExperienceProfessionnel, siret, datePublication) 
                                                     VALUES(:sujetExperienceProfessionnelTag, :thematiqueExperienceProfessionnelTag,
                                                             :tachesExperienceProfessionnelTag, :codePostalExperienceProfessionnelTag,
                                                             :adresseExperienceProfessionnelTag, :dateDebutExperienceProfessionnelTag, 
-                                                            :dateFinExperienceProfessionnelTag, :siretTag)");
+                                                            :dateFinExperienceProfessionnelTag, :siretTag, :datePublicationTag)");
             $values = array("sujetExperienceProfessionnelTag" => $e->getSujet(),
                 "thematiqueExperienceProfessionnelTag" => $e->getThematique(),
                 "tachesExperienceProfessionnelTag" => $e->getTaches(),
@@ -24,7 +24,8 @@ class ExperienceProfessionnelRepository {
                 "adresseExperienceProfessionnelTag" => $e->getAdresse(),
                 "dateDebutExperienceProfessionnelTag" => $e->getDateDebut(),
                 "dateFinExperienceProfessionnelTag" => $e->getDateFin(),
-                "siretTag" => $e->getSiret());
+                "siretTag" => $e->getSiret(),
+                "datePublicationTag" => date('Y-m-d'));
             $requestStatement->execute($values);
             return true;
         }catch (\PDOException $e){

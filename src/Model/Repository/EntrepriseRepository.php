@@ -18,7 +18,7 @@ class EntrepriseRepository extends AbstractRepository {
     }
 
     protected function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise{
-        $entreprise = new Entreprise($entrepriseFormatTableau["siret"],$entrepriseFormatTableau["nomEntreprise"], $entrepriseFormatTableau["codePostalEntreprise"], $entrepriseFormatTableau["effectifEntreprise"], $entrepriseFormatTableau["téléphoneEntreprise"], $entrepriseFormatTableau["siteWebEntreprise"]);
+        $entreprise = new Entreprise($entrepriseFormatTableau["siret"],$entrepriseFormatTableau["nomEntreprise"], $entrepriseFormatTableau["codePostalEntreprise"], $entrepriseFormatTableau["effectifEntreprise"], $entrepriseFormatTableau["telephoneEntreprise"], $entrepriseFormatTableau["siteWebEntreprise"]);
         return $entreprise;
     }
 

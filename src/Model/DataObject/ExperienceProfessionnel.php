@@ -16,6 +16,8 @@ abstract class ExperienceProfessionnel extends AbstractDataObject {
     private string $enseignant;
     private string $tuteurProfessionnel;
 
+    private string $datePublication;
+
 
     public function __construct(
           string $sujet,
@@ -131,5 +133,14 @@ abstract class ExperienceProfessionnel extends AbstractDataObject {
     public function setTuteurProfessionnel(string $tuteurProfessionnel): void {
         $this->tuteurProfessionnel = $tuteurProfessionnel;
     }
+
+    public function getDatePublication(): string {
+        return $this->datePublication;
+    }
+
+    public function setDatePublication(string $datePublication): void {
+        $this->datePublication = $datePublication;
+    }
+
 }
 ?>
