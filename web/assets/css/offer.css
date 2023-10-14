@@ -1,6 +1,6 @@
 .header {
     border-bottom: solid;
-    border-color: #707B7C;
+    border-color: var(--grey2);
     border-width: 2px;
     padding-bottom: 15px;
     display: flex;
@@ -139,11 +139,10 @@ td {
     word-break: break-word;
     margin-left:14%;
     color: var(--darkBlue2);
-    border: 2px solid #F2F2F2;
+    border: 2.5px solid #F2F2F2;
 }
 
-.small:hover{
-    background-color: #F2F2F200;
+.small:hover {
     cursor: pointer;
 }
 
@@ -200,7 +199,7 @@ h3 {
 
 .Stage:hover{
     border-color: var(--wisteria);
-    box-shadow:10px 10px 10px #00000020,
+    box-shadow:10px 10px 10px #00000025,
     -10px -10px 10px #8E44AD25;
 }
 
@@ -213,7 +212,7 @@ h3 {
 
 .Alternance:hover{
     border-color: var(--orange);
-    box-shadow:10px 10px 10px #00000020,
+    box-shadow:10px 10px 10px #00000025,
     -10px -10px 10px #E67E2225;
 }
 /*---END SMALL OFFER---*/
