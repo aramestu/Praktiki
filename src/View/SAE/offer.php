@@ -45,5 +45,8 @@ use App\SAE\Model\Repository\EntrepriseRepository;
         <p>Thématique : <?= $expPro->getThematique()?></p>
         <p>Tâches : <?= $expPro->getTaches()?></p>
     </div>
+    <a href="frontController.php?controller=ExpPro&action=getExpProByDefault"> <button id="retour">Retour</button> </a>
     <button id="apply">Postuler</button>
+    <a href="frontController.php?controller=Main&action=afficherFormulaireModification&experiencePro=<?php echo $expPro->getId()?>"> <button id="retour">Modifier</button> </a>
+    <a href="frontController.php?controller=Main&action=supprimerOffre&experiencePro=<?php echo $expPro->getId()?>"> <button id="retour">Supprimer</button> </a>
 </div>
