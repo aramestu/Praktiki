@@ -2,7 +2,7 @@
 use App\SAE\Model\Repository\EntrepriseRepository;
 ?>
 
-<a href="frontController.php?controller=Main&action=afficherOffre&experiencePro= <?php echo rawurlencode($expPro->getId())?> " style="text-decoration:none" id="offerButton">
+<a href="frontController.php?controller=ExpPro&action=afficherOffre&experiencePro= <?php echo rawurlencode($expPro->getId())?> " style="text-decoration:none" id="offerButton">
     <div class="subContainer small <?php
                                                        $full_path = get_class($expPro);
                                                        $elements = explode('\\', $full_path);

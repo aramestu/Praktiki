@@ -1,7 +1,7 @@
 <?php
 namespace App\SAE\Controller;
 
-abstract class ControleurGenerique{
+abstract class ControllerGenerique{
 
     protected static function afficheVue(string $cheminVue, array $parametres = []): void
     {

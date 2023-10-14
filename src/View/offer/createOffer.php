@@ -13,7 +13,7 @@
 
 <body>
     <div class="container">
-        <form method="post" action="frontController.php?action=creerOffreDepuisFormulaire">
+        <form method="post" action="frontController.php?controller=ExpPro&action=creerOffreDepuisFormulaire">
             <legend>Création d'Offre</legend>
             <p>
                 <label for="typeOffre">Type d'Offre</label>
@@ -69,7 +69,7 @@
             </p>
             <p>
                 <label for="siret">Siret</label>
-                <input type="number" name="siret" id="siret" required placeholder="Siret" />
+                <input type="number" name="siret" id="siret" required placeholder="Siret" value="01234567890123" />
             </p>
 
             <p>

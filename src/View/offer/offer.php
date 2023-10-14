@@ -58,6 +58,6 @@ use App\SAE\Model\Repository\StageRepository;
     </div>
     <a href="frontController.php?controller=ExpPro&action=getExpProByDefault"> <button id="retour">Retour</button> </a>
     <button id="apply">Postuler</button>
-    <a href="frontController.php?controller=Main&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($expPro->getId())?>"> <button id="retour">Modifier</button> </a>
-    <a href="frontController.php?controller=Main&action=supprimerOffre&experiencePro=<?php echo rawurlencode($expPro->getId())?>"> <button id="retour">Supprimer</button> </a>
+    <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($expPro->getId())?>"> <button id="retour">Modifier</button> </a>
+    <a href="frontController.php?controller=ExpPro&action=supprimerOffre&experiencePro=<?php echo rawurlencode($expPro->getId())?>"> <button id="retour">Supprimer</button> </a>
 </div>
