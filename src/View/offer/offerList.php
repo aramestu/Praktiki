@@ -9,9 +9,9 @@
 <body>
     <div class="container">
 
-    <textarea id="search-bar" name="session_id" rows="1" cols="50" style="resize: none"
-                                  placeholder="Rechercher une offre" ></textarea>
-    <button class="custom-button" id="search-button">
+<form method="get">
+    <input type="text" placeholder="Rechercher une offre" id="search-bar">
+    <input type="submit" class="custom-button" id="search-button">
         <img src="assets/images/loupe.png" alt="Loupe Icon" width="20" height="20">
     </button>
 
@@ -20,7 +20,6 @@
 <div class="HBox" id="center">
 
 <div class="container VBox" id="sideFilter">
-<form method="get">
 
                     <select name="datePublication" id="datePublication">
                     <option value="" disabled selected style="display:none;">Période de publication</option>

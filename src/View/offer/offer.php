@@ -6,6 +6,7 @@
 
 <?php
 use App\SAE\Model\Repository\EntrepriseRepository;
+use App\SAE\Model\Repository\StageRepository;
 ?>
 
 <div class="subContainer <?php
@@ -42,6 +43,16 @@ use App\SAE\Model\Repository\EntrepriseRepository;
     </ul>
     <div class="text">
         <p>Sujet : <?= $expPro->getSujet()?></p>
+        <?php
+            if ($last_element == "Stage") {
+                ?>
+                <p>Gratification : <?php
+                                           $stage = (new StageRepository())->get($expPro->getID());
+                                           echo($stage->getGratification());
+                                           ?>€</p>
+                                           <?php
+                                               }
+                                               ?>
         <p>Thématique : <?= $expPro->getThematique()?></p>
         <p>Tâches : <?= $expPro->getTaches()?></p>
     </div>
