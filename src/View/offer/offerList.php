@@ -11,7 +11,7 @@
 
 <form method="get">
     <input type="text" placeholder="Rechercher une offre" id="search-bar">
-    <input type="submit" class="custom-button" id="search-button">
+    <button type="submit" class="custom-button" id="search-button">
         <img src="assets/images/loupe.png" alt="Loupe Icon" width="20" height="20">
     </button>
 
