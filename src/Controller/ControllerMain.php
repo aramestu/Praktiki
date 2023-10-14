@@ -190,10 +190,17 @@ class ControllerMain
         // Si c'est un stage alors c'est good
         if(! is_null($stage)){
             StageRepository::supprimer($stage);
+            self::afficherVueEndOffer("Stage supprimée avec succès");
         }
         else{
             $alternance = AlternanceRepository::get($idExpPro); //Dans un else pour éviter de faire 2 requêtes s'il n'y a pas besoin
-            AlternanceRepository::supprimer($alternance);
+            if (! is_null($alternance)){
+                AlternanceRepository::supprimer($alternance);
+                self::afficherVueEndOffer("Alternance supprimée avec succès");
+            }
+            else{
+                self::error("L'offre à supprimer n'existe pas");
+            }
         }
     }
 

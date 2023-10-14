@@ -95,7 +95,7 @@ class AlternanceRepository{
 
     public static function supprimer(Alternance $alternance): void
     {
-        $sql = "DELETE FROM Stages WHERE idAlternance= :idTag;";
+        $sql = "DELETE FROM Alternances WHERE idAlternance= :idTag;";
         $pdoStatement = Model::getPdo()->prepare($sql);
 
         $values = array(
