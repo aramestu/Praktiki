@@ -53,7 +53,7 @@
             </p>
             <p>
                 <label for="codePostale">Code Postal</label>
-                <input type="text" name="codePostal" id="codePostal" required placeholder="Code Postal" />
+                <input type="text" name="codePostal" id="codePostal" maxlength="5" required placeholder="Code Postal" />
             </p>
             <p>
                 <label for="adresse">Adresse postale</label>

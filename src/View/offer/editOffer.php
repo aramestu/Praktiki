@@ -58,7 +58,7 @@ if(is_a($expPro, 'App\SAE\Model\DataObject\Stage')){ // Si c'est un stage
         </p>
         <p>
             <label for="codePostale">Code Postal</label>
-            <input type="text" name="codePostal" id="codePostal" required placeholder="Code Postal" value="<?php echo htmlspecialchars($expPro->getCodePostal());?>"/>
+            <input type="text" name="codePostal" id="codePostal" required placeholder="Code Postal" maxlength="5" value="<?php echo htmlspecialchars($expPro->getCodePostal());?>"/>
         </p>
         <p>
             <label for="adresse">Adresse postale</label>
