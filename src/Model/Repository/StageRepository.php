@@ -54,7 +54,7 @@ class StageRepository{
         $pdo = Model::getPdo();
         $requestStatement = $pdo->query(" SELECT idStage, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
                                                 codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
-                                                dateFinExperienceProfessionnel AS dateFin, siret, datePublication, numEtudiant AS etudiant, mailEnseignant AS enseignant, 
+                                                dateFinExperienceProfessionnel AS dateFin, siret, datePublication, datePublication, numEtudiant AS etudiant, mailEnseignant AS enseignant, 
                                                 mailTuteurProfessionnel AS tuteurProfessionnel, gratificationStage AS gratification
                                                 FROM ExperienceProfessionnel e
                                                 JOIN Stages s ON s.idStage = e.idExperienceProfessionnel");
@@ -68,7 +68,7 @@ class StageRepository{
     public static function get(string $id) :?Stage{
         $sql = "SELECT idStage, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
                 codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
-                dateFinExperienceProfessionnel AS dateFin, siret, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel,
+                dateFinExperienceProfessionnel AS dateFin, siret, datePublication, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel,
                 gratificationStage AS gratification
                 FROM ExperienceProfessionnel e
                 JOIN Stages s ON s.idStage = e.idExperienceProfessionnel
