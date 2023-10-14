@@ -38,7 +38,7 @@ class ExperienceProfessionnelRepository {
         return array_merge($alternance, $stage);
     }
 
-    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $stage = null, string $alternance = null, string $codePostal = null) : array|false
+    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $stage = null, string $alternance = null, string $codePostal = null) : array
     {
         /*$resultArray = array();
         $pdo = Model::getPdo();
@@ -123,7 +123,7 @@ class ExperienceProfessionnelRepository {
             return $tabAlternance;
         }
         else{
-            var_dump(self::mergeSort($tabAlternance, $tabStages, $optionTri));
+            //var_dump(self::mergeSort($tabAlternance, $tabStages, $optionTri));
             return self::mergeSort($tabAlternance, $tabStages, $optionTri);
         }
     }

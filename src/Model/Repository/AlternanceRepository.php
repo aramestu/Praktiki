@@ -106,7 +106,7 @@ class AlternanceRepository{
         ExperienceProfessionnelRepository::supprimer($alternance);
     }
 
-    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null) : array|false{
+    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null) : array{
         $pdo = Model::getPdo();
         $sql = "SELECT idAlternance, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
                 codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
