@@ -63,6 +63,7 @@ if (isset($_POST["import"])) {
                     }
                 }/*
 
+
                 else if ($i == 7) {//ExperienceProfessionnel
                     $sql = "INSERT into $tab[$i] (sujetExperienceProfessionnel, thematiqueExperienceProfessionnel , tacheExperienceProfessionnel,
                    codePostalExperienceProfessionnel, adresseExperienceProfessionnel, dateDebutExperienceProfessionnel,
@@ -121,3 +122,4 @@ if (isset($_POST["import"])) {
 header('Location: index.php');
 exit;
 ?>
+
