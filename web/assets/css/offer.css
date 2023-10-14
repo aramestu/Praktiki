@@ -135,15 +135,16 @@ td {
     text-align: center;
     min-width: max-content;
     max-width: 305px;
-    height:155px;
+    height:185px;
     word-break: break-word;
     margin-left:14%;
+    color: var(--darkBlue2);
+    border: 2px solid #F2F2F2;
 }
 
 .small:hover{
-    background-color: #F2F2F2;
+    background-color: #F2F2F200;
     cursor: pointer;
-    transform: scale(1.02);
 }
 
 .small div {
@@ -169,5 +170,50 @@ h3 {
 
 .small .information * {
     margin: 5px;
+    display: -webkit-box;
+}
+
+.mapPin{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.typeExpPro{
+    border-radius: 0.5rem;
+    padding: 5px;
+    font-size: 11px;
+    font-weight: bold;
+    width: max-content;
+    margin-bottom: 5px;
+    border: 2px solid;
+}
+
+.Stage > .header > .left > .typeExpPro,
+.Stage > .header > .information > .typeExpPro{
+    border-color: var(--wisteria);
+    background-color: var(--wisteria);
+    color: var(--white);
+}
+
+
+
+.Stage:hover{
+    border-color: var(--wisteria);
+    box-shadow:10px 10px 10px #00000020,
+    -10px -10px 10px #8E44AD25;
+}
+
+.Alternance > .header > .left > .typeExpPro,
+.Alternance > .header > .information > .typeExpPro{
+    border-color: var(--orange);
+    background-color: var(--orange);
+    color: var(--white);
+}
+
+.Alternance:hover{
+    border-color: var(--orange);
+    box-shadow:10px 10px 10px #00000020,
+    -10px -10px 10px #E67E2225;
 }
 /*---END SMALL OFFER---*/

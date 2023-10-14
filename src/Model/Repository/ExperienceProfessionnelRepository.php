@@ -2,6 +2,7 @@
 namespace App\SAE\Model\Repository;
 
 use App\SAE\Model\DataObject\ExperienceProfessionnel;
+use App\SAE\Model\DataObject\Stage;
 use App\SAE\Model\Repository\Model;
 
 class ExperienceProfessionnelRepository {
@@ -34,11 +35,10 @@ class ExperienceProfessionnelRepository {
     public static function getAll() : array{
         $alternance = AlternanceRepository::getAll();
         $stage = StageRepository::getAll();
-        var_dump(array_merge($alternance, $stage));
         return array_merge($alternance, $stage);
     }
 
-    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $stage = null, string $alternance = null, string $codePostal = null) : array|false
+    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $stage = null, string $alternance = null, string $codePostal = null) : array
     {
         /*$resultArray = array();
         $pdo = Model::getPdo();
@@ -68,7 +68,10 @@ class ExperienceProfessionnelRepository {
         $pdo->prepare($sql);
         $pdo->execute();
         return $pdo->fetchAll();*/
-        //TODO : a finir
+        /* TODO : tempo 2eme test
+         *
+         *
+         * //TODO : a finir
         $pdo = Model::getPdo();
         $sql = "SELECT * ";
         if (isset($stage) && isset($alternance) || !isset($stage) && !isset($alternance)){
@@ -109,7 +112,45 @@ class ExperienceProfessionnelRepository {
         var_dump($sql);
         var_dump($pdo->query($sql)->fetchAll());
 
-        return $pdo->query($sql)->fetchAll();
+        return $pdo->query($sql)->fetchAll();*/
+
+        $tabStages = StageRepository::filtre($dateDebut, $dateFin, $optionTri, $codePostal);
+        $tabAlternance = AlternanceRepository::filtre($dateDebut, $dateFin, $optionTri, $codePostal);
+        if (isset($stage)){
+            return $tabStages;
+        }
+        elseif (isset($alternance)){
+            return $tabAlternance;
+        }
+        else{
+            //var_dump(self::mergeSort($tabAlternance, $tabStages, $optionTri));
+            return self::mergeSort($tabAlternance, $tabStages, $optionTri);
+        }
+    }
+    public static function mergeSort(array $array1, array $array2, string|null $option): array {
+        $result = [];
+
+        while (!empty($array1) && !empty($array2)) {
+            $element1 = reset($array1);
+            $element2 = reset($array2);
+
+            $comparison = match ($option) {
+                'datePublication' => $element1['datePublication'] - $element2['datePublication'],
+                'datePublicationInverse' => $element2['datePublicationInverse'] - $element1['datePublicationInverse'],
+                'salaireCroissant' => $element1['gratificationStage'] - $element2['gratificationStage'],
+                'salaireDecroissant' => $element2['gratificationStage'] - $element1['gratificationStage'],
+                default => 0, // Pas de changement d'ordre par défaut
+            };
+
+            if ($comparison <= 0) {
+                $result[] = array_shift($array1);
+            } else {
+                $result[] = array_shift($array2);
+            }
+        }
+
+        // Ajout des éléments restants s'il y en a
+        return array_merge($result, $array1, $array2);
     }
 
     public static function mettreAJour(ExperienceProfessionnel $exp): void
