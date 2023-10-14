@@ -13,13 +13,27 @@ class ControllerExpPro extends ControllerGenerique{
     {
         $listeExpPro = ExperienceProfessionnelRepository::getAll();
         self::afficheVue(
-                            'view.php',
-                            [
-                                'pagetitle' => 'Offre',
-                                'listeExpPro' => $listeExpPro,
-                                'cheminVueBody' => 'offer/offerList.php',
-                            ]
-                        );
+            'view.php',
+            [
+                'pagetitle' => 'Offre',
+                'listeExpPro' => $listeExpPro,
+                'cheminVueBody' => 'offer/offerList.php',
+            ]
+        );
+    }
+
+    public static function getExpProBySearch(){
+        $keywords = urldecode($_GET['keywords']);
+        $listeExpPro = ExperienceProfessionnelRepository::search($keywords);
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Offre',
+                'listeExpPro' => $listeExpPro,
+                'keywords' => $keywords,
+                'cheminVueBody' => 'offer/offerList.php',
+            ]
+        );
     }
 
     public static function getExpProByFiltre(): void
