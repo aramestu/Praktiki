@@ -25,22 +25,20 @@ use App\SAE\Model\Repository\EntrepriseRepository;
                 $entreprise = (new EntrepriseRepository())->get($expPro->getSiret());
                 echo($entreprise->getNom());
                 ?></h2>
-            <label>adresse de l'entreprise / code postal stage</label>
+            <label><?= $expPro->getAdresse()?> / <?= $expPro->getCodePostal()?></label>
         </div>
 
     </div>
     <ul>
         <li>Date de création de l'offre</li>
-        <li>Effectif entreprise</li>
-        <li>téléphone (pas sûr)</li>
-        <li><a href="http://localhost/sae_web_s1/web/frontController.php?action=home" class="link">site web</a></li>
+        <li>Effectifs : <?php echo($entreprise->getEffectif()); ?></li>
+        <li>Téléphone : <?php echo($entreprise->getTelephone()); ?></li>
+        <li><a href="https://<?php echo($entreprise->getSiteWeb()); ?>" class="link">site web</a></li>
     </ul>
     <div class="text">
-        <?php
-        echo "information sur le stage avec le sujet, les tâches, la thématique peut être aussi la durée... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec accumsan sem. Quisque at ligula dui. Mauris eleifend tempor mi ac faucibus. In varius velit non sem fringilla, eu convallis elit commodo. Donec nunc velit, placerat at molestie at, ornare eu augue. Curabitur sed elit vitae tellus sollicitudin ullamcorper. Proin non libero sed eros vehicula gravida. Donec in leo nibh. Curabitur mattis urna non leo facilisis, quis laoreet lectus consectetur.
-
-Integer laoreet nulla arcu, ullamcorper cursus sapien tempor in. Ut non vestibulum libero. In porta, eros non placerat vestibulum, orci justo feugiat dolor, quis dignissim justo lectus id diam. Nam at metus sem. Donec vel elit sit amet elit ornare euismod vel at mi. Sed gravida auctor velit. Nunc egestas, purus ut rhoncus ornare, sem felis fringilla mi, nec vulputate lacus risus at tellus. Pellentesque bibendum purus vel turpis aliquam euismod."
-        ?>
+        <p>Sujet : <?= $expPro->getSujet()?></p>
+        <p>Thématique : <?= $expPro->getThematique()?></p>
+        <p>Tâches : <?= $expPro->getTaches()?></p>
     </div>
     <button id="apply">Postuler</button>
 </div>
