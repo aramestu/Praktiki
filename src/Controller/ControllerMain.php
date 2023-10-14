@@ -39,7 +39,7 @@ class ControllerMain
                     'view.php',
                     [
                         'pagetitle' => 'Connexion',
-                        'cheminVueBody' => 'SAE/connect.php',
+                        'cheminVueBody' => 'user/connect.php',
                     ]
                 );
     }
@@ -50,7 +50,7 @@ class ControllerMain
                     'view.php',
                     [
                         'pagetitle' => 'Créer un compte',
-                        'cheminVueBody' => 'SAE/createAccount.php',
+                        'cheminVueBody' => 'user/createAccount.php',
                     ]
                 );
     }
@@ -59,8 +59,8 @@ class ControllerMain
         self::afficheVue(
                     'view.php',
                     [
-                        'pagetitle' => 'Créer une offre',
-                        'cheminVueBody' => 'SAE/createOffer.php',
+                        'pagetitle' => 'Créer une offer',
+                        'cheminVueBody' => 'offer/createOffer.php',
                     ]
                 );
     }
@@ -70,15 +70,15 @@ class ControllerMain
                     'view.php',
                     [
                         'pagetitle' => 'Offre',
-                        'cheminVueBody' => 'SAE/offerList.php',
+                        'cheminVueBody' => 'offer/offerList.php',
                     ]
                 );
     }
 
     public static function afficherVueEndOffer($msg){
         self::afficheVue("view.php", [
-            "pagetitle" => "Gestion d'offre",
-            "cheminVueBody" => "SAE/endOffer.php",
+            "pagetitle" => "Gestion d'offer",
+            "cheminVueBody" => "offer/endOffer.php",
             "message" => $msg
         ]);
     }
@@ -118,7 +118,7 @@ class ControllerMain
     public static function afficherFormulaireModification(){
         $idExpPro = $_GET["experiencePro"];
         $pagetitle = 'Modification Offre';
-        $cheminVueBody = 'SAE/editOffer.php';
+        $cheminVueBody = 'offer/editOffer.php';
 
         $stage = StageRepository::get($idExpPro);
 
@@ -143,7 +143,7 @@ class ControllerMain
                 ]);
             }
             else{
-                $messageErreur = 'Cette offre n existe pas !';
+                $messageErreur = 'Cette offer n existe pas !';
                 self::error($messageErreur);
             }
         }
@@ -179,7 +179,7 @@ class ControllerMain
         }
         // Si ce n'est aucun des 2 alors ce n'est pas normal
         else{
-            self::error("Ce type d'offre n'existe pas");
+            self::error("Ce type d'offer n'existe pas");
         }
     }
 
@@ -199,7 +199,7 @@ class ControllerMain
                 self::afficherVueEndOffer("Alternance supprimée avec succès");
             }
             else{
-                self::error("L'offre à supprimer n'existe pas");
+                self::error("L'offer à supprimer n'existe pas");
             }
         }
     }
@@ -211,8 +211,8 @@ class ControllerMain
 
         if(! is_null($stage)) {
             ControllerMain::afficheVue('view.php', [
-                "pagetitle" => "Affichage offre",
-                "cheminVueBody" => "SAE/offer.php",
+                "pagetitle" => "Affichage offer",
+                "cheminVueBody" => "offer/offer.php",
                 "expPro" => $stage
             ]);
         }
@@ -220,13 +220,13 @@ class ControllerMain
             $alternance = AlternanceRepository::get($idExpPro);
             if (! is_null($alternance)){
                 ControllerMain::afficheVue('view.php', [
-                    "pagetitle" => "Affichage offre",
-                    "cheminVueBody" => "SAE/offer.php",
+                    "pagetitle" => "Affichage offer",
+                    "cheminVueBody" => "offer/offer.php",
                     "expPro" => $alternance
                 ]);
             }
             else{
-                $messageErreur = 'Cette offre n existe pas !';
+                $messageErreur = 'Cette offer n existe pas !';
                 self::error($messageErreur);
             }
         }

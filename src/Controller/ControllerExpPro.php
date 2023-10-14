@@ -17,7 +17,7 @@ class ControllerExpPro{
                             [
                                 'pagetitle' => 'Offre',
                                 'listeExpPro' => $listeExpPro,
-                                'cheminVueBody' => 'SAE/offerList.php',
+                                'cheminVueBody' => 'offer/offerList.php',
                             ]
                         );
     }
@@ -54,7 +54,7 @@ class ControllerExpPro{
             [
                 'pagetitle' => 'Offre',
                 'listeExpPro' => $listeExpPro,
-                'cheminVueBody' => 'SAE/offerList.php',
+                'cheminVueBody' => 'offer/offerList.php',
             ]
         );
     }
