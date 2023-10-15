@@ -53,45 +53,32 @@ class ExperienceProfessionnelRepository {
                 return array_merge($tabStages, $tabAlternance);
             }
             $option = match ($optionTri) {
-                'datePublication', 'salaireDecroissant' => 'asc',
-                'datePublicationInverse', 'salaireCroissant' => 'desc',
+                'datePublication', 'salaireCroissant' => 'asc',
+                'datePublicationInverse', 'salaireDecroissant' => 'desc',
             };
-                var_dump($option);
-                var_dump(self::customMergeSort($tabAlternance, $tabStages, $option));
                 return self::customMergeSort($tabAlternance, $tabStages, $option);
         }
     }
-    //TODO : a modif
-    public static function customMergeSort(array $arr1, array $arr2, string $option): array
-    {
-        $result = array();
-        $i = 0;
-        $j = 0;
 
-        while ($i < count($arr1) && $j < count($arr2)) {
-            if (($option === 'asc' && $arr1[$i] < $arr2[$j]) || ($option === 'desc' && $arr1[$i] > $arr2[$j])) {
-                $result[] = $arr1[$i];
-                $i++;
+    public static function customMergeSort(array $array1, array $array2, string $option): array {
+        // Fusionnez les deux tableaux
+        $mergedArray = array_merge($array1, $array2);
+
+        // Fonction de comparaison pour le tri
+        $compareFunction = function ($a, $b) use ($option) {
+            if ($option === 'asc') {
+                return ($a < $b) ? -1 : 1;
+            } elseif ($option === 'desc') {
+                return ($a > $b) ? -1 : 1;
             } else {
-                $result[] = $arr2[$j];
-                $j++;
+                return 0; // Aucun tri spécifié, ne change pas l'ordre d'origine
             }
-        }
+        };
 
-        // Ajouter les éléments restants des deux tableaux
-        while ($i < count($arr1)) {
-            $result[] = $arr1[$i];
-            $i++;
-        }
+        // Triez le tableau fusionné en utilisant la fonction de comparaison
+        usort($mergedArray, $compareFunction);
 
-        while ($j < count($arr2)) {
-            $result[] = $arr2[$j];
-            $j++;
-        }
-
-
-        // Maintenant, $result contient les éléments triés des deux tableaux
-        return $result;
+        return $mergedArray;
     }
 
     public static function mettreAJour(ExperienceProfessionnel $exp): void
