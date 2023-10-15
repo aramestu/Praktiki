@@ -132,7 +132,7 @@ class StageRepository{
         $sql = "SELECT idStage, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
                                                 codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
                                                 dateFinExperienceProfessionnel AS dateFin, siret, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel,
-                                                gratificationStage AS gratification, datePublication FROM Stages s JOIN ExperienceProfessionnel e ON s.idStage = e.idExperienceProfessionnel ";
+                                                gratificationStage AS gratification, datePublication FROM Stages s JOIN ExperienceProfessionnel e ON s.idStage = e.idExperienceProfessionnel WHERE numEtudiant IS NULL ";
         if (isset($datePublication)){
             $sql .= match ($datePublication){
                 'last24' => "AND DATEDIFF(NOW(), datePublication) < 1 ",
@@ -141,17 +141,19 @@ class StageRepository{
             };
         }
 
-        //TODO : add BETWEEN si les 2 set
-        if (strlen($dateDebut) > 0){
+        //TODO : A revoire quand Date dans BD
+        if (strlen($dateDebut) > 0 && strlen($dateFin) > 0){
+            $sql .= "AND dateDebutExperienceProfessionnel >= $dateDebut AND dateFinExperienceProfessionnel <= $dateFin ";
+        }
+        elseif (strlen($dateDebut) > 0){
             $sql .= "AND dateDebutExperienceProfessionnel = '$dateDebut' ";
         }
-        if (strlen($dateFin) > 0){
+        elseif (strlen($dateFin) > 0){
             $sql .= "AND dateFinExperienceProfessionnel = '$dateFin' ";
         }
         if (strlen($codePostal) > 0){
             $sql .= "AND codePostalExperienceProfessionnel = '$codePostal' ";
         }
-        $sql .= "GROUP BY idStage, sujet, thematique, taches, codePostal, adresse, dateDebut, dateFin, etudiant, enseignant, tuteurProfessionnel, gratification, datepublication ";
         if(isset($optionTri)){
             if ($optionTri == "datePublication"){
                 $sql .= "ORDER BY datePublication ASC";
@@ -159,10 +161,10 @@ class StageRepository{
             if ($optionTri == "datePublicationInverse") {
                 $sql .= "ORDER BY datePublication DESC";
             }
-            if ($optionTri == "salaireCroissant" && isset($stage)){
+            if ($optionTri == "salaireCroissant"){
                 $sql .= "ORDER BY gratificationStage ASC";
             }
-            if ($optionTri == "salaireDecroissant" && isset($stage)) {
+            if ($optionTri == "salaireDecroissant") {
                 $sql .= "ORDER BY gratificationStage DESC";
             }
         }

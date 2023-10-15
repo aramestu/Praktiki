@@ -129,6 +129,7 @@ class AlternanceRepository
                 'lastMonth' => "AND DATEDIFF(NOW(), datePublication) < 30 ",
             };
         }
+        //TODO : A revoire quand Date dans BD
         if (strlen($dateDebut) > 0 && strlen($dateFin) > 0) {
             $sql .= "AND dateDebutExperienceProfessionnel >= $dateDebut AND dateFinExperienceProfessionnel <= $dateFin ";
         } elseif (strlen($dateDebut) > 0) {
@@ -139,7 +140,6 @@ class AlternanceRepository
         if (strlen($codePostal) > 0) {
             $sql .= "AND codePostalExperienceProfessionnel = '$codePostal' ";
         }
-        $sql .= "GROUP BY idAlternance, sujet, thematique, taches, codePostal, adresse, dateDebut, dateFin, etudiant, enseignant, tuteurProfessionnel, datepublication ";
         if (isset($optionTri)) {
             if ($optionTri == "datePublication") {
                 $sql .= "ORDER BY datePublication ASC";
