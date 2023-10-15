@@ -56,12 +56,10 @@ class ExperienceProfessionnelRepository {
                 'datePublication', 'salaireCroissant' => 'asc',
                 'datePublicationInverse', 'salaireDecroissant' => 'desc',
             };
-                var_dump($option);
-                var_dump(self::customMergeSort($tabAlternance, $tabStages, $option));
                 return self::customMergeSort($tabAlternance, $tabStages, $option);
         }
     }
-    //TODO : a modif
+
     public static function customMergeSort(array $array1, array $array2, string $option): array {
         // Fusionnez les deux tableaux
         $mergedArray = array_merge($array1, $array2);

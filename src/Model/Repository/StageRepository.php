@@ -170,7 +170,6 @@ class StageRepository{
         }
 
         $requete = $pdo->query($sql);
-        var_dump($requete);
         $stageTriee = [];
         foreach ($requete as $result){
             $stageTriee[] = self::construireDepuisTableau($result);
