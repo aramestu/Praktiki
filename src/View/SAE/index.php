@@ -5,15 +5,14 @@
     <title>Importer</title>
     <link rel="stylesheet" href="assets/css/button.css">
     <link rel="stylesheet" href="assets/css/style.css">
-
-
-
+</head>
 
 <body>
 <div class="container">
 <form enctype="multipart/form-data" action="frontController.php?action=importation" method="post">
     <div class="input-row">
         <label class="col-md-4 control-label">Choisir un fichier CSV</label>
+        <img src="assets/images/upload-icon.png" class="uploadIcon">
         <input type="file" name="file" id="file" accept=".csv">
         <br />
         <br />
