@@ -4,24 +4,24 @@ namespace App\SAE\Model\Repository;
 use App\SAE\Model\DataObject\Enseignant;
 class EnseignantRepository extends AbstractRepository
 {
-    public static function get(string $id): ?Enseignant
+    public static function get(string $mail,$nom,$prenom): bool
     {
-        $sql = "SELECT mailEnseignant
-                FROM Enseignants
-                WHERE mailEnseignant = :id";
+        try {
+            $sql = "INSERT into Enseignants 
+                             values ( :mailEnsei, :nomEnsei,:prenomEnsei)";
 
-        $pdoStatement = Model::getPdo()->prepare($sql);
+            $pdoStatement = Model::getPdo()->prepare($sql);
+            $values = array(
+                "mailEnsei" => $mail,
+                "nomEnsei" => $nom,
+                "prenomEnsei" => $prenom);
+            $pdoStatement->execute($values);
 
-        $values = array(
-            "id" => $id,
-        );
 
-        $pdoStatement->execute($values);
-
-        $enseigant = $pdoStatement->fetch();
-        if(!$enseigant)
-            return null;
-        return $enseigant;
+            return true;
+        } catch (\PDOException $e) {
+            return false;
+        }
     }
 
     protected function getNomTable(): string

@@ -3,6 +3,11 @@
 namespace App\SAE\Controller;
 
 use App\SAE\Model\Repository\AlternanceRepository;
+use App\SAE\Model\Repository\AnneeUniversitaireRepository;
+use App\SAE\Model\Repository\DepartementRepository;
+use App\SAE\Model\Repository\EnseignantRepository;
+use App\SAE\Model\Repository\EntrepriseRepository;
+use App\SAE\Model\Repository\EtudiantRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\Model;
 use App\SAE\Model\Repository\StageRepository;
@@ -50,7 +55,6 @@ class ControllerMain extends ControllerGenerique
             $tab = array("Departements", "TuteurProfessionnel", "AnneeUniversitaire",
                 "Etudiants", "Entreprises", "Enseignants", "ExperienceProfessionnel", "Stages",
                 "Soutenances", "Alternances", "Inscriptions");
-            for ($i = 0; $i < 12; $i++) {
                 $isFirstLine = true;
                 $fileName = $_FILES["file"]["tmp_name"];
                 if ($_FILES["file"]["size"] > 0) {
@@ -61,9 +65,10 @@ class ControllerMain extends ControllerGenerique
                             $isFirstLine = false;
                             continue;
                         }
+                        for ($i = 0; $i < 11; $i++) {
 
 
-                        /*if ($i == 0) {//Departements
+                        if ($i == 0) {//Departements
                             $sql = "INSERT into $tab[$i] (nomDepartement)
              values (:nomdepartement)";
                             $pdoStatement = Model::getPdo()->prepare($sql);
@@ -71,25 +76,12 @@ class ControllerMain extends ControllerGenerique
                                 "nomdepartement" => $column[10],
                             );
                             $pdoStatement->execute($values);
-
-                            $result = mysqli_query(Conf::conn(), $sql);
-                        }*/
+                        }
 
                         else if ($i == 1) {//TuteurProfessionnel
-                            if (TuteurProfessionnelRepository::get($column[79]) == null) {
-                                $sql = "INSERT into TuteurProfessionnel 
-                             values ( :mailtuteur, :prenomtuteur, :nomtuteur, :fonctiontuteur, :telephonetuteur)";
-
-                                $pdoStatement = Model::getPdo()->prepare($sql);
-                                $values = array(
-                                    "mailtuteur" => $column[79],
-                                    "prenomtuteur" => $column[78],
-                                    "nomtuteur" => $column[77],
-                                    "fonctiontuteur" => $column[81],
-                                    "telephonetuteur" => $column[80]);
-                                $pdoStatement->execute($values);
-                            }
-                        }/*
+                            TuteurProfessionnelRepository::get($column[79],$column[78],$column[77],
+                                $column[81],$column[80]);
+                        }
 
                         else if ($i == 2) {//AnneeUniversitaire
                             $sql = "INSERT into $tab[$i] (nomAnneeUniversitaire)
@@ -100,73 +92,28 @@ class ControllerMain extends ControllerGenerique
                                 "nomAnnee" => $column[36],
                             );
                             $pdoStatement->execute($values);
-
-                            $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
                         }
 
                         else if ($i == 3) {//Etudiants
-                            $sql = "INSERT into $tab[$i]
-                 values ( :numEtu, :nomEtu, :prenomEtu,
-                 :mailPerso,:mailUniv,:telephonePort,
-                 :codePostal)";
+                            EtudiantRepository::get($column[1],$column[2],
+                                $column[3], $column[6],$column[7],$column[5],$column[45]);
 
-                            $pdoStatement = Model::getPdo()->prepare($sql);
-                            $values = array(
-                                "numEtu" => $column[1],
-                                "nomEtu" => $column[2],
-                                "prenomEtu" => $column[3],
-                                "mailPerso" => $column[6],
-                                "mailUniv" => $column[7],
-                                "telephonePort" => $column[5],
-                                "codePostal" => $column[45]
-                            );
-                            $pdoStatement->execute($values);
-
-                            $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
                         }
 
                         else if ($i == 4) {//Entreprises
-                            if (EntrepriseRepository::getStatic($column[55]) == null) {
-                                $sql = "INSERT into $tab[$i]
-                 values (:siret,:nomEnt,:codePostalEnt,
-                 :effectEnt,:telEnt,:siteEnt)";
+                            EntrepriseRepository::import($column[55],$column[54],$column[59],
+                                $column[64],$column[66],$column[69]);
 
-                                $pdoStatement = Model::getPdo()->prepare($sql);
-                                $values = array(
-                                    "siret" => $column[55],
-                                    "nomEnt" => $column[54],
-                                    "codePostalEnt" => $column[59],
-                                    "effectEnt" => $column[64],
-                                    "telEnt" => $column[66],
-                                    "siteEnt" => $column[69]
-                                );
-                                $pdoStatement->execute($values);
-
-                                $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
-                            }
                         }
 
                         else if ($i == 5) {//Enseignants
-                            //if(EnseignantRepository::get($column[31])==null) {
-                            $sql = "INSERT into $tab[$i]
-                 values (:mailEnsei, :nomEnsei, :prenonEnsei)";
-
-                            $pdoStatement = Model::getPdo()->prepare($sql);
-                            $values = array(
-                                "mailEnsei" => $column[31],
-                                "nomEnsei" => $column[29],
-                                "prenomEnsei" => $column[30],
-                            );
-                            $pdoStatement->execute($values);
-
-                            $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
-                            // }
+                            EnseignantRepository::get($column[31],$column[29],$column[30]);
                         }
 
                         else if ($i == 6) {//ExperienceProfessionnel
-                            $sql = "INSERT into $tab[$i] (sujetExperienceProfessionnel, thematiqueExperienceProfessionnel , tacheExperienceProfessionnel,
+                            $sql = "INSERT into $tab[$i] (sujetExperienceProfessionnel, thematiqueExperienceProfessionnel , tachesExperienceProfessionnel,
                        codePostalExperienceProfessionnel, adresseExperienceProfessionnel, dateDebutExperienceProfessionnel,
-                         dateFinExperienceProfessionnel, mailEtudiant, mailEnseignant, siret, mailTuteurProfessionnel)
+                         dateFinExperienceProfessionnel, numEtudiant, mailEnseignant, siret, mailTuteurProfessionnel)
                  values (:sujet,:thematique,:taches, :codePostal,:adresse,:dateDeb,:dateFin
                  ,:numEtu,:mailEnsei,:siret,:mailTuteur)";
 
@@ -185,21 +132,19 @@ class ControllerMain extends ControllerGenerique
                                 "mailTuteur" => $column[79]
                             );
                             $pdoStatement->execute($values);
-
-                            $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
                         }
 
                         else if ($i == 7) {//stages
-                            $sql = "INSERT into $tab[$i] (gratificationStage)
-                 values (:gratif)";
+                            $sql = "INSERT into $tab[$i]
+                 values (:id,:gratif)";
 
                             $pdoStatement = Model::getPdo()->prepare($sql);
                             $values = array(
+                                "id" => ExperienceProfessionnelRepository::lastExperienceProfessionnel(),
                                 "gratif" => $column[25]
                             );
                             $pdoStatement->execute($values);
 
-                            $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
                         }
 
                         /*else if ($i == 8) {//Soutenances
@@ -215,21 +160,22 @@ class ControllerMain extends ControllerGenerique
                             $sql = "INSERT into $tab[$i]
                  values ()";
                             $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
-                        }
+                        }*/
 
-                        else if ($tab[$i] == 10) {//Inscriptions
-                            $sql = "INSERT into $tab[$i] (numEtudiant)
-                 values (:numEtu)";
+                        else if ($i == 10) {//Inscriptions
+                            $sql = "INSERT into $tab[$i] 
+                 values (:numEtu,:idAnnee,:codedepartement)";
 
                             $pdoStatement = Model::getPdo()->prepare($sql);
                             $values = array(
-                                "numEtu" => $column[1]
+                                "numEtu" => $column[1],
+                                "idAnnee" => AnneeUniversitaireRepository::lastAnneeUniversitaire(),
+                                "codedepartement" => DepartementRepository::lastDepartement()
                             );
                             $pdoStatement->execute($values);
 
-                            $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
                         }
-                    }*/
+                    }
 
 
                     }
@@ -245,5 +191,4 @@ class ControllerMain extends ControllerGenerique
             }
         }
 
-    }
 }

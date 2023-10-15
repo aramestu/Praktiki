@@ -32,6 +32,14 @@ class ExperienceProfessionnelRepository {
         }
     }
 
+    public static function lastExperienceProfessionnel() : int{
+        $pdo = Model::getPdo();
+        $requestStatement = $pdo->prepare("SELECT MAX(idExperienceProfessionnel) FROM ExperienceProfessionnel");
+        $requestStatement->execute();
+        $result = $requestStatement->fetch();
+        return $result[0];
+    }
+
     public static function getAll() : array{
         $alternance = AlternanceRepository::getAll();
         $stage = StageRepository::getAll();

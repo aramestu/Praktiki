@@ -1,29 +1,34 @@
 <?php
+
 namespace App\SAE\Model\Repository;
 
 use App\SAE\Model\DataObject\TuteurProfessionnel;
 
 class TuteurProfessionnelRepository extends AbstractRepository
 {
-    public static function get(string $id): ?TuteurProfessionnel
+
+    public static function get(string $mail,$prenom,$nom,$fonction,$telephone): bool
     {
-        $sql = "SELECT mailTuteurProfessionnel
-                FROM TuteurProfessionnel
-                WHERE mailTuteurProfessionnel = :id";
+        try {
+            $sql = "INSERT into TuteurProfessionnel 
+                             values ( :mailtuteur, :prenomtuteur, :nomtuteur, :fonctiontuteur, :telephonetuteur)";
 
-        $pdoStatement = Model::getPdo()->prepare($sql);
+            $pdoStatement = Model::getPdo()->prepare($sql);
+            $values = array(
+                "mailtuteur" => $mail,
+                "prenomtuteur" => $prenom,
+                "nomtuteur" => $nom,
+                "fonctiontuteur" => $fonction,
+                "telephonetuteur" => $telephone);
+            $pdoStatement->execute($values);
 
-        $values = array(
-            "id" => $id,
-        );
 
-        $pdoStatement->execute($values);
-
-        $tuteur = $pdoStatement->fetch();
-        if(!$tuteur)
-            return null;
-        return $tuteur;
+            return true;
+        } catch (\PDOException $e) {
+            return false;
+        }
     }
+
 
     protected function getNomTable(): string
     {
@@ -32,8 +37,8 @@ class TuteurProfessionnelRepository extends AbstractRepository
 
     protected function construireDepuisTableau(array $TuteurProfessionnelFormatTableau): TuteurProfessionnel
     {
-        $tuteur = new TuteurProfessionnel($TuteurProfessionnelFormatTableau["mailTuteurProfessionnel"],$TuteurProfessionnelFormatTableau["prenomTuteurProfessionnel"], $TuteurProfessionnelFormatTableau["nomTuteurProfessionnel"],
-        $TuteurProfessionnelFormatTableau["fonctionTuteurProfessionnel"], $TuteurProfessionnelFormatTableau["telephoneTuteur"]);
+        $tuteur = new TuteurProfessionnel($TuteurProfessionnelFormatTableau["mailTuteurProfessionnel"], $TuteurProfessionnelFormatTableau["prenomTuteurProfessionnel"], $TuteurProfessionnelFormatTableau["nomTuteurProfessionnel"],
+            $TuteurProfessionnelFormatTableau["fonctionTuteurProfessionnel"], $TuteurProfessionnelFormatTableau["telephoneTuteur"]);
         return $tuteur;
     }
 }
