@@ -11,10 +11,6 @@ use App\SAE\Model\Repository\TuteurProfessionnelRepository;
 
 class ControllerMain extends ControllerGenerique
 {
-
-
-
-
     public static function connect()
     {
         self::afficheVue(
