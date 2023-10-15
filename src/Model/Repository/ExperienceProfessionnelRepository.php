@@ -38,84 +38,10 @@ class ExperienceProfessionnelRepository {
         return array_merge($alternance, $stage);
     }
 
-    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $stage = null, string $alternance = null, string $codePostal = null) : array
+    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $stage = null, string $alternance = null, string $codePostal = null, string $datePublication = null) : array
     {
-        /*$resultArray = array();
-        $pdo = Model::getPdo();
-        $sql = $pdo->prepare("SELECT * FROM ExperienceProfessionnel");
-
-        if (!is_null($dateDebut) && is_null($dateFin) && is_null($optionTri)){
-            $sql = "SELECT * FROM ExperienceProfessionnel WHERE dateDebut = $dateDebut";
-        }
-        elseif (is_null($dateDebut) && !is_null($dateFin) && is_null($optionTri)){
-            $sql ="SELECT * FROM ExperienceProfessionnel WHERE dateFin = $dateFin";
-        }
-        elseif (is_null($dateDebut) && is_null($dateFin) && !is_null($optionTri)){
-            $sql = "SELECT * FROM ExperienceProfessionnel ORDER BY $optionTri";
-        }
-        elseif (!is_null($dateDebut) && !is_null($dateFin) && is_null($optionTri)){
-            $sql = "SELECT * FROM ExperienceProfessionel WHERE dateDebut = $dateDebut AND dateFin = $dateFin";
-        }
-        elseif (!is_null($dateDebut) && is_null($dateFin) && !is_null($optionTri)){
-            $sql = "SELECT * FROM ExperienceProfessionel WHERE dateDebut = $dateDebut ORDER BY $optionTri";
-        }
-        elseif (is_null($dateDebut) && !is_null($dateFin) && !is_null($optionTri)){
-            $sql = "SELECT * FROM ExperienceProfessionel WHERE dateFin = $dateFin ORDER BY $optionTri";
-        }
-        elseif (!is_null($dateDebut) && !is_null($dateFin) && !is_null($optionTri)){
-            $sql = "SELECT * FROM ExperienceProfessionel WHERE dateDebut = $dateDebut AND dateFin = $dateFin ORDER BY $optionTri";
-        }
-        $pdo->prepare($sql);
-        $pdo->execute();
-        return $pdo->fetchAll();*/
-        /* TODO : tempo 2eme test
-         *
-         *
-         * //TODO : a finir
-        $pdo = Model::getPdo();
-        $sql = "SELECT * ";
-        if (isset($stage) && isset($alternance) || !isset($stage) && !isset($alternance)){
-            $sql .= "FROM ExperienceProfessionnel e JOIN Stages s ON s.idStage = e.idExperienceProfessionnel JOIN Alternances a ON a.idalternance = e.idExperienceProfessionnel ";
-        }
-        elseif (isset($stage)){
-            $sql .= "FROM Stages s JOIN ExperienceProfessionnel e ON s.idStage = e.idExperienceProfessionnel ";
-        }
-        elseif (isset($alternance)){
-            $sql .= "FROM Alternances a JOIN ExperienceProfessionnel e ON a.idalternance = e.idExperienceProfessionnel ";
-        }
-        $sql .= "WHERE numEtudiant IS NULL ";
-
-        if (strlen($dateDebut) > 0){
-            $sql .= "AND dateDebutExperienceProfessionnel = '$dateDebut' ";
-        }
-        if (strlen($dateFin) > 0){
-            $sql .= "AND dateFinExperienceProfessionnel = '$dateFin' ";
-        }
-        if (strlen($codePostal) > 0){
-            $sql .= "AND codePostalExperienceProfessionnel = '$codePostal' ";
-        }
-        if (isset($optionTri)){
-            if ($optionTri = "datePublication"){
-                //TODO : $sql .= "ORDER BY datePublication ASC"
-            }
-            if ($optionTri = "datePublicationInverse") {
-                //TODO : $sql .= "ORDER BY datePublication DESC"
-            }
-            if ($optionTri = "salaireCroissant" && isset($stage)){
-                $sql .= "ORDER BY gratificationStage ASC";
-            }
-            if ($optionTri = "salaireDecroissant" && isset($stage)) {
-                $sql .= "ORDER BY gratificationStage DESC";
-            }
-        }
-
-        var_dump($sql);
-        var_dump($pdo->query($sql)->fetchAll());
-
-        return $pdo->query($sql)->fetchAll();*/
-
-        $tabStages = StageRepository::filtre($dateDebut, $dateFin, $optionTri, $codePostal);
-        $tabAlternance = AlternanceRepository::filtre($dateDebut, $dateFin, $optionTri, $codePostal);
+        $tabStages = StageRepository::filtre($dateDebut, $dateFin, $optionTri, $codePostal, $datePublication);
+        $tabAlternance = AlternanceRepository::filtre($dateDebut, $dateFin, $optionTri, $codePostal, $datePublication);
         if (isset($stage)){
             return $tabStages;
         }
@@ -123,34 +49,49 @@ class ExperienceProfessionnelRepository {
             return $tabAlternance;
         }
         else{
-            //var_dump(self::mergeSort($tabAlternance, $tabStages, $optionTri));
-            return self::mergeSort($tabAlternance, $tabStages, $optionTri);
+            if (!isset($optionTri)) {
+                return array_merge($tabStages, $tabAlternance);
+            }
+            $option = match ($optionTri) {
+                'datePublication', 'salaireDecroissant' => 'asc',
+                'datePublicationInverse', 'salaireCroissant' => 'desc',
+            };
+                var_dump($option);
+                var_dump(self::customMergeSort($tabAlternance, $tabStages, $option));
+                return self::customMergeSort($tabAlternance, $tabStages, $option);
         }
     }
-    public static function mergeSort(array $array1, array $array2, string|null $option): array {
-        $result = [];
+    //TODO : a modif
+    public static function customMergeSort(array $arr1, array $arr2, string $option): array
+    {
+        $result = array();
+        $i = 0;
+        $j = 0;
 
-        while (!empty($array1) && !empty($array2)) {
-            $element1 = reset($array1);
-            $element2 = reset($array2);
-
-            $comparison = match ($option) {
-                'datePublication' => $element1['datePublication'] - $element2['datePublication'],
-                'datePublicationInverse' => $element2['datePublicationInverse'] - $element1['datePublicationInverse'],
-                'salaireCroissant' => $element1['gratificationStage'] - $element2['gratificationStage'],
-                'salaireDecroissant' => $element2['gratificationStage'] - $element1['gratificationStage'],
-                default => 0, // Pas de changement d'ordre par défaut
-            };
-
-            if ($comparison <= 0) {
-                $result[] = array_shift($array1);
+        while ($i < count($arr1) && $j < count($arr2)) {
+            if (($option === 'asc' && $arr1[$i] < $arr2[$j]) || ($option === 'desc' && $arr1[$i] > $arr2[$j])) {
+                $result[] = $arr1[$i];
+                $i++;
             } else {
-                $result[] = array_shift($array2);
+                $result[] = $arr2[$j];
+                $j++;
             }
         }
 
-        // Ajout des éléments restants s'il y en a
-        return array_merge($result, $array1, $array2);
+        // Ajouter les éléments restants des deux tableaux
+        while ($i < count($arr1)) {
+            $result[] = $arr1[$i];
+            $i++;
+        }
+
+        while ($j < count($arr2)) {
+            $result[] = $arr2[$j];
+            $j++;
+        }
+
+
+        // Maintenant, $result contient les éléments triés des deux tableaux
+        return $result;
     }
 
     public static function mettreAJour(ExperienceProfessionnel $exp): void

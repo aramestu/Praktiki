@@ -3,6 +3,7 @@ namespace App\SAE\Model\Repository;
 
 use App\SAE\Model\DataObject\ExperienceProfessionnel;
 use App\SAE\Model\DataObject\Stage;
+use Cassandra\Date;
 
 class StageRepository{
     public static function save(Stage $s): bool {
@@ -125,12 +126,22 @@ class StageRepository{
         ExperienceProfessionnelRepository::supprimer($stage);
     }
 
-    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null) : array{
+    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null) : array{
+        date_default_timezone_set('Europe/Paris');
         $pdo = Model::getPdo();
         $sql = "SELECT idStage, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
                                                 codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
                                                 dateFinExperienceProfessionnel AS dateFin, siret, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel,
-                                                gratificationStage AS gratification FROM Stages s JOIN ExperienceProfessionnel e ON s.idStage = e.idExperienceProfessionnel ";
+                                                gratificationStage AS gratification, datePublication FROM Stages s JOIN ExperienceProfessionnel e ON s.idStage = e.idExperienceProfessionnel ";
+        if (isset($datePublication)){
+            $sql .= match ($datePublication){
+                'last24' => "AND DATEDIFF(NOW(), datePublication) < 1 ",
+                'lastWeek' => "AND DATEDIFF(NOW(), datePublication) < 7 ",
+                'lastMonth' => "AND DATEDIFF(NOW(), datePublication) < 30 ",
+            };
+        }
+
+        //TODO : add BETWEEN si les 2 set
         if (strlen($dateDebut) > 0){
             $sql .= "AND dateDebutExperienceProfessionnel = '$dateDebut' ";
         }
@@ -140,12 +151,13 @@ class StageRepository{
         if (strlen($codePostal) > 0){
             $sql .= "AND codePostalExperienceProfessionnel = '$codePostal' ";
         }
+        $sql .= "GROUP BY idStage, sujet, thematique, taches, codePostal, adresse, dateDebut, dateFin, etudiant, enseignant, tuteurProfessionnel, gratification, datepublication ";
         if(isset($optionTri)){
             if ($optionTri == "datePublication"){
-                //TODO : $sql .= "ORDER BY datePublication ASC"
+                $sql .= "ORDER BY datePublication ASC";
             }
             if ($optionTri == "datePublicationInverse") {
-                //TODO : $sql .= "ORDER BY datePublication DESC"
+                $sql .= "ORDER BY datePublication DESC";
             }
             if ($optionTri == "salaireCroissant" && isset($stage)){
                 $sql .= "ORDER BY gratificationStage ASC";
@@ -156,6 +168,7 @@ class StageRepository{
         }
 
         $requete = $pdo->query($sql);
+        var_dump($requete);
         $stageTriee = [];
         foreach ($requete as $result){
             $stageTriee[] = self::construireDepuisTableau($result);

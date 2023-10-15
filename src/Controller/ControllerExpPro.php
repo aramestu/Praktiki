@@ -22,7 +22,8 @@ class ControllerExpPro extends ControllerGenerique{
         );
     }
 
-    public static function getExpProBySearch(){
+    public static function getExpProBySearch(): void
+    {
         $keywords = urldecode($_GET['keywords']);
         $listeExpPro = ExperienceProfessionnelRepository::search($keywords);
         self::afficheVue(
@@ -44,6 +45,7 @@ class ControllerExpPro extends ControllerGenerique{
         $stage = null;
         $alternance = null;
         $codePostal = null;
+        $datePublication = null;
         if (isset($_GET['dateDebut'])){
             $dateDebut = $_GET['dateDebut'];
         }
@@ -62,7 +64,10 @@ class ControllerExpPro extends ControllerGenerique{
         if (isset($_GET['codePostal'])){
             $codePostal = $_GET['codePostal'];
         }
-        $listeExpPro = ExperienceProfessionnelRepository::filtre($dateDebut, $dateFin, $optionTri, $stage, $alternance, $codePostal);
+        if (isset($_GET['datePublication'])){
+            $datePublication = $_GET['datePublication'];
+        }
+        $listeExpPro = ExperienceProfessionnelRepository::filtre($dateDebut, $dateFin, $optionTri, $stage, $alternance, $codePostal, $datePublication);
         self::afficheVue(
             'view.php',
             [
@@ -73,7 +78,7 @@ class ControllerExpPro extends ControllerGenerique{
         );
     }
 
-    public static function modifierDepuisFormulaire()
+    public static function modifierDepuisFormulaire(): void
     {
         $msg = "Offre modifiée avec succés !";
         $tab = [
@@ -105,7 +110,7 @@ class ControllerExpPro extends ControllerGenerique{
         }
     }
 
-    public static function afficherVueEndOffer($msg)
+    public static function afficherVueEndOffer($msg): void
     {
         ControllerGenerique::afficheVue("view.php", [
             "pagetitle" => "Gestion d'offer",
@@ -114,7 +119,7 @@ class ControllerExpPro extends ControllerGenerique{
         ]);
     }
 
-    public static function afficherFormulaireModification()
+    public static function afficherFormulaireModification(): void
     {
         $idExpPro = $_GET["experiencePro"];
         $pagetitle = 'Modification Offre';
@@ -147,7 +152,7 @@ class ControllerExpPro extends ControllerGenerique{
         }
     }
 
-    public static function afficherOffre()
+    public static function afficherOffre(): void
     {
         $idExpPro = $_GET["experiencePro"];
 
@@ -207,7 +212,7 @@ class ControllerExpPro extends ControllerGenerique{
         }
     }
 
-    public static function supprimerOffre()
+    public static function supprimerOffre(): void
     {
         $idExpPro = $_GET["experiencePro"];
         $stage = StageRepository::get($idExpPro);
@@ -227,7 +232,7 @@ class ControllerExpPro extends ControllerGenerique{
         }
     }
 
-    public static function createOffer()
+    public static function createOffer(): void
     {
         ControllerGenerique::afficheVue(
             'view.php',
@@ -238,7 +243,7 @@ class ControllerExpPro extends ControllerGenerique{
         );
     }
 
-    public static function displayOffer()
+    public static function displayOffer(): void
     {
         ControllerGenerique::afficheVue(
             'view.php',
