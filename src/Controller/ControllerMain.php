@@ -16,7 +16,7 @@ use App\SAE\Model\Repository\TuteurProfessionnelRepository;
 
 class ControllerMain extends ControllerGenerique
 {
-    public static function connect()
+    public static function connect(): void
     {
         self::afficheVue(
             'view.php',
@@ -27,7 +27,7 @@ class ControllerMain extends ControllerGenerique
         );
     }
 
-    public static function createAccount()
+    public static function createAccount(): void
     {
         self::afficheVue(
             'view.php',
@@ -38,7 +38,7 @@ class ControllerMain extends ControllerGenerique
         );
     }
 
-    public static function import()
+    public static function import(): void
     {
         self::afficheVue(
             'view.php',
@@ -49,7 +49,11 @@ class ControllerMain extends ControllerGenerique
         );
     }
 
-    public static function importation()
+    public static function panel(): void{
+        self::afficheVue('view.php', ['pagetitle' => 'Panel', 'cheminVueBody' => 'user/panel.php']);
+    }
+
+    public static function importation(): void
     {
         if (isset($_POST["import"])) {
             $tab = array("Departements", "TuteurProfessionnel", "AnneeUniversitaire",
