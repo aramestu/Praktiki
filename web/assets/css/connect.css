@@ -1,17 +1,19 @@
+/*--- START Container Styles ---*/
 .container {
     background: var(--lightGrey);
     padding: 20px;
     min-width: 330px;
     border-radius: 20px;
-    box-shadow: 10px 10px 20px #00000020,
-     -10px -10px 20px #ffffff45;
+    box-shadow: 10px 10px 20px #00000020, -10px -10px 20px #ffffff45;
     display: inline-block;
     text-align: center;
     max-width: 400px;
     margin: 0 auto;
     margin-top: 50px;
 }
+/*--- END Container Styles ---*/
 
+/*--- START Form Styles ---*/
 form {
     text-align: left;
     margin-top: 20px;
@@ -24,7 +26,9 @@ label {
     font-weight: bold;
     color: var(--darkBlue1);
 }
+/*--- END Form Styles ---*/
 
+/*--- START Password Input Styles ---*/
 .password-input {
     position: relative;
 }
@@ -42,26 +46,32 @@ label {
     border: none;
     cursor: pointer;
 }
+/*--- END Password Input Styles ---*/
 
 .create-account {
     margin-top: 20px;
     color: var(--darkBlue1);
 }
 
+/*--- START Show Password Icon Styles (Connect) ---*/
 #showPasswordIconConnect {
-    width:20px;
-    height:20px;
+    width: 20px;
+    height: 20px;
     opacity: 0.6;
     margin-bottom: 13px;
 }
+/*--- END Show Password Icon Styles (Connect) ---*/
 
+/*--- START Show Password Icon Styles (Register) ---*/
 #showPasswordIconRegister {
-    width:20px;
-    height:20px;
+    width: 20px;
+    height: 20px;
     opacity: 0.6;
     margin-bottom: 49px;
 }
+/*--- END Show Password Icon Styles (Register) ---*/
 
+/*--- START Password Strength Styles ---*/
 .password-strength {
     width: 100%;
     height: 10px;
@@ -69,8 +79,7 @@ label {
     border-radius: 5px;
     margin-top: 5px;
     overflow: hidden;
-    box-shadow: 10px 10px 20px var(--grey0),
-    -10px -10px 20px var(--white);
+    box-shadow: 10px 10px 20px var(--grey0), -10px -10px 20px var(--white);
 }
 
 .strength-bar {
@@ -80,8 +89,9 @@ label {
     border-radius: 5px;
     transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
+/*--- END Password Strength Styles ---*/
 
-
+/*--- START Requirements Styles ---*/
 .requirements {
     display: flex;
     flex-direction: column;
@@ -116,12 +126,16 @@ label {
 .password-input {
     position: relative;
 }
+/*--- END Requirements Styles ---*/
 
+/*--- START Password Help Styles ---*/
 #passwordHelp {
     margin-top: 8px;
 }
+/*--- END Password Help Styles ---*/
 
+/*--- START Hidden Element Styles ---*/
 .hidden {
     display: none;
 }
-
+/*--- END Hidden Element Styles ---*/

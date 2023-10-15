@@ -15,13 +15,10 @@
                     <a href="frontController.php?controller=ExpPro&action=createOffer"><button type="button" class="btn btn-primary">Créer une offre</button></a>
                 </p>
                 <p>
-                    <a href="frontController.php?controller=ExpPro&action=getExpProByDefault"><button type="button" class="btn btn-primary">Afficher une offre</button></a>
+                    <a href="frontController.php?action=import"><button type="button" class="btn btn-primary">Importer</button></a>
                 </p>
                 <p>
                     <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=1"><button type="button" class="btn btn-primary"> Modifier une offre (URL : &experiencePro=1)</button> </a>
-                </p>
-                <p>
-                    <a href="frontController.php?action=import" class="nav-item" data-action="import"><button type="button" class="btn btn-primary">Importer</button></a>
                 </p>
 
     </div>

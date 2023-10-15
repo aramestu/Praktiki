@@ -1,3 +1,4 @@
+/*--- START HEADER ---*/
 .header {
     border-bottom: solid;
     border-color: var(--grey2);
@@ -56,14 +57,14 @@ ul li {
     border-radius: 1.5rem;
     cursor: pointer;
     font-weight: bold;
-    font-size : 1.2em;
+    font-size: 1.2em;
     box-shadow: inset 10px 10px 20px #ffffff45,
     inset -10px -10px 20px #00000020,
     10px 10px 10px #00000020,
     -10px -10px 10px #ffffff45;
 
     margin-top: 22px;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 #apply:hover {
@@ -77,15 +78,16 @@ ul li {
     justify-content: center;
 }
 
-#search-bar{
+#search-bar {
     margin-bottom: 0;
 }
 
 td {
     padding: 10px;
 }
+/*--- END HEADER ---*/
 
-/*---START SMALL OFFER---*/
+/*--- START SMALL OFFER ---*/
 .small {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     border-radius: 1rem;
@@ -93,9 +95,9 @@ td {
     text-align: center;
     min-width: 225px;
     max-width: 305px;
-    height:225px;
+    height: 225px;
     word-break: break-word;
-    margin-left:14%;
+    margin-left: 14%;
     color: var(--darkBlue2);
     border: 2.5px solid #F2F2F200;
 }
@@ -139,7 +141,7 @@ h3 {
     width: 190px;
 }
 
-.small h3{
+.small h3 {
     margin-bottom: 5px;
     width: 190px;
     height: 55px;
@@ -148,7 +150,7 @@ h3 {
 
 .editIcon,
 .deleteIcon,
-.backIcon{
+.backIcon {
     width: 30px;
     height: 30px;
     margin-right: 5px;
@@ -159,11 +161,11 @@ h3 {
 
 .editIcon:hover,
 .deleteIcon:hover,
-.backIcon:hover{
+.backIcon:hover {
     opacity: 0.69;
 }
 
-.editIcon:hover{
+.editIcon:hover {
     animation: wiggle 0.4s ease-in-out infinite;
 }
 
@@ -183,6 +185,7 @@ h3 {
     100% {
         transform: rotate(0deg);
     }
+
 }
 
 @keyframes wiggleBack {
@@ -203,36 +206,36 @@ h3 {
     }
 }
 
-.deleteIcon:hover{
+.deleteIcon:hover {
     transform: rotate(90deg) scale(1.1);
 }
 
-.backIcon:hover{
+.backIcon:hover {
     animation: wiggleBack 0.6s ease-in-out infinite;
 }
 
-.deleteIcon{
-    top:3%;
+.deleteIcon {
+    top: 3%;
     right: 1%;
 }
 
-.editIcon{
-    top:3%;
+.editIcon {
+    top: 3%;
     right: 6%;
 }
 
-.backIcon{
+.backIcon {
     bottom: 3%;
     left: 2%;
 }
 
-.mapPin{
+.mapPin {
     width: 20px;
     height: 20px;
     margin-right: 5px;
 }
 
-.typeExpPro{
+.typeExpPro {
     border-radius: 0.5rem;
     padding: 5px;
     font-size: 11px;
@@ -243,28 +246,28 @@ h3 {
 }
 
 .Stage > .header > .left > .typeExpPro,
-.Stage > .header > .information > .typeExpPro{
+.Stage > .header > .information > .typeExpPro {
     border-color: var(--wisteria);
     background-color: var(--wisteria);
     color: var(--white);
 }
 
-.Stage:hover{
+.Stage:hover {
     border-color: var(--wisteria);
-    box-shadow:10px 10px 10px #00000025,
+    box-shadow: 10px 10px 10px #00000025,
     -10px -10px 10px #8E44AD25;
 }
 
 .Alternance > .header > .left > .typeExpPro,
-.Alternance > .header > .information > .typeExpPro{
+.Alternance > .header > .information > .typeExpPro {
     border-color: var(--orange);
     background-color: var(--orange);
     color: var(--white);
 }
 
-.Alternance:hover{
+.Alternance:hover {
     border-color: var(--orange);
-    box-shadow:10px 10px 10px #00000025,
+    box-shadow: 10px 10px 10px #00000025,
     -10px -10px 10px #E67E2225;
 }
-/*---END SMALL OFFER---*/
+/*--- END SMALL OFFER ---*/
