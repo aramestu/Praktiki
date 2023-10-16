@@ -52,34 +52,31 @@ class ExperienceProfessionnelRepository {
         else{
             if (!isset($optionTri)) {
                 return array_merge($tabStages, $tabAlternance);
+            }else{
+                return self::sort($tabStages, $tabAlternance, $optionTri);
             }
-            $option = match ($optionTri) {
-                'datePublication', 'salaireCroissant' => 'asc',
-                'datePublicationInverse', 'salaireDecroissant' => 'desc',
-            };
-                return self::customMergeSort($tabAlternance, $tabStages, $option);
+
         }
     }
 
-    public static function customMergeSort(array $array1, array $array2, string $option): array {
-        // Fusionnez les deux tableaux
-        $mergedArray = array_merge($array1, $array2);
+    private static function sort(array $stages, array $alternances, string $option): array{
 
-        // Fonction de comparaison pour le tri
-        $compareFunction = function ($a, $b) use ($option) {
-            if ($option === 'asc') {
-                return ($a < $b) ? -1 : 1;
-            } elseif ($option === 'desc') {
-                return ($a > $b) ? -1 : 1;
-            } else {
-                return 0; // Aucun tri spécifié, ne change pas l'ordre d'origine
+        if($option == "salaireCroissant" || $option == "salaireDecroissant" ){
+            return array_merge($stages, $alternances);
+        }
+        $allExperienceProfessionnel = array();
+        while(!empty($stages) && !empty($alternances)){
+            $order = match ($option){
+                "datePublication" => strtotime($stages[0]->getDatePublication()) - strtotime($alternances[0]->getDatePublication()),
+                "datePublicationInverse" => strtotime($alternances[0]->getDatePublication()) - strtotime($stages[0]->getDatePublication())
+            };
+            if($order<0){
+                $allExperienceProfessionnel[] = array_shift($stages);
+            }else{
+                $allExperienceProfessionnel[] = array_shift($alternances);
             }
-        };
-
-        // Triez le tableau fusionné en utilisant la fonction de comparaison
-        usort($mergedArray, $compareFunction);
-
-        return $mergedArray;
+        }
+        return array_merge($allExperienceProfessionnel, $stages, $alternances);
     }
 
     public static function mettreAJour(ExperienceProfessionnel $exp): void
@@ -124,6 +121,6 @@ class ExperienceProfessionnelRepository {
     public static function search(string $keywords){
         $stage = StageRepository::search($keywords);
         $alternance = AlternanceRepository::search($keywords);
-        return array_merge($stage, $alternance);
+        return self::sort($stage, $alternance, "datePublication");
     }
 }

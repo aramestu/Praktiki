@@ -60,8 +60,7 @@
                         <input type="number" id="codePostal" name="codePostal" pattern="[0-9]{5}" maxlength="5" placeholder="34090">
 
                                 <select name="optionTri" id="optionTri">
-                                <option value="" disabled selected style="display:none;">Trier par</option>
-
+                                    <option value="" disabled selected style="display:none;">Trier par</option>
                                     <option value="datePublication">Offres les plus récentes</option>
                                     <option value="datePublicationInverse">Offres les plus anciennes</option>
                                     <option value="salaireCroissant">Salaire croissant</option>
