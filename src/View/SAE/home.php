@@ -15,12 +15,6 @@
                     <a href="frontController.php?controller=ExpPro&action=createOffer"><button type="button" class="btn btn-primary">Créer une offre</button></a>
                 </p>
                 <p>
-                    <a href="frontController.php?action=import"><button type="button" class="btn btn-primary">Importer</button></a>
-                </p>
-                <p>
-                    <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=1"><button type="button" class="btn btn-primary"> Modifier une offre (URL : &experiencePro=1)</button> </a>
-                </p>
-                <p>
                     <a href="frontController.php?action=panel"><button type="button" class="btn btn-primary">Panel admin</button></a>
                 </p>
 

@@ -361,7 +361,6 @@ select:invalid {
     color: var(--grey2);
 }
 
-
 input[type="submit"] {
     background-color: var(--bleuUM);
     color: var(--white);
@@ -447,6 +446,11 @@ legend{
 #errorIcon{
     height:200px;
     width:200px;
+}
+
+#uploadIcon{
+    width:30px;
+    height:30px;
 }
 
 .left{
