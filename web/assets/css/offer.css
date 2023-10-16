@@ -133,6 +133,7 @@ h3 {
 .small .information * {
     margin: 5px;
     display: -webkit-box;
+    font-size: 11px;
 }
 
 .small .information p {
@@ -148,9 +149,9 @@ h3 {
     margin-top: -5px;
 }
 
-.editIcon,
-.deleteIcon,
-.backIcon {
+#editIcon,
+#deleteIcon,
+#backIcon{
     width: 30px;
     height: 30px;
     margin-right: 5px;
@@ -159,13 +160,13 @@ h3 {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.editIcon:hover,
-.deleteIcon:hover,
-.backIcon:hover {
+#editIcon:hover,
+#deleteIcon:hover,
+#backIcon:hover{
     opacity: 0.69;
 }
 
-.editIcon:hover {
+#editIcon:hover {
     animation: wiggle 0.4s ease-in-out infinite;
 }
 
@@ -206,25 +207,30 @@ h3 {
     }
 }
 
-.deleteIcon:hover {
-    transform: rotate(90deg) scale(1.1);
+#deleteIcon{
+    height: 35px;
+    width: 35px;
 }
 
-.backIcon:hover {
-    animation: wiggleBack 0.6s ease-in-out infinite;
+#deleteIcon:hover {
+    animation: wiggle 0.4s ease-in-out infinite;
 }
 
-.deleteIcon {
-    top: 3%;
+#backIcon:hover {
+    transform: translateX(-4px);
+}
+
+#deleteIcon {
+    top: 16px;
     right: 1%;
 }
 
-.editIcon {
-    top: 3%;
-    right: 6%;
+#editIcon {
+    top: 18px;
+    right: 60px;
 }
 
-.backIcon {
+#backIcon {
     bottom: 3%;
     left: 2%;
 }
@@ -263,6 +269,10 @@ h3 {
     border-color: var(--orange);
     background-color: var(--orange);
     color: var(--white);
+}
+
+#mainContainer:hover{
+    box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1), 0 4px 16px rgba(31, 38, 135, 0.1);
 }
 
 .Alternance:hover {

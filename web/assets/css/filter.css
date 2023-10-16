@@ -89,6 +89,12 @@ input[type="submit"]{
     opacity: 0.6;
 }
 
+//make an incredible style and animation for the checkbox
+checkbox{
+    background: var(--white);
+    filter: none;
+  }
+
 
 /*---START SIDE FILTER---*/
 #sideFilter {

@@ -24,7 +24,7 @@
 
       <nav class="navbar">
                   <a href="frontController.php?action=home" class="nav-item" data-action="home">Accueil</a>
-                  <a href="frontController.php?controller=ExpPro&action=getExpProByDefault" class="nav-item" data-action="alter">Offres</a>
+                  <a href="frontController.php?action=getExpProByDefault&controller=ExpPro" class="nav-item" data-action="offre">Offres</a>
                   <a href="frontController.php?action=contact" class="nav-item" data-action="contact">Contact</a>
                   <a href="frontController.php?action=connect" class="nav-item" data-action="connect">Connexion</a>
 

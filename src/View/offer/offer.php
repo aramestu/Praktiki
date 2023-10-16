@@ -9,7 +9,7 @@ use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\StageRepository;
 ?>
 
-<div class="subContainer <?php
+<div id="mainContainer" class="subContainer <?php
                                                                                 $full_path = get_class($expPro);
                                                                                 $elements = explode('\\', $full_path);
                                                                                 $last_element = end($elements);
@@ -56,8 +56,8 @@ use App\SAE\Model\Repository\StageRepository;
         <p>Thématique : <?= htmlspecialchars($expPro->getThematique())?></p>
         <p>Tâches : <?= htmlspecialchars($expPro->getTaches())?></p>
     </div>
-    <a href="frontController.php?controller=ExpPro&action=getExpProByDefault"><img src="assets/images/back-icon.png" class="backIcon"></button> </a>
+    <a href="frontController.php?controller=ExpPro&action=supprimerOffre&experiencePro=<?php echo rawurlencode($expPro->getId())?>"><img src="assets/images/bin-icon.png" id="deleteIcon"></a>
     <button id="apply">Postuler</button>
-    <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($expPro->getId())?>"><img src="assets/images/edit-icon.png" class="editIcon"></a>
-    <a href="frontController.php?controller=ExpPro&action=supprimerOffre&experiencePro=<?php echo rawurlencode($expPro->getId())?>"><img src="assets/images/delete-icon.png" class="deleteIcon"></a>
+    <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($expPro->getId())?>"><img src="assets/images/edit-icon.png" id="editIcon"></a>
+    <a href="frontController.php?controller=ExpPro&action=getExpProByDefault"><img src="assets/images/back-icon.png" id="backIcon"></button> </a>
 </div>

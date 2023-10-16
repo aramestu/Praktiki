@@ -4,12 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const alternanceForm = document.getElementById('alternanceForm');
     const gratification = document.getElementById('gratification');
 
-    // Fonction pour masquer le formulaire non sélectionné
     function toggleFormDisplay() {
-        // Supprimer l'attribut "required" de l'élément gratification
-        //gratification.removeAttribute('required');
-
-
         if (typeOffre.value === 'stage') {
             gratification.setAttribute('required', 'required');
             stageForm.classList.remove('hidden');
@@ -21,9 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Écouteur d'événement pour le changement de sélection
     typeOffre.addEventListener('change', toggleFormDisplay);
-
-    // Appel initial pour afficher le formulaire approprié
     toggleFormDisplay();
 });

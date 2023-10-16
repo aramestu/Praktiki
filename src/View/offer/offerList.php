@@ -42,14 +42,16 @@
                                 <input type="date" name="dateFin" id="dateFin">
 
 
-                    <div class="button-checkbox">
+                    <div class="VBox">
+                    <div class="button-checkbox HBox">
                         <input type="checkbox" id="stage" name="stage" value="stage">
                         <label for="stage">Stage</label>
                     </div>
 
-                    <div class="button-checkbox">
+                    <div class="button-checkbox HBox">
                         <input type="checkbox" id="alternance" name="alternance" value="alternance">
                         <label for="alternance">Alternance</label>
+                    </div>
                     </div>
 
 

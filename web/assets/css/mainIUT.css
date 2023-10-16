@@ -444,6 +444,11 @@ legend{
     padding: 0;
 }
 
+#errorIcon{
+    height:200px;
+    width:200px;
+}
+
 .left{
     float: left;
 }

@@ -23,11 +23,9 @@ document.addEventListener('DOMContentLoaded', function () {
             /[@$!%*?&]/.test(password),
         ];
 
-        // Update the strength bar based on the number of requirements met
         const requirementsMetCount = requirementsMet.reduce((count, met) => count + (met ? 1 : 0), 0);
         const barWidth = (requirementsMetCount / requirementsMet.length) * 100;
         strengthBar.style.width = barWidth + '%';
-        // Update the tooltip color and text
         if (password.length === 0) {
             passwordHelp.innerHTML = 'Entrez un mot de passe';
             strengthBar.style.backgroundColor = 'transparent';
