@@ -8,7 +8,7 @@
 
 </head>
 <body>
-    <p><b>Bienvenue user</b></p>
+    <p><b>Bienvenue Mr. Trombettoni</b></p>
     <div class="main" id="panel">
 
     <div class="container" id="option">
@@ -39,18 +39,6 @@
         </div>
         <div class ="HBox">
             <p>Etudiant n° 7</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
-        </div>
-        <div class ="HBox">
-            <p>Etudiant n° 8</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
-        </div>
-        <div class ="HBox">
-            <p>Etudiant n° 9</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
-        </div>
-        <div class ="HBox">
-            <p>Etudiant n° 10</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
-        </div>
-        <div class ="HBox">
-            <p>Etudiant n° 11</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
         </div>
     </div>
 </div>
