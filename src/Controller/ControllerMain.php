@@ -144,7 +144,7 @@ class ControllerMain extends ControllerGenerique
 
                             $pdoStatement = Model::getPdo()->prepare($sql);
                             $values = array(
-                                "id" => ExperienceProfessionnelRepository::lastExperienceProfessionnel(),
+                                "id" => Model::getPdo()->lastInsertId(),
                                 "gratif" => $column[25]
                             );
                             $pdoStatement->execute($values);
