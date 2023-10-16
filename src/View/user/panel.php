@@ -9,26 +9,50 @@
 </head>
 <body>
     <p><b>Bienvenue user</b></p>
-    <div class="container">
+    <div class="main" id="panel">
+
+    <div class="container" id="option">
         <p><a href=""><button type="button" class="btn btn-primary">Modifer Profil</button></a></p>
         <p><a href=""><button type="button" class="btn btn-primary">Liste des offres en Attentes</button></a></p>
         <p><a href="frontController.php?action=getExpProByDefault&controller=ExpPro"><button type="button" class="btn btn-primary">Liste des offres</button></a></p>
         <p><a href=""><button type="button" class="btn btn-primary">Liste des Entreprise</button></a></p>
         <p><a href="frontController.php?action=import"><button type="button" class="btn btn-primary">Importation des données</button></a></p>
     </div>
-    <div class="container">
-        <p>Etudiant n° 1                Valide->vert/En cours->orange/Rouge->en recherche</p>
-        <p>Etudiant n° 2                Valide->vert/En cours->orange/Rouge->en recherche</p>
-        <p>Etudiant n° 3                Valide->vert/En cours->orange/Rouge->en recherche</p>
-        <p>Etudiant n° 4                Valide->vert/En cours->orange/Rouge->en recherche</p>
-        <p>Etudiant n° 5                Valide->vert/En cours->orange/Rouge->en recherche</p>
-        <p>Etudiant n° 6                Valide->vert/En cours->orange/Rouge->en recherche</p>
-        <p>Etudiant n° 7                Valide->vert/En cours->orange/Rouge->en recherche</p>
-        <p>Etudiant n° 8                Valide->vert/En cours->orange/Rouge->en recherche</p>
-        <p>Etudiant n° 9                Valide->vert/En cours->orange/Rouge->en recherche</p>
-        <p>Etudiant n° 10                Valide->vert/En cours->orange/Rouge->en recherche</p>
-        <p>Etudiant n° 11               Valide->vert/En cours->orange/Rouge->en recherche</p>
+    <div class="container" id="placeholder">
+        <div class ="HBox">
+            <p>Etudiant n° 1</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
+        </div>
+        <div class ="HBox">
+            <p>Etudiant n° 2</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
+        </div>
+        <div class ="HBox">
+            <p>Etudiant n° 3</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
+        </div>
+        <div class ="HBox">
+            <p>Etudiant n° 4</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
+        </div>
+        <div class ="HBox">
+            <p>Etudiant n° 5</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
+        </div>
+        <div class ="HBox">
+            <p>Etudiant n° 6</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
+        </div>
+        <div class ="HBox">
+            <p>Etudiant n° 7</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
+        </div>
+        <div class ="HBox">
+            <p>Etudiant n° 8</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
+        </div>
+        <div class ="HBox">
+            <p>Etudiant n° 9</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
+        </div>
+        <div class ="HBox">
+            <p>Etudiant n° 10</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
+        </div>
+        <div class ="HBox">
+            <p>Etudiant n° 11</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
+        </div>
     </div>
-
+</div>
 </body>
 </html>
