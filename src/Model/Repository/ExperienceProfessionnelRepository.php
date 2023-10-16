@@ -6,8 +6,9 @@ use App\SAE\Model\DataObject\Stage;
 use App\SAE\Model\Repository\Model;
 
 class ExperienceProfessionnelRepository {
-    public static function save(ExperienceProfessionnel $e) : bool{
-        try{
+    public static function save(ExperienceProfessionnel $e) : bool
+    {
+        try {
             $pdo = Model::getPdo();
             $requestStatement = $pdo->prepare("INSERT INTO ExperienceProfessionnel(sujetExperienceProfessionnel, thematiqueExperienceProfessionnel,
                                                                                     tachesExperienceProfessionnel, codePostalExperienceProfessionnel,
@@ -27,17 +28,9 @@ class ExperienceProfessionnelRepository {
                 "siretTag" => $e->getSiret());
             $requestStatement->execute($values);
             return true;
-        }catch (\PDOException $e){
+        } catch (\PDOException $e) {
             return false;
         }
-    }
-
-    public static function lastExperienceProfessionnel() : int{
-        $pdo = Model::getPdo();
-        $requestStatement = $pdo->prepare("SELECT MAX(idExperienceProfessionnel) FROM ExperienceProfessionnel");
-        $requestStatement->execute();
-        $result = $requestStatement->fetch();
-        return $result[0];
     }
 
     public static function getAll() : array{

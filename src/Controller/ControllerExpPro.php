@@ -31,7 +31,6 @@ class ControllerExpPro extends ControllerGenerique{
             [
                 'pagetitle' => 'Offre',
                 'listeExpPro' => $listeExpPro,
-                'keywords' => $keywords,
                 'cheminVueBody' => 'offer/offerList.php',
             ]
         );

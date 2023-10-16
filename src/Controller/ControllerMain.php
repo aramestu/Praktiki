@@ -144,27 +144,12 @@ class ControllerMain extends ControllerGenerique
 
                             $pdoStatement = Model::getPdo()->prepare($sql);
                             $values = array(
-                                "id" => ExperienceProfessionnelRepository::lastExperienceProfessionnel(),
+                                "id" => Model::getPdo()->lastInsertId(),
                                 "gratif" => $column[25]
                             );
                             $pdoStatement->execute($values);
 
                         }
-
-                        /*else if ($i == 8) {//Soutenances
-                            $sql = "INSERT into $tab[$i] (dateSoutenance,heureDebutSoutenance,heureFinSoutenance,
-                        salleSoutenance,noteSoutenance,mailEnseignant,idStage)
-                        values ('" . $column[?] . "','" . $column[?] . "','" . $column[?] . "'
-                        ,'" . $column[?] . "','" . $column[?] . "','" . $column[31] . "'
-                        ,'" . $column[?] . "')";
-                        $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
-                        }
-
-                        else if ($i == 9) {//Alternances
-                            $sql = "INSERT into $tab[$i]
-                 values ()";
-                            $result = mysqli_query(\App\SAE\Config\Conf::conn(), $sql);
-                        }*/
 
                         else if ($i == 10) {//Inscriptions
                             $sql = "INSERT into $tab[$i] 
