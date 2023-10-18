@@ -7,22 +7,22 @@ use App\SAE\Model\DataObject\Etudiant;
 class EtudiantRepository extends AbstractRepository
 {
 
-    public static function get(string $mail,$prenom,$nom,$mailPerso,$mailUniv,$telephone,$codePostal): bool
+    public static function save(Etudiant $et): bool
     {
         try {
             $sql = "INSERT into Etudiants 
-                             values ( :mailEtu, :nomEtu,:prenomEtu,
+                             values ( :numEtu, :nomEtu,:prenomEtu,
                                      :mailPersoEtu,:mailUnivEtu, :telephoneEtu, :codePostalEtu)";
 
             $pdoStatement = Model::getPdo()->prepare($sql);
             $values = array(
-                "mailEtu" => $mail,
-                "nomEtu" => $nom,
-                "prenomEtu" => $prenom,
-                "mailPersoEtu" => $mailPerso,
-                "mailUnivEtu" => $mailUniv,
-                "telephoneEtu" => $telephone,
-                "codePostalEtu" => $codePostal);
+                "numEtu" => $et->getNumEtudiant(),
+                "nomEtu" => $et->getNomEtudiant(),
+                "prenomEtu" => $et->getPrenomEtudiant(),
+                "mailPersoEtu" => $et->getMailPersoEtudiant(),
+                "mailUnivEtu" => $et->getMailUniversitaireEtuidant(),
+                "telephoneEtu" => $et->getTelephoneEtudiant(),
+                "codePostalEtu" => $et->getCodePostalEtudiant());
             $pdoStatement->execute($values);
 
 

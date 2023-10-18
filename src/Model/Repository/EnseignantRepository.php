@@ -4,7 +4,7 @@ namespace App\SAE\Model\Repository;
 use App\SAE\Model\DataObject\Enseignant;
 class EnseignantRepository extends AbstractRepository
 {
-    public static function get(string $mail,$nom,$prenom): bool
+    public static function save($id,$id1,$id2): bool
     {
         try {
             $sql = "INSERT into Enseignants 
@@ -12,9 +12,9 @@ class EnseignantRepository extends AbstractRepository
 
             $pdoStatement = Model::getPdo()->prepare($sql);
             $values = array(
-                "mailEnsei" => $mail,
-                "nomEnsei" => $nom,
-                "prenomEnsei" => $prenom);
+                "mailEnsei" => $id,
+                "nomEnsei" => $id1,
+                "prenomEnsei" => $id2);
             $pdoStatement->execute($values);
 
 

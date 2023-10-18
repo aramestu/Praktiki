@@ -12,4 +12,26 @@ class AnneeUniversitaire extends AbstractDataObject
         $this->idAnneeUniversitaire = $idAnneeUniversitaire;
         $this->nomAnneeUniversitaire = $nomAnneeUniversitaire;
     }
+
+    public function getIdAnneeUniversitaire(): string
+    {
+        return $this->idAnneeUniversitaire;
+    }
+
+    public function setIdAnneeUniversitaire(string $idAnneeUniversitaire): void
+    {
+        $this->idAnneeUniversitaire = $idAnneeUniversitaire;
+    }
+
+    public function getNomAnneeUniversitaire(): string
+    {
+        return $this->nomAnneeUniversitaire;
+    }
+
+    public function setNomAnneeUniversitaire(string $nomAnneeUniversitaire): void
+    {
+        $this->nomAnneeUniversitaire = $nomAnneeUniversitaire;
+    }
+
+
 }

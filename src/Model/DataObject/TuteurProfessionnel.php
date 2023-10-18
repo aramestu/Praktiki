@@ -21,6 +21,56 @@ class TuteurProfessionnel extends AbstractDataObject
 
     }
 
+    public function getMailTuteurProfessionnel(): string
+    {
+        return $this->mailTuteurProfessionnel;
+    }
+
+    public function setMailTuteurProfessionnel(string $mailTuteurProfessionnel): void
+    {
+        $this->mailTuteurProfessionnel = $mailTuteurProfessionnel;
+    }
+
+    public function getPrenomTuteurProfessionnel(): string
+    {
+        return $this->prenomTuteurProfessionnel;
+    }
+
+    public function setPrenomTuteurProfessionnel(string $prenomTuteurProfessionnel): void
+    {
+        $this->prenomTuteurProfessionnel = $prenomTuteurProfessionnel;
+    }
+
+    public function getNomTuteurProfessionnel(): string
+    {
+        return $this->nomTuteurProfessionnel;
+    }
+
+    public function setNomTuteurProfessionnel(string $nomTuteurProfessionnel): void
+    {
+        $this->nomTuteurProfessionnel = $nomTuteurProfessionnel;
+    }
+
+    public function getFonctionTuteurProfessionnel(): string
+    {
+        return $this->fonctionTuteurProfessionnel;
+    }
+
+    public function setFonctionTuteurProfessionnel(string $fonctionTuteurProfessionnel): void
+    {
+        $this->fonctionTuteurProfessionnel = $fonctionTuteurProfessionnel;
+    }
+
+    public function getTelephoneTuteur(): string
+    {
+        return $this->telephoneTuteur;
+    }
+
+    public function setTelephoneTuteur(string $telephoneTuteur): void
+    {
+        $this->telephoneTuteur = $telephoneTuteur;
+    }
+
 
 
 

@@ -12,4 +12,26 @@ class Departement extends AbstractDataObject
         $this->codeDepartement = $codeDepartement;
         $this->nomDepartement = $nomDepartement;
     }
+
+    public function getCodeDepartement(): string
+    {
+        return $this->codeDepartement;
+    }
+
+    public function setCodeDepartement(string $codeDepartement): void
+    {
+        $this->codeDepartement = $codeDepartement;
+    }
+
+    public function getNomDepartement(): string
+    {
+        return $this->nomDepartement;
+    }
+
+    public function setNomDepartement(string $nomDepartement): void
+    {
+        $this->nomDepartement = $nomDepartement;
+    }
+
+
 }

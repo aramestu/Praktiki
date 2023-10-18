@@ -7,7 +7,7 @@ use App\SAE\Model\DataObject\TuteurProfessionnel;
 class TuteurProfessionnelRepository extends AbstractRepository
 {
 
-    public static function get(string $mail,$prenom,$nom,$fonction,$telephone): bool
+    public static function save(TuteurProfessionnel $t): bool
     {
         try {
             $sql = "INSERT into TuteurProfessionnel 
@@ -15,11 +15,11 @@ class TuteurProfessionnelRepository extends AbstractRepository
 
             $pdoStatement = Model::getPdo()->prepare($sql);
             $values = array(
-                "mailtuteur" => $mail,
-                "prenomtuteur" => $prenom,
-                "nomtuteur" => $nom,
-                "fonctiontuteur" => $fonction,
-                "telephonetuteur" => $telephone);
+                "mailtuteur" => $t->getMailTuteurProfessionnel(),
+                "prenomtuteur" => $t->getPrenomTuteurProfessionnel(),
+                "nomtuteur" => $t->getNomTuteurProfessionnel(),
+                "fonctiontuteur" => $t->getFonctionTuteurProfessionnel(),
+                "telephonetuteur" => $t->getTelephoneTuteur());
             $pdoStatement->execute($values);
 
 

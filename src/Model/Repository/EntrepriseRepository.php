@@ -18,8 +18,7 @@ class EntrepriseRepository extends AbstractRepository {
     }
 
 
-    public static function import(string $siret,$nomEnt,$codePostal
-    ,$effectif,$tel,$siteWeb): bool
+    public static function save(Entreprise $en): bool
     {
         try {
             $sql = "INSERT into Entreprises 
@@ -28,12 +27,12 @@ class EntrepriseRepository extends AbstractRepository {
 
             $pdoStatement = Model::getPdo()->prepare($sql);
             $values = array(
-                "siret" => $siret,
-                "nomEnt" => $nomEnt,
-                "CodePostal" => $codePostal,
-                "effectif" => $effectif,
-                "telEnt" => $tel,
-                "siteEnt" => $siteWeb);
+                "siret" => $en->getSiret(),
+                "nomEnt" => $en->getNom(),
+                "CodePostal" => $en->getCodePostal(),
+                "effectif" => $en->getEffectif(),
+                "telEnt" => $en->getTelephone(),
+                "siteEnt" => $en->getSiteWeb());
             $pdoStatement->execute($values);
 
             return true;

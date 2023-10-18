@@ -11,12 +11,34 @@ class DepartementRepository extends AbstractRepository
         return "Departements";
     }
 
-    public static function lastDepartement() : int{
+    public function save (Departement $d) : bool
+    {
+        try {
+            if ($this->get($d->getNomDepartement()) == null) {
+                $pdo = Model::getPdo();
+                $sql = "INSERT INTO Departements (nomDepartement) VALUES (:nomDepartementTag)";
+                $requestStatement = $pdo->prepare($sql);
+                $values = array("nomDepartementTag" => $d->getNomDepartement());
+                $requestStatement->execute($values);
+                return true;
+            }
+            return false; // Le nom de l'année existe déjà, pas d'insertion nécessaire
+        } catch (\PDOException $e) {
+            return false;
+        }
+    }
+
+    public function get(string $nom): ?Departement{
         $pdo = Model::getPdo();
-        $requestStatement = $pdo->prepare("SELECT MAX(codeDepartement) FROM Departements");
-        $requestStatement->execute();
-        $result = $requestStatement->fetch();
-        return $result[0];
+        $sql= "SELECT count(*) FROM Departements WHERE nomDepartement = :nomDep";
+        $requestStatement = $pdo->prepare($sql);
+        $values = array("nomDep" =>$nom);
+        $requestStatement->execute($values);
+        $Departement = $requestStatement->fetchColumn();
+        if($Departement==0){
+            return null;
+        }
+        return $this->construireDepuisTableau($this->getDepuisTableau($nom));
     }
 
     protected function construireDepuisTableau(array $DepartementFormatTableau): Departement
@@ -26,4 +48,17 @@ class DepartementRepository extends AbstractRepository
 
         return $Departement;
     }
+
+    private function getDepuisTableau(string $nom)
+    {
+        $pdo = Model::getPdo();
+        $sql = "SELECT * FROM Departements WHERE nomDepartement = :nomAnnee";
+        $requestStatement = $pdo->prepare($sql);
+        $values = array("nomAnnee" =>$nom);
+        $requestStatement->execute($values);
+        $Departement = $requestStatement->fetch();
+        return $Departement;
+    }
+
+
 }
