@@ -280,4 +280,10 @@ h3 {
     box-shadow: 10px 10px 10px #00000025,
     -10px -10px 10px #E67E2225;
 }
+
+.Stalternance > .header > .left > .typeExpPro,
+.Stalternance > .header > .information > .typeExpPro {
+    background: linear-gradient(-45deg, var(--wisteria) 0%, var(--wisteria) 50%, var(--orange) 50%, var(--orange) 100%);
+    color: var(--white);
+}
 /*--- END SMALL OFFER ---*/
