@@ -6,30 +6,6 @@ use App\SAE\Model\DataObject\TuteurProfessionnel;
 
 class TuteurProfessionnelRepository extends AbstractRepository
 {
-
-    public static function save(TuteurProfessionnel $t): bool
-    {
-        try {
-            $sql = "INSERT into TuteurProfessionnel 
-                             values ( :mailtuteur, :prenomtuteur, :nomtuteur, :fonctiontuteur, :telephonetuteur)";
-
-            $pdoStatement = Model::getPdo()->prepare($sql);
-            $values = array(
-                "mailtuteur" => $t->getMailTuteurProfessionnel(),
-                "prenomtuteur" => $t->getPrenomTuteurProfessionnel(),
-                "nomtuteur" => $t->getNomTuteurProfessionnel(),
-                "fonctiontuteur" => $t->getFonctionTuteurProfessionnel(),
-                "telephonetuteur" => $t->getTelephoneTuteur());
-            $pdoStatement->execute($values);
-
-
-            return true;
-        } catch (\PDOException $e) {
-            return false;
-        }
-    }
-
-
     protected function getNomTable(): string
     {
         return "TuteurProfessionnel";
@@ -38,7 +14,15 @@ class TuteurProfessionnelRepository extends AbstractRepository
     protected function construireDepuisTableau(array $TuteurProfessionnelFormatTableau): TuteurProfessionnel
     {
         $tuteur = new TuteurProfessionnel($TuteurProfessionnelFormatTableau["mailTuteurProfessionnel"], $TuteurProfessionnelFormatTableau["prenomTuteurProfessionnel"], $TuteurProfessionnelFormatTableau["nomTuteurProfessionnel"],
-            $TuteurProfessionnelFormatTableau["fonctionTuteurProfessionnel"], $TuteurProfessionnelFormatTableau["telephoneTuteur"]);
+            $TuteurProfessionnelFormatTableau["fonctionTuteurProfessionnel"], $TuteurProfessionnelFormatTableau["telephoneTuteurProfessionnel"]);
         return $tuteur;
+    }
+
+    protected function getNomClePrimaire(): string {
+        return "mailTuteurProfessionnel";
+    }
+
+    protected function getNomsColonnes(): array {
+        return array("mailTuteurProfessionnel", "prenomTuteurProfessionnel", "nomTuteurProfessionnel", "fonctionTuteurProfessionnel", "telephoneTuteurProfessionnel");
     }
 }

@@ -9,4 +9,11 @@ class Alternance extends ExperienceProfessionnel
         parent::__construct($sujet, $thematique, $taches, $codePostal, $adresse, $dateDebut, $dateFin, $siret);
 
     }
+
+
+    public function formatTableau(): array{
+        return array_merge(parent::formatTableau(), array(
+
+        ));
+    }
 }

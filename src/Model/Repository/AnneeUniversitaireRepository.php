@@ -2,23 +2,18 @@
 namespace App\SAE\Model\Repository;
 
 use App\SAE\Model\DataObject\AnneeUniversitaire;
+use App\SAE\Model\DataObject\AbstractDataObject;
 
-class AnneeUniversitaireRepository extends AbstractRepository
-{
+class AnneeUniversitaireRepository extends AbstractRepository {
 
-    protected function getNomTable(): string
-    {
-        return "AnneeUniversitaire";
-    }
-
-    public function save(AnneeUniversitaire $a): bool
+    public function save(AbstractDataObject|AnneeUniversitaire $anneeUniversitaire): bool
     {
         try {
-            if ($this->get($a->getNomAnneeUniversitaire()) == null) {
+            if ($this->get($anneeUniversitaire->getNomAnneeUniversitaire()) == null) {
                 $pdo = Model::getPdo();
                 $sql = "INSERT INTO AnneeUniversitaire (nomAnneeUniversitaire) VALUES (:nomAnneeUniversitaireTag)";
                 $requestStatement = $pdo->prepare($sql);
-                $values = array("nomAnneeUniversitaireTag" => $a->getNomAnneeUniversitaire());
+                $values = array("nomAnneeUniversitaireTag" => $anneeUniversitaire->getNomAnneeUniversitaire());
                 $requestStatement->execute($values);
                 return true;
             }
@@ -28,36 +23,33 @@ class AnneeUniversitaireRepository extends AbstractRepository
         }
     }
 
-    public function get(string $nom): ?AnneeUniversitaire{
-        $pdo = Model::getPdo();
-        $sql= "SELECT count(*) FROM AnneeUniversitaire WHERE nomAnneeUniversitaire = :nomAnnee";
-        $requestStatement = $pdo->prepare($sql);
-        $values = array("nomAnnee" =>$nom);
-        $requestStatement->execute($values);
-        $AnneeUniversitaire = $requestStatement->fetchColumn();
-        if($AnneeUniversitaire==0){
-            return null;
-        }
-        return $this->construireDepuisTableau($this->getDepuisTableau($nom));
+    protected function construireDepuisTableau(array $anneeUniversitaireFormatTableau): AnneeUniversitaire
+    {
+        $anneeUniversitaire = new AnneeUniversitaire($anneeUniversitaireFormatTableau["idAnneeUniversitaire"],
+            $anneeUniversitaireFormatTableau["nomAnneeUniversitaire"]);
+
+        return $anneeUniversitaire;
     }
 
-
-    protected function construireDepuisTableau(array $AnneeUniversitaireFormatTableau): AnneeUniversitaire
-    {
-        $AnneeUniversitaire = new AnneeUniversitaire($AnneeUniversitaireFormatTableau["idAnneeUniversitaire"],
-            $AnneeUniversitaireFormatTableau["nomAnneeUniversitaire"]);
-
-        return $AnneeUniversitaire;
-    }
-
-    private function getDepuisTableau(string $nom)
-    {
+    private function getByNom(string $nom){
         $pdo = Model::getPdo();
         $sql = "SELECT * FROM AnneeUniversitaire WHERE nomAnneeUniversitaire = :nomAnnee";
         $requestStatement = $pdo->prepare($sql);
         $values = array("nomAnnee" =>$nom);
         $requestStatement->execute($values);
-        $AnneeUniversitaire = $requestStatement->fetch();
-        return $AnneeUniversitaire;
+        $anneeUniversitaire = $requestStatement->fetch();
+        return $anneeUniversitaire;
+    }
+
+    protected function getNomTable(): string {
+        return "AnneeUniversitaire";
+    }
+
+    protected function getNomClePrimaire(): string {
+        return "idAnneeUniversitaire";
+    }
+
+    protected function getNomsColonnes(): array {
+        return array("idAnneeUniversitaire", "nomAnneeUniversitaire");
     }
 }

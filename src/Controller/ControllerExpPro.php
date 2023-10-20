@@ -236,8 +236,7 @@ class ControllerExpPro extends ControllerGenerique{
         }
     }
 
-    public static function supprimerOffre(): void
-    {
+    public static function supprimerOffre(): void {
         $idExpPro = $_GET["experiencePro"];
         $stage = StageRepository::get($idExpPro);
 

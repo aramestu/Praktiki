@@ -8,20 +8,20 @@ class Etudiant extends AbstractDataObject
     private string $prenomEtudiant;
     private string $nomEtudiant;
     private string $mailPersoEtudiant;
-    private string $mailUniversitaireEtuidant;
+    private string $mailUniversitaireEtudidant;
     private string $telephoneEtudiant;
     private string $codePostalEtudiant;
 
 
     public function __construct(string $numEtudiant, string $prenomEtudiant, string $nomEtudiant,
-                                string $mailPersoEtudiant, string $mailUniversitaireEtuidant,
+                                string $mailPersoEtudiant, string $mailUniversitaireEtudidant,
                                 string $telephoneEtudiant, string $codePostalEtudiant)
     {
         $this->numEtudiant = $numEtudiant;
         $this->prenomEtudiant = $prenomEtudiant;
         $this->nomEtudiant = $nomEtudiant;
         $this->mailPersoEtudiant = $mailPersoEtudiant;
-        $this->mailUniversitaireEtuidant = $mailUniversitaireEtuidant;
+        $this->mailUniversitaireEtudidant = $mailUniversitaireEtudidant;
         $this->telephoneEtudiant = $telephoneEtudiant;
         $this->codePostalEtudiant = $codePostalEtudiant;
     }
@@ -98,4 +98,15 @@ class Etudiant extends AbstractDataObject
 
 
 
+    public function formatTableau(): array{
+        return array(
+            "etudiantTag" => $this->numEtudiant,
+            "prenomTag" => $this->prenomEtudiant,
+            "nomTag" => $this->nomEtudiant,
+            "mailPersoEtudiantTag" => $this->mailPersoEtudiant,
+            "mailUniversitaireEtudidantTag" => $this->mailUniversitaireEtudidant,
+            "telephoneEtudiantTag" => $this->telephoneEtudiant,
+            "codePostalEtudiantTag" => $this->codePostalEtudiant
+        );
+    }
 }

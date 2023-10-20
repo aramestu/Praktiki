@@ -7,7 +7,7 @@ class TuteurProfessionnel extends AbstractDataObject
     private string $prenomTuteurProfessionnel;
     private string $nomTuteurProfessionnel;
     private string $fonctionTuteurProfessionnel;
-    private string $telephoneTuteur;
+    private string $telephoneTuteurProfessionnel;
 
 
     public function __construct(string $mailTuteurProfessionnel, string $prenomTuteurProfessionnel, string $nomTuteurProfessionnel
@@ -17,7 +17,7 @@ class TuteurProfessionnel extends AbstractDataObject
         $this->prenomTuteurProfessionnel = $prenomTuteurProfessionnel;
         $this->nomTuteurProfessionnel = $nomTuteurProfessionnel;
         $this->fonctionTuteurProfessionnel = $fonctionTuteurProfessionnel;
-        $this->telephoneTuteur = $telephoneTuteur;
+        $this->telephoneTuteurProfessionnel = $telephoneTuteur;
 
     }
 
@@ -61,19 +61,25 @@ class TuteurProfessionnel extends AbstractDataObject
         $this->fonctionTuteurProfessionnel = $fonctionTuteurProfessionnel;
     }
 
-    public function getTelephoneTuteur(): string
+    public function getTelephoneTuteurProfessionnel(): string
     {
-        return $this->telephoneTuteur;
+        return $this->telephoneTuteurProfessionnel;
     }
 
-    public function setTelephoneTuteur(string $telephoneTuteur): void
+    public function setTelephoneTuteurProfessionnel(string $telephoneTuteurProfessionnel): void
     {
-        $this->telephoneTuteur = $telephoneTuteur;
+        $this->telephoneTuteurProfessionnel = $telephoneTuteurProfessionnel;
     }
 
 
-
-
-
+    public function formatTableau(): array {
+        return array(
+            "mailTuteurProfessionnelTag" => $this->mailTuteurProfessionnel,
+            "prenomTuteurProfessionnelTag" => $this->prenomTuteurProfessionnel,
+            "nomTuteurProfessionnelTag" => $this->nomTuteurProfessionnel,
+            "fonctionTuteurProfessionnelTag" => $this->fonctionTuteurProfessionnel,
+            "telephoneTuteurProfessionnelTag" => $this->telephoneTuteurProfessionnel
+        );
+    }
 }
 

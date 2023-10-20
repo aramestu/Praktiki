@@ -33,5 +33,10 @@ class AnneeUniversitaire extends AbstractDataObject
         $this->nomAnneeUniversitaire = $nomAnneeUniversitaire;
     }
 
-
+    public function formatTableau(): array{
+        return array(
+            "idAnneeUniversitaireTag" => $this->idAnneeUniversitaire,
+            "nomAnneeUniversitaireTag" => $this->nomAnneeUniversitaire
+        );
+    }
 }

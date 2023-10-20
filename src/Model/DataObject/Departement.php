@@ -33,5 +33,10 @@ class Departement extends AbstractDataObject
         $this->nomDepartement = $nomDepartement;
     }
 
-
+    public function formatTableau(): array{
+        return array(
+            "codeDepartementTag" => $this->codeDepartement,
+            "nomDepartementTag" => $this->nomDepartement
+        );
+    }
 }

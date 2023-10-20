@@ -3,19 +3,19 @@ namespace App\SAE\Model\DataObject;
 
 class Entreprise extends AbstractDataObject {
     private string $siret;
-    private string $nom;
-    private string $codePostal;
-    private string $effectif;
-    private string $telephone;
-    private string $siteWeb;
+    private string $nomEntreprise;
+    private string $codePostalEntreprise;
+    private string $effectifEntreprise;
+    private string $telephoneEntreprise;
+    private string $siteWebEntreprise;
 
     public function __construct(string $siret, string $nom, string $codePostal, string $effectif, string $telephone, string $siteWeb){
         $this->siret = $siret;
-        $this->nom = $nom;
-        $this->codePostal = $codePostal;
-        $this->effectif = $effectif;
-        $this->telephone = $telephone;
-        $this->siteWeb = $siteWeb;
+        $this->nomEntreprise = $nom;
+        $this->codePostalEntreprise = $codePostal;
+        $this->effectifEntreprise = $effectif;
+        $this->telephoneEntreprise = $telephone;
+        $this->siteWebEntreprise = $siteWeb;
     }
 
     public function getSiret(): string{
@@ -26,44 +26,54 @@ class Entreprise extends AbstractDataObject {
         $this->siret = $siret;
     }
 
-    public function getNom(): string {
-        return $this->nom;
+    public function getNomEntreprise(): string {
+        return $this->nomEntreprise;
     }
 
-    public function setNom(string $nom): void {
-        $this->nom = $nom;
+    public function setNomEntreprise(string $nomEntreprise): void {
+        $this->nomEntreprise = $nomEntreprise;
     }
 
-    public function getCodePostal(): string {
-        return $this->codePostal;
+    public function getCodePostalEntreprise(): string {
+        return $this->codePostalEntreprise;
     }
 
-    public function setCodePostal(string $codePostal): void {
-        $this->codePostal = $codePostal;
+    public function setCodePostalEntreprise(string $codePostalEntreprise): void {
+        $this->codePostalEntreprise = $codePostalEntreprise;
     }
 
-    public function getEffectif(): string {
-        return $this->effectif;
+    public function getEffectifEntreprise(): string {
+        return $this->effectifEntreprise;
     }
 
-    public function setEffectif(string $effectif): void {
-        $this->effectif = $effectif;
+    public function setEffectifEntreprise(string $effectifEntreprise): void {
+        $this->effectifEntreprise = $effectifEntreprise;
     }
 
-    public function getTelephone(): string {
-        return $this->telephone;
+    public function getTelephoneEntreprise(): string {
+        return $this->telephoneEntreprise;
     }
 
-    public function setTelephone(string $telephone): void {
-        $this->telephone = $telephone;
+    public function setTelephoneEntreprise(string $telephoneEntreprise): void {
+        $this->telephoneEntreprise = $telephoneEntreprise;
     }
 
-    public function getSiteWeb(): string {
-        return $this->siteWeb;
+    public function getSiteWebEntreprise(): string {
+        return $this->siteWebEntreprise;
     }
 
-    public function setSiteWeb(string $siteWeb): void {
-        $this->siteWeb = $siteWeb;
+    public function setSiteWebEntreprise(string $siteWebEntreprise): void {
+        $this->siteWebEntreprise = $siteWebEntreprise;
     }
 
+    public function formatTableau(): array{
+        return array(
+            "siretTag" => $this->siret,
+            "nomEntrepriseTag" => $this->nomEntreprise,
+            "codePostalEntrepriseTag" => $this->codePostalEntreprise,
+            "effectifEntrepriseTag" => $this->effectifEntreprise,
+            "telephoneEntrepriseTag" => $this->telephoneEntreprise,
+            "siteWebEntrepriseTag" => $this->siteWebEntreprise
+        );
+    }
 }

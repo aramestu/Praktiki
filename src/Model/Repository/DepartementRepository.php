@@ -2,23 +2,18 @@
 namespace App\SAE\Model\Repository;
 
 use App\SAE\Model\DataObject\Departement;
+use App\SAE\Model\DataObject\AbstractDataObject;
 
-class DepartementRepository extends AbstractRepository
-{
+class DepartementRepository extends AbstractRepository{
 
-    protected function getNomTable(): string
-    {
-        return "Departements";
-    }
-
-    public function save (Departement $d) : bool
+    public function save (AbstractDataObject|Departement $departement) : bool
     {
         try {
-            if ($this->get($d->getNomDepartement()) == null) {
+            if ($this->get($departement->getNomDepartement()) == null) {
                 $pdo = Model::getPdo();
                 $sql = "INSERT INTO Departements (nomDepartement) VALUES (:nomDepartementTag)";
                 $requestStatement = $pdo->prepare($sql);
-                $values = array("nomDepartementTag" => $d->getNomDepartement());
+                $values = array("nomDepartementTag" => $departement->getNomDepartement());
                 $requestStatement->execute($values);
                 return true;
             }
@@ -28,21 +23,7 @@ class DepartementRepository extends AbstractRepository
         }
     }
 
-    public function get(string $nom): ?Departement{
-        $pdo = Model::getPdo();
-        $sql= "SELECT count(*) FROM Departements WHERE nomDepartement = :nomDep";
-        $requestStatement = $pdo->prepare($sql);
-        $values = array("nomDep" =>$nom);
-        $requestStatement->execute($values);
-        $Departement = $requestStatement->fetchColumn();
-        if($Departement==0){
-            return null;
-        }
-        return $this->construireDepuisTableau($this->getDepuisTableau($nom));
-    }
-
-    protected function construireDepuisTableau(array $DepartementFormatTableau): Departement
-    {
+    protected function construireDepuisTableau(array $DepartementFormatTableau): Departement {
         $Departement = new Departement($DepartementFormatTableau["codeDepartement"],
             $DepartementFormatTableau["nomDepartement"]);
 
@@ -61,4 +42,16 @@ class DepartementRepository extends AbstractRepository
     }
 
 
+    protected function getNomClePrimaire(): string {
+        return "codeDepartement";
+    }
+
+    protected function getNomTable(): string
+    {
+        return "Departements";
+    }
+
+    protected function getNomsColonnes(): array {
+        return array("codeDepartement", "nomDepartement");
+    }
 }

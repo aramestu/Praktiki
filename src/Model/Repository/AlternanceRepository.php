@@ -24,26 +24,26 @@ class AlternanceRepository
 
     public static function construireDepuisTableau($alternanceFormatTableau): Alternance
     {
-        $alternance = new Alternance($alternanceFormatTableau["sujet"], $alternanceFormatTableau["thematique"], $alternanceFormatTableau["taches"], $alternanceFormatTableau["codePostal"], $alternanceFormatTableau["adresse"], $alternanceFormatTableau["dateDebut"], $alternanceFormatTableau["dateFin"], $alternanceFormatTableau["siret"]);
+        $alternance = new Alternance($alternanceFormatTableau["sujetExperienceProfessionnel"], $alternanceFormatTableau["thematiqueExperienceProfessionnel"], $alternanceFormatTableau["tachesExperienceProfessionnel"], $alternanceFormatTableau["codePostalExperienceProfessionnel"], $alternanceFormatTableau["adresseExperienceProfessionnel"], $alternanceFormatTableau["dateDebutExperienceProfessionnel"], $alternanceFormatTableau["dateFinExperienceProfessionnel"], $alternanceFormatTableau["siret"]);
         if (array_key_exists("idAlternance", $alternanceFormatTableau)) {
             if (!empty($alternanceFormatTableau["idAlternance"])) {
-                $alternance->setId($alternanceFormatTableau["idAlternance"]);
+                $alternance->setIdExperienceProfessionnel($alternanceFormatTableau["idAlternance"]);
             }
         }
-        if (array_key_exists("etudiant", $alternanceFormatTableau)) {
-            if (!empty($alternanceFormatTableau["etudiant"])) {
-                $alternance->setEtudiant($alternanceFormatTableau["etudiant"]);
+        if (array_key_exists("numEtudiant", $alternanceFormatTableau)) {
+            if (!empty($alternanceFormatTableau["numEtudiant"])) {
+                $alternance->setNumEtudiant($alternanceFormatTableau["numEtudiant"]);
             }
         }
-        if (array_key_exists("enseignant", $alternanceFormatTableau)) {
-            if (!empty($alternanceFormatTableau["enseignant"])) {
-                $alternance->setEnseignant($alternanceFormatTableau["enseignant"]);
+        if (array_key_exists("mailEnseignant", $alternanceFormatTableau)) {
+            if (!empty($alternanceFormatTableau["mailEnseignant"])) {
+                $alternance->setMailEnseignant($alternanceFormatTableau["mailEnseignant"]);
             }
 
         }
-        if (array_key_exists("tuteurProfessionnel", $alternanceFormatTableau)) {
-            if (!empty($alternanceFormatTableau["tuteurProfessionnel"])) {
-                $alternance->setTuteurProfessionnel($alternanceFormatTableau["tuteurProfessionnel"]);
+        if (array_key_exists("mailTuteurProfessionnel", $alternanceFormatTableau)) {
+            if (!empty($alternanceFormatTableau["mailTuteurProfessionnel"])) {
+                $alternance->setMailTuteurProfessionnel($alternanceFormatTableau["mailTuteurProfessionnel"]);
             }
         }
         if (array_key_exists("datePublication", $alternanceFormatTableau)) {
@@ -57,9 +57,7 @@ class AlternanceRepository
     public static function getAll(): array
     {
         $pdo = Model::getPdo();
-        $requestStatement = $pdo->query(" SELECT idAlternance, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
-                                                codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
-                                                dateFinExperienceProfessionnel AS dateFin, siret, datePublication, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel 
+        $requestStatement = $pdo->query(" SELECT * 
                                                 FROM ExperienceProfessionnel e
                                                 JOIN Alternances a ON a.idAlternance = e.idExperienceProfessionnel");
         $AllAlternance = [];
@@ -71,9 +69,7 @@ class AlternanceRepository
 
     public static function get(string $id): ?Alternance
     {
-        $sql = "SELECT idAlternance, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
-                codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
-                dateFinExperienceProfessionnel AS dateFin, siret, datePublication, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel
+        $sql = "SELECT *
                 FROM ExperienceProfessionnel e
                 JOIN Alternances a ON a.idAlternance = e.idExperienceProfessionnel
                 WHERE a.idAlternance = :id";
@@ -102,13 +98,12 @@ class AlternanceRepository
         ExperienceProfessionnelRepository::mettreAJour($alternance);
     }
 
-    public static function supprimer(Alternance $alternance): void
-    {
+    public static function supprimer(Alternance $alternance): void {
         $sql = "DELETE FROM Alternances WHERE idAlternance= :idTag;";
         $pdoStatement = Model::getPdo()->prepare($sql);
 
         $values = array(
-            "idTag" => $alternance->getId()
+            "idTag" => $alternance->getIdExperienceProfessionnel()
         );
 
         $pdoStatement->execute($values);
@@ -119,9 +114,8 @@ class AlternanceRepository
     {
         date_default_timezone_set('Europe/Paris');
         $pdo = Model::getPdo();
-        $sql = "SELECT idAlternance, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
-                codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
-                dateFinExperienceProfessionnel AS dateFin, siret, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel, datePublication FROM Alternances a JOIN ExperienceProfessionnel e ON a.idalternance = e.idExperienceProfessionnel WHERE numEtudiant IS NULL ";
+        $sql = "SELECT * 
+                FROM Alternances a JOIN ExperienceProfessionnel e ON a.idalternance = e.idExperienceProfessionnel WHERE numEtudiant IS NULL ";
         if (isset($datePublication)) {
             $sql .= match ($datePublication) {
                 'last24' => "AND DATEDIFF(NOW(), datePublication) < 1 ",
@@ -159,9 +153,7 @@ class AlternanceRepository
 
     public static function search(string $keywords): array
     {
-        $sql = "SELECT idAlternance, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
-                codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
-                dateFinExperienceProfessionnel AS dateFin, siret, datePublication, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel
+        $sql = "SELECT *
                 FROM ExperienceProfessionnel e
                 JOIN Alternances a ON a.idAlternance = e.idExperienceProfessionnel
                 WHERE numEtudiant IS NULL
@@ -170,7 +162,8 @@ class AlternanceRepository
                 OR tachesExperienceProfessionnel LIKE '%$keywords%'
                 OR codePostalExperienceProfessionnel LIKE '%$keywords%'
                 OR adresseExperienceProfessionnel LIKE '%$keywords%'
-                OR siret LIKE '%$keywords%')";
+                OR siret LIKE '%$keywords%')
+                ORDER BY datePublication";
 
         $requestStatement = Model::getPdo()->query($sql);
 

@@ -13,7 +13,7 @@ class StageRepository{
             $requestStatement = $pdo->prepare("INSERT INTO Stages(idStage, gratificationStage) 
                                                  VALUES(:idStageTag, :gratificationStageTag)");
             $values = array("idStageTag" => $pdo->lastInsertId(),
-                "gratificationStageTag" => $s->getGratification());
+                "gratificationStageTag" => $s->getGratificationStage());
 
             $requestStatement->execute($values);
             return true;
@@ -23,24 +23,24 @@ class StageRepository{
     }
 
     public static function construireDepuisTableau($stageFormatTableau): Stage {
-        $stage = new Stage($stageFormatTableau["sujet"], $stageFormatTableau["thematique"], $stageFormatTableau["taches"], $stageFormatTableau["codePostal"], $stageFormatTableau["adresse"], $stageFormatTableau["dateDebut"], $stageFormatTableau["dateFin"], $stageFormatTableau["siret"], $stageFormatTableau["gratification"]);
+        $stage = new Stage($stageFormatTableau["sujetExperienceProfessionnel"], $stageFormatTableau["thematiqueExperienceProfessionnel"], $stageFormatTableau["tachesExperienceProfessionnel"], $stageFormatTableau["codePostalExperienceProfessionnel"], $stageFormatTableau["adresseExperienceProfessionnel"], $stageFormatTableau["dateDebutExperienceProfessionnel"], $stageFormatTableau["dateFinExperienceProfessionnel"], $stageFormatTableau["siret"], $stageFormatTableau["gratificationStage"]);
         if(array_key_exists("idStage", $stageFormatTableau)){
-            $stage->setId($stageFormatTableau["idStage"]);
+            $stage->setIdExperienceProfessionnel($stageFormatTableau["idStage"]);
         }
-        if(array_key_exists("etudiant", $stageFormatTableau)){
-            if(!empty($stageFormatTableau["etudiant"])){
-                $stage->setEtudiant($stageFormatTableau["etudiant"]);
+        if(array_key_exists("numEtudiant", $stageFormatTableau)){
+            if(!empty($stageFormatTableau["numEtudiant"])){
+                $stage->setNumEtudiant($stageFormatTableau["numEtudiant"]);
             }
         }
-        if(array_key_exists("enseignant", $stageFormatTableau)){
-            if(!empty($stageFormatTableau["enseignant"])){
-                $stage->setEnseignant($stageFormatTableau["enseignant"]);
+        if(array_key_exists("mailEnseignant", $stageFormatTableau)){
+            if(!empty($stageFormatTableau["mailEnseignant"])){
+                $stage->setMailEnseignant($stageFormatTableau["mailEnseignant"]);
             }
 
         }
-        if(array_key_exists("tuteurProfessionnel", $stageFormatTableau)){
-            if(!empty($stageFormatTableau["tuteurProfessionnel"])){
-                $stage->setTuteurProfessionnel($stageFormatTableau["tuteurProfessionnel"]);
+        if(array_key_exists("mailTuteurProfessionnel", $stageFormatTableau)){
+            if(!empty($stageFormatTableau["mailTuteurProfessionnel"])){
+                $stage->setMailTuteurProfessionnel($stageFormatTableau["mailTuteurProfessionnel"]);
             }
         }
         if(array_key_exists("datePublication", $stageFormatTableau)){
@@ -51,12 +51,9 @@ class StageRepository{
         return $stage;
     }
 
-    public static function getAll() : array{
+    public static function getAll() : array {
         $pdo = Model::getPdo();
-        $requestStatement = $pdo->query(" SELECT idStage, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
-                                                codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
-                                                dateFinExperienceProfessionnel AS dateFin, siret, datePublication, datePublication, numEtudiant AS etudiant, mailEnseignant AS enseignant, 
-                                                mailTuteurProfessionnel AS tuteurProfessionnel, gratificationStage AS gratification
+        $requestStatement = $pdo->query(" SELECT *
                                                 FROM ExperienceProfessionnel e
                                                 JOIN Stages s ON s.idStage = e.idExperienceProfessionnel");
         $AllStage = [];
@@ -66,11 +63,8 @@ class StageRepository{
         return $AllStage;
     }
 
-    public static function get(string $id) :?Stage{
-        $sql = "SELECT idStage, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
-                codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
-                dateFinExperienceProfessionnel AS dateFin, siret, datePublication, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel,
-                gratificationStage AS gratification
+    public static function get(string $id) :?Stage {
+        $sql = "SELECT *
                 FROM ExperienceProfessionnel e
                 JOIN Stages s ON s.idStage = e.idExperienceProfessionnel
                 WHERE s.idStage = :id";
@@ -94,8 +88,7 @@ class StageRepository{
 
 
 
-    public static function mettreAJour(Stage $stage): void
-    {
+    public static function mettreAJour(Stage $stage): void {
         // Il faut modifier à la fois dans ExperienceProfessionnel et dans Stage
         ExperienceProfessionnelRepository::mettreAJour($stage);
 
@@ -106,20 +99,19 @@ class StageRepository{
         $pdoStatement = Model::getPdo()->prepare($sql);
 
         $values = array(
-            "gratificationTag" => $stage->getGratification(),
-            "idTag" => $stage->getId()
+            "gratificationTag" => $stage->getGratificationStage(),
+            "idTag" => $stage->getIdExperienceProfessionnel()
         );
 
         $pdoStatement->execute($values);
     }
 
-    public static function supprimer(Stage $stage): void
-    {
+    public static function supprimer(Stage $stage): void {
         $sql = "DELETE FROM Stages WHERE idStage= :idTag;";
         $pdoStatement = Model::getPdo()->prepare($sql);
 
         $values = array(
-            "idTag" => $stage->getId()
+            "idTag" => $stage->getIdExperienceProfessionnel()
         );
 
         $pdoStatement->execute($values);
@@ -129,10 +121,8 @@ class StageRepository{
     public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null) : array{
         date_default_timezone_set('Europe/Paris');
         $pdo = Model::getPdo();
-        $sql = "SELECT idStage, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
-                                                codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
-                                                dateFinExperienceProfessionnel AS dateFin, siret, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel,
-                                                gratificationStage AS gratification, datePublication FROM Stages s JOIN ExperienceProfessionnel e ON s.idStage = e.idExperienceProfessionnel WHERE numEtudiant IS NULL ";
+        $sql = "SELECT *
+                FROM Stages s JOIN ExperienceProfessionnel e ON s.idStage = e.idExperienceProfessionnel WHERE numEtudiant IS NULL ";
         if (isset($datePublication)){
             $sql .= match ($datePublication){
                 'last24' => "AND DATEDIFF(NOW(), datePublication) < 1 ",
@@ -178,10 +168,7 @@ class StageRepository{
     }
 
     public static function search(string $keywords): array{
-        $sql = "SELECT idStage, sujetExperienceProfessionnel AS sujet, thematiqueExperienceProfessionnel AS thematique, tachesExperienceProfessionnel AS taches,
-                codePostalExperienceProfessionnel AS codePostal, adresseExperienceProfessionnel AS adresse, dateDebutExperienceProfessionnel AS dateDebut,
-                dateFinExperienceProfessionnel AS dateFin, siret, datePublication, numEtudiant AS etudiant, mailEnseignant AS enseignant, mailTuteurProfessionnel AS tuteurProfessionnel,
-                gratificationStage AS gratification
+        $sql = "SELECT *
                 FROM ExperienceProfessionnel e
                 JOIN Stages s ON s.idStage = e.idExperienceProfessionnel
                 WHERE numEtudiant IS NULL
@@ -190,7 +177,8 @@ class StageRepository{
                 OR tachesExperienceProfessionnel LIKE '%$keywords%'
                 OR codePostalExperienceProfessionnel LIKE '%$keywords%'
                 OR adresseExperienceProfessionnel LIKE '%$keywords%'
-                OR siret LIKE '%$keywords%')";
+                OR siret LIKE '%$keywords%')
+                ORDER BY datePublication";
 
         $requestStatement = Model::getPdo()->query($sql);
 

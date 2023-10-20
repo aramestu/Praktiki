@@ -18,13 +18,13 @@ class ExperienceProfessionnelRepository {
                                                             :tachesExperienceProfessionnelTag, :codePostalExperienceProfessionnelTag,
                                                             :adresseExperienceProfessionnelTag, :dateDebutExperienceProfessionnelTag, 
                                                             :dateFinExperienceProfessionnelTag, :siretTag)");
-            $values = array("sujetExperienceProfessionnelTag" => $e->getSujet(),
-                "thematiqueExperienceProfessionnelTag" => $e->getThematique(),
-                "tachesExperienceProfessionnelTag" => $e->getTaches(),
-                "codePostalExperienceProfessionnelTag" => $e->getCodePostal(),
-                "adresseExperienceProfessionnelTag" => $e->getAdresse(),
-                "dateDebutExperienceProfessionnelTag" => $e->getDateDebut(),
-                "dateFinExperienceProfessionnelTag" => $e->getDateFin(),
+            $values = array("sujetExperienceProfessionnelTag" => $e->getSujetExperienceProfessionnel(),
+                "thematiqueExperienceProfessionnelTag" => $e->getThematiqueExperienceProfessionnel(),
+                "tachesExperienceProfessionnelTag" => $e->getTachesExperienceProfessionnel(),
+                "codePostalExperienceProfessionnelTag" => $e->getCodePostalExperienceProfessionnel(),
+                "adresseExperienceProfessionnelTag" => $e->getAdresseExperienceProfessionnel(),
+                "dateDebutExperienceProfessionnelTag" => $e->getDateDebutExperienceProfessionnel(),
+                "dateFinExperienceProfessionnelTag" => $e->getDateFinExperienceProfessionnel(),
                 "siretTag" => $e->getSiret());
             $requestStatement->execute($values);
             return true;
@@ -94,25 +94,25 @@ class ExperienceProfessionnelRepository {
         $pdoStatement = Model::getPdo()->prepare($sql);
 
         $values = array(
-            "sujetTag" => $exp->getSujet(),
-            "thematiqueTag" => $exp->getThematique(),
-            "tacheTag" => $exp->getTaches(),
-            "codePostalTag" => $exp->getCodePostal(),
-            "adresseTag" => $exp->getAdresse(),
-            "dateDebutTag" => $exp->getDateDebut(),
-            "dateFinTag" => $exp->getDateFin(),
-            "idExpPro" => $exp->getId()
+            "sujetTag" => $exp->getSujetExperienceProfessionnel(),
+            "thematiqueTag" => $exp->getThematiqueExperienceProfessionnel(),
+            "tacheTag" => $exp->getTachesExperienceProfessionnel(),
+            "codePostalTag" => $exp->getCodePostalExperienceProfessionnel(),
+            "adresseTag" => $exp->getAdresseExperienceProfessionnel(),
+            "dateDebutTag" => $exp->getDateDebutExperienceProfessionnel(),
+            "dateFinTag" => $exp->getDateFinExperienceProfessionnel(),
+            "idExpPro" => $exp->getIdExperienceProfessionnel()
         );
         $pdoStatement->execute($values);
     }
 
     public static function supprimer(ExperienceProfessionnel $exp): void {
-        $sql = "DELETE FROM `ExperienceProfessionnel` WHERE idExperienceProfessionnel= :idTag;";
+        $sql = "DELETE FROM ExperienceProfessionnel WHERE idExperienceProfessionnel= :idTag;";
 
         $pdoStatement = Model::getPdo()->prepare($sql);
 
         $values = array(
-            "idTag" => $exp->getId()
+            "idTag" => $exp->getIdExperienceProfessionnel()
         );
 
         $pdoStatement->execute($values);

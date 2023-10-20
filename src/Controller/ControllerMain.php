@@ -77,22 +77,22 @@ class ControllerMain extends ControllerGenerique
                         for ($i = 0; $i < 11; $i++) {
 
                             if ($i == 1) {//TuteurProfessionnel
-                            TuteurProfessionnelRepository::save(new TuteurProfessionnel($column[79],$column[78],$column[77],
+                            (new TuteurProfessionnelRepository())->save(new TuteurProfessionnel($column[79],$column[78],$column[77],
                                 $column[81],$column[80]));
                         }
 
                         else if ($i == 2) {//Etudiants
-                            EtudiantRepository::save(new Etudiant($column[1],$column[2],
+                            (new EtudiantRepository())->save(new Etudiant($column[1],$column[2],
                                 $column[3], $column[6],$column[7],$column[5],$column[45]));
                         }
 
                         else if ($i == 3) {//Entreprises
-                            EntrepriseRepository::save(new Entreprise($column[55],$column[54],$column[59],
+                            (new EntrepriseRepository())->save(new Entreprise($column[55],$column[54],$column[59],
                                 $column[64],$column[66],$column[69]));
                         }
 
                         else if ($i == 4) {//Enseignants
-                            EnseignantRepository::save($column[31],$column[29],$column[30]);
+                            (new EnseignantRepository())->save(new Enseignant($column[31],$column[29],$column[30]));
                         }
 
                         else if ($i == 5) {//stages
@@ -101,7 +101,8 @@ class ControllerMain extends ControllerGenerique
                         }
 
                         else if ($i == 6) {//Inscriptions
-                            InscriptionRepository::save(new Inscription($column[1],$column[36],$column[10]));
+                            EtudiantRepository::inscrire((new EtudiantRepository())->get($column[1]), (int) $column[36], (int) $column[10]);
+
                         }
                     }
 

@@ -3,19 +3,18 @@ namespace App\SAE\Model\DataObject;
 
 abstract class ExperienceProfessionnel extends AbstractDataObject {
 
-    private string $id;
-    private string $sujet;
-    private string $thematique;
-    private string $taches;
-    private string $codePostal;
-    private string $adresse;
-    private string $dateDebut;
-    private string $dateFin;
+    private string $idExperienceProfessionnel;
+    private string $sujetExperienceProfessionnel;
+    private string $thematiqueExperienceProfessionnel;
+    private string $tachesExperienceProfessionnel;
+    private string $codePostalExperienceProfessionnel;
+    private string $adresseExperienceProfessionnel;
+    private string $dateDebutExperienceProfessionnel;
+    private string $dateFinExperienceProfessionnel;
+    private string $numEtudiant;
+    private string $mailEnseignant;
     private string $siret;
-    private string $etudiant;
-    private string $enseignant;
-    private string $tuteurProfessionnel;
-
+    private string $mailTuteurProfessionnel;
     private string $datePublication;
 
 
@@ -29,77 +28,77 @@ abstract class ExperienceProfessionnel extends AbstractDataObject {
           string $dateFin,
           string $siret
        ) {
-        $this->sujet = $sujet;
-        $this->thematique = $thematique;
-        $this->taches = $taches;
-        $this->codePostal = $codePostal;
-        $this->adresse = $adresse;
-        $this->dateDebut = $dateDebut;
-        $this->dateFin = $dateFin;
+        $this->sujetExperienceProfessionnel = $sujet;
+        $this->thematiqueExperienceProfessionnel = $thematique;
+        $this->tachesExperienceProfessionnel = $taches;
+        $this->codePostalExperienceProfessionnel = $codePostal;
+        $this->adresseExperienceProfessionnel = $adresse;
+        $this->dateDebutExperienceProfessionnel = $dateDebut;
+        $this->dateFinExperienceProfessionnel = $dateFin;
         $this->siret = $siret;
         }
-    public function getId(): string {
-        return $this->id;
+    public function getIdExperienceProfessionnel(): string {
+        return $this->idExperienceProfessionnel;
     }
 
-    public function setId(string $id): void {
-        $this->id = $id;
+    public function setIdExperienceProfessionnel(string $idExperienceProfessionnel): void {
+        $this->idExperienceProfessionnel = $idExperienceProfessionnel;
     }
 
-    public function getSujet(): string {
-        return $this->sujet;
+    public function getSujetExperienceProfessionnel(): string {
+        return $this->sujetExperienceProfessionnel;
     }
 
-    public function setSujet(string $sujet): void {
-        $this->sujet = $sujet;
+    public function setSujetExperienceProfessionnel(string $sujetExperienceProfessionnel): void {
+        $this->sujetExperienceProfessionnel = $sujetExperienceProfessionnel;
     }
 
-    public function getThematique(): string {
-        return $this->thematique;
+    public function getThematiqueExperienceProfessionnel(): string {
+        return $this->thematiqueExperienceProfessionnel;
     }
 
-    public function setThematique(string $thematique): void {
-        $this->thematique = $thematique;
+    public function setThematiqueExperienceProfessionnel(string $thematiqueExperienceProfessionnel): void {
+        $this->thematiqueExperienceProfessionnel = $thematiqueExperienceProfessionnel;
     }
 
-    public function getTaches(): string {
-        return $this->taches;
+    public function getTachesExperienceProfessionnel(): string {
+        return $this->tachesExperienceProfessionnel;
     }
 
-    public function setTaches(string $taches): void {
-        $this->taches = $taches;
+    public function setTachesExperienceProfessionnel(string $tachesExperienceProfessionnel): void {
+        $this->tachesExperienceProfessionnel = $tachesExperienceProfessionnel;
     }
 
-    public function getCodePostal(): string {
-        return $this->codePostal;
+    public function getCodePostalExperienceProfessionnel(): string {
+        return $this->codePostalExperienceProfessionnel;
     }
 
-    public function setCodePostal(string $codePostal): void {
-        $this->codePostal = $codePostal;
+    public function setCodePostalExperienceProfessionnel(string $codePostalExperienceProfessionnel): void {
+        $this->codePostalExperienceProfessionnel = $codePostalExperienceProfessionnel;
     }
 
-    public function getAdresse(): string {
-        return $this->adresse;
+    public function getAdresseExperienceProfessionnel(): string {
+        return $this->adresseExperienceProfessionnel;
     }
 
-    public function setAdresse(string $adresse): void {
-        $this->adresse = $adresse;
+    public function setAdresseExperienceProfessionnel(string $adresseExperienceProfessionnel): void {
+        $this->adresseExperienceProfessionnel = $adresseExperienceProfessionnel;
     }
 
-    public function getDateDebut(): string {
-        return $this->dateDebut;
+    public function getDateDebutExperienceProfessionnel(): string {
+        return $this->dateDebutExperienceProfessionnel;
     }
 
-    public function setDateDebut(string $dateDebut): void {
-        $this->dateDebut = $dateDebut;
+    public function setDateDebutExperienceProfessionnel(string $dateDebutExperienceProfessionnel): void {
+        $this->dateDebutExperienceProfessionnel = $dateDebutExperienceProfessionnel;
     }
 
-    public function getDateFin(): string {
-        return $this->dateFin;
+    public function getDateFinExperienceProfessionnel(): string {
+        return $this->dateFinExperienceProfessionnel;
     }
 
-    public function setDateFin(string $dateFin): void {
-        $this->dateFin = $dateFin;
+    public function setDateFinExperienceProfessionnel(string $dateFinExperienceProfessionnel): void {
+        $this->dateFinExperienceProfessionnel = $dateFinExperienceProfessionnel;
     }
 
     public function getSiret(): string {
@@ -110,28 +109,28 @@ abstract class ExperienceProfessionnel extends AbstractDataObject {
         $this->siret = $siret;
     }
 
-    public function getEtudiant(): string {
-        return $this->etudiant;
+    public function getNumEtudiant(): string {
+        return $this->numEtudiant;
     }
 
-    public function setEtudiant(string $etudiant): void {
-        $this->etudiant = $etudiant;
+    public function setNumEtudiant(string $numEtudiant): void {
+        $this->numEtudiant = $numEtudiant;
     }
 
-    public function getEnseignant(): string {
-        return $this->enseignant;
+    public function getMailEnseignant(): string {
+        return $this->mailEnseignant;
     }
 
-    public function setEnseignant(string $enseignant): void {
-        $this->enseignant = $enseignant;
+    public function setMailEnseignant(string $mailEnseignant): void {
+        $this->mailEnseignant = $mailEnseignant;
     }
 
-    public function getTuteurProfessionnel(): string {
-        return $this->tuteurProfessionnel;
+    public function getMailTuteurProfessionnel(): string {
+        return $this->mailTuteurProfessionnel;
     }
 
-    public function setTuteurProfessionnel(string $tuteurProfessionnel): void {
-        $this->tuteurProfessionnel = $tuteurProfessionnel;
+    public function setMailTuteurProfessionnel(string $mailTuteurProfessionnel): void {
+        $this->mailTuteurProfessionnel = $mailTuteurProfessionnel;
     }
 
     public function getDatePublication(): string {
@@ -140,6 +139,24 @@ abstract class ExperienceProfessionnel extends AbstractDataObject {
 
     public function setDatePublication(string $datePublication): void {
         $this->datePublication = $datePublication;
+    }
+
+    public function formatTableau(): array{
+        return array(
+            "idExperienceProfessionnelTag" => $this->idExperienceProfessionnel,
+            "sujetExperienceProfessionnelTag" => $this->sujetExperienceProfessionnel,
+            "thematiqueExperienceProfessionnelTag" => $this->thematiqueExperienceProfessionnel,
+            "tachesExperienceProfessionnelTag" => $this->tachesExperienceProfessionnel,
+            "codePostalExperienceProfessionnelTag" => $this->codePostalExperienceProfessionnel,
+            "adresseExperienceProfessionnelTag" => $this->adresseExperienceProfessionnel,
+            "dateDebutExperienceProfessionnelTag" => $this->dateDebutExperienceProfessionnel,
+            "dateFinExperienceProfessionnelTag" => $this->dateFinExperienceProfessionnel,
+            "siretTag" => $this->siret,
+            "numEtudiantTag" => $this->numEtudiant,
+            "mailEnseignantTag" => $this->mailEnseignant,
+            "mailTuteurProfessionnelTag" => $this->mailTuteurProfessionnel,
+            "datePublicationTag" => $this->datePublication
+        );
     }
 
 }

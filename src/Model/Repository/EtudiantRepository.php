@@ -4,45 +4,42 @@ namespace App\SAE\Model\Repository;
 
 use App\SAE\Model\DataObject\Etudiant;
 
-class EtudiantRepository extends AbstractRepository
-{
+class EtudiantRepository extends AbstractRepository {
 
-    public static function save(Etudiant $et): bool
-    {
-        try {
-            $sql = "INSERT into Etudiants 
-                             values ( :numEtu, :nomEtu,:prenomEtu,
-                                     :mailPersoEtu,:mailUnivEtu, :telephoneEtu, :codePostalEtu)";
-
-            $pdoStatement = Model::getPdo()->prepare($sql);
+    public static function inscrire(Etudiant $etudiant, int $idAnneeUniversitaire, int $codeDepartement): bool{
+        try{
+            $pdo = Model::getPdo();
+            $requestStatement = $pdo->prepare("INSERT INTO Inscriptions
+                                                 VALUES(:numEtudiantTag, :idAnneeUniversitaireTag, :codeDepartementTag)");
             $values = array(
-                "numEtu" => $et->getNumEtudiant(),
-                "nomEtu" => $et->getNomEtudiant(),
-                "prenomEtu" => $et->getPrenomEtudiant(),
-                "mailPersoEtu" => $et->getMailPersoEtudiant(),
-                "mailUnivEtu" => $et->getMailUniversitaireEtuidant(),
-                "telephoneEtu" => $et->getTelephoneEtudiant(),
-                "codePostalEtu" => $et->getCodePostalEtudiant());
-            $pdoStatement->execute($values);
-
-
+                "numEtudiantTag" => $etudiant->getNumEtudiant(),
+                "idAnneeUniversitaireTag" => $idAnneeUniversitaire,
+                "codeDepartementTag" => $codeDepartement
+            );
+            $requestStatement->execute($values);
             return true;
-        } catch (\PDOException $e) {
+        }catch (\PDOException){
             return false;
         }
     }
 
-
-    protected function getNomTable(): string
-    {
-        return "Etudiant";
-    }
-
     protected function construireDepuisTableau(array $EtudiantFormatTableau): Etudiant
     {
-        $etudiant = new Etudiant($EtudiantFormatTableau["mailEtudiant"], $EtudiantFormatTableau["prenomEtudiant"], $EtudiantFormatTableau["nomEtudiant"],
-            $EtudiantFormatTableau["mailPersoEtudiant"], $EtudiantFormatTableau["mailUniversitaireEtuidant"], $EtudiantFormatTableau["telephoneEtudiant"],
+        $etudiant = new Etudiant($EtudiantFormatTableau["numEtudiant"], $EtudiantFormatTableau["prenomEtudiant"], $EtudiantFormatTableau["nomEtudiant"],
+            $EtudiantFormatTableau["mailPersoEtudiant"], $EtudiantFormatTableau["mailUniversitaireEtudiant"], $EtudiantFormatTableau["telephoneEtudiant"],
             $EtudiantFormatTableau["codePostalEtudiant"]);
         return $etudiant;
+    }
+
+    protected function getNomTable(): string {
+        return "Etudiants";
+    }
+
+    protected function getNomClePrimaire(): string {
+        return "numEtudiant";
+    }
+
+    protected function getNomsColonnes(): array {
+        return array("numEtudiant", "nomEtudiant", "prenomEtudiant", "mailPersoEtudiant", "mailUniversitaireEtudiant", "telephoneEtudiant", "codePostalEtudiant");
     }
 }
