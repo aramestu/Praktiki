@@ -5,7 +5,7 @@
     <title><?= $pagetitle ?></title>
     <link rel="icon" href="assets/images/favicon.ico">
 
- <link id="theme" rel="stylesheet" type="text/css" href="assets/css/mainIUT.css" />
+    <link id="theme" rel="stylesheet" type="text/css" href="assets/css/mainIUT.css" />
     <link rel="stylesheet" href="assets/css/charte-graphique-UM.css">
 
     <script src="assets/javascript/navbar.js"></script>
