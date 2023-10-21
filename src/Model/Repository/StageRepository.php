@@ -171,16 +171,24 @@ class StageRepository{
         $sql = "SELECT *
                 FROM ExperienceProfessionnel e
                 JOIN Stages s ON s.idStage = e.idExperienceProfessionnel
+                JOIN Entreprises en ON en.siret = e.siret
                 WHERE numEtudiant IS NULL
-                AND (sujetExperienceProfessionnel LIKE '%$keywords%'
-                OR thematiqueExperienceProfessionnel LIKE '%$keywords%'
-                OR tachesExperienceProfessionnel LIKE '%$keywords%'
-                OR codePostalExperienceProfessionnel LIKE '%$keywords%'
-                OR adresseExperienceProfessionnel LIKE '%$keywords%'
-                OR siret LIKE '%$keywords%')
+                AND en.estValide = true
+                AND (sujetExperienceProfessionnel LIKE :keywordsTag
+                OR thematiqueExperienceProfessionnel LIKE :keywordsTag
+                OR tachesExperienceProfessionnel LIKE :keywordsTag
+                OR codePostalExperienceProfessionnel LIKE :keywordsTag
+                OR adresseExperienceProfessionnel LIKE :keywordsTag
+                OR e.siret LIKE :keywordsTag)
                 ORDER BY datePublication";
 
-        $requestStatement = Model::getPdo()->query($sql);
+        $requestStatement = Model::getPdo()->prepare($sql);
+
+        $values = array(
+            "keywordsTag" => '%' . $keywords . '%'
+        );
+
+        $requestStatement->execute($values);
 
         $AllStage = [];
         foreach ($requestStatement as $stageTab){
