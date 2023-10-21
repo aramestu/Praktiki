@@ -16,4 +16,9 @@ class Alternance extends ExperienceProfessionnel
 
         ));
     }
+
+    public function getNomExperienceProfessionnel()
+    {
+        return "Alternance";
+    }
 }

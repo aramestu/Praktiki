@@ -180,6 +180,5 @@ class AlternanceRepository
             $AllAlternance[] = self::construireDepuisTableau($alternanceTab);
         }
         return $AllAlternance;
-
     }
 }

@@ -159,5 +159,5 @@ abstract class ExperienceProfessionnel extends AbstractDataObject {
         );
     }
 
+    protected abstract function getNomExperienceProfessionnel();
 }
-?>

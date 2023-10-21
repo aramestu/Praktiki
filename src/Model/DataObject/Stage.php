@@ -23,4 +23,9 @@ class Stage extends ExperienceProfessionnel {
             "gratificationStageTag" => $this->gratificationStage
         ));
     }
+
+    public function getNomExperienceProfessionnel()
+    {
+        return "Stage";
+    }
 }

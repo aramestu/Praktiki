@@ -14,6 +14,7 @@
     <div class="container" id="option">
         <p><a href=""><button type="button" class="btn btn-primary">Modifer Profil</button></a></p>
         <p><a href=""><button type="button" class="btn btn-primary">Liste des offres en Attentes</button></a></p>
+        <p><a href=""><button type="button" class="btn btn-primary">Liste des entreprises en Attentes</button></a></p>
         <p><a href="frontController.php?action=getExpProByDefault&controller=ExpPro"><button type="button" class="btn btn-primary">Liste des offres</button></a></p>
         <p><a href=""><button type="button" class="btn btn-primary">Liste des Entreprise</button></a></p>
         <p><a href="frontController.php?action=import"><button type="button" class="btn btn-primary">Importation des données</button></a></p>
