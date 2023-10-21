@@ -9,13 +9,16 @@ class Entreprise extends AbstractDataObject {
     private string $telephoneEntreprise;
     private string $siteWebEntreprise;
 
-    public function __construct(string $siret, string $nom, string $codePostal, string $effectif, string $telephone, string $siteWeb){
+    private string $estValide;
+
+    public function __construct(string $siret, string $nom, string $codePostal, string $effectif, string $telephone, string $siteWeb, bool $estValide){
         $this->siret = $siret;
         $this->nomEntreprise = $nom;
         $this->codePostalEntreprise = $codePostal;
         $this->effectifEntreprise = $effectif;
         $this->telephoneEntreprise = $telephone;
         $this->siteWebEntreprise = $siteWeb;
+        $this->estValide = $estValide;
     }
 
     public function getSiret(): string{
@@ -66,6 +69,16 @@ class Entreprise extends AbstractDataObject {
         $this->siteWebEntreprise = $siteWebEntreprise;
     }
 
+    public function getEstValide(): string
+    {
+        return $this->estValide;
+    }
+
+    public function setEstValide(string $estValide): void
+    {
+        $this->estValide = $estValide;
+    }
+
     public function formatTableau(): array{
         return array(
             "siretTag" => $this->siret,
@@ -73,7 +86,8 @@ class Entreprise extends AbstractDataObject {
             "codePostalEntrepriseTag" => $this->codePostalEntreprise,
             "effectifEntrepriseTag" => $this->effectifEntreprise,
             "telephoneEntrepriseTag" => $this->telephoneEntreprise,
-            "siteWebEntrepriseTag" => $this->siteWebEntreprise
+            "siteWebEntrepriseTag" => $this->siteWebEntreprise,
+            "estValideTag" => $this->estValide
         );
     }
 }

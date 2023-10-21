@@ -5,7 +5,7 @@ use App\SAE\Model\DataObject\Entreprise;
 class EntrepriseRepository extends AbstractRepository {
 
     protected function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise{
-        $entreprise = new Entreprise($entrepriseFormatTableau["siret"],$entrepriseFormatTableau["nomEntreprise"], $entrepriseFormatTableau["codePostalEntreprise"], $entrepriseFormatTableau["effectifEntreprise"], $entrepriseFormatTableau["telephoneEntreprise"], $entrepriseFormatTableau["siteWebEntreprise"]);
+        $entreprise = new Entreprise($entrepriseFormatTableau["siret"],$entrepriseFormatTableau["nomEntreprise"], $entrepriseFormatTableau["codePostalEntreprise"], $entrepriseFormatTableau["effectifEntreprise"], $entrepriseFormatTableau["telephoneEntreprise"], $entrepriseFormatTableau["siteWebEntreprise"], $entrepriseFormatTableau["estValide"]);
         return $entreprise;
     }
 
@@ -18,6 +18,6 @@ class EntrepriseRepository extends AbstractRepository {
     }
 
     protected function getNomsColonnes(): array {
-        return array("siret", "nomEntreprise", "codePostalEntreprise", "effectifEntreprise", "telephoneEntreprise", "siteWebEntreprise");
+        return array("siret", "nomEntreprise", "codePostalEntreprise", "effectifEntreprise", "telephoneEntreprise", "siteWebEntreprise", "estValide");
     }
 }

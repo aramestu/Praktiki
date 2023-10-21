@@ -19,7 +19,7 @@ use App\SAE\Model\Repository\StageRepository;
         <div class="company">
             <h2><?php
                 $entreprise = (new EntrepriseRepository())->get($expPro->getSiret());
-                echo(htmlspecialchars($entreprise->getNom()));
+                echo(htmlspecialchars($entreprise->getNomEntreprise()));
                 ?></h2>
             <label><?= htmlspecialchars($expPro->getAdresseExperienceProfessionnel())?> / <?= htmlspecialchars($expPro->getCodePostalExperienceProfessionnel())?></label>
         </div>
@@ -27,9 +27,9 @@ use App\SAE\Model\Repository\StageRepository;
     </div>
     <ul>
         <li>Date de création de l'offre</li>
-        <li>Effectifs : <?php echo(htmlspecialchars($entreprise->getEffectif())); ?></li>
-        <li>Téléphone : <?php echo(htmlspecialchars($entreprise->getTelephone())); ?></li>
-        <li><a href="https://<?php echo(htmlspecialchars($entreprise->getSiteWeb())); ?>" class="link">Site web</a></li>
+        <li>Effectifs : <?php echo(htmlspecialchars($entreprise->getEffectifEntreprise())); ?></li>
+        <li>Téléphone : <?php echo(htmlspecialchars($entreprise->getEffectifEntreprise())); ?></li>
+        <li><a href="https://<?php echo(htmlspecialchars($entreprise->getSiteWebEntreprise())); ?>" class="link">Site web</a></li>
     </ul>
     <div class="text">
         <p>Sujet : <?= htmlspecialchars($expPro->getSujetExperienceProfessionnel())?></p>

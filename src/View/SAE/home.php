@@ -18,7 +18,7 @@
                     <a href="frontController.php?action=panel"><button type="button" class="btn btn-primary">Panel admin</button></a>
                 </p>
                 <p>
-                    <a href="frontController.php?controller=ExpPro&action=afficherOffreStalternanceTODELETE&experiencePro= 4"><button type="button" class="btn btn-primary">Démo offre mixte stage/alternance</button></a>
+                    <a href="frontController.php?controller=ExpPro&action=afficherOffreStalternanceTODELETE&experiencePro=4"><button type="button" class="btn btn-primary">Démo offre mixte stage/alternance</button></a>
                 </p>
 
     </div>
