@@ -89,10 +89,22 @@ input[type="submit"]{
     opacity: 0.6;
 }
 
-checkbox{
+input[type="checkbox"]{
     background: var(--white);
     filter: none;
-  }
+    width: 18px;
+    height: 18px;
+}
+
+.button-checkbox{
+    justify-content: start;
+    padding-left: 10%;
+
+}
+
+.button-checkbox > input[type="checkbox"] {
+    margin-right: 10px;
+}
 
 
 /*---START SIDE FILTER---*/
