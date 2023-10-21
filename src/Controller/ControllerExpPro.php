@@ -81,18 +81,18 @@ class ControllerExpPro extends ControllerGenerique{
     {
         $msg = "Offre modifiée avec succés !";
         $tab = [
-            "sujet" => $_POST["sujet"],
-            "thematique" => $_POST["thematique"],
-            "taches" => $_POST["taches"],
-            "codePostal" => $_POST["codePostal"],
-            "adresse" => $_POST["adressePostale"],
-            "dateDebut" => $_POST["dateDebut"],
-            "dateFin" => $_POST["dateFin"],
-            "siret" => $_POST["siret"],
+            "sujetExperienceProfessionnel" => $_POST["sujet"],
+            "thematiqueExperienceProfessionnel" => $_POST["thematique"],
+            "tachesExperienceProfessionnel" => $_POST["taches"],
+            "codePostalExperienceProfessionnel" => $_POST["codePostal"],
+            "adresseExperienceProfessionnel" => $_POST["adressePostale"],
+            "dateDebutExperienceProfessionnel" => $_POST["dateDebut"],
+            "dateFinExperienceProfessionnel" => $_POST["dateFin"],
+            "siret" => $_POST["siret"]
         ];
         // Si c'est un stage
         if ($_POST["typeOffre"] == "stage") {
-            $tab["gratification"] = $_POST["gratification"]; // Un stage a une gratification à renseigner en plus
+            $tab["gratificationStage"] = $_POST["gratification"]; // Un stage a une gratification à renseigner en plus
             $tab["idStage"] = $_POST["id"];
             $stage = StageRepository::construireDepuisTableau($tab);
             StageRepository::mettreAJour($stage);
@@ -208,28 +208,28 @@ class ControllerExpPro extends ControllerGenerique{
         $msg = "Offre crée avec succés !";
         if ($_POST["typeOffre"] == "stage") {
             $stage = StageRepository::construireDepuisTableau([
-                "sujet" => $_POST["sujet"],
-                "thematique" => $_POST["thematique"],
-                "taches" => $_POST["taches"],
-                "codePostal" => $_POST["codePostal"],
-                "adresse" => $_POST["adressePostale"],
-                "dateDebut" => $_POST["dateDebut"],
-                "dateFin" => $_POST["dateFin"],
+                "sujetExperienceProfessionnel" => $_POST["sujet"],
+                "thematiqueExperienceProfessionnel" => $_POST["thematique"],
+                "tachesExperienceProfessionnel" => $_POST["taches"],
+                "codePostalExperienceProfessionnel" => $_POST["codePostal"],
+                "adresseExperienceProfessionnel" => $_POST["adressePostale"],
+                "dateDebutExperienceProfessionnel" => $_POST["dateDebut"],
+                "dateFinExperienceProfessionnel" => $_POST["dateFin"],
                 "siret" => $_POST["siret"],
-                "gratification" => $_POST["gratification"]
+                "gratificationStage" => $_POST["gratification"]
             ]);
             StageRepository::save($stage);
             self::afficherVueEndOffer($msg); // Redirection vers une page
         } else if ($_POST["typeOffre"] == "alternance") {
             $alternance = AlternanceRepository::construireDepuisTableau([
-                "sujet" => $_POST["sujet"],
-                "thematique" => $_POST["thematique"],
-                "taches" => $_POST["taches"],
-                "codePostal" => $_POST["codePostal"],
-                "adresse" => $_POST["adressePostale"],
-                "dateDebut" => $_POST["dateDebut"],
-                "dateFin" => $_POST["dateFin"],
-                "siret" => $_POST["siret"],
+                "sujetExperienceProfessionnel" => $_POST["sujet"],
+                "thematiqueExperienceProfessionnel" => $_POST["thematique"],
+                "tachesExperienceProfessionnel" => $_POST["taches"],
+                "codePostalExperienceProfessionnel" => $_POST["codePostal"],
+                "adresseExperienceProfessionnel" => $_POST["adressePostale"],
+                "dateDebutExperienceProfessionnel" => $_POST["dateDebut"],
+                "dateFinExperienceProfessionnel" => $_POST["dateFin"],
+                "siret" => $_POST["siret"]
             ]);
             AlternanceRepository::save($alternance);
             self::afficherVueEndOffer($msg); // Redirection vers une page
