@@ -103,9 +103,15 @@ class ControllerExpPro extends ControllerGenerique{
             $alternance = AlternanceRepository::construireDepuisTableau($tab);
             AlternanceRepository::mettreAJour($alternance);
             self::afficherVueEndOffer($msg); // Redirection vers une page
-        } // Si ce n'est aucun des 2 alors ce n'est pas normal
+        } // Si c'est un stalternance
+        elseif ($_POST["typeOffre"] == "stalternance") {
+                    $tab["idExpPro"] = $_POST["id"];
+                    $stalternance = ExperienceProfessionnelRepository::construireDepuisTableau($tab);
+                    ExperienceProfessionnelRepository::mettreAJour($stalternance);
+                    self::afficherVueEndOffer($msg); // Redirection vers une page
+                } // Si ce n'est aucun des 3 alors ce n'est pas normal
         else {
-            ControllerGenerique::error("Ce type d'offer n'existe pas");
+            ControllerGenerique::error("Ce type d'offre n'existe pas");
         }
     }
 
@@ -145,8 +151,17 @@ class ControllerExpPro extends ControllerGenerique{
                     "experiencePro" => $alternance
                 ]);
             } else {
-                $messageErreur = 'Cette offer n existe pas !';
-                ControllerGenerique::error($messageErreur);
+                $stalternance = ExperienceProfessionnelRepository::get($idExpPro);
+                if (!is_null($stalternance)) {
+                    ControllerGenerique::afficheVue('view.php', [
+                        "pagetitle" => $pagetitle,
+                        "cheminVueBody" => $cheminVueBody,
+                        "experiencePro" => $stalternance
+                    ]);
+                } else {
+                    $messageErreur = 'Cette offre n existe pas !';
+                    ControllerGenerique::error($messageErreur);
+                }
             }
         }
     }
@@ -172,8 +187,17 @@ class ControllerExpPro extends ControllerGenerique{
                     "expPro" => $alternance
                 ]);
             } else {
-                $messageErreur = 'Cette offer n existe pas !';
-                ControllerGenerique::error($messageErreur);
+                $stalternance = ExperienceProfessionnelRepository::get($idExpPro);
+                if (!is_null($stalternance)) {
+                    ControllerGenerique::afficheVue('view.php', [
+                        "pagetitle" => "Affichage offer",
+                        "cheminVueBody" => "offer/offer.php",
+                        "expPro" => $stalternance
+                    ]);
+                } else {
+                    $messageErreur = 'Cette offre n existe pas !';
+                    ControllerGenerique::error($messageErreur);
+                }
             }
         }
     }
@@ -197,8 +221,17 @@ class ControllerExpPro extends ControllerGenerique{
                     "expPro" => $alternance
                 ]);
             } else {
-                $messageErreur = 'Cette offer n existe pas !';
-                ControllerGenerique::error($messageErreur);
+                $stalternance = ExperienceProfessionnelRepository::get($idExpPro);
+                if (!is_null($stalternance)) {
+                    ControllerGenerique::afficheVue('view.php', [
+                        "pagetitle" => "Affichage offer",
+                        "cheminVueBody" => "offer/offerTODELETE.php",
+                        "expPro" => $stalternance
+                    ]);
+                } else {
+                    $messageErreur = 'Cette offre n existe pas !';
+                    ControllerGenerique::error($messageErreur);
+                }
             }
         }
     }
@@ -233,6 +266,21 @@ class ControllerExpPro extends ControllerGenerique{
             ]);
             AlternanceRepository::save($alternance);
             self::afficherVueEndOffer($msg); // Redirection vers une page
+        } else if ($_POST["typeOffre"] == "stalternance") {
+            $stalternance = ExperienceProfessionnelRepository::construireDepuisTableau([
+                "sujetExperienceProfessionnel" => $_POST["sujet"],
+                "thematiqueExperienceProfessionnel" => $_POST["thematique"],
+                "tachesExperienceProfessionnel" => $_POST["taches"],
+                "codePostalExperienceProfessionnel" => $_POST["codePostal"],
+                "adresseExperienceProfessionnel" => $_POST["adressePostale"],
+                "dateDebutExperienceProfessionnel" => $_POST["dateDebut"],
+                "dateFinExperienceProfessionnel" => $_POST["dateFin"],
+                "siret" => $_POST["siret"]
+            ]);
+            ExperienceProfessionnelRepository::save($stalternance);
+            self::afficherVueEndOffer($msg); // Redirection vers une page
+        } else {
+            ControllerGenerique::error("Ce type d'offre n'existe pas");
         }
     }
 
@@ -250,7 +298,14 @@ class ControllerExpPro extends ControllerGenerique{
                 AlternanceRepository::supprimer($alternance);
                 self::afficherVueEndOffer("Alternance supprimée avec succès");
             } else {
-                ControllerGenerique::error("L'offer à supprimer n'existe pas");
+                $stalternance = ExperienceProfessionnelRepository::get($idExpPro);
+                if (!is_null($stalternance)) {
+                    ExperienceProfessionnelRepository::supprimer($stalternance);
+                    self::afficherVueEndOffer("Stalternance supprimée avec succès");
+                } else {
+                    $messageErreur = 'Cette offre n existe pas !';
+                    ControllerGenerique::error($messageErreur);
+                }
             }
         }
     }
