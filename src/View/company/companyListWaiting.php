@@ -6,7 +6,7 @@
             </h2>
         </div>
     </div>
-    <div class="subContainer">
+    <div id="mainContainer" class="subContainer">
         <?php
             use App\SAE\Model\Repository\EntrepriseRepository;
             $listEntreprises = EntrepriseRepository::getEntrepriseEnAttente();

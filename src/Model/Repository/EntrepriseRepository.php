@@ -21,13 +21,18 @@ class EntrepriseRepository extends AbstractRepository {
         return array("siret", "nomEntreprise", "codePostalEntreprise", "effectifEntreprise", "telephoneEntreprise", "siteWebEntreprise", "estValide");
     }
 
-    /* Retourne la liste des entreprises qui n'ont pas encore été validé */
-    public static function getEntrepriseEnAttente(): array {
+    private static function getEntrepriseAvecEtat(bool $etat){
         $sql = "SELECT *
                 FROM Entreprises e
-                WHERE e.estValide = false";
+                WHERE e.estValide = :etatTag";
 
-        $request = Model::getPdo()->query($sql);
+        $request = Model::getPdo()->prepare($sql);
+
+        $values = array(
+            "etatTag" => $etat
+        );
+
+        $request->execute($values);
 
         $entrepriseRepository = new EntrepriseRepository();
         $objects = [];
@@ -37,35 +42,44 @@ class EntrepriseRepository extends AbstractRepository {
         return $objects;
     }
 
+    /* Retourne la liste des entreprises qui n'ont pas encore été validé */
+    public static function getEntrepriseEnAttente(): array {
+        return self::getEntrepriseAvecEtat(false);
+    }
+
+    /* Retourne la liste des entreprises qui ont été validée */
+    public static function getEntrepriseValide(): array {
+        return self::getEntrepriseAvecEtat(true);
+    }
+
     /* Modifie l'état d'une entreprise, cad qu'elle peut être :
     *   - accepté ou validé (true/1)
-     *  - en attente (false/0)
-     *  - refusé (null)
-     *  TEMPORAIRE, NULL ET FALSE SERONT INVERSES POUR PLUS LOGIQUE
-    */
-    private static function changerEtatEntreprise(string $siret, bool $etat = null){
+     *  - en attente (false/0) */
+    public static function accepter(string $siret){
         $sql = "UPDATE Entreprises
-                SET estValide = :etatTag
+                SET estValide = true
                 WHERE siret= :siretTag";
 
         $requete = Model::getPdo()->prepare($sql);
 
         $values = array(
-            "etatTag"=> $etat,
             "siretTag" => $siret
         );
 
         $requete->execute($values);
     }
 
-    /* Change l'état d'une entreprise lorsqu'elle a été validée */
-    public static function accepter(string $siret){
-        self::changerEtatEntreprise($siret, true);
-    }
-
     /* Change l'état d'une entreprise lorsqu'elle a été refusée */
     public static function refuser(string $siret){
-        self::changerEtatEntreprise($siret);
+        $sql = "DELETE FROM Entreprises WHERE siret= :siretTag";
+
+        $requete = Model::getPdo()->prepare($sql);
+
+        $values = array(
+            "siretTag" => $siret
+        );
+
+        $requete->execute($values);
     }
 
 

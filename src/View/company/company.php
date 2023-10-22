@@ -28,6 +28,6 @@ $siret = $entreprise->getSiret();
             Site web : <a href="https://<?php echo $siteWeb; ?>"> <?php echo $siteWeb;?> </a>
         </p>
     </div>
-    <a href="frontController.php?controller=Entreprise&action=accepter&siret=<?php echo $siret?>"><button> Accepter </button> </a>
+    <?php if(! $entreprise->getEstValide()) echo '<a href="frontController.php?controller=Entreprise&action=accepter&siret=<?php echo $siret?>"><button> Accepter </button> </a>'; ?>
     <a href="frontController.php?controller=Entreprise&action=refuser&siret=<?php echo $siret?>"><button> Refuser </button> </a>
 </div>
