@@ -315,7 +315,7 @@ class ControllerExpPro extends ControllerGenerique{
         ControllerGenerique::afficheVue(
             'view.php',
             [
-                'pagetitle' => 'Créer une offer',
+                'pagetitle' => 'Créer une offre',
                 'cheminVueBody' => 'offer/createOffer.php',
             ]
         );

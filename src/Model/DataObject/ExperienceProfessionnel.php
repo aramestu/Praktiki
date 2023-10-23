@@ -1,7 +1,7 @@
 <?php
 namespace App\SAE\Model\DataObject;
 
-abstract class ExperienceProfessionnel extends AbstractDataObject {
+class ExperienceProfessionnel extends AbstractDataObject {
 
     private string $idExperienceProfessionnel;
     private string $sujetExperienceProfessionnel;
@@ -159,5 +159,7 @@ abstract class ExperienceProfessionnel extends AbstractDataObject {
         );
     }
 
-    protected abstract function getNomExperienceProfessionnel();
+    public function getNomExperienceProfessionnel(){
+             return "stalernance";
+         }
 }

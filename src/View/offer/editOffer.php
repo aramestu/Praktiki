@@ -8,6 +8,8 @@ $nomExperience = 'alternance';
 if(is_a($expPro, 'App\SAE\Model\DataObject\Stage')){ // Si c'est un stage
     $nomExperience = 'stage';
     $gratification = $expPro->getGratificationStage();
+}else{//si c'est une stalerternance
+    $nomExperience = 'Non définie';
 }
 ?>
 <!DOCTYPE html>

@@ -33,6 +33,36 @@ class ExperienceProfessionnelRepository {
         }
     }
 
+    public static function construireDepuisTableau($stalternanceFormatTableau): ExperienceProfessionnel
+    {
+        $exp = new ExperienceProfessionnel($stalternanceFormatTableau["sujetExperienceProfessionnel"],$stalternanceFormatTableau["thematiqueExperienceProfessionnel"],
+            $stalternanceFormatTableau["tachesExperienceProfessionnel"],$stalternanceFormatTableau["codePostalExperienceProfessionnel"],
+            $stalternanceFormatTableau["adresseExperienceProfessionnel"],$stalternanceFormatTableau["dateDebutExperienceProfessionnel"],
+            $stalternanceFormatTableau["dateFinExperienceProfessionnel"],$stalternanceFormatTableau["siret"]);
+            if(array_key_exists("idExperienceProfessionnel", $stalternanceFormatTableau)){
+                $exp->setIdExperienceProfessionnel($stalternanceFormatTableau["idExperienceProfessionnel"]);
+            }
+            if(array_key_exists("numEtudiant", $stalternanceFormatTableau)){
+                if(!empty($stalternanceFormatTableau["numEtudiant"])){
+                    $exp->setNumEtudiant($stalternanceFormatTableau["numEtudiant"]);
+                }
+            }
+            if(array_key_exists("mailEnseignant", $stalternanceFormatTableau)){
+                 if(!empty($stalternanceFormatTableau["mailEnseignant"])){
+                    $stage->setMailEnseignant($stalternanceFormatTableau["mailEnseignant"]);
+                 }
+            }
+            if(array_key_exists("mailTuteurProfessionnel", $stalternanceFormatTableau)){
+                 if(!empty($stalternanceFormatTableau["mailTuteurProfessionnel"])){
+                    $stage->setMailTuteurProfessionnel($stalternanceFormatTableau["mailTuteurProfessionnel"]);
+                 }
+            }
+            if(array_key_exists("datePublication", $stalternanceFormatTableau)){
+                $exp->setDatePublication($stalternanceFormatTableau["datePublication"]);
+            }
+            return $exp;
+    }
+
     public static function getAll() : array{
         $alternance = AlternanceRepository::getAll();
         $stage = StageRepository::getAll();
@@ -43,6 +73,7 @@ class ExperienceProfessionnelRepository {
     {
         $tabStages = StageRepository::filtre($dateDebut, $dateFin, $optionTri, $codePostal, $datePublication);
         $tabAlternance = AlternanceRepository::filtre($dateDebut, $dateFin, $optionTri, $codePostal, $datePublication);
+        //$tabStalternance =
         if (isset($stage)){
             return $tabStages;
         }
@@ -121,6 +152,31 @@ class ExperienceProfessionnelRepository {
     public static function search(string $keywords){
         $stage = StageRepository::search($keywords);
         $alternance = AlternanceRepository::search($keywords);
-        return self::sort($stage, $alternance, "datePublication");
+        $sql = "SELECT *
+                        FROM ExperienceProfessionnel e
+                        JOIN Entreprises en ON en.siret = e.siret
+                        WHERE numEtudiant IS NULL
+                        AND en.estValide = true
+                        AND (sujetExperienceProfessionnel LIKE :keywordsTag
+                        OR thematiqueExperienceProfessionnel LIKE :keywordsTag
+                        OR tachesExperienceProfessionnel LIKE :keywordsTag
+                        OR codePostalExperienceProfessionnel LIKE :keywordsTag
+                        OR adresseExperienceProfessionnel LIKE :keywordsTag
+                        OR e.siret LIKE :keywordsTag)
+                        ORDER BY datePublication";
+
+                $requestStatement = Model::getPdo()->prepare($sql);
+
+                $values = array(
+                    "keywordsTag" => '%' . $keywords . '%'
+                );
+
+                $requestStatement->execute($values);
+
+                $stalternance = [];
+                foreach ($requestStatement as $stalternanceTab){
+                    $stalternance[] = self::construireDepuisTableau($stalternanceTab);
+                }
+        return self::sort($alternance, $stalternance, "datePublication");
     }
 }

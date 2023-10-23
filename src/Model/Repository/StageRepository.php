@@ -36,7 +36,6 @@ class StageRepository{
             if(!empty($stageFormatTableau["mailEnseignant"])){
                 $stage->setMailEnseignant($stageFormatTableau["mailEnseignant"]);
             }
-
         }
         if(array_key_exists("mailTuteurProfessionnel", $stageFormatTableau)){
             if(!empty($stageFormatTableau["mailTuteurProfessionnel"])){

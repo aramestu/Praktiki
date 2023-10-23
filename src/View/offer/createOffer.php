@@ -6,7 +6,6 @@
     <title>Création d'Offre</title>
     <link rel="stylesheet" href="assets/css/connect.css">
 
-    <!--<script src="assets/javascript/passwordStrength.js"></script> -->
     <script src="assets/javascript/showHideToggle.js"></script>
 
 </head>
@@ -18,6 +17,7 @@
             <p>
                 <label for="typeOffre">Type d'Offre</label>
                 <select name="typeOffre" id="typeOffre" required>
+                    <option value="stalternance">Non définie</option>
                     <option value="stage">Stage</option>
                     <option value="alternance">Alternance</option>
                 </select>

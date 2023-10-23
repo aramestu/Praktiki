@@ -13,6 +13,10 @@ document.addEventListener('DOMContentLoaded', function () {
             gratification.removeAttribute('required');
             stageForm.classList.add('hidden');
             alternanceForm.classList.remove('hidden');
+        } else if (typeOffre.value === 'stalternance') {
+            gratification.removeAttribute('required');
+            stageForm.classList.add('hidden');
+            alternanceForm.classList.add('hidden');
         }
     }
 
