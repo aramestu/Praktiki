@@ -7,9 +7,7 @@ class Departement extends AbstractDataObject
     private string $codeDepartement;
     private string $nomDepartement;
 
-    public function __construct(string $codeDepartement, string $nomDepartement)
-    {
-        $this->codeDepartement = $codeDepartement;
+    public function __construct(string $nomDepartement){
         $this->nomDepartement = $nomDepartement;
     }
 

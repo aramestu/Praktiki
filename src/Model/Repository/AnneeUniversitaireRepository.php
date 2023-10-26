@@ -9,11 +9,13 @@ class AnneeUniversitaireRepository extends AbstractRepository {
     public function save(AbstractDataObject|AnneeUniversitaire $anneeUniversitaire): bool
     {
         try {
-            if ($this->get($anneeUniversitaire->getNomAnneeUniversitaire()) == null) {
+            if ($this->getByNom($anneeUniversitaire->getNomAnneeUniversitaire()) == null) {
                 $pdo = Model::getPdo();
                 $sql = "INSERT INTO AnneeUniversitaire (nomAnneeUniversitaire) VALUES (:nomAnneeUniversitaireTag)";
                 $requestStatement = $pdo->prepare($sql);
-                $values = array("nomAnneeUniversitaireTag" => $anneeUniversitaire->getNomAnneeUniversitaire());
+                $values = array(
+                    "nomAnneeUniversitaireTag" => $anneeUniversitaire->getNomAnneeUniversitaire()
+                );
                 $requestStatement->execute($values);
                 return true;
             }
@@ -25,19 +27,26 @@ class AnneeUniversitaireRepository extends AbstractRepository {
 
     protected function construireDepuisTableau(array $anneeUniversitaireFormatTableau): AnneeUniversitaire
     {
-        $anneeUniversitaire = new AnneeUniversitaire($anneeUniversitaireFormatTableau["idAnneeUniversitaire"],
-            $anneeUniversitaireFormatTableau["nomAnneeUniversitaire"]);
+        $anneeUniversitaire = new AnneeUniversitaire($anneeUniversitaireFormatTableau["nomAnneeUniversitaire"]);
+        if(isset($anneeUniversitaireFormatTableau["idAnneeUniversitaire"])){
+            $anneeUniversitaire->setIdAnneeUniversitaire($anneeUniversitaireFormatTableau["idAnneeUniversitaire"]);
+        }
 
         return $anneeUniversitaire;
     }
 
-    private function getByNom(string $nom){
+    public function getByNom(string $nom): ?AnneeUniversitaire{
         $pdo = Model::getPdo();
         $sql = "SELECT * FROM AnneeUniversitaire WHERE nomAnneeUniversitaire = :nomAnnee";
         $requestStatement = $pdo->prepare($sql);
         $values = array("nomAnnee" =>$nom);
         $requestStatement->execute($values);
-        $anneeUniversitaire = $requestStatement->fetch();
+        $tableauAnneeUniversitaire = $requestStatement->fetch();
+        if($tableauAnneeUniversitaire!=null){
+            $anneeUniversitaire = $this->construireDepuisTableau($tableauAnneeUniversitaire);
+        }else{
+            $anneeUniversitaire = null;
+        }
         return $anneeUniversitaire;
     }
 

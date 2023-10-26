@@ -2,25 +2,30 @@
 
 namespace App\SAE\Model\Repository;
 
+use App\SAE\Model\DataObject\AnneeUniversitaire;
+use App\SAE\Model\DataObject\Departement;
 use App\SAE\Model\DataObject\Etudiant;
+use App\SAE\Model\DataObject\Inscription;
 
 class EtudiantRepository extends AbstractRepository {
 
-    public static function inscrire(Etudiant $etudiant, int $idAnneeUniversitaire, int $codeDepartement): bool{
-        try{
+    public static function inscrire(string $numEtudiant, string $nomDepartement, string $nomAnneeUniversitaire): bool{
+        try {
             $pdo = Model::getPdo();
-            $requestStatement = $pdo->prepare("INSERT INTO Inscriptions
-                                                 VALUES(:numEtudiantTag, :idAnneeUniversitaireTag, :codeDepartementTag)");
+            $sql="INSERT INTO Inscriptions 
+            VALUES ( :numEtudiant, :idAnneeUniversitaire,:codeDepartement)";
+            $requestStatement = $pdo->prepare($sql);
             $values = array(
-                "numEtudiantTag" => $etudiant->getNumEtudiant(),
-                "idAnneeUniversitaireTag" => $idAnneeUniversitaire,
-                "codeDepartementTag" => $codeDepartement
-            );
+                "numEtudiant" => $numEtudiant,
+                "idAnneeUniversitaire" => (new AnneeUniversitaireRepository())->getByNom($nomAnneeUniversitaire)->getIdAnneeUniversitaire(),
+                "codeDepartement" => (new DepartementRepository())->getByNom($nomDepartement)->getCodeDepartement());
             $requestStatement->execute($values);
+
             return true;
-        }catch (\PDOException){
+        } catch (\PDOException $e) {
             return false;
         }
+
     }
 
     protected function construireDepuisTableau(array $EtudiantFormatTableau): Etudiant

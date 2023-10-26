@@ -10,14 +10,26 @@ class ExperienceProfessionnelRepository {
     {
         try {
             $pdo = Model::getPdo();
-            $requestStatement = $pdo->prepare("INSERT INTO ExperienceProfessionnel(sujetExperienceProfessionnel, thematiqueExperienceProfessionnel,
+            $sql = "INSERT INTO ExperienceProfessionnel(sujetExperienceProfessionnel, thematiqueExperienceProfessionnel,
                                                                                     tachesExperienceProfessionnel, codePostalExperienceProfessionnel,
                                                                                     adresseExperienceProfessionnel, dateDebutExperienceProfessionnel, 
-                                                                                    dateFinExperienceProfessionnel, siret) 
-                                                    VALUES(:sujetExperienceProfessionnelTag, :thematiqueExperienceProfessionnelTag,
+                                                                                    dateFinExperienceProfessionnel, siret";
+            if($e->getNumEtudiant() !=""){
+                $sql = $sql . ', numEtudiant';
+            }
+            if($e->getMailEnseignant() !=""){
+                $sql = $sql . ', mailEnseignant';
+            }
+            if($e->getMailTuteurProfessionnel() != ""){
+                $sql = $sql . ', mailTuteurProfessionnel';
+            }
+            if($e->getDatePublication() != ""){
+                $sql = $sql . ', datePublication';
+            }
+            $sql = $sql . ') VALUES(:sujetExperienceProfessionnelTag, :thematiqueExperienceProfessionnelTag,
                                                             :tachesExperienceProfessionnelTag, :codePostalExperienceProfessionnelTag,
                                                             :adresseExperienceProfessionnelTag, :dateDebutExperienceProfessionnelTag, 
-                                                            :dateFinExperienceProfessionnelTag, :siretTag)");
+                                                            :dateFinExperienceProfessionnelTag, :siretTag ';
             $values = array("sujetExperienceProfessionnelTag" => $e->getSujetExperienceProfessionnel(),
                 "thematiqueExperienceProfessionnelTag" => $e->getThematiqueExperienceProfessionnel(),
                 "tachesExperienceProfessionnelTag" => $e->getTachesExperienceProfessionnel(),
@@ -26,6 +38,25 @@ class ExperienceProfessionnelRepository {
                 "dateDebutExperienceProfessionnelTag" => $e->getDateDebutExperienceProfessionnel(),
                 "dateFinExperienceProfessionnelTag" => $e->getDateFinExperienceProfessionnel(),
                 "siretTag" => $e->getSiret());
+            if($e->getNumEtudiant() !=""){
+                $sql = $sql . ', :numEtudiantTag';
+                $values["numEtudiantTag"] = $e->getNumEtudiant();
+            }
+            if($e->getMailEnseignant() !=""){
+                $sql = $sql . ', :mailEnseignantTag';
+                $values["mailEnseignantTag"] = $e->getMailEnseignant();
+            }
+            if($e->getMailTuteurProfessionnel() != ""){
+                $sql = $sql . ', :mailTuteurProfessionnelTag';
+                $values["mailTuteurProfessionnelTag"] = $e->getMailTuteurProfessionnel();
+            }
+            if($e->getDatePublication() != ""){
+                $sql = $sql . ', :datePublicationTag';
+                $values["datePublicationTag"] = $e->getDatePublication();
+            }
+            $sql = $sql . ')';
+            $requestStatement = $pdo->prepare($sql);
+
             $requestStatement->execute($values);
             return true;
         } catch (\PDOException $e) {

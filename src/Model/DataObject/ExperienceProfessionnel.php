@@ -36,6 +36,10 @@ abstract class ExperienceProfessionnel extends AbstractDataObject {
         $this->dateDebutExperienceProfessionnel = $dateDebut;
         $this->dateFinExperienceProfessionnel = $dateFin;
         $this->siret = $siret;
+        $this->datePublication = "";
+        $this->numEtudiant = "";
+        $this->mailEnseignant = "";
+        $this->mailTuteurProfessionnel = "";
         }
     public function getIdExperienceProfessionnel(): string {
         return $this->idExperienceProfessionnel;
