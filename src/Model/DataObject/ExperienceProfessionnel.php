@@ -160,6 +160,6 @@ class ExperienceProfessionnel extends AbstractDataObject {
     }
 
     public function getNomExperienceProfessionnel(){
-             return "stalernance";
+             return "Stalternance";
          }
 }

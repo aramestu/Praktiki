@@ -9,7 +9,7 @@ class Conf {
             'database' => 'francoisn',
             'port' => '3316',
             'login' => 'francoisn',
-            'password' => '21012004'
+            'password' => 'rairflashi7tiounklex'
             ),
         array(
             'hostname' => '176.131.31.93',

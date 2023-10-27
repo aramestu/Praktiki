@@ -286,4 +286,9 @@ h3 {
     background: linear-gradient(-45deg, var(--wisteria) 0%, var(--wisteria) 50%, var(--orange) 50%, var(--orange) 100%);
     color: var(--white);
 }
+
+.Stalternance:hover {
+    /*border-image:   linear-gradient(to right, grey 25%, yellow 25%, yellow 50%,red 50%, red 75%, teal 75%) 5;*/
+    border-image: linear-gradient(-45deg, var(--wisteria) 0%, var(--wisteria) 50%, var(--orange) 50%, var(--orange) 100%) 5;
+}
 /*--- END SMALL OFFER ---*/

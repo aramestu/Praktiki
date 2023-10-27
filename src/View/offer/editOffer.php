@@ -4,12 +4,12 @@ use App\SAE\Model\DataObject\Stage;
 use App\SAE\Model\Repository\StageRepository;
 $gratification = 0;
 $expPro = $experiencePro;
-$nomExperience = 'alternance';
+$typeExperience = 'alternance';
 if(is_a($expPro, 'App\SAE\Model\DataObject\Stage')){ // Si c'est un stage
-    $nomExperience = 'stage';
+    $typeExperience = 'stage';
     $gratification = $expPro->getGratificationStage();
 }else{//si c'est une stalerternance
-    $nomExperience = 'Non définie';
+    $typeExperience = 'Non définie';
 }
 ?>
 <!DOCTYPE html>
@@ -20,7 +20,6 @@ if(is_a($expPro, 'App\SAE\Model\DataObject\Stage')){ // Si c'est un stage
     <title>Modification d'Offre</title>
     <link rel="stylesheet" href="assets/css/connect.css">
 
-    <script src="assets/javascript/passwordStrength.js"></script>
     <script src="assets/javascript/showHideToggle.js"></script>
 
 </head>
@@ -28,7 +27,7 @@ if(is_a($expPro, 'App\SAE\Model\DataObject\Stage')){ // Si c'est un stage
 <body>
 <div class="container">
     <form method="post" action="frontController.php?controller=ExpPro&action=modifierDepuisFormulaire">
-        <legend>Modification <?php echo htmlspecialchars($nomExperience);?></legend>
+        <legend>Modification <?php echo htmlspecialchars($typeExperience);?></legend>
         <div id="stageForm">
             <!--<p>
                 <label for="titreStage">Titre du Stage</label>
@@ -78,7 +77,7 @@ if(is_a($expPro, 'App\SAE\Model\DataObject\Stage')){ // Si c'est un stage
         <p>
             <input type="hidden" name="siret" value="<?php echo htmlspecialchars($expPro->getSiret());?>"/>
             <input type="hidden" name="id" value="<?php echo htmlspecialchars($expPro->getIdExperienceProfessionnel());?>"/>
-            <input type="hidden" id="typeOffre" name="typeOffre" value="<?php echo htmlspecialchars($nomExperience);?>"/>
+            <input type="hidden" id="typeOffre" name="typeOffre" value="<?php echo htmlspecialchars($typeExperience);?>"/>
             <input type="submit" value="Modifier l'offre" />
         </p>
     </form>

@@ -103,8 +103,8 @@ class ControllerExpPro extends ControllerGenerique{
             $alternance = AlternanceRepository::construireDepuisTableau($tab);
             AlternanceRepository::mettreAJour($alternance);
             self::afficherVueEndOffer($msg); // Redirection vers une page
-        } // Si c'est un stalternance
-        elseif ($_POST["typeOffre"] == "stalternance") {
+        } // Si c'est une stalternance
+        elseif ($_POST["typeOffre"] == "stalternance"  || $_POST["typeOffre"] == "Non définie") {
                     $tab["idExpPro"] = $_POST["id"];
                     $stalternance = ExperienceProfessionnelRepository::construireDepuisTableau($tab);
                     ExperienceProfessionnelRepository::mettreAJour($stalternance);
@@ -266,7 +266,7 @@ class ControllerExpPro extends ControllerGenerique{
             ]);
             AlternanceRepository::save($alternance);
             self::afficherVueEndOffer($msg); // Redirection vers une page
-        } else if ($_POST["typeOffre"] == "stalternance") {
+        } else if ($_POST["typeOffre"] == "stalternance" || $_POST["typeOffre"] == "Non définie") {
             $stalternance = ExperienceProfessionnelRepository::construireDepuisTableau([
                 "sujetExperienceProfessionnel" => $_POST["sujet"],
                 "thematiqueExperienceProfessionnel" => $_POST["thematique"],

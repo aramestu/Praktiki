@@ -60,14 +60,48 @@ class ExperienceProfessionnelRepository {
             if(array_key_exists("datePublication", $stalternanceFormatTableau)){
                 $exp->setDatePublication($stalternanceFormatTableau["datePublication"]);
             }
-            return $exp;
+        return $exp;
     }
 
     public static function getAll() : array{
         $alternance = AlternanceRepository::getAll();
         $stage = StageRepository::getAll();
-        return array_merge($alternance, $stage);
+        $pdo = Model::getPdo();
+                $requestStatement = $pdo->query(" SELECT *
+                                                        FROM ExperienceProfessionnel e
+                                                        WHERE NOT EXISTS (SELECT * FROM Stages
+                                                        WHERE Stages.idStage = e.idExperienceProfessionnel)
+                                                        AND NOT EXISTS (SELECT * FROM Alternances
+                                                        WHERE Alternances.idAlternance = e.idExperienceProfessionnel)");
+                $stalternance = [];
+                foreach ($requestStatement as $alternanceTab) {
+                    $stalternance[] = self::construireDepuisTableau($alternanceTab);
+                }
+                $stage = array_merge($alternance, $stage);
+        return array_merge($stalternance, $stage);
     }
+
+    public static function get(string $id) :?ExperienceProfessionnel {
+            $sql = "SELECT *
+                    FROM ExperienceProfessionnel e
+                    WHERE e.idExperienceProfessionnel = :id";
+            $pdoStatement = Model::getPdo()->prepare($sql);
+
+            $values = array(
+                "id" => $id,
+            );
+
+            $pdoStatement->execute($values);
+
+            $stalternance = $pdoStatement->fetch();
+
+            // S'il n'y a pas d'offre associée
+            if (! $stalternance) {
+                return null;
+            } else {
+                return ExperienceProfessionnelRepository::construireDepuisTableau($stalternance);
+            }
+        }
 
     public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $stage = null, string $alternance = null, string $codePostal = null, string $datePublication = null) : array
     {
@@ -91,7 +125,6 @@ class ExperienceProfessionnelRepository {
     }
 
     private static function sort(array $stages, array $alternances, string $option): array{
-
         if($option == "salaireCroissant" || $option == "salaireDecroissant" ){
             return array_merge($stages, $alternances);
         }
@@ -163,8 +196,12 @@ class ExperienceProfessionnelRepository {
                         OR codePostalExperienceProfessionnel LIKE :keywordsTag
                         OR adresseExperienceProfessionnel LIKE :keywordsTag
                         OR e.siret LIKE :keywordsTag)
-                        ORDER BY datePublication";
-
+                        AND NOT EXISTS (SELECT * FROM Stages
+                                                WHERE Stages.idStage = e.idExperienceProfessionnel)
+                                                AND NOT EXISTS (SELECT * FROM Alternances
+                                                WHERE Alternances.idAlternance = e.idExperienceProfessionnel)
+                        ORDER BY datePublication
+                        ";
                 $requestStatement = Model::getPdo()->prepare($sql);
 
                 $values = array(
@@ -177,6 +214,7 @@ class ExperienceProfessionnelRepository {
                 foreach ($requestStatement as $stalternanceTab){
                     $stalternance[] = self::construireDepuisTableau($stalternanceTab);
                 }
-        return self::sort($alternance, $stalternance, "datePublication");
+        $alternance = self::sort($alternance, $stalternance, "datePublication");
+        return self::sort($alternance, $stage, "datePublication");
     }
 }
