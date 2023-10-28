@@ -151,7 +151,8 @@ h3 {
 
 #editIcon,
 #deleteIcon,
-#backIcon{
+#backIcon,
+#closeIcon{
     width: 30px;
     height: 30px;
     margin-right: 5px;
@@ -162,7 +163,8 @@ h3 {
 
 #editIcon:hover,
 #deleteIcon:hover,
-#backIcon:hover{
+#backIcon:hover,
+#closeIcon:hover {
     opacity: 0.69;
 }
 
@@ -235,6 +237,11 @@ h3 {
     left: 2%;
 }
 
+#closeIcon {
+    top: 2%;
+    right: 2%;
+}
+
 .mapPin {
     width: 20px;
     height: 20px;
@@ -300,3 +307,67 @@ h3 {
     -10px -10px 10px #E67E2225;
 }
 /*--- END SMALL OFFER ---*/
+
+/*--- START POP UP ---*/
+#popUpDelete{
+    opacity: 0;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 1rem;
+    padding: 15px;
+    text-align: center;
+    font-size: 1.2em;
+    min-width: 400px;
+    max-width: 550px;
+    max-height: 200px;
+    word-break: break-word;
+    color: var(--darkBlue2);
+    border: 2.5px solid #F2F2F200;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: -1;
+}
+
+#popUpDelete > p{
+    margin: 10px;
+}
+
+#popUpDeleteContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.popUpDeleteButton > button{
+    width: 200px;
+    height: 50px;
+    font-size: 1.2em;
+    margin: 20px;
+    border-radius: 1rem;
+    padding: 5px;
+    text-align: center;
+    word-break: break-word;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+#popUpDeleteNo:hover{
+    background-color: var(--red);
+    color: var(--white);
+}
+
+#popUpDeleteNo{
+    background-color: var(--pomegranate);
+    color: var(--white);
+}
+
+#popUpDeleteYes:hover{
+    background-color: var(--emerald);
+    color: var(--white);
+}
+
+#popUpDeleteYes{
+    background-color: var(--green);
+    color: var(--white);
+}
