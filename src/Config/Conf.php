@@ -49,4 +49,3 @@ class Conf {
         return mysqli_connect(self::getHostName(), self::getLogin(), self::getPassword(), self::getDataBase());
     }
 }
-?>
