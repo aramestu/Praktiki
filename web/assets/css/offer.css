@@ -239,7 +239,7 @@ h3 {
 
 #closeIcon {
     top: 2%;
-    right: 2%;
+    right: 0%;
 }
 
 .mapPin {
@@ -319,9 +319,6 @@ h3 {
     padding: 15px;
     text-align: center;
     font-size: 1.2em;
-    min-width: 400px;
-    max-width: 550px;
-    max-height: 200px;
     word-break: break-word;
     color: var(--darkBlue2);
     border: 2.5px solid #F2F2F200;
@@ -329,8 +326,59 @@ h3 {
     z-index: -1;
 }
 
+@media (max-width: 41200px) {
+    #popUpDelete{
+        min-width: 400px;
+        max-width: 550px;
+        min-height: 169px;
+        height: 169px;
+        max-height: 400px;
+    }
+
+    .popUpDeleteButton > button{
+        width: 200px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 1300px) {
+    #popUpDelete{
+        min-width: 400px;
+        max-width: 550px;
+        min-height: 169px;
+        height: 169px;
+        max-height: 400px;
+    }
+
+    .popUpDeleteButton > button{
+        width: 200px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 750px) {
+    #popUpDelete{
+        min-width: 280px;
+        max-width: 550px;
+        height: 350px;
+        max-height: 350px;
+    }
+
+    #popUpDeleteContent > p{
+        margin-top: 20px;
+        margin-left: 4%;
+        margin-right: 4%;
+    }
+
+    .popUpDeleteButton > button{
+        width: 80%;
+        height: 59px;
+    }
+}
+
 #popUpDelete > p{
     margin: 10px;
+    margin-top: 20px;
 }
 
 #popUpDeleteContent{
@@ -341,8 +389,6 @@ h3 {
 }
 
 .popUpDeleteButton > button{
-    width: 200px;
-    height: 50px;
     font-size: 1.2em;
     margin: 20px;
     border-radius: 1rem;
