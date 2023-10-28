@@ -11,7 +11,7 @@ class Entreprise extends AbstractDataObject {
 
     private string $estValide;
 
-    public function __construct(string $siret, string $nom, string $codePostal, string $effectif, string $telephone, string $siteWeb, bool $estValide){
+    public function __construct(string $siret, string $nom, string $codePostal, string $effectif, string $telephone, string $siteWeb, bool $estValide=false){
         $this->siret = $siret;
         $this->nomEntreprise = $nom;
         $this->codePostalEntreprise = $codePostal;

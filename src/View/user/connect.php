@@ -12,7 +12,7 @@
 
 <body>
     <div class="container">
-        <form method="post" action="login.php">
+        <form method="get">
                 <legend>Connexion</legend>
                 <p>
                     <label for="username">Email</label>
@@ -26,6 +26,8 @@
                     </div>
                 </p>
                 <p>
+                    <input type="hidden" name="action" value="verify">
+                    <input type="hidden" name="controller" value="LDAP">
                     <input type="submit" value="Connexion" />
                 </p>
         </form>

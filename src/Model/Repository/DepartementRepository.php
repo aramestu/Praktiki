@@ -9,11 +9,13 @@ class DepartementRepository extends AbstractRepository{
     public function save (AbstractDataObject|Departement $departement) : bool
     {
         try {
-            if ($this->get($departement->getNomDepartement()) == null) {
+            if ($this->getByNom($departement->getNomDepartement()) == null) {
                 $pdo = Model::getPdo();
                 $sql = "INSERT INTO Departements (nomDepartement) VALUES (:nomDepartementTag)";
                 $requestStatement = $pdo->prepare($sql);
-                $values = array("nomDepartementTag" => $departement->getNomDepartement());
+                $values = array(
+                    "nomDepartementTag" => $departement->getNomDepartement()
+                );
                 $requestStatement->execute($values);
                 return true;
             }
@@ -23,11 +25,13 @@ class DepartementRepository extends AbstractRepository{
         }
     }
 
-    protected function construireDepuisTableau(array $DepartementFormatTableau): Departement {
-        $Departement = new Departement($DepartementFormatTableau["codeDepartement"],
-            $DepartementFormatTableau["nomDepartement"]);
+    protected function construireDepuisTableau(array $departementFormatTableau): Departement {
+        $departement = new Departement($departementFormatTableau["nomDepartement"]);
+        if(isset($departementFormatTableau["codeDepartement"])){
+            $departement->setCodeDepartement($departementFormatTableau["codeDepartement"]);
+        }
 
-        return $Departement;
+        return $departement;
     }
 
     private function getDepuisTableau(string $nom)
@@ -39,6 +43,23 @@ class DepartementRepository extends AbstractRepository{
         $requestStatement->execute($values);
         $Departement = $requestStatement->fetch();
         return $Departement;
+    }
+
+    public function getByNom(string $nom): ?Departement{
+        $pdo = Model::getPdo();
+        $sql = "SELECT * FROM Departements WHERE nomDepartement = :nomDepartementTag";
+        $requestStatement = $pdo->prepare($sql);
+        $values = array(
+            "nomDepartementTag" => $nom
+        );
+        $requestStatement->execute($values);
+        $tableauDepartement = $requestStatement->fetch();
+        if($tableauDepartement!=null){
+            $departement = $this->construireDepuisTableau($tableauDepartement);
+        }else{
+            $departement = null;
+        }
+        return $departement;
     }
 
 

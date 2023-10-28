@@ -77,13 +77,13 @@ class ControllerMain extends ControllerGenerique
                         for ($i = 0; $i < 11; $i++) {
 
                             if ($i == 1) {//TuteurProfessionnel
-                            (new TuteurProfessionnelRepository())->save(new TuteurProfessionnel($column[79],$column[78],$column[77],
-                                $column[81],$column[80]));
-                        }
+                                (new TuteurProfessionnelRepository())->save(new TuteurProfessionnel($column[79],$column[78],$column[77],
+                                                                                                   $column[81],$column[80]));
+                            }
 
                         else if ($i == 2) {//Etudiants
                             (new EtudiantRepository())->save(new Etudiant($column[1],$column[2],
-                                $column[3], $column[6],$column[7],$column[5],$column[45]));
+                                                    $column[3], $column[6],$column[7],$column[5],$column[45]));
                         }
 
                         else if ($i == 3) {//Entreprises
@@ -96,12 +96,18 @@ class ControllerMain extends ControllerGenerique
                         }
 
                         else if ($i == 5) {//stages
-                            StageRepository::save(new Stage($column[19],$column[18],$column[20],
-                                $column[59],$column[57],$column[13],$column[14],$column[55],$column[25]));
+                            $stage = new Stage($column[19],$column[18],$column[20],
+                                $column[59],$column[57],$column[13],$column[14],$column[55],$column[25]);
+                            $stage->setNumEtudiant($column[1]);
+                            $stage->setMailEnseignant($column[31]);
+                            $stage->setMailTuteurProfessionnel($column[79]);
+                            StageRepository::save($stage);
                         }
 
                         else if ($i == 6) {//Inscriptions
-                            EtudiantRepository::inscrire((new EtudiantRepository())->get($column[1]), (int) $column[36], (int) $column[10]);
+                            (new DepartementRepository())->save(new Departement($column[36]));
+                            (new AnneeUniversitaireRepository())->save(new AnneeUniversitaire($column[10]));
+                            EtudiantRepository::inscrire($column[1], $column[36], $column[10]);
 
                         }
                     }

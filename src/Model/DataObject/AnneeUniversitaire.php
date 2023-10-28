@@ -7,9 +7,7 @@ class AnneeUniversitaire extends AbstractDataObject
     private string $idAnneeUniversitaire;
     private string $nomAnneeUniversitaire;
 
-    public function __construct(string $idAnneeUniversitaire, string $nomAnneeUniversitaire)
-    {
-        $this->idAnneeUniversitaire = $idAnneeUniversitaire;
+    public function __construct(string $nomAnneeUniversitaire) {
         $this->nomAnneeUniversitaire = $nomAnneeUniversitaire;
     }
 
