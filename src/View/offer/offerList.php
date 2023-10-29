@@ -43,14 +43,18 @@
 
 
                     <div class="VBox">
-                    <div class="button-checkbox HBox">
-                        <input type="checkbox" id="stage" name="stage" value="stage">
-                        <label for="stage">Stage</label>
+                    <div class="button-checkbox">
+                        <Label>
+                            <input type="checkbox" id="stage" name="stage" value="stage">
+                            <span>Stage</span>
+                        </Label>
                     </div>
 
-                    <div class="button-checkbox HBox">
-                        <input type="checkbox" id="alternance" name="alternance" value="alternance">
-                        <label for="alternance">Alternance</label>
+                    <div class="button-checkbox">
+                        <label>
+                            <input type="checkbox" id="alternance" name="alternance" value="alternance">
+                            <span>Alternance</span>
+                        </label>
                     </div>
                     </div>
 
