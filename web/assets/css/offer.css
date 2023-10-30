@@ -36,18 +36,12 @@ h2 {
 }
 
 ul {
-    padding-top: 12px;
-    padding-bottom: 12px;
     list-style-position: inside;
     list-style-type: circle;
-    border-bottom: solid;
-    border-color: #707B7C;
-    border-width: 2px;
-    text-align: left;
 }
 
 ul li {
-    padding: 2px;
+    padding-bottom: 2px;
 }
 
 #apply {
@@ -88,8 +82,27 @@ td {
     padding: 10px;
 }
 
-.text {
+#main {
+    display: flex;
+    padding-top: 5px;
+}
+
+#infoOffer {
+    flex: 3;
     text-align: left;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+#infoCompany {
+    flex: 2;
+    border-left: solid;
+    border-color: #707B7C;
+    border-width: 2px;
+    text-align: left;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 10px;
 }
 
 /*--- END HEADER ---*/
