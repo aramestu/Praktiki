@@ -56,7 +56,6 @@ echo htmlspecialchars($last_element) */
         <p>Tâches : <?= htmlspecialchars($expPro->getTachesExperienceProfessionnel())?></p>
     </div>
 
-    <a href="frontController.php?controller=ExpPro&action=supprimerOffre&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel())?>">DELETE</a>
     <a id="deleteButtonOrigin"><img src="assets/images/bin-icon.png" id="deleteIcon"></a>
     <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel())?>"><img src="assets/images/edit-icon.png" id="editIcon"></a>
     <a href="frontController.php?controller=ExpPro&action=getExpProByDefault"><img src="assets/images/back-icon.png" id="backIcon"></button> </a>

@@ -95,26 +95,15 @@ input[type="checkbox"]{
     width: 18px;
     height: 18px;
 }
-/*
-.button-checkbox{
-    justify-content: start;
-    padding-left: 10%;
-
-}
-
-.button-checkbox > input[type="checkbox"] {
-    margin-right: 10px;
-}*/
 
 .button-checkbox{
     background-color: var(--lightGrey);
     padding: 0 0;
     border-radius: 13px;
-    border: 1px solid #fff;
+    margin-bottom: 15px;
     overflow: hidden;
     display: block;
-box-shadow: inset 2px 2px 8px var(--grey1);
-
+    box-shadow: inset 2px 2px 8px var(--grey1);
 }
 
 .button-checkbox label {
@@ -130,15 +119,23 @@ box-shadow: inset 2px 2px 8px var(--grey1);
     text-align: center;
     padding: 3px 0;
     display: block;
+    transition: all 0.15s ease-in-out;
 }
-
 
 .button-checkbox label input {
     display: none;
     position: absolute;
 }
-.alternance input:checked + span{background-color: var(--orange); color :var(--lightGrey)}
-.stage input:checked + span{background-color: var(--purple); color :var(--lightGrey)}
+.alternance input:checked + span{
+    background-color: var(--bleuUM);
+    color :var(--white);
+    font-weight: bold;
+}
+.stage input:checked + span{
+    background-color: var(--bleuUM);
+    color :var(--white);
+    font-weight: bold;
+}
 
 /*---START SIDE FILTER---*/
 #sideFilter {

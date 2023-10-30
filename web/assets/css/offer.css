@@ -314,7 +314,7 @@ h3 {
     opacity: 0;
     position: absolute;
     top: 45%;
-    left: 50%;
+    left: 48%;
     transform: translate(-50%, -50%);
     border-radius: 1rem;
     padding: 15px;
@@ -418,3 +418,4 @@ h3 {
     background-color: var(--green);
     color: var(--white);
 }
+/*--- END POP UP ---*/
