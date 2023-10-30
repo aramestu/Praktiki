@@ -1,6 +1,8 @@
 <?php
 namespace App\SAE\Model\DataObject;
 
+use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
+
 class ExperienceProfessionnel extends AbstractDataObject {
 
     private string $idExperienceProfessionnel;
@@ -138,7 +140,7 @@ class ExperienceProfessionnel extends AbstractDataObject {
     }
 
     public function getDatePublication(): string {
-        return $this->datePublication;
+        return ExperienceProfessionnelRepository::getDatePublication($this->idExperienceProfessionnel);
     }
 
     public function setDatePublication(string $datePublication): void {
