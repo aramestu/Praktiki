@@ -19,6 +19,7 @@
     flex-grow: 1;
     align-self: flex-start;
     margin-top: -5px;
+    margin-left: -5%;
 }
 
 .text {
@@ -42,6 +43,7 @@ ul {
     border-bottom: solid;
     border-color: #707B7C;
     border-width: 2px;
+    text-align: left;
 }
 
 ul li {
@@ -84,6 +86,10 @@ ul li {
 
 td {
     padding: 10px;
+}
+
+.text {
+    text-align: left;
 }
 
 /*--- END HEADER ---*/
@@ -240,7 +246,7 @@ h3 {
 
 #closeIcon {
     top: 2%;
-    right: 0%;
+    right: 0;
 }
 
 .mapPin {
