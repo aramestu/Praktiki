@@ -16,7 +16,7 @@
                 <legend>Connexion</legend>
                 <p>
                     <label for="username">Email</label>
-                    <input type="text" name="username" id="username" required placeholder="rick.astley@roll.com"/>
+                    <input type="text" name="username" id="username" required placeholder="rick.astley@roll.com" autofocus/>
                 </p>
                 <p>
                     <label for="password">Mot de passe</label>
