@@ -32,28 +32,32 @@ echo htmlspecialchars($last_element) */
                 ?></h2>
             <label><?= htmlspecialchars($expPro->getAdresseExperienceProfessionnel())?> / <?= htmlspecialchars($expPro->getCodePostalExperienceProfessionnel())?></label>
         </div>
-
     </div>
-    <ul>
-        <li>Date de création de l'offre</li>
-        <li>Effectifs : <?php echo(htmlspecialchars($entreprise->getEffectifEntreprise())); ?></li>
-        <li>Téléphone : <?php echo(htmlspecialchars($entreprise->getTelephoneEntreprise())); ?></li>
-        <li><a href="https://<?php echo(htmlspecialchars($entreprise->getSiteWebEntreprise())); ?>" class="link">Site web</a></li>
-    </ul>
-    <div class="text">
-        <p>Sujet : <?= htmlspecialchars($expPro->getSujetExperienceProfessionnel())?></p>
-        <?php
+    <div id="main">
+        <div id="infoOffer">
+            <p class="bold">Sujet : <?= htmlspecialchars($expPro->getSujetExperienceProfessionnel())?></p>
+            <?php
             if ($expPro->getNomExperienceProfessionnel() == "Stage") {
                 ?>
                 <p>Gratification : <?php
-                                           $stage = (new StageRepository())->get($expPro->getIdExperienceProfessionnel());
-                                           echo(htmlspecialchars($stage->getGratificationStage()));
-                                           ?>€</p>
-                                           <?php
-                                               }
-                                               ?>
-        <p>Thématique : <?= htmlspecialchars($expPro->getThematiqueExperienceProfessionnel())?></p>
-        <p>Tâches : <?= htmlspecialchars($expPro->getTachesExperienceProfessionnel())?></p>
+                    $stage = (new StageRepository())->get($expPro->getIdExperienceProfessionnel());
+                    echo(htmlspecialchars($stage->getGratificationStage()));
+                    ?>€</p>
+                <?php
+            }
+            ?>
+            <p>Thématique : <?= htmlspecialchars($expPro->getThematiqueExperienceProfessionnel())?></p>
+            <p>Tâches : <?= htmlspecialchars($expPro->getTachesExperienceProfessionnel())?></p>
+        </div>
+
+        <div id="infoCompany">
+            <ul>
+                <li>Date de création de l'offre</li>
+                <li>Effectifs : <?php echo(htmlspecialchars($entreprise->getEffectifEntreprise())); ?></li>
+                <li>Téléphone : <?php echo(htmlspecialchars($entreprise->getTelephoneEntreprise())); ?></li>
+                <li><a href="https://<?php echo(htmlspecialchars($entreprise->getSiteWebEntreprise())); ?>" class="link">Site web</a></li>
+            </ul>
+        </div>
     </div>
 
     <a id="deleteButtonOrigin"><img src="assets/images/bin-icon.png" id="deleteIcon"></a>

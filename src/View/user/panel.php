@@ -21,25 +21,25 @@
     </div>
     <div class="container" id="placeholder">
         <div class ="HBox">
-            <p>Etudiant n° 1</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
+            <p>Etudiant n° 1</p> <p>Valide->vert/En cours->orange/En recherche->Rouge</p>
         </div>
         <div class ="HBox">
-            <p>Etudiant n° 2</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
+            <p>Etudiant n° 2</p> <p>Valide->vert/En cours->orange/En recherche->Rouge</p>
         </div>
         <div class ="HBox">
-            <p>Etudiant n° 3</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
+            <p>Etudiant n° 3</p> <p>Valide->vert/En cours->orange/En recherche->Rouge</p>
         </div>
         <div class ="HBox">
-            <p>Etudiant n° 4</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
+            <p>Etudiant n° 4</p> <p>Valide->vert/En cours->orange/En recherche->Rouge</p>
         </div>
         <div class ="HBox">
-            <p>Etudiant n° 5</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
+            <p>Etudiant n° 5</p> <p>Valide->vert/En cours->orange/En recherche->Rouge</p>
         </div>
         <div class ="HBox">
-            <p>Etudiant n° 6</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
+            <p>Etudiant n° 6</p> <p>Valide->vert/En cours->orange/En recherche->Rouge</p>
         </div>
         <div class ="HBox">
-            <p>Etudiant n° 7</p> <p>Valide->vert/En cours->orange/Rouge->en recherche</p>
+            <p>Etudiant n° 7</p> <p>Valide->vert/En cours->orange/En recherche->Rouge</p>
         </div>
     </div>
 </div>
