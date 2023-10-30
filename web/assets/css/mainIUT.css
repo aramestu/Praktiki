@@ -353,6 +353,10 @@ textarea {
     color: var(--darkBlue1);
 }
 
+textarea{
+    resize: vertical;
+}
+
 select:invalid {
     color: var(--grey2);
 }

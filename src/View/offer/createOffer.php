@@ -49,7 +49,7 @@
             </p>
             <p>
                 <label for="taches">Tâches</label>
-                <input type="text" name="taches" id="taches" required placeholder="Tâches" />
+                <textarea name="taches" id="taches" cols="30" rows="10" maxlength="500" required placeholder="Tâches"></textarea>
             </p>
             <p>
                 <label for="codePostale">Code Postal</label>
