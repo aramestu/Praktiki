@@ -125,5 +125,4 @@ class ControllerMain extends ControllerGenerique
                 self::home();
             }
         }
-
 }

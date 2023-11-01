@@ -45,8 +45,8 @@ class Conf {
   static public function getPort() : string{
       return self::$databaseConfiguration['port'];
   }
-    static public function conn() : \mysqli{
-        return mysqli_connect(self::getHostName(), self::getLogin(), self::getPassword(), self::getDataBase());
-    }
+  static public function conn() : \mysqli{
+      return mysqli_connect(self::getHostName(), self::getLogin(), self::getPassword(), self::getDataBase());
+  }
+
 }
-?>

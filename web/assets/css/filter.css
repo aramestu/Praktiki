@@ -113,7 +113,7 @@ input[type="checkbox"]{
     border: 1px solid #fff;
     overflow: hidden;
     display: block;
-box-shadow: inset 2px 2px 8px var(--grey1);
+    box-shadow: inset 2px 2px 8px var(--grey1);
 
 }
 
