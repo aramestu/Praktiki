@@ -15,7 +15,7 @@
             <legend>Inscription Entreprise</legend>
             <p>
                 <label for="nom">Nom de l'entreprise</label>
-                <input type="text" name="nom" id="nom" required placeholder="Nom de votre entreprise" />
+                <input type="text" name="nom" id="nom" required placeholder="Nom de votre entreprise" autofocus/>
             </p>
             <p>
                 <label for="website">Site Web</label>

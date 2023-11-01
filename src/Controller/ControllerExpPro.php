@@ -202,40 +202,6 @@ class ControllerExpPro extends ControllerGenerique{
         }
     }
 
-    public static function afficherOffreStalternanceTODELETE(): void
-    {
-        $idExpPro = $_GET["experiencePro"];
-        $stage = StageRepository::get($idExpPro);
-        if (!is_null($stage)) {
-            ControllerGenerique::afficheVue('view.php', [
-                "pagetitle" => "Affichage offer",
-                "cheminVueBody" => "offer/offerTODELETE.php",
-                "expPro" => $stage
-            ]);
-        } else {
-            $alternance = AlternanceRepository::get($idExpPro);
-            if (!is_null($alternance)) {
-                ControllerGenerique::afficheVue('view.php', [
-                    "pagetitle" => "Affichage offer",
-                    "cheminVueBody" => "offer/offerTODELETE.php",
-                    "expPro" => $alternance
-                ]);
-            } else {
-                $stalternance = ExperienceProfessionnelRepository::get($idExpPro);
-                if (!is_null($stalternance)) {
-                    ControllerGenerique::afficheVue('view.php', [
-                        "pagetitle" => "Affichage offer",
-                        "cheminVueBody" => "offer/offerTODELETE.php",
-                        "expPro" => $stalternance
-                    ]);
-                } else {
-                    $messageErreur = 'Cette offre n existe pas !';
-                    ControllerGenerique::error($messageErreur);
-                }
-            }
-        }
-    }
-
     public static function creerOffreDepuisFormulaire(): void
     {
         $msg = "Offre crée avec succés !";

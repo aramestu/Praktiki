@@ -107,11 +107,39 @@ header:hover::after {
     header {
         padding: .9rem 16%;
     }
+
+    .HBox{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        margin-bottom: 20px;
+    }
+
+    input[type="submit"]{
+        width: 100%;
+    }
 }
 
 @media (max-width: 1300px) {
     header {
         padding: .9rem 5%;
+    }
+
+    .HBox{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        margin-bottom: 20px;
+    }
+
+    input[type="submit"]{
+        width: 100%;
     }
 }
 
@@ -340,7 +368,7 @@ input[type="password"],
 input[type='date'],
 select,
 textarea {
-    width: calc(100%);
+    width: 100%;
     padding: 10px;
     margin-bottom: 15px;
     border: none;
@@ -353,6 +381,10 @@ textarea {
     color: var(--darkBlue1);
 }
 
+textarea{
+    resize: none;
+}
+
 select:invalid {
     color: var(--grey2);
 }
@@ -360,7 +392,6 @@ select:invalid {
 input[type="submit"] {
     background-color: var(--bleuUM);
     color: var(--white);
-    width: 100%;
     padding: 15px 0;
     border: none;
     border-radius: 1.5rem;
@@ -410,16 +441,6 @@ legend{
     font-size: 1.269rem;
     font-weight: bold;
     color: var(--black);
-    margin-bottom: 20px;
-}
-
-.HBox{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    height: 100%;
     margin-bottom: 20px;
 }
 
