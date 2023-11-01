@@ -17,7 +17,7 @@ class ControllerEtudiant extends ControllerGenerique{
         if(isset($_GET['keywords'])){
             $keywords = urldecode($_GET["keywords"]);
         }
-        $listEtudiants = (new EtudiantRepository())->search($keywords,array("nomEtudiant"));
+        $listEtudiants = (new EtudiantRepository())->search($keywords);
         self::afficheVue(
             'view.php',
             [

@@ -97,23 +97,37 @@ abstract class AbstractRepository {
 
     /*
      * - keyword est le mot clé que l'on recherche
-     * - colonnes est un tableau de string où l'on recherche le keyword (optionnel). S'il n'est pas renseigné, alors on fait la recherche sur toutes les colonnes
+     * - colonnes est un tableau de string où l'on recherche le keyword (optionnel). S'il n'est pas renseigné, alors on fait la recherche sur toutes les colonnes de l'objet associé au repository !
      *      Je spécifie les colonnes pour éviter de faire une recherche sur des mdp ou autres infos
      * - colonneTrie pour savoir par quel colonne on trie le résultat (optionnel)
      * - ordre pour savoir si on trie par ordre croissant (false) ou décroissant (true) (optionnel)
      *
      * Renvoie un tableau d'AbstractObject
+     *
+     * array( array("Inscriptions" => "numEtudiant") array("Etudiants" => "numEtudiant")) )
+     *
      */
-    public function search(string $keywords = "", array $colonnes = array(), string $colonneTrie = null, bool $ordre = false){
+    public function search(string $keywords = null, array $colonnes = null, array $jointures = null ,string $colonneTrie = null, bool $ordre = null){
+        if(is_null($jointures)){
+            $jointures = array();
+        }
+        if(is_null($colonnes)){
+            $colonnes = array();
+        }
+
         $sql = "SELECT * 
                 FROM " . $this->getNomTable() . " ";
 
+        // S'il y a 2 valeurs alors on fait un JOIN
+        if(sizeof($jointures) == 2){
+            //echo $this->jointure($jointures[0],$jointures[1]);
+            $sql = $sql . $this->jointures($jointures[0],$jointures[1]);
+        }
+
         $values = array();
-        // S'il n'y a pas de mot clé alors j'affiche tout (pas de WHERE)
-        if($keywords != ""){
+        // S'il y a un mot clé alors je "filtre" par le mot clé sur les colonnes données
+        if(! is_null($keywords)){
             $sql = $sql . " WHERE " . $this->colonneToSearch($colonnes) . " ";
-            echo "(" . $keywords . ")";
-            echo $this->colonneToSearch($colonnes);
             $values = array(
                 "keywordsTag" => '%' . $keywords . '%'
             );
@@ -124,7 +138,7 @@ abstract class AbstractRepository {
             $sql = $sql . " ORDER BY $colonneTrie ";
 
             // Si c'est true alors on trie par décroissant sinon croissant (de base)
-            if($ordre){
+            if($ordre === true){
                 $sql = $sql . " DESC ";
             }
         }
@@ -137,6 +151,34 @@ abstract class AbstractRepository {
             $tab[] = $this->construireDepuisTableau($result);
         }
         return $tab;
+    }
+
+    /* Retourne une chaine de caractère correspondant aux joins SQL. Prérequis : table et colonne existent
+    *  qui associe la première valeur du tableau à sa valeur
+     * ex: array("Inscriptions" => "numEtudiant") array("Etudiants" => "numEtudiant"))
+     * qui fait une jointure entre Inscription et Etudiant sur les colonnes indiqués
+     * et Etudiants à numEtudiant
+     * SQL : JOIN Inscriptions ON Inscriptions.numEtudiant = Etudiants.numEtudiants
+    */
+    public function jointures(array $tab1, array $tab2){
+        // S'ils n'ont pas la même taille ou qu'ils sont vide, je ne fais pas de jointure
+        if(sizeof($tab1) != sizeof($tab2) || sizeof($tab1) == 0){
+            return "";
+        }
+        $chaine = " JOIN ";
+        // Je récupère la liste des clés des tableaux
+        $cleTab1 = array_keys($tab1);
+        $cleTab2 = array_keys($tab2);
+
+        for($i = 0; $i < sizeof($tab1); $i++){
+            $table1 = $cleTab1[$i]; // nom de la table de tab1 à l'indice i
+            $colonne1 = $tab1[$table1]; // nom de la colonne de tab1 à l'indice i
+            $table2 = $cleTab2[$i];
+            $colonne2 = $tab2[$table2];
+
+            $chaine = $chaine . $table1 . " ON " . $table1 . "." . $colonne1 . "=" . $table2 . "." . $colonne2 . " ";
+        }
+        return $chaine;
     }
 
     /*
