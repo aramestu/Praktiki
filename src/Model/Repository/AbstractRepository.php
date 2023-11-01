@@ -93,7 +93,77 @@ abstract class AbstractRepository {
         } catch (\PDOException $e) {
             return false;
         }
+    }
 
+    /*
+     * - keyword est le mot clé que l'on recherche
+     * - colonnes est un tableau de string où l'on recherche le keyword (optionnel). S'il n'est pas renseigné, alors on fait la recherche sur toutes les colonnes
+     *      Je spécifie les colonnes pour éviter de faire une recherche sur des mdp ou autres infos
+     * - colonneTrie pour savoir par quel colonne on trie le résultat (optionnel)
+     * - ordre pour savoir si on trie par ordre croissant (false) ou décroissant (true) (optionnel)
+     *
+     * Renvoie un tableau d'AbstractObject
+     */
+    public function search(string $keywords = "", array $colonnes = array(), string $colonneTrie = null, bool $ordre = false){
+        $sql = "SELECT * 
+                FROM " . $this->getNomTable() . " ";
+
+        $values = array();
+        // S'il n'y a pas de mot clé alors j'affiche tout (pas de WHERE)
+        if($keywords != ""){
+            $sql = $sql . " WHERE " . $this->colonneToSearch($colonnes) . " ";
+            echo "(" . $keywords . ")";
+            echo $this->colonneToSearch($colonnes);
+            $values = array(
+                "keywordsTag" => '%' . $keywords . '%'
+            );
+        }
+        // Si aucune colonne de trie n'a été renseigné alors on ne trie pas
+        // Sinon je trie
+        if(! is_null($colonneTrie)){
+            $sql = $sql . " ORDER BY $colonneTrie ";
+
+            // Si c'est true alors on trie par décroissant sinon croissant (de base)
+            if($ordre){
+                $sql = $sql . " DESC ";
+            }
+        }
+
+        $requestStatement = Model::getPdo()->prepare($sql);
+        $requestStatement->execute($values);
+
+        $tab = [];
+        foreach ($requestStatement as $result){
+            $tab[] = $this->construireDepuisTableau($result);
+        }
+        return $tab;
+    }
+
+    /*
+     * Retourne un string. Utilisé dans la clause
+     * WHERE d'une requête SQL de recherche avec un LIKE.
+     * notamment pour la fonction search
+     * ex: sujetExperienceProfessionnel LIKE :keywordsTag
+    */
+    public function colonneToSearch(array $colonnes) :string {
+        $chaine = "(";
+        $nbColonnes = sizeof($colonnes);
+
+        // Si c'est vide alors je fais sur toutes les colonnes
+        if($nbColonnes == 0){
+            $colonnes = $this->getNomsColonnes();
+            $nbColonnes = sizeof($colonnes);
+        }
+
+        for($i = 0; $i < $nbColonnes; $i++){
+            // SI ce n'est pas le premier alors je met un OR
+            if($i != 0){
+                $chaine = $chaine . "OR ";
+            }
+
+            $chaine = $chaine . "$colonnes[$i] LIKE :keywordsTag ";
+        }
+        return $chaine . ") ";
     }
 
     protected abstract function getNomTable() : string;

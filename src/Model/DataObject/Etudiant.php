@@ -68,12 +68,12 @@ class Etudiant extends AbstractDataObject
 
     public function getMailUniversitaireEtuidant(): string
     {
-        return $this->mailUniversitaireEtuidant;
+        return $this->mailUniversitaireEtudidant;
     }
 
     public function setMailUniversitaireEtuidant(string $mailUniversitaireEtuidant): void
     {
-        $this->mailUniversitaireEtuidant = $mailUniversitaireEtuidant;
+        $this->mailUniversitaireEtudidant = $mailUniversitaireEtuidant;
     }
 
     public function getTelephoneEtudiant(): string

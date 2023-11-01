@@ -80,7 +80,7 @@
 <?php require 'offerTable.php'; ?>
 </div>
 
-   </div>
+</div>
 
 
 </body>

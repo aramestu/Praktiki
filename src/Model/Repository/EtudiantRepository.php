@@ -25,7 +25,6 @@ class EtudiantRepository extends AbstractRepository {
         } catch (\PDOException $e) {
             return false;
         }
-
     }
 
     protected function construireDepuisTableau(array $EtudiantFormatTableau): Etudiant

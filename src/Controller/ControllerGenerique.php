@@ -31,4 +31,19 @@ abstract class ControllerGenerique{
             ]
         );
     }
+
+    // nomData ex: Alternance / Stage / TuteurProfessionnel
+    protected static function getBySearch(string $nomData, string $keywords): void
+    {
+        $keywords = urldecode($_GET['keywords']);
+        $listeExpPro = $nomRepository::search($keywords);
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Recherche',
+                'listeExpPro' => $listeExpPro,
+                'cheminVueBody' => 'offer/offerList.php',
+            ]
+        );
+    }
 }

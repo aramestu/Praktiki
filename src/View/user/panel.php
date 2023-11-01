@@ -12,7 +12,7 @@
     <div class="main" id="panel">
 
     <div class="container" id="option">
-        <p><a href=""><button type="button" class="btn btn-primary">Modifer Profil</button></a></p>
+        <p><a href="frontController.php?controller=Etudiant&action=getEtudiantBySearch"><button type="button" class="btn btn-primary">Liste des étudiants</button></a></p>
         <p><a href=""><button type="button" class="btn btn-primary">Liste des offres en Attentes</button></a></p>
         <p><a href="frontController.php?action=afficherListeEntrepriseEnAttente&controller=Entreprise"><button type="button" class="btn btn-primary">Liste des entreprises en Attentes</button></a></p>
         <p><a href="frontController.php?action=getExpProByDefault&controller=ExpPro"><button type="button" class="btn btn-primary">Liste des offres</button></a></p>
