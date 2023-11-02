@@ -4,12 +4,14 @@ namespace App\SAE\Model\Repository;
 
 use App\SAE\Model\DataObject\AbstractDataObject;
 
-abstract class AbstractRepository {
+abstract class AbstractRepository
+{
 
-    public function getAll(): array {
+    public function getAll(): array
+    {
         $pdo = Model::getPdo();
         $nomTable = $this->getNomTable();
-        $requestStatement =  $pdo->query("SELECT * FROM $nomTable");
+        $requestStatement = $pdo->query("SELECT * FROM $nomTable");
 
         $objects = [];
         foreach ($requestStatement as $objectFormatTableau) {
@@ -18,7 +20,8 @@ abstract class AbstractRepository {
         return $objects;
     }
 
-    public function get(string $valeurClePrimaire): ?AbstractDataObject{
+    public function get(string $valeurClePrimaire): ?AbstractDataObject
+    {
         $nomTable = $this->getNomTable();
         $clePrimaire = $this->getNomClePrimaire();
         $sql = "SELECT * from $nomTable WHERE $clePrimaire = :clePrimaireTag";
@@ -36,15 +39,15 @@ abstract class AbstractRepository {
         // Note: fetch() renvoie false si pas de objet correspondante
         $objetFormatTableau = $pdoStatement->fetch();
 
-        if(!$objetFormatTableau){
+        if (!$objetFormatTableau) {
             return null;
-        }
-        else{
+        } else {
             return $this->construireDepuisTableau($objetFormatTableau);
         }
     }
 
-    public function supprimer(string $valeurClePrimaire){
+    public function supprimer(string $valeurClePrimaire)
+    {
         $pdo = Model::getPdo();
         $nomTable = $this->getNomTable();
         $clePrimaire = $this->getNomClePrimaire();
@@ -54,16 +57,17 @@ abstract class AbstractRepository {
         $requeteStatement->execute($values);
     }
 
-    public function mettreAJour(AbstractDataObject $object): void{
+    public function mettreAJour(AbstractDataObject $object): void
+    {
         $pdo = Model::getPdo();
         $table = $this->getNomTable();
         $clePrimaire = $this->getNomClePrimaire();
         $colonnes = $this->getNomsColonnes();
         $sql = "UPDATE $table SET ";
-        for($i =0; $i<sizeof($colonnes); $i++){
-            if($colonnes[$i]!=$clePrimaire){
-                $sql = $sql . $colonnes[$i] ." = :" . $colonnes[$i] . "Tag";
-                if($i!=sizeof($colonnes)-1){
+        for ($i = 0; $i < sizeof($colonnes); $i++) {
+            if ($colonnes[$i] != $clePrimaire) {
+                $sql = $sql . $colonnes[$i] . " = :" . $colonnes[$i] . "Tag";
+                if ($i != sizeof($colonnes) - 1) {
                     $sql = $sql . ", ";
                 }
             }
@@ -73,17 +77,18 @@ abstract class AbstractRepository {
         $requeteStatement->execute($object->formatTableau());
     }
 
-    public function save(AbstractDataObject $object) : bool {
+    public function save(AbstractDataObject $object): bool
+    {
         try {
             $pdo = Model::getPdo();
             $table = $this->getNomTable();
             $colonnes = $this->getNomsColonnes();
             $sql = "INSERT INTO $table VALUES (";
-            for($i =0; $i<sizeof($colonnes); $i++){
+            for ($i = 0; $i < sizeof($colonnes); $i++) {
                 $sql = $sql . ":" . $colonnes[$i] . "Tag";
-                if($i!=sizeof($colonnes)-1){
+                if ($i != sizeof($colonnes) - 1) {
                     $sql = $sql . ", ";
-                }else{
+                } else {
                     $sql = $sql . ")";
                 }
             }
@@ -104,13 +109,14 @@ abstract class AbstractRepository {
      *
      * Renvoie un tableau d'AbstractObject
      */
-    public function search(string $keywords = "", array $colonnes = array(), string $colonneTrie = null, bool $ordre = false){
+    public function search(string $keywords = "", array $colonnes = array(), string $colonneTrie = null, bool $ordre = false)
+    {
         $sql = "SELECT * 
                 FROM " . $this->getNomTable() . " ";
 
         $values = array();
         // S'il n'y a pas de mot clé alors j'affiche tout (pas de WHERE)
-        if($keywords != ""){
+        if ($keywords != "") {
             $sql = $sql . " WHERE " . $this->colonneToSearch($colonnes) . " ";
             echo "(" . $keywords . ")";
             echo $this->colonneToSearch($colonnes);
@@ -120,11 +126,11 @@ abstract class AbstractRepository {
         }
         // Si aucune colonne de trie n'a été renseigné alors on ne trie pas
         // Sinon je trie
-        if(! is_null($colonneTrie)){
+        if (!is_null($colonneTrie)) {
             $sql = $sql . " ORDER BY $colonneTrie ";
 
             // Si c'est true alors on trie par décroissant sinon croissant (de base)
-            if($ordre){
+            if ($ordre) {
                 $sql = $sql . " DESC ";
             }
         }
@@ -133,7 +139,7 @@ abstract class AbstractRepository {
         $requestStatement->execute($values);
 
         $tab = [];
-        foreach ($requestStatement as $result){
+        foreach ($requestStatement as $result) {
             $tab[] = $this->construireDepuisTableau($result);
         }
         return $tab;
@@ -145,19 +151,20 @@ abstract class AbstractRepository {
      * notamment pour la fonction search
      * ex: sujetExperienceProfessionnel LIKE :keywordsTag
     */
-    public function colonneToSearch(array $colonnes) :string {
+    public function colonneToSearch(array $colonnes): string
+    {
         $chaine = "(";
         $nbColonnes = sizeof($colonnes);
 
         // Si c'est vide alors je fais sur toutes les colonnes
-        if($nbColonnes == 0){
+        if ($nbColonnes == 0) {
             $colonnes = $this->getNomsColonnes();
             $nbColonnes = sizeof($colonnes);
         }
 
-        for($i = 0; $i < $nbColonnes; $i++){
+        for ($i = 0; $i < $nbColonnes; $i++) {
             // SI ce n'est pas le premier alors je met un OR
-            if($i != 0){
+            if ($i != 0) {
                 $chaine = $chaine . "OR ";
             }
 
@@ -166,8 +173,11 @@ abstract class AbstractRepository {
         return $chaine . ") ";
     }
 
-    protected abstract function getNomTable() : string;
-    protected abstract function construireDepuisTableau(array $objetFormatTableau) : AbstractDataObject;
-    protected abstract function getNomClePrimaire():string;
+    protected abstract function getNomTable(): string;
+
+    protected abstract function construireDepuisTableau(array $objetFormatTableau): AbstractDataObject;
+
+    protected abstract function getNomClePrimaire(): string;
+
     protected abstract function getNomsColonnes(): array;
 }

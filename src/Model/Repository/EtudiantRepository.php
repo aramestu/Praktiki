@@ -7,12 +7,14 @@ use App\SAE\Model\DataObject\Departement;
 use App\SAE\Model\DataObject\Etudiant;
 use App\SAE\Model\DataObject\Inscription;
 
-class EtudiantRepository extends AbstractRepository {
+class EtudiantRepository extends AbstractRepository
+{
 
-    public static function inscrire(string $numEtudiant, string $nomDepartement, string $nomAnneeUniversitaire): bool{
+    public static function inscrire(string $numEtudiant, string $nomDepartement, string $nomAnneeUniversitaire): bool
+    {
         try {
             $pdo = Model::getPdo();
-            $sql="INSERT INTO Inscriptions 
+            $sql = "INSERT INTO Inscriptions 
             VALUES ( :numEtudiant, :idAnneeUniversitaire,:codeDepartement)";
             $requestStatement = $pdo->prepare($sql);
             $values = array(
@@ -35,15 +37,18 @@ class EtudiantRepository extends AbstractRepository {
         return $etudiant;
     }
 
-    protected function getNomTable(): string {
+    protected function getNomTable(): string
+    {
         return "Etudiants";
     }
 
-    protected function getNomClePrimaire(): string {
+    protected function getNomClePrimaire(): string
+    {
         return "numEtudiant";
     }
 
-    protected function getNomsColonnes(): array {
+    protected function getNomsColonnes(): array
+    {
         return array("numEtudiant", "nomEtudiant", "prenomEtudiant", "mailPersoEtudiant", "mailUniversitaireEtudiant", "telephoneEtudiant", "codePostalEtudiant");
     }
 }

@@ -3,28 +3,28 @@
     <div class="header">
         <div class="company">
             <h2>
-                <?php echo(htmlspecialchars($etudiant->getNomEtudiant()));?>
+                <?php echo(htmlspecialchars($etudiant->getNomEtudiant())); ?>
             </h2>
         </div>
     </div>
     <div class="text">
         <p>
-            Prenom : <?php echo(htmlspecialchars($etudiant->getPrenomEtudiant()));?>
+            Prenom : <?php echo(htmlspecialchars($etudiant->getPrenomEtudiant())); ?>
         </p>
         <p>
-            Numéro étudiant : <?php echo(htmlspecialchars($etudiant->getNumEtudiant()));?>
+            Numéro étudiant : <?php echo(htmlspecialchars($etudiant->getNumEtudiant())); ?>
         </p>
         <p>
-            Mail perso : <?php echo(htmlspecialchars($etudiant->getMailPersoEtudiant()));?>
+            Mail perso : <?php echo(htmlspecialchars($etudiant->getMailPersoEtudiant())); ?>
         </p>
         <p>
-            Mail universitaire : <?php echo(htmlspecialchars($etudiant->getMailUniversitaireEtuidant()));?>
+            Mail universitaire : <?php echo(htmlspecialchars($etudiant->getMailUniversitaireEtuidant())); ?>
         </p>
         <p>
-            Numéro de téléphone : <?php echo(htmlspecialchars($etudiant->getTelephoneEtudiant()));?>
+            Numéro de téléphone : <?php echo(htmlspecialchars($etudiant->getTelephoneEtudiant())); ?>
         </p>
         <p>
-            Code Postal : <?php echo(htmlspecialchars($etudiant->getCodePostalEtudiant()));?>
+            Code Postal : <?php echo(htmlspecialchars($etudiant->getCodePostalEtudiant())); ?>
         </p>
     </div>
 </div>

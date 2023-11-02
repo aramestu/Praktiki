@@ -7,7 +7,8 @@ class Departement extends AbstractDataObject
     private string $codeDepartement;
     private string $nomDepartement;
 
-    public function __construct(string $nomDepartement){
+    public function __construct(string $nomDepartement)
+    {
         $this->nomDepartement = $nomDepartement;
     }
 
@@ -31,7 +32,8 @@ class Departement extends AbstractDataObject
         $this->nomDepartement = $nomDepartement;
     }
 
-    public function formatTableau(): array{
+    public function formatTableau(): array
+    {
         return array(
             "codeDepartementTag" => $this->codeDepartement,
             "nomDepartementTag" => $this->nomDepartement

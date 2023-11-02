@@ -1,12 +1,14 @@
 <?php
+
 namespace App\SAE\Model\Repository;
 
 use App\SAE\Model\DataObject\ExperienceProfessionnel;
 use App\SAE\Model\DataObject\Stage;
 use App\SAE\Model\Repository\Model;
 
-class ExperienceProfessionnelRepository {
-    public static function save(ExperienceProfessionnel $e) : bool
+class ExperienceProfessionnelRepository
+{
+    public static function save(ExperienceProfessionnel $e): bool
     {
         try {
             $pdo = Model::getPdo();
@@ -14,16 +16,16 @@ class ExperienceProfessionnelRepository {
                                                                                     tachesExperienceProfessionnel, codePostalExperienceProfessionnel,
                                                                                     adresseExperienceProfessionnel, dateDebutExperienceProfessionnel, 
                                                                                     dateFinExperienceProfessionnel, siret";
-            if($e->getNumEtudiant() !=""){
+            if ($e->getNumEtudiant() != "") {
                 $sql = $sql . ', numEtudiant';
             }
-            if($e->getMailEnseignant() !=""){
+            if ($e->getMailEnseignant() != "") {
                 $sql = $sql . ', mailEnseignant';
             }
-            if($e->getMailTuteurProfessionnel() != ""){
+            if ($e->getMailTuteurProfessionnel() != "") {
                 $sql = $sql . ', mailTuteurProfessionnel';
             }
-            if($e->getDatePublication() != ""){
+            if ($e->getDatePublication() != "") {
                 $sql = $sql . ', datePublication';
             }
             $sql = $sql . ') VALUES(:sujetExperienceProfessionnelTag, :thematiqueExperienceProfessionnelTag,
@@ -38,19 +40,19 @@ class ExperienceProfessionnelRepository {
                 "dateDebutExperienceProfessionnelTag" => $e->getDateDebutExperienceProfessionnel(),
                 "dateFinExperienceProfessionnelTag" => $e->getDateFinExperienceProfessionnel(),
                 "siretTag" => $e->getSiret());
-            if($e->getNumEtudiant() !=""){
+            if ($e->getNumEtudiant() != "") {
                 $sql = $sql . ', :numEtudiantTag';
                 $values["numEtudiantTag"] = $e->getNumEtudiant();
             }
-            if($e->getMailEnseignant() !=""){
+            if ($e->getMailEnseignant() != "") {
                 $sql = $sql . ', :mailEnseignantTag';
                 $values["mailEnseignantTag"] = $e->getMailEnseignant();
             }
-            if($e->getMailTuteurProfessionnel() != ""){
+            if ($e->getMailTuteurProfessionnel() != "") {
                 $sql = $sql . ', :mailTuteurProfessionnelTag';
                 $values["mailTuteurProfessionnelTag"] = $e->getMailTuteurProfessionnel();
             }
-            if($e->getDatePublication() != ""){
+            if ($e->getDatePublication() != "") {
                 $sql = $sql . ', :datePublicationTag';
                 $values["datePublicationTag"] = $e->getDatePublication();
             }
@@ -66,108 +68,109 @@ class ExperienceProfessionnelRepository {
 
     public static function construireDepuisTableau($stalternanceFormatTableau): ExperienceProfessionnel
     {
-        $exp = new ExperienceProfessionnel($stalternanceFormatTableau["sujetExperienceProfessionnel"],$stalternanceFormatTableau["thematiqueExperienceProfessionnel"],
-            $stalternanceFormatTableau["tachesExperienceProfessionnel"],$stalternanceFormatTableau["codePostalExperienceProfessionnel"],
-            $stalternanceFormatTableau["adresseExperienceProfessionnel"],$stalternanceFormatTableau["dateDebutExperienceProfessionnel"],
-            $stalternanceFormatTableau["dateFinExperienceProfessionnel"],$stalternanceFormatTableau["siret"]);
-            if(array_key_exists("idExperienceProfessionnel", $stalternanceFormatTableau)){
-                $exp->setIdExperienceProfessionnel($stalternanceFormatTableau["idExperienceProfessionnel"]);
+        $exp = new ExperienceProfessionnel($stalternanceFormatTableau["sujetExperienceProfessionnel"], $stalternanceFormatTableau["thematiqueExperienceProfessionnel"],
+            $stalternanceFormatTableau["tachesExperienceProfessionnel"], $stalternanceFormatTableau["codePostalExperienceProfessionnel"],
+            $stalternanceFormatTableau["adresseExperienceProfessionnel"], $stalternanceFormatTableau["dateDebutExperienceProfessionnel"],
+            $stalternanceFormatTableau["dateFinExperienceProfessionnel"], $stalternanceFormatTableau["siret"]);
+        if (array_key_exists("idExperienceProfessionnel", $stalternanceFormatTableau)) {
+            $exp->setIdExperienceProfessionnel($stalternanceFormatTableau["idExperienceProfessionnel"]);
+        }
+        if (array_key_exists("numEtudiant", $stalternanceFormatTableau)) {
+            if (!empty($stalternanceFormatTableau["numEtudiant"])) {
+                $exp->setNumEtudiant($stalternanceFormatTableau["numEtudiant"]);
             }
-            if(array_key_exists("numEtudiant", $stalternanceFormatTableau)){
-                if(!empty($stalternanceFormatTableau["numEtudiant"])){
-                    $exp->setNumEtudiant($stalternanceFormatTableau["numEtudiant"]);
-                }
+        }
+        if (array_key_exists("mailEnseignant", $stalternanceFormatTableau)) {
+            if (!empty($stalternanceFormatTableau["mailEnseignant"])) {
+                $stage->setMailEnseignant($stalternanceFormatTableau["mailEnseignant"]);
             }
-            if(array_key_exists("mailEnseignant", $stalternanceFormatTableau)){
-                 if(!empty($stalternanceFormatTableau["mailEnseignant"])){
-                    $stage->setMailEnseignant($stalternanceFormatTableau["mailEnseignant"]);
-                 }
+        }
+        if (array_key_exists("mailTuteurProfessionnel", $stalternanceFormatTableau)) {
+            if (!empty($stalternanceFormatTableau["mailTuteurProfessionnel"])) {
+                $stage->setMailTuteurProfessionnel($stalternanceFormatTableau["mailTuteurProfessionnel"]);
             }
-            if(array_key_exists("mailTuteurProfessionnel", $stalternanceFormatTableau)){
-                 if(!empty($stalternanceFormatTableau["mailTuteurProfessionnel"])){
-                    $stage->setMailTuteurProfessionnel($stalternanceFormatTableau["mailTuteurProfessionnel"]);
-                 }
-            }
-            if(array_key_exists("datePublication", $stalternanceFormatTableau)){
-                $exp->setDatePublication($stalternanceFormatTableau["datePublication"]);
-            }
+        }
+        if (array_key_exists("datePublication", $stalternanceFormatTableau)) {
+            $exp->setDatePublication($stalternanceFormatTableau["datePublication"]);
+        }
         return $exp;
     }
 
-    public static function getAll() : array{
+    public static function getAll(): array
+    {
         $alternance = AlternanceRepository::getAll();
         $stage = StageRepository::getAll();
         $pdo = Model::getPdo();
-                $requestStatement = $pdo->query(" SELECT *
+        $requestStatement = $pdo->query(" SELECT *
                                                         FROM ExperienceProfessionnel e
                                                         WHERE NOT EXISTS (SELECT * FROM Stages
                                                         WHERE Stages.idStage = e.idExperienceProfessionnel)
                                                         AND NOT EXISTS (SELECT * FROM Alternances
                                                         WHERE Alternances.idAlternance = e.idExperienceProfessionnel)");
-                $stalternance = [];
-                foreach ($requestStatement as $alternanceTab) {
-                    $stalternance[] = self::construireDepuisTableau($alternanceTab);
-                }
-                $stage = array_merge($alternance, $stage);
+        $stalternance = [];
+        foreach ($requestStatement as $alternanceTab) {
+            $stalternance[] = self::construireDepuisTableau($alternanceTab);
+        }
+        $stage = array_merge($alternance, $stage);
         return array_merge($stalternance, $stage);
     }
 
-    public static function get(string $id) :?ExperienceProfessionnel {
-            $sql = "SELECT *
+    public static function get(string $id): ?ExperienceProfessionnel
+    {
+        $sql = "SELECT *
                     FROM ExperienceProfessionnel e
                     WHERE e.idExperienceProfessionnel = :id";
-            $pdoStatement = Model::getPdo()->prepare($sql);
+        $pdoStatement = Model::getPdo()->prepare($sql);
 
-            $values = array(
-                "id" => $id,
-            );
+        $values = array(
+            "id" => $id,
+        );
 
-            $pdoStatement->execute($values);
+        $pdoStatement->execute($values);
 
-            $stalternance = $pdoStatement->fetch();
+        $stalternance = $pdoStatement->fetch();
 
-            // S'il n'y a pas d'offre associée
-            if (! $stalternance) {
-                return null;
-            } else {
-                return ExperienceProfessionnelRepository::construireDepuisTableau($stalternance);
-            }
+        // S'il n'y a pas d'offre associée
+        if (!$stalternance) {
+            return null;
+        } else {
+            return ExperienceProfessionnelRepository::construireDepuisTableau($stalternance);
         }
+    }
 
-    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $stage = null, string $alternance = null, string $codePostal = null, string $datePublication = null) : array
+    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $stage = null, string $alternance = null, string $codePostal = null, string $datePublication = null): array
     {
         $tabStages = StageRepository::filtre($dateDebut, $dateFin, $optionTri, $codePostal, $datePublication);
         $tabAlternance = AlternanceRepository::filtre($dateDebut, $dateFin, $optionTri, $codePostal, $datePublication);
         //$tabStalternance =
-        if (isset($stage)){
+        if (isset($stage)) {
             return $tabStages;
-        }
-        elseif (isset($alternance)){
+        } elseif (isset($alternance)) {
             return $tabAlternance;
-        }
-        else{
+        } else {
             if (!isset($optionTri)) {
                 return array_merge($tabStages, $tabAlternance);
-            }else{
+            } else {
                 return self::sort($tabStages, $tabAlternance, $optionTri);
             }
 
         }
     }
 
-    private static function sort(array $stages, array $alternances, string $option): array{
-        if($option == "salaireCroissant" || $option == "salaireDecroissant" ){
+    private static function sort(array $stages, array $alternances, string $option): array
+    {
+        if ($option == "salaireCroissant" || $option == "salaireDecroissant") {
             return array_merge($stages, $alternances);
         }
         $allExperienceProfessionnel = array();
-        while(!empty($stages) && !empty($alternances)){
-            $order = match ($option){
+        while (!empty($stages) && !empty($alternances)) {
+            $order = match ($option) {
                 "datePublication" => strtotime($stages[0]->getDatePublication()) - strtotime($alternances[0]->getDatePublication()),
                 "datePublicationInverse" => strtotime($alternances[0]->getDatePublication()) - strtotime($stages[0]->getDatePublication())
             };
-            if($order<0){
+            if ($order < 0) {
                 $allExperienceProfessionnel[] = array_shift($stages);
-            }else{
+            } else {
                 $allExperienceProfessionnel[] = array_shift($alternances);
             }
         }
@@ -201,7 +204,8 @@ class ExperienceProfessionnelRepository {
         $pdoStatement->execute($values);
     }
 
-    public static function supprimer(ExperienceProfessionnel $exp): void {
+    public static function supprimer(ExperienceProfessionnel $exp): void
+    {
         $sql = "DELETE FROM ExperienceProfessionnel WHERE idExperienceProfessionnel= :idTag;";
 
         $pdoStatement = Model::getPdo()->prepare($sql);
@@ -213,7 +217,8 @@ class ExperienceProfessionnelRepository {
         $pdoStatement->execute($values);
     }
 
-    public static function search(string $keywords){
+    public static function search(string $keywords)
+    {
         $stage = StageRepository::search($keywords);
         $alternance = AlternanceRepository::search($keywords);
         $sql = "SELECT *
@@ -233,23 +238,24 @@ class ExperienceProfessionnelRepository {
                                                 WHERE Alternances.idAlternance = e.idExperienceProfessionnel)
                         ORDER BY datePublication
                         ";
-                $requestStatement = Model::getPdo()->prepare($sql);
+        $requestStatement = Model::getPdo()->prepare($sql);
 
-                $values = array(
-                    "keywordsTag" => '%' . $keywords . '%'
-                );
+        $values = array(
+            "keywordsTag" => '%' . $keywords . '%'
+        );
 
-                $requestStatement->execute($values);
+        $requestStatement->execute($values);
 
-                $stalternance = [];
-                foreach ($requestStatement as $stalternanceTab){
-                    $stalternance[] = self::construireDepuisTableau($stalternanceTab);
-                }
+        $stalternance = [];
+        foreach ($requestStatement as $stalternanceTab) {
+            $stalternance[] = self::construireDepuisTableau($stalternanceTab);
+        }
         $alternance = self::sort($alternance, $stalternance, "datePublication");
         return self::sort($alternance, $stage, "datePublication");
     }
 
-    public static function getDatePublication(string $id): string {
+    public static function getDatePublication(string $id): string
+    {
         $sql = "SELECT get_delay_experience(:id) AS delai_experience FROM ExperienceProfessionnel WHERE idExperienceProfessionnel = :id;";
         $pdoStatement = Model::getPdo()->prepare($sql);
         $values = array(

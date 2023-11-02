@@ -7,8 +7,10 @@
 </head>
 
 <?php
+
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\StageRepository;
+
 /* IL Y AVAIT CELA A LA PLACE DE echo $expPro->getNomExperienceProfessionnel();
 * DONC SI CA NE FONCTIONNE PLUS, C EST PEUT ETRE A CAUSE DE CA
 
@@ -22,20 +24,21 @@ echo htmlspecialchars($last_element) */
     <div class="header">
         <div class="information">
             <p class="bold typeExpPro"> <?php echo $expPro->getNomExperienceProfessionnel(); ?></p>
-            <p>du <?= htmlspecialchars($expPro->getDateDebutExperienceProfessionnel())?></p>
-            <p>au <?= htmlspecialchars($expPro->getDateFinExperienceProfessionnel())?></p>
+            <p>du <?= htmlspecialchars($expPro->getDateDebutExperienceProfessionnel()) ?></p>
+            <p>au <?= htmlspecialchars($expPro->getDateFinExperienceProfessionnel()) ?></p>
         </div>
         <div class="company">
             <h2><?php
                 $entreprise = (new EntrepriseRepository())->get($expPro->getSiret());
                 echo(htmlspecialchars($entreprise->getNomEntreprise()));
                 ?></h2>
-            <label><?= htmlspecialchars($expPro->getAdresseExperienceProfessionnel())?> / <?= htmlspecialchars($expPro->getCodePostalExperienceProfessionnel())?></label>
+            <label><?= htmlspecialchars($expPro->getAdresseExperienceProfessionnel()) ?>
+                / <?= htmlspecialchars($expPro->getCodePostalExperienceProfessionnel()) ?></label>
         </div>
     </div>
     <div id="main">
         <div id="infoOffer">
-            <p class="bold">Sujet : <?= htmlspecialchars($expPro->getSujetExperienceProfessionnel())?></p>
+            <p class="bold">Sujet : <?= htmlspecialchars($expPro->getSujetExperienceProfessionnel()) ?></p>
             <?php
             if ($expPro->getNomExperienceProfessionnel() == "Stage") {
                 ?>
@@ -46,8 +49,8 @@ echo htmlspecialchars($last_element) */
                 <?php
             }
             ?>
-            <p>Thématique : <?= htmlspecialchars($expPro->getThematiqueExperienceProfessionnel())?></p>
-            <p>Tâches : <?= htmlspecialchars($expPro->getTachesExperienceProfessionnel())?></p>
+            <p>Thématique : <?= htmlspecialchars($expPro->getThematiqueExperienceProfessionnel()) ?></p>
+            <p>Tâches : <?= htmlspecialchars($expPro->getTachesExperienceProfessionnel()) ?></p>
         </div>
 
         <div id="infoCompany">
@@ -55,14 +58,17 @@ echo htmlspecialchars($last_element) */
                 <li>Date de création de l'offre</li>
                 <li>Effectifs : <?php echo(htmlspecialchars($entreprise->getEffectifEntreprise())); ?></li>
                 <li>Téléphone : <?php echo(htmlspecialchars($entreprise->getTelephoneEntreprise())); ?></li>
-                <li><a href="https://<?php echo(htmlspecialchars($entreprise->getSiteWebEntreprise())); ?>" class="link">Site web</a></li>
+                <li><a href="https://<?php echo(htmlspecialchars($entreprise->getSiteWebEntreprise())); ?>"
+                       class="link">Site web</a></li>
             </ul>
         </div>
     </div>
 
     <a id="deleteButtonOrigin"><img src="assets/images/bin-icon.png" id="deleteIcon"></a>
-    <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel())?>"><img src="assets/images/edit-icon.png" id="editIcon"></a>
-    <a href="frontController.php?controller=ExpPro&action=getExpProByDefault"><img src="assets/images/back-icon.png" id="backIcon"></button> </a>
+    <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel()) ?>"><img
+                src="assets/images/edit-icon.png" id="editIcon"></a>
+    <a href="frontController.php?controller=ExpPro&action=getExpProByDefault"><img src="assets/images/back-icon.png"
+                                                                                   id="backIcon"></button> </a>
 
     <button id="apply">Postuler</button>
 </div>
@@ -72,8 +78,13 @@ echo htmlspecialchars($last_element) */
     <div id="popUpDeleteContent">
         <p>Êtes-vous sûr de vouloir supprimer cette offre ?</p>
         <div>
-            <a class="popUpDeleteButton"><button id="popUpDeleteNo">Non</button></a>
-            <a class="popUpDeleteButton" href="frontController.php?controller=ExpPro&action=supprimerOffre&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel())?>"><button id="popUpDeleteYes">Oui</button></a>
+            <a class="popUpDeleteButton">
+                <button id="popUpDeleteNo">Non</button>
+            </a>
+            <a class="popUpDeleteButton"
+               href="frontController.php?controller=ExpPro&action=supprimerOffre&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel()) ?>">
+                <button id="popUpDeleteYes">Oui</button>
+            </a>
         </div>
     </div>
 </div>

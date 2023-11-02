@@ -97,8 +97,8 @@ class Etudiant extends AbstractDataObject
     }
 
 
-
-    public function formatTableau(): array{
+    public function formatTableau(): array
+    {
         return array(
             "numEtudiantTag" => $this->numEtudiant,
             "prenomEtudiantTag" => $this->prenomEtudiant,

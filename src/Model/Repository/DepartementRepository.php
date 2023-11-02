@@ -1,12 +1,14 @@
 <?php
+
 namespace App\SAE\Model\Repository;
 
 use App\SAE\Model\DataObject\Departement;
 use App\SAE\Model\DataObject\AbstractDataObject;
 
-class DepartementRepository extends AbstractRepository{
+class DepartementRepository extends AbstractRepository
+{
 
-    public function save (AbstractDataObject|Departement $departement) : bool
+    public function save(AbstractDataObject|Departement $departement): bool
     {
         try {
             if ($this->getByNom($departement->getNomDepartement()) == null) {
@@ -25,9 +27,10 @@ class DepartementRepository extends AbstractRepository{
         }
     }
 
-    protected function construireDepuisTableau(array $departementFormatTableau): Departement {
+    protected function construireDepuisTableau(array $departementFormatTableau): Departement
+    {
         $departement = new Departement($departementFormatTableau["nomDepartement"]);
-        if(isset($departementFormatTableau["codeDepartement"])){
+        if (isset($departementFormatTableau["codeDepartement"])) {
             $departement->setCodeDepartement($departementFormatTableau["codeDepartement"]);
         }
 
@@ -39,13 +42,14 @@ class DepartementRepository extends AbstractRepository{
         $pdo = Model::getPdo();
         $sql = "SELECT * FROM Departements WHERE nomDepartement = :nomAnnee";
         $requestStatement = $pdo->prepare($sql);
-        $values = array("nomAnnee" =>$nom);
+        $values = array("nomAnnee" => $nom);
         $requestStatement->execute($values);
         $Departement = $requestStatement->fetch();
         return $Departement;
     }
 
-    public function getByNom(string $nom): ?Departement{
+    public function getByNom(string $nom): ?Departement
+    {
         $pdo = Model::getPdo();
         $sql = "SELECT * FROM Departements WHERE nomDepartement = :nomDepartementTag";
         $requestStatement = $pdo->prepare($sql);
@@ -54,16 +58,17 @@ class DepartementRepository extends AbstractRepository{
         );
         $requestStatement->execute($values);
         $tableauDepartement = $requestStatement->fetch();
-        if($tableauDepartement!=null){
+        if ($tableauDepartement != null) {
             $departement = $this->construireDepuisTableau($tableauDepartement);
-        }else{
+        } else {
             $departement = null;
         }
         return $departement;
     }
 
 
-    protected function getNomClePrimaire(): string {
+    protected function getNomClePrimaire(): string
+    {
         return "codeDepartement";
     }
 
@@ -72,7 +77,8 @@ class DepartementRepository extends AbstractRepository{
         return "Departements";
     }
 
-    protected function getNomsColonnes(): array {
+    protected function getNomsColonnes(): array
+    {
         return array("codeDepartement", "nomDepartement");
     }
 }

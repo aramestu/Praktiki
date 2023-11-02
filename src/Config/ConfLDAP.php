@@ -1,10 +1,12 @@
 <?php
 
 namespace App\SAE\Config;
+
 use Exception;
 use LDAP\Connection;
 
-class ConfLDAP{
+class ConfLDAP
+{
 
     static private array $ldapConfig = array(
         'ldap_host' => '10.10.1.30',
@@ -13,19 +15,23 @@ class ConfLDAP{
         'ldap_conn' => 'false'
     );
 
-    static public function getHost() {
+    static public function getHost()
+    {
         return self::$ldapConfig['ldap_host'];
     }
 
-    static public function getBasedn() {
+    static public function getBasedn()
+    {
         return self::$ldapConfig['ldap_basedn'];
     }
 
-    static public function getPort() {
+    static public function getPort()
+    {
         return self::$ldapConfig['ldap_port'];
     }
 
-    static public function getConnection() {
+    static public function getConnection()
+    {
         return self::$ldapConfig['ldap_conn'];
     }
 
@@ -39,8 +45,7 @@ class ConfLDAP{
             ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, 3);
             self::$ldapConfig['ldap_conn'] = $ldap_conn;
             return $ldap_conn;
-        }
-        else{
+        } else {
             throw new Exception('LDAP connection');
         }
     }

@@ -1,7 +1,9 @@
 <?php
+
 namespace App\SAE\Model\DataObject;
 
-class Enseignant extends AbstractDataObject {
+class Enseignant extends AbstractDataObject
+{
     private string $mailEnseignant;
     private string $nomEnseignant;
     private string $prenomEnseignant;
@@ -45,7 +47,8 @@ class Enseignant extends AbstractDataObject {
         $this->prenomEnseignant = $prenomEnseignant;
     }
 
-    public function formatTableau(): array{
+    public function formatTableau(): array
+    {
         return array(
             "mailEnseignantTag" => $this->mailEnseignant,
             "nomEnseignantTag" => $this->nomEnseignant,

@@ -1,10 +1,12 @@
 <?php
+
 namespace App\SAE\Model\Repository;
 
 use App\SAE\Model\DataObject\AnneeUniversitaire;
 use App\SAE\Model\DataObject\AbstractDataObject;
 
-class AnneeUniversitaireRepository extends AbstractRepository {
+class AnneeUniversitaireRepository extends AbstractRepository
+{
 
     public function save(AbstractDataObject|AnneeUniversitaire $anneeUniversitaire): bool
     {
@@ -28,37 +30,41 @@ class AnneeUniversitaireRepository extends AbstractRepository {
     protected function construireDepuisTableau(array $anneeUniversitaireFormatTableau): AnneeUniversitaire
     {
         $anneeUniversitaire = new AnneeUniversitaire($anneeUniversitaireFormatTableau["nomAnneeUniversitaire"]);
-        if(isset($anneeUniversitaireFormatTableau["idAnneeUniversitaire"])){
+        if (isset($anneeUniversitaireFormatTableau["idAnneeUniversitaire"])) {
             $anneeUniversitaire->setIdAnneeUniversitaire($anneeUniversitaireFormatTableau["idAnneeUniversitaire"]);
         }
 
         return $anneeUniversitaire;
     }
 
-    public function getByNom(string $nom): ?AnneeUniversitaire{
+    public function getByNom(string $nom): ?AnneeUniversitaire
+    {
         $pdo = Model::getPdo();
         $sql = "SELECT * FROM AnneeUniversitaire WHERE nomAnneeUniversitaire = :nomAnnee";
         $requestStatement = $pdo->prepare($sql);
-        $values = array("nomAnnee" =>$nom);
+        $values = array("nomAnnee" => $nom);
         $requestStatement->execute($values);
         $tableauAnneeUniversitaire = $requestStatement->fetch();
-        if($tableauAnneeUniversitaire!=null){
+        if ($tableauAnneeUniversitaire != null) {
             $anneeUniversitaire = $this->construireDepuisTableau($tableauAnneeUniversitaire);
-        }else{
+        } else {
             $anneeUniversitaire = null;
         }
         return $anneeUniversitaire;
     }
 
-    protected function getNomTable(): string {
+    protected function getNomTable(): string
+    {
         return "AnneeUniversitaire";
     }
 
-    protected function getNomClePrimaire(): string {
+    protected function getNomClePrimaire(): string
+    {
         return "idAnneeUniversitaire";
     }
 
-    protected function getNomsColonnes(): array {
+    protected function getNomsColonnes(): array
+    {
         return array("idAnneeUniversitaire", "nomAnneeUniversitaire");
     }
 }

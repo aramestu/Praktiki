@@ -8,9 +8,11 @@
 </div>
 <div class="container">
     <?php
+
     use App\SAE\Model\Repository\EntrepriseRepository;
+
     $listEntreprises = EntrepriseRepository::getEntrepriseValide();
-    foreach ($listEntreprises as $entreprise){
+    foreach ($listEntreprises as $entreprise) {
         require "company.php";
     }
     ?>

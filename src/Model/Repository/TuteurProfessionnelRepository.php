@@ -18,11 +18,13 @@ class TuteurProfessionnelRepository extends AbstractRepository
         return $tuteur;
     }
 
-    protected function getNomClePrimaire(): string {
+    protected function getNomClePrimaire(): string
+    {
         return "mailTuteurProfessionnel";
     }
 
-    protected function getNomsColonnes(): array {
+    protected function getNomsColonnes(): array
+    {
         return array("mailTuteurProfessionnel", "prenomTuteurProfessionnel", "nomTuteurProfessionnel", "fonctionTuteurProfessionnel", "telephoneTuteurProfessionnel");
     }
 }

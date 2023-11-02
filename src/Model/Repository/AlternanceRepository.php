@@ -98,7 +98,8 @@ class AlternanceRepository
         ExperienceProfessionnelRepository::mettreAJour($alternance);
     }
 
-    public static function supprimer(Alternance $alternance): void {
+    public static function supprimer(Alternance $alternance): void
+    {
         $sql = "DELETE FROM Alternances WHERE idAlternance= :idTag;";
         $pdoStatement = Model::getPdo()->prepare($sql);
 

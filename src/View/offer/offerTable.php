@@ -1,7 +1,7 @@
 <div class="tableResponsive">
-<?php
-foreach($listeExpPro as $expPro){
-    require 'smallOffer.php';
-}
-?>
+    <?php
+    foreach ($listeExpPro as $expPro) {
+        require 'smallOffer.php';
+    }
+    ?>
 </div>

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\SAE\Model\DataObject;
 
 class TuteurProfessionnel extends AbstractDataObject
@@ -11,7 +12,7 @@ class TuteurProfessionnel extends AbstractDataObject
 
 
     public function __construct(string $mailTuteurProfessionnel, string $prenomTuteurProfessionnel, string $nomTuteurProfessionnel
-        , string $fonctionTuteurProfessionnel, string $telephoneTuteur)
+        , string                       $fonctionTuteurProfessionnel, string $telephoneTuteur)
     {
         $this->mailTuteurProfessionnel = $mailTuteurProfessionnel;
         $this->prenomTuteurProfessionnel = $prenomTuteurProfessionnel;
@@ -72,7 +73,8 @@ class TuteurProfessionnel extends AbstractDataObject
     }
 
 
-    public function formatTableau(): array {
+    public function formatTableau(): array
+    {
         return array(
             "mailTuteurProfessionnelTag" => $this->mailTuteurProfessionnel,
             "prenomTuteurProfessionnelTag" => $this->prenomTuteurProfessionnel,

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\SAE\Model\DataObject;
 
 class Inscription extends AbstractDataObject
@@ -44,7 +45,8 @@ class Inscription extends AbstractDataObject
         $this->codeDepartement = $codeDepartement;
     }
 
-    public function formatTableau(): array {
+    public function formatTableau(): array
+    {
         return array(
             "numEtudiantTag" => $this->numEtudiant,
             "idAnneeUniversitaireTag" => $this->idAnneeUniversitaire,

@@ -7,7 +7,8 @@ class AnneeUniversitaire extends AbstractDataObject
     private string $idAnneeUniversitaire;
     private string $nomAnneeUniversitaire;
 
-    public function __construct(string $nomAnneeUniversitaire) {
+    public function __construct(string $nomAnneeUniversitaire)
+    {
         $this->nomAnneeUniversitaire = $nomAnneeUniversitaire;
     }
 
@@ -31,7 +32,8 @@ class AnneeUniversitaire extends AbstractDataObject
         $this->nomAnneeUniversitaire = $nomAnneeUniversitaire;
     }
 
-    public function formatTableau(): array{
+    public function formatTableau(): array
+    {
         return array(
             "idAnneeUniversitaireTag" => $this->idAnneeUniversitaire,
             "nomAnneeUniversitaireTag" => $this->nomAnneeUniversitaire

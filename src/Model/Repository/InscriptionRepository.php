@@ -6,9 +6,11 @@ use App\SAE\Model\DataObject\AnneeUniversitaire;
 use App\SAE\Model\DataObject\Departement;
 use App\SAE\Model\DataObject\Inscription;
 
-class InscriptionRepository extends AbstractRepository {
+class InscriptionRepository extends AbstractRepository
+{
 
-    public static function getIdDep($nomDepartement){
+    public static function getIdDep($nomDepartement)
+    {
         $pdo = Model::getPdo();
         $sqlDepartement = "SELECT codeDepartement FROM Departements WHERE nomDepartement = :nomDepartement";
         $stmtDepartement = $pdo->prepare($sqlDepartement);
@@ -17,7 +19,8 @@ class InscriptionRepository extends AbstractRepository {
         return $idDepartement;
     }
 
-    public static function getIdAnnee($anneeUniversitaire){
+    public static function getIdAnnee($anneeUniversitaire)
+    {
         $pdo = Model::getPdo();
         $sqlAnnee = "SELECT idAnneeUniversitaire FROM AnneeUniversitaire WHERE nomAnneeUniversitaire = :nomAnnee";
         $stmtAnnee = $pdo->prepare($sqlAnnee);
@@ -34,16 +37,19 @@ class InscriptionRepository extends AbstractRepository {
         return $Inscription;
     }
 
-    protected function getNomTable(): string {
+    protected function getNomTable(): string
+    {
         return "Inscriptions";
     }
 
 
-    protected function getNomClePrimaire(): string {
+    protected function getNomClePrimaire(): string
+    {
         return "numEtudiant";
     }
 
-    protected function getNomsColonnes(): array {
+    protected function getNomsColonnes(): array
+    {
         return array("numEtudiant", "idAnneeUniversitaire", "codeDepartement");
     }
 }

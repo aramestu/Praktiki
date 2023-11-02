@@ -6,7 +6,9 @@
     <br>
     <br>
     <p>
-        <a href="frontController.php?action=home"><button type="button" class="btn btn-primary">Retourner à l'accueil</button></a>
+        <a href="frontController.php?action=home">
+            <button type="button" class="btn btn-primary">Retourner à l'accueil</button>
+        </a>
     </p>
 </div>
 

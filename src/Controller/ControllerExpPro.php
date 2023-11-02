@@ -8,7 +8,8 @@ use App\SAE\Model\Repository\StageRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 use App\SAE\Model\DataObject\Stage;
 
-class ControllerExpPro extends ControllerGenerique{
+class ControllerExpPro extends ControllerGenerique
+{
     public static function getExpProByDefault(): void
     {
         $listeExpPro = ExperienceProfessionnelRepository::search("");
@@ -45,25 +46,25 @@ class ControllerExpPro extends ControllerGenerique{
         $alternance = null;
         $codePostal = null;
         $datePublication = null;
-        if (isset($_GET['dateDebut'])){
+        if (isset($_GET['dateDebut'])) {
             $dateDebut = $_GET['dateDebut'];
         }
-        if (isset($_GET['dateFin'])){
+        if (isset($_GET['dateFin'])) {
             $dateFin = $_GET['dateFin'];
         }
-        if (isset($_GET['optionTri'])){
+        if (isset($_GET['optionTri'])) {
             $optionTri = $_GET['optionTri'];
         }
-        if (isset($_GET['stage'])){
+        if (isset($_GET['stage'])) {
             $stage = $_GET['stage'];
         }
-        if (isset($_GET['alternance'])){
+        if (isset($_GET['alternance'])) {
             $alternance = $_GET['alternance'];
         }
-        if (isset($_GET['codePostal'])){
+        if (isset($_GET['codePostal'])) {
             $codePostal = $_GET['codePostal'];
         }
-        if (isset($_GET['datePublication'])){
+        if (isset($_GET['datePublication'])) {
             $datePublication = $_GET['datePublication'];
         }
         $listeExpPro = ExperienceProfessionnelRepository::filtre($dateDebut, $dateFin, $optionTri, $stage, $alternance, $codePostal, $datePublication);
@@ -104,12 +105,12 @@ class ControllerExpPro extends ControllerGenerique{
             AlternanceRepository::mettreAJour($alternance);
             self::afficherVueEndOffer($msg); // Redirection vers une page
         } // Si c'est une stalternance
-        elseif ($_POST["typeOffre"] == "stalternance"  || $_POST["typeOffre"] == "Non définie") {
-                    $tab["idExpPro"] = $_POST["id"];
-                    $stalternance = ExperienceProfessionnelRepository::construireDepuisTableau($tab);
-                    ExperienceProfessionnelRepository::mettreAJour($stalternance);
-                    self::afficherVueEndOffer($msg); // Redirection vers une page
-                } // Si ce n'est aucun des 3 alors ce n'est pas normal
+        elseif ($_POST["typeOffre"] == "stalternance" || $_POST["typeOffre"] == "Non définie") {
+            $tab["idExpPro"] = $_POST["id"];
+            $stalternance = ExperienceProfessionnelRepository::construireDepuisTableau($tab);
+            ExperienceProfessionnelRepository::mettreAJour($stalternance);
+            self::afficherVueEndOffer($msg); // Redirection vers une page
+        } // Si ce n'est aucun des 3 alors ce n'est pas normal
         else {
             ControllerGenerique::error("Ce type d'offre n'existe pas");
         }
@@ -250,7 +251,8 @@ class ControllerExpPro extends ControllerGenerique{
         }
     }
 
-    public static function supprimerOffre(): void {
+    public static function supprimerOffre(): void
+    {
         $idExpPro = $_GET["experiencePro"];
         $stage = StageRepository::get($idExpPro);
 
