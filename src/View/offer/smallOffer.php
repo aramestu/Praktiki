@@ -1,15 +1,6 @@
 <?php
 
 use App\SAE\Model\Repository\EntrepriseRepository;
-
-/* IL Y AVAIT CELA A LA PLACE DE echo $expPro->getNomExperienceProfessionnel();
-* DONC SI CA NE FONCTIONNE PLUS, C EST PEUT ETRE A CAUSE DE CA
-
-$full_path = get_class($expPro);
-$elements = explode('\\', $full_path);
-$last_element = end($elements);
-echo htmlspecialchars($last_element) */
-
 ?>
 <a href="frontController.php?controller=ExpPro&action=afficherOffre&experiencePro= <?php echo rawurlencode($expPro->getIdExperienceProfessionnel()) ?> "
    style="text-decoration:none" id="offerButton">
