@@ -8,10 +8,6 @@
 </div>
 <div id="mainContainer" class="subContainer">
     <?php
-
-    use App\SAE\Model\Repository\EntrepriseRepository;
-
-    $listEntreprises = EntrepriseRepository::getEntrepriseEnAttente();
     foreach ($listEntreprises as $entreprise) {
         require "company.php";
     }

@@ -28,38 +28,65 @@ class EntrepriseRepository extends AbstractRepository
         return array("siret", "nomEntreprise", "codePostalEntreprise", "effectifEntreprise", "telephoneEntreprise", "siteWebEntreprise", "estValide");
     }
 
-    private static function getEntrepriseAvecEtat(bool $etat)
+    /*
+     * - etat : true = validé et false = en attente
+     * - keywords : mot clé que l'on recherche dans les données des entreprises pour filtrer
+     * - codePostalEntreprise : filtre par code postal
+     * - effectifEntreprise : filtre et trie décroissant.
+     *      Affiche les entreprises qui ont un effectif inférieur à celui renseigné par l'utilisateur
+     *  Renvoi une liste des entreprises en fonction de leur état (validé ou en attente)
+     */
+    private function getEntrepriseAvecEtatFiltree(bool $etat, string $keywords = null, string $codePostalEntreprise = null, string $effectifEntreprise = null): array
     {
         $sql = "SELECT *
                 FROM Entreprises e
-                WHERE e.estValide = :etatTag";
-
-        $request = Model::getPdo()->prepare($sql);
+                WHERE e.estValide = :etatTag ";
 
         $values = array(
             "etatTag" => $etat
         );
 
+        // S'il y a un mot clé alors on filtre sinon non
+        if(! is_null($keywords) && $keywords != ""){
+            $sql .= " AND " . $this->colonneToSearch(array("siret", "nomEntreprise"));
+            $values["keywordsTag"] = '%' . $keywords . '%';
+        }
+        echo $codePostalEntreprise;
+        echo $effectifEntreprise;
+        // Si un codePostal a été renseigné alors on filtre par ça
+        if(! is_null($codePostalEntreprise) && $codePostalEntreprise != ""){
+            echo 'here';
+            $sql .= " AND codePostalEntreprise = :codePostalEntrepriseTag ";
+            $values["codePostalEntrepriseTag"] = $codePostalEntreprise;
+        }
+
+        // Si un effectif a été renseigné alors on filtre par ça
+        if(! is_null($effectifEntreprise) && $effectifEntreprise != ""){
+            $sql .= " AND effectifEntreprise <= :effectifEntrepriseTag ORDER BY effectifEntreprise, nomEntreprise ";
+            $values["effectifEntrepriseTag"] = $effectifEntreprise;
+        }
+
+        $request = Model::getPdo()->prepare($sql);
+
         $request->execute($values);
 
-        $entrepriseRepository = new EntrepriseRepository();
         $objects = [];
         foreach ($request as $objectFormatTableau) {
-            $objects[] = $entrepriseRepository->construireDepuisTableau($objectFormatTableau);
+            $objects[] = $this->construireDepuisTableau($objectFormatTableau);
         }
         return $objects;
     }
 
-    /* Retourne la liste des entreprises qui n'ont pas encore été validé */
-    public static function getEntrepriseEnAttente(): array
+    /* Retourne la liste des entreprises qui n'ont pas encore été validé + filtre */
+    public function getEntrepriseEnAttenteFiltree( string $keywords = null, string $codePostalEntreprise = null, string $effectifEntreprise = null): array
     {
-        return self::getEntrepriseAvecEtat(false);
+        return self::getEntrepriseAvecEtatFiltree(false, $keywords, $codePostalEntreprise, $effectifEntreprise);
     }
 
-    /* Retourne la liste des entreprises qui ont été validée */
-    public static function getEntrepriseValide(): array
+    /* Retourne la liste des entreprises qui ont été validée + filtre */
+    public function getEntrepriseValideFiltree( string $keywords = null, string $codePostalEntreprise = null, string $effectifEntreprise = null): array
     {
-        return self::getEntrepriseAvecEtat(true);
+        return self::getEntrepriseAvecEtatFiltree(true, $keywords, $codePostalEntreprise, $effectifEntreprise);
     }
 
     /* Modifie l'état d'une entreprise, cad qu'elle peut être :

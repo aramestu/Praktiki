@@ -95,6 +95,33 @@ abstract class AbstractRepository {
         }
     }
 
+    /*
+     * Retourne un string. Utilisé dans la clause
+     * WHERE d'une requête SQL de recherche avec un LIKE.
+     * notamment pour la fonction search
+     * ex: sujetExperienceProfessionnel LIKE :keywordsTag OR ...
+    */
+    protected function colonneToSearch(array $colonnes = null) :string {
+        $chaine = " (";
+        $nbColonnes = sizeof($colonnes);
+
+        // Si c'est vide alors je fais sur toutes les colonnes
+        if($nbColonnes == 0 || is_null($colonnes)){
+            $colonnes = $this->getNomsColonnes();
+            $nbColonnes = sizeof($colonnes);
+        }
+
+        for($i = 0; $i < $nbColonnes; $i++){
+            // SI ce n'est pas le premier alors je met un OR
+            if($i != 0){
+                $chaine = $chaine . "OR ";
+            }
+
+            $chaine = $chaine . "$colonnes[$i] LIKE :keywordsTag ";
+        }
+        return $chaine . ") ";
+    }
+
     protected abstract function getNomTable() : string;
     protected abstract function construireDepuisTableau(array $objetFormatTableau) : AbstractDataObject;
     protected abstract function getNomClePrimaire():string;

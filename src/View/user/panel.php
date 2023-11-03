@@ -18,13 +18,13 @@
         <p><a href="">
                 <button type="button" class="btn btn-primary">Liste des offres en Attentes</button>
             </a></p>
-        <p><a href="frontController.php?action=afficherListeEntrepriseEnAttente&controller=Entreprise">
+        <p><a href="frontController.php?action=afficherListeEntrepriseEnAttenteFiltree&controller=Entreprise">
                 <button type="button" class="btn btn-primary">Liste des entreprises en Attentes</button>
             </a></p>
         <p><a href="frontController.php?action=getExpProByDefault&controller=ExpPro">
                 <button type="button" class="btn btn-primary">Liste des offres</button>
             </a></p>
-        <p><a href="frontController.php?action=afficherListeEntrepriseValide&controller=Entreprise">
+        <p><a href="frontController.php?action=afficherListeEntrepriseValideFiltree&controller=Entreprise">
                 <button type="button" class="btn btn-primary">Liste des Entreprise</button>
             </a></p>
         <p><a href="frontController.php?action=import">
