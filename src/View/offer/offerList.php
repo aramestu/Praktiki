@@ -58,7 +58,7 @@
 
 
             <label for="codePostal">Code Postal</label>
-            <input type="number" id="codePostal" name="codePostal" pattern="[0-9]{5}" maxlength="5" placeholder="34090">
+            <input type="number" id="codePostal" name="codePostal"  min="0" max="99999" placeholder="34090">
 
             <select name="optionTri" id="optionTri">
                 <option value="" disabled selected style="display:none;">Trier par</option>

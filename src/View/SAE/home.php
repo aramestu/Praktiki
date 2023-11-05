@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -13,6 +13,7 @@
     <legend>Zone de test</legend>
     <p>
         <a href="frontController.php?controller=ExpPro&action=createOffer">
+            <!--TODO: demander pour JS button   onclick="location.href = 'frontController.php?controller=ExpPro&action=createOffer'"-->
             <button type="button" class="btn btn-primary">Créer une offre</button>
         </a>
     </p>

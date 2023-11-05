@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title><?= $pagetitle ?></title>
     <link rel="icon" href="assets/images/favicon.ico">
 
-    <link id="theme" rel="stylesheet" type="text/css" href="assets/css/mainIUT.css"/>
+    <link id="theme" rel="stylesheet" type="text/css" href="assets/css/mainIUT.css">
     <link rel="stylesheet" href="assets/css/charte-graphique-UM.css">
 
     <script src="assets/javascript/navbar.js"></script>
@@ -16,7 +16,7 @@
 
 <header>
 
-    <img id="logoToggle" href="#" class="logo" src="assets/images/LOGO_UM_filet-blanc.png"/>
+    <img id="logoToggle" class="logo" src="assets/images/LOGO_UM_filet-blanc.png" alt="File not found">
 
     <div class="burger">
         <span></span>

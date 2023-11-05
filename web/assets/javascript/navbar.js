@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
         burger.classList.toggle('active');
         document.querySelector('.navbar').classList.toggle('active');
         if (!document.querySelector('.navbar').classList.contains('active')) {
-            document.querySelector('.navbar').classList.toggle('active');;
+            document.querySelector('.navbar').classList.toggle('active');
             document.querySelector('.navbar').style = "height:";
             setTimeout(() => {
                 document.querySelector('.navbar').classList.toggle('active');
