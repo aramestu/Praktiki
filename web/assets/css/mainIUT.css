@@ -381,6 +381,11 @@ textarea {
     color: var(--darkBlue1);
 }
 
+span:hover,
+select{
+    cursor: pointer;
+}
+
 textarea{
     resize: none;
 }
