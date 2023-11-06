@@ -81,44 +81,44 @@ class ControllerEntreprise extends ControllerGenerique
                 $mp2 = hash("sha256", $_REQUEST["password"]);
                 if (MotDePasse::verifier($_REQUEST["password"], $user->formatTableau()["mdpHacheTag"])) {
                     ConnexionEntreprise::connecter($_REQUEST["username"]);
-                    self::afficheVue("view.php", [
-                        "pagetitle" => "Entreprise connecté",
-                        "cheminVueBody" => "SAE/home.php"
-                    ]);
+                    self::redirectionVersURL("success", "Connexion réussie", "home");
                 } else {
-                    self::afficheVue("view.php", [
-                        "pagetitle" => "Connexion",
-                        "cheminVueBody" => "SAE/error.php",
-                        "messageErreur" => $mp1 . " et " . $mp2
-                    ]);
+                    self::redirectionVersURL("warning", "Mot de passe incorrect" , "connect");
                 }
+            } else{
+                self::redirectionVersURL("warning", "Login incorrect", "connect");
             }
         } else {
-            self::afficheVue("view.php", [
-                "pagetitle" => "Connexion",
-                "cheminVueBody" => "SAE/error.php",
-                "messageErreur" => "Impossible de se connecter"
-            ]);
+            self::redirectionVersURL("warning", "Remplissez les champs libres", "connect");
         }
     }
 
-    public static function disconnect(){
+    public static function disconnect()
+    {
         ConnexionEntreprise::deconnecter();
-        self::home();
+        self::redirectionVersURL("success", "Déconnexion réussie", "home");
     }
 
     public static function creerDepuisFormulaire(): void
     {
-        if (isset($_REQUEST["siret"]) > 0 && $_REQUEST["postcode"] > 0 && $_REQUEST["effectif"] > 0 && $_REQUEST["telephone"] > 0 ) {
-            $user = Entreprise::construireDepuisFormulaire($_REQUEST);
-            (new EntrepriseRepository())->sauvegarder($user);
-            self::afficheVue("view.php", [
-                "pagetitle" => "Entreprise créee",
-                "cheminVueBody" => "SAE/home.php"
-            ]);
+        if (($_REQUEST["siret"]) > 0) {
+            if ($_REQUEST["postcode"] > 0) {
+                if($_REQUEST["effectif"] > 0 ) {
+                    if($_REQUEST["telephone"] > 0){
+                    $user = Entreprise::construireDepuisFormulaire($_REQUEST);
+                    (new EntrepriseRepository())->sauvegarder($user);
+                    self::redirectionVersURL("success", "Entreprise créée", "home");
+                    }else {
+                        self::redirectionVersURL("warning", "Telephone incorrect", "createAccount");
+                    }
+                } else {
+                    self::redirectionVersURL("warning", "Effectif ", "createAccount");
+                }
+            } else {
+                self::redirectionVersURL("warning", "Code postal incorrect", "createAccount");
+            }
         } else {
-            self::afficheVue("view.php", ["pagetitle" => "Créer une entreprise",
-                "cheminVueBody" => "user/createAccount.php"]);
+            self::redirectionVersURL("warning ", "Siret incorrect", "createAccount");
         }
     }
 }

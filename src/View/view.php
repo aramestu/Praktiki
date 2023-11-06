@@ -42,6 +42,9 @@
 
 <main>
     <?php
+    foreach (\App\SAE\Lib\MessageFlash::lireTousMessages() as $type => $lireMessage) {
+        echo '<div class="alert alert-'.$type.'">'.$lireMessage.'</div>';
+    }
     require __DIR__ . "/{$cheminVueBody}";
     ?>
 </main>
