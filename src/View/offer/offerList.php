@@ -15,7 +15,7 @@
         <input type="hidden" name="controller" value="ExpPro">
         <input type="text" placeholder="Rechercher une offre" name="keywords" id="search-bar" <?php
         if (isset($_GET["keywords"])) {
-            echo "value=\"" . $_GET['keywords'] . "\"";
+            echo "value=\"" . rawurldecode($_GET['keywords']) . "\"";
         }
         ?>>
 
