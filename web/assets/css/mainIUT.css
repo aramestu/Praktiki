@@ -546,34 +546,70 @@ footer > VBox{
 /*---END FOOTER---*/
 
 /*---START MESSAGEFLASH---*/
+
 .alert {
+    opacity: 0;
+    position : absolute;
+    top : 90px;
     padding: 15px;
     margin-bottom: 20px;
     border: 1px solid transparent;
-    border-radius: 4px;
+    border-radius: 1.5rem;
+    z-index: 5;
+    animation: slideDown 1s, fadeOut 2.5s 1s;
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translateY(-100%);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        z-index: 5;
+    }
+    90% {
+        opacity: 1;
+        z-index: 5;
+    }
+    99% {
+        opacity: 0;
+        z-index: 5;
+    }
+    100% {
+        opacity: 0;
+        z-index: -1;
+    }
 }
 
 .alert-success {
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
+    color: var(--darkGreen);
+    background-color: var(--lightpastelGreen);
+    border-color: var(--pastelGreen);
 }
 
 .alert-info {
-    color: #31708f;
-    background-color: #d9edf7;
-    border-color: #bce8f1;
+    color: var(--darkBlue);
+    background-color: var(--lightpastelBlue);
+    border-color: var(--pastelBlue);
 }
 
 .alert-warning {
-    color: #8a6d3b;
-    background-color: #fcf8e3;
-    border-color: #faebcc;
+    color: var(--darkYellow);
+    background-color: var(--lightpastelYellow);
+    border-color: var(--pastelYellow);
 }
 
 .alert-danger {
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
+    color: var(--darkRed);
+    background-color: var(--lightpastelRed);
+    border-color: var(--pastelRed);
 }
 /*---END MESSAGEFLASH---*/
