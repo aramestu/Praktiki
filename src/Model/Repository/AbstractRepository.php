@@ -2,6 +2,7 @@
 
 namespace App\SAE\Model\Repository;
 
+use App\SAE\Controller\ControllerGenerique;
 use App\SAE\Model\DataObject\AbstractDataObject;
 
 abstract class AbstractRepository {
@@ -91,6 +92,28 @@ abstract class AbstractRepository {
             $requeteStatement->execute($object->formatTableau());
             return true;
         } catch (\PDOException $e) {
+            return false;
+        }
+    }
+
+    public function sauvegarder(AbstractDataObject $object): bool
+    {
+        // on suppose que les attributs sont tous non nuls
+        try {
+            $sql = "INSERT INTO ".$this->getNomTable()." VALUES (";
+            $colonnes = $this->getNomsColonnes();
+            foreach ($colonnes as $nomsColonne) {
+                if ($nomsColonne!=$this->getNomsColonnes()[0]){
+                    $sql.=",";
+                }
+                $sql.=":".$nomsColonne."Tag";
+                $values[$nomsColonne."Tag"]=$object->formatTableau()[$nomsColonne."Tag"];
+            }
+            $sql.=")";
+            $requeteStatement = Model::getPdo()->prepare($sql);
+            $requeteStatement->execute($values);
+            return true;
+        } catch (PDOException $e) {
             return false;
         }
     }

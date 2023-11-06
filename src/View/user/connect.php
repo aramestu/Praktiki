@@ -25,8 +25,8 @@
             <button type="button" id="showPassword"><img id="showPasswordIconConnect" src="assets/images/eye-icon.png" alt="O"></button>
         </div>
         <p>
-            <input type="hidden" name="action" value="verify">
-            <input type="hidden" name="controller" value="LDAP">
+            <input type="hidden" name="action" value="connecter">
+            <input type="hidden" name="controller" value="Entreprise">
             <input type="submit" value="Connexion">
         </p>
     </form>

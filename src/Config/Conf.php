@@ -58,4 +58,8 @@ class Conf
         return mysqli_connect(self::getHostName(), self::getLogin(), self::getPassword(), self::getDataBase());
     }
 
+    public static function getDelai(){
+        return 30*60;
+    }
+
 }

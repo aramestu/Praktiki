@@ -2,6 +2,8 @@
 
 namespace App\SAE\Model\Repository;
 
+use App\SAE\Lib\MotDePasse;
+use App\SAE\Model\DataObject\AbstractDataObject;
 use App\SAE\Model\DataObject\Entreprise;
 
 class EntrepriseRepository extends AbstractRepository
@@ -9,7 +11,15 @@ class EntrepriseRepository extends AbstractRepository
 
     protected function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise
     {
-        $entreprise = new Entreprise($entrepriseFormatTableau["siret"], $entrepriseFormatTableau["nomEntreprise"], $entrepriseFormatTableau["codePostalEntreprise"], $entrepriseFormatTableau["effectifEntreprise"], $entrepriseFormatTableau["telephoneEntreprise"], $entrepriseFormatTableau["siteWebEntreprise"], $entrepriseFormatTableau["estValide"]);
+        $entreprise = new Entreprise(
+            $entrepriseFormatTableau["siret"],
+            $entrepriseFormatTableau["nomEntreprise"],
+            $entrepriseFormatTableau["codePostalEntreprise"],
+            $entrepriseFormatTableau["effectifEntreprise"],
+            $entrepriseFormatTableau["telephoneEntreprise"],
+            $entrepriseFormatTableau["siteWebEntreprise"],
+            $entrepriseFormatTableau["email"],
+            $entrepriseFormatTableau["mdpHache"] );
         return $entreprise;
     }
 
@@ -25,7 +35,7 @@ class EntrepriseRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return array("siret", "nomEntreprise", "codePostalEntreprise", "effectifEntreprise", "telephoneEntreprise", "siteWebEntreprise", "estValide");
+        return array("siret", "nomEntreprise", "codePostalEntreprise", "effectifEntreprise", "telephoneEntreprise", "siteWebEntreprise", "estValide", "email", "mdpHache");
     }
 
     /*
@@ -119,6 +129,40 @@ class EntrepriseRepository extends AbstractRepository
         );
 
         $requete->execute($values);
+    }
+
+
+    public function recupererParClePrimaire(string $valeurClePrimaire): ?AbstractDataObject
+    {
+
+        $sql = "SELECT * from " . $this->getNomTable() . " WHERE " . $this->getNomClePrimaire() . " = :clePrimaireTag";
+        // Préparation de la requête
+        $pdoStatement = Model::getPdo()->prepare($sql);
+
+        $values = array(
+            "clePrimaireTag" => $valeurClePrimaire,
+            //nomdutag => valeur, ...
+        );
+        // On donne les valeurs et on exécute la requête
+        $pdoStatement->execute($values);
+
+        // On récupère les résultats comme précédemment
+        // Note: fetch() renvoie false si pas de voiture correspondante
+        $entrepriseFormatTableau = $pdoStatement->fetch();
+        if (!$entrepriseFormatTableau) {
+            return null;
+        }
+        return $this->construireDepuisTableau($entrepriseFormatTableau);
+    }
+
+    public static function creermdp($mdp){
+        $sql="update Entreprises set mdpHache=:mdpHacheTag where siret=:siretTag";
+        $pdoStatement = Model::getPdo()->prepare($sql);
+        $values = array(
+            "mdpHacheTag" => MotDePasse::hacher($mdp),
+            "siretTag" => '01234567890123'
+        );
+        $pdoStatement->execute($values);
     }
 
 

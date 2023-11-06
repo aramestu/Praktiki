@@ -2,6 +2,8 @@
 
 namespace App\SAE\Model\DataObject;
 
+use App\SAE\Lib\MotDePasse;
+
 class Entreprise extends AbstractDataObject
 {
     private string $siret;
@@ -12,8 +14,10 @@ class Entreprise extends AbstractDataObject
     private string $siteWebEntreprise;
 
     private string $estValide;
+    private string $email;
+    private string $mdpHache;
 
-    public function __construct(string $siret, string $nom, string $codePostal, string $effectif, string $telephone, string $siteWeb, bool $estValide = false)
+    public function __construct(string $siret, string $nom, string $codePostal, string $effectif, string $telephone, string $siteWeb, string $email, string $mdpHache)
     {
         $this->siret = $siret;
         $this->nomEntreprise = $nom;
@@ -21,7 +25,9 @@ class Entreprise extends AbstractDataObject
         $this->effectifEntreprise = $effectif;
         $this->telephoneEntreprise = $telephone;
         $this->siteWebEntreprise = $siteWeb;
-        $this->estValide = $estValide;
+        $this->estValide = 0;
+        $this->email = $email;
+        $this->mdpHache = $mdpHache;
     }
 
     public function getSiret(): string
@@ -93,17 +99,57 @@ class Entreprise extends AbstractDataObject
     {
         $this->estValide = $estValide;
     }
+    public function getMdpHache(): string
+    {
+        return $this->mdpHache;
+    }
+
+    public function setMdpHache($mdpClair):string{
+        return MotDePasse::hacher($mdpClair);
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+
+
+
 
     public function formatTableau(): array
     {
-        return array(
+        return [
             "siretTag" => $this->siret,
             "nomEntrepriseTag" => $this->nomEntreprise,
             "codePostalEntrepriseTag" => $this->codePostalEntreprise,
             "effectifEntrepriseTag" => $this->effectifEntreprise,
             "telephoneEntrepriseTag" => $this->telephoneEntreprise,
             "siteWebEntrepriseTag" => $this->siteWebEntreprise,
-            "estValideTag" => $this->estValide
+            "estValideTag" => $this->estValide,
+            "emailTag" => $this->email,
+            "mdpHacheTag" => $this->mdpHache
+        ];
+    }
+
+    public static function construireDepuisFormulaire (array $tableauFormulaire) : Entreprise
+    {
+
+        $mdpHache = MotDePasse::hacher($tableauFormulaire["password"]);
+        return new Entreprise(
+            $tableauFormulaire["siret"],
+            $tableauFormulaire["nom"],
+            $tableauFormulaire["postcode"],
+            $tableauFormulaire["effectif"],
+            $tableauFormulaire["telephone"],
+            $tableauFormulaire["website"],
+            $tableauFormulaire["email"],
+            $mdpHache
         );
     }
 }

@@ -11,27 +11,31 @@
 
 <body>
 <div class="container">
-    <form method="post" action="login.php">
+    <form method="get">
         <legend>Inscription Entreprise</legend>
         <p>
             <label for="nom">Nom de l'entreprise</label>
-            <input type="text" name="nom" id="nom" required placeholder="Nom de votre entreprise" autofocus>
+            <input type="text" name="nom" id="nom" required placeholder="Nom de votre entreprise" autofocus/>
         </p>
         <p>
             <label for="website">Site Web</label>
-            <input type="text" name="website" id="website" required placeholder="entreprise.com">
+            <input type="text" name="website" id="website" required placeholder="entreprise.com"/>
         </p>
         <p>
             <label for="siret">N° de Siret</label>
-            <input type="text" name="siret" id="siret" required placeholder="N° de Siret">
+            <input type="text" name="siret" id="siret" required placeholder="N° de Siret"/>
         </p>
         <p>
-            <label for="website">Code postal</label>
-            <input type="number" max="5" name="postcode" id="postcode" required placeholder="34090">
+            <label for="postcode">Code postal</label>
+            <input type="number" maxlength="5" name="postcode" id="postcode" required placeholder="34090"/>
         </p>
         <p>
-            <label for="website">Effectif</label>
-            <input type="number" max="5" name="effectif" id="effectif" required placeholder="412">
+            <label for="effectif">Effectif</label>
+            <input type="number" maxlength="5" name="effectif" id="effectif" required placeholder="412"/>
+        </p>
+        <p>
+            <label for="telephone">Telephone</label>
+            <input type="text" maxlength="10" minlength="10" name="telephone" id="telephone" required placeholder="0785449977"/>
         </p>
         <p>
             <label for="email">Email</label>
@@ -50,7 +54,9 @@
         </div>
 
         <p>
-            <input type="submit" value="Inscription">
+            <input type="hidden" name="action" value="creerDepuisFormulaire"/>
+            <input type="hidden" name="controller" value="Entreprise"/>
+            <input type="submit" value="Inscription"/>
         </p>
     </form>
     <div class="create-account">

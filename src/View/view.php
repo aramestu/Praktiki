@@ -26,7 +26,16 @@
         <a href="frontController.php?action=home" class="nav-item" data-action="home">Accueil</a>
         <a href="frontController.php?action=getExpProByDefault&controller=ExpPro" class="nav-item" data-action="offre">Offres</a>
         <a href="frontController.php?action=contact" class="nav-item" data-action="contact">Contact</a>
-        <a href="frontController.php?action=connect" class="nav-item" data-action="connect">Connexion</a>
+        <?php if (!\App\SAE\Lib\ConnexionEntreprise::estConnecte()) {
+            echo '
+                <a href="frontController.php?action=connect" class="nav-item" data-action="connect">Connexion</a>
+                ';
+        }else {
+            echo '
+                    <a href="frontController.php?action=disconnect&controller=Entreprise" class="nav-item" data-action="disconnect">Déconnexion</a>
+                ';
+        }
+        ?>
 
     </nav>
 </header>
