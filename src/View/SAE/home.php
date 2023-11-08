@@ -21,6 +21,11 @@
             <button type="button" class="btn btn-primary">Panel admin</button>
         </a>
     </p>
+    <p>
+        <a href="frontController.php?controller=ExpPro&action=displayConvention">
+            <button type="button" class="btn btn-primary">Convention</button>
+        </a>
+    </p>
 
 </div>
 
