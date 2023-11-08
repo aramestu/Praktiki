@@ -24,7 +24,7 @@ use App\SAE\Model\Repository\EntrepriseRepository;
         </div>
         <div class="information">
             <h3><?php echo htmlspecialchars($expPro->getSujetExperienceProfessionnel()); ?></h3>
-            <p><?php $entreprise = (new EntrepriseRepository())->get($expPro->getSiret());
+            <p><?php $entreprise = (new EntrepriseRepository())->getById($expPro->getSiret());
                 echo(htmlspecialchars($entreprise->getNomEntreprise()));
                 ?></p>
             <p><img src="assets/images/map-pin-icon.png"

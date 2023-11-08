@@ -29,7 +29,7 @@ echo htmlspecialchars($last_element) */
         </div>
         <div class="company">
             <h2><?php
-                $entreprise = (new EntrepriseRepository())->get($expPro->getSiret());
+                $entreprise = (new EntrepriseRepository())->getById($expPro->getSiret());
                 echo(htmlspecialchars($entreprise->getNomEntreprise()));
                 ?></h2>
             <label><?= htmlspecialchars($expPro->getAdresseExperienceProfessionnel()) ?>
