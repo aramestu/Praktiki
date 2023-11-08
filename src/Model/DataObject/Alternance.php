@@ -16,7 +16,7 @@ class Alternance extends ExperienceProfessionnel
         return array_merge(parent::formatTableau(), array());
     }
 
-    public function getNomExperienceProfessionnel()
+    public function getNomExperienceProfessionnel(): string
     {
         return "Alternance";
     }
