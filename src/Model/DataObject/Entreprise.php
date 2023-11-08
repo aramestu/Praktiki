@@ -4,17 +4,15 @@ namespace App\SAE\Model\DataObject;
 
 use App\SAE\Lib\MotDePasse;
 
-class Entreprise extends AbstractDataObject
-{
+class Entreprise extends AbstractDataObject {
     private string $siret;
     private string $nomEntreprise;
     private string $codePostalEntreprise;
     private string $effectifEntreprise;
     private string $telephoneEntreprise;
     private string $siteWebEntreprise;
-
     private string $estValide;
-    private string $email;
+    private string $emailEntreprise;
     private string $mdpHache;
 
     public function __construct(string $siret, string $nom, string $codePostal, string $effectif, string $telephone, string $siteWeb, string $email, string $mdpHache)
@@ -25,9 +23,9 @@ class Entreprise extends AbstractDataObject
         $this->effectifEntreprise = $effectif;
         $this->telephoneEntreprise = $telephone;
         $this->siteWebEntreprise = $siteWeb;
-        $this->estValide = 0;
-        $this->email = $email;
+        $this->emailEntreprise = $email;
         $this->mdpHache = $mdpHache;
+        $this->estValide = 0;
     }
 
     public function getSiret(): string
@@ -108,19 +106,15 @@ class Entreprise extends AbstractDataObject
         return MotDePasse::hacher($mdpClair);
     }
 
-    public function getEmail(): string
+    public function getEmailEntreprise(): string
     {
-        return $this->email;
+        return $this->emailEntreprise;
     }
 
-    public function setEmail(string $email): void
+    public function setEmailEntreprise(string $email): void
     {
-        $this->email = $email;
+        $this->emailEntreprise = $email;
     }
-
-
-
-
 
     public function formatTableau(): array
     {
@@ -132,7 +126,7 @@ class Entreprise extends AbstractDataObject
             "telephoneEntrepriseTag" => $this->telephoneEntreprise,
             "siteWebEntrepriseTag" => $this->siteWebEntreprise,
             "estValideTag" => $this->estValide,
-            "emailTag" => $this->email,
+            "emailEntrepriseTag" => $this->emailEntreprise,
             "mdpHacheTag" => $this->mdpHache
         ];
     }

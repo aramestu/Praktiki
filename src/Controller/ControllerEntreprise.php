@@ -75,7 +75,7 @@ class ControllerEntreprise extends ControllerGenerique
     public static function connecter()
     {
         if (isset($_REQUEST["username"]) && isset($_REQUEST["password"])) {
-            $user = (new EntrepriseRepository())->recupererParClePrimaire($_REQUEST["username"]);
+            $user = (new EntrepriseRepository())->getById($_REQUEST["username"]);
             if (!is_null($user)) {
                 $mp1 = $user->formatTableau()["mdpHacheTag"];
                 $mp2 = hash("sha256", $_REQUEST["password"]);
