@@ -18,7 +18,7 @@ if (is_a($expPro, 'App\SAE\Model\DataObject\Stage')) { // Si c'est un stage
 
 <div class="container">
     <form method="post" action="frontController.php?controller=ExpPro&action=modifierDepuisFormulaire">
-        <legend>Modification <?php echo htmlspecialchars($typeExperience); ?></legend>
+        <h2 id="remplaceBaliseLegend">Modification <?php echo htmlspecialchars($typeExperience); ?></h2>
         <div id="stageForm">
             <!--<p>
                 <label for="titreStage">Titre du Stage</label>

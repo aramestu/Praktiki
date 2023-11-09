@@ -4,7 +4,7 @@
 
 <div class="container">
     <form method="get">
-        <legend>Connexion</legend>
+        <h2 id="remplaceBaliseLegend">Connexion</h2>
         <p>
             <label for="username">Email</label>
             <input type="text" name="username" id="username" required placeholder="rick.astley@roll.com" autofocus>

@@ -508,6 +508,10 @@ legend{
 .link:hover::before {
     width: 100%;
 }
+
+#remplaceBaliseLegend{
+    font-size: 25px;
+}
 /*---END MISCELLANEOUS---*/
 
 
