@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="assets/css/button.css">
 <link rel="stylesheet" href="assets/css/convention.css">
 
-<div>
-    <p>Etudiant : </p>
+<div class="container">
+    <h2>Etudiant : </h2>
     <label for="nomEtudiant">Nom de l'étudiant</label>
     <input type="text" name="nomEtudiant" id="nomEtudiant" placeholder="nomEtudiant">
     <label for="prenomEtudiant">Prénom de l'étudiant</label>
@@ -17,8 +17,8 @@
     <input type="text" name="assuranceMaladie" id="assuranceMaladie" placeholder="assuranceMaladie">
 </div>
 
-<div>
-    <p>Stage et entreprise : </p>
+<div class="container">
+    <h2>Stage et entreprise : </h2>
     <label for="typeStage">Type du stage</label>
     <input type="text" name="typeStage" id="typeStage" placeholder="typeStage">
     <label for="thematiqueStage">Thématique du stage</label>
@@ -72,12 +72,16 @@
     <input type="text" name="professionSignataire" id="professionSignataire" placeholder="professionSignataire">
 </div>
 
-<div>
-    <p>Etablissement : </p>
+<div class="container">
+    <h2>Etablissement : </h2>
     <label for="nomEnseignant">Nom de l'enseignant référant</label>
     <input type="text" name="nomEnseignant" id="nomEnseignant" placeholder="nomEnseignant">
     <label for="prenomEnseignant">Prénom de l'enseignant référant</label>
     <input type="text" name="prenomEnseignant" id="prenomEnseignant" placeholder="prenomEnseignant">
 </div>
 
-<button>Créer la convention</button>
+<div>
+    <button>Enregistrer le brouillon de la convention</button>
+    <button>Envoyer la convention</button>
+</div>
+
