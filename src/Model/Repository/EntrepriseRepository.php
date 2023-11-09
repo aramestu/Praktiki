@@ -38,7 +38,7 @@ class EntrepriseRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return array("siret", "nomEntreprise", "codePostalEntreprise", "effectifEntreprise", "telephoneEntreprise", "siteWebEntreprise", "estValide", "emailEntreprise", "mdpHache");
+        return array("siret", "nomEntreprise", "codePostalEntreprise", "effectifEntreprise", "telephoneEntreprise", "siteWebEntreprise", "estValide", "emailEntreprise", "mdpHache",  "emailAValider", "nonce");
     }
 
     /*
