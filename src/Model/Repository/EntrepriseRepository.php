@@ -18,7 +18,9 @@ class EntrepriseRepository extends AbstractRepository
             $entrepriseFormatTableau["telephoneEntreprise"],
             $entrepriseFormatTableau["siteWebEntreprise"],
             $entrepriseFormatTableau["emailEntreprise"],
-            $entrepriseFormatTableau["mdpHache"]);
+            $entrepriseFormatTableau["mdpHache"],
+            $entrepriseFormatTableau["emailAValider"],
+            $entrepriseFormatTableau["nonce"]);
         if(isset($entrepriseFormatTableau["estValide"])){
             $entreprise->setEstValide($entrepriseFormatTableau["estValide"]);
         }
