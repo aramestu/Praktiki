@@ -4,12 +4,12 @@
 
 <div class="container" id="createOffer">
     <form method="post" action="frontController.php?controller=ExpPro&action=creerOffreDepuisFormulaire">
-        <legend>Création d'Offre</legend>
+        <h2 id="remplaceBaliseLegend">Création d'Offre</h2>
         <div class="HBox">
             <div class="VBox">
                 <p>
                     <label for="typeOffre">Type d'Offre</label>
-                    <select name="typeOffre" id="typeOffre" required>
+                    <select name="typeOffre" id="typeOffre" size="3" required>
                         <option value="stalternance">Non définie</option>
                         <option value="stage">Stage</option>
                         <option value="alternance">Alternance</option>

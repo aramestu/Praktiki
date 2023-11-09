@@ -3,7 +3,7 @@
 
 <div class="container">
     <form method="get">
-        <legend>Inscription Entreprise</legend>
+        <h2 id="remplaceBaliseLegend">Inscription Entreprise</h2>
         <p>
             <label for="nom">Nom de l'entreprise</label>
             <input type="text" name="nom" id="nom" required placeholder="Nom de votre entreprise" autofocus>
