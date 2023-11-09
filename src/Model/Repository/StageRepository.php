@@ -9,12 +9,14 @@ use Cassandra\Date;
 
 class StageRepository extends AbstractExperienceProfessionnelRepository
 {
-
-    protected function getNomsColonnes(): array
+    protected function getNomDataObject(): string
     {
-        $s = parent::getNomsColonnes();
-        $s["gratification"] = "gratification";
-        return $s;
+        return "Stage";
+    }
+
+    protected function getNomsColonnesSupplementaires(): array
+    {
+        return array("idStage","gratificationStage");
     }
 
     protected function getNomClePrimaire(): string
@@ -27,29 +29,12 @@ class StageRepository extends AbstractExperienceProfessionnelRepository
         return "Stages";
     }
 
-    public function save(AbstractDataObject $s): bool
-    {
-        try {
-            ExperienceProfessionnelRepository::save($s);
-            $pdo = Model::getPdo();
-            $requestStatement = $pdo->prepare("INSERT INTO Stages(idStage, gratificationStage) 
-                                                 VALUES(:idStageTag, :gratificationStageTag)");
-            $values = array("idStageTag" => $pdo->lastInsertId(),
-                "gratificationStageTag" => $s->getGratificationStage());
-
-            $requestStatement->execute($values);
-            return true;
-        } catch (\PDOException $e) {
-            return false;
-        }
-    }
-
     public function construireDepuisTableau(array $expProFormatTableau): ExperienceProfessionnel
     {
         $exp = new Stage($expProFormatTableau["sujetExperienceProfessionnel"], $expProFormatTableau["thematiqueExperienceProfessionnel"],
             $expProFormatTableau["tachesExperienceProfessionnel"], $expProFormatTableau["codePostalExperienceProfessionnel"],
             $expProFormatTableau["adresseExperienceProfessionnel"], $expProFormatTableau["dateDebutExperienceProfessionnel"],
-            $expProFormatTableau["dateFinExperienceProfessionnel"], $expProFormatTableau["siret"], $expProFormatTableau["gratification"]);
+            $expProFormatTableau["dateFinExperienceProfessionnel"], $expProFormatTableau["siret"], $expProFormatTableau["gratificationStage"]);
         $this->updateAttribut($expProFormatTableau, $exp);
         return $exp;
     }
@@ -124,7 +109,7 @@ class StageRepository extends AbstractExperienceProfessionnelRepository
         ExperienceProfessionnelRepository::supprimer($stage);
     }
 
-    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array
+    /*public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array
     {
         date_default_timezone_set('Europe/Paris');
         $pdo = Model::getPdo();
@@ -170,11 +155,11 @@ class StageRepository extends AbstractExperienceProfessionnelRepository
             $stageTriee[] = self::construireDepuisTableau($result);
         }
         return $stageTriee;
-    }
+    }*/
 
-    public function search(string $keywords): array
+    public static function search(string $keywords): array
     {
-        $sql = "SELECT *
+        /*$sql = "SELECT *
                 FROM ExperienceProfessionnel e
                 JOIN Stages s ON s.idStage = e.idExperienceProfessionnel
                 JOIN Entreprises en ON en.siret = e.siret
@@ -200,11 +185,8 @@ class StageRepository extends AbstractExperienceProfessionnelRepository
         foreach ($requestStatement as $stageTab) {
             $AllStage[] = self::construireDepuisTableau($stageTab);
         }
-        return $AllStage;
+        return $AllStage;*/
     }
 
-    protected function getNomDataObject(): string
-    {
-        return "Stage";
-    }
+
 }

@@ -3,7 +3,7 @@ namespace App\SAE\Model\Repository;
 use App\SAE\Model\DataObject\AbstractDataObject;
 use App\SAE\Model\DataObject\Stage;
 
-class ExperienceProfessionnelRepository extends AbstractRepository {
+class ExperienceProfessionnelRepository extends AbstractRepository /* /!\ A CHANGER PLUS TARD */{
 
     protected function getNomTable(): string
     {

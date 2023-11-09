@@ -12,9 +12,9 @@ class AlternanceRepository extends AbstractExperienceProfessionnelRepository
     {
         return "Alternance";
     }
-    protected function getNomsColonnes(): array
+    protected function getNomsColonnesSupplementaires(): array
     {
-        return parent::getNomsColonnes();
+        return array("idAlternance");
     }
 
     protected function getNomClePrimaire(): string
@@ -99,7 +99,7 @@ class AlternanceRepository extends AbstractExperienceProfessionnelRepository
         ExperienceProfessionnelRepository::supprimer($alternance);
     }
 
-    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array
+    /*public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array
     {
         date_default_timezone_set('Europe/Paris');
         $pdo = Model::getPdo();
@@ -138,11 +138,11 @@ class AlternanceRepository extends AbstractExperienceProfessionnelRepository
             $alternanceTriee[] = self::construireDepuisTableau($result);
         }
         return $alternanceTriee;
-    }
+    }*/
 
     public static function search(string $keywords): array
     {
-        $sql = "SELECT *
+        /*$sql = "SELECT *
                 FROM ExperienceProfessionnel e
                 JOIN Alternances a ON a.idAlternance = e.idExperienceProfessionnel
                 JOIN Entreprises en ON en.siret = e.siret
@@ -168,6 +168,6 @@ class AlternanceRepository extends AbstractExperienceProfessionnelRepository
         foreach ($requestStatement as $alternanceTab) {
             $AllAlternance[] = self::construireDepuisTableau($alternanceTab);
         }
-        return $AllAlternance;
+        return $AllAlternance;*/
     }
 }

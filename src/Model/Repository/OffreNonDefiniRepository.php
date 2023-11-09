@@ -4,7 +4,7 @@ use App\SAE\Model\DataObject\AbstractDataObject;
 use App\SAE\Model\DataObject\OffreNonDefini;
 use App\SAE\Model\DataObject\ExperienceProfessionnel;
 
-class OffreNonDefiniRepository extends  ExperienceProfessionnelRepository{
+class OffreNonDefiniRepository extends  AbstractExperienceProfessionnelRepository {
     protected function getNomDataObject(): string
     {
         return "OffreNonDefini";
@@ -18,5 +18,10 @@ class OffreNonDefiniRepository extends  ExperienceProfessionnelRepository{
     protected function getNomTable(): string
     {
         return "OffreNonDefini";
+    }
+
+    protected function getNomsColonnesSupplementaires(): array
+    {
+        return array("idOffreNonDefini");
     }
 }

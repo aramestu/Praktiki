@@ -9,6 +9,7 @@ use App\SAE\Model\Repository\Model;
 
 abstract class AbstractExperienceProfessionnelRepository extends AbstractRepository
 {
+    protected abstract function getNomsColonnesSupplementaires(): array;
     protected abstract function getNomDataObject(): string;
 
     protected function getNomsColonnes(): array
@@ -29,12 +30,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         return "ExperienceProfessionnel";
     }
 
-    public function save(AbstractDataObject $e): bool{
-        return true;
-    }
-
-
-    /*public function save(AbstractDataObject $e): bool
+    public function save(AbstractDataObject $e): bool
     {
         try {
             $pdo = Model::getPdo();
@@ -86,17 +82,67 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             $requestStatement = $pdo->prepare($sql);
 
             $requestStatement->execute($values);
+
+            $formatTab = $e->formatTableau(); // Pour récupérer les colonnes
+            $formatTab[$this->getNomClePrimaire() . "Tag"] = $pdo->lastInsertId(); // Pour ajouter la bonne clé primaire aux colonnes
+            $sql = "INSERT INTO " . $this->getNomTable() . " VALUES(";
+            $colonne = $this->getNomsColonnesSupplementaires(); // Colonnes supplémentaires déjà dans formatTableau
+            $value = array();
+            for($i = 0; $i < sizeof($colonne); $i++){
+                $sql = $sql . ":" . $colonne[$i] . "Tag";
+                if($i != sizeof($colonne) - 1){
+                    $sql .= " , ";
+                }
+                $value[$colonne[$i] . "Tag"] = $formatTab[$colonne[$i] . "Tag"];
+            }
+            $sql = $sql . ")";
+            $pdo->prepare($sql)->execute($value);
+            return true;
+        } catch (\PDOException $e) {
+            echo $e;
+            return false;
+        }
+    }
+
+
+    /*public function save(AbstractDataObject $e): bool{
+        // Puis on spécialise (Stage/Alternance/OffreNonDefini)
+        try {
+            $pdo = Model::getPdo();
+            $table = $this->getNomTable();
+            $colonnes = $this->getNomsColonnes();
+            $sql = "INSERT INTO $table VALUES (";
+            // Je commence à 1 pour ne pas enregistrer l'idExperienceProfessionnel
+            for($i = 1; $i<sizeof($colonnes); $i++){
+                $sql = $sql . ":" . $colonnes[$i] . "Tag";
+                if($i!=sizeof($colonnes)-1){
+                    $sql = $sql . ", ";
+                }else{
+                    $sql = $sql . ")";
+                }
+            }
+            $requeteStatement = $pdo->prepare($sql);
+
+            // Pour mettre Tag aux colonnes spécifiques aux offres
+            $formatTab = $e->formatTableau();
+            $values = array();
+            foreach ($colonnes as $col){
+                $values[$col . "Tag"] = $formatTab[$col];
+            }
+            $requeteStatement->execute($values);
             return true;
         } catch (\PDOException $e) {
             return false;
         }
-    } */
+    }*/
+
+
 
     /* utilisé pour construireDepuisTableau afin de dupliquer du code avec StageRepository
      *
      */
     public function updateAttribut(array $expProFormatTableau, ExperienceProfessionnel $exp): void {
-        $nomId = $this->getNomDataObject();
+        $nomId = $this->getNomClePrimaire();
         // Les id ont des noms différents, je vérif qu'ils existent
         if (array_key_exists($nomId, $expProFormatTableau)) {
             $exp->setIdExperienceProfessionnel($expProFormatTableau[$nomId]);
@@ -123,7 +169,6 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
 
     public function construireDepuisTableau(array $expProFormatTableau): ExperienceProfessionnel
     {
-        $nomId = $this->getNomClePrimaire();
         $exp = new ($this->getNomDataObject())($expProFormatTableau["sujetExperienceProfessionnel"], $expProFormatTableau["thematiqueExperienceProfessionnel"],
             $expProFormatTableau["tachesExperienceProfessionnel"], $expProFormatTableau["codePostalExperienceProfessionnel"],
             $expProFormatTableau["adresseExperienceProfessionnel"], $expProFormatTableau["dateDebutExperienceProfessionnel"],
@@ -253,9 +298,9 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         $pdoStatement->execute($values);
     }
 
-    public function search(string $keywords)
+    public static function search(string $keywords)
     {
-        $stage = StageRepository::search($keywords);
+        /*$stage = StageRepository::search($keywords);
         $alternance = AlternanceRepository::search($keywords);
         $sql = "SELECT *
                         FROM ExperienceProfessionnel e
@@ -284,10 +329,10 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
 
         $stalternance = [];
         foreach ($requestStatement as $stalternanceTab) {
-            $stalternance[] = $this->construireDepuisTableau($stalternanceTab);
+            $stalternance[] = self::construireDepuisTableau($stalternanceTab);
         }
         $alternance = self::sort($alternance, $stalternance, "datePublication");
-        return self::sort($alternance, $stage, "datePublication");
+        return self::sort($alternance, $stage, "datePublication");*/
     }
 
     public static function getDatePublication(string $id): string

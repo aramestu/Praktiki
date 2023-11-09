@@ -2,6 +2,7 @@
 
 namespace App\SAE\Model\DataObject;
 
+use App\SAE\Model\Repository\AbstractExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 
 class ExperienceProfessionnel extends AbstractDataObject
@@ -41,6 +42,7 @@ class ExperienceProfessionnel extends AbstractDataObject
         $this->dateDebutExperienceProfessionnel = $dateDebut;
         $this->dateFinExperienceProfessionnel = $dateFin;
         $this->siret = $siret;
+        $this->idExperienceProfessionnel = "";
         $this->datePublication = "";
         $this->numEtudiant = "";
         $this->mailEnseignant = "";
@@ -169,7 +171,11 @@ class ExperienceProfessionnel extends AbstractDataObject
 
     public function getDatePublication(): string
     {
-        return ExperienceProfessionnelRepository::getDatePublication($this->idExperienceProfessionnel);
+        // Si l'id n'a pas été initialisé
+        if($this->idExperienceProfessionnel == ""){
+            return "";
+        }
+        return AbstractExperienceProfessionnelRepository::getDatePublication($this->idExperienceProfessionnel);
     }
 
     public function setDatePublication(string $datePublication): void
@@ -192,11 +198,11 @@ class ExperienceProfessionnel extends AbstractDataObject
             "numEtudiantTag" => $this->numEtudiant,
             "mailEnseignantTag" => $this->mailEnseignant,
             "mailTuteurProfessionnelTag" => $this->mailTuteurProfessionnel,
-            "datePublicationTag" => $this->datePublication
+            "datePublicationTag" => $this->getDatePublication()
         );
     }
 
-    public function getNomExperienceProfessionnel()
+    public function getNomExperienceProfessionnel(): string
     {
         return "Stalternance";
     }
