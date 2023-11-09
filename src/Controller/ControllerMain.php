@@ -60,11 +60,6 @@ class ControllerMain extends ControllerGenerique
         );
     }
 
-    public static function panel(): void
-    {
-        self::afficheVue('view.php', ['pagetitle' => 'Panel', 'cheminVueBody' => 'user/adminPanel/panel.php']);
-    }
-
     public static function importation(): void
     {
         if (isset($_POST["import"])) {

@@ -48,7 +48,7 @@ class ControllerEntreprise extends ControllerGenerique
     }
 
 
-    private static function keywordsExiste()
+    public static function keywordsExiste()
     {
         if (isset($_GET["keywords"])) {
             return $_GET["keywords"];
@@ -56,7 +56,7 @@ class ControllerEntreprise extends ControllerGenerique
         return null;
     }
 
-    private static function codePostalExiste()
+    public static function codePostalExiste()
     {
         if (isset($_GET["codePostal"])) {
             return $_GET["codePostal"];
@@ -64,7 +64,7 @@ class ControllerEntreprise extends ControllerGenerique
         return null;
     }
 
-    private static function effectifExiste()
+    public static function effectifExiste()
     {
         if (isset($_GET["effectif"])) {
             return $_GET["effectif"];

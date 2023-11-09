@@ -2,15 +2,15 @@
 <link rel="stylesheet" href="assets/css/button.css">
 
 <p><b>Bienvenue Mr. Trombettoni</b></p>
-<div class="main" id="panel">
+<div class="HBox" id="panel">
     <div class="container" id="option">
-        <a href="frontController.php?controller=Etudiant&action=getEtudiantBySearch">
+        <a href="frontController.php?controller=PanelAdmin&action=PanelEtudiants">
             <button type="button" class="btn btn-primary">Liste des étudiants</button>
         </a>
         <a href="">
             <button type="button" class="btn btn-primary">Liste des offres en Attentes</button>
         </a>
-        <a href="frontController.php?action=afficherListeEntrepriseEnAttenteFiltree&controller=Entreprise">
+        <a href="frontController.php?action=panelEntreprises&controller=PanelAdmin">
             <button type="button" class="btn btn-primary">Liste des entreprises en Attentes</button>
         </a>
         <a href="frontController.php?action=getExpProByDefault&controller=ExpPro">
@@ -24,33 +24,8 @@
         </a>
     </div>
     <div class="container" id="placeholder">
-        <div class="HBox">
-            <p>Etudiant n° 1</p>
-            <p>Valide->vert/En cours->orange/En recherche->Rouge</p>
-        </div>
-        <div class="HBox">
-            <p>Etudiant n° 2</p>
-            <p>Valide->vert/En cours->orange/En recherche->Rouge</p>
-        </div>
-        <div class="HBox">
-            <p>Etudiant n° 3</p>
-            <p>Valide->vert/En cours->orange/En recherche->Rouge</p>
-        </div>
-        <div class="HBox">
-            <p>Etudiant n° 4</p>
-            <p>Valide->vert/En cours->orange/En recherche->Rouge</p>
-        </div>
-        <div class="HBox">
-            <p>Etudiant n° 5</p>
-            <p>Valide->vert/En cours->orange/En recherche->Rouge</p>
-        </div>
-        <div class="HBox">
-            <p>Etudiant n° 6</p>
-            <p>Valide->vert/En cours->orange/En recherche->Rouge</p>
-        </div>
-        <div class="HBox">
-            <p>Etudiant n° 7</p>
-            <p>Valide->vert/En cours->orange/En recherche->Rouge</p>
-        </div>
+        <?php
+            require __DIR__ . "/../../$adminPanelView";
+        ?>
     </div>
 </div>
