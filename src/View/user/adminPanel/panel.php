@@ -16,7 +16,7 @@
         <a href="frontController.php?action=getExpProByDefault&controller=ExpPro">
             <button type="button" class="btn btn-primary">Liste des offres</button>
         </a>
-        <a href="frontController.php?action=afficherListeEntrepriseValideFiltree&controller=Entreprise">
+        <a href="frontController.php?action=panelListeEntreprises&controller=PanelAdmin">
             <button type="button" class="btn btn-primary">Liste des Entreprise</button>
         </a>
         <a href="frontController.php?action=import">

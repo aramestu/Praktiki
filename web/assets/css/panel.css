@@ -12,24 +12,66 @@
     min-height: 50em;
     margin-bottom: 40px;
 }
+
 #placeholder{
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: stretch;
     align-items: center;
-    min-height: 60em;
-    height: 60em;
+    height: 80vh;
     overflow: auto;
-    padding-top: 50px;
+    padding-top: 10px;
 }
 
-#placeholder > .content{
-    display: flex;
-    flex-direction: column;
+#placeholder > .VBox{
+    align-items: center;
     justify-content: flex-start;
-    width: 100%;
-    align-items: baseline;
 }
+
+#placeholder .line{
+    display: flex;
+    border: var(--darkBlue2) solid 1px;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 2em;
+    width: 100%;
+    box-sizing: unset;
+}
+
+.lineNomEntreprise{
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.line button{
+    margin: 0;
+    height: 3em;
+    width: 6em;
+    padding: 0;
+}
+
+.line a{
+
+}
+
+.circle {
+    width: 1.3em;
+    height: 1.3em;
+    border-radius: 50%;
+}
+
+.greenColor{
+    background-color: var(--green);
+}
+
+.orangeColor{
+    background-color: var(--orange);
+}
+
+.redColor{
+    background-color: var(--red);
+}
+
 
 @media (max-width: 950px) {
     #panel{
@@ -52,5 +94,15 @@
 
     #panel{
         height: auto;
+    }
+
+    #placeholder .line{
+        display: flex;
+        flex-wrap: wrap;
+        border: var(--darkBlue2) solid 1px;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 2em;
+        width: 100%;
     }
 }

@@ -26,4 +26,12 @@ class ControllerPanelAdmin extends ControllerGenerique {
                                                 'listEntreprises' => $listEntreprises ]);
     }
 
+    public static  function panelListeEntreprises(): void {
+        $listEntreprises = (new EntrepriseRepository)->getAll();
+        self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
+            'cheminVueBody' => 'user/adminPanel/panel.php',
+            'adminPanelView' => 'user/adminPanel/entreprise/entrepriseList.php',
+            'listEntreprises' => $listEntreprises ]);
+    }
+
 }
