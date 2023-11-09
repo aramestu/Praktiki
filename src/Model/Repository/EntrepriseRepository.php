@@ -2,19 +2,32 @@
 
 namespace App\SAE\Model\Repository;
 
+use App\SAE\Lib\MotDePasse;
+use App\SAE\Model\DataObject\AbstractDataObject;
 use App\SAE\Model\DataObject\Entreprise;
 
 class EntrepriseRepository extends AbstractRepository
 {
 
-    protected function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise
-    {
-        $entreprise = new Entreprise($entrepriseFormatTableau["siret"], $entrepriseFormatTableau["nomEntreprise"], $entrepriseFormatTableau["codePostalEntreprise"], $entrepriseFormatTableau["effectifEntreprise"], $entrepriseFormatTableau["telephoneEntreprise"], $entrepriseFormatTableau["siteWebEntreprise"], $entrepriseFormatTableau["estValide"]);
+    protected function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise {
+        $entreprise = new Entreprise(
+            $entrepriseFormatTableau["siret"],
+            $entrepriseFormatTableau["nomEntreprise"],
+            $entrepriseFormatTableau["codePostalEntreprise"],
+            $entrepriseFormatTableau["effectifEntreprise"],
+            $entrepriseFormatTableau["telephoneEntreprise"],
+            $entrepriseFormatTableau["siteWebEntreprise"],
+            $entrepriseFormatTableau["emailEntreprise"],
+            $entrepriseFormatTableau["mdpHache"],
+            $entrepriseFormatTableau["emailAValider"],
+            $entrepriseFormatTableau["nonce"]);
+        if(isset($entrepriseFormatTableau["estValide"])){
+            $entreprise->setEstValide($entrepriseFormatTableau["estValide"]);
+        }
         return $entreprise;
     }
 
-    protected function getNomTable(): string
-    {
+    protected function getNomTable(): string{
         return "Entreprises";
     }
 
@@ -25,7 +38,7 @@ class EntrepriseRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return array("siret", "nomEntreprise", "codePostalEntreprise", "effectifEntreprise", "telephoneEntreprise", "siteWebEntreprise", "estValide");
+        return array("siret", "nomEntreprise", "codePostalEntreprise", "effectifEntreprise", "telephoneEntreprise", "siteWebEntreprise", "estValide", "emailEntreprise", "mdpHache",  "emailAValider", "nonce");
     }
 
     /*
@@ -119,6 +132,16 @@ class EntrepriseRepository extends AbstractRepository
         );
 
         $requete->execute($values);
+    }
+
+    public static function creermdp($mdp){
+        $sql="update Entreprises set mdpHache=:mdpHacheTag where siret=:siretTag";
+        $pdoStatement = Model::getPdo()->prepare($sql);
+        $values = array(
+            "mdpHacheTag" => MotDePasse::hacher($mdp),
+            "siretTag" => '01234567890123'
+        );
+        $pdoStatement->execute($values);
     }
 
 

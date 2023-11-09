@@ -2,6 +2,8 @@
 
 namespace App\SAE\Controller;
 
+use App\SAE\Lib\MessageFlash;
+
 abstract class ControllerGenerique
 {
 
@@ -47,5 +49,13 @@ abstract class ControllerGenerique
                 'cheminVueBody' => 'offer/offerList.php',
             ]
         );
+    }
+
+
+    public static function redirectionVersURL(string $type,string $message,string $url): void
+    {
+        MessageFlash::ajouter($type,$message);
+        header("Location: frontController.php?action=$url");
+        exit();
     }
 }

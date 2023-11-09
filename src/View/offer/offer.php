@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="assets/css/offer.css">
-    <link rel="stylesheet" href="assets/css/button.css">
-    <script src="assets/javascript/popUpDelete.js"></script>
-</head>
+<link rel="stylesheet" href="assets/css/offer.css">
+<link rel="stylesheet" href="assets/css/button.css">
+<script src="assets/javascript/popUpDelete.js"></script>
 
 <?php
 
@@ -29,7 +25,7 @@ echo htmlspecialchars($last_element) */
         </div>
         <div class="company">
             <h2><?php
-                $entreprise = (new EntrepriseRepository())->get($expPro->getSiret());
+                $entreprise = (new EntrepriseRepository())->getById($expPro->getSiret());
                 echo(htmlspecialchars($entreprise->getNomEntreprise()));
                 ?></h2>
             <label><?= htmlspecialchars($expPro->getAdresseExperienceProfessionnel()) ?>
@@ -64,17 +60,17 @@ echo htmlspecialchars($last_element) */
         </div>
     </div>
 
-    <a id="deleteButtonOrigin"><img src="assets/images/bin-icon.png" id="deleteIcon"></a>
+    <a id="deleteButtonOrigin"><img src="assets/images/bin-icon.png" id="deleteIcon" alt="File not found"></a>
     <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel()) ?>"><img
-                src="assets/images/edit-icon.png" id="editIcon"></a>
+                src="assets/images/edit-icon.png" id="editIcon" alt="File not found"></a>
     <a href="frontController.php?controller=ExpPro&action=getExpProByDefault"><img src="assets/images/back-icon.png"
-                                                                                   id="backIcon"></button> </a>
+                                                                                   id="backIcon" alt="File not found"></a>
 
     <button id="apply">Postuler</button>
 </div>
 
 <div id="popUpDelete" class="subContainer">
-    <a id="popUpDeleteClose"><img src="assets/images/close-icon.png" id="closeIcon"></a>
+    <a id="popUpDeleteClose"><img src="assets/images/close-icon.png" id="closeIcon" alt="File not found"></a>
     <div id="popUpDeleteContent">
         <p>Êtes-vous sûr de vouloir supprimer cette offre ?</p>
         <div>

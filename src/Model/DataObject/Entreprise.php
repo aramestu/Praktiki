@@ -2,18 +2,22 @@
 
 namespace App\SAE\Model\DataObject;
 
-class Entreprise extends AbstractDataObject
-{
+use App\SAE\Lib\MotDePasse;
+
+class Entreprise extends AbstractDataObject {
     private string $siret;
     private string $nomEntreprise;
     private string $codePostalEntreprise;
     private string $effectifEntreprise;
     private string $telephoneEntreprise;
     private string $siteWebEntreprise;
-
     private string $estValide;
+    private string $emailEntreprise;
+    private string $mdpHache;
+    private string $emailAValider;
+    private string $nonce;
 
-    public function __construct(string $siret, string $nom, string $codePostal, string $effectif, string $telephone, string $siteWeb, bool $estValide = false)
+    public function __construct(string $siret, string $nom, string $codePostal, string $effectif, string $telephone, string $siteWeb, string $email, string $mdpHache,string  $emailAValider, string $nonce)
     {
         $this->siret = $siret;
         $this->nomEntreprise = $nom;
@@ -21,7 +25,11 @@ class Entreprise extends AbstractDataObject
         $this->effectifEntreprise = $effectif;
         $this->telephoneEntreprise = $telephone;
         $this->siteWebEntreprise = $siteWeb;
-        $this->estValide = $estValide;
+        $this->estValide = 0;
+        $this->emailEntreprise = $email;
+        $this->mdpHache = $mdpHache;
+        $this->emailAValider=$emailAValider;
+        $this->nonce=$nonce;
     }
 
     public function getSiret(): string
@@ -93,17 +101,79 @@ class Entreprise extends AbstractDataObject
     {
         $this->estValide = $estValide;
     }
+    public function getMdpHache(): string
+    {
+        return $this->mdpHache;
+    }
+
+    public function setMdpHache($mdpClair):string{
+        return MotDePasse::hacher($mdpClair);
+    }
+
+    public function getEmailEntreprise(): string
+    {
+        return $this->emailEntreprise;
+    }
+
+    public function setEmailEntreprise(string $email): void
+    {
+        $this->emailEntreprise = $email;
+    }
+
+    public function getEmailAValider(): string
+    {
+        return $this->emailAValider;
+    }
+
+    public function setEmailAValider(string $emailAValider): void
+    {
+        $this->emailAValider = $emailAValider;
+    }
+
+    public function getNonce(): string
+    {
+        return $this->nonce;
+    }
+
+    public function setNonce(string $nonce): void
+    {
+        $this->nonce = $nonce;
+    }
+
+
 
     public function formatTableau(): array
     {
-        return array(
+        return [
             "siretTag" => $this->siret,
             "nomEntrepriseTag" => $this->nomEntreprise,
             "codePostalEntrepriseTag" => $this->codePostalEntreprise,
             "effectifEntrepriseTag" => $this->effectifEntreprise,
             "telephoneEntrepriseTag" => $this->telephoneEntreprise,
             "siteWebEntrepriseTag" => $this->siteWebEntreprise,
-            "estValideTag" => $this->estValide
+            "estValideTag" => $this->estValide,
+            "emailEntrepriseTag" => $this->emailEntreprise,
+            "mdpHacheTag" => $this->mdpHache,
+            "emailAValiderTag" => $this->emailAValider,
+            "nonceTag" => $this->nonce
+        ];
+    }
+
+    public static function construireDepuisFormulaire (array $tableauFormulaire) : Entreprise
+    {
+
+        $mdpHache = MotDePasse::hacher($tableauFormulaire["password"]);
+        return new Entreprise(
+            $tableauFormulaire["siret"],
+            $tableauFormulaire["nom"],
+            $tableauFormulaire["postcode"],
+            $tableauFormulaire["effectif"],
+            $tableauFormulaire["telephone"],
+            $tableauFormulaire["website"],
+            $tableauFormulaire["email"],
+            $mdpHache,
+            "",
+            MotDePasse::genererChaineAleatoire()
         );
     }
 }

@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="assets/css/offer.css">
-    <link rel="stylesheet" href="assets/css/filter.css">
-    <script src="assets/javascript/buildOfferTable.js"></script>
-</head>
+<link rel="stylesheet" href="assets/css/offer.css">
+<link rel="stylesheet" href="assets/css/filter.css">
+<script src="assets/javascript/buildOfferTable.js"></script>
 
-<body>
 <div class="container">
 
     <form method="get" action="frontController.php">
@@ -15,7 +10,7 @@
         <input type="hidden" name="controller" value="ExpPro">
         <input type="text" placeholder="Rechercher une offre" name="keywords" id="search-bar" <?php
         if (isset($_GET["keywords"])) {
-            echo "value=\"" . $_GET['keywords'] . "\"";
+            echo "value=\"" . rawurldecode($_GET['keywords']) . "\"";
         }
         ?>>
 
@@ -58,7 +53,7 @@
 
 
             <label for="codePostal">Code Postal</label>
-            <input type="number" id="codePostal" name="codePostal" pattern="[0-9]{5}" maxlength="5" placeholder="34090">
+            <input type="number" id="codePostal" name="codePostal"  min="0" max="99999" placeholder="34090">
 
             <select name="optionTri" id="optionTri">
                 <option value="" disabled selected style="display:none;">Trier par</option>
@@ -80,7 +75,3 @@
     </div>
 
 </div>
-
-
-</body>
-</html>

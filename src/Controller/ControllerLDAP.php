@@ -27,6 +27,9 @@ class ControllerLDAP extends ControllerGenerique
     public static function verify(): void
     {
         ConfLDAP::connect();
+        session_start();
+        $ldapConnection = ConfLDAP::connect();
+        $_SESSION['ldapConnection'] = serialize($ldapConnection);
         $ldap_login = $_GET['username'];
         $ldap_password = $_GET['password'];
         $ldap_searchfilter = "(uid=$ldap_login)";
@@ -47,6 +50,7 @@ class ControllerLDAP extends ControllerGenerique
 
     public static function disconnect(): void
     {
-        ldap_close(ConfLDAP::getConnection());
+        ldap_close($_SESSION['ldap']);
+        unset($_SESSION['ldap']);
     }
 }

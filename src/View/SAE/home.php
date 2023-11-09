@@ -1,23 +1,16 @@
-<!DOCTYPE html>
-<html>
+<link rel="stylesheet" href="assets/css/button.css">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Accueil</title>
 
-    <link rel="stylesheet" href="assets/css/button.css">
-</head>
-
-<body>
 <div class="container">
     <legend>Zone de test</legend>
     <p>
         <a href="frontController.php?controller=ExpPro&action=createOffer">
+            <!--TODO: demander pour JS button   onclick="location.href = 'frontController.php?controller=ExpPro&action=createOffer'"-->
             <button type="button" class="btn btn-primary">Créer une offre</button>
         </a>
     </p>
     <p>
-        <a href="frontController.php?action=panel">
+        <a href="frontController.php?controller=PanelAdmin&action=panelEtudiants">
             <button type="button" class="btn btn-primary">Panel admin</button>
         </a>
     </p>
@@ -110,7 +103,3 @@
     Donec ut massa ullamcorper, ullamcorper risus elementum, semper arcu. Curabitur pretium neque sed magna semper, at
     fringilla nibh porttitor. Suspendisse bibendum turpis eget finibus tristique.
 </div>
-
-</body>
-
-</html>

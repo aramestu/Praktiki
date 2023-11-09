@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title><?= $pagetitle ?></title>
     <link rel="icon" href="assets/images/favicon.ico">
 
-    <link id="theme" rel="stylesheet" type="text/css" href="assets/css/mainIUT.css"/>
+    <link id="theme" rel="stylesheet" type="text/css" href="assets/css/mainIUT.css">
     <link rel="stylesheet" href="assets/css/charte-graphique-UM.css">
 
     <script src="assets/javascript/navbar.js"></script>
@@ -16,7 +16,7 @@
 
 <header>
 
-    <img id="logoToggle" href="#" class="logo" src="assets/images/LOGO_UM_filet-blanc.png"/>
+    <img id="logoToggle" class="logo" src="assets/images/LOGO_UM_filet-blanc.png" alt="File not found">
 
     <div class="burger">
         <span></span>
@@ -26,13 +26,25 @@
         <a href="frontController.php?action=home" class="nav-item" data-action="home">Accueil</a>
         <a href="frontController.php?action=getExpProByDefault&controller=ExpPro" class="nav-item" data-action="offre">Offres</a>
         <a href="frontController.php?action=contact" class="nav-item" data-action="contact">Contact</a>
-        <a href="frontController.php?action=connect" class="nav-item" data-action="connect">Connexion</a>
+        <?php if (!\App\SAE\Lib\ConnexionEntreprise::estConnecte()) {
+            echo '
+                <a href="frontController.php?action=connect" class="nav-item" data-action="connect">Connexion</a>
+                ';
+        }else {
+            echo '
+                    <a href="frontController.php?action=disconnect&controller=Entreprise" class="nav-item" data-action="disconnect">Déconnexion</a>
+                ';
+        }
+        ?>
 
     </nav>
 </header>
 
 <main>
     <?php
+    foreach (\App\SAE\Lib\MessageFlash::lireTousMessages() as $type => $lireMessage) {
+        echo '<div class="alert alert-'.$type.'">'.$lireMessage.'</div>';
+    }
     require __DIR__ . "/{$cheminVueBody}";
     ?>
 </main>

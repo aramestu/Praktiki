@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Création d'Offre</title>
-    <link rel="stylesheet" href="assets/css/connect.css">
-    <script src="assets/javascript/showHideToggle.js"></script>
-</head>
-<body>
+<link rel="stylesheet" href="assets/css/connect.css">
+<link rel="stylesheet" href="assets/css/create.css">
+<script src="assets/javascript/showHideToggle.js"></script>
+
 <div class="container" id="createOffer">
     <form method="post" action="frontController.php?controller=ExpPro&action=creerOffreDepuisFormulaire">
         <legend>Création d'Offre</legend>
@@ -27,7 +22,7 @@
                         </p> -->
                     <p>
                         <label for="gratification">Gratification</label>
-                        <input type="number" name="gratification" id="gratification" placeholder="gratification"/>
+                        <input type="number" name="gratification" id="gratification" placeholder="gratification">
                     </p>
                 </div>
                 <div id="alternanceForm" class="hidden">
@@ -38,25 +33,28 @@
                 </div>
                 <p>
                     <label for="sujet">Sujet</label>
-                    <input type="text" name="sujet" id="sujet" required placeholder="Sujet"/>
+                    <input type="text" name="sujet" id="sujet" required placeholder="Sujet">
                 </p>
                 <p>
                     <label for="thematique">Thématique</label>
-                    <input type="text" name="thematique" id="thematique" required placeholder="Thématique"/>
+                    <input type="text" name="thematique" id="thematique" required placeholder="Thématique">
                 </p>
                 <p>
-                    <label for="codePostale">Code Postal</label>
+                    <label for="codePostal">Code Postal</label>
                     <input type="text" name="codePostal" id="codePostal" maxlength="5" required
-                           placeholder="Code Postal"/>
+                           placeholder="Code Postal">
                 </p>
                 <p>
-                    <label for="adresse">Adresse postale</label>
+                    <label for="adressePostale">Adresse postale</label>
                     <input type="text" name="adressePostale" id="adressePostale" required
-                           placeholder="Adresse postale"/>
+                           placeholder="Adresse postale">
                 </p>
                 <p>
                     <label for="siret">Siret</label>
-                    <input type="number" name="siret" id="siret" required placeholder="Siret" value="01234567890123"/>
+                    <input type="number" name="siret" id="siret" required placeholder="Siret" value="01234567890123">
+                </p>
+                <p>
+                    <input type="submit" id="submitButton" value="Créer l'Offre">
                 </p>
             </div>
             <div id="createOfferSpacerBIS"></div>
@@ -69,19 +67,14 @@
                 <div class="HBox">
                     <p>
                         <label for="dateDebut">Date de Début</label>
-                        <input type="date" name="dateDebut" id="dateDebut" required placeholder="Date de Début"/>
+                        <input type="date" name="dateDebut" id="dateDebut" required>
                     </p>
                     <p>
                         <label for="dateFin">Date de Fin</label>
-                        <input type="date" name="dateFin" id="dateFin" required placeholder="Date de Fin"/>
+                        <input type="date" name="dateFin" id="dateFin" required>
                     </p>
                 </div>
-                <p>
-                    <input type="submit" id="submitButton" value="Créer l'Offre"/>
-                </p>
             </div>
         </div>
     </form>
 </div>
-</body>
-</html>
