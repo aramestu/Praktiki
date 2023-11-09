@@ -4,6 +4,7 @@ namespace App\SAE\Model\Repository;
 
 use App\SAE\Controller\ControllerGenerique;
 use App\SAE\Model\DataObject\AbstractDataObject;
+use PDOException;
 
 abstract class AbstractRepository {
 

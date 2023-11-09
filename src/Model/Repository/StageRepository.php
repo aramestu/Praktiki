@@ -2,13 +2,32 @@
 
 namespace App\SAE\Model\Repository;
 
+use App\SAE\Model\DataObject\AbstractDataObject;
 use App\SAE\Model\DataObject\ExperienceProfessionnel;
 use App\SAE\Model\DataObject\Stage;
 use Cassandra\Date;
 
-class StageRepository
+class StageRepository extends AbstractExperienceProfessionnelRepository
 {
-    public static function save(Stage $s): bool
+
+    protected function getNomsColonnes(): array
+    {
+        $s = parent::getNomsColonnes();
+        $s["gratification"] = "gratification";
+        return $s;
+    }
+
+    protected function getNomClePrimaire(): string
+    {
+        return "idStage";
+    }
+
+    protected function getNomTable(): string
+    {
+        return "Stages";
+    }
+
+    public function save(AbstractDataObject $s): bool
     {
         try {
             ExperienceProfessionnelRepository::save($s);
@@ -25,36 +44,17 @@ class StageRepository
         }
     }
 
-    public static function construireDepuisTableau($stageFormatTableau): Stage
+    public function construireDepuisTableau(array $expProFormatTableau): ExperienceProfessionnel
     {
-        $stage = new Stage($stageFormatTableau["sujetExperienceProfessionnel"], $stageFormatTableau["thematiqueExperienceProfessionnel"], $stageFormatTableau["tachesExperienceProfessionnel"], $stageFormatTableau["codePostalExperienceProfessionnel"], $stageFormatTableau["adresseExperienceProfessionnel"], $stageFormatTableau["dateDebutExperienceProfessionnel"], $stageFormatTableau["dateFinExperienceProfessionnel"], $stageFormatTableau["siret"], $stageFormatTableau["gratificationStage"]);
-        if (array_key_exists("idStage", $stageFormatTableau)) {
-            $stage->setIdExperienceProfessionnel($stageFormatTableau["idStage"]);
-        }
-        if (array_key_exists("numEtudiant", $stageFormatTableau)) {
-            if (!empty($stageFormatTableau["numEtudiant"])) {
-                $stage->setNumEtudiant($stageFormatTableau["numEtudiant"]);
-            }
-        }
-        if (array_key_exists("mailEnseignant", $stageFormatTableau)) {
-            if (!empty($stageFormatTableau["mailEnseignant"])) {
-                $stage->setMailEnseignant($stageFormatTableau["mailEnseignant"]);
-            }
-        }
-        if (array_key_exists("mailTuteurProfessionnel", $stageFormatTableau)) {
-            if (!empty($stageFormatTableau["mailTuteurProfessionnel"])) {
-                $stage->setMailTuteurProfessionnel($stageFormatTableau["mailTuteurProfessionnel"]);
-            }
-        }
-        if (array_key_exists("datePublication", $stageFormatTableau)) {
-            if (!empty($stageFormatTableau["datePublication"])) {
-                $stage->setDatePublication($stageFormatTableau["datePublication"]);
-            }
-        }
-        return $stage;
+        $exp = new Stage($expProFormatTableau["sujetExperienceProfessionnel"], $expProFormatTableau["thematiqueExperienceProfessionnel"],
+            $expProFormatTableau["tachesExperienceProfessionnel"], $expProFormatTableau["codePostalExperienceProfessionnel"],
+            $expProFormatTableau["adresseExperienceProfessionnel"], $expProFormatTableau["dateDebutExperienceProfessionnel"],
+            $expProFormatTableau["dateFinExperienceProfessionnel"], $expProFormatTableau["siret"], $expProFormatTableau["gratification"]);
+        $this->updateAttribut($expProFormatTableau, $exp);
+        return $exp;
     }
 
-    public static function getAll(): array
+    public function getAll(): array
     {
         $pdo = Model::getPdo();
         $requestStatement = $pdo->query(" SELECT *
@@ -67,7 +67,7 @@ class StageRepository
         return $AllStage;
     }
 
-    public static function get(string $id): ?Stage
+    public function get(string $id): ?Stage
     {
         $sql = "SELECT *
                 FROM ExperienceProfessionnel e
@@ -92,7 +92,7 @@ class StageRepository
     }
 
 
-    public static function mettreAJour(Stage $stage): void
+    public function mettreAJour(AbstractDataObject $stage): void
     {
         // Il faut modifier à la fois dans ExperienceProfessionnel et dans Stage
         ExperienceProfessionnelRepository::mettreAJour($stage);
@@ -111,7 +111,7 @@ class StageRepository
         $pdoStatement->execute($values);
     }
 
-    public static function supprimer(Stage $stage): void
+    public function supprimer(string $stage): void
     {
         $sql = "DELETE FROM Stages WHERE idStage= :idTag;";
         $pdoStatement = Model::getPdo()->prepare($sql);
@@ -172,7 +172,7 @@ class StageRepository
         return $stageTriee;
     }
 
-    public static function search(string $keywords): array
+    public function search(string $keywords): array
     {
         $sql = "SELECT *
                 FROM ExperienceProfessionnel e
@@ -201,5 +201,10 @@ class StageRepository
             $AllStage[] = self::construireDepuisTableau($stageTab);
         }
         return $AllStage;
+    }
+
+    protected function getNomDataObject(): string
+    {
+        return "Stage";
     }
 }

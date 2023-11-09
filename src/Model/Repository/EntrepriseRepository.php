@@ -64,11 +64,8 @@ class EntrepriseRepository extends AbstractRepository
             $sql .= " AND " . $this->colonneToSearch(array("siret", "nomEntreprise"));
             $values["keywordsTag"] = '%' . $keywords . '%';
         }
-        echo $codePostalEntreprise;
-        echo $effectifEntreprise;
         // Si un codePostal a été renseigné alors on filtre par ça
         if(! is_null($codePostalEntreprise) && $codePostalEntreprise != ""){
-            echo 'here';
             $sql .= " AND codePostalEntreprise = :codePostalEntrepriseTag ";
             $values["codePostalEntrepriseTag"] = $codePostalEntreprise;
         }

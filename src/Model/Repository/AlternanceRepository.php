@@ -2,11 +2,31 @@
 
 namespace App\SAE\Model\Repository;
 
+use App\SAE\Model\DataObject\AbstractDataObject;
 use App\SAE\Model\DataObject\Alternance;
+use App\SAE\Model\DataObject\ExperienceProfessionnel;
 
-class AlternanceRepository
+class AlternanceRepository extends AbstractExperienceProfessionnelRepository
 {
-    public static function save(Alternance $a): bool
+    protected function getNomDataObject(): string
+    {
+        return "Alternance";
+    }
+    protected function getNomsColonnes(): array
+    {
+        return parent::getNomsColonnes();
+    }
+
+    protected function getNomClePrimaire(): string
+    {
+        return "idAlternance";
+    }
+
+    protected function getNomTable(): string
+    {
+        return "Alternances";
+    }
+    public function save(AbstractDataObject $a): bool
     {
         try {
             ExperienceProfessionnelRepository::save($a);
@@ -22,39 +42,7 @@ class AlternanceRepository
         }
     }
 
-    public static function construireDepuisTableau($alternanceFormatTableau): Alternance
-    {
-        $alternance = new Alternance($alternanceFormatTableau["sujetExperienceProfessionnel"], $alternanceFormatTableau["thematiqueExperienceProfessionnel"], $alternanceFormatTableau["tachesExperienceProfessionnel"], $alternanceFormatTableau["codePostalExperienceProfessionnel"], $alternanceFormatTableau["adresseExperienceProfessionnel"], $alternanceFormatTableau["dateDebutExperienceProfessionnel"], $alternanceFormatTableau["dateFinExperienceProfessionnel"], $alternanceFormatTableau["siret"]);
-        if (array_key_exists("idAlternance", $alternanceFormatTableau)) {
-            if (!empty($alternanceFormatTableau["idAlternance"])) {
-                $alternance->setIdExperienceProfessionnel($alternanceFormatTableau["idAlternance"]);
-            }
-        }
-        if (array_key_exists("numEtudiant", $alternanceFormatTableau)) {
-            if (!empty($alternanceFormatTableau["numEtudiant"])) {
-                $alternance->setNumEtudiant($alternanceFormatTableau["numEtudiant"]);
-            }
-        }
-        if (array_key_exists("mailEnseignant", $alternanceFormatTableau)) {
-            if (!empty($alternanceFormatTableau["mailEnseignant"])) {
-                $alternance->setMailEnseignant($alternanceFormatTableau["mailEnseignant"]);
-            }
-
-        }
-        if (array_key_exists("mailTuteurProfessionnel", $alternanceFormatTableau)) {
-            if (!empty($alternanceFormatTableau["mailTuteurProfessionnel"])) {
-                $alternance->setMailTuteurProfessionnel($alternanceFormatTableau["mailTuteurProfessionnel"]);
-            }
-        }
-        if (array_key_exists("datePublication", $alternanceFormatTableau)) {
-            if (!empty($alternanceFormatTableau["datePublication"])) {
-                $alternance->setDatePublication($alternanceFormatTableau["datePublication"]);
-            }
-        }
-        return $alternance;
-    }
-
-    public static function getAll(): array
+    public function getAll(): array
     {
         $pdo = Model::getPdo();
         $requestStatement = $pdo->query(" SELECT * 
@@ -67,7 +55,7 @@ class AlternanceRepository
         return $AllAlternance;
     }
 
-    public static function get(string $id): ?Alternance
+    public function get(string $id): ?Alternance
     {
         $sql = "SELECT *
                 FROM ExperienceProfessionnel e
@@ -91,14 +79,14 @@ class AlternanceRepository
         }
     }
 
-    public static function mettreAJour(Alternance $alternance): void
+    public function mettreAJour(AbstractDataObject $alternance): void
     {
 
         // Il faut modifier à la fois dans ExperienceProfessionnel
         ExperienceProfessionnelRepository::mettreAJour($alternance);
     }
 
-    public static function supprimer(Alternance $alternance): void
+    public function supprimer(string $alternance): void
     {
         $sql = "DELETE FROM Alternances WHERE idAlternance= :idTag;";
         $pdoStatement = Model::getPdo()->prepare($sql);
