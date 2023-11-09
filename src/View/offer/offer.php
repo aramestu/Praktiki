@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="assets/css/offer.css">
-    <link rel="stylesheet" href="assets/css/button.css">
-    <script src="assets/javascript/popUpDelete.js"></script>
-</head>
+<link rel="stylesheet" href="assets/css/offer.css">
+<link rel="stylesheet" href="assets/css/button.css">
+<script src="assets/javascript/popUpDelete.js"></script>
 
 <?php
 
@@ -28,7 +24,7 @@ echo htmlspecialchars($last_element) */
             <p>au <?= htmlspecialchars($expPro->getDateFinExperienceProfessionnel()) ?></p>
         </div>
         <div class="company">
-            <h2><?php
+            <h2 class="infoEntrepriseOffer"><?php
                 $entreprise = (new EntrepriseRepository())->getById($expPro->getSiret());
                 echo(htmlspecialchars($entreprise->getNomEntreprise()));
                 ?></h2>

@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="fr">
+<link rel="stylesheet" href="assets/css/button.css">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Accueil</title>
 
-    <link rel="stylesheet" href="assets/css/button.css">
-</head>
-
-<body>
 <div class="container">
     <legend>Zone de test</legend>
     <p>
@@ -20,6 +12,11 @@
     <p>
         <a href="frontController.php?controller=PanelAdmin&action=panelEtudiants">
             <button type="button" class="btn btn-primary">Panel admin</button>
+        </a>
+    </p>
+    <p>
+        <a href="frontController.php?controller=ExpPro&action=displayConvention">
+            <button type="button" class="btn btn-primary">Convention</button>
         </a>
     </p>
 
@@ -106,7 +103,3 @@
     Donec ut massa ullamcorper, ullamcorper risus elementum, semper arcu. Curabitur pretium neque sed magna semper, at
     fringilla nibh porttitor. Suspendisse bibendum turpis eget finibus tristique.
 </div>
-
-</body>
-
-</html>

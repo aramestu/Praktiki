@@ -14,8 +14,10 @@ class Entreprise extends AbstractDataObject {
     private string $estValide;
     private string $emailEntreprise;
     private string $mdpHache;
+    private string $emailAValider;
+    private string $nonce;
 
-    public function __construct(string $siret, string $nom, string $codePostal, string $effectif, string $telephone, string $siteWeb, string $email, string $mdpHache)
+    public function __construct(string $siret, string $nom, string $codePostal, string $effectif, string $telephone, string $siteWeb, string $email, string $mdpHache,string  $emailAValider, string $nonce)
     {
         $this->siret = $siret;
         $this->nomEntreprise = $nom;
@@ -23,9 +25,11 @@ class Entreprise extends AbstractDataObject {
         $this->effectifEntreprise = $effectif;
         $this->telephoneEntreprise = $telephone;
         $this->siteWebEntreprise = $siteWeb;
+        $this->estValide = 0;
         $this->emailEntreprise = $email;
         $this->mdpHache = $mdpHache;
-        $this->estValide = 0;
+        $this->emailAValider=$emailAValider;
+        $this->nonce=$nonce;
     }
 
     public function getSiret(): string
@@ -116,6 +120,28 @@ class Entreprise extends AbstractDataObject {
         $this->emailEntreprise = $email;
     }
 
+    public function getEmailAValider(): string
+    {
+        return $this->emailAValider;
+    }
+
+    public function setEmailAValider(string $emailAValider): void
+    {
+        $this->emailAValider = $emailAValider;
+    }
+
+    public function getNonce(): string
+    {
+        return $this->nonce;
+    }
+
+    public function setNonce(string $nonce): void
+    {
+        $this->nonce = $nonce;
+    }
+
+
+
     public function formatTableau(): array
     {
         return [
@@ -127,7 +153,9 @@ class Entreprise extends AbstractDataObject {
             "siteWebEntrepriseTag" => $this->siteWebEntreprise,
             "estValideTag" => $this->estValide,
             "emailEntrepriseTag" => $this->emailEntreprise,
-            "mdpHacheTag" => $this->mdpHache
+            "mdpHacheTag" => $this->mdpHache,
+            "emailAValiderTag" => $this->emailAValider,
+            "nonceTag" => $this->nonce
         ];
     }
 
@@ -143,7 +171,9 @@ class Entreprise extends AbstractDataObject {
             $tableauFormulaire["telephone"],
             $tableauFormulaire["website"],
             $tableauFormulaire["email"],
-            $mdpHache
+            $mdpHache,
+            "",
+            MotDePasse::genererChaineAleatoire()
         );
     }
 }

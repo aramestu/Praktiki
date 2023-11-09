@@ -1,19 +1,10 @@
-<!DOCTYPE html>
-<html>
+<link rel="stylesheet" href="assets/css/connect.css">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Connexion</title>
+<script src="assets/javascript/showPassword.js"></script>
 
-    <link rel="stylesheet" href="assets/css/connect.css">
-
-    <script src="assets/javascript/showPassword.js"></script>
-</head>
-
-<body>
 <div class="container">
     <form method="get">
-        <legend>Connexion</legend>
+        <h2 id="remplaceBaliseLegend">Connexion</h2>
         <p>
             <label for="username">Email</label>
             <input type="text" name="username" id="username" required placeholder="rick.astley@roll.com" autofocus>
@@ -34,6 +25,3 @@
         <p>Vous n'avez pas de compte? <a href="frontController.php?action=createAccount" class="link">Créer un compte</a></p>
     </div>
 </div>
-</body>
-
-</html>

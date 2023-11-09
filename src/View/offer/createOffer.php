@@ -1,21 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Création d'Offre</title>
-    <link rel="stylesheet" href="assets/css/connect.css">
-    <link rel="stylesheet" href="assets/css/create.css">
-    <script src="assets/javascript/showHideToggle.js"></script>
-</head>
-<body>
+<link rel="stylesheet" href="assets/css/connect.css">
+<link rel="stylesheet" href="assets/css/create.css">
+<script src="assets/javascript/showHideToggle.js"></script>
+
 <div class="container" id="createOffer">
     <form method="post" action="frontController.php?controller=ExpPro&action=creerOffreDepuisFormulaire">
-        <legend>Création d'Offre</legend>
+        <h2 id="remplaceBaliseLegend">Création d'Offre</h2>
         <div class="HBox">
             <div class="VBox">
                 <p>
                     <label for="typeOffre">Type d'Offre</label>
-                    <select name="typeOffre" id="typeOffre" required>
+                    <select name="typeOffre" id="typeOffre" size="3" required>
                         <option value="stalternance">Non définie</option>
                         <option value="stage">Stage</option>
                         <option value="alternance">Alternance</option>
@@ -84,5 +78,3 @@
         </div>
     </form>
 </div>
-</body>
-</html>

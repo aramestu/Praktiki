@@ -2,8 +2,8 @@
 
 use App\SAE\Model\Repository\EntrepriseRepository;
 ?>
-<a href="frontController.php?controller=ExpPro&action=afficherOffre&experiencePro= <?php echo rawurlencode($expPro->getIdExperienceProfessionnel()) ?> "
-   style="text-decoration:none" id="offerButton">
+<a href="frontController.php?controller=ExpPro&action=afficherOffre&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel()) ?>"
+   style="text-decoration:none">
     <div class="subContainer small <?php echo $expPro->getNomExperienceProfessionnel(); ?>">
         <div class="header">
             <div class="left">
@@ -28,7 +28,7 @@ use App\SAE\Model\Repository\EntrepriseRepository;
                 echo(htmlspecialchars($entreprise->getNomEntreprise()));
                 ?></p>
             <p><img src="assets/images/map-pin-icon.png"
-                    class="mapPin"><label><?php echo htmlspecialchars($expPro->getCodePostalExperienceProfessionnel()); ?></label>
+                    class="mapPin" alt="File not found"><span><?php echo htmlspecialchars($expPro->getCodePostalExperienceProfessionnel()); ?></span>
             </p>
         </div>
     </div>

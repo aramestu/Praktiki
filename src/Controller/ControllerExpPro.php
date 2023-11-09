@@ -299,6 +299,13 @@ class ControllerExpPro extends ControllerGenerique
             ]
         );
     }
+
+    public static function displayConvention(): void {
+        ControllerGenerique::afficheVue('view.php',[
+            'pagetitle' => 'Convention',
+            'cheminVueBody' => 'SAE/convention.php',
+        ]);
+    }
 }
 
 

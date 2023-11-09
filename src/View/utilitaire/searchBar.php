@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="assets/css/offer.css">
-    <link rel="stylesheet" href="assets/css/filter.css">
-    <script src="assets/javascript/buildOfferTable.js"></script>
-</head>
-
-<body>
+<link rel="stylesheet" href="assets/css/offer.css">
+<link rel="stylesheet" href="assets/css/filter.css">
+<script src="assets/javascript/buildOfferTable.js"></script>
 <div class="container">
 
     <form method="get" action="frontController.php">
@@ -25,5 +19,3 @@
 
     </form>
 </div>
-</body>
-</html>
