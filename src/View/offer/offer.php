@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="assets/css/offer.css">
-    <link rel="stylesheet" href="assets/css/button.css">
-    <script src="assets/javascript/popUpDelete.js"></script>
-</head>
+<link rel="stylesheet" href="assets/css/offer.css">
+<link rel="stylesheet" href="assets/css/button.css">
+<script src="assets/javascript/popUpDelete.js"></script>
 
 <?php
 
