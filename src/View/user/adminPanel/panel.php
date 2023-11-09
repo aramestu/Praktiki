@@ -4,6 +4,7 @@
 <p><b>Bienvenue Mr. Trombettoni</b></p>
 <div class="HBox" id="panel">
     <div class="container" id="option">
+        <!--TODO: corriger prb heritage button-->
         <a href="frontController.php?controller=PanelAdmin&action=PanelEtudiants">
             <button type="button" class="btn btn-primary">Liste des étudiants</button>
         </a>
