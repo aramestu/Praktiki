@@ -13,7 +13,7 @@ class Alternance extends ExperienceProfessionnel
 
     public function formatTableau(): array
     {
-        return array_merge(parent::formatTableau(), array());
+        return array_merge(parent::formatTableau(), array()); // test
     }
 
     public function getNomExperienceProfessionnel()
