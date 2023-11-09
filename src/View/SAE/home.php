@@ -18,7 +18,7 @@
         </a>
     </p>
     <p>
-        <a href="frontController.php?action=panel">
+        <a href="frontController.php?controller=PanelAdmin&action=panelEtudiants">
             <button type="button" class="btn btn-primary">Panel admin</button>
         </a>
     </p>

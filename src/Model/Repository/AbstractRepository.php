@@ -19,7 +19,7 @@ abstract class AbstractRepository {
         return $objects;
     }
 
-    public function get(string $valeurClePrimaire): ?AbstractDataObject{
+    public function getById(string $valeurClePrimaire): ?AbstractDataObject{
         $nomTable = $this->getNomTable();
         $clePrimaire = $this->getNomClePrimaire();
         $sql = "SELECT * from $nomTable WHERE $clePrimaire = :clePrimaireTag";

@@ -1,4 +1,3 @@
-<body>
 <div class="header">
     <h2>
         Liste des entreprises en attente de validation
@@ -14,4 +13,3 @@ require_once __DIR__ . '/../utilitaire/searchBar.php';?>
     }
     ?>
 </div>
-</body>

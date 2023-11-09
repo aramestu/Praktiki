@@ -4,20 +4,20 @@ namespace App\SAE\Model\DataObject;
 
 use App\SAE\Lib\MotDePasse;
 
-class Entreprise extends AbstractDataObject
-{
+class Entreprise extends AbstractDataObject {
     private string $siret;
     private string $nomEntreprise;
     private string $codePostalEntreprise;
     private string $effectifEntreprise;
     private string $telephoneEntreprise;
     private string $siteWebEntreprise;
-
     private string $estValide;
-    private string $email;
+    private string $emailEntreprise;
     private string $mdpHache;
+    private string $emailAValider;
+    private string $nonce;
 
-    public function __construct(string $siret, string $nom, string $codePostal, string $effectif, string $telephone, string $siteWeb, string $email, string $mdpHache)
+    public function __construct(string $siret, string $nom, string $codePostal, string $effectif, string $telephone, string $siteWeb, string $email, string $mdpHache,string  $emailAValider, string $nonce)
     {
         $this->siret = $siret;
         $this->nomEntreprise = $nom;
@@ -26,8 +26,10 @@ class Entreprise extends AbstractDataObject
         $this->telephoneEntreprise = $telephone;
         $this->siteWebEntreprise = $siteWeb;
         $this->estValide = 0;
-        $this->email = $email;
+        $this->emailEntreprise = $email;
         $this->mdpHache = $mdpHache;
+        $this->emailAValider=$emailAValider;
+        $this->nonce=$nonce;
     }
 
     public function getSiret(): string
@@ -108,17 +110,35 @@ class Entreprise extends AbstractDataObject
         return MotDePasse::hacher($mdpClair);
     }
 
-    public function getEmail(): string
+    public function getEmailEntreprise(): string
     {
-        return $this->email;
+        return $this->emailEntreprise;
     }
 
-    public function setEmail(string $email): void
+    public function setEmailEntreprise(string $email): void
     {
-        $this->email = $email;
+        $this->emailEntreprise = $email;
     }
 
+    public function getEmailAValider(): string
+    {
+        return $this->emailAValider;
+    }
 
+    public function setEmailAValider(string $emailAValider): void
+    {
+        $this->emailAValider = $emailAValider;
+    }
+
+    public function getNonce(): string
+    {
+        return $this->nonce;
+    }
+
+    public function setNonce(string $nonce): void
+    {
+        $this->nonce = $nonce;
+    }
 
 
 
@@ -132,8 +152,10 @@ class Entreprise extends AbstractDataObject
             "telephoneEntrepriseTag" => $this->telephoneEntreprise,
             "siteWebEntrepriseTag" => $this->siteWebEntreprise,
             "estValideTag" => $this->estValide,
-            "emailTag" => $this->email,
-            "mdpHacheTag" => $this->mdpHache
+            "emailEntrepriseTag" => $this->emailEntreprise,
+            "mdpHacheTag" => $this->mdpHache,
+            "emailAValiderTag" => $this->emailAValider,
+            "nonceTag" => $this->nonce
         ];
     }
 
@@ -149,7 +171,9 @@ class Entreprise extends AbstractDataObject
             $tableauFormulaire["telephone"],
             $tableauFormulaire["website"],
             $tableauFormulaire["email"],
-            $mdpHache
+            $mdpHache,
+            "",
+            MotDePasse::genererChaineAleatoire()
         );
     }
 }

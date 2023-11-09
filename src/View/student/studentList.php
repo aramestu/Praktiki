@@ -1,16 +1,18 @@
-<html>
-<head>
-    <link rel="stylesheet" href="assets/css/offer.css">
-    <link rel="stylesheet" href="assets/css/filter.css">
-    <script src="assets/javascript/buildOfferTable.js"></script>
-</head>
+<link rel="stylesheet" href="assets/css/offer.css">
+<link rel="stylesheet" href="assets/css/filter.css">
+<script src="assets/javascript/buildOfferTable.js"></script>
 
-
+<div class="header">
+    <h2>
+        Liste des étudiants
+    </h2>
+</div>
 <div class="container">
     <form method="get" action="frontController.php">
 
         <input type="hidden" name="action" value="getEtudiantBySearch">
         <input type="hidden" name="controller" value="Etudiant">
+
         <input type="text" placeholder="Rechercher un étudiant" name="keywords" id="search-bar"
             <?php
             if (isset($_GET["keywords"])) {
@@ -27,11 +29,7 @@
 <div class="VBox" id="center">
 
     <div class="header">
-        <div class="header">
-            <h2>
-                Liste des étudiants
-            </h2>
-        </div>
+
     </div>
     <?php
     foreach ($listEtudiants as $etudiant) {
@@ -39,5 +37,3 @@
     }
     ?>
 </div>
-</body>
-</html>
