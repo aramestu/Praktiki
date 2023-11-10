@@ -5,9 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const noButton = document.getElementById('popUpDeleteNo');
     const closeIcon = document.getElementById('closeIcon');
 
-
     deleteButtonOrigin.addEventListener('click', function () {
-        console.log('click, overlay and popup should appear');
         transitionOverlay.style.backdropFilter = 'blur(10px)';
         transitionOverlay.style.zIndex = '15';
         popUpDelete.style.zIndex = '16';

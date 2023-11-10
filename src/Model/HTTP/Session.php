@@ -28,36 +28,33 @@ class Session
 
     public function contient($name): bool
     {
-// À compléter
         return isset($_SESSION[$name]);
     }
 
     public function enregistrer(string $name, $value): void
     {
-// À compléter
         $_SESSION[$name]=$value;
     }
 
     public function lire(string $name)
     {
-// À compléter
         return $_SESSION[$name];
     }
 
     public function supprimer($name): void
     {
-// À compléter
         unset($_SESSION[$name]);
     }
 
     public function detruire() : void
     {
-        session_unset();     // unset $_SESSION variable for the run-time
-        session_destroy();   // destroy session data in storage
-        Cookie::supprimer(session_name()); // deletes the session cookie
-// Il faudra reconstruire la session au prochain appel de getInstance()
+        session_unset();
+        session_destroy();
+        Cookie::supprimer(session_name());
+        // Il faudra reconstruire la session au prochain appel de getInstance()
         $instance = null;
     }
+
     public static function verifierDerniereActivite():void{
 
         if (isset($_SESSION['derniereActivite']) && (time() - $_SESSION['derniereActivite'] > (Conf::getDelai()))) {
