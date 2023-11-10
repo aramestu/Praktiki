@@ -105,40 +105,6 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         }
     }
 
-
-    /*public function save(AbstractDataObject $e): bool{
-        // Puis on spécialise (Stage/Alternance/OffreNonDefini)
-        try {
-            $pdo = Model::getPdo();
-            $table = $this->getNomTable();
-            $colonnes = $this->getNomsColonnes();
-            $sql = "INSERT INTO $table VALUES (";
-            // Je commence à 1 pour ne pas enregistrer l'idExperienceProfessionnel
-            for($i = 1; $i<sizeof($colonnes); $i++){
-                $sql = $sql . ":" . $colonnes[$i] . "Tag";
-                if($i!=sizeof($colonnes)-1){
-                    $sql = $sql . ", ";
-                }else{
-                    $sql = $sql . ")";
-                }
-            }
-            $requeteStatement = $pdo->prepare($sql);
-
-            // Pour mettre Tag aux colonnes spécifiques aux offres
-            $formatTab = $e->formatTableau();
-            $values = array();
-            foreach ($colonnes as $col){
-                $values[$col . "Tag"] = $formatTab[$col];
-            }
-            $requeteStatement->execute($values);
-            return true;
-        } catch (\PDOException $e) {
-            return false;
-        }
-    }*/
-
-
-
     /* utilisé pour construireDepuisTableau afin de dupliquer du code avec StageRepository
      *
      */
@@ -170,28 +136,27 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
 
     public function getAll(): array
     {
-        $alternance = AlternanceRepository::getAll();
-        $stage = StageRepository::getAll();
         $pdo = Model::getPdo();
-        $requestStatement = $pdo->query(" SELECT *
-                                                        FROM ExperienceProfessionnel e
-                                                        WHERE NOT EXISTS (SELECT * FROM Stages
-                                                        WHERE Stages.idStage = e.idExperienceProfessionnel)
-                                                        AND NOT EXISTS (SELECT * FROM Alternances
-                                                        WHERE Alternances.idAlternance = e.idExperienceProfessionnel)");
-        $stalternance = [];
-        foreach ($requestStatement as $alternanceTab) {
-            $stalternance[] = $this->construireDepuisTableau($alternanceTab);
+        $nomTable = $this->getNomTable();
+        $nomClePrimaire = $this->getNomClePrimaire();
+        $requestStatement =  $pdo->query("SELECT * FROM $nomTable 
+        JOIN ExperienceProfessionnel e ON e.idExperienceProfessionnel = $nomTable.$nomClePrimaire");
+
+        $objects = [];
+        foreach ($requestStatement as $objectFormatTableau) {
+            $objects[] = $this->construireDepuisTableau($objectFormatTableau);
         }
-        $stage = array_merge($alternance, $stage);
-        return array_merge($stalternance, $stage);
+        return $objects;
     }
 
     public function get(string $id): ?ExperienceProfessionnel
     {
-        $sql = "SELECT *
-                    FROM ExperienceProfessionnel e
-                    WHERE e.idExperienceProfessionnel = :id";
+        $nomTable = $this->getNomTable();
+        $nomClePrimaire = $this->getNomClePrimaire();
+        $sql = "SELECT * 
+                FROM $nomTable 
+                JOIN ExperienceProfessionnel e ON e.idExperienceProfessionnel = $nomTable.$nomClePrimaire
+                WHERE e.idExperienceProfessionnel = :id";
         $pdoStatement = Model::getPdo()->prepare($sql);
 
         $values = array(
@@ -200,14 +165,14 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
 
         $pdoStatement->execute($values);
 
-        $stalternance = $pdoStatement->fetch();
+        $exp = $pdoStatement->fetch();
 
         // S'il n'y a pas d'offre associée
-        if (!$stalternance) {
+        if (! $exp) {
             return null;
-        } else {
-            return ExperienceProfessionnelRepository::construireDepuisTableau($stalternance);
         }
+        //Sinon
+        return ExperienceProfessionnelRepository::construireDepuisTableau($exp);
     }
 
     public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $stage = null, string $alternance = null, string $codePostal = null, string $datePublication = null): array
