@@ -24,4 +24,14 @@ class OffreNonDefiniRepository extends  AbstractExperienceProfessionnelRepositor
     {
         return array("idOffreNonDefini");
     }
+
+    public function construireDepuisTableau(array $expProFormatTableau): ExperienceProfessionnel
+    {
+        $exp = new OffreNonDefini($expProFormatTableau["sujetExperienceProfessionnel"], $expProFormatTableau["thematiqueExperienceProfessionnel"],
+            $expProFormatTableau["tachesExperienceProfessionnel"], $expProFormatTableau["codePostalExperienceProfessionnel"],
+            $expProFormatTableau["adresseExperienceProfessionnel"], $expProFormatTableau["dateDebutExperienceProfessionnel"],
+            $expProFormatTableau["dateFinExperienceProfessionnel"], $expProFormatTableau["siret"]);
+        $this->updateAttribut($expProFormatTableau, $exp);
+        return $exp;
+    }
 }

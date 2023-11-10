@@ -26,7 +26,17 @@ class AlternanceRepository extends AbstractExperienceProfessionnelRepository
     {
         return "Alternances";
     }
-    public function save(AbstractDataObject $a): bool
+
+    public function construireDepuisTableau(array $expProFormatTableau): ExperienceProfessionnel
+    {
+        $exp = new Alternance($expProFormatTableau["sujetExperienceProfessionnel"], $expProFormatTableau["thematiqueExperienceProfessionnel"],
+            $expProFormatTableau["tachesExperienceProfessionnel"], $expProFormatTableau["codePostalExperienceProfessionnel"],
+            $expProFormatTableau["adresseExperienceProfessionnel"], $expProFormatTableau["dateDebutExperienceProfessionnel"],
+            $expProFormatTableau["dateFinExperienceProfessionnel"], $expProFormatTableau["siret"]);
+        $this->updateAttribut($expProFormatTableau, $exp);
+        return $exp;
+    }
+    /*public function save(AbstractDataObject $a): bool
     {
         try {
             ExperienceProfessionnelRepository::save($a);
@@ -40,7 +50,7 @@ class AlternanceRepository extends AbstractExperienceProfessionnelRepository
         } catch (\PDOException $e) {
             return false;
         }
-    }
+    }*/
 
     public function getAll(): array
     {

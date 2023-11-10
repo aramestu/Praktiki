@@ -107,9 +107,9 @@ class ControllerExpPro extends ControllerGenerique
             AlternanceRepository::mettreAJour($alternance);
             self::afficherVueEndOffer($msg); // Redirection vers une page
         } // Si c'est une stalternance
-        elseif ($_POST["typeOffre"] == "stalternance" || $_POST["typeOffre"] == "Non définie") {
+        elseif ($_POST["typeOffre"] == "Non définie") {
             $tab["idExpPro"] = $_POST["id"];
-            $stalternance = AbstractExperienceProfessionnelRepository::construireDepuisTableau($tab);
+            $stalternance = OffreNonDefiniRepository::construireDepuisTableau($tab);
             AbstractExperienceProfessionnelRepository::mettreAJour($stalternance);
             self::afficherVueEndOffer($msg); // Redirection vers une page
         } // Si ce n'est aucun des 3 alors ce n'est pas normal
@@ -222,36 +222,14 @@ class ControllerExpPro extends ControllerGenerique
                 "gratificationStage" => $_POST["gratification"]
             ]);
             $rep->save($stage);
-            //self::afficherVueEndOffer($msg); // Redirection vers une page
+            self::afficherVueEndOffer($msg); // Redirection vers une page
 
         } else if ($_POST["typeOffre"] == "alternance") {
             $rep = new AlternanceRepository();
-            $alternance = $rep->construireDepuisTableau([
-                "sujetExperienceProfessionnel" => $_POST["sujet"],
-                "thematiqueExperienceProfessionnel" => $_POST["thematique"],
-                "tachesExperienceProfessionnel" => $_POST["taches"],
-                "codePostalExperienceProfessionnel" => $_POST["codePostal"],
-                "adresseExperienceProfessionnel" => $_POST["adressePostale"],
-                "dateDebutExperienceProfessionnel" => $_POST["dateDebut"],
-                "dateFinExperienceProfessionnel" => $_POST["dateFin"],
-                "siret" => $_POST["siret"]
-            ]);
-            $rep->save($alternance);
-            self::afficherVueEndOffer($msg); // Redirection vers une page
+            self::saveExpByFormulairePost($rep, $msg); // Redirection vers une page
         } else if ($_POST["typeOffre"] == "stalternance" || $_POST["typeOffre"] == "Non définie") {
             $rep = new OffreNonDefiniRepository();
-            $stalternance = $rep->construireDepuisTableau([
-                "sujetExperienceProfessionnel" => $_POST["sujet"],
-                "thematiqueExperienceProfessionnel" => $_POST["thematique"],
-                "tachesExperienceProfessionnel" => $_POST["taches"],
-                "codePostalExperienceProfessionnel" => $_POST["codePostal"],
-                "adresseExperienceProfessionnel" => $_POST["adressePostale"],
-                "dateDebutExperienceProfessionnel" => $_POST["dateDebut"],
-                "dateFinExperienceProfessionnel" => $_POST["dateFin"],
-                "siret" => $_POST["siret"]
-            ]);
-            $rep->save($stalternance);
-            self::afficherVueEndOffer($msg); // Redirection vers une page
+            self::saveExpByFormulairePost($rep, $msg); // Redirection vers une page
         } else {
             ControllerGenerique::error("Ce type d'offre n'existe pas");
         }
@@ -304,6 +282,27 @@ class ControllerExpPro extends ControllerGenerique
                 'cheminVueBody' => 'offer/offerList.php',
             ]
         );
+    }
+
+    /**
+     * @param AlternanceRepository $rep
+     * @param string $msg
+     * @return void
+     */
+    public static function saveExpByFormulairePost(AbstractExperienceProfessionnelRepository $rep, string $msg): void
+    {
+        $exp = $rep->construireDepuisTableau([
+            "sujetExperienceProfessionnel" => $_POST["sujet"],
+            "thematiqueExperienceProfessionnel" => $_POST["thematique"],
+            "tachesExperienceProfessionnel" => $_POST["taches"],
+            "codePostalExperienceProfessionnel" => $_POST["codePostal"],
+            "adresseExperienceProfessionnel" => $_POST["adressePostale"],
+            "dateDebutExperienceProfessionnel" => $_POST["dateDebut"],
+            "dateFinExperienceProfessionnel" => $_POST["dateFin"],
+            "siret" => $_POST["siret"]
+        ]);
+        $rep->save($exp);
+        self::afficherVueEndOffer($msg);
     }
 }
 

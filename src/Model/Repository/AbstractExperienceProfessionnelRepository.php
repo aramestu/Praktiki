@@ -3,6 +3,7 @@
 namespace App\SAE\Model\Repository;
 
 use App\SAE\Model\DataObject\AbstractDataObject;
+use App\SAE\Model\DataObject\Alternance;
 use App\SAE\Model\DataObject\ExperienceProfessionnel;
 use App\SAE\Model\DataObject\Stage;
 use App\SAE\Model\Repository\Model;
@@ -165,16 +166,6 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         if (array_key_exists("datePublication", $expProFormatTableau)) {
             $exp->setDatePublication($expProFormatTableau["datePublication"]);
         }
-    }
-
-    public function construireDepuisTableau(array $expProFormatTableau): ExperienceProfessionnel
-    {
-        $exp = new ($this->getNomDataObject())($expProFormatTableau["sujetExperienceProfessionnel"], $expProFormatTableau["thematiqueExperienceProfessionnel"],
-            $expProFormatTableau["tachesExperienceProfessionnel"], $expProFormatTableau["codePostalExperienceProfessionnel"],
-            $expProFormatTableau["adresseExperienceProfessionnel"], $expProFormatTableau["dateDebutExperienceProfessionnel"],
-            $expProFormatTableau["dateFinExperienceProfessionnel"], $expProFormatTableau["siret"]);
-        $this->updateAttribut($expProFormatTableau, $exp);
-        return $exp;
     }
 
     public function getAll(): array
