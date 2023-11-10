@@ -28,19 +28,68 @@
     justify-content: flex-start;
 }
 
-#placeholder .line{
+#placeholder .line, .columnName{
     display: flex;
-    border: var(--darkBlue2) solid 1px;
     justify-content: space-between;
     align-items: center;
     min-height: 2em;
-    width: 100%;
+    width: 90%;
     box-sizing: unset;
+    position: relative;
+    border: var(--grey2) solid 2px;
+}
+
+.columnName{
+    margin-top: 10px;
+    border: none;
+    font-weight: bold;
+    width: 92%;
+}
+
+#placeholder .line:hover{
+    border-color: var(--darkBlue1);
+}
+
+.HBox.containerEtatNomEntreprise{
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+    width: auto;
+    max-width: 35%;
+}
+
+#placeholder .HBox *{
+    margin-right: 1em;
+}
+
+.line label{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .lineNomEntreprise{
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
+}
+
+.lineCodePostalEntreprise{
+    position: absolute;
+    left: 40%;
+}
+
+.columnName .lineCodePostalEntreprise{
+    left: 37%;
+}
+
+.lineTelephoneEntreprise{
+    position: absolute;
+    left: 53%;
+}
+
+.lineSiteWebEntreprise{
+    position: absolute;
+    left: 70%;
 }
 
 .line button{
@@ -48,10 +97,7 @@
     height: 3em;
     width: 6em;
     padding: 0;
-}
-
-.line a{
-
+    font-size: 0.9em;
 }
 
 .circle {
@@ -96,13 +142,24 @@
         height: auto;
     }
 
-    #placeholder .line{
-        display: flex;
-        flex-wrap: wrap;
-        border: var(--darkBlue2) solid 1px;
-        justify-content: space-between;
-        align-items: center;
-        min-height: 2em;
-        width: 100%;
+    #placeholder .line, .columnName{
+        width: 95%;
+    }
+
+    .lineTelephoneEntreprise{
+        display: none;
+    }
+
+    .lineCodePostalEntreprise{
+        display: none;
+    }
+
+    .lineSiteWebEntreprise{
+        left: 55%;
+    }
+
+    .HBox.containerEtatNomEntreprise{
+        max-width: 50%;
+        justify-content:flex-start;
     }
 }
