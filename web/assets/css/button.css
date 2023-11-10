@@ -1,9 +1,10 @@
 .button{
+    display: block;
     text-decoration: none;
     background-color: var(--bleuUM);
     color: var(--white);
     width: 100%;
-    padding: 15px 0;
+    padding: 15px;
     border: none;
     border-radius: 1.5rem;
     cursor: pointer;
