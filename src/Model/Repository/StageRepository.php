@@ -121,6 +121,7 @@ class StageRepository extends AbstractExperienceProfessionnelRepository
 
     public static function search(string $keywords): array
     {
+        return array();
         /*$sql = "SELECT *
                 FROM ExperienceProfessionnel e
                 JOIN Stages s ON s.idStage = e.idExperienceProfessionnel
