@@ -152,6 +152,7 @@ class AlternanceRepository extends AbstractExperienceProfessionnelRepository
 
     public static function search(string $keywords): array
     {
+        return array();
         /*$sql = "SELECT *
                 FROM ExperienceProfessionnel e
                 JOIN Alternances a ON a.idAlternance = e.idExperienceProfessionnel
