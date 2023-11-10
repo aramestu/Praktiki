@@ -36,58 +36,7 @@ class AlternanceRepository extends AbstractExperienceProfessionnelRepository
         $this->updateAttribut($expProFormatTableau, $exp);
         return $exp;
     }
-    /*public function save(AbstractDataObject $a): bool
-    {
-        try {
-            ExperienceProfessionnelRepository::save($a);
-            $pdo = Model::getPdo();
-            $requestStatement = $pdo->prepare("INSERT INTO Alternances(idAlternance)
-                                                 VALUES(:idAlternanceTag)");
-            $values = array("idAlternanceTag" => $pdo->lastInsertId());
 
-            $requestStatement->execute($values);
-            return true;
-        } catch (\PDOException $e) {
-            return false;
-        }
-    }*/
-
-    public function getAll(): array
-    {
-        $pdo = Model::getPdo();
-        $requestStatement = $pdo->query(" SELECT * 
-                                                FROM ExperienceProfessionnel e
-                                                JOIN Alternances a ON a.idAlternance = e.idExperienceProfessionnel");
-        $AllAlternance = [];
-        foreach ($requestStatement as $alternanceTab) {
-            $AllAlternance[] = self::construireDepuisTableau($alternanceTab);
-        }
-        return $AllAlternance;
-    }
-
-    public function get(string $id): ?Alternance
-    {
-        $sql = "SELECT *
-                FROM ExperienceProfessionnel e
-                JOIN Alternances a ON a.idAlternance = e.idExperienceProfessionnel
-                WHERE a.idAlternance = :id";
-        $pdoStatement = Model::getPdo()->prepare($sql);
-
-        $values = array(
-            "id" => $id,
-        );
-
-        $pdoStatement->execute($values);
-
-        $alternance = $pdoStatement->fetch();
-
-        // S'il n'y a pas d'alternance
-        if (!$alternance) {
-            return null;
-        } else {
-            return AlternanceRepository::construireDepuisTableau($alternance);
-        }
-    }
 
     public function mettreAJour(AbstractDataObject $alternance): void
     {

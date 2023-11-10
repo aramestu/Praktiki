@@ -39,44 +39,6 @@ class StageRepository extends AbstractExperienceProfessionnelRepository
         return $exp;
     }
 
-    public function getAll(): array
-    {
-        $pdo = Model::getPdo();
-        $requestStatement = $pdo->query(" SELECT *
-                                                FROM ExperienceProfessionnel e
-                                                JOIN Stages s ON s.idStage = e.idExperienceProfessionnel");
-        $AllStage = [];
-        foreach ($requestStatement as $stageTab) {
-            $AllStage[] = self::construireDepuisTableau($stageTab);
-        }
-        return $AllStage;
-    }
-
-    public function get(string $id): ?Stage
-    {
-        $sql = "SELECT *
-                FROM ExperienceProfessionnel e
-                JOIN Stages s ON s.idStage = e.idExperienceProfessionnel
-                WHERE s.idStage = :id";
-        $pdoStatement = Model::getPdo()->prepare($sql);
-
-        $values = array(
-            "id" => $id,
-        );
-
-        $pdoStatement->execute($values);
-
-        $stage = $pdoStatement->fetch();
-
-        // S'il n'y a pas de stage
-        if (!$stage) {
-            return null;
-        } else {
-            return StageRepository::construireDepuisTableau($stage);
-        }
-    }
-
-
     public function mettreAJour(AbstractDataObject $stage): void
     {
         // Il faut modifier à la fois dans ExperienceProfessionnel et dans Stage
