@@ -49,6 +49,8 @@ class ControllerMain extends ControllerGenerique
         );
     }
 
+
+
     public static function import(): void
     {
         self::afficheVue(
@@ -83,7 +85,7 @@ class ControllerMain extends ControllerGenerique
                                 $column[3], $column[6], $column[7], $column[5], $column[45]));
                         } else if ($i == 3) {//Entreprises
                             (new EntrepriseRepository())->save(new Entreprise($column[55], $column[54], $column[59],
-                                $column[64], $column[66], $column[69]));
+                                $column[64], $column[66], $column[69],"","","",""));
                         } else if ($i == 4) {//Enseignants
                             (new EnseignantRepository())->save(new Enseignant($column[31], $column[29], $column[30]));
                         } else if ($i == 5) {//stages

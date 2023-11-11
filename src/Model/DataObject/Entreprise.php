@@ -170,9 +170,9 @@ class Entreprise extends AbstractDataObject {
             $tableauFormulaire["effectif"],
             $tableauFormulaire["telephone"],
             $tableauFormulaire["website"],
-            $tableauFormulaire["email"],
-            $mdpHache,
             "",
+            $mdpHache,
+            $tableauFormulaire["email"],
             MotDePasse::genererChaineAleatoire()
         );
     }

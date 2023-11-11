@@ -2,6 +2,8 @@
 
 namespace App\SAE\Controller;
 
+use App\SAE\Lib\VerificationEmail;
+use App\SAE\Lib\MessageFlash;
 use App\SAE\Lib\MotDePasse;
 use App\SAE\Lib\ConnexionEntreprise;
 use App\SAE\Model\DataObject\Entreprise;
@@ -77,15 +79,17 @@ class ControllerEntreprise extends ControllerGenerique
         if (isset($_REQUEST["username"]) && isset($_REQUEST["password"])) {
             $user = (new EntrepriseRepository())->getById($_REQUEST["username"]);
             if (!is_null($user)) {
-                $mp1 = $user->formatTableau()["mdpHacheTag"];
-                $mp2 = hash("sha256", $_REQUEST["password"]);
                 if (MotDePasse::verifier($_REQUEST["password"], $user->formatTableau()["mdpHacheTag"])) {
                     ConnexionEntreprise::connecter($_REQUEST["username"]);
-                    self::redirectionVersURL("success", "Connexion réussie", "home");
+                    MessageFlash::ajouter("success", "Connexion réussie");
+                    self::afficheVue("view.php", [
+                        "pagetitle" => "AccueilEntreprise",
+                        "cheminVueBody" => "company/companyHome.php",
+                    ]);
                 } else {
-                    self::redirectionVersURL("warning", "Mot de passe incorrect" , "connect");
+                    self::redirectionVersURL("warning", "Mot de passe incorrect", "connect");
                 }
-            } else{
+            } else {
                 self::redirectionVersURL("warning", "Login incorrect", "connect");
             }
         } else {
@@ -103,12 +107,13 @@ class ControllerEntreprise extends ControllerGenerique
     {
         if (($_REQUEST["siret"]) > 0) {
             if ($_REQUEST["postcode"] > 0) {
-                if($_REQUEST["effectif"] > 0 ) {
-                    if($_REQUEST["telephone"] > 0){
-                    $user = Entreprise::construireDepuisFormulaire($_REQUEST);
-                    (new EntrepriseRepository())->sauvegarder($user);
-                    self::redirectionVersURL("success", "Entreprise créée", "home");
-                    }else {
+                if ($_REQUEST["effectif"] > 0) {
+                    if ($_REQUEST["telephone"] > 0) {
+                        $user = Entreprise::construireDepuisFormulaire($_REQUEST);
+                        (new EntrepriseRepository())->save($user);
+                        VerificationEmail::envoiEmailValidation($user);
+                        self::redirectionVersURL("success", "Entreprise créée", "home");
+                    } else {
                         self::redirectionVersURL("warning", "Telephone incorrect", "createAccount");
                     }
                 } else {
@@ -121,4 +126,18 @@ class ControllerEntreprise extends ControllerGenerique
             self::redirectionVersURL("warning ", "Siret incorrect", "createAccount");
         }
     }
+
+    public static function validerEmail():void{
+        if (isset($_GET["siret"], $_GET["nonce"])){
+            $bool=VerificationEmail::traiterEmailValidation($_GET["siret"],$_GET["nonce"]);
+            if ($bool){
+                self::redirectionVersURL("success","Email Valider","home");
+            }else {
+                self::redirectionVersURL("warning","Email non Valider","afficherListe");
+            }
+        }else{
+            self::redirectionVersURL("warning","Login ou nonce manquant","afficherListe");
+        }
+    }
+
 }
