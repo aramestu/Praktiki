@@ -21,6 +21,7 @@
     height: 80vh;
     overflow: auto;
     padding-top: 10px;
+    border : rgba(0,0,0,0.005) solid 10px;
 }
 
 #placeholder > .VBox{
@@ -28,7 +29,8 @@
     justify-content: flex-start;
 }
 
-#placeholder .line, .columnName{
+#placeholder .line,
+.columnName{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -36,7 +38,25 @@
     width: 90%;
     box-sizing: unset;
     position: relative;
-    border: var(--grey2) solid 2px;
+    border: var(--grey2) solid 3px;
+    transition: all 0.3s ease-in-out;
+}
+
+.line{
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+#placeholder .valide:hover{
+    border-color: var(--green);
+    box-shadow : 10px 10px 10px #00000025,
+    -10px -10px 10px #27AE6025;
+}
+
+#placeholder .nonValide:hover{
+    border-color: var(--yellow);
+    box-shadow : 10px 10px 10px #00000025,
+    -10px -10px 10px #F1C40F25;
 }
 
 .columnName{
@@ -47,7 +67,8 @@
 }
 
 #placeholder .line:hover{
-    border-color: var(--darkBlue1);
+    cursor: pointer;
+    transform: scale(1.01);
 }
 
 .HBox.containerEtatNomEntreprise{
@@ -110,8 +131,8 @@
     background-color: var(--green);
 }
 
-.orangeColor{
-    background-color: var(--orange);
+.yellowColor{
+    background-color: var(--yellow);
 }
 
 .redColor{

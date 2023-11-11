@@ -1,6 +1,13 @@
-<div class="container line">
+<div class="container line <?php
+if ($entreprise->getEstValide() == 1){
+    echo "valide";
+}else{
+    echo "nonValide";
+}
+?>
+    ">
     <div class="HBox containerEtatNomEntreprise">
-        <div class="circle<?=$entreprise->getEstValide() ? " greenColor" : " orangeColor"?>"></div>
+        <div class="circle<?=$entreprise->getEstValide() ? " greenColor" : " yellowColor"?>"></div>
         <label class="lineNomEntreprise"><?= htmlspecialchars($entreprise->getNomEntreprise())?></label>
     </div>
     <label class="lineCodePostalEntreprise"><?= htmlspecialchars($entreprise->getCodePostalEntreprise())?></label>

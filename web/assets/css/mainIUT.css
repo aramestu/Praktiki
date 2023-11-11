@@ -105,7 +105,6 @@ header:hover::after {
 
 
 /*--START BURGER--*/
-
 .burger span::before,
 .burger span::after {
     content: "";
@@ -140,6 +139,7 @@ header:hover::after {
     transform: rotateZ(-45deg) translateY(0);
 }
 /*---END BURGER---*/
+
 #transition-overlay{
     position: absolute;
     width:100%;
@@ -149,7 +149,7 @@ header:hover::after {
 
 @keyframes enter-transition-overlay {
     0% {
-        backdrop-filter: blur(100px);
+        backdrop-filter: blur(50px);
         z-index: 10;
     }
     99% {
@@ -375,7 +375,7 @@ main{
 }
 
 .listeExpPro{
-color: var(--black);
+    color: var(--black);
     width: 69%;
     text-align: center;
     font-size: 12px;
@@ -607,7 +607,7 @@ footer > VBox{
     border: 1px solid transparent;
     border-radius: 1.5rem;
     z-index: 5;
-    animation: slideDown 1s, fadeOut 2.5s 1s;
+    animation: slideDown 1s, fadeOut 9.5s 1s;
 }
 
 @keyframes slideDown {
