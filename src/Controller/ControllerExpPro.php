@@ -208,28 +208,26 @@ class ControllerExpPro extends ControllerGenerique
     public static function creerOffreDepuisFormulaire(): void
     {
         $msg = "Offre crée avec succés !";
+        $tabInfo = [
+            "sujetExperienceProfessionnel" => $_POST["sujet"],
+            "thematiqueExperienceProfessionnel" => $_POST["thematique"],
+            "tachesExperienceProfessionnel" => $_POST["taches"],
+            "codePostalExperienceProfessionnel" => $_POST["codePostal"],
+            "adresseExperienceProfessionnel" => $_POST["adressePostale"],
+            "dateDebutExperienceProfessionnel" => $_POST["dateDebut"],
+            "dateFinExperienceProfessionnel" => $_POST["dateFin"],
+            "siret" => $_POST["siret"]];
         if ($_POST["typeOffre"] == "stage") {
             $rep = new StageRepository();
-            $stage = $rep->construireDepuisTableau([
-                "sujetExperienceProfessionnel" => $_POST["sujet"],
-                "thematiqueExperienceProfessionnel" => $_POST["thematique"],
-                "tachesExperienceProfessionnel" => $_POST["taches"],
-                "codePostalExperienceProfessionnel" => $_POST["codePostal"],
-                "adresseExperienceProfessionnel" => $_POST["adressePostale"],
-                "dateDebutExperienceProfessionnel" => $_POST["dateDebut"],
-                "dateFinExperienceProfessionnel" => $_POST["dateFin"],
-                "siret" => $_POST["siret"],
-                "gratificationStage" => $_POST["gratification"]
-            ]);
-            $rep->save($stage);
-            self::afficherVueEndOffer($msg); // Redirection vers une page
+            $tabInfo["gratificationStage"] = $_POST["gratification"];
+            self::saveExpByFormulairePost($rep, $msg, $tabInfo);
 
         } else if ($_POST["typeOffre"] == "alternance") {
             $rep = new AlternanceRepository();
-            self::saveExpByFormulairePost($rep, $msg); // Redirection vers une page
-        } else if ($_POST["typeOffre"] == "stalternance" || $_POST["typeOffre"] == "Non définie") {
+            self::saveExpByFormulairePost($rep, $msg, $tabInfo); // Redirection vers une page
+        } else if ($_POST["typeOffre"] == "Non définie") {
             $rep = new OffreNonDefiniRepository();
-            self::saveExpByFormulairePost($rep, $msg); // Redirection vers une page
+            self::saveExpByFormulairePost($rep, $msg, $tabInfo); // Redirection vers une page
         } else {
             ControllerGenerique::error("Ce type d'offre n'existe pas");
         }
@@ -289,20 +287,15 @@ class ControllerExpPro extends ControllerGenerique
      * @param string $msg
      * @return void
      */
-    public static function saveExpByFormulairePost(AbstractExperienceProfessionnelRepository $rep, string $msg): void
+    public static function saveExpByFormulairePost(AbstractExperienceProfessionnelRepository $rep, string $msg, array $tab): void
     {
-        $exp = $rep->construireDepuisTableau([
-            "sujetExperienceProfessionnel" => $_POST["sujet"],
-            "thematiqueExperienceProfessionnel" => $_POST["thematique"],
-            "tachesExperienceProfessionnel" => $_POST["taches"],
-            "codePostalExperienceProfessionnel" => $_POST["codePostal"],
-            "adresseExperienceProfessionnel" => $_POST["adressePostale"],
-            "dateDebutExperienceProfessionnel" => $_POST["dateDebut"],
-            "dateFinExperienceProfessionnel" => $_POST["dateFin"],
-            "siret" => $_POST["siret"]
-        ]);
-        $rep->save($exp);
-        self::afficherVueEndOffer($msg);
+        $exp = $rep->construireDepuisTableau($tab);
+        if($rep->save($exp)){
+            self::afficherVueEndOffer($msg);
+        }
+        else{
+            self::error("L'offre n'a pas pu être créeé");
+        }
     }
 }
 

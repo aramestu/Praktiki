@@ -172,11 +172,6 @@ class ExperienceProfessionnel extends AbstractDataObject
     public function getDatePublication(): string
     {
         return $this->datePublication;
-        /* Si l'id n'a pas été initialisé
-        if($this->idExperienceProfessionnel == ""){
-            return "";
-        }
-        return AbstractExperienceProfessionnelRepository::getDatePublication($this->idExperienceProfessionnel);*/
     }
 
     public function setDatePublication(string $datePublication): void
@@ -205,6 +200,6 @@ class ExperienceProfessionnel extends AbstractDataObject
 
     public function getNomExperienceProfessionnel(): string
     {
-        return "Stalternance";
+        return "ExperienceProfessionnel";
     }
 }
