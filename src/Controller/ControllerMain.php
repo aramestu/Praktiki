@@ -49,6 +49,28 @@ class ControllerMain extends ControllerGenerique
         );
     }
 
+    public static function forgetPassword(): void
+    {
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Créer un compte',
+                'cheminVueBody' => 'user/forgetPassword.php',
+            ]
+        );
+    }
+
+    public static function resetPassword(): void
+    {
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'changer le mot de passe',
+                'cheminVueBody' => 'user/resetPassword.php',
+            ]
+        );
+    }
+
 
 
     public static function import(): void

@@ -29,6 +29,9 @@
             <input type="submit" value="Connexion">
         </p>
     </form>
+    <div class="forget-password">
+        <p>Mot de passe oublié ? <a href="frontController.php?action=forgetPassword" class="link">Changer de mot de passe</a></p>
+    </div>
     <div class="create-account">
         <p>Vous n'avez pas de compte? <a href="frontController.php?action=createAccount" class="link">Créer un compte</a></p>
     </div>

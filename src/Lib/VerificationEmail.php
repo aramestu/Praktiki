@@ -42,6 +42,33 @@ class VerificationEmail
         MessageFlash::ajouter("success", $corpsEmail);
     }
 
+    public static function envoiEmailChangementPassword($login,$mail): void{
+        $loginURL = rawurlencode($login);
+        $absoluteURL = Conf::getAbsoluteURL();
+        $lienChangementPassword = "$absoluteURL?action=resetPassword&siret=$loginURL";
+        $corpsEmail = "<a href=\"$lienChangementPassword\">Validation</a>";
+        $message = '
+<html>
+    <body>
+        <div align="center">
+            <a href="'.$lienChangementPassword.'">Changer de mot de passe</a>
+        </div>
+</body>
+</html>';
+        $headers = [
+            "From" => "From: IUT-Montpellier-Sete",
+            "Reply-To" => "Reply-To: IUT-Montpellier-Sete",
+            "Cc" => "Cc: IUT-Montpellier-Sete",
+            "Bcc" => "Bcc: IUT-Montpellier-Sete",
+            "Content-Type" => "Content-Type: text/html; charset=UTF-8"
+        ];
+        mail($mail, "Changement de votre mot de passe",
+            $message, implode("\r\n", $headers));
+
+        MessageFlash::ajouter("success", $corpsEmail);
+    }
+
+
     public static function traiterEmailValidation($login, $nonce): bool
     {
         $user = (new EntrepriseRepository())->getById($login);
@@ -55,7 +82,6 @@ class VerificationEmail
             }
         }
         return false;
-
     }
 
     public static function aValideEmail(Entreprise $Entreprise): bool

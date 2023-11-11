@@ -106,8 +106,8 @@ class Entreprise extends AbstractDataObject {
         return $this->mdpHache;
     }
 
-    public function setMdpHache($mdpClair):string{
-        return MotDePasse::hacher($mdpClair);
+    public function setMdpHache($mdpClair):void{
+        $this->mdpHache= MotDePasse::hacher($mdpClair);
     }
 
     public function getEmailEntreprise(): string

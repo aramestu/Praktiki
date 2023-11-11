@@ -140,4 +140,40 @@ class ControllerEntreprise extends ControllerGenerique
         }
     }
 
+    public static function changePassword():void{
+        if(isset($_REQUEST["siret"],$_REQUEST["mail"])) {
+            $user = (new EntrepriseRepository())->getById($_REQUEST["siret"]);
+            if (!is_null($user)) {
+                if ($user->getEmailEntreprise() == $_REQUEST["mail"]) {
+                    VerificationEmail::envoiEmailChangementPassword($_REQUEST["siret"], $_REQUEST["mail"]);
+                    self::redirectionVersURL("success", "Vous allez recevoir un mail", "home");
+                }
+            } else {
+                self::redirectionVersURL("warning", "mail incorrect", "forgetPassword");
+            }
+        }else{
+            self::redirectionVersURL("warning","Siret inconnu","forgetPassword");
+        }
+    }
+
+    public static function resetPassword():void{
+        if (isset($_REQUEST["siret"],$_REQUEST["newPassword"],$_REQUEST["confirmNewMdp"])) {
+            if ($_REQUEST["newPassword"] == $_REQUEST["confirmNewMdp"]) {
+                $user = (new EntrepriseRepository())->getById($_REQUEST["siret"]);
+                if (!is_null($user)) {
+                    $user->setMdpHache($_REQUEST["newPassword"]);
+                    (new EntrepriseRepository())->mettreAJour($user);
+                    self::redirectionVersURL("success", "Mot de passe changé", "home");
+                } else {
+                    self::redirectionVersURL("warning", "Utilisateur inconnu", "resetPassword");
+                }
+            } else {
+                self::redirectionVersURL("warning", "Mot de passe différent", "resetPassword");
+            }
+        } else {
+            self::redirectionVersURL("warning", "Variable non remplit", "resetPassword");
+        }
+
+    }
+
 }
