@@ -251,7 +251,12 @@ class ExperienceProfessionnelRepository
             $stalternance[] = self::construireDepuisTableau($stalternanceTab);
         }
         $alternance = self::sort($alternance, $stalternance, "datePublication");
-        return self::sort($alternance, $stage, "datePublication");
+        $result = self::sort($alternance, $stage, "datePublication");
+        if(empty($result)){
+            return null;
+        }else{
+            return $result;
+        }
     }
 
     public static function getDatePublication(string $id): string
@@ -259,11 +264,11 @@ class ExperienceProfessionnelRepository
         $sql = "SELECT get_delay_experience(:id) AS delai_experience FROM ExperienceProfessionnel WHERE idExperienceProfessionnel = :id;";
         $pdoStatement = Model::getPdo()->prepare($sql);
         $values = array(
-            "id" => $id // Utilisez "id" au lieu de "idExperienceProfessionnel" pour correspondre aux paramètres dans la requête SQL
+            "id" => $id
         );
         $pdoStatement->execute($values);
         $result = $pdoStatement->fetch();
-        return $result["delai_experience"]; // Utilisez le même alias que celui défini dans la requête SQL
+        return $result["delai_experience"];
     }
 
 }
