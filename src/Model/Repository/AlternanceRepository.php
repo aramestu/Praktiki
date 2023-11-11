@@ -45,19 +45,6 @@ class AlternanceRepository extends AbstractExperienceProfessionnelRepository
         ExperienceProfessionnelRepository::mettreAJour($alternance);
     }
 
-    public function supprimer(string $alternance): void
-    {
-        $sql = "DELETE FROM Alternances WHERE idAlternance= :idTag;";
-        $pdoStatement = Model::getPdo()->prepare($sql);
-
-        $values = array(
-            "idTag" => $alternance->getIdExperienceProfessionnel()
-        );
-
-        $pdoStatement->execute($values);
-        ExperienceProfessionnelRepository::supprimer($alternance);
-    }
-
     /*public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array
     {
         date_default_timezone_set('Europe/Paris');

@@ -225,7 +225,7 @@ class ControllerExpPro extends ControllerGenerique
         } else if ($_POST["typeOffre"] == "alternance") {
             $rep = new AlternanceRepository();
             self::saveExpByFormulairePost($rep, $msg, $tabInfo); // Redirection vers une page
-        } else if ($_POST["typeOffre"] == "Non définie") {
+        } else if ($_POST["typeOffre"] == "offreNonDefini") {
             $rep = new OffreNonDefiniRepository();
             self::saveExpByFormulairePost($rep, $msg, $tabInfo); // Redirection vers une page
         } else {
@@ -236,22 +236,25 @@ class ControllerExpPro extends ControllerGenerique
     public static function supprimerOffre(): void
     {
         $idExpPro = $_GET["experiencePro"];
-        $stage = StageRepository::get($idExpPro);
+        $rep = new StageRepository();
+        $stage = $rep->get($idExpPro);
 
         // Si c'est un stage alors c'est good
         if (!is_null($stage)) {
-            StageRepository::supprimer($stage);
+            $rep->supprimer($idExpPro);
             self::afficherVueEndOffer("Stage supprimée avec succès");
         } else {
-            $alternance = AlternanceRepository::get($idExpPro); //Dans un else pour éviter de faire 2 requêtes s'il n'y a pas besoin
+            $rep = new AlternanceRepository();
+            $alternance = $rep->get($idExpPro); //Dans un else pour éviter de faire 2 requêtes s'il n'y a pas besoin
             if (!is_null($alternance)) {
-                AlternanceRepository::supprimer($alternance);
+                $rep->supprimer($idExpPro);
                 self::afficherVueEndOffer("Alternance supprimée avec succès");
             } else {
-                $stalternance = ExperienceProfessionnelRepository::get($idExpPro);
-                if (!is_null($stalternance)) {
-                    ExperienceProfessionnelRepository::supprimer($stalternance);
-                    self::afficherVueEndOffer("Stalternance supprimée avec succès");
+                $rep = new OffreNonDefiniRepository();
+                $nonDefini = $rep->get($idExpPro);
+                if (!is_null($nonDefini)) {
+                    $rep->supprimer($idExpPro);
+                    self::afficherVueEndOffer("Offre non défini supprimée avec succès");
                 } else {
                     $messageErreur = 'Cette offre n existe pas !';
                     ControllerGenerique::error($messageErreur);

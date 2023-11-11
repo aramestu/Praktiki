@@ -12,6 +12,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
 {
     protected abstract function getNomsColonnesSupplementaires(): array;
     protected abstract function getNomDataObject(): string;
+    public abstract function construireDepuisTableau(array $objetFormatTableau): ExperienceProfessionnel;
 
     protected function getNomsColonnes(): array
     {
@@ -171,8 +172,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         if (! $exp) {
             return null;
         }
-        //Sinon
-        return ExperienceProfessionnelRepository::construireDepuisTableau($exp);
+        return $this->construireDepuisTableau($exp);
     }
 
     public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $stage = null, string $alternance = null, string $codePostal = null, string $datePublication = null): array
@@ -241,14 +241,17 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         $pdoStatement->execute($values);
     }
 
-    public function supprimer(string $exp): void
+    public function supprimer(string $id): void
     {
+        // On supprime d'abord les sous classes puis dans ExpPro
+        parent::supprimer($id);
+
         $sql = "DELETE FROM ExperienceProfessionnel WHERE idExperienceProfessionnel= :idTag;";
 
         $pdoStatement = Model::getPdo()->prepare($sql);
 
         $values = array(
-            "idTag" => $exp->getIdExperienceProfessionnel()
+            "idTag" => $id
         );
 
         $pdoStatement->execute($values);

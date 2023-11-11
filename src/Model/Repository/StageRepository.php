@@ -58,19 +58,6 @@ class StageRepository extends AbstractExperienceProfessionnelRepository
         $pdoStatement->execute($values);
     }
 
-    public function supprimer(string $stage): void
-    {
-        $sql = "DELETE FROM Stages WHERE idStage= :idTag;";
-        $pdoStatement = Model::getPdo()->prepare($sql);
-
-        $values = array(
-            "idTag" => $stage->getIdExperienceProfessionnel()
-        );
-
-        $pdoStatement->execute($values);
-        ExperienceProfessionnelRepository::supprimer($stage);
-    }
-
     /*public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array
     {
         date_default_timezone_set('Europe/Paris');
