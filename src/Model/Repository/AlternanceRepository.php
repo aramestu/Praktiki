@@ -37,14 +37,6 @@ class AlternanceRepository extends AbstractExperienceProfessionnelRepository
         return $exp;
     }
 
-
-    public function mettreAJour(AbstractDataObject $alternance): void
-    {
-
-        // Il faut modifier à la fois dans ExperienceProfessionnel
-        ExperienceProfessionnelRepository::mettreAJour($alternance);
-    }
-
     /*public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array
     {
         date_default_timezone_set('Europe/Paris');

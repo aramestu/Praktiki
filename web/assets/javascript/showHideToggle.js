@@ -8,15 +8,11 @@ document.addEventListener('DOMContentLoaded', function () {
         if (typeOffre.value === 'stage') {
             gratification.setAttribute('required', 'required');
             stageForm.classList.remove('hidden');
-            alternanceForm.classList.add('hidden');
-        } else if (typeOffre.value === 'alternance') {
+            //alternanceForm.classList.add('hidden');
+        } else if (typeOffre.value === 'alternance' || typeOffre.value === 'offreNonDefini') {
             gratification.removeAttribute('required');
             stageForm.classList.add('hidden');
-            alternanceForm.classList.remove('hidden');
-        } else if (typeOffre.value === 'Non définie' || typeOffre.value === 'stalternance') {
-            gratification.removeAttribute('required');
-            stageForm.classList.add('hidden');
-            alternanceForm.classList.add('hidden');
+            //alternanceForm.classList.remove('hidden');
         }
     }
 

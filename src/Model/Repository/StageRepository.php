@@ -39,25 +39,6 @@ class StageRepository extends AbstractExperienceProfessionnelRepository
         return $exp;
     }
 
-    public function mettreAJour(AbstractDataObject $stage): void
-    {
-        // Il faut modifier à la fois dans ExperienceProfessionnel et dans Stage
-        ExperienceProfessionnelRepository::mettreAJour($stage);
-
-        $sql = "UPDATE Stages SET
-                gratificationStage= :gratificationTag
-                WHERE idStage= :idTag";
-
-        $pdoStatement = Model::getPdo()->prepare($sql);
-
-        $values = array(
-            "gratificationTag" => $stage->getGratificationStage(),
-            "idTag" => $stage->getIdExperienceProfessionnel()
-        );
-
-        $pdoStatement->execute($values);
-    }
-
     /*public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array
     {
         date_default_timezone_set('Europe/Paris');

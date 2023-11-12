@@ -19,7 +19,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         return array("idExperienceProfessionnel","sujetExperienceProfessionnel", "thematiqueExperienceProfessionnel",
             "tachesExperienceProfessionnel", "codePostalExperienceProfessionnel",
             "adresseExperienceProfessionnel", "dateDebutExperienceProfessionnel",
-            "dateFinExperienceProfessionnel", "siret");
+            "dateFinExperienceProfessionnel", "siret", "numEtudiant", "mailEnseignant", "mailTuteurProfessionnel", "datePublication");
     }
 
     protected function getNomClePrimaire(): string
@@ -216,6 +216,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
 
     public function mettreAJour(AbstractDataObject $exp): void
     {
+        // Mise à jour de la table Experience Pro
         $sql = "UPDATE ExperienceProfessionnel SET
                 sujetExperienceProfessionnel= :sujetTag,
                 thematiqueExperienceProfessionnel= :thematiqueTag,
@@ -228,6 +229,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
 
         $pdoStatement = Model::getPdo()->prepare($sql);
 
+
         $values = array(
             "sujetTag" => $exp->getSujetExperienceProfessionnel(),
             "thematiqueTag" => $exp->getThematiqueExperienceProfessionnel(),
@@ -239,6 +241,28 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             "idExpPro" => $exp->getIdExperienceProfessionnel()
         );
         $pdoStatement->execute($values);
+
+        // Mise à jour de la sous table s'il n'y a pas que la clé primaire
+        $colonnes = $this->getNomsColonnesSupplementaires();
+        if(sizeof($colonnes) > 1){
+            $nomTable = $this->getNomTable();
+            $nomClePrimaire = $this->getNomClePrimaire();
+            $values2 = array();
+            $formatTableau = $exp->formatTableau();
+            $sql2 = "UPDATE $nomTable SET ";
+            // Je rempli la requête et le tableau de valeur grâce au format Tableau
+            for($i = 1; $i < sizeof($colonnes); $i++){
+                $nomColonne = $colonnes[$i];
+                $sql2 .= " $nomColonne= :$nomColonne" . "Tag";
+                $values2[$nomColonne . "Tag"] = $formatTableau[$nomColonne . "Tag"];
+            }
+            // Ajout condition WHERE pour
+            $sql2 .= " WHERE $nomClePrimaire= :$nomClePrimaire" . "Tag";
+            $values2[$nomClePrimaire . "Tag"] = $formatTableau["idExperienceProfessionnelTag"];
+            $pdoStatement = Model::getPdo()->prepare($sql2);
+            $pdoStatement->execute($values2);
+        }
+
     }
 
     public function supprimer(string $id): void
