@@ -27,16 +27,7 @@ use App\SAE\Model\Repository\TuteurProfessionnelRepository;
 
 class ControllerMain extends ControllerGenerique
 {
-    public static function connect(): void
-    {
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Connexion',
-                'cheminVueBody' => 'user/connect.php',
-            ]
-        );
-    }
+
 
     public static function createAccount(): void
     {
@@ -67,6 +58,16 @@ class ControllerMain extends ControllerGenerique
             [
                 'pagetitle' => 'changer le mot de passe',
                 'cheminVueBody' => 'user/resetPassword.php',
+            ]
+        );
+    }
+
+    public static function preference():void{
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Préférence',
+                'cheminVueBody' => 'user/preference.php',
             ]
         );
     }

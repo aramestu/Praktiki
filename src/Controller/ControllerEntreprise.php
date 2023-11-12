@@ -11,6 +11,17 @@ use App\SAE\Model\Repository\EntrepriseRepository;
 
 class ControllerEntreprise extends ControllerGenerique
 {
+
+    public static function connect(): void
+    {
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Connexion',
+                'cheminVueBody' => 'user/connect.php',
+            ]
+        );
+    }
     public static function afficherListeEntrepriseValideFiltree(): void
     {
         $keywords = self::keywordsExiste();

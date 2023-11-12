@@ -48,9 +48,22 @@ class ControllerLDAP extends ControllerGenerique
         }
     }
 
+
+
     public static function disconnect(): void
     {
         ldap_close($_SESSION['ldap']);
         unset($_SESSION['ldap']);
+    }
+
+    public static function connect(): void
+    {
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Connexion',
+                'cheminVueBody' => 'user/connect.php',
+            ]
+        );
     }
 }
