@@ -3,7 +3,7 @@
 
 <div class="container">
     <form method="get">
-        <legend>Inscription Entreprise</legend>
+        <h2 id="remplaceBaliseLegend">Inscription Entreprise</h2>
         <p>
             <label for="nom">Nom de l'entreprise</label>
             <input type="text" name="nom" id="nom" required placeholder="Nom de votre entreprise" autofocus>
@@ -18,11 +18,11 @@
         </p>
         <p>
             <label for="postcode">Code postal</label>
-            <input type="number" max="5" name="postcode" id="postcode" required placeholder="34090">
+            <input type="number" min="11111" max="99999" name="postcode" id="postcode" required placeholder="34090">
         </p>
         <p>
             <label for="effectif">Effectif</label>
-            <input type="number" max="5" name="effectif" id="effectif" required placeholder="412">
+            <input type="number" min="0" max="99999" name="effectif" id="effectif" required placeholder="412">
         </p>
         <p>
             <label for="telephone">Telephone</label>

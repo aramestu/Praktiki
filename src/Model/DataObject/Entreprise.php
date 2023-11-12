@@ -106,8 +106,8 @@ class Entreprise extends AbstractDataObject {
         return $this->mdpHache;
     }
 
-    public function setMdpHache($mdpClair):string{
-        return MotDePasse::hacher($mdpClair);
+    public function setMdpHache($mdpClair):void{
+        $this->mdpHache= MotDePasse::hacher($mdpClair);
     }
 
     public function getEmailEntreprise(): string
@@ -170,9 +170,9 @@ class Entreprise extends AbstractDataObject {
             $tableauFormulaire["effectif"],
             $tableauFormulaire["telephone"],
             $tableauFormulaire["website"],
-            $tableauFormulaire["email"],
-            $mdpHache,
             "",
+            $mdpHache,
+            $tableauFormulaire["email"],
             MotDePasse::genererChaineAleatoire()
         );
     }

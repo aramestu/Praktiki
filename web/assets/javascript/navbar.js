@@ -4,15 +4,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const navItems = document.querySelectorAll('.navbar .nav-item');
     navItems.forEach(item => {
-        console.log(item.getAttribute('data-action'));
-        console.log(currentAction);
         if (item.getAttribute('data-action') === currentAction) {
             item.classList.add('active');
         }else if(currentAction === 'createAccount' && item.getAttribute('data-action') === 'connect'){
             item.classList.add('active');
         }else if(currentAction === 'createOffer' && item.getAttribute('data-action') === 'home'){
             item.classList.add('active');
-        }else if(currentAction === 'getExpProByDefault&controller' || currentAction === 'ExpPro&action' && item.getAttribute('data-action') === 'offre'){
+        }else if((currentAction === 'getExpProByDefault&controller' || currentAction === 'ExpPro&action') && item.getAttribute('data-action') === 'offre'){
             item.classList.add('active');
         }
     });

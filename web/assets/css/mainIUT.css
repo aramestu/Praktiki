@@ -103,6 +103,95 @@ header:hover::after {
     display: none;
 }
 
+
+/*--START BURGER--*/
+.burger span::before,
+.burger span::after {
+    content: "";
+    width: 100%;
+    background-color: var(--white);
+    display: block;
+    transition: all 0.5s ease-in-out;
+    border-radius: 12px;
+    height: 4px;
+}
+
+.burger span::before {
+    transform: translateY(-10px);
+
+}
+
+.burger span::after {
+    transform: translateY(10px);
+    margin-top: -4px;
+}
+
+
+.burger.active span {
+    background-color: transparent;
+}
+
+.burger.active span::before {
+    transform: rotateZ(45deg) translateY(0);
+}
+
+.burger.active span::after {
+    transform: rotateZ(-45deg) translateY(0);
+}
+/*---END BURGER---*/
+
+#transition-overlay{
+    position: absolute;
+    width:100%;
+    height:100%;
+    animation: enter-transition-overlay .4s ease-in-out;
+}
+
+@keyframes enter-transition-overlay {
+    0% {
+        backdrop-filter: blur(50px);
+        z-index: 10;
+    }
+    99% {
+        backdrop-filter: blur(0px);
+        z-index: 10;
+    }
+    100% {
+        z-index: -10;
+    }
+}
+/*---END NAVBAR---*/
+
+
+
+/*---START BODY---*/
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: white;
+    background-position: center;
+}
+/*---END BODY---*/
+
+
+
+/*---START MAIN---*/
+main{
+    width: 100%;
+    height: 100%;
+    margin-top: 100px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+/*---END MAIN---*/
+
+
+
+/*---START RESPONSIVE---*/
 @media (max-width: 41200px) {
     header {
         padding: .9rem 16%;
@@ -120,6 +209,15 @@ header:hover::after {
 
     input[type="submit"]{
         width: 100%;
+    }
+
+    #noOfferFound{
+        max-width: 55%;
+    }
+
+    #noResults-icon{
+        width: 220px;
+        height: 220px;
     }
 }
 
@@ -140,6 +238,15 @@ header:hover::after {
 
     input[type="submit"]{
         width: 100%;
+    }
+
+    #noOfferFound{
+        max-width: 55%;
+    }
+
+    #noResults-icon{
+        width: 200px;
+        height: 200px;
     }
 }
 
@@ -222,92 +329,17 @@ header:hover::after {
         width: 100%;
         height: 100%;
     }
-}
 
-/*--START BURGER--*/
-
-.burger span::before,
-.burger span::after {
-    content: "";
-    width: 100%;
-    background-color: var(--white);
-    display: block;
-    transition: all 0.5s ease-in-out;
-    border-radius: 12px;
-    height: 4px;
-}
-
-.burger span::before {
-    transform: translateY(-10px);
-
-}
-
-.burger span::after {
-    transform: translateY(10px);
-    margin-top: -4px;
-}
-
-
-.burger.active span {
-    background-color: transparent;
-}
-
-.burger.active span::before {
-    transform: rotateZ(45deg) translateY(0);
-}
-
-.burger.active span::after {
-    transform: rotateZ(-45deg) translateY(0);
-}
-/*---END BURGER---*/
-#transition-overlay{
-    position: absolute;
-    width:100%;
-    height:100%;
-    animation: enter-transition-overlay .4s ease-in-out;
-}
-
-@keyframes enter-transition-overlay {
-    0% {
-        backdrop-filter: blur(100px);
-        z-index: 10;
+    #noOfferFound{
+        max-width: 30%;
     }
-    99% {
-        backdrop-filter: blur(0px);
-        z-index: 10;
-    }
-    100% {
-        z-index: -10;
+
+    #noResults-icon{
+        width: 100px;
+        height: 100px;
     }
 }
-/*---END NAVBAR---*/
-
-
-
-/*---START BODY---*/
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background: white;
-    background-position: center;
-}
-/*---END BODY---*/
-
-
-
-/*---START MAIN---*/
-main{
-    width: 100%;
-    height: 100%;
-    margin-top: 100px;
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-}
-/*---END MAIN---*/
+/*---END RESPONSIVE---*/
 
 
 
@@ -343,7 +375,7 @@ main{
 }
 
 .listeExpPro{
-color: var(--black);
+    color: var(--black);
     width: 69%;
     text-align: center;
     font-size: 12px;
@@ -441,6 +473,21 @@ textarea:focus{
 
 
 
+/*---START NO RESULTS---*/
+#noOfferFound{
+    position: absolute;
+    margin-left: 3%;
+    background: none;
+    box-shadow: none;
+}
+
+#noResults-icon{
+    margin-bottom: 20px;
+}
+/*---END NO RESULTS---*/
+
+
+
 /*---START MISCELLANEOUS---*/
 legend{
     font-size: 1.269rem;
@@ -508,6 +555,10 @@ legend{
 .link:hover::before {
     width: 100%;
 }
+
+#remplaceBaliseLegend{
+    font-size: 25px;
+}
 /*---END MISCELLANEOUS---*/
 
 
@@ -556,7 +607,7 @@ footer > VBox{
     border: 1px solid transparent;
     border-radius: 1.5rem;
     z-index: 5;
-    animation: slideDown 1s, fadeOut 2.5s 1s;
+    animation: slideDown 1s, fadeOut 9.5s 1s;
 }
 
 @keyframes slideDown {

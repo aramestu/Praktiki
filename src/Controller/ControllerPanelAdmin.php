@@ -26,4 +26,25 @@ class ControllerPanelAdmin extends ControllerGenerique {
                                                 'listEntreprises' => $listEntreprises ]);
     }
 
+    public static function panelListeEntreprises(): void {
+        $keywords = "";
+        if(isset($_GET["keywords"])){
+            $keywords .= $_GET["keywords"];
+        }
+        $listEntreprises = (new EntrepriseRepository)->getEntrepriseAvecEtatFiltree(null,$keywords);
+        self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
+                                                'cheminVueBody' => 'user/adminPanel/panel.php',
+                                                'adminPanelView' => 'user/adminPanel/entreprise/entrepriseList.php',
+                                                'listEntreprises' => $listEntreprises,
+                                                'keywords' => $keywords]);
+    }
+
+    public static function panelListeEtudiants(): void {
+        $listEtudiants = (new EtudiantRepository())->getAll();
+        self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
+                                                'cheminVueBody' => 'user/adminPanel/panel.php',
+                                                'adminPanelView' => 'user/adminPanel/etudiant/etudiantList.php',
+                                                'listEtudiants' => $listEtudiants ]);
+    }
+
 }

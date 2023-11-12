@@ -62,4 +62,8 @@ class Conf
         return 30*60;
     }
 
+    public static function getAbsoluteURL():string{
+        return "https://webinfo.iutmontp.univ-montp2.fr/~vergnesl/SAE/sae_web_s1/web/frontController.php";
+    }
+
 }

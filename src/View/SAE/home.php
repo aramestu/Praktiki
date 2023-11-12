@@ -4,15 +4,16 @@
 <div class="container">
     <legend>Zone de test</legend>
     <p>
-        <a href="frontController.php?controller=ExpPro&action=createOffer">
-            <!--TODO: demander pour JS button   onclick="location.href = 'frontController.php?controller=ExpPro&action=createOffer'"-->
-            <button type="button" class="btn btn-primary">Créer une offre</button>
-        </a>
+        <a href="frontController.php?controller=ExpPro&action=createOffer" class="button">Créer une offre</a>
     </p>
     <p>
-        <a href="frontController.php?controller=PanelAdmin&action=panelEtudiants">
-            <button type="button" class="btn btn-primary">Panel admin</button>
-        </a>
+        <a href="frontController.php?controller=ExpPro&action=createOffer" class="button">Créer une offre</a>
+    </p>
+    <p>
+        <a href="frontController.php?controller=PanelAdmin&action=panelListeEtudiants" class="button">Panel admin</a>
+    </p>
+    <p>
+        <a href="frontController.php?controller=ExpPro&action=displayConvention" class="button">Convention</a>
     </p>
 
 </div>

@@ -30,7 +30,7 @@
     font-weight: 600;
 }
 
-h2 {
+.infoEntrepriseOffer {
     font-size: 25px;
     padding-right: 10px;
 }
@@ -276,7 +276,6 @@ h3 {
     font-weight: bold;
     width: max-content;
     margin-bottom: 5px;
-    /*border: 2px solid;*/
 }
 
 .Stage > .header > .left > .typeExpPro,

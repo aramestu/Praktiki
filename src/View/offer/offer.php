@@ -24,7 +24,7 @@ echo htmlspecialchars($last_element) */
             <p>au <?= htmlspecialchars($expPro->getDateFinExperienceProfessionnel()) ?></p>
         </div>
         <div class="company">
-            <h2><?php
+            <h2 class="infoEntrepriseOffer"><?php
                 $entreprise = (new EntrepriseRepository())->getById($expPro->getSiret());
                 echo(htmlspecialchars($entreprise->getNomEntreprise()));
                 ?></h2>

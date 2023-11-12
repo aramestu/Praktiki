@@ -12,24 +12,144 @@
     min-height: 50em;
     margin-bottom: 40px;
 }
+
 #placeholder{
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: stretch;
     align-items: center;
-    min-height: 60em;
-    height: 60em;
+    height: 80vh;
     overflow: auto;
-    padding-top: 50px;
+    padding-top: 10px;
+    border : rgba(0,0,0,0.005) solid 10px;
 }
 
-#placeholder > .content{
-    display: flex;
-    flex-direction: column;
+#placeholder > .VBox{
+    align-items: center;
     justify-content: flex-start;
-    width: 100%;
-    align-items: baseline;
 }
+
+#placeholder .line,
+.columnName{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 2em;
+    width: 90%;
+    box-sizing: unset;
+    position: relative;
+    border: var(--grey2) solid 3px;
+    transition: all 0.3s ease-in-out;
+}
+
+.line{
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+#placeholder .greenHover:hover{
+    border-color: var(--green);
+    box-shadow : 10px 10px 10px #00000025,
+    -10px -10px 10px #27AE6025;
+}
+
+#placeholder .yellowHover:hover{
+    border-color: var(--yellow);
+    box-shadow : 10px 10px 10px #00000025,
+    -10px -10px 10px #F1C40F25;
+}
+
+.columnName{
+    margin-top: 10px;
+    border: none;
+    font-weight: bold;
+    width: 92%;
+}
+
+#placeholder .line:hover{
+    cursor: pointer;
+    transform: scale(1.01);
+}
+
+.HBox.containerDebutLine{
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+    width: 35%;
+}
+
+#placeholder .HBox *{
+    margin-right: 1em;
+}
+
+.line label{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.lineNomEntreprise, .lineNomPrenomEtudiant{
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.lineCodePostalEntreprise{
+    position: absolute;
+    left: 40%;
+}
+
+.columnName .lineCodePostalEntreprise{
+    left: 37%;
+}
+
+.lineTelephoneEntreprise {
+    position: absolute;
+    left: 53%;
+}
+
+.lineSiteWebEntreprise{
+    position: absolute;
+    left: 70%;
+}
+
+.lineMailUniversitaireEtudidant{
+    position: absolute;
+    left: 55%;
+    width: 30%;
+}
+
+.lineNumEtudiant{
+    position: absolute;
+    width: 15%;
+    left: 35%;
+}
+
+.line button{
+    margin: 0;
+    height: 3em;
+    width: 6em;
+    padding: 0;
+    font-size: 0.9em;
+}
+
+.circle {
+    width: 1.3em;
+    height: 1.3em;
+    border-radius: 50%;
+}
+
+.greenColor{
+    background-color: var(--green);
+}
+
+.yellowColor{
+    background-color: var(--yellow);
+}
+
+.redColor{
+    background-color: var(--red);
+}
+
 
 @media (max-width: 950px) {
     #panel{
@@ -52,5 +172,35 @@
 
     #panel{
         height: auto;
+    }
+
+    #placeholder .line, .columnName{
+        width: 95%;
+    }
+
+    .lineTelephoneEntreprise{
+        display: none;
+    }
+
+    .lineCodePostalEntreprise{
+        display: none;
+    }
+
+    .lineSiteWebEntreprise{
+        left: 55%;
+    }
+
+    .HBox.containerDebutLine{
+        width: 50%;
+        justify-content:flex-start;
+    }
+
+    .lineMailUniversitaireEtudidant{
+        display: none;
+    }
+
+    .lineNumEtudiant{
+        left: 55%;
+        width: 20%;
     }
 }
