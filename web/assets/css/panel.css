@@ -102,7 +102,7 @@
     left: 37%;
 }
 
-.lineTelephoneEntreprise . line{
+.lineTelephoneEntreprise {
     position: absolute;
     left: 53%;
 }
@@ -201,5 +201,6 @@
 
     .lineNumEtudiant{
         left: 55%;
+        width: 20%;
     }
 }
