@@ -1,12 +1,5 @@
-<div class="container line <?php
-if ($entreprise->getEstValide() == 1){
-    echo "valide";
-}else{
-    echo "nonValide";
-}
-?>
-    ">
-    <div class="HBox containerEtatNomEntreprise">
+<div class="container line <?= $entreprise->getEstValide() ? "greenHover" : "yellowHover" ?>">
+    <div class="HBox containerDebutLine" title="Entreprise <?=$entreprise->getEstValide() ? "" : "non " ?>validée">
         <div class="circle<?=$entreprise->getEstValide() ? " greenColor" : " yellowColor"?>"></div>
         <label class="lineNomEntreprise"><?= htmlspecialchars($entreprise->getNomEntreprise())?></label>
     </div>

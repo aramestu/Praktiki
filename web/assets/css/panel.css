@@ -47,13 +47,13 @@
     -webkit-backdrop-filter: none;
 }
 
-#placeholder .valide:hover{
+#placeholder .greenHover:hover{
     border-color: var(--green);
     box-shadow : 10px 10px 10px #00000025,
     -10px -10px 10px #27AE6025;
 }
 
-#placeholder .nonValide:hover{
+#placeholder .yellowHover:hover{
     border-color: var(--yellow);
     box-shadow : 10px 10px 10px #00000025,
     -10px -10px 10px #F1C40F25;
@@ -71,12 +71,11 @@
     transform: scale(1.01);
 }
 
-.HBox.containerEtatNomEntreprise{
+.HBox.containerDebutLine{
     justify-content: flex-start;
     align-items: center;
     margin: 0;
-    width: auto;
-    max-width: 35%;
+    width: 35%;
 }
 
 #placeholder .HBox *{
@@ -89,7 +88,7 @@
     text-overflow: ellipsis;
 }
 
-.lineNomEntreprise{
+.lineNomEntreprise, .lineNomPrenomEtudiant{
     font-weight: bold;
     font-size: 16px;
 }
@@ -103,7 +102,7 @@
     left: 37%;
 }
 
-.lineTelephoneEntreprise{
+.lineTelephoneEntreprise . line{
     position: absolute;
     left: 53%;
 }
@@ -111,6 +110,18 @@
 .lineSiteWebEntreprise{
     position: absolute;
     left: 70%;
+}
+
+.lineMailUniversitaireEtudidant{
+    position: absolute;
+    left: 55%;
+    width: 30%;
+}
+
+.lineNumEtudiant{
+    position: absolute;
+    width: 15%;
+    left: 35%;
 }
 
 .line button{
@@ -179,8 +190,16 @@
         left: 55%;
     }
 
-    .HBox.containerEtatNomEntreprise{
-        max-width: 50%;
+    .HBox.containerDebutLine{
+        width: 50%;
         justify-content:flex-start;
+    }
+
+    .lineMailUniversitaireEtudidant{
+        display: none;
+    }
+
+    .lineNumEtudiant{
+        left: 55%;
     }
 }

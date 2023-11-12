@@ -1,11 +1,11 @@
 <div class="header">
      <h2>Liste des Entreprises</h2>
 </div>
-<?php $action="afficherListeEntrepriseEnAttenteFiltree";
-$controller="Entreprise";
+<?php $action="panelListeEntreprises";
+$controller="PanelAdmin";
 require_once __DIR__ . '/../../../utilitaire/searchBar.php';?>
 <div class="columnName">
-    <div class="HBox containerEtatNomEntreprise">
+    <div class="HBox containerDebutLine">
         <div>Etat</div>
         <label class="lineNomEntreprise">Nom Entreprise</label>
     </div>
