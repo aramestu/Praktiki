@@ -179,16 +179,21 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
     {
         $tabStages = StageRepository::filtres($dateDebut, $dateFin, $optionTri, $codePostal, $datePublication);
         $tabAlternance = AlternanceRepository::filtres($dateDebut, $dateFin, $optionTri, $codePostal, $datePublication);
-        //$tabStalternance =
+        $tabOffreNonDefini = OffreNonDefiniRepository::filtres($dateDebut, $dateFin, $optionTri, $codePostal, $datePublication);
         if (isset($stage)) {
             return $tabStages;
-        } elseif (isset($alternance)) {
+        }
+        else if (isset($alternance)) {
             return $tabAlternance;
-        } else {
+        }
+        else if (isset($offreNonDefini)){
+            return $tabOffreNonDefini;
+        }
+        else {
             if (!isset($optionTri)) {
-                return array_merge($tabStages, $tabAlternance);
+                return array_merge(array_merge($tabStages, $tabAlternance), $tabOffreNonDefini);
             } else {
-                return self::sort($tabStages, $tabAlternance, $optionTri);
+                return self::sort(self::sort($tabStages, $tabOffreNonDefini, $optionTri), $tabAlternance, $optionTri);
             }
 
         }
@@ -285,36 +290,9 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
     {
         $stage = StageRepository::search($keywords);
         $alternance = AlternanceRepository::search($keywords);
-        /*$sql = "SELECT *
-                        FROM ExperienceProfessionnel e
-                        JOIN Entreprises en ON en.siret = e.siret
-                        WHERE numEtudiant IS NULL
-                        AND en.estValide = true
-                        AND (sujetExperienceProfessionnel LIKE :keywordsTag
-                        OR thematiqueExperienceProfessionnel LIKE :keywordsTag
-                        OR tachesExperienceProfessionnel LIKE :keywordsTag
-                        OR codePostalExperienceProfessionnel LIKE :keywordsTag
-                        OR adresseExperienceProfessionnel LIKE :keywordsTag
-                        OR e.siret LIKE :keywordsTag)
-                        AND NOT EXISTS (SELECT * FROM Stages
-                                                WHERE Stages.idStage = e.idExperienceProfessionnel)
-                                                AND NOT EXISTS (SELECT * FROM Alternances
-                                                WHERE Alternances.idAlternance = e.idExperienceProfessionnel)
-                        ORDER BY datePublication
-                        ";
-        $requestStatement = Model::getPdo()->prepare($sql);
+        $offreNonDefini = OffreNonDefiniRepository::search($keywords);
 
-        $values = array(
-            "keywordsTag" => '%' . $keywords . '%'
-        );
-
-        $requestStatement->execute($values);
-
-        $stalternance = [];
-        foreach ($requestStatement as $stalternanceTab) {
-            $stalternance[] = self::construireDepuisTableau($stalternanceTab);
-        }
-        $alternance = self::sort($alternance, $stalternance, "datePublication"); */
+        $alternance = self::sort($alternance, $offreNonDefini, "datePublication");
         return self::sort($alternance, $stage, "datePublication");
     }
 

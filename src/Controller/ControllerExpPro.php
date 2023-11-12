@@ -28,7 +28,7 @@ class ControllerExpPro extends ControllerGenerique
     public static function getExpProBySearch(): void
     {
         $keywords = urldecode($_GET['keywords']);
-        $listeExpPro = ExperienceProfessionnelRepository::search($keywords);
+        $listeExpPro = AbstractExperienceProfessionnelRepository::search($keywords);
         self::afficheVue(
             'view.php',
             [
@@ -69,7 +69,7 @@ class ControllerExpPro extends ControllerGenerique
         if (isset($_GET['datePublication'])) {
             $datePublication = $_GET['datePublication'];
         }
-        $listeExpPro = ExperienceProfessionnelRepository::filtre($dateDebut, $dateFin, $optionTri, $stage, $alternance, $codePostal, $datePublication);
+        $listeExpPro = AbstractExperienceProfessionnelRepository::filtre($dateDebut, $dateFin, $optionTri, $stage, $alternance, $codePostal, $datePublication);
         self::afficheVue(
             'view.php',
             [
