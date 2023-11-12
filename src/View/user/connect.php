@@ -30,7 +30,11 @@
         <div class="password-input">
             <input type="password" name="password" id="password" required placeholder="mot de passe">
             <button type="button" id="showPassword"><img id="showPasswordIconConnect" src="assets/images/eye-icon.png" alt="O"></button>
+        <div class="forget-password">
+        <p>Mot de passe oublié ? <a href="frontController.php?action=forgetPassword" class="link">Changer de mot de passe</a></p>
+    </div>
         </div>
+        
         <p>
             <input type="hidden" name="action" value="connecter">
             <input type="hidden" name="controller" value="Entreprise">
@@ -41,9 +45,7 @@
     </form>
     <?php
     if ($_GET["controller"]=="Entreprise"){
-        echo'<div class="forget-password">
-        <p>Mot de passe oublié ? <a href="frontController.php?action=forgetPassword" class="link">Changer de mot de passe</a></p>
-    </div>
+        echo'
     <div class="create-account">
         <p>Vous n\'avez pas de compte? <a href="frontController.php?action=createAccount" class="link">Créer un compte</a></p>
     </div>';

@@ -346,6 +346,11 @@ h3 {
     z-index: -1;
 }
 
+#popUpDeleteNo,
+#popUpDeleteYes{
+    margin: 20px;
+}
+
 @media (max-width: 41200px) {
     #popUpDelete{
         min-width: 400px;
@@ -355,7 +360,7 @@ h3 {
         max-height: 400px;
     }
 
-    .popUpDeleteButton > button{
+    .popUpDeleteButton > a{
         width: 200px;
         height: 50px;
     }
@@ -370,13 +375,13 @@ h3 {
         max-height: 400px;
     }
 
-    .popUpDeleteButton > button{
+    .popUpDeleteButton > a{
         width: 200px;
         height: 50px;
     }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 950px) {
     #popUpDelete{
         min-width: 280px;
         max-width: 550px;
@@ -390,7 +395,7 @@ h3 {
         margin-right: 4%;
     }
 
-    .popUpDeleteButton > button{
+    .popUpDeleteButton > a{
         width: 80%;
         height: 59px;
     }
@@ -408,7 +413,7 @@ h3 {
     height: 100%;
 }
 
-.popUpDeleteButton > button{
+.popUpDeleteButton > a{
     font-size: 1.2em;
     margin: 20px;
     border-radius: 1rem;

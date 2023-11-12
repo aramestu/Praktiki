@@ -73,15 +73,9 @@ echo htmlspecialchars($last_element) */
     <a id="popUpDeleteClose"><img src="assets/images/close-icon.png" id="closeIcon" alt="File not found"></a>
     <div id="popUpDeleteContent">
         <p>Êtes-vous sûr de vouloir supprimer cette offre ?</p>
-        <div>
-            <!--TODO : voir avec soren button -->
-            <a class="popUpDeleteButton">
-                <button id="popUpDeleteNo">Non</button>
-            </a>
-            <a class="popUpDeleteButton"
-               href="frontController.php?controller=ExpPro&action=supprimerOffre&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel()) ?>">
-                <button id="popUpDeleteYes">Oui</button>
-            </a>
+        <div class="HBox">
+            <a class="button popUpDeleteButton" id="popUpDeleteNo">Non</a>
+            <a class="button popUpDeleteButton" id="popUpDeleteYes" href="frontController.php?controller=ExpPro&action=supprimerOffre&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel()) ?>">Oui</a>
         </div>
     </div>
 </div>
