@@ -37,7 +37,7 @@ class AlternanceRepository extends AbstractExperienceProfessionnelRepository
         return $exp;
     }
 
-    /*public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array
+    public static function filtres(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array
     {
         date_default_timezone_set('Europe/Paris');
         $pdo = Model::getPdo();
@@ -72,16 +72,16 @@ class AlternanceRepository extends AbstractExperienceProfessionnelRepository
 
         $requete = $pdo->query($sql);
         $alternanceTriee = [];
+        $rep = new AlternanceRepository();
         foreach ($requete as $result) {
-            $alternanceTriee[] = self::construireDepuisTableau($result);
+            $alternanceTriee[] = $rep->construireDepuisTableau($result);
         }
         return $alternanceTriee;
-    }*/
+    }
 
     public static function search(string $keywords): array
     {
-        return array();
-        /*$sql = "SELECT *
+        $sql = "SELECT *
                 FROM ExperienceProfessionnel e
                 JOIN Alternances a ON a.idAlternance = e.idExperienceProfessionnel
                 JOIN Entreprises en ON en.siret = e.siret
@@ -104,9 +104,10 @@ class AlternanceRepository extends AbstractExperienceProfessionnelRepository
         $requestStatement->execute($values);
 
         $AllAlternance = [];
+        $rep = new AlternanceRepository();
         foreach ($requestStatement as $alternanceTab) {
-            $AllAlternance[] = self::construireDepuisTableau($alternanceTab);
+            $AllAlternance[] = $rep->construireDepuisTableau($alternanceTab);
         }
-        return $AllAlternance;*/
+        return $AllAlternance;
     }
 }

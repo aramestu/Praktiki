@@ -177,8 +177,8 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
 
     public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $stage = null, string $alternance = null, string $codePostal = null, string $datePublication = null): array
     {
-        $tabStages = StageRepository::filtre($dateDebut, $dateFin, $optionTri, $codePostal, $datePublication);
-        $tabAlternance = AlternanceRepository::filtre($dateDebut, $dateFin, $optionTri, $codePostal, $datePublication);
+        $tabStages = StageRepository::filtres($dateDebut, $dateFin, $optionTri, $codePostal, $datePublication);
+        $tabAlternance = AlternanceRepository::filtres($dateDebut, $dateFin, $optionTri, $codePostal, $datePublication);
         //$tabStalternance =
         if (isset($stage)) {
             return $tabStages;
@@ -281,11 +281,11 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         $pdoStatement->execute($values);
     }
 
-    public static function search(string $keywords)
+    public static function search(string $keywords): array
     {
-        /*$stage = StageRepository::search($keywords);
+        $stage = StageRepository::search($keywords);
         $alternance = AlternanceRepository::search($keywords);
-        $sql = "SELECT *
+        /*$sql = "SELECT *
                         FROM ExperienceProfessionnel e
                         JOIN Entreprises en ON en.siret = e.siret
                         WHERE numEtudiant IS NULL
@@ -314,8 +314,8 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         foreach ($requestStatement as $stalternanceTab) {
             $stalternance[] = self::construireDepuisTableau($stalternanceTab);
         }
-        $alternance = self::sort($alternance, $stalternance, "datePublication");
-        return self::sort($alternance, $stage, "datePublication");*/
+        $alternance = self::sort($alternance, $stalternance, "datePublication"); */
+        return self::sort($alternance, $stage, "datePublication");
     }
 
     public static function getDatePublication(string $id): string

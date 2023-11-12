@@ -39,7 +39,7 @@ class StageRepository extends AbstractExperienceProfessionnelRepository
         return $exp;
     }
 
-    /*public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array
+    public static function filtres(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array
     {
         date_default_timezone_set('Europe/Paris');
         $pdo = Model::getPdo();
@@ -68,29 +68,29 @@ class StageRepository extends AbstractExperienceProfessionnelRepository
             if ($optionTri == "datePublication") {
                 $sql .= "ORDER BY datePublication ASC";
             }
-            if ($optionTri == "datePublicationInverse") {
+            else if ($optionTri == "datePublicationInverse") {
                 $sql .= "ORDER BY datePublication DESC";
             }
-            if ($optionTri == "salaireCroissant") {
+            else if ($optionTri == "salaireCroissant") {
                 $sql .= "ORDER BY gratificationStage ASC";
             }
-            if ($optionTri == "salaireDecroissant") {
+            else if ($optionTri == "salaireDecroissant") {
                 $sql .= "ORDER BY gratificationStage DESC";
             }
         }
 
         $requete = $pdo->query($sql);
         $stageTriee = [];
+        $rep = new StageRepository();
         foreach ($requete as $result) {
-            $stageTriee[] = self::construireDepuisTableau($result);
+            $stageTriee[] = $rep->construireDepuisTableau($result);
         }
         return $stageTriee;
-    }*/
+    }
 
     public static function search(string $keywords): array
     {
-        return array();
-        /*$sql = "SELECT *
+        $sql = "SELECT *
                 FROM ExperienceProfessionnel e
                 JOIN Stages s ON s.idStage = e.idExperienceProfessionnel
                 JOIN Entreprises en ON en.siret = e.siret
@@ -113,10 +113,11 @@ class StageRepository extends AbstractExperienceProfessionnelRepository
         $requestStatement->execute($values);
 
         $AllStage = [];
+        $rep = new StageRepository();
         foreach ($requestStatement as $stageTab) {
-            $AllStage[] = self::construireDepuisTableau($stageTab);
+            $AllStage[] =$rep->construireDepuisTableau($stageTab);
         }
-        return $AllStage;*/
+        return $AllStage;
     }
 
 
