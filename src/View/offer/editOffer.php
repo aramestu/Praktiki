@@ -10,7 +10,7 @@ if (is_a($expPro, 'App\SAE\Model\DataObject\Stage')) { // Si c'est un stage
     $typeExperience = 'stage';
     $gratification = $expPro->getGratificationStage();
 } else {//si c'est une stalerternance
-    $typeExperience = 'Non définie';
+    $typeExperience = 'offreNonDefini';
 }
 ?>
 <link rel="stylesheet" href="assets/css/connect.css">

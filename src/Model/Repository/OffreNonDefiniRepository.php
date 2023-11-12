@@ -1,35 +1,33 @@
 <?php
-
 namespace App\SAE\Model\Repository;
-
 use App\SAE\Model\DataObject\AbstractDataObject;
-use App\SAE\Model\DataObject\Alternance;
+use App\SAE\Model\DataObject\OffreNonDefini;
 use App\SAE\Model\DataObject\ExperienceProfessionnel;
 
-class AlternanceRepository extends AbstractExperienceProfessionnelRepository
-{
+class OffreNonDefiniRepository extends  AbstractExperienceProfessionnelRepository {
     protected function getNomDataObject(): string
     {
-        return "Alternance";
-    }
-    protected function getNomsColonnesSupplementaires(): array
-    {
-        return array("idAlternance");
+        return "OffreNonDefini";
     }
 
     protected function getNomClePrimaire(): string
     {
-        return "idAlternance";
+        return "idOffreNonDefini";
     }
 
     protected function getNomTable(): string
     {
-        return "Alternances";
+        return "OffreNonDefini";
+    }
+
+    protected function getNomsColonnesSupplementaires(): array
+    {
+        return array("idOffreNonDefini");
     }
 
     public function construireDepuisTableau(array $expProFormatTableau): ExperienceProfessionnel
     {
-        $exp = new Alternance($expProFormatTableau["sujetExperienceProfessionnel"], $expProFormatTableau["thematiqueExperienceProfessionnel"],
+        $exp = new OffreNonDefini($expProFormatTableau["sujetExperienceProfessionnel"], $expProFormatTableau["thematiqueExperienceProfessionnel"],
             $expProFormatTableau["tachesExperienceProfessionnel"], $expProFormatTableau["codePostalExperienceProfessionnel"],
             $expProFormatTableau["adresseExperienceProfessionnel"], $expProFormatTableau["dateDebutExperienceProfessionnel"],
             $expProFormatTableau["dateFinExperienceProfessionnel"], $expProFormatTableau["siret"]);
@@ -37,12 +35,44 @@ class AlternanceRepository extends AbstractExperienceProfessionnelRepository
         return $exp;
     }
 
+    public static function search(string $keywords): array
+    {
+        $sql = "SELECT *
+                FROM ExperienceProfessionnel e
+                JOIN OffreNonDefini o ON o.idOffreNonDefini = e.idExperienceProfessionnel
+                JOIN Entreprises en ON en.siret = e.siret
+                WHERE numEtudiant IS NULL
+                AND en.estValide = true
+                AND (sujetExperienceProfessionnel LIKE :keywordsTag
+                OR thematiqueExperienceProfessionnel LIKE :keywordsTag
+                OR tachesExperienceProfessionnel LIKE :keywordsTag
+                OR codePostalExperienceProfessionnel LIKE :keywordsTag
+                OR adresseExperienceProfessionnel LIKE :keywordsTag
+                OR e.siret LIKE :keywordsTag)
+                ORDER BY datePublication";
+
+        $requestStatement = Model::getPdo()->prepare($sql);
+
+        $values = array(
+            "keywordsTag" => '%' . $keywords . '%'
+        );
+
+        $requestStatement->execute($values);
+
+        $AllOffreNonDefini = [];
+        $rep = new OffreNonDefiniRepository();
+        foreach ($requestStatement as $offre) {
+            $AllOffreNonDefini[] = $rep->construireDepuisTableau($offre);
+        }
+        return $AllOffreNonDefini;
+    }
+
     public static function filtres(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array
     {
         date_default_timezone_set('Europe/Paris');
         $pdo = Model::getPdo();
         $sql = "SELECT * 
-                FROM Alternances a JOIN ExperienceProfessionnel e ON a.idalternance = e.idExperienceProfessionnel WHERE numEtudiant IS NULL ";
+                FROM OffreNonDefini o JOIN ExperienceProfessionnel e ON o.idOffreNonDefini = e.idExperienceProfessionnel WHERE numEtudiant IS NULL ";
         if (isset($datePublication)) {
             $sql .= match ($datePublication) {
                 'last24' => "AND DATEDIFF(NOW(), datePublication) < 1 ",
@@ -71,43 +101,11 @@ class AlternanceRepository extends AbstractExperienceProfessionnelRepository
         }
 
         $requete = $pdo->query($sql);
-        $alternanceTriee = [];
-        $rep = new AlternanceRepository();
+        $offreNonDefiniTrie = [];
+        $rep = new OffreNonDefiniRepository();
         foreach ($requete as $result) {
-            $alternanceTriee[] = $rep->construireDepuisTableau($result);
+            $offreNonDefiniTrie[] = $rep->construireDepuisTableau($result);
         }
-        return $alternanceTriee;
-    }
-
-    public static function search(string $keywords): array
-    {
-        $sql = "SELECT *
-                FROM ExperienceProfessionnel e
-                JOIN Alternances a ON a.idAlternance = e.idExperienceProfessionnel
-                JOIN Entreprises en ON en.siret = e.siret
-                WHERE numEtudiant IS NULL
-                AND en.estValide = true
-                AND (sujetExperienceProfessionnel LIKE :keywordsTag
-                OR thematiqueExperienceProfessionnel LIKE :keywordsTag
-                OR tachesExperienceProfessionnel LIKE :keywordsTag
-                OR codePostalExperienceProfessionnel LIKE :keywordsTag
-                OR adresseExperienceProfessionnel LIKE :keywordsTag
-                OR e.siret LIKE :keywordsTag)
-                ORDER BY datePublication";
-
-        $requestStatement = Model::getPdo()->prepare($sql);
-
-        $values = array(
-            "keywordsTag" => '%' . $keywords . '%'
-        );
-
-        $requestStatement->execute($values);
-
-        $AllAlternance = [];
-        $rep = new AlternanceRepository();
-        foreach ($requestStatement as $alternanceTab) {
-            $AllAlternance[] = $rep->construireDepuisTableau($alternanceTab);
-        }
-        return $AllAlternance;
+        return $offreNonDefiniTrie;
     }
 }

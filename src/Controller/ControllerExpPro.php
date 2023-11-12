@@ -2,8 +2,10 @@
 
 namespace App\SAE\Controller;
 
+use App\SAE\Model\Repository\AbstractExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\AlternanceRepository;
 use App\SAE\Model\Repository\Model;
+use App\SAE\Model\Repository\OffreNonDefiniRepository;
 use App\SAE\Model\Repository\StageRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 use App\SAE\Model\DataObject\Stage;
@@ -12,7 +14,7 @@ class ControllerExpPro extends ControllerGenerique
 {
     public static function getExpProByDefault(): void
     {
-        $listeExpPro = ExperienceProfessionnelRepository::search("");
+        $listeExpPro = AbstractExperienceProfessionnelRepository::search("");
         self::afficheVue(
             'view.php',
             [
@@ -26,7 +28,7 @@ class ControllerExpPro extends ControllerGenerique
     public static function getExpProBySearch(): void
     {
         $keywords = urldecode($_GET['keywords']);
-        $listeExpPro = ExperienceProfessionnelRepository::search($keywords);
+        $listeExpPro = AbstractExperienceProfessionnelRepository::search($keywords);
         self::afficheVue(
             'view.php',
             [
@@ -67,7 +69,7 @@ class ControllerExpPro extends ControllerGenerique
         if (isset($_GET['datePublication'])) {
             $datePublication = $_GET['datePublication'];
         }
-        $listeExpPro = ExperienceProfessionnelRepository::filtre($dateDebut, $dateFin, $optionTri, $stage, $alternance, $codePostal, $datePublication);
+        $listeExpPro = AbstractExperienceProfessionnelRepository::filtre($dateDebut, $dateFin, $optionTri, $stage, $alternance, $codePostal, $datePublication);
         self::afficheVue(
             'view.php',
             [
@@ -95,20 +97,23 @@ class ControllerExpPro extends ControllerGenerique
         if ($_POST["typeOffre"] == "stage") {
             $tab["gratificationStage"] = $_POST["gratification"]; // Un stage a une gratification à renseigner en plus
             $tab["idStage"] = $_POST["id"];
-            $stage = StageRepository::construireDepuisTableau($tab);
-            StageRepository::mettreAJour($stage);
+            $rep = new StageRepository();
+            $stage = $rep->construireDepuisTableau($tab);
+            $rep->mettreAJour($stage);
             self::afficherVueEndOffer($msg); // Redirection vers une page
         } // Si c'est une alternance
         elseif ($_POST["typeOffre"] == "alternance") {
             $tab["idAlternance"] = $_POST["id"];
-            $alternance = AlternanceRepository::construireDepuisTableau($tab);
-            AlternanceRepository::mettreAJour($alternance);
+            $rep = new AlternanceRepository();
+            $alternance = $rep->construireDepuisTableau($tab);
+            $rep->mettreAJour($alternance);
             self::afficherVueEndOffer($msg); // Redirection vers une page
-        } // Si c'est une stalternance
-        elseif ($_POST["typeOffre"] == "stalternance" || $_POST["typeOffre"] == "Non définie") {
-            $tab["idExpPro"] = $_POST["id"];
-            $stalternance = ExperienceProfessionnelRepository::construireDepuisTableau($tab);
-            ExperienceProfessionnelRepository::mettreAJour($stalternance);
+        } // Si c'est une offre non défini
+        elseif ($_POST["typeOffre"] == "offreNonDefini") {
+            $tab["idOffreNonDefini"] = $_POST["id"];
+            $rep = new OffreNonDefiniRepository();
+            $stalternance = $rep->construireDepuisTableau($tab);
+            $rep->mettreAJour($stalternance);
             self::afficherVueEndOffer($msg); // Redirection vers une page
         } // Si ce n'est aucun des 3 alors ce n'est pas normal
         else {
@@ -131,7 +136,8 @@ class ControllerExpPro extends ControllerGenerique
         $pagetitle = 'Modification Offre';
         $cheminVueBody = 'offer/editOffer.php';
 
-        $stage = StageRepository::get($idExpPro);
+        $rep = new StageRepository();
+        $stage = $rep->get($idExpPro);
 
 
         // Si c'est un stage alors c'est good
@@ -144,7 +150,8 @@ class ControllerExpPro extends ControllerGenerique
         } // On vérifie que c'est une alternance sinon on affiche un message d'erreur
         else {
             // On vérifie que c'est une alternance
-            $alternance = AlternanceRepository::get($idExpPro); //Dans un else pour éviter de faire 2 requêtes s'il n'y a pas besoin
+            $rep = new AlternanceRepository();
+            $alternance = $rep->get($idExpPro); //Dans un else pour éviter de faire 2 requêtes s'il n'y a pas besoin
             if (!is_null($alternance)) {
                 ControllerGenerique::afficheVue('view.php', [
                     "pagetitle" => $pagetitle,
@@ -152,12 +159,13 @@ class ControllerExpPro extends ControllerGenerique
                     "experiencePro" => $alternance
                 ]);
             } else {
-                $stalternance = ExperienceProfessionnelRepository::get($idExpPro);
-                if (!is_null($stalternance)) {
+                $rep = new OffreNonDefiniRepository();
+                $offreNonDefini = $rep->get($idExpPro);
+                if (!is_null($offreNonDefini)) {
                     ControllerGenerique::afficheVue('view.php', [
                         "pagetitle" => $pagetitle,
                         "cheminVueBody" => $cheminVueBody,
-                        "experiencePro" => $stalternance
+                        "experiencePro" => $offreNonDefini
                     ]);
                 } else {
                     $messageErreur = 'Cette offre n existe pas !';
@@ -171,7 +179,8 @@ class ControllerExpPro extends ControllerGenerique
     {
         $idExpPro = $_GET["experiencePro"];
 
-        $stage = StageRepository::get($idExpPro);
+        $rep = new StageRepository();
+        $stage = $rep->get($idExpPro);
 
         if (!is_null($stage)) {
             ControllerGenerique::afficheVue('view.php', [
@@ -180,7 +189,8 @@ class ControllerExpPro extends ControllerGenerique
                 "expPro" => $stage
             ]);
         } else {
-            $alternance = AlternanceRepository::get($idExpPro);
+            $rep = new AlternanceRepository();
+            $alternance = $rep->get($idExpPro);
             if (!is_null($alternance)) {
                 ControllerGenerique::afficheVue('view.php', [
                     "pagetitle" => "Affichage offer",
@@ -188,12 +198,13 @@ class ControllerExpPro extends ControllerGenerique
                     "expPro" => $alternance
                 ]);
             } else {
-                $stalternance = ExperienceProfessionnelRepository::get($idExpPro);
-                if (!is_null($stalternance)) {
+                $rep = new OffreNonDefiniRepository();
+                $offreNonDefini = $rep->get($idExpPro);
+                if (!is_null($offreNonDefini)) {
                     ControllerGenerique::afficheVue('view.php', [
                         "pagetitle" => "Affichage offer",
                         "cheminVueBody" => "offer/offer.php",
-                        "expPro" => $stalternance
+                        "expPro" => $offreNonDefini
                     ]);
                 } else {
                     $messageErreur = 'Cette offre n existe pas !';
@@ -206,46 +217,26 @@ class ControllerExpPro extends ControllerGenerique
     public static function creerOffreDepuisFormulaire(): void
     {
         $msg = "Offre crée avec succés !";
+        $tabInfo = [
+            "sujetExperienceProfessionnel" => $_POST["sujet"],
+            "thematiqueExperienceProfessionnel" => $_POST["thematique"],
+            "tachesExperienceProfessionnel" => $_POST["taches"],
+            "codePostalExperienceProfessionnel" => $_POST["codePostal"],
+            "adresseExperienceProfessionnel" => $_POST["adressePostale"],
+            "dateDebutExperienceProfessionnel" => $_POST["dateDebut"],
+            "dateFinExperienceProfessionnel" => $_POST["dateFin"],
+            "siret" => $_POST["siret"]];
         if ($_POST["typeOffre"] == "stage") {
-            $stage = StageRepository::construireDepuisTableau([
-                "sujetExperienceProfessionnel" => $_POST["sujet"],
-                "thematiqueExperienceProfessionnel" => $_POST["thematique"],
-                "tachesExperienceProfessionnel" => $_POST["taches"],
-                "codePostalExperienceProfessionnel" => $_POST["codePostal"],
-                "adresseExperienceProfessionnel" => $_POST["adressePostale"],
-                "dateDebutExperienceProfessionnel" => $_POST["dateDebut"],
-                "dateFinExperienceProfessionnel" => $_POST["dateFin"],
-                "siret" => $_POST["siret"],
-                "gratificationStage" => $_POST["gratification"]
-            ]);
-            StageRepository::save($stage);
-            self::afficherVueEndOffer($msg); // Redirection vers une page
+            $rep = new StageRepository();
+            $tabInfo["gratificationStage"] = $_POST["gratification"];
+            self::saveExpByFormulairePost($rep, $msg, $tabInfo);
+
         } else if ($_POST["typeOffre"] == "alternance") {
-            $alternance = AlternanceRepository::construireDepuisTableau([
-                "sujetExperienceProfessionnel" => $_POST["sujet"],
-                "thematiqueExperienceProfessionnel" => $_POST["thematique"],
-                "tachesExperienceProfessionnel" => $_POST["taches"],
-                "codePostalExperienceProfessionnel" => $_POST["codePostal"],
-                "adresseExperienceProfessionnel" => $_POST["adressePostale"],
-                "dateDebutExperienceProfessionnel" => $_POST["dateDebut"],
-                "dateFinExperienceProfessionnel" => $_POST["dateFin"],
-                "siret" => $_POST["siret"]
-            ]);
-            AlternanceRepository::save($alternance);
-            self::afficherVueEndOffer($msg); // Redirection vers une page
-        } else if ($_POST["typeOffre"] == "stalternance" || $_POST["typeOffre"] == "Non définie") {
-            $stalternance = ExperienceProfessionnelRepository::construireDepuisTableau([
-                "sujetExperienceProfessionnel" => $_POST["sujet"],
-                "thematiqueExperienceProfessionnel" => $_POST["thematique"],
-                "tachesExperienceProfessionnel" => $_POST["taches"],
-                "codePostalExperienceProfessionnel" => $_POST["codePostal"],
-                "adresseExperienceProfessionnel" => $_POST["adressePostale"],
-                "dateDebutExperienceProfessionnel" => $_POST["dateDebut"],
-                "dateFinExperienceProfessionnel" => $_POST["dateFin"],
-                "siret" => $_POST["siret"]
-            ]);
-            ExperienceProfessionnelRepository::save($stalternance);
-            self::afficherVueEndOffer($msg); // Redirection vers une page
+            $rep = new AlternanceRepository();
+            self::saveExpByFormulairePost($rep, $msg, $tabInfo); // Redirection vers une page
+        } else if ($_POST["typeOffre"] == "offreNonDefini") {
+            $rep = new OffreNonDefiniRepository();
+            self::saveExpByFormulairePost($rep, $msg, $tabInfo); // Redirection vers une page
         } else {
             ControllerGenerique::error("Ce type d'offre n'existe pas");
         }
@@ -254,22 +245,25 @@ class ControllerExpPro extends ControllerGenerique
     public static function supprimerOffre(): void
     {
         $idExpPro = $_GET["experiencePro"];
-        $stage = StageRepository::get($idExpPro);
+        $rep = new StageRepository();
+        $stage = $rep->get($idExpPro);
 
         // Si c'est un stage alors c'est good
         if (!is_null($stage)) {
-            StageRepository::supprimer($stage);
+            $rep->supprimer($idExpPro);
             self::afficherVueEndOffer("Stage supprimée avec succès");
         } else {
-            $alternance = AlternanceRepository::get($idExpPro); //Dans un else pour éviter de faire 2 requêtes s'il n'y a pas besoin
+            $rep = new AlternanceRepository();
+            $alternance = $rep->get($idExpPro); //Dans un else pour éviter de faire 2 requêtes s'il n'y a pas besoin
             if (!is_null($alternance)) {
-                AlternanceRepository::supprimer($alternance);
+                $rep->supprimer($idExpPro);
                 self::afficherVueEndOffer("Alternance supprimée avec succès");
             } else {
-                $stalternance = ExperienceProfessionnelRepository::get($idExpPro);
-                if (!is_null($stalternance)) {
-                    ExperienceProfessionnelRepository::supprimer($stalternance);
-                    self::afficherVueEndOffer("Stalternance supprimée avec succès");
+                $rep = new OffreNonDefiniRepository();
+                $nonDefini = $rep->get($idExpPro);
+                if (!is_null($nonDefini)) {
+                    $rep->supprimer($idExpPro);
+                    self::afficherVueEndOffer("Offre non défini supprimée avec succès");
                 } else {
                     $messageErreur = 'Cette offre n existe pas !';
                     ControllerGenerique::error($messageErreur);
@@ -300,11 +294,20 @@ class ControllerExpPro extends ControllerGenerique
         );
     }
 
-    public static function displayConvention(): void {
-        ControllerGenerique::afficheVue('view.php',[
-            'pagetitle' => 'Convention',
-            'cheminVueBody' => 'SAE/convention.php',
-        ]);
+    /**
+     * @param AlternanceRepository $rep
+     * @param string $msg
+     * @return void
+     */
+    public static function saveExpByFormulairePost(AbstractExperienceProfessionnelRepository $rep, string $msg, array $tab): void
+    {
+        $exp = $rep->construireDepuisTableau($tab);
+        if($rep->save($exp)){
+            self::afficherVueEndOffer($msg);
+        }
+        else{
+            self::error("L'offre n'a pas pu être créeé");
+        }
     }
 }
 

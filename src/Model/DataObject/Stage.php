@@ -29,7 +29,7 @@ class Stage extends ExperienceProfessionnel
         ));
     }
 
-    public function getNomExperienceProfessionnel()
+    public function getNomExperienceProfessionnel(): string
     {
         return "Stage";
     }

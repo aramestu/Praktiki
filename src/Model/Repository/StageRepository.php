@@ -2,129 +2,44 @@
 
 namespace App\SAE\Model\Repository;
 
+use App\SAE\Model\DataObject\AbstractDataObject;
 use App\SAE\Model\DataObject\ExperienceProfessionnel;
 use App\SAE\Model\DataObject\Stage;
 use Cassandra\Date;
 
-class StageRepository
+class StageRepository extends AbstractExperienceProfessionnelRepository
 {
-    public static function save(Stage $s): bool
+    protected function getNomDataObject(): string
     {
-        try {
-            ExperienceProfessionnelRepository::save($s);
-            $pdo = Model::getPdo();
-            $requestStatement = $pdo->prepare("INSERT INTO Stages(idStage, gratificationStage) 
-                                                 VALUES(:idStageTag, :gratificationStageTag)");
-            $values = array("idStageTag" => $pdo->lastInsertId(),
-                "gratificationStageTag" => $s->getGratificationStage());
-
-            $requestStatement->execute($values);
-            return true;
-        } catch (\PDOException $e) {
-            return false;
-        }
+        return "Stage";
     }
 
-    public static function construireDepuisTableau($stageFormatTableau): Stage
+    protected function getNomsColonnesSupplementaires(): array
     {
-        $stage = new Stage($stageFormatTableau["sujetExperienceProfessionnel"], $stageFormatTableau["thematiqueExperienceProfessionnel"], $stageFormatTableau["tachesExperienceProfessionnel"], $stageFormatTableau["codePostalExperienceProfessionnel"], $stageFormatTableau["adresseExperienceProfessionnel"], $stageFormatTableau["dateDebutExperienceProfessionnel"], $stageFormatTableau["dateFinExperienceProfessionnel"], $stageFormatTableau["siret"], $stageFormatTableau["gratificationStage"]);
-        if (array_key_exists("idStage", $stageFormatTableau)) {
-            $stage->setIdExperienceProfessionnel($stageFormatTableau["idStage"]);
-        }
-        if (array_key_exists("numEtudiant", $stageFormatTableau)) {
-            if (!empty($stageFormatTableau["numEtudiant"])) {
-                $stage->setNumEtudiant($stageFormatTableau["numEtudiant"]);
-            }
-        }
-        if (array_key_exists("mailEnseignant", $stageFormatTableau)) {
-            if (!empty($stageFormatTableau["mailEnseignant"])) {
-                $stage->setMailEnseignant($stageFormatTableau["mailEnseignant"]);
-            }
-        }
-        if (array_key_exists("mailTuteurProfessionnel", $stageFormatTableau)) {
-            if (!empty($stageFormatTableau["mailTuteurProfessionnel"])) {
-                $stage->setMailTuteurProfessionnel($stageFormatTableau["mailTuteurProfessionnel"]);
-            }
-        }
-        if (array_key_exists("datePublication", $stageFormatTableau)) {
-            if (!empty($stageFormatTableau["datePublication"])) {
-                $stage->setDatePublication($stageFormatTableau["datePublication"]);
-            }
-        }
-        return $stage;
+        return array("idStage","gratificationStage");
     }
 
-    public static function getAll(): array
+    protected function getNomClePrimaire(): string
     {
-        $pdo = Model::getPdo();
-        $requestStatement = $pdo->query(" SELECT *
-                                                FROM ExperienceProfessionnel e
-                                                JOIN Stages s ON s.idStage = e.idExperienceProfessionnel");
-        $AllStage = [];
-        foreach ($requestStatement as $stageTab) {
-            $AllStage[] = self::construireDepuisTableau($stageTab);
-        }
-        return $AllStage;
+        return "idStage";
     }
 
-    public static function get(string $id): ?Stage
+    protected function getNomTable(): string
     {
-        $sql = "SELECT *
-                FROM ExperienceProfessionnel e
-                JOIN Stages s ON s.idStage = e.idExperienceProfessionnel
-                WHERE s.idStage = :id";
-        $pdoStatement = Model::getPdo()->prepare($sql);
-
-        $values = array(
-            "id" => $id,
-        );
-
-        $pdoStatement->execute($values);
-
-        $stage = $pdoStatement->fetch();
-
-        // S'il n'y a pas de stage
-        if (!$stage) {
-            return null;
-        } else {
-            return StageRepository::construireDepuisTableau($stage);
-        }
+        return "Stages";
     }
 
-
-    public static function mettreAJour(Stage $stage): void
+    public function construireDepuisTableau(array $expProFormatTableau): ExperienceProfessionnel
     {
-        // Il faut modifier à la fois dans ExperienceProfessionnel et dans Stage
-        ExperienceProfessionnelRepository::mettreAJour($stage);
-
-        $sql = "UPDATE Stages SET
-                gratificationStage= :gratificationTag
-                WHERE idStage= :idTag";
-
-        $pdoStatement = Model::getPdo()->prepare($sql);
-
-        $values = array(
-            "gratificationTag" => $stage->getGratificationStage(),
-            "idTag" => $stage->getIdExperienceProfessionnel()
-        );
-
-        $pdoStatement->execute($values);
+        $exp = new Stage($expProFormatTableau["sujetExperienceProfessionnel"], $expProFormatTableau["thematiqueExperienceProfessionnel"],
+            $expProFormatTableau["tachesExperienceProfessionnel"], $expProFormatTableau["codePostalExperienceProfessionnel"],
+            $expProFormatTableau["adresseExperienceProfessionnel"], $expProFormatTableau["dateDebutExperienceProfessionnel"],
+            $expProFormatTableau["dateFinExperienceProfessionnel"], $expProFormatTableau["siret"], $expProFormatTableau["gratificationStage"]);
+        $this->updateAttribut($expProFormatTableau, $exp);
+        return $exp;
     }
 
-    public static function supprimer(Stage $stage): void
-    {
-        $sql = "DELETE FROM Stages WHERE idStage= :idTag;";
-        $pdoStatement = Model::getPdo()->prepare($sql);
-
-        $values = array(
-            "idTag" => $stage->getIdExperienceProfessionnel()
-        );
-
-        $pdoStatement->execute($values);
-        ExperienceProfessionnelRepository::supprimer($stage);
-    }
-
-    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array
+    public static function filtres(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array
     {
         date_default_timezone_set('Europe/Paris');
         $pdo = Model::getPdo();
@@ -153,21 +68,22 @@ class StageRepository
             if ($optionTri == "datePublication") {
                 $sql .= "ORDER BY datePublication ASC";
             }
-            if ($optionTri == "datePublicationInverse") {
+            else if ($optionTri == "datePublicationInverse") {
                 $sql .= "ORDER BY datePublication DESC";
             }
-            if ($optionTri == "salaireCroissant") {
+            else if ($optionTri == "salaireCroissant") {
                 $sql .= "ORDER BY gratificationStage ASC";
             }
-            if ($optionTri == "salaireDecroissant") {
+            else if ($optionTri == "salaireDecroissant") {
                 $sql .= "ORDER BY gratificationStage DESC";
             }
         }
 
         $requete = $pdo->query($sql);
         $stageTriee = [];
+        $rep = new StageRepository();
         foreach ($requete as $result) {
-            $stageTriee[] = self::construireDepuisTableau($result);
+            $stageTriee[] = $rep->construireDepuisTableau($result);
         }
         return $stageTriee;
     }
@@ -197,9 +113,12 @@ class StageRepository
         $requestStatement->execute($values);
 
         $AllStage = [];
+        $rep = new StageRepository();
         foreach ($requestStatement as $stageTab) {
-            $AllStage[] = self::construireDepuisTableau($stageTab);
+            $AllStage[] =$rep->construireDepuisTableau($stageTab);
         }
         return $AllStage;
     }
+
+
 }
