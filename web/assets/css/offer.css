@@ -308,8 +308,8 @@ h3 {
     -10px -10px 10px #E67E2225;
 }
 
-.Stalternance > .header > .left > .typeExpPro,
-.Stalternance > .header > .information > .typeExpPro {
+.OffreNonDefini > .header > .left > .typeExpPro,
+.OffreNonDefini> .header > .information > .typeExpPro {
     background: linear-gradient(-45deg, var(--wisteria) 0%, var(--wisteria) 50%, var(--orange) 50%, var(--orange) 100%);
     color: var(--white);
     border-bottom-color: var(--wisteria);
@@ -318,7 +318,7 @@ h3 {
     border-top-color: var(--orange);
 }
 
-.Stalternance:hover {
+.OffreNonDefini:hover {
     border-bottom-color: var(--wisteria);
     border-left-color: var(--orange);
     border-right-color: var(--wisteria);
