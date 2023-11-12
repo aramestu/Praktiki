@@ -179,7 +179,8 @@ class ControllerExpPro extends ControllerGenerique
     {
         $idExpPro = $_GET["experiencePro"];
 
-        $stage = StageRepository::get($idExpPro);
+        $rep = new StageRepository();
+        $stage = $rep->get($idExpPro);
 
         if (!is_null($stage)) {
             ControllerGenerique::afficheVue('view.php', [
@@ -188,7 +189,8 @@ class ControllerExpPro extends ControllerGenerique
                 "expPro" => $stage
             ]);
         } else {
-            $alternance = AlternanceRepository::get($idExpPro);
+            $rep = new AlternanceRepository();
+            $alternance = $rep->get($idExpPro);
             if (!is_null($alternance)) {
                 ControllerGenerique::afficheVue('view.php', [
                     "pagetitle" => "Affichage offer",
@@ -196,12 +198,13 @@ class ControllerExpPro extends ControllerGenerique
                     "expPro" => $alternance
                 ]);
             } else {
-                $stalternance = ExperienceProfessionnelRepository::get($idExpPro);
-                if (!is_null($stalternance)) {
+                $rep = new OffreNonDefiniRepository();
+                $offreNonDefini = $rep->get($idExpPro);
+                if (!is_null($offreNonDefini)) {
                     ControllerGenerique::afficheVue('view.php', [
                         "pagetitle" => "Affichage offer",
                         "cheminVueBody" => "offer/offer.php",
-                        "expPro" => $stalternance
+                        "expPro" => $offreNonDefini
                     ]);
                 } else {
                     $messageErreur = 'Cette offre n existe pas !';
