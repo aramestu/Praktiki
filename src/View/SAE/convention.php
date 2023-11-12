@@ -41,10 +41,10 @@
 
     <p>Période du stage</p>
     <label for="debutPeriodeStage">Début</label>
-    <input type="date" name="debutPeriodeStage" id="debutPeriodeStage" placeholder="debutPeriodeStage">
+    <input type="date" name="debutPeriodeStage" id="debutPeriodeStage">
 
     <label for="finPeriodeStage">Fin</label>
-    <input type="date" name="finPeriodeStage" id="finPeriodeStage" placeholder="finPeriodeStage">
+    <input type="date" name="finPeriodeStage" id="finPeriodeStage">
 
     <label for="langueConvention">Langue de la convention</label>
     <input type="text" name="langueConvention" id="langueConvention" placeholder="langueConvention">

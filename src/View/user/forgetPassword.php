@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <title>VerifMail</title>
-
-    <link rel="stylesheet" href="assets/css/connect.css">
-
-</head>
-
-<body>
+<link rel="stylesheet" href="assets/css/connect.css">
 <div class="container">
     <form method="get">
-        <legend>Entrez votre mail</legend>
+        <h2 class="remplaceBaliseLegend">Entrez votre mail</h2>
         <p>
             <label for="siret">Siret</label>
             <input type="text" name="siret" id="siret" required placeholder="01234567891011">
@@ -27,6 +16,3 @@
         </p>
     </form>
 </div>
-</body>
-
-</html>

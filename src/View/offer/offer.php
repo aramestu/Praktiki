@@ -60,11 +60,11 @@ echo htmlspecialchars($last_element) */
         </div>
     </div>
 
-    <a id="deleteButtonOrigin"><img src="assets/images/bin-icon.png" id="deleteIcon" alt="File not found"></a>
+    <a id="deleteButtonOrigin"><img src="assets/images/bin-icon.png" id="deleteIcon" alt="Bin"></a>
     <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel()) ?>"><img
-                src="assets/images/edit-icon.png" id="editIcon" alt="File not found"></a>
+                src="assets/images/edit-icon.png" id="editIcon" alt="EditButton"></a>
     <a href="frontController.php?controller=ExpPro&action=getExpProByDefault"><img src="assets/images/back-icon.png"
-                                                                                   id="backIcon" alt="File not found"></a>
+                                                                                   id="backIcon" alt="BackToOffer"></a>
 
     <button id="apply">Postuler</button>
 </div>
@@ -74,6 +74,7 @@ echo htmlspecialchars($last_element) */
     <div id="popUpDeleteContent">
         <p>Êtes-vous sûr de vouloir supprimer cette offre ?</p>
         <div>
+            <!--TODO : voir avec soren button -->
             <a class="popUpDeleteButton">
                 <button id="popUpDeleteNo">Non</button>
             </a>

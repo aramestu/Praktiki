@@ -18,7 +18,7 @@
             Mail perso : <?php echo(htmlspecialchars($etudiant->getMailPersoEtudiant())); ?>
         </p>
         <p>
-            Mail universitaire : <?php echo(htmlspecialchars($etudiant->getMailUniversitaireEtuidant())); ?>
+            Mail universitaire : <?php echo(htmlspecialchars($etudiant->getMailUniversitaireEtudiant())); ?>
         </p>
         <p>
             Numéro de téléphone : <?php echo(htmlspecialchars($etudiant->getTelephoneEtudiant())); ?>

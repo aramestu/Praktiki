@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html>
+<link rel="stylesheet" href="assets/css/connect.css">
+<script src="assets/javascript/showPassword.js"></script>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Connexion</title>
-
-    <link rel="stylesheet" href="assets/css/connect.css">
-
-    <script src="assets/javascript/showPassword.js"></script>
-</head>
-
-<body>
 <div class="container">
     <form method="get">
         <h2 id="remplaceBaliseLegend">Connexion</h2>
@@ -61,6 +51,3 @@
     ?>
 
 </div>
-</body>
-
-</html>

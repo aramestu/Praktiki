@@ -28,7 +28,7 @@ use App\SAE\Model\Repository\EntrepriseRepository;
                 echo(htmlspecialchars($entreprise->getNomEntreprise()));
                 ?></p>
             <p><img src="assets/images/map-pin-icon.png"
-                    class="mapPin" alt="File not found"><span><?php echo htmlspecialchars($expPro->getCodePostalExperienceProfessionnel()); ?></span>
+                    class="mapPin" alt="MapPin"><span><?php echo htmlspecialchars($expPro->getCodePostalExperienceProfessionnel()); ?></span>
             </p>
         </div>
     </div>

@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <title>Choix du compte</title>
-
-    <link rel="stylesheet" href="assets/css/connect.css">
-
-</head>
-
-<body>
+<link rel="stylesheet" href="assets/css/connect.css">
 <div class="container">
     <form method="get">
         <h2 id="remplaceBaliseLegend">Choisissez votre compte</h2>
@@ -26,6 +15,3 @@
         </p>
     </form>
 </div>
-</body>
-
-</html>
