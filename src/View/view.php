@@ -16,7 +16,7 @@
 
 <header>
 
-    <img id="logoToggle" class="logo" src="assets/images/LOGO_UM_filet-blanc.png" alt="File not found">
+    <img id="logoToggle" class="logo" src="assets/images/LOGO_UM_filet-blanc.png" alt="LogoUM">
 
     <div class="burger">
         <span></span>

@@ -70,7 +70,7 @@ echo htmlspecialchars($last_element) */
 </div>
 
 <div id="popUpDelete" class="subContainer">
-    <a id="popUpDeleteClose"><img src="assets/images/close-icon.png" id="closeIcon" alt="File not found"></a>
+    <a id="popUpDeleteClose"><img src="assets/images/close-icon.png" id="closeIcon" alt="Close"></a>
     <div id="popUpDeleteContent">
         <p>Êtes-vous sûr de vouloir supprimer cette offre ?</p>
         <div class="HBox">

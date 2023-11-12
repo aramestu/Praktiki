@@ -41,7 +41,7 @@
             </div>
             <p id="passwordHelp">Entrez un mot de passe</p>
             <button type="button" id="showPassword"><img id="showPasswordIconRegister" src="assets/images/eye-icon.png"
-                                                         alt="O"></button>
+                                                         alt="ShowPassword"></button>
         </div>
 
         <p>

@@ -13,7 +13,7 @@
             <label for="password">Mot de passe</label>
             <div class="password-input">
             <input type="password" name="password" id="password" required placeholder="mot de passe">
-            <button type="button" id="showPassword"><img id="showPasswordIconConnect" src="assets/images/eye-icon.png" alt="O"></button>
+            <button type="button" id="showPassword"><img id="showPasswordIconConnect" src="assets/images/eye-icon.png" alt="ShowPassword"></button>
         </div>
             <p>
             <input type="hidden" name="action" value="verify">
@@ -29,7 +29,7 @@
         <label for="password">Mot de passe</label>
         <div class="password-input">
             <input type="password" name="password" id="password" required placeholder="mot de passe">
-            <button type="button" id="showPassword"><img id="showPasswordIconConnect" src="assets/images/eye-icon.png" alt="O"></button>
+            <button type="button" id="showPassword"><img id="showPasswordIconConnect" src="assets/images/eye-icon.png" alt="ShowPassword"></button>
         <div class="forget-password">
         <p>Mot de passe oublié ? <a href="frontController.php?action=forgetPassword" class="link">Changer de mot de passe</a></p>
     </div>

@@ -111,7 +111,7 @@
 </div>
 
 <div>
-    <button>Enregistrer le brouillon de la convention</button>
-    <button>Envoyer la convention</button>
+    <button class="button">Enregistrer le brouillon de la convention</button>
+    <button class="button">Envoyer la convention</button>
 </div>
 
