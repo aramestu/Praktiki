@@ -124,7 +124,7 @@ class ControllerExpPro extends ControllerGenerique
     public static function afficherVueEndOffer($msg): void
     {
         ControllerGenerique::afficheVue("view.php", [
-            "pagetitle" => "Gestion d'offer",
+            "pagetitle" => "Gestion d'offre",
             "cheminVueBody" => "offer/endOffer.php",
             "message" => $msg
         ]);
@@ -133,7 +133,7 @@ class ControllerExpPro extends ControllerGenerique
     public static function afficherFormulaireModification(): void
     {
         $idExpPro = $_GET["experiencePro"];
-        $pagetitle = 'Modification Offre';
+        $pagetitle = "Modification d'offre";
         $cheminVueBody = 'offer/editOffer.php';
 
         $rep = new StageRepository();
@@ -184,7 +184,7 @@ class ControllerExpPro extends ControllerGenerique
 
         if (!is_null($stage)) {
             ControllerGenerique::afficheVue('view.php', [
-                "pagetitle" => "Affichage offer",
+                "pagetitle" => "Stage",
                 "cheminVueBody" => "offer/offer.php",
                 "expPro" => $stage
             ]);
@@ -193,7 +193,7 @@ class ControllerExpPro extends ControllerGenerique
             $alternance = $rep->get($idExpPro);
             if (!is_null($alternance)) {
                 ControllerGenerique::afficheVue('view.php', [
-                    "pagetitle" => "Affichage offer",
+                    "pagetitle" => "Alternance",
                     "cheminVueBody" => "offer/offer.php",
                     "expPro" => $alternance
                 ]);
@@ -202,7 +202,7 @@ class ControllerExpPro extends ControllerGenerique
                 $offreNonDefini = $rep->get($idExpPro);
                 if (!is_null($offreNonDefini)) {
                     ControllerGenerique::afficheVue('view.php', [
-                        "pagetitle" => "Affichage offer",
+                        "pagetitle" => "Offre non définie",
                         "cheminVueBody" => "offer/offer.php",
                         "expPro" => $offreNonDefini
                     ]);
@@ -298,7 +298,7 @@ class ControllerExpPro extends ControllerGenerique
         ControllerGenerique::afficheVue(
             'view.php',
             [
-                'pagetitle' => 'SAE',
+                'pagetitle' => 'Convention',
                 'cheminVueBody' => 'SAE/convention.php',
             ]
         );
