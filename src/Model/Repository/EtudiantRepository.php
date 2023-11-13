@@ -10,6 +10,37 @@ use App\SAE\Model\DataObject\Inscription;
 class EtudiantRepository extends AbstractRepository
 {
 
+    public function getEtudiantAvecConventionValidee(): array
+    {
+        return $this->getEtudiantAvecConvention(true,true);
+    }
+
+    public function getEtudiantAvecConvention(bool $estSigne, bool $estValide): array{
+        $sql = "SELECT * FROM Etudiants e 
+                JOIN Conventions c ON c.idStage = e.idStage ";
+
+        $whereAjoutee = false;
+        $values = array();
+        if($estSigne){
+            $sql .= " WHERE c.estSigne = :estSigneTag";
+            $values["estSigneTag"] = $estSigne;
+        }
+        else if($estValide){
+            $sql .= " WHERE c.estValide = :estValideTag";
+            $values["estValideTag"] = $estValide;
+        }
+
+        $request = Model::getPdo()->prepare($sql);
+
+        $request->execute($values);
+
+        $objects = [];
+        foreach ($request as $objectFormatTableau) {
+            $objects[] = $this->construireDepuisTableau($objectFormatTableau);
+        }
+        return $objects;
+    }
+
     public static function inscrire(string $numEtudiant, string $nomDepartement, string $nomAnneeUniversitaire): bool
     {
         try {
