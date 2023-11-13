@@ -4,7 +4,7 @@
 <p><b>Bienvenue Mr. Trombettoni</b></p>
 <div class="HBox" id="panel">
     <div class="container" id="option">
-        <a href="frontController.php?controller=PanelAdmin&action=PanelEtudiants" class="button">Liste des étudiants</a>
+        <a href="frontController.php?controller=PanelAdmin&action=PanelListeEtudiants" class="button">Liste des étudiants</a>
         <a href="" class="button" >Liste des offres en Attentes</a>
         <a href="frontController.php?action=panelEntreprises&controller=PanelAdmin" class="button">Liste des entreprises en Attentes</a>
         <a href="frontController.php?action=getExpProByDefault&controller=ExpPro" class="button" >Liste des offres</a>

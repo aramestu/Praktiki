@@ -4,6 +4,14 @@
 <?php $action="afficherListeEntrepriseEnAttenteFiltree";
 $controller="Entreprise";
 require_once __DIR__ . '/../../../utilitaire/searchBar.php';?>
+<div class="columnName">
+    <div class="HBox containerDebutLine">
+        <label>Etat</label>
+        <label class="lineNomPrenomEtudiant">NOM Prénom</label>
+    </div>
+    <label class="lineNumEtudiant">Num Etudiant</label>
+    <label class="lineMailUniversitaireEtudidant">Mail</label>
+</div>
 
 <div class="VBox">
     <?php
