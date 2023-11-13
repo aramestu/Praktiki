@@ -102,13 +102,17 @@ class ControllerEntreprise extends ControllerGenerique
         if (isset($_REQUEST["username"], $_REQUEST["password"])) {
             $user = (new EntrepriseRepository())->getById($_REQUEST["username"]);
             if (!is_null($user)) {
-                if (MotDePasse::verifier($_REQUEST["password"], $user->formatTableau()["mdpHacheTag"])) {
-                    ConnexionEntreprise::connecter($_REQUEST["username"]);
-                    MessageFlash::ajouter("success", "Connexion réussie");
-                    self::redirectionVersURL("success", "Connexion réussie", "home");
+                if (VerificationEmail::aValideEmail($user)) {
+                    if (MotDePasse::verifier($_REQUEST["password"], $user->formatTableau()["mdpHacheTag"])) {
+                        ConnexionEntreprise::connecter($_REQUEST["username"]);
+                        MessageFlash::ajouter("success", "Connexion réussie");
+                        self::redirectionVersURL("success", "Connexion réussie", "home");
 
-                } else {
-                    self::redirectionVersURL("warning", "Mot de passe incorrect", "connect&controller=Entreprise");
+                    } else {
+                        self::redirectionVersURL("warning", "Mot de passe incorrect", "connect&controller=Entreprise");
+                    }
+                }else{
+                    self::redirectionVersURL("warning", "Email non validé", "connect&controller=Entreprise");
                 }
             } else {
                 self::redirectionVersURL("warning", "Login incorrect", "connect&controller=Entreprise");
