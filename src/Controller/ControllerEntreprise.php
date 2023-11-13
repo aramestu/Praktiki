@@ -22,6 +22,7 @@ class ControllerEntreprise extends ControllerGenerique
             ]
         );
     }
+
     public static function afficherListeEntrepriseValideFiltree(): void
     {
         $keywords = self::keywordsExiste();
@@ -98,7 +99,7 @@ class ControllerEntreprise extends ControllerGenerique
 
     public static function connecter()
     {
-        if (isset($_REQUEST["username"],$_REQUEST["password"])) {
+        if (isset($_REQUEST["username"], $_REQUEST["password"])) {
             $user = (new EntrepriseRepository())->getById($_REQUEST["username"]);
             if (!is_null($user)) {
                 if (MotDePasse::verifier($_REQUEST["password"], $user->formatTableau()["mdpHacheTag"])) {
@@ -130,10 +131,14 @@ class ControllerEntreprise extends ControllerGenerique
             if ($_REQUEST["postcode"] > 0) {
                 if ($_REQUEST["effectif"] > 0) {
                     if ($_REQUEST["telephone"] > 0) {
-                        $user = Entreprise::construireDepuisFormulaire($_REQUEST);
-                        (new EntrepriseRepository())->save($user);
-                        VerificationEmail::envoiEmailValidation($user);
-                        self::redirectionVersURL("success", "Entreprise créée", "home");
+                        if ($_REQUEST["password"] == $_REQUEST["confirmPassword"]) {
+                            $user = Entreprise::construireDepuisFormulaire($_REQUEST);
+                            (new EntrepriseRepository())->save($user);
+                            VerificationEmail::envoiEmailValidation($user);
+                            self::redirectionVersURL("success", "Entreprise créée", "home");
+                        } else {
+                            self::redirectionVersURL("warning", "Mot de passe différent", "createAccount");
+                        }
                     } else {
                         self::redirectionVersURL("warning", "Telephone incorrect", "createAccount");
                     }
@@ -148,21 +153,23 @@ class ControllerEntreprise extends ControllerGenerique
         }
     }
 
-    public static function validerEmail():void{
-        if (isset($_GET["siret"], $_GET["nonce"])){
-            $bool=VerificationEmail::traiterEmailValidation($_GET["siret"],$_GET["nonce"]);
-            if ($bool){
-                self::redirectionVersURL("success","Email Valider","home");
-            }else {
-                self::redirectionVersURL("warning","Email non Valider","home");
+    public static function validerEmail(): void
+    {
+        if (isset($_GET["siret"], $_GET["nonce"])) {
+            $bool = VerificationEmail::traiterEmailValidation($_GET["siret"], $_GET["nonce"]);
+            if ($bool) {
+                self::redirectionVersURL("success", "Email Valider", "home");
+            } else {
+                self::redirectionVersURL("warning", "Email non Valider", "home");
             }
-        }else{
-            self::redirectionVersURL("warning","Login ou nonce manquant","home");
+        } else {
+            self::redirectionVersURL("warning", "Login ou nonce manquant", "home");
         }
     }
 
-    public static function changePassword():void{
-        if(isset($_REQUEST["siret"],$_REQUEST["mail"])) {
+    public static function changePassword(): void
+    {
+        if (isset($_REQUEST["siret"], $_REQUEST["mail"])) {
             $user = (new EntrepriseRepository())->getById($_REQUEST["siret"]);
             if (!is_null($user)) {
                 if ($user->getEmailEntreprise() == $_REQUEST["mail"]) {
@@ -172,13 +179,14 @@ class ControllerEntreprise extends ControllerGenerique
             } else {
                 self::redirectionVersURL("warning", "mail incorrect", "forgetPassword");
             }
-        }else{
-            self::redirectionVersURL("warning","Siret inconnu","forgetPassword");
+        } else {
+            self::redirectionVersURL("warning", "Siret inconnu", "forgetPassword");
         }
     }
 
-    public static function resetPassword():void{
-        if (isset($_REQUEST["siret"],$_REQUEST["newPassword"],$_REQUEST["confirmNewMdp"])) {
+    public static function resetPassword(): void
+    {
+        if (isset($_REQUEST["siret"], $_REQUEST["newPassword"], $_REQUEST["confirmNewMdp"])) {
             if ($_REQUEST["newPassword"] == $_REQUEST["confirmNewMdp"]) {
                 $user = (new EntrepriseRepository())->getById($_REQUEST["siret"]);
                 if (!is_null($user)) {

@@ -43,6 +43,10 @@
             <button type="button" id="showPassword"><img id="showPasswordIconRegister" src="assets/images/eye-icon.png"
                                                          alt="ShowPassword"></button>
         </div>
+        <p>
+            <label for="password">Confirmer mot de passe</label>
+            <input type="password" name="confirmPassword" id="password" required placeholder="Confirmer le mot de passe">
+        </p>
 
         <p>
             <input type="hidden" name="action" value="creerDepuisFormulaire">
