@@ -98,13 +98,13 @@ class ControllerEntreprise extends ControllerGenerique
                         "cheminVueBody" => "company/companyHome.php",
                     ]);
                 } else {
-                    self::redirectionVersURL("warning", "Mot de passe incorrect", "connect");
+                    self::redirectionVersURL("warning", "Mot de passe incorrect", "connect&controller=Entreprise");
                 }
             } else {
-                self::redirectionVersURL("warning", "Login incorrect", "connect");
+                self::redirectionVersURL("warning", "Login incorrect", "connect&controller=Entreprise");
             }
         } else {
-            self::redirectionVersURL("warning", "Remplissez les champs libres", "connect");
+            self::redirectionVersURL("warning", "Remplissez les champs libres", "connect&controller=Entreprise");
         }
     }
 
@@ -144,10 +144,10 @@ class ControllerEntreprise extends ControllerGenerique
             if ($bool){
                 self::redirectionVersURL("success","Email Valider","home");
             }else {
-                self::redirectionVersURL("warning","Email non Valider","afficherListe");
+                self::redirectionVersURL("warning","Email non Valider","home");
             }
         }else{
-            self::redirectionVersURL("warning","Login ou nonce manquant","afficherListe");
+            self::redirectionVersURL("warning","Login ou nonce manquant","home");
         }
     }
 
