@@ -29,6 +29,21 @@ class EtudiantRepository extends AbstractRepository
         }
     }
 
+    public function search(string $keywords): array{
+        $sql = "SELECT * FROM Etudiants
+                WHERE ";
+        $sql .= $this->colonneToSearch(array("numEtudiant", "nomEtudiant", "prenomEtudiant"));
+        $values["keywordsTag"] = '%' . $keywords . '%';
+
+        $request = Model::getPdo()->prepare($sql);
+        $request->execute($values);
+        $listeEtudiants = array();
+        foreach ($request as $etudiantTab) {
+            $listeEtudiants[] = $this->construireDepuisTableau($etudiantTab);
+        }
+        return $listeEtudiants;
+    }
+
     protected function construireDepuisTableau(array $EtudiantFormatTableau): Etudiant
     {
         $etudiant = new Etudiant($EtudiantFormatTableau["numEtudiant"], $EtudiantFormatTableau["prenomEtudiant"], $EtudiantFormatTableau["nomEtudiant"],

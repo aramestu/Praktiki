@@ -40,7 +40,11 @@ class ControllerPanelAdmin extends ControllerGenerique {
     }
 
     public static function panelListeEtudiants(): void {
-        $listEtudiants = (new EtudiantRepository())->getAll();
+        $keywords = "";
+        if(isset($_GET["keywords"])){
+            $keywords .= $_GET["keywords"];
+        }
+        $listEtudiants = (new EtudiantRepository())->search($keywords);
         self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
                                                 'cheminVueBody' => 'user/adminPanel/panel.php',
                                                 'adminPanelView' => 'user/adminPanel/etudiant/etudiantList.php',

@@ -1,8 +1,8 @@
 <div class="header">
     <h2>Liste des Etudiants</h2>
 </div>
-<?php $action="afficherListeEntrepriseEnAttenteFiltree";
-$controller="Entreprise";
+<?php $action="panelListeEtudiants";
+$controller="PanelAdmin";
 require_once __DIR__ . '/../../../utilitaire/searchBar.php';?>
 <div class="columnName">
     <div class="HBox containerDebutLine">
