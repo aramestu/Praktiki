@@ -3,6 +3,9 @@
 namespace App\SAE\Controller;
 
 use App\SAE\Config\ConfLDAP;
+use App\SAE\Lib\ConnexionEntreprise;
+use App\SAE\Lib\Ldap;
+use App\SAE\Lib\MessageFlash;
 use Exception;
 
 class ControllerLDAP extends ControllerGenerique
@@ -49,7 +52,6 @@ class ControllerLDAP extends ControllerGenerique
     }
 
 
-
     public static function disconnect(): void
     {
         ldap_close($_SESSION['ldap']);
@@ -65,5 +67,20 @@ class ControllerLDAP extends ControllerGenerique
                 'cheminVueBody' => 'user/connect.php',
             ]
         );
+    }
+
+    public static function connecter()
+    {
+        if (isset($_REQUEST["username"],$_REQUEST["password"])) {
+            if (Ldap::bind($_REQUEST["username"],$_REQUEST["password"])) {
+                ConnexionEntreprise::connecter($_REQUEST["username"]);
+                MessageFlash::ajouter("success", "Connexion réussie");
+                self::redirectionVersURL("success", "Connexion réussie", "home");
+            } else {
+                self::redirectionVersURL("warning", "Identifiant ou Mot de passe incorrect", "connect&controller=LDAP");
+            }
+        } else {
+            self::redirectionVersURL("warning", "Remplissez les champs libres", "connect&controller=LDAP");
+        }
     }
 }

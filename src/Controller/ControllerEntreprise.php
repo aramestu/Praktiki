@@ -85,18 +85,27 @@ class ControllerEntreprise extends ControllerGenerique
         return null;
     }
 
+    public static function companyHome(): void
+    {
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Accueil',
+                'cheminVueBody' => 'company/companyHome.php',
+            ]
+        );
+    }
+
     public static function connecter()
     {
-        if (isset($_REQUEST["username"]) && isset($_REQUEST["password"])) {
+        if (isset($_REQUEST["username"],$_REQUEST["password"])) {
             $user = (new EntrepriseRepository())->getById($_REQUEST["username"]);
             if (!is_null($user)) {
                 if (MotDePasse::verifier($_REQUEST["password"], $user->formatTableau()["mdpHacheTag"])) {
                     ConnexionEntreprise::connecter($_REQUEST["username"]);
                     MessageFlash::ajouter("success", "Connexion réussie");
-                    self::afficheVue("view.php", [
-                        "pagetitle" => "AccueilEntreprise",
-                        "cheminVueBody" => "company/companyHome.php",
-                    ]);
+                    self::redirectionVersURL("success", "Connexion réussie", "home");
+
                 } else {
                     self::redirectionVersURL("warning", "Mot de passe incorrect", "connect&controller=Entreprise");
                 }
@@ -113,6 +122,7 @@ class ControllerEntreprise extends ControllerGenerique
         ConnexionEntreprise::deconnecter();
         self::redirectionVersURL("success", "Déconnexion réussie", "home");
     }
+
 
     public static function creerDepuisFormulaire(): void
     {
