@@ -72,7 +72,7 @@ class ControllerLDAP extends ControllerGenerique
     public static function connecter()
     {
         if (isset($_REQUEST["username"],$_REQUEST["password"])) {
-            if (Ldap::bind($_REQUEST["username"],$_REQUEST["password"])) {
+            if (Ldap::connection($_REQUEST["username"],$_REQUEST["password"])) {
                 ConnexionEntreprise::connecter($_REQUEST["username"]);
                 MessageFlash::ajouter("success", "Connexion réussie");
                 self::redirectionVersURL("success", "Connexion réussie", "home");
