@@ -53,6 +53,11 @@ if (is_a($expPro, 'App\SAE\Model\DataObject\Stage')) { // Si c'est un stage
                    value="<?php echo htmlspecialchars($expPro->getTachesExperienceProfessionnel()); ?>">
         </p>
         <p>
+            <label for="niveau">Niveau Requis</label>
+            <input type="text" name="niveau" id="niveau" required placeholder="Niveau Requis"
+                   value="<?php echo htmlspecialchars($expPro->getNiveauExperienceProfessionnel()); ?>">
+        </p>
+        <p>
             <label for="codePostal">Code Postal</label>
             <input type="text" name="codePostal" id="codePostal" required placeholder="Code Postal" maxlength="5"
                    value="<?php echo htmlspecialchars($expPro->getCodePostalExperienceProfessionnel()); ?>">

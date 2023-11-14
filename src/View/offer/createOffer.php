@@ -41,6 +41,10 @@
                     <input type="text" name="thematique" id="thematique" required placeholder="Thématique">
                 </p>
                 <p>
+                    <label for="niveau">Niveau Requis</label>
+                    <input type="text" name="niveau" id="niveau" required placeholder="BUT2">
+                </p>
+                <p>
                     <label for="codePostal">Code Postal</label>
                     <input type="text" name="codePostal" id="codePostal" maxlength="5" required
                            placeholder="Code Postal">

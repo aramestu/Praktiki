@@ -12,6 +12,7 @@ class ExperienceProfessionnel extends AbstractDataObject
     private string $sujetExperienceProfessionnel;
     private string $thematiqueExperienceProfessionnel;
     private string $tachesExperienceProfessionnel;
+    private string $niveauExperienceProfessionnel;
     private string $codePostalExperienceProfessionnel;
     private string $adresseExperienceProfessionnel;
     private string $dateDebutExperienceProfessionnel;
@@ -27,6 +28,7 @@ class ExperienceProfessionnel extends AbstractDataObject
         string $sujet,
         string $thematique,
         string $taches,
+        string $niveau,
         string $codePostal,
         string $adresse,
         string $dateDebut,
@@ -37,6 +39,7 @@ class ExperienceProfessionnel extends AbstractDataObject
         $this->sujetExperienceProfessionnel = $sujet;
         $this->thematiqueExperienceProfessionnel = $thematique;
         $this->tachesExperienceProfessionnel = $taches;
+        $this->niveauExperienceProfessionnel = $niveau;
         $this->codePostalExperienceProfessionnel = $codePostal;
         $this->adresseExperienceProfessionnel = $adresse;
         $this->dateDebutExperienceProfessionnel = $dateDebut;
@@ -88,6 +91,17 @@ class ExperienceProfessionnel extends AbstractDataObject
     {
         $this->tachesExperienceProfessionnel = $tachesExperienceProfessionnel;
     }
+
+    public function getNiveauExperienceProfessionnel(): string
+    {
+        return $this->niveauExperienceProfessionnel;
+    }
+
+    public function setNiveauExperienceProfessionnel(string $niveauExperienceProfessionnel): void
+    {
+        $this->niveauExperienceProfessionnel = $niveauExperienceProfessionnel;
+    }
+
 
     public function getCodePostalExperienceProfessionnel(): string
     {
@@ -186,6 +200,7 @@ class ExperienceProfessionnel extends AbstractDataObject
             "sujetExperienceProfessionnelTag" => $this->sujetExperienceProfessionnel,
             "thematiqueExperienceProfessionnelTag" => $this->thematiqueExperienceProfessionnel,
             "tachesExperienceProfessionnelTag" => $this->tachesExperienceProfessionnel,
+            "niveauExperienceProfessionnelTag" => $this->niveauExperienceProfessionnel,
             "codePostalExperienceProfessionnelTag" => $this->codePostalExperienceProfessionnel,
             "adresseExperienceProfessionnelTag" => $this->adresseExperienceProfessionnel,
             "dateDebutExperienceProfessionnelTag" => $this->dateDebutExperienceProfessionnel,

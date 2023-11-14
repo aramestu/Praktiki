@@ -30,7 +30,7 @@ class AlternanceRepository extends AbstractExperienceProfessionnelRepository
     public function construireDepuisTableau(array $expProFormatTableau): ExperienceProfessionnel
     {
         $exp = new Alternance($expProFormatTableau["sujetExperienceProfessionnel"], $expProFormatTableau["thematiqueExperienceProfessionnel"],
-            $expProFormatTableau["tachesExperienceProfessionnel"], $expProFormatTableau["codePostalExperienceProfessionnel"],
+            $expProFormatTableau["tachesExperienceProfessionnel"], $expProFormatTableau["niveauExperienceProfessionnel"], $expProFormatTableau["codePostalExperienceProfessionnel"],
             $expProFormatTableau["adresseExperienceProfessionnel"], $expProFormatTableau["dateDebutExperienceProfessionnel"],
             $expProFormatTableau["dateFinExperienceProfessionnel"], $expProFormatTableau["siret"]);
         $this->updateAttribut($expProFormatTableau, $exp);
@@ -90,6 +90,7 @@ class AlternanceRepository extends AbstractExperienceProfessionnelRepository
                 AND (sujetExperienceProfessionnel LIKE :keywordsTag
                 OR thematiqueExperienceProfessionnel LIKE :keywordsTag
                 OR tachesExperienceProfessionnel LIKE :keywordsTag
+                OR niveauExperienceProfessionnel LIKE :keywordsTag
                 OR codePostalExperienceProfessionnel LIKE :keywordsTag
                 OR adresseExperienceProfessionnel LIKE :keywordsTag
                 OR e.siret LIKE :keywordsTag)

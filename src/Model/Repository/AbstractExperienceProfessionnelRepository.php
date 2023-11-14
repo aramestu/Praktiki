@@ -17,7 +17,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
     protected function getNomsColonnes(): array
     {
         return array("idExperienceProfessionnel","sujetExperienceProfessionnel", "thematiqueExperienceProfessionnel",
-            "tachesExperienceProfessionnel", "codePostalExperienceProfessionnel",
+            "tachesExperienceProfessionnel", "niveauExperienceProfessionnel", "codePostalExperienceProfessionnel",
             "adresseExperienceProfessionnel", "dateDebutExperienceProfessionnel",
             "dateFinExperienceProfessionnel", "siret", "numEtudiant", "mailEnseignant", "mailTuteurProfessionnel", "datePublication");
     }
@@ -37,7 +37,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         try {
             $pdo = Model::getPdo();
             $sql = "INSERT INTO ExperienceProfessionnel(sujetExperienceProfessionnel, thematiqueExperienceProfessionnel,
-                                                                                    tachesExperienceProfessionnel, codePostalExperienceProfessionnel,
+                                                                                    tachesExperienceProfessionnel, niveauExperienceProfessionnel,codePostalExperienceProfessionnel,
                                                                                     adresseExperienceProfessionnel, dateDebutExperienceProfessionnel, 
                                                                                     dateFinExperienceProfessionnel, siret";
             if ($e->getNumEtudiant() != "") {
@@ -53,12 +53,13 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
                 $sql = $sql . ', datePublication';
             }
             $sql = $sql . ') VALUES(:sujetExperienceProfessionnelTag, :thematiqueExperienceProfessionnelTag,
-                                                            :tachesExperienceProfessionnelTag, :codePostalExperienceProfessionnelTag,
+                                                            :tachesExperienceProfessionnelTag, :niveauExperienceProfessionnelTag, :codePostalExperienceProfessionnelTag,
                                                             :adresseExperienceProfessionnelTag, :dateDebutExperienceProfessionnelTag, 
                                                             :dateFinExperienceProfessionnelTag, :siretTag ';
             $values = array("sujetExperienceProfessionnelTag" => $e->getSujetExperienceProfessionnel(),
                 "thematiqueExperienceProfessionnelTag" => $e->getThematiqueExperienceProfessionnel(),
                 "tachesExperienceProfessionnelTag" => $e->getTachesExperienceProfessionnel(),
+                "niveauExperienceProfessionnelTag" => $e->getNiveauExperienceProfessionnel(),
                 "codePostalExperienceProfessionnelTag" => $e->getCodePostalExperienceProfessionnel(),
                 "adresseExperienceProfessionnelTag" => $e->getAdresseExperienceProfessionnel(),
                 "dateDebutExperienceProfessionnelTag" => $e->getDateDebutExperienceProfessionnel(),
@@ -226,6 +227,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
                 sujetExperienceProfessionnel= :sujetTag,
                 thematiqueExperienceProfessionnel= :thematiqueTag,
                 tachesExperienceProfessionnel= :tacheTag,
+                niveauExperienceProfessionnel= :niveauTag,
                 codePostalExperienceProfessionnel= :codePostalTag,
                 adresseExperienceProfessionnel= :adresseTag,
                 dateDebutExperienceProfessionnel= :dateDebutTag,
@@ -239,6 +241,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             "sujetTag" => $exp->getSujetExperienceProfessionnel(),
             "thematiqueTag" => $exp->getThematiqueExperienceProfessionnel(),
             "tacheTag" => $exp->getTachesExperienceProfessionnel(),
+            "niveauTag" => $exp->getNiveauExperienceProfessionnel(),
             "codePostalTag" => $exp->getCodePostalExperienceProfessionnel(),
             "adresseTag" => $exp->getAdresseExperienceProfessionnel(),
             "dateDebutTag" => $exp->getDateDebutExperienceProfessionnel(),
