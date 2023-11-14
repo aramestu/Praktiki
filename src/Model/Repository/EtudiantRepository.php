@@ -24,10 +24,16 @@ class EtudiantRepository extends AbstractRepository
         if($estSigne){
             $sql .= " WHERE c.estSigne = :estSigneTag";
             $values["estSigneTag"] = $estSigne;
+            $whereAjoutee = true;
         }
         else if($estValide){
-            $sql .= " WHERE c.estValide = :estValideTag";
+            // SI un where n'a pas été ajouté avant
+            if(! $whereAjoutee){
+                $sql .= " WHERE ";
+            }
+            $sql .= " c.estValide = :estValideTag";
             $values["estValideTag"] = $estValide;
+
         }
 
         $request = Model::getPdo()->prepare($sql);
