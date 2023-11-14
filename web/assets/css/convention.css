@@ -1,7 +1,27 @@
-label {
-    margin: 10px;
+.container {
+    text-align: left;
 }
 
-html {
-    background-color: palegoldenrod;
+.container label {
+    padding-left: 5px;
+    flex: 0 0 30%;
+    font-size: 15px;
+    margin-top: -15px;
+}
+
+.container h2 {
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.container-label-input {
+    display: flex;
+    flex: 1;
+    margin: 5px;
+    align-items: center;
+}
+
+.container-label-input h {
+    margin-top: -15px;
+    padding: 5px;
 }
