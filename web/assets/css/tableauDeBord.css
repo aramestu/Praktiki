@@ -1,0 +1,17 @@
+#recentOffers{
+    width : 69%;
+    border-left : 1px solid black;
+    height: 400px;
+}
+
+#infoEtu{
+    width : 31%;
+    position : sticky;
+    top : 0;
+    display: grid;
+    flex : 3;
+}
+
+#infoEtu p{
+    text-align: left;
+}

@@ -12,5 +12,10 @@
     <p>
         <a href="frontController.php?controller=ExpPro&action=displayConvention" class="button">Convention</a>
     </p>
-
+    <p>
+        <a href="frontController.php?controller=Main&action=displayTDBetu" class="button">tableau de bord etudiant</a>
+    </p>
+    <p>
+        <a href="frontController.php?controller=Main&action=displayTDBentreprise" class="button">tableau de bord entreprise</a>
+    </p>
 </div>

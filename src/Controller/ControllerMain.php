@@ -139,4 +139,26 @@ class ControllerMain extends ControllerGenerique
             self::home();
         }
     }
+
+    public static function displayTDBetu()
+    {
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Tableau de bord',
+                'cheminVueBody' => 'user/tableauDeBord/etudiant.php',
+            ]
+        );
+    }
+
+    public static function displayTDBentreprise()
+    {
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Tableau de bord',
+                'cheminVueBody' => 'user/tableauDeBord/entreprise.php',
+            ]
+        );
+    }
 }
