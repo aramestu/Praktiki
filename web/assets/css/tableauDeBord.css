@@ -1,6 +1,6 @@
 #recentOffers{
     width : 69%;
-    border-left : 1px solid black;
+    border-left : 2px solid var(--grey1);
     height: 400px;
 }
 

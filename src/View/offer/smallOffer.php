@@ -1,6 +1,7 @@
 <?php
 
 use App\SAE\Model\Repository\EntrepriseRepository;
+use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 ?>
 <a href="frontController.php?controller=ExpPro&action=afficherOffre&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel()) ?>"
    style="text-decoration:none">
@@ -15,7 +16,7 @@ use App\SAE\Model\Repository\EntrepriseRepository;
                         echo htmlspecialchars($expPro->getNomExperienceProfessionnel());
                     }
                     ?></p>
-                <p><?php echo $expPro->getDatePublication(); ?></p>
+                <p><?php echo (new ExperienceProfessionnelRepository())->getDatePublication($expPro) ?></p>
             </div>
             <div class="right">
                 <p>Du <?php echo htmlspecialchars($expPro->getDateDebutExperienceProfessionnel()); ?></p>

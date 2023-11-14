@@ -299,12 +299,12 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         return self::sort($alternance, $stage, "datePublication");
     }
 
-    public static function getDatePublication(string $id): string
+    public static function getDatePublication(ExperienceProfessionnel $expPro): string
     {
         $sql = "SELECT get_delay_experience(:id) AS delai_experience FROM ExperienceProfessionnel WHERE idExperienceProfessionnel = :id;";
         $pdoStatement = Model::getPdo()->prepare($sql);
         $values = array(
-            "id" => $id // Utilisez "id" au lieu de "idExperienceProfessionnel" pour correspondre aux paramètres dans la requête SQL
+            "id" => $expPro->getIdExperienceProfessionnel() // Utilisez "id" au lieu de "idExperienceProfessionnel" pour correspondre aux paramètres dans la requête SQL
         );
         $pdoStatement->execute($values);
         $result = $pdoStatement->fetch();

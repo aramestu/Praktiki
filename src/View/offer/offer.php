@@ -6,6 +6,7 @@
 
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\StageRepository;
+use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 
 /* IL Y AVAIT CELA A LA PLACE DE echo $expPro->getNomExperienceProfessionnel();
 * DONC SI CA NE FONCTIONNE PLUS, C EST PEUT ETRE A CAUSE DE CA
@@ -34,6 +35,7 @@ echo htmlspecialchars($last_element) */
     </div>
     <div id="main">
         <div id="infoOffer">
+            <p><?php echo (new ExperienceProfessionnelRepository())->getDatePublication($expPro) ?></p>
             <p class="bold">Sujet : <?= htmlspecialchars($expPro->getSujetExperienceProfessionnel()) ?></p>
             <?php
             if ($expPro->getNomExperienceProfessionnel() == "Stage") {
@@ -51,7 +53,6 @@ echo htmlspecialchars($last_element) */
 
         <div id="infoCompany">
             <ul>
-                <li>Date de création de l'offre</li>
                 <li>Effectifs : <?php echo(htmlspecialchars($entreprise->getEffectifEntreprise())); ?></li>
                 <li>Téléphone : <?php echo(htmlspecialchars($entreprise->getTelephoneEntreprise())); ?></li>
                 <li><a href="https://<?php echo(htmlspecialchars($entreprise->getSiteWebEntreprise())); ?>"
