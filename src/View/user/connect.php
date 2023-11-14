@@ -40,7 +40,25 @@
             <input type="hidden" name="controller" value="Entreprise">
             <input type="submit" value="Connexion">
         </p>';
-        }?>
+        }else if($_GET["controller"]=="Enseignant"){
+            echo '
+            <p>
+            <label for="username">Identifiant</label>
+            <input type="text" name="username" id="username" required placeholder="Identifiant:">
+            <p>
+            <label for="password">Mot de passe</label>
+            <div class="password-input">
+            <input type="password" name="password" id="password" required placeholder="mot de passe">
+            <button type="button" id="showPassword"><img id="showPasswordIconConnect" src="assets/images/eye-icon.png" alt="ShowPassword"></button>
+        </div>
+            <p>
+            <input type="hidden" name="action" value="connecter">
+            <input type="hidden" name="controller" value="Enseignant">
+            <input type="submit" value="Connexion">
+        </p>';
+
+        }
+        ?>
 
     </form>
     <?php

@@ -14,4 +14,11 @@
             <input type="submit" value="Compte Entreprise">
         </p>
     </form>
+    <form method="get">
+        <p>
+            <input type="hidden" name="action" value="connect">
+            <input type="hidden" name="controller" value="Enseignant">
+            <input type="submit" value="Compte Enseignant">
+        </p>
+    </form>
 </div>
