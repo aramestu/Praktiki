@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="assets/css/panel.css">
+<link rel="stylesheet" href="assets/css/panelAdmin.css">
 <link rel="stylesheet" href="assets/css/button.css">
 
 <p><b>Bienvenue Mr. Trombettoni</b></p>

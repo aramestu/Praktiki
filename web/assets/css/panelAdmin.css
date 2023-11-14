@@ -115,7 +115,7 @@
 .lineMailUniversitaireEtudidant{
     position: absolute;
     left: 55%;
-    width: 30%;
+    width: 29.5%;
 }
 
 .lineNumEtudiant{
@@ -126,8 +126,8 @@
 
 .line .button{
     margin: 0;
-    width: 8em;
-    padding: 8px;
+    width: 6em;
+    padding: 8px 8px 8px 5px;
     font-size: 0.9em;
 }
 

@@ -10,7 +10,7 @@ class ControllerPanelAdmin extends ControllerGenerique {
     public static function panelEtudiants(): void {
         $listEtudiants = (new EtudiantRepository())->getAll();
         self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
-                                                'cheminVueBody' => 'user/adminPanel/panel.php',
+                                                'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
                                                 'adminPanelView' => 'student/studentList.php',
                                                 'listEtudiants' => $listEtudiants]);
     }
@@ -21,7 +21,7 @@ class ControllerPanelAdmin extends ControllerGenerique {
         $effectifEntreprise = ControllerEntreprise::effectifExiste();
         $listEntreprises = (new EntrepriseRepository)->getEntrepriseEnAttenteFiltree($keywords, $codePostalEntreprise, $effectifEntreprise);
         self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
-                                                'cheminVueBody' => 'user/adminPanel/panel.php',
+                                                'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
                                                 'adminPanelView' => 'company/companyListWaiting.php',
                                                 'listEntreprises' => $listEntreprises ]);
     }
@@ -33,7 +33,7 @@ class ControllerPanelAdmin extends ControllerGenerique {
         }
         $listEntreprises = (new EntrepriseRepository)->getEntrepriseAvecEtatFiltree(null,$keywords);
         self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
-                                                'cheminVueBody' => 'user/adminPanel/panel.php',
+                                                'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
                                                 'adminPanelView' => 'user/adminPanel/entreprise/entrepriseList.php',
                                                 'listEntreprises' => $listEntreprises,
                                                 'keywords' => $keywords]);
@@ -46,7 +46,7 @@ class ControllerPanelAdmin extends ControllerGenerique {
         }
         $listEtudiants = (new EtudiantRepository())->search($keywords);
         self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
-                                                'cheminVueBody' => 'user/adminPanel/panel.php',
+                                                'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
                                                 'adminPanelView' => 'user/adminPanel/etudiant/etudiantList.php',
                                                 'listEtudiants' => $listEtudiants ]);
     }
