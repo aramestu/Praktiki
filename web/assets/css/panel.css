@@ -126,9 +126,8 @@
 
 .line .button{
     margin: 0;
-    height: 3em;
-    width: 6em;
-    padding: 0;
+    width: 8em;
+    padding: 8px;
     font-size: 0.9em;
 }
 
