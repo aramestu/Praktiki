@@ -32,7 +32,7 @@ class StageRepository extends AbstractExperienceProfessionnelRepository
     public function construireDepuisTableau(array $expProFormatTableau): ExperienceProfessionnel
     {
         $exp = new Stage($expProFormatTableau["sujetExperienceProfessionnel"], $expProFormatTableau["thematiqueExperienceProfessionnel"],
-            $expProFormatTableau["tachesExperienceProfessionnel"], $expProFormatTableau["codePostalExperienceProfessionnel"],
+            $expProFormatTableau["tachesExperienceProfessionnel"], $expProFormatTableau["niveauExperienceProfessionnel"], $expProFormatTableau["codePostalExperienceProfessionnel"],
             $expProFormatTableau["adresseExperienceProfessionnel"], $expProFormatTableau["dateDebutExperienceProfessionnel"],
             $expProFormatTableau["dateFinExperienceProfessionnel"], $expProFormatTableau["siret"], $expProFormatTableau["gratificationStage"]);
         $this->updateAttribut($expProFormatTableau, $exp);
@@ -99,6 +99,7 @@ class StageRepository extends AbstractExperienceProfessionnelRepository
                 AND (sujetExperienceProfessionnel LIKE :keywordsTag
                 OR thematiqueExperienceProfessionnel LIKE :keywordsTag
                 OR tachesExperienceProfessionnel LIKE :keywordsTag
+                OR niveauExperienceProfessionnel LIKE :keywordsTag
                 OR codePostalExperienceProfessionnel LIKE :keywordsTag
                 OR adresseExperienceProfessionnel LIKE :keywordsTag
                 OR e.siret LIKE :keywordsTag)
