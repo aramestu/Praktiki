@@ -26,7 +26,7 @@ class EtudiantRepository extends AbstractRepository
             $values["estSigneTag"] = $estSigne;
             $whereAjoutee = true;
         }
-        else if($estValide){
+        if($estValide){
             // SI un where n'a pas été ajouté avant
             if(! $whereAjoutee){
                 $sql .= " WHERE ";
