@@ -1,16 +1,17 @@
 <?php
 namespace App\SAE\Model\Repository;
 use App\SAE\Model\DataObject\AbstractDataObject;
+use App\SAE\Model\DataObject\ExperienceProfessionnel;
 use App\SAE\Model\DataObject\Stage;
 
-class ExperienceProfessionnelRepository extends AbstractRepository /* /!\ A CHANGER PLUS TARD */{
+class ExperienceProfessionnelRepository extends AbstractExperienceProfessionnelRepository {
 
     protected function getNomTable(): string
     {
         return "";
     }
 
-    protected function construireDepuisTableau(array $objetFormatTableau): AbstractDataObject
+    public function construireDepuisTableau(array $objetFormatTableau): ExperienceProfessionnel
     {
         return new Stage();
     }
@@ -23,5 +24,15 @@ class ExperienceProfessionnelRepository extends AbstractRepository /* /!\ A CHAN
     protected function getNomsColonnes(): array
     {
         return array();
+    }
+
+    protected function getNomsColonnesSupplementaires(): array
+    {
+        return array();
+    }
+
+    protected function getNomDataObject(): string
+    {
+        return "";
     }
 }
