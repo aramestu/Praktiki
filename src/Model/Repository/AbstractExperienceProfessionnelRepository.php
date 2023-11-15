@@ -320,10 +320,10 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         } elseif ($dateFin != null) {
             $sql .= "AND dateFinExperienceProfessionnel <= '$dateFin' "; // modif >= à la place de =
         }
-        if (strlen($codePostal) > 0) {
+        if ($codePostal != null) {
             $sql .= "AND codePostalExperienceProfessionnel = '$codePostal' ";
         }
-        if(strlen($keywords) > 0){
+        if($keywords != null){
             $sql .= " AND " . $this->colonneToSearch(array_merge($this->getNomsColonnes(), $this->getNomsColonnesSupplementaires()));
             $values["keywordsTag"] = $keywords;
         }
