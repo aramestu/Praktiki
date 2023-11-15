@@ -57,6 +57,8 @@ class ControllerExpPro extends ControllerGenerique
         $alternance = null;
         $codePostal = null;
         $datePublication = null;
+        $BUT2 = null;
+        $BUT3 = null;
         if (isset($_GET['dateDebut'])) {
             $dateDebut = $_GET['dateDebut'];
         }
@@ -78,7 +80,13 @@ class ControllerExpPro extends ControllerGenerique
         if (isset($_GET['datePublication'])) {
             $datePublication = $_GET['datePublication'];
         }
-        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(null, $dateDebut, $dateFin, $optionTri, $stage, $alternance, $codePostal, $datePublication);
+        if (isset($_GET['BUT2'])){
+            $BUT2 = $_GET['BUT2'];
+        }
+        if (isset($_GET['BUT3'])){
+            $BUT3 = $_GET['BUT3'];
+        }
+        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(null, $dateDebut, $dateFin, $optionTri, $stage, $alternance, $codePostal, $datePublication, $BUT2, $BUT3);
         self::afficheVue(
             'view.php',
             [

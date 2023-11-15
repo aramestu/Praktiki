@@ -42,7 +42,7 @@
                 </p>
                 <p>
                     <label for="niveau">Niveau Requis</label>
-                    <input type="text" name="niveau" id="niveau" required placeholder="BUT2">
+                    <input type="text" name="niveau" id="niveau" required placeholder="BUT2/BUT3">
                 </p>
                 <p>
                     <label for="codePostal">Code Postal</label>

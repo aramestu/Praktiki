@@ -265,10 +265,10 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
     }
 
 
-    public static function rechercheAllOffreFiltree(string $keywords = null,string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $stage = null, string $alternance = null, string $codePostal = null, string $datePublication = null) : array{
-        $tabStages = (new StageRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication);
-        $tabAlternance = (new AlternanceRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication);
-        $tabOffreNonDefini = (new OffreNonDefiniRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication);
+    public static function rechercheAllOffreFiltree(string $keywords = null,string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $stage = null, string $alternance = null, string $codePostal = null, string $datePublication = null, string $BUT2 = null, string $BUT3 = null) : array{
+        $tabStages = (new StageRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
+        $tabAlternance = (new AlternanceRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
+        $tabOffreNonDefini = (new OffreNonDefiniRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
         // Si c'est filtré par stage
         if (isset($stage)) {
             // S'il n'y a pas une option de trie
@@ -298,7 +298,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         }
     }
 
-    public function search(string $keywords = null,string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array{
+    public function search(string $keywords = null,string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null, string $BUT2 = null, string $BUT3 = null): array{
         date_default_timezone_set('Europe/Paris');
         $nomTable = $this->getNomTable();
         $nomClePrimaire = $this->getNomClePrimaire();
@@ -322,6 +322,12 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         }
         if ($codePostal != null) {
             $sql .= "AND codePostalExperienceProfessionnel = '$codePostal' ";
+        }
+        if (isset($BUT2)){
+            $sql .= "AND niveauExperienceProfessionnel = '$BUT2' ";
+        }
+        if (isset($BUT3)){
+            $sql .= "AND niveauExperienceProfessionnel = '$BUT3' ";
         }
         if($keywords != null){
             $sql .= " AND " . $this->colonneToSearch(array_merge($this->getNomsColonnes(), $this->getNomsColonnesSupplementaires()));

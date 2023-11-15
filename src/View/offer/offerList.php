@@ -37,6 +37,7 @@
             <input type="date" name="dateFin" id="dateFin">
 
 
+            <span>Type d'offre</span>
             <div class="button-checkbox stage">
                 <Label>
                     <input type="checkbox" id="stage" name="stage" value="stage">
@@ -51,9 +52,25 @@
                 </label>
             </div>
 
+            <span>Année minimum demandée</span>
+            <div class="button-checkbox stage">
+                <Label>
+                    <input type="checkbox" id="BUT2" name="BUT2" value="BUT2">
+                    <span>BUT 2</span>
+                </Label>
+            </div>
+
+            <div class="button-checkbox stage">
+                <Label>
+                    <input type="checkbox" id="BUT3" name="BUT3" value="BUT3">
+                    <span>BUT 3</span>
+                </Label>
+            </div>
 
             <label for="codePostal">Code Postal</label>
             <input type="number" id="codePostal" name="codePostal"  min="0" max="99999" placeholder="34090">
+
+
 
             <select name="optionTri" id="optionTri">
                 <option value="" disabled selected style="display:none;">Trier par</option>
