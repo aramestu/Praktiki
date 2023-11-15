@@ -329,10 +329,10 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         }
         if (isset($optionTri)) {
             if ($optionTri == "datePublication") {
-                $sql .= " ORDER BY datePublication ASC";
+                $sql .= " ORDER BY datePublication DESC";
             }
             else if ($optionTri == "datePublicationInverse") {
-                $sql .= " ORDER BY datePublication DESC";
+                $sql .= " ORDER BY datePublication ASC";
             }
             else if ($optionTri == "salaireCroissant" && $this->getNomTable() === 'Stages') {
                 $sql .= " ORDER BY gratificationStage ASC";
