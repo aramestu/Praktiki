@@ -14,7 +14,7 @@ class ControllerExpPro extends ControllerGenerique
 {
     public static function getExpProByDefault(): void
     {
-        $listeExpPro = AbstractExperienceProfessionnelRepository::search("");
+        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree("");
         self::afficheVue(
             'view.php',
             [
@@ -37,7 +37,7 @@ class ControllerExpPro extends ControllerGenerique
     public static function getExpProBySearch(): void
     {
         $keywords = urldecode($_GET['keywords']);
-        $listeExpPro = AbstractExperienceProfessionnelRepository::search($keywords);
+        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree($keywords);
         self::afficheVue(
             'view.php',
             [
@@ -78,7 +78,7 @@ class ControllerExpPro extends ControllerGenerique
         if (isset($_GET['datePublication'])) {
             $datePublication = $_GET['datePublication'];
         }
-        $listeExpPro = AbstractExperienceProfessionnelRepository::filtre($dateDebut, $dateFin, $optionTri, $stage, $alternance, $codePostal, $datePublication);
+        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(null, $dateDebut, $dateFin, $optionTri, $stage, $alternance, $codePostal, $datePublication);
         self::afficheVue(
             'view.php',
             [
