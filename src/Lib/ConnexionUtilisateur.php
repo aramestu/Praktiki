@@ -2,17 +2,16 @@
 namespace App\SAE\Lib;
 
 use App\SAE\Model\HTTP\Session;
-use App\SAE\Model\Repository\EntrepriseRepository;
 
-class ConnexionEntreprise
+class ConnexionUtilisateur
 {
-    // L'Entreprise connecté sera enregistré en session associé à la clé suivante
-    private static string $cleConnexion = "_entrepriseConnecte";
+    // L'Utilisateur connecté sera enregistré en session associé à la clé suivante
+    private static string $cleConnexion = "_utilisateurConnecte";
 
-    public static function connecter(string $loginEntreprise): void
+    public static function connecter(string $loginUtilisateur): void
     {
         $session=Session::getInstance();
-        $session->enregistrer(self::$cleConnexion,$loginEntreprise);
+        $session->enregistrer(self::$cleConnexion,$loginUtilisateur);
     }
 
     public static function estConnecte(): bool
@@ -29,7 +28,7 @@ class ConnexionEntreprise
         $session->supprimer(self::$cleConnexion);
     }
 
-    public static function getLoginEntrepriseConnecte(): ?string
+    public static function getLoginUtilisateurConnecte(): ?string
     {
         // À compléter
         if (self::estConnecte()){
@@ -38,8 +37,8 @@ class ConnexionEntreprise
         }
         return null;
     }
-    public static function estEntreprise($login): bool{
-        return (self::getLoginEntrepriseConnecte()==$login);
+    public static function estUtilisateur($login): bool{
+        return (self::getLoginUtilisateurConnecte()==$login);
     }
 
 }

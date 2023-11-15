@@ -2,12 +2,13 @@
 
 namespace App\SAE\Controller;
 
+use App\SAE\Lib\ConnexionUtilisateur;
 use App\SAE\Lib\VerificationEmail;
 use App\SAE\Lib\MessageFlash;
 use App\SAE\Lib\MotDePasse;
-use App\SAE\Lib\ConnexionEntreprise;
 use App\SAE\Model\DataObject\Entreprise;
 use App\SAE\Model\Repository\EntrepriseRepository;
+use mysql_xdevapi\Table;
 
 class ControllerEntreprise extends ControllerGenerique
 {
@@ -104,14 +105,14 @@ class ControllerEntreprise extends ControllerGenerique
             if (!is_null($user)) {
                 if (VerificationEmail::aValideEmail($user)) {
                     if (MotDePasse::verifier($_REQUEST["password"], $user->formatTableau()["mdpHacheTag"])) {
-                        ConnexionEntreprise::connecter($_REQUEST["username"]);
+                        ConnexionUtilisateur::connecter($_REQUEST["username"]);
                         MessageFlash::ajouter("success", "Connexion réussie");
                         self::redirectionVersURL("success", "Connexion réussie", "home");
 
                     } else {
                         self::redirectionVersURL("warning", "Mot de passe incorrect", "connect&controller=Entreprise");
                     }
-                }else{
+                } else {
                     self::redirectionVersURL("warning", "Email non validé", "connect&controller=Entreprise");
                 }
             } else {
@@ -124,7 +125,7 @@ class ControllerEntreprise extends ControllerGenerique
 
     public static function disconnect()
     {
-        ConnexionEntreprise::deconnecter();
+        ConnexionUtilisateur::deconnecter();
         self::redirectionVersURL("success", "Déconnexion réussie", "home");
     }
 
@@ -132,17 +133,18 @@ class ControllerEntreprise extends ControllerGenerique
     public static function creerDepuisFormulaire(): void
     {
         if (($_REQUEST["siret"]) > 0) {
-            if ($_REQUEST["postcode"] > 0) {
-                if ($_REQUEST["effectif"] > 0) {
-                    if ($_REQUEST["telephone"] > 0) {
-                        if ($_REQUEST["password"] == $_REQUEST["confirmPassword"]) {
-                            $user = Entreprise::construireDepuisFormulaire($_REQUEST);
-                            (new EntrepriseRepository())->save($user);
-                            VerificationEmail::envoiEmailValidation($user);
-                            self::redirectionVersURL("success", "Entreprise créée", "home");
-                        } else {
-                            self::redirectionVersURL("warning", "Mot de passe différent", "createAccount");
-                        }
+            if ($_REQUEST["postcode"] >= 01000 & $_REQUEST["postcode"] <= 98890) {
+                if ($_REQUEST["effectif"] > 0 & $_REQUEST["effectif"] <= 99999) {
+                    if ($_REQUEST["telephone"] >= 0600000000 & $_REQUEST["telephone"] <= 799999999) {
+                            if ($_REQUEST["password"] == $_REQUEST["confirmPassword"]) {
+                                $user = Entreprise::construireDepuisFormulaire($_REQUEST);
+                                (new EntrepriseRepository())->save($user);
+                                VerificationEmail::envoiEmailValidation($user);
+                                self::redirectionVersURL("success", "Entreprise créée", "home");
+                            } else {
+                                self::redirectionVersURL("warning", "Mot de passe différent", "createAccount");
+                            }
+
                     } else {
                         self::redirectionVersURL("warning", "Telephone incorrect", "createAccount");
                     }

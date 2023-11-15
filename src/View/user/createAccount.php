@@ -18,7 +18,7 @@
         </p>
         <p>
             <label for="postcode">Code postal</label>
-            <input type="number" min="11111" max="99999" name="postcode" id="postcode" required placeholder="34090">
+            <input type="text" name="postcode" id="postcode" required placeholder="34090">
         </p>
         <p>
             <label for="effectif">Effectif</label>
