@@ -11,7 +11,7 @@
                     <label for="typeOffre">Type d'Offre</label>
                     <select name="typeOffre" id="typeOffre" required>
                         <option disabled selected value> -- Veuillez choisir une option -- </option>
-                        <option value="stalternance" >Non définie</option>
+                        <option value="offreNonDefini" >Non définie</option>
                         <option value="stage">Stage</option>
                         <option value="alternance">Alternance</option>
                     </select>
