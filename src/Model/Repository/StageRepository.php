@@ -39,7 +39,7 @@ class StageRepository extends AbstractExperienceProfessionnelRepository
         return $exp;
     }
 
-    public static function filtres(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array
+    /*public static function filtres(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array
     {
         date_default_timezone_set('Europe/Paris');
         $pdo = Model::getPdo();
@@ -86,9 +86,9 @@ class StageRepository extends AbstractExperienceProfessionnelRepository
             $stageTriee[] = $rep->construireDepuisTableau($result);
         }
         return $stageTriee;
-    }
+    }*/
 
-    public static function search(string $keywords): array
+    /*public static function search(string $keywords): array
     {
         $sql = "SELECT *
                 FROM ExperienceProfessionnel e
@@ -119,7 +119,7 @@ class StageRepository extends AbstractExperienceProfessionnelRepository
             $AllStage[] =$rep->construireDepuisTableau($stageTab);
         }
         return $AllStage;
-    }
+    }*/
 
 
 }

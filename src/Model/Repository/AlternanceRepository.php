@@ -37,7 +37,7 @@ class AlternanceRepository extends AbstractExperienceProfessionnelRepository
         return $exp;
     }
 
-    public static function filtres(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array
+    /*public static function filtres(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array
     {
         date_default_timezone_set('Europe/Paris');
         $pdo = Model::getPdo();
@@ -77,9 +77,9 @@ class AlternanceRepository extends AbstractExperienceProfessionnelRepository
             $alternanceTriee[] = $rep->construireDepuisTableau($result);
         }
         return $alternanceTriee;
-    }
+    }*/
 
-    public static function search(string $keywords): array
+    /*public static function search(string $keywords): array
     {
         $sql = "SELECT *
                 FROM ExperienceProfessionnel e
@@ -110,5 +110,5 @@ class AlternanceRepository extends AbstractExperienceProfessionnelRepository
             $AllAlternance[] = $rep->construireDepuisTableau($alternanceTab);
         }
         return $AllAlternance;
-    }
+    }*/
 }
