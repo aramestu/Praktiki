@@ -7,13 +7,15 @@ class Enseignant extends AbstractDataObject
     private string $mailEnseignant;
     private string $nomEnseignant;
     private string $prenomEnseignant;
+    private bool $estAdmin;
 
 
-    public function __construct(string $mailEnseignant, string $nomEnseignant, string $prenomEnseignant)
+    public function __construct(string $mailEnseignant, string $nomEnseignant, string $prenomEnseignant, bool $estAdmin)
     {
         $this->mailEnseignant = $mailEnseignant;
         $this->nomEnseignant = $nomEnseignant;
         $this->prenomEnseignant = $prenomEnseignant;
+        $this->estAdmin = $estAdmin;
 
     }
 
@@ -46,6 +48,18 @@ class Enseignant extends AbstractDataObject
     {
         $this->prenomEnseignant = $prenomEnseignant;
     }
+
+    public function isEstAdmin(): bool
+    {
+        return $this->estAdmin;
+    }
+
+    public function setEstAdmin(bool $estAdmin): void
+    {
+        $this->estAdmin = $estAdmin;
+    }
+
+
 
     public function formatTableau(): array
     {

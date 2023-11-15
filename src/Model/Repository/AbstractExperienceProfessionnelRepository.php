@@ -351,6 +351,26 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         return $stageTriee;
     }
 
+    public static function offreMoins7jours()
+    {
+        // Renvoi dans un tableau les offres publiées il y a moins de 7 jours
+        $objects = array();
+        $sql = "SELECT idExperienceProfessionnel FROM ExperienceProfessionnel WHERE datePublication <= CURDATE() and datePublication >= CURDATE() - 7";
+        $pdoStatement = Model::getPdo()->prepare($sql);
+        $pdoStatement->execute();
+        $requestStatement = $pdoStatement->fetchAll();
+
+        foreach ($requestStatement as $objectFormatTableau) {
+            // Convertir la valeur en chaîne de caractères (supposons que la colonne s'appelle "nom")
+            $nomEnChaine = strval($objectFormatTableau['idExperienceProfessionnel']);
+
+            // Créer un nouvel objet avec la valeur convertie
+            $objects[] = (new StageRepository())->get($nomEnChaine);
+        }
+
+        return $objects;
+    }
+
     public static function getDatePublication(ExperienceProfessionnel $expPro): string
     {
         $sql = "SELECT get_delay_experience(:id) AS delai_experience FROM ExperienceProfessionnel WHERE idExperienceProfessionnel = :id;";

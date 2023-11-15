@@ -2,12 +2,14 @@
 
 namespace App\SAE\Controller;
 
+use App\SAE\Lib\ConnexionUtilisateur;
 use App\SAE\Model\DataObject\AnneeUniversitaire;
 use App\SAE\Model\DataObject\Departement;
 use App\SAE\Model\DataObject\Entreprise;
 use App\SAE\Model\DataObject\Etudiant;
 use App\SAE\Model\DataObject\Inscription;
 use App\SAE\Model\DataObject\TuteurProfessionnel;
+use App\SAE\Model\Repository\AbstractExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\AlternanceRepository;
 use App\SAE\Model\Repository\AnneeUniversitaireRepository;
 use App\SAE\Model\Repository\DepartementRepository;
@@ -142,10 +144,12 @@ class ControllerMain extends ControllerGenerique
 
     public static function displayTDBetu()
     {
+        $listeExpPro = AbstractExperienceProfessionnelRepository::offreMoins7jours();
         self::afficheVue(
             'view.php',
             [
                 'pagetitle' => 'Tableau de bord',
+                'listeExpPro' => $listeExpPro,
                 'cheminVueBody' => 'user/tableauDeBord/etudiant.php',
             ]
         );
@@ -153,10 +157,12 @@ class ControllerMain extends ControllerGenerique
 
     public static function displayTDBentreprise()
     {
+        $listeExpPro = AbstractExperienceProfessionnelRepository::search(ConnexionUtilisateur::getLoginUtilisateurConnecte());
         self::afficheVue(
             'view.php',
             [
                 'pagetitle' => 'Tableau de bord',
+                'listeExpPro' => $listeExpPro,
                 'cheminVueBody' => 'user/tableauDeBord/entreprise.php',
             ]
         );

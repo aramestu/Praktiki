@@ -25,6 +25,15 @@ class ControllerExpPro extends ControllerGenerique
         );
     }
 
+    public static function getExpProRecent(): void
+    {
+        $listeExpPro = AbstractExperienceProfessionnelRepository::offreMoins7jours();
+        extract($listeExpPro);
+        require __DIR__ ."/../View/offer/offerTable.php";
+    }
+
+
+
     public static function getExpProBySearch(): void
     {
         $keywords = urldecode($_GET['keywords']);

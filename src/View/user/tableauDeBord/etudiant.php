@@ -21,7 +21,7 @@
         <div class="VBox" id="recentOffers">
             <h2>Offres récentes</h2>
             <div id="tableOffer">
-                //TODO une sous vue pour les offres
+                <?php \App\SAE\Controller\ControllerExpPro::getExpProRecent(); ?>
             </div>
         </div>
     </div>

@@ -9,7 +9,7 @@ class EnseignantRepository extends AbstractRepository
 
     protected function construireDepuisTableau(array $enseignantFormatTableau): Enseignant
     {
-        $enseignant = new Enseignant($enseignantFormatTableau["mailEnseignant"], $enseignantFormatTableau["nomEnseignant"], $enseignantFormatTableau["prenomEnseignant"]);
+        $enseignant = new Enseignant($enseignantFormatTableau["mailEnseignant"], $enseignantFormatTableau["nomEnseignant"], $enseignantFormatTableau["prenomEnseignant"],$enseignantFormatTableau["estAdmin"]);
         return $enseignant;
     }
 
@@ -25,6 +25,6 @@ class EnseignantRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return array("mailEnseignant", "nomEnseignant", "prenomEnseignant");
+        return array("mailEnseignant", "nomEnseignant", "prenomEnseignant", "estAdmin");
     }
 }

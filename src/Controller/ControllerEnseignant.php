@@ -1,4 +1,5 @@
 <?php
+
 namespace App\SAE\Controller;
 
 use App\SAE\Lib\ConnexionUtilisateur;
@@ -25,15 +26,20 @@ class ControllerEnseignant extends ControllerGenerique
     }
 
 
-
     public static function connecter()
     {
         if (isset($_REQUEST["username"])) {
             $user = (new EnseignantRepository())->getById($_REQUEST["username"]);
             if (!is_null($user)) {
-                        ConnexionUtilisateur::connecter($_REQUEST["username"]);
-                        MessageFlash::ajouter("success", "Connexion réussie");
-                        self::redirectionVersURL("success", "Connexion réussie", "panelListeEtudiants&controller=PanelAdmin");
+                if ($user->isEstAdmin()) {
+                    ConnexionUtilisateur::connecter($_REQUEST["username"]);
+                    MessageFlash::ajouter("success", "Connexion réussie");
+                    self::redirectionVersURL("success", "Connexion réussie", "panelListeEtudiants&controller=PanelAdmin");
+                } else {
+                    ConnexionUtilisateur::connecter($_REQUEST["username"]);
+                    MessageFlash::ajouter("success", "Connexion réussie");
+                    self::redirectionVersURL("success", "Connexion réussie", "home");
+                }
             } else {
                 self::redirectionVersURL("warning", "Login incorrect", "connect&controller=Enseignant");
             }
@@ -41,4 +47,6 @@ class ControllerEnseignant extends ControllerGenerique
             self::redirectionVersURL("warning", "Remplissez les champs libres", "connect&controller=Enseignant");
         }
     }
+
+
 }
