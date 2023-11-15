@@ -2,7 +2,7 @@
 
 
 <div class="container">
-    <h2 class="remplaceBaliseLegend">Zone de test</h2>
+    <h2 class="remplaceBaliseLegend">Bienvenue sur "PlaceHolder: nom site"</h2>
     <p>
         <a href="frontController.php?controller=ExpPro&action=createOffer" class="button">Créer une offre</a>
     </p>
