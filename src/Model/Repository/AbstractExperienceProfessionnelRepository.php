@@ -313,12 +313,11 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             };
         }
 
-        //TODO : A revoire quand Date dans BD
-        if (strlen($dateDebut) > 0 && strlen($dateFin) > 0) {
+        if ($dateDebut != null && $dateFin != null) {
             $sql .= "AND dateDebutExperienceProfessionnel >= '$dateDebut' AND dateFinExperienceProfessionnel <= '$dateFin' ";
-        } elseif (strlen($dateDebut) > 0) {
+        } elseif ($dateDebut != null) {
             $sql .= "AND dateDebutExperienceProfessionnel >= '$dateDebut' "; // modif >= à la place de =
-        } elseif (strlen($dateFin) > 0) {
+        } elseif ($dateFin != null) {
             $sql .= "AND dateFinExperienceProfessionnel <= '$dateFin' "; // modif >= à la place de =
         }
         if (strlen($codePostal) > 0) {
