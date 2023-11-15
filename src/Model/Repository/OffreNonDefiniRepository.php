@@ -35,7 +35,7 @@ class OffreNonDefiniRepository extends  AbstractExperienceProfessionnelRepositor
         return $exp;
     }
 
-    public static function search(string $keywords): array
+    /*public static function search(string $keywords): array
     {
         $sql = "SELECT *
                 FROM ExperienceProfessionnel e
@@ -66,9 +66,9 @@ class OffreNonDefiniRepository extends  AbstractExperienceProfessionnelRepositor
             $AllOffreNonDefini[] = $rep->construireDepuisTableau($offre);
         }
         return $AllOffreNonDefini;
-    }
+    }*/
 
-    public static function filtres(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array
+    /*public static function filtres(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array
     {
         date_default_timezone_set('Europe/Paris');
         $pdo = Model::getPdo();
@@ -108,5 +108,5 @@ class OffreNonDefiniRepository extends  AbstractExperienceProfessionnelRepositor
             $offreNonDefiniTrie[] = $rep->construireDepuisTableau($result);
         }
         return $offreNonDefiniTrie;
-    }
+    }*/
 }

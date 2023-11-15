@@ -289,7 +289,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         $pdoStatement->execute($values);
     }
 
-    public static function search(string $keywords): array
+    /*public static function search(string $keywords): array
     {
         $stage = StageRepository::search($keywords);
         $alternance = AlternanceRepository::search($keywords);
@@ -297,6 +297,58 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
 
         $alternance = self::sort($alternance, $offreNonDefini, "datePublication");
         return self::sort($alternance, $stage, "datePublication");
+    }*/
+
+    public function search(string $keywords,string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array{
+        date_default_timezone_set('Europe/Paris');
+        $nomTable = $this->getNomTable();
+        $nomClePrimaire = $this->getNomClePrimaire();
+        $pdo = Model::getPdo();
+        $sql = "SELECT *
+                FROM $nomTable JOIN ExperienceProfessionnel e ON $nomTable.$nomClePrimaire = e.idExperienceProfessionnel WHERE numEtudiant IS NULL ";
+        if (isset($datePublication)) {
+            $sql .= match ($datePublication) {
+                'last24' => "AND DATEDIFF(NOW(), datePublication) < 1 ",
+                'lastWeek' => "AND DATEDIFF(NOW(), datePublication) < 7 ",
+                'lastMonth' => "AND DATEDIFF(NOW(), datePublication) < 30 ",
+            };
+        }
+
+        //TODO : A revoire quand Date dans BD
+        if (strlen($dateDebut) > 0 && strlen($dateFin) > 0) {
+            $sql .= "AND dateDebutExperienceProfessionnel >= $dateDebut AND dateFinExperienceProfessionnel <= $dateFin ";
+        } elseif (strlen($dateDebut) > 0) {
+            $sql .= "AND dateDebutExperienceProfessionnel = '$dateDebut' ";
+        } elseif (strlen($dateFin) > 0) {
+            $sql .= "AND dateFinExperienceProfessionnel = '$dateFin' ";
+        }
+        if (strlen($codePostal) > 0) {
+            $sql .= "AND codePostalExperienceProfessionnel = '$codePostal' ";
+        }
+        if(strlen($keywords) > 0){
+            $sql .= " AND " . $this->colonneToSearch(array_merge($this->getNomsColonnes(), $this->getNomsColonnesSupplementaires()));
+        }
+        if (isset($optionTri)) {
+            if ($optionTri == "datePublication") {
+                $sql .= "ORDER BY datePublication ASC";
+            }
+            else if ($optionTri == "datePublicationInverse") {
+                $sql .= "ORDER BY datePublication DESC";
+            }
+            else if ($optionTri == "salaireCroissant") {
+                $sql .= "ORDER BY gratificationStage ASC";
+            }
+            else if ($optionTri == "salaireDecroissant") {
+                $sql .= "ORDER BY gratificationStage DESC";
+            }
+        }
+
+        $requete = $pdo->query($sql);
+        $stageTriee = [];
+        foreach ($requete as $result) {
+            $stageTriee[] = $this->construireDepuisTableau($result);
+        }
+        return $stageTriee;
     }
 
     public static function getDatePublication(ExperienceProfessionnel $expPro): string
