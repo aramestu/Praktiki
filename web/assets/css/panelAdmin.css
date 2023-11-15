@@ -149,6 +149,77 @@
     background-color: var(--red);
 }
 
+/**************************************************
+***************** Management Panel ****************
+***************************************************/
+.managementPanel{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 90%;
+    height: 100%;
+}
+
+.entityInformation{
+    border: var(--grey2) solid 3px;
+    justify-content: space-between;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    max-height: 60%;
+    margin: 0;
+}
+
+#managementEntrepriseName{
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.managementActions{
+    max-height: 30%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.managementActions .button{
+    height: 20%;
+    padding-top: 0.4em;
+}
+
+.managementActions *{
+    font-size: 1vw;
+}
+
+.entityInformation > .top{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-left: 5%;
+    border-bottom: var(--grey1) solid 3px;
+}
+
+.entityInformation > .top > .state{
+    display: flex;
+    flex-direction: row;
+}
+
+.entityInformation > .top > .state *{
+    padding-right: 10px;
+}
+
+.entityInformation > .top > .state > .circle{
+    height: 1.75em;
+    width: 1.75em;
+}
+
+#managementEntrepriseValidation{
+    font-size: 1em;
+}
+
+.managementActions . button{
+
+}
+
 
 @media (max-width: 950px) {
     #panel{
@@ -202,4 +273,10 @@
         left: 55%;
         width: 20%;
     }
+
+
+    /**************************************************
+    ***************** Management Panel ****************
+    ***************************************************/
+
 }

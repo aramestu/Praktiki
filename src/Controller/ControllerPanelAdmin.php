@@ -51,4 +51,37 @@ class ControllerPanelAdmin extends ControllerGenerique {
                                                 'listEtudiants' => $listEtudiants ]);
     }
 
+    public static function panelGestionEntreprise(): void {
+        if(!isset($_GET["siret"])){
+            self::error("Entreprise non défini");
+            return;
+        }
+        $entreprise = (new EntrepriseRepository())->getById(rawurldecode($_GET["siret"]));
+        self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
+                                                'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
+                                                'adminPanelView' => 'user/adminPanel/entreprise/managementEntreprise.php',
+                                                'entreprise' => $entreprise ]);
+    }
+
+    public static function validerEntreprise(): void{
+        if(!isset($_GET["siret"])){
+            self::error("Entreprise non défini");
+            return;
+        }
+        $entreprise = (new EntrepriseRepository())->getById(rawurldecode($_GET["siret"]));
+        $entreprise->setEstValide(true);
+        (new EntrepriseRepository())->mettreAJour($entreprise);
+        self::panelGestionEntreprise();
+    }
+
+    public static function invaliderEntreprise(): void{
+        if(!isset($_GET["siret"])){
+            self::error("Entreprise non défini");
+            return;
+        }
+        $entreprise = (new EntrepriseRepository())->getById(rawurldecode($_GET["siret"]));
+        $entreprise->setEstValide(false);
+        (new EntrepriseRepository())->mettreAJour($entreprise);
+        self::panelGestionEntreprise();
+    }
 }

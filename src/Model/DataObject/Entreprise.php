@@ -151,7 +151,7 @@ class Entreprise extends AbstractDataObject {
             "effectifEntrepriseTag" => $this->effectifEntreprise,
             "telephoneEntrepriseTag" => $this->telephoneEntreprise,
             "siteWebEntrepriseTag" => $this->siteWebEntreprise,
-            "estValideTag" => $this->estValide,
+            "estValideTag" => $this->estValide? '1': '0',
             "emailEntrepriseTag" => $this->emailEntreprise,
             "mdpHacheTag" => $this->mdpHache,
             "emailAValiderTag" => $this->emailAValider,
