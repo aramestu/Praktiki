@@ -167,6 +167,7 @@
     -webkit-backdrop-filter: none;
     max-height: 60%;
     margin: 0;
+    font-size: 1vw;
 }
 
 #managementEntrepriseName{
@@ -184,7 +185,7 @@
     /*height: 20%;*/
     /*padding-top: 0.4em;*/
     margin: 10px;
-    font-size: 1.2em;
+    font-size: 1.4em;
     border-radius: 15px;
 }
 
@@ -253,7 +254,43 @@
     font-size: 1em;
 }
 
-.managementActions . button{
+#managementEntrepriseSiret{
+    font-size: 1.5em;
+}
+
+#managementEntrepriseEffectif{
+    font-size: 1.5em;
+}
+
+#managementEntrepriseCodePostal{
+    font-size: 1.5em;
+}
+
+#managementEntrepriseMail{
+    font-size: 1.5em;
+}
+
+#managementEntrepriseTelephone{
+    font-size: 1.5em;
+}
+
+.entityInformation > .down{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+.entityInformation > .down > .VBox{
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-left: 5%;
+    width: unset;
+    flex-grow: 2;
+}
+
+.entityInformation > .down > .VBox:first-child{
+    border-right: var(--grey1) solid 3px;
 
 }
 

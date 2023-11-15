@@ -84,4 +84,13 @@ class ControllerPanelAdmin extends ControllerGenerique {
         (new EntrepriseRepository())->mettreAJour($entreprise);
         self::panelGestionEntreprise();
     }
+
+    public static function supprimerEntreprise(): void{
+        if(!isset($_GET["siret"])){
+            self::error("Entreprise non défini");
+            return;
+        }
+        (new EntrepriseRepository())->supprimer(rawurldecode($_GET["siret"]));
+        self::panelListeEntreprises();
+    }
 }
