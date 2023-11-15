@@ -14,8 +14,7 @@
         <label id="managementEntrepriseMail">mail : <?=htmlspecialchars($entreprise->getEmailEntreprise())?></label>
     </div>
     <div class="managementActions">
-        <a class="button" href="frontController.php?action=validerEntreprise&controller=PanelAdmin&siret=<?=rawurlencode($entreprise->getSiret())?>">Valider</a>
-        <a class="button" href="frontController.php?action=invaliderEntreprise&controller=PanelAdmin&siret=<?=rawurlencode($entreprise->getSiret())?>">Invalider</a>
+        <a class="button" href="frontController.php?action=<?=$entreprise->getEstValide()? "invalider":"valider"?>Entreprise&controller=PanelAdmin&siret=<?=rawurlencode($entreprise->getSiret())?>"><?=$entreprise->getEstValide()? "Invalider":"Valider"?></a>
         <a class="button">Supprimer</a>
         <a class="button">Modifier</a>
     </div>
