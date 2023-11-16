@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="assets/css/mainIUT.css">
 
 <div class="container">
-    <h2 class="remplaceBaliseLegend">Bienvenue sur Prakniti</h2>
+    <h2 class="remplaceBaliseLegend">Bienvenue sur Praktiki</h2>
 </div>
 <div class="container">
     <h2 class="remplaceBaliseLegend">Les stages BUT2 et BUT3 en France</h2>
@@ -31,7 +31,9 @@
     <p>Utilisez une adresse email incluant votre nom</p>
     <p>Soyez réactif dans vos échanges email</p>
     <br>
+    <br>
     <h3>Rémunération</h3>
+    <br>
     <p>La gratification est <b>obligatoire</b> au delà de 2 mois de stage (soit l&#8217;équivalent de 44 jours à 7 heures par jour ou soit à partir de la 309e heure de stage même s&#8217;il est effectué de façon non continue).</p>
     <p>Le <b>montant minimum</b> légal de gratification est de<b> 4,35 euros*</b> par heure de stage.  *( modification 1er Janvier 2024)</p>
     <p>Vous trouverez des informations supplémentaires sur vos droits et devoirs en tant que stagiaire <a href="https://www.service-public.fr/particuliers/vosdroits/F16734">ici</a>, ainsi qu&#8217;un simulateur de votre rémunération en cliquant <a href="https://www.service-public.fr/particuliers/vosdroits/F32131#:~:text=Montant%20minimum,%E2%82%AC%20x%200%2C15)." target="_blank" rel="noopener noreferrer">ici</a>.</p>
@@ -39,6 +41,7 @@
 
 <div class="container">
     <h2 class="remplaceBaliseLegend">Les Alternances</h2>
+    <br>
     <p>Vous pouvez réaliser votre BUT en alternance dès la seconde année.</p>
     <p>Votre alternance peut débuter :</p>
     <p>au semestre 3: mais le peu de temps passé en entreprise ce semestre ne rend pas cette date très prisée par les entreprises. Vous pouvez qd même tenter votre chance ;-)</p>
@@ -48,10 +51,13 @@
     <p>(*) Etre alternant ne vous fera rater aucun cours. Vous serez uniquement dispensés de certaines SAE.</p>
     <br>
     <h3>Documents utiles</h3>
+    <br>
     <a href="https://drive.google.com/drive/folders/1C6qphFXaaBHH4DKaqqywgEstMovD3xNt">Les calendriers de l&#8217;alternance en BUT2 et BUT3</a><br>
     <a href="https://drive.google.com/file/d/1wphXCq6cAdcwhwTAiDW8v20xWQOAEDAJ/view?usp=share_link">Le livret de l&#8217;alternant</a><br>
     <a href="https://drive.google.com/file/d/1oUkhEWFKWemTAbnEX7fRGmZN23C3Ve1F/view?usp=sharing">Le programme nationnal BUT Info (tous parcours confondus)</a><br>
+    <br>
     <h3>Rémunération</h3>
+    <br>
     <p>La rémunération minimale réglementaire d’un apprenti·e est basée sur trois critères :</p>
     <ul>
         <li>Le critère principal est celui de l’<strong>année contractuelle</strong> &#8211; année d’exécution du contrat ;</li>
@@ -59,6 +65,7 @@
         <li>Son <strong>évolution dans le cycle de formation suivie</strong> : en principe, d’une durée désormais de 6 mois à 3 ans maximum.</li>
     </ul>
     <p>La rémunération dépend des dispositions conventionnelles de l’entreprise, à défaut, c’est le salaire minimum de croissance en vigueur (SMIC).</p>
+    <br>
     <table id="tableRemuneration">
         <tbody>
         <tr>
@@ -93,7 +100,7 @@
         </tr>
         </tbody>
     </table>
-
+    <br>
     <div class="thumbnail">En mai 2023, montant du SMIC BRUT mensuel: 1 747,2 € <span class="legend-top">Les montants indiqués correspondent au salaire brut</span></div>
     <p>Exonéré de charges sociales jusqu&#8217;à 79% du SMIC (donc pour tous les moins de 26 ans).</p>
     <p><em>◊ Source : article D6222-26 du Code du travail</em></p>
