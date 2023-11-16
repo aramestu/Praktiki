@@ -358,21 +358,37 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         return $stageTriee;
     }
 
-    public static function offreMoins7jours()
+    public static function offreMoins7jours(): array
     {
         // Renvoi dans un tableau les offres publiées il y a moins de 7 jours
         $objects = array();
-        $sql = "SELECT idExperienceProfessionnel FROM ExperienceProfessionnel WHERE DATEDIFF(NOW(), datePublication) < 7";
+        $sql = "SELECT idExperienceProfessionnel FROM ExperienceProfessionnel WHERE datePublication <= CURDATE() and datePublication >= CURDATE()-7";
         $pdoStatement = Model::getPdo()->prepare($sql);
         $pdoStatement->execute();
         $requestStatement = $pdoStatement->fetchAll();
-
         foreach ($requestStatement as $objectFormatTableau) {
-            // Convertir la valeur en chaîne de caractères (supposons que la colonne s'appelle "idExperienceProfessionnel")
-            $idEnChaine = strval($objectFormatTableau['idExperienceProfessionnel']);
+            // Convertir la valeur en chaîne de caractères (supposons que la colonne s'appelle "nom")
+            $nomEnChaine = strval($objectFormatTableau['idExperienceProfessionnel']);
 
             // Créer un nouvel objet avec la valeur convertie
-            $objects[] = (new StageRepository())->get($idEnChaine);
+            $objects[] = (new StageRepository())->get($nomEnChaine);
+
+        }
+        foreach ($requestStatement as $objectFormatTableau) {
+            // Convertir la valeur en chaîne de caractères (supposons que la colonne s'appelle "nom")
+            $nomEnChaine = strval($objectFormatTableau['idExperienceProfessionnel']);
+
+            // Créer un nouvel objet avec la valeur convertie
+            $objects[] = (new AlternanceRepository())->get($nomEnChaine);
+        }
+        foreach ($requestStatement as $objectFormatTableau) {
+            // Convertir la valeur en chaîne de caractères (supposons que la colonne s'appelle "nom")
+            $nomEnChaine = strval($objectFormatTableau['idExperienceProfessionnel']);
+
+            // Créer un nouvel objet avec la valeur convertie
+            $objects[] = (new OffreNonDefiniRepository())->get($nomEnChaine);
+
+
         }
 
         return $objects;

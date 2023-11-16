@@ -30,7 +30,6 @@ class ConnexionUtilisateur
 
     public static function getLoginUtilisateurConnecte(): ?string
     {
-        // À compléter
         if (self::estConnecte()){
             $session=Session::getInstance();
             return $session->lire(self::$cleConnexion);

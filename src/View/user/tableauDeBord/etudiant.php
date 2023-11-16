@@ -1,11 +1,18 @@
 <link rel="stylesheet" href="assets/css/tableauDeBord.css">
 <link rel="stylesheet" href="assets/css/button.css">
+<link rel="stylesheet" href="assets/css/offer.css">
+<link rel="stylesheet" href="assets/css/filter.css">
+<script src="assets/javascript/buildOfferTable.js"></script>
+<?php
+
+?>
+
 
 <div class="container">
     <div class="HBox">
         <div class="VBox" id="infoEtu">
-            <h2>Informations personnelles</h2>
-            <p>Binvenue Stéphane Plazza</p>
+            <h2>Informations personnelles:</h2>
+            <p>Binvenue</p>
             <p>Numéro étudiant : 123456789</p>
             <p>Adresse : 123 rue de la paix</p>
             <p>Code postal : 34000</p>

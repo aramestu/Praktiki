@@ -107,7 +107,7 @@ class ControllerEntreprise extends ControllerGenerique
                     if (MotDePasse::verifier($_REQUEST["password"], $user->formatTableau()["mdpHacheTag"])) {
                         ConnexionUtilisateur::connecter($_REQUEST["username"]);
                         MessageFlash::ajouter("success", "Connexion réussie");
-                        self::redirectionVersURL("success", "Connexion réussie", "home");
+                        self::redirectionVersURL("success", "Connexion réussie", "controller=Main&action=displayTDBentreprise");
 
                     } else {
                         self::redirectionVersURL("warning", "Mot de passe incorrect", "connect&controller=Entreprise");

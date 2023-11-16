@@ -2,7 +2,9 @@
 
 namespace App\SAE\Controller;
 
+use App\SAE\Config\ConfLDAP;
 use App\SAE\Lib\ConnexionUtilisateur;
+use App\SAE\Lib\Ldap;
 use App\SAE\Model\DataObject\AnneeUniversitaire;
 use App\SAE\Model\DataObject\Departement;
 use App\SAE\Model\DataObject\Entreprise;
@@ -142,6 +144,9 @@ class ControllerMain extends ControllerGenerique
         }
     }
 
+    /**
+     * @throws \Exception
+     */
     public static function displayTDBetu()
     {
         $listeExpPro = AbstractExperienceProfessionnelRepository::offreMoins7jours();
@@ -157,7 +162,7 @@ class ControllerMain extends ControllerGenerique
 
     public static function displayTDBentreprise()
     {
-        $listeExpPro = AbstractExperienceProfessionnelRepository::search(ConnexionUtilisateur::getLoginUtilisateurConnecte());
+        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(ConnexionUtilisateur::getLoginUtilisateurConnecte());
         self::afficheVue(
             'view.php',
             [

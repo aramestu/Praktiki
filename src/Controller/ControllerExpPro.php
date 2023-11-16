@@ -2,6 +2,7 @@
 
 namespace App\SAE\Controller;
 
+use App\SAE\Lib\ConnexionUtilisateur;
 use App\SAE\Model\Repository\AbstractExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\AlternanceRepository;
 use App\SAE\Model\Repository\Model;
@@ -28,6 +29,13 @@ class ControllerExpPro extends ControllerGenerique
     public static function getExpProRecent(): void
     {
         $listeExpPro = AbstractExperienceProfessionnelRepository::offreMoins7jours();
+        extract($listeExpPro);
+        require __DIR__ ."/../View/offer/offerTable.php";
+    }
+
+    public static function getExpProEntreprise(): void
+    {
+        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(ConnexionUtilisateur::getLoginUtilisateurConnecte());
         extract($listeExpPro);
         require __DIR__ ."/../View/offer/offerTable.php";
     }
