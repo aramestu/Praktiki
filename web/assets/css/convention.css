@@ -1,16 +1,16 @@
-.container {
+.containerConvention {
     text-align: left;
     width: 100%;
 }
 
-.container label {
+.containerConvention label {
     padding-left: 5px;
     flex: 0 0 30%;
     font-size: 15px;
     margin-top: -15px;
 }
 
-.container h2 {
+.containerConvention h2 {
     text-align: center;
     padding-bottom: 15px;
 }

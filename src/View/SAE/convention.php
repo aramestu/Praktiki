@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="assets/css/button.css">
 
 <form method="post" action="home.php">
-    <div class="container">
+    <div class="containerConvention">
         <h2>Etudiant : </h2>
         <div class="container-label-input">
             <label for="nomEtudiant">Nom de l'étudiant :</label>
@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="containerConvention">
         <h2>Stage et entreprise : </h2>
         <div class="container-label-input">
             <label for="typeStage">Type du stage :</label>
@@ -133,7 +133,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="containerConvention">
         <h2>Etablissement : </h2>
         <div class="container-label-input">
             <label for="nomEnseignant">Nom de l'enseignant référant :</label>
