@@ -566,6 +566,10 @@ legend{
     border: 1px solid;
     width: 349px;
 }
+
+.jusitfyTexte{
+    text-align: justify;
+}
 /*---END MISCELLANEOUS---*/
 
 
