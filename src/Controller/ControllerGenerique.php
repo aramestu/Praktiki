@@ -36,6 +36,10 @@ abstract class ControllerGenerique
         );
     }
 
+    public static function zoneDetest(): void{
+        self::afficheVue('view.php', ['pagetitle' => 'Zone de test', 'cheminVueBody' => 'SAE/zoneDeTest.php']);
+    }
+
     // nomData ex: Alternance / Stage / TuteurProfessionnel
     protected static function getBySearch(string $nomData, string $keywords): void
     {

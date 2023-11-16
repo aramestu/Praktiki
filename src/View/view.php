@@ -7,6 +7,7 @@
 
     <link id="theme" rel="stylesheet" type="text/css" href="assets/css/mainIUT.css">
     <link rel="stylesheet" href="assets/css/charte-graphique-UM.css">
+    <link rel="stylesheet" href="assets/css/button.css">
 
     <script src="assets/javascript/navbar.js"></script>
 </head>
@@ -16,7 +17,7 @@
 
 <header>
 
-    <img id="logoToggle" class="logo" src="assets/images/LOGO_UM_filet-blanc.png" alt="LogoUM">
+    <a href="frontController.php?action=zoneDetest"><img id="logoToggle" class="logo" src="assets/images/LOGO_UM_filet-blanc.png" alt="LogoUM"></a>
 
     <div class="burger">
         <span></span>
