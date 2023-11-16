@@ -2,6 +2,7 @@
 
 namespace App\SAE\Controller;
 
+use App\SAE\Model\Repository\ConventionRepository;
 use App\SAE\Model\Repository\EnseignantRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
@@ -22,9 +23,10 @@ class ControllerConvention extends ControllerGenerique
 
 
     public static function afficherFormulaire(): void{
-        $idStage = $_GET["idStage"];
+        $idConvention = $_GET["idConvention"];
 
-        $stage = (new StageRepository())->get($idStage);
+        $convention = (new ConventionRepository())->getById($idConvention);
+        $stage = (new StageRepository())->get($convention->getIdStage());
         $entreprise = (new EntrepriseRepository())->getById($stage->getSiret());
         $etudiant = (new EtudiantRepository())->getById($stage->getNumEtudiant());
         $tuteur = (new TuteurProfessionnelRepository())->getById($stage->getMailTuteurProfessionnel());
@@ -35,6 +37,7 @@ class ControllerConvention extends ControllerGenerique
             [
                 'pagetitle' => 'Convention',
                 'cheminVueBody' => 'SAE/convention.php',
+                'convention' => $convention,
                 'stage' => $stage,
                 'entreprise' => $entreprise,
                 'etudiant' => $etudiant,

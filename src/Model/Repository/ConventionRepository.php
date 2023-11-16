@@ -14,11 +14,10 @@ class ConventionRepository extends AbstractRepository {
 
     protected function construireDepuisTableau(array $conventionFormatTableau): Convention
     {
-        $convention = new Convention($conventionFormatTableau["idConvention"], $conventionFormatTableau["idStage"], $conventionFormatTableau["competencesADevelopper"],
+        return new Convention($conventionFormatTableau["idConvention"], $conventionFormatTableau["idStage"], $conventionFormatTableau["competencesADevelopper"],
         $conventionFormatTableau["dureeDeTravail"], $conventionFormatTableau["languesImpression"], $conventionFormatTableau["origineDeLaConvention"], $conventionFormatTableau["sujetEstConfidentiel"],
         $conventionFormatTableau["nbHeuresHebdo"], $conventionFormatTableau["modePaiement"], $conventionFormatTableau["dureeExperienceProfessionnel"], $conventionFormatTableau["caisseAssuranceMaladie"],
         $conventionFormatTableau["estSignee"], $conventionFormatTableau["estValidee"]);
-        return $convention;
     }
 
     protected function getNomClePrimaire(): string
