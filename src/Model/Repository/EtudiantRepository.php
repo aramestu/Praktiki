@@ -47,6 +47,27 @@ class EtudiantRepository extends AbstractRepository
         return $objects;
     }
 
+    public function conventionEtudiantEstValide(Etudiant $etudiant): ?bool{
+        $sql = "SELECT estValidee FROM Etudiants etu
+                JOIN ExperienceProfessionnel exp ON etu.numEtudiant=exp.numEtudiant
+                JOIN Stages s ON s.idStage=exp.idExperienceProfessionnel
+                JOIN Conventions c ON c.idStage = s.idStage
+                WHERE etu.numEtudiant = :numEtudiantTag";
+        $request = Model::getPdo()->prepare($sql);
+        $values = array(
+            "numEtudiantTag" => $etudiant->getNumEtudiant()
+        );
+        $request->execute($values);
+        $result = $request->fetch();
+        if(!$result){
+            return null;
+        }elseif($result["estValidee"] == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public static function inscrire(string $numEtudiant, string $nomDepartement, string $nomAnneeUniversitaire): bool
     {
         try {

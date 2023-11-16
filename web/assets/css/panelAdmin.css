@@ -59,6 +59,12 @@
     -10px -10px 10px #F1C40F25;
 }
 
+#placeholder .redHover:hover{
+    border-color: var(--red);
+    box-shadow : 10px 10px 10px #00000025,
+    -10px -10px 10px #F1C40F25;
+}
+
 .columnName{
     margin-top: 10px;
     border: none;
