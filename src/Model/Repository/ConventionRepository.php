@@ -34,14 +34,14 @@ class ConventionRepository extends AbstractRepository {
     public function save(AbstractDataObject|Convention $convention): bool
     {
         try {
-            if ($this->getById($convention->getIdConvention()) == null) {
-                $pdo = Model::getPdo();
-                $sql = "INSERT INTO Conventions (CompetencesADevelopper) VALUES (NULL)";
-                $requestStatement = $pdo->prepare($sql);
-                $requestStatement->execute();
-                return true;
-            }
-            return false;
+            $pdo = Model::getPdo();
+            $sql = "INSERT INTO Conventions (idStage) VALUES (:idStageTag)";
+            $requestStatement = $pdo->prepare($sql);
+            $values = array(
+                "idStageTag" => $convention->getIdStage()
+            );
+            $requestStatement->execute($values);
+            return true;
         } catch (\PDOException $e) {
             return false;
         }
