@@ -559,6 +559,13 @@ legend{
 #remplaceBaliseLegend{
     font-size: 25px;
 }
+
+#tableRemuneration{
+    margin: 0 auto;
+    height: 173px;
+    border: 1px solid;
+    width: 349px;
+}
 /*---END MISCELLANEOUS---*/
 
 
