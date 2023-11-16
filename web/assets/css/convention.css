@@ -1,15 +1,26 @@
-.container {
+.containerConvention {
     text-align: left;
+    width: 100%;
+    color: var(--darkBlue2);
+    font-size: 12px;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+    padding: 2%;
+    margin: 1.5%;
+    border-radius: 1.5rem;
+    box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1), 0 4px 16px rgba(31, 38, 135, 0.1);
+    z-index: 1;
 }
 
-.container label {
+.containerConvention label {
     padding-left: 5px;
     flex: 0 0 30%;
     font-size: 15px;
     margin-top: -15px;
 }
 
-.container h2 {
+.containerConvention h2 {
     text-align: center;
     padding-bottom: 15px;
 }
@@ -24,4 +35,14 @@
 .container-label-input h {
     margin-top: -15px;
     padding: 5px;
+}
+
+form {
+    width: 80%;
+    justify-content: center;
+    margin-left: -30px;
+}
+
+#confidentialite {
+    margin-top: -15px;
 }
