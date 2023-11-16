@@ -2,6 +2,8 @@
 
 namespace App\SAE\Controller;
 
+use App\SAE\Lib\MessageFlash;
+use App\SAE\Model\DataObject\Etudiant;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
 
@@ -107,7 +109,6 @@ class ControllerPanelAdmin extends ControllerGenerique {
     }
 
     public static function modifierEntreprise(): void{
-        var_dump($_POST);
         if(!isset($_POST["siret"])){
             self::error("siret non défini");
             return;
@@ -141,4 +142,78 @@ class ControllerPanelAdmin extends ControllerGenerique {
         (new EntrepriseRepository())->mettreAJour($entreprise);
         self::panelGestionEntreprise();
     }
+
+    public static function panelGestionEtudiant(): void {
+        if(!isset($_GET["numEtudiant"])){
+            self::error("Etudiant non défini");
+            return;
+        }
+        $etudiant = (new EtudiantRepository())->getById(rawurldecode($_GET["numEtudiant"]));
+        self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
+                                                                'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
+                                                                'adminPanelView' => 'user/adminPanel/etudiant/managementEtudiant.php',
+                                                                'etudiant' => $etudiant ]);
+    }
+
+    public static function supprimerEtudiant(): void{
+        if(!isset($_GET["numEtudiant"])){
+            self::error("Etudiant non défini");
+            return;
+        }
+        (new EtudiantRepository())->supprimer(rawurldecode($_GET["numEtudiant"]));
+        self::panelListeEtudiants();
+    }
+
+    public static function panelModificationEtudiant(): void{
+        if(!isset($_GET["numEtudiant"])){
+            self::error("Etudiant non défini");
+            return;
+        }
+        $etudiant = (new EtudiantRepository())->getById(rawurldecode($_GET["numEtudiant"]));
+        self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
+                                                                'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
+                                                                'adminPanelView' => 'user/adminPanel/etudiant/modificationEtudiant.php',
+                                                                'etudiant' => $etudiant ]);
+    }
+
+    public static function modifierEtudiant(): void{
+        if(!isset($_POST["numEtudiant"])){
+            self::error("siret non défini");
+            return;
+        }
+        if(!isset($_POST["nom"])){
+            self::error("nom non défini");
+            return;
+        }
+        if(!isset($_POST["prenom"])){
+            self::error("prenom non défini");
+            return;
+        }
+        if(!isset($_POST["telephone"])){
+            self::error("telephone non défini");
+            return;
+        }
+        if(!isset($_POST["mailUniv"])){
+            self::error("mail Univ non défini");
+            return;
+        }
+        if(!isset($_POST["mailPerso"])){
+            self::error("mail Perso non défini");
+            return;
+        }
+        if(!isset($_POST["codePostal"])){
+            self::error("code postal non défini");
+            return;
+        }
+        $etudiant = (new EtudiantRepository())->getById($_POST["numEtudiant"]);
+        $etudiant->setNomEtudiant($_POST["nom"]);
+        $etudiant->setNomEtudiant($_POST["prenom"]);
+        $etudiant->setTelephoneEtudiant($_POST["telephone"]);
+        $etudiant->setMailUniversitaireEtudiant($_POST["mailUniv"]);
+        $etudiant->setMailPersoEtudiant($_POST["mailPerso"]);
+        $etudiant->setCodePostalEtudiant($_POST["codePostal"]);
+        (new EtudiantRepository())->mettreAJour($etudiant);
+        self::panelGestionEtudiant();
+    }
+
 }

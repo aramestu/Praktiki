@@ -1,1 +1,66 @@
+<?php
+use App\SAE\Model\Repository\EtudiantRepository;
+$conventionValidee = (new EtudiantRepository())->conventionEtudiantEstValide($etudiant);
+$etudiantAStage = (new EtudiantRepository())->etudiantAStage($etudiant);
+$etudiantAAlternance = (new EtudiantRepository())->etudiantAAlternance($etudiant);
+?>
+
+<div class="managementPanel">
+    <div class="container VBox entityInformation">
+        <div class="top">
+            <label id="managementEtudiantName"><?=htmlspecialchars(strtoupper($etudiant->getNomEtudiant()) . " " .$etudiant->getPrenomEtudiant())?></label>
+            <div class="state">
+                <label id="managementEtudiantState"><?php
+                                                        if(($conventionValidee && $etudiantAStage) || $etudiantAAlternance){
+                                                            echo "Procédure finalisée";
+                                                        }elseif ($etudiantAStage){
+                                                            echo "En attente de convention";
+                                                        }else{
+                                                            echo "En recherche";
+                                                        }
+                                                    ?></label>
+                <div class="circle <?php
+                                        if(($conventionValidee && $etudiantAStage) || $etudiantAAlternance){
+                                            echo "greenColor";
+                                        }elseif ($etudiantAStage){
+                                            echo "yellowColor";
+                                        }else{
+                                            echo "redColor";
+                                        }
+                                    ?>"></div>
+            </div>
+        </div>
+        <div class="down">
+            <div class="VBox">
+                <div id="managementEtudiantNumEtudiant">
+                    <label >Num Etudiant :</label>
+                    <label><?=htmlspecialchars($etudiant->getNumEtudiant())?></label>
+                </div>
+                <div id="managementEtudiantTelephone">
+                    <label>Téléphone :</label>
+                    <label><?=htmlspecialchars($etudiant->getTelephoneEtudiant())?></label>
+                </div>
+                <div id="managementEtudiantCodePostal">
+                    <label>Code Postal :</label>
+                    <label><?=htmlspecialchars($etudiant->getCodePostalEtudiant())?></label>
+                </div>
+
+            </div>
+            <div class="VBox">
+                <div id="managementEtudiantMailUniv">
+                    <label>Mail Univ :</label>
+                    <label><a class="link" href="mailto:<?=$etudiant->getMailUniversitaireEtudiant()?>"><?=htmlspecialchars($etudiant->getMailUniversitaireEtudiant())?></a></label>
+                </div>
+                <div id="managementEtudiantMailPerso">
+                    <label>Mail Perso :</label>
+                    <label><a class="link" href="mailto:<?=$etudiant->getMailPersoEtudiant()?>"><?=htmlspecialchars($etudiant->getMailPersoEtudiant())?></a></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="managementActions">
+        <a class="button" id="suppression" href="frontController.php?action=supprimerEtudiant&controller=PanelAdmin&numEtudiant=<?=rawurlencode($etudiant->getNumEtudiant())?>">Supprimer</a>
+        <a class="button" id="modification" href="frontController.php?action=panelModificationEtudiant&controller=PanelAdmin&numEtudiant=<?=rawurlencode($etudiant->getNumEtudiant())?>">Modifier</a>
+    </div>
+</div>
 
