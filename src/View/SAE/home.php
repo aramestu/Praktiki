@@ -100,8 +100,6 @@
         </tbody>
     </table>
     <br>
-    <div class="thumbnail">En mai 2023, montant du SMIC BRUT mensuel: 1 747,2 € <span class="legend-top">Les montants indiqués correspondent au salaire brut</span></div>
+    <p>En mai 2023, montant du SMIC BRUT mensuel: 1 747,2 € Les montants indiqués correspondent au salaire brut</p>
     <p>Exonéré de charges sociales jusqu&#8217;à 79% du SMIC (donc pour tous les moins de 26 ans).</p>
     <p><em>◊ Source : article D6222-26 du Code du travail</em></p>
-    <p>&nbsp;</p>
-</div>
