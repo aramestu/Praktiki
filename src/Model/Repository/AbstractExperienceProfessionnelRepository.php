@@ -4,6 +4,7 @@ namespace App\SAE\Model\Repository;
 
 use App\SAE\Model\DataObject\AbstractDataObject;
 use App\SAE\Model\DataObject\Alternance;
+use App\SAE\Model\DataObject\Convention;
 use App\SAE\Model\DataObject\ExperienceProfessionnel;
 use App\SAE\Model\DataObject\Stage;
 use App\SAE\Model\Repository\Model;
@@ -87,7 +88,8 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             $requestStatement->execute($values);
 
             $formatTab = $e->formatTableau(); // Pour récupérer les colonnes
-            $formatTab[$this->getNomClePrimaire() . "Tag"] = $pdo->lastInsertId(); // Pour ajouter la bonne clé primaire aux colonnes
+            $lastInsert = $pdo->lastInsertId();
+            $formatTab[$this->getNomClePrimaire() . "Tag"] = $lastInsert; // Pour ajouter la bonne clé primaire aux colonnes
             $sql = "INSERT INTO " . $this->getNomTable() . " VALUES(";
             $colonne = $this->getNomsColonnesSupplementaires(); // Colonnes supplémentaires déjà dans formatTableau
             $value = array();
@@ -100,6 +102,9 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             }
             $sql = $sql . ")";
             $pdo->prepare($sql)->execute($value);
+
+            (new ConventionRepository())->save(new Convention($lastInsert, "", "", "", "", "", "", "", "", "", "", ""));
+
             return true;
         } catch (\PDOException $e) {
             return false;
