@@ -52,15 +52,51 @@
     margin-bottom: 40px;
 }
 
+
+/*---START SEARCH BAR---*/
+
+#searchBarParent{
+    width:100%;
+    margin-right: 0;
+}
+
+form #search-button{
+    top: 30px;
+    right: 65px;
+}
+
+#title{
+    white-space: nowrap;
+    font-size: 1.8em;
+    margin-left: 10px;
+}
+
+form #search-bar{
+    width: 55%;
+    margin-right: 0;
+}
+
+#searchBarParent form{
+    display: flex;
+    justify-content: flex-end;
+}
+
+/*---END SEARCH BAR---*/
+
 #placeholder{
     display: flex;
     flex-direction: column;
     justify-content: stretch;
     align-items: center;
-    height: 80vh;
+    height: 85vh;
+    width: 89%;
+    margin-left: 15%;
+    margin-right: -4%;
+    margin-top: 0;
     overflow: auto;
     padding-top: 10px;
     border : rgba(0,0,0,0.005) solid 10px;
+    overflow-x: hidden;
 }
 
 #placeholder > .VBox{
@@ -73,18 +109,58 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 2em;
-    width: 90%;
+    height: 0.5vh;
+    width: 96%;
+    margin: 0;
     box-sizing: unset;
     position: relative;
-    border: var(--grey2) solid 3px;
+    border: rgba(0,0,0,0) solid 3px;
     transition: all 0.3s ease-in-out;
 }
 
 .line{
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
+
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
 }
+
+#placeholder .line:nth-child(odd){
+    background: rgba(0, 0, 0, 0.1);
+}
+#placeholder .line:nth-child(even){
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.columnName{
+    background: var(--grey0);
+    margin-top: 10px;
+    border: none;
+    font-weight: bold;
+    width: 99%;
+    padding: 9px;
+    height: 30px;
+    border-radius: 1rem 1rem 0 0;
+    border-bottom: var(--grey1) solid 3px;
+}
+
+.line:hover .button{
+    opacity: 1;
+}
+
+.line .button{
+    background: rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    margin: 0;
+    width: 6em;
+    padding: 8px 8px 8px 5px;
+    font-size: 0.9em;
+    transition: all 0.3s ease-in-out;
+}
+
 
 #placeholder .greenHover:hover{
     border-color: var(--green);
@@ -104,23 +180,18 @@
     -10px -10px 10px #E74C3C25;
 }
 
-.columnName{
-    margin-top: 10px;
-    border: none;
-    font-weight: bold;
-    width: 92%;
-}
-
 #placeholder .line:hover{
     cursor: pointer;
-    transform: scale(1.01);
 }
 
 .HBox.containerDebutLine{
     justify-content: flex-start;
     align-items: center;
-    margin: 0;
     width: 35%;
+}
+
+#columnFirst{
+    margin : 0 0 0 10px;
 }
 
 #placeholder .HBox *{
@@ -167,13 +238,6 @@
     position: absolute;
     width: 15%;
     left: 35%;
-}
-
-.line .button{
-    margin: 0;
-    width: 6em;
-    padding: 8px 8px 8px 5px;
-    font-size: 0.9em;
 }
 
 .circle {

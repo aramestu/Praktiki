@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="assets/css/offer.css">
 <link rel="stylesheet" href="assets/css/filter.css">
 <script src="assets/javascript/buildOfferTable.js"></script>
-<div class="container">
+<div id="searchBarParent">
 
     <form method="get" action="frontController.php">
 

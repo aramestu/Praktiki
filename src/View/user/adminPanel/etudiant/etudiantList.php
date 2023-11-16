@@ -1,11 +1,12 @@
-<div class="header">
-    <h2>Liste des Etudiants</h2>
+<div class="HBox">
+    <h2 id="title">Liste des Etudiants</h2>
+    <?php $action="panelListeEtudiants";
+    $controller="PanelAdmin";
+    require_once __DIR__ . '/../../../utilitaire/searchBar.php';?>
 </div>
-<?php $action="panelListeEtudiants";
-$controller="PanelAdmin";
-require_once __DIR__ . '/../../../utilitaire/searchBar.php';?>
+
 <div class="columnName">
-    <div class="HBox containerDebutLine">
+    <div id="columnFirst" class="HBox containerDebutLine">
         <label>Etat</label>
         <label class="lineNomPrenomEtudiant">NOM Prénom</label>
     </div>
