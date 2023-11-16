@@ -53,11 +53,12 @@
             <input type="text" name="competences" id="competences" placeholder="Compétence à développer ou à acquérir">
         </div>
         <div class="container-label-input">
+            <!--TODO: changer les for -->
             <label for="periodeStage">Période du stage :</label>
-            <h for="debutPeriodeStage">Début</h>
-            <input type="date" name="debutPeriodeStage" id="debutPeriodeStage" placeholder="Début">
-            <h for="finPeriodeStage">Fin</h>
-            <input type="date" name="finPeriodeStage" id="finPeriodeStage" placeholder="Fin">
+            <h4 for="debutPeriodeStage">Début</h4>
+            <input type="date" name="debutPeriodeStage" id="debutPeriodeStage">
+            <h4 for="finPeriodeStage">Fin</h4>
+            <input type="date" name="finPeriodeStage" id="finPeriodeStage">
         </div>
         <div class="container-label-input">
             <label for="langueConvention">Langue de la convention :</label>
@@ -73,7 +74,7 @@
         </div>
         <div class="container-label-input">
             <label for="confidentialite">Confidentialité du sujet/thème du stage :</label>
-            <input type="checkbox" name="confidentialite" id="confidentialite" placeholder="Confidentialité du sujet et du thème du Stage">
+            <input type="checkbox" name="confidentialite" id="confidentialite">
         </div>
         <div class="container-label-input">
             <label for="nombreHeureHebdo">Nombre d'heures par semaine :</label>
