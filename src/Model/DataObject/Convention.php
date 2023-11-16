@@ -18,6 +18,36 @@ class Convention extends AbstractDataObject {
     private bool $estSignee;
     private bool $estValidee;
 
+    /**
+     * @param string $idStage
+     * @param string $competencesADevelopper
+     * @param string $dureeDeTravail
+     * @param string $languesImpression
+     * @param string $origineDeLaConvention
+     * @param bool $sujetEstConfidentiel
+     * @param string $dureeExperienceProfessionnel
+     * @param string $nbHeuresHebdo
+     * @param string $modePaiement
+     * @param string $caisseAssuranceMaladie
+     * @param bool $estSignee
+     * @param bool $estValidee
+     */
+    public function __construct(string $idStage, string $competencesADevelopper, string $dureeDeTravail, string $languesImpression, string $origineDeLaConvention, bool $sujetEstConfidentiel, string $dureeExperienceProfessionnel, string $nbHeuresHebdo, string $modePaiement, string $caisseAssuranceMaladie, bool $estSignee, bool $estValidee)
+    {
+        $this->idStage = $idStage;
+        $this->competencesADevelopper = $competencesADevelopper;
+        $this->dureeDeTravail = $dureeDeTravail;
+        $this->languesImpression = $languesImpression;
+        $this->origineDeLaConvention = $origineDeLaConvention;
+        $this->sujetEstConfidentiel = $sujetEstConfidentiel;
+        $this->dureeExperienceProfessionnel = $dureeExperienceProfessionnel;
+        $this->nbHeuresHebdo = $nbHeuresHebdo;
+        $this->modePaiement = $modePaiement;
+        $this->caisseAssuranceMaladie = $caisseAssuranceMaladie;
+        $this->estSignee = $estSignee;
+        $this->estValidee = $estValidee;
+    }
+
     public function getIdConvention(): string
     {
         return $this->idConvention;
