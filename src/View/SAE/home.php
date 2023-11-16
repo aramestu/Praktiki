@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="assets/css/mainIUT.css">
 
 <div class="container">
-    <h2 class="remplaceBaliseLegend">Bienvenue sur "PlaceHolder: nom site"</h2>
+    <h2 class="remplaceBaliseLegend">Bienvenue sur Prakniti</h2>
 </div>
 <div class="container">
     <h2 class="remplaceBaliseLegend">Les stages BUT2 et BUT3 en France</h2>
