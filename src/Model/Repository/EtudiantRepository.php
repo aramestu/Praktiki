@@ -47,7 +47,7 @@ class EtudiantRepository extends AbstractRepository
         return $objects;
     }
 
-    public function conventionEtudiantEstValide(Etudiant $etudiant): ?bool{
+    public function conventionEtudiantEstValide(Etudiant $etudiant): bool{
         $sql = "SELECT estValidee FROM Etudiants etu
                 JOIN ExperienceProfessionnel exp ON etu.numEtudiant=exp.numEtudiant
                 JOIN Stages s ON s.idStage=exp.idExperienceProfessionnel
@@ -59,12 +59,49 @@ class EtudiantRepository extends AbstractRepository
         );
         $request->execute($values);
         $result = $request->fetch();
-        if(!$result){
-            return null;
-        }elseif($result["estValidee"] == 1){
+        if($result==false){
+            return false;
+        }
+        elseif($result["estValidee"] == 1){
             return true;
         }else{
             return false;
+        }
+    }
+
+    public function etudiantAStage(Etudiant $etudiant): bool{
+        $sql = "SELECT * FROM Etudiants etu
+                JOIN ExperienceProfessionnel exp ON etu.numEtudiant=exp.numEtudiant
+                JOIN Stages s ON s.idStage=exp.idExperienceProfessionnel
+                WHERE etu.numEtudiant = :numEtudiantTag";
+        $request = Model::getPdo()->prepare($sql);
+        $values = array(
+            "numEtudiantTag" => $etudiant->getNumEtudiant()
+        );
+        $request->execute($values);
+        $result = $request->fetch();
+        if($result==false){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public function etudiantAAlternance(Etudiant $etudiant): bool{
+        $sql = "SELECT * FROM Etudiants etu
+                JOIN ExperienceProfessionnel exp ON etu.numEtudiant=exp.numEtudiant
+                JOIN Alternances a ON a.idAlternance=exp.idExperienceProfessionnel
+                WHERE etu.numEtudiant = :numEtudiantTag";
+        $request = Model::getPdo()->prepare($sql);
+        $values = array(
+            "numEtudiantTag" => $etudiant->getNumEtudiant()
+        );
+        $request->execute($values);
+        $result = $request->fetch();
+        if($result==false){
+            return false;
+        }else{
+            return true;
         }
     }
 
