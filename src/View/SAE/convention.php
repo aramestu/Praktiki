@@ -72,8 +72,8 @@
             <input type="text" name="origineStage" id="origineStage" placeholder="Origine du stage">
         </div>
         <div class="container-label-input">
-            <label for="confidentialite">Confidentialité du sujet et du thème du Stage :</label>
-            <input type="text" name="confidentialite" id="confidentialite" placeholder="Confidentialité du sujet et du thème du Stage">
+            <label for="confidentialite">Confidentialité du sujet/thème du stage :</label>
+            <input type="checkbox" name="confidentialite" id="confidentialite" placeholder="Confidentialité du sujet et du thème du Stage">
         </div>
         <div class="container-label-input">
             <label for="nombreHeureHebdo">Nombre d'heures par semaine :</label>
