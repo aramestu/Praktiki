@@ -10,7 +10,7 @@
         <div>Etat</div>
         <label class="lineNomEntreprise">Nom Entreprise</label>
     </div>
-    <label class="lineCodePostalEntreprise">CodePostal</label>
+    <label id="columnCodePostal" class="lineCodePostalEntreprise">CodePostal</label>
     <label class="lineTelephoneEntreprise">Téléphone</label>
     <label class="lineSiteWebEntreprise">Site web</label>
 </div>

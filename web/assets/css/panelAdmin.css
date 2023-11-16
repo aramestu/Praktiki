@@ -188,10 +188,15 @@ form #search-bar{
     justify-content: flex-start;
     align-items: center;
     width: 35%;
+    margin-bottom: 0;
 }
 
 #columnFirst{
     margin : 0 0 0 10px;
+}
+
+#columnCodePostal{
+    width: 10%;
 }
 
 #placeholder .HBox *{
