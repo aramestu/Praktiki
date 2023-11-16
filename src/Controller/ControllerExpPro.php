@@ -28,7 +28,8 @@ class ControllerExpPro extends ControllerGenerique
 
     public static function getExpProRecent(): void
     {
-        $listeExpPro = AbstractExperienceProfessionnelRepository::offreMoins7jours();
+        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(null, null, null, null,null
+            ,null,null,"lastWeek",null,null);;
         extract($listeExpPro);
         require __DIR__ ."/../View/offer/offerTable.php";
     }

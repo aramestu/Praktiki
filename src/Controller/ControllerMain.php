@@ -149,7 +149,8 @@ class ControllerMain extends ControllerGenerique
      */
     public static function displayTDBetu()
     {
-        $listeExpPro = AbstractExperienceProfessionnelRepository::offreMoins7jours();
+        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(null, null, null, null,null
+            ,null,null,"lastWeek",null,null);;
         self::afficheVue(
             'view.php',
             [
