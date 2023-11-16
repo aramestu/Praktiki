@@ -102,7 +102,6 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             $pdo->prepare($sql)->execute($value);
             return true;
         } catch (\PDOException $e) {
-            echo $e;
             return false;
         }
     }
@@ -174,30 +173,6 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             return null;
         }
         return $this->construireDepuisTableau($exp);
-    }
-
-    public static function filtre(string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $stage = null, string $alternance = null, string $codePostal = null, string $datePublication = null): array
-    {
-        $tabStages = StageRepository::filtres($dateDebut, $dateFin, $optionTri, $codePostal, $datePublication);
-        $tabAlternance = AlternanceRepository::filtres($dateDebut, $dateFin, $optionTri, $codePostal, $datePublication);
-        $tabOffreNonDefini = OffreNonDefiniRepository::filtres($dateDebut, $dateFin, $optionTri, $codePostal, $datePublication);
-        if (isset($stage)) {
-            return $tabStages;
-        }
-        else if (isset($alternance)) {
-            return $tabAlternance;
-        }
-        else if (isset($offreNonDefini)){
-            return $tabOffreNonDefini;
-        }
-        else {
-            if (!isset($optionTri)) {
-                return array_merge(array_merge($tabStages, $tabAlternance), $tabOffreNonDefini);
-            } else {
-                return self::sort(self::sort($tabStages, $tabOffreNonDefini, $optionTri), $tabAlternance, $optionTri);
-            }
-
-        }
     }
 
     private static function sort(array $stages, array $alternances, string $option): array
@@ -289,21 +264,45 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         $pdoStatement->execute($values);
     }
 
-    /*public static function search(string $keywords): array
-    {
-        $stage = StageRepository::search($keywords);
-        $alternance = AlternanceRepository::search($keywords);
-        $offreNonDefini = OffreNonDefiniRepository::search($keywords);
 
-        $alternance = self::sort($alternance, $offreNonDefini, "datePublication");
-        return self::sort($alternance, $stage, "datePublication");
-    }*/
+    public static function rechercheAllOffreFiltree(string $keywords = null,string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $stage = null, string $alternance = null, string $codePostal = null, string $datePublication = null, string $BUT2 = null, string $BUT3 = null) : array{
+        $tabStages = (new StageRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
+        $tabAlternance = (new AlternanceRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
+        $tabOffreNonDefini = (new OffreNonDefiniRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
+        // Si c'est filtré par stage
+        if (isset($stage)) {
+            // S'il n'y a pas une option de trie
+            if(! isset($optionTri)){
+                return array_merge($tabStages, $tabOffreNonDefini);
+            }
+            else{
+                return self::sort($tabStages, $tabOffreNonDefini, $optionTri);
+            }
+        }
+        // Si c'est filtré par alternance
+        else if (isset($alternance)) {
+            if(! isset($optionTri)){
+                return array_merge($tabAlternance, $tabOffreNonDefini);
+            }
+            else{
+                return self::sort($tabAlternance, $tabOffreNonDefini, $optionTri);
+            }
+        }
+        else {
+            if (!isset($optionTri)) {
+                return array_merge(array_merge($tabStages, $tabAlternance), $tabOffreNonDefini);
+            } else {
+                return self::sort(self::sort($tabStages, $tabOffreNonDefini, $optionTri), $tabAlternance, $optionTri);
+            }
 
-    public function search(string $keywords,string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null): array{
+        }
+    }
+
+    public function search(string $keywords = null,string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null, string $BUT2 = null, string $BUT3 = null): array{
         date_default_timezone_set('Europe/Paris');
         $nomTable = $this->getNomTable();
         $nomClePrimaire = $this->getNomClePrimaire();
-        $pdo = Model::getPdo();
+        $values = array();
         $sql = "SELECT *
                 FROM $nomTable JOIN ExperienceProfessionnel e ON $nomTable.$nomClePrimaire = e.idExperienceProfessionnel WHERE numEtudiant IS NULL ";
         if (isset($datePublication)) {
@@ -314,38 +313,46 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             };
         }
 
-        //TODO : A revoire quand Date dans BD
-        if (strlen($dateDebut) > 0 && strlen($dateFin) > 0) {
-            $sql .= "AND dateDebutExperienceProfessionnel >= $dateDebut AND dateFinExperienceProfessionnel <= $dateFin ";
-        } elseif (strlen($dateDebut) > 0) {
-            $sql .= "AND dateDebutExperienceProfessionnel = '$dateDebut' ";
-        } elseif (strlen($dateFin) > 0) {
-            $sql .= "AND dateFinExperienceProfessionnel = '$dateFin' ";
+        if ($dateDebut != null && $dateFin != null) {
+            $sql .= "AND dateDebutExperienceProfessionnel >= '$dateDebut' AND dateFinExperienceProfessionnel <= '$dateFin' ";
+        } elseif ($dateDebut != null) {
+            $sql .= "AND dateDebutExperienceProfessionnel >= '$dateDebut' "; // modif >= à la place de =
+        } elseif ($dateFin != null) {
+            $sql .= "AND dateFinExperienceProfessionnel <= '$dateFin' "; // modif >= à la place de =
         }
-        if (strlen($codePostal) > 0) {
+        if ($codePostal != null) {
             $sql .= "AND codePostalExperienceProfessionnel = '$codePostal' ";
         }
-        if(strlen($keywords) > 0){
+        if (isset($BUT2)){
+            $sql .= "AND niveauExperienceProfessionnel = '$BUT2' ";
+        }
+        if (isset($BUT3)){
+            $sql .= "AND niveauExperienceProfessionnel = '$BUT3' ";
+        }
+        if($keywords != null){
             $sql .= " AND " . $this->colonneToSearch(array_merge($this->getNomsColonnes(), $this->getNomsColonnesSupplementaires()));
+            $values["keywordsTag"] = $keywords;
         }
         if (isset($optionTri)) {
             if ($optionTri == "datePublication") {
-                $sql .= "ORDER BY datePublication ASC";
+                $sql .= " ORDER BY datePublication DESC";
             }
             else if ($optionTri == "datePublicationInverse") {
-                $sql .= "ORDER BY datePublication DESC";
+                $sql .= " ORDER BY datePublication ASC";
             }
-            else if ($optionTri == "salaireCroissant") {
-                $sql .= "ORDER BY gratificationStage ASC";
+            else if ($optionTri == "salaireCroissant" && $this->getNomTable() === 'Stages') {
+                $sql .= " ORDER BY gratificationStage ASC";
             }
-            else if ($optionTri == "salaireDecroissant") {
-                $sql .= "ORDER BY gratificationStage DESC";
+            else if ($optionTri == "salaireDecroissant" && $this->getNomTable() === 'Stages') {
+                $sql .= " ORDER BY gratificationStage DESC";
             }
         }
 
-        $requete = $pdo->query($sql);
+        $request = Model::getPdo()->prepare($sql);
+
+        $request->execute($values);
         $stageTriee = [];
-        foreach ($requete as $result) {
+        foreach ($request as $result) {
             $stageTriee[] = $this->construireDepuisTableau($result);
         }
         return $stageTriee;

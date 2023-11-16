@@ -4,11 +4,21 @@ use App\SAE\Model\DataObject\AbstractDataObject;
 use App\SAE\Model\DataObject\ExperienceProfessionnel;
 use App\SAE\Model\DataObject\Stage;
 
-abstract class ExperienceProfessionnelRepository{
-
-    public function search(string $keywords,string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $stage = null, string $alternance = null, string $codePostal = null, string $datePublication = null): array{
+class ExperienceProfessionnelRepository extends  AbstractExperienceProfessionnelRepository {
 
 
+    protected function getNomsColonnesSupplementaires(): array
+    {
         return array();
+    }
+
+    protected function getNomDataObject(): string
+    {
+        return "";
+    }
+
+    public function construireDepuisTableau(array $objetFormatTableau): ExperienceProfessionnel
+    {
+        return new Stage();
     }
 }

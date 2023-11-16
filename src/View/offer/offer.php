@@ -49,6 +49,7 @@ echo htmlspecialchars($last_element) */
             ?>
             <p>Thématique : <?= htmlspecialchars($expPro->getThematiqueExperienceProfessionnel()) ?></p>
             <p>Tâches : <?= htmlspecialchars($expPro->getTachesExperienceProfessionnel()) ?></p>
+            <p>Année minimum demandée : <?= htmlspecialchars($expPro->getNiveauExperienceProfessionnel()) ?></p>
         </div>
 
         <div id="infoCompany">

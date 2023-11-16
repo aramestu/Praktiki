@@ -11,7 +11,7 @@
                     <label for="typeOffre">Type d'Offre</label>
                     <select name="typeOffre" id="typeOffre" required>
                         <option disabled selected value> -- Veuillez choisir une option -- </option>
-                        <option value="stalternance" >Non définie</option>
+                        <option value="offreNonDefini" >Non définie</option>
                         <option value="stage">Stage</option>
                         <option value="alternance">Alternance</option>
                     </select>
@@ -42,7 +42,7 @@
                 </p>
                 <p>
                     <label for="niveau">Niveau Requis</label>
-                    <input type="text" name="niveau" id="niveau" required placeholder="BUT2">
+                    <input type="text" name="niveau" id="niveau" required placeholder="BUT2/BUT3">
                 </p>
                 <p>
                     <label for="codePostal">Code Postal</label>
