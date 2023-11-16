@@ -187,6 +187,8 @@ class ControllerEntreprise extends ControllerGenerique
                     if ($user->getEmailEntreprise() == $_REQUEST["mail"]) {
                         VerificationEmail::envoiEmailChangementPassword($_REQUEST["siret"], $_REQUEST["mail"]);
                         self::redirectionVersURL("success", "Vous allez recevoir un mail", "home");
+                    }else{
+                        self::redirectionVersURL("warning", "mail incorrect", "forgetPassword");
                     }
                 } else {
                     self::redirectionVersURL("warning", "mail incorrect", "forgetPassword");
