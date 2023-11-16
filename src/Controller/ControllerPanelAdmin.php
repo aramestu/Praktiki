@@ -93,4 +93,52 @@ class ControllerPanelAdmin extends ControllerGenerique {
         (new EntrepriseRepository())->supprimer(rawurldecode($_GET["siret"]));
         self::panelListeEntreprises();
     }
+
+    public static function panelModificationEntreprise(): void{
+        if(!isset($_GET["siret"])){
+            self::error("Entreprise non défini");
+            return;
+        }
+        $entreprise = (new EntrepriseRepository())->getById(rawurldecode($_GET["siret"]));
+        self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
+            'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
+            'adminPanelView' => 'user/adminPanel/entreprise/modificationEntreprise.php',
+            'entreprise' => $entreprise ]);
+    }
+
+    public static function modifierEntreprise(): void{
+        var_dump($_POST);
+        if(!isset($_POST["siret"])){
+            self::error("siret non défini");
+            return;
+        }
+        if(!isset($_POST["nom"])){
+            self::error("nom non défini");
+            return;
+        }
+        if(!isset($_POST["telephone"])){
+            self::error("telephone non défini");
+            return;
+        }
+        if(!isset($_POST["mail"])){
+            self::error("mail non défini");
+            return;
+        }
+        if(!isset($_POST["effectif"])){
+            self::error("effectif non défini");
+            return;
+        }
+        if(!isset($_POST["codePostal"])){
+            self::error("code postal non défini");
+            return;
+        }
+        $entreprise = (new EntrepriseRepository())->getById($_POST["siret"]);
+        $entreprise->setNomEntreprise($_POST["nom"]);
+        $entreprise->setTelephoneEntreprise($_POST["telephone"]);
+        $entreprise->setEmailEntreprise($_POST["mail"]);
+        $entreprise->setEffectifEntreprise($_POST["effectif"]);
+        $entreprise->setCodePostalEntreprise($_POST["codePostal"]);
+        (new EntrepriseRepository())->mettreAJour($entreprise);
+        self::panelGestionEntreprise();
+    }
 }
