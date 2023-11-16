@@ -1,5 +1,6 @@
 .container {
     text-align: left;
+    width: 100%;
 }
 
 .container label {
@@ -24,4 +25,10 @@
 .container-label-input h {
     margin-top: -15px;
     padding: 5px;
+}
+
+form {
+    width: 80%;
+    justify-content: center;
+    margin-left: -30px;
 }
