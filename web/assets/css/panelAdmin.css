@@ -257,7 +257,7 @@ form #search-bar{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    width: 90%;
+    width: 100%;
     height: 100%;
 }
 
@@ -271,7 +271,7 @@ form #search-bar{
     font-size: 1vw;
 }
 
-#managementEntrepriseName{
+#managementEntrepriseName, #managementEtudiantName, #managementEtudiantSurname{
     font-size: 2.5em;
     font-weight: bold;
 }
@@ -354,27 +354,15 @@ form #search-bar{
     word-break: break-all;
 }
 
-#managementEntrepriseValidation{
+#managementEntrepriseValidation, #managementEtudiantState{
     font-size: 1em;
 }
 
-#managementEntrepriseSiret{
-    font-size: 1.5em;
-}
-
-#managementEntrepriseEffectif{
-    font-size: 1.5em;
-}
-
-#managementEntrepriseCodePostal{
-    font-size: 1.5em;
-}
-
-#managementEntrepriseMail{
-    font-size: 1.5em;
-}
-
-#managementEntrepriseTelephone{
+#managementEntrepriseSiret, #managementEntrepriseEffectif,
+#managementEntrepriseCodePostal, #managementEntrepriseMail,
+#managementEntrepriseTelephone , #managementEtudiantCodePostal,
+#managementEtudiantNumEtudiant, #managementEtudiantMailPerso,
+#managementEtudiantMailUniv, #managementEtudiantTelephone{
     font-size: 1.5em;
 }
 
@@ -404,6 +392,7 @@ form #search-bar{
 
 .entityInformation > .down div > label:first-child{
     white-space: nowrap;
+    margin-right: 5px;
 }
 
 .entityInformation > .down div > label:nth-of-type(2){

@@ -4,7 +4,7 @@
 <div class="container">
     <h2 class="remplaceBaliseLegend">Bienvenue sur Praktiki</h2>
 </div>
-<div class="container">
+<div class="container jusitfyTexte">
     <h2 class="remplaceBaliseLegend">Les stages BUT2 et BUT3 en France</h2>
     <br>
     <p>Responsable : Rémi Coletta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;remi.coletta@umontpellier.fr</p>
@@ -37,10 +37,10 @@
     <br>
     <p>La gratification est <b>obligatoire</b> au delà de 2 mois de stage (soit l&#8217;équivalent de 44 jours à 7 heures par jour ou soit à partir de la 309e heure de stage même s&#8217;il est effectué de façon non continue).</p>
     <p>Le <b>montant minimum</b> légal de gratification est de<b> 4,35 euros*</b> par heure de stage.  *( modification 1er Janvier 2024)</p>
-    <p>Vous trouverez des informations supplémentaires sur vos droits et devoirs en tant que stagiaire <a href="https://www.service-public.fr/particuliers/vosdroits/F16734" class="link">ici</a>, ainsi qu&#8217;un simulateur de votre rémunération en cliquant <a href="https://www.service-public.fr/particuliers/vosdroits/F32131#:~:text=Montant%20minimum,%E2%82%AC%20x%200%2C15)." target="_blank" rel="noopener noreferrer">ici</a>.</p>
+    <p>Vous trouverez des informations supplémentaires sur vos droits et devoirs en tant que stagiaire <a href="https://www.service-public.fr/particuliers/vosdroits/F16734" class="link">ici</a>, ainsi qu&#8217;un simulateur de votre rémunération en cliquant <a href="https://www.service-public.fr/particuliers/vosdroits/F32131#:~:text=Montant%20minimum,%E2%82%AC%20x%200%2C15)." target="_blank" rel="noopener noreferrer" class="link">ici</a>.</p>
 </div>
 
-<div class="container">
+<div class="container jusitfyTexte">
     <h2 class="remplaceBaliseLegend">Les Alternances</h2>
     <br>
     <p>Vous pouvez réaliser votre BUT en alternance dès la seconde année.</p>
@@ -100,8 +100,6 @@
         </tbody>
     </table>
     <br>
-    <div class="thumbnail">En mai 2023, montant du SMIC BRUT mensuel: 1 747,2 € <span class="legend-top">Les montants indiqués correspondent au salaire brut</span></div>
+    <p>En mai 2023, montant du SMIC BRUT mensuel: 1 747,2 € Les montants indiqués correspondent au salaire brut</p>
     <p>Exonéré de charges sociales jusqu&#8217;à 79% du SMIC (donc pour tous les moins de 26 ans).</p>
     <p><em>◊ Source : article D6222-26 du Code du travail</em></p>
-    <p>&nbsp;</p>
-</div>
