@@ -1,5 +1,5 @@
 <div class="HBox">
-     <h2 id="title">Liste des Entreprises</h2>
+    <h2 id="title"><div class="HBox"><img src="assets/images/company-icon.png">Liste des Entreprises</div></h2>
     <?php $action="panelListeEntreprises";
     $controller="PanelAdmin";
     require_once __DIR__ . '/../../../utilitaire/searchBar.php';?>
