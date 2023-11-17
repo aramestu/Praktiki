@@ -13,7 +13,7 @@
     <br>
     <h3>Où trouver des Offres de stage</h3>
     <br>
-    <p>Les stages se trouvent dans la partie offre du site, si malgré cela, vous n'en trouvez pas, voici quelque lien pour vous aidez.</p>
+    <p>Les stages se trouvent dans la partie offre du site, si malgré cela, vous n'en trouvez pas, voici quelque lien pour vous aider : </p>
     <br>
     <p><a href="https://www.welcometothejungle.com/fr/jobs?page=1&amp;groupBy=job&amp;sortBy=mostRelevant&amp;query=informatique&amp;aroundQuery=Montpellier%2C%20France&amp;aroundLatLng=43.61086%2C3.87613&amp;aroundRadius=50000&amp;refinementList%5Bcontract_type_names.fr%5D%5B%5D=Stage" class="link">Welcome To The Jungle</a></p>
     <p><a href="https://www.apec.fr/candidat.html" target="_blank" rel="noopener" class="link">APEC</a></p>
@@ -31,7 +31,6 @@
     <p>Personnalisez votre lettre de motivation (un texte générique ou copié/collé avec le nom d&#8217;une autre entreprise est souvent rédhibitoire)</p>
     <p>Utilisez une adresse email incluant votre nom</p>
     <p>Soyez réactif dans vos échanges email</p>
-    <br>
     <br>
     <h3>Rémunération</h3>
     <br>
