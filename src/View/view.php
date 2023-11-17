@@ -26,7 +26,12 @@
 
     <nav class="navbar">
         <a href="frontController.php?action=home" class="nav-item" data-action="home">Accueil</a>
-        <a href="frontController.php?action=getExpProByDefault&controller=ExpPro" class="nav-item" data-action="offre">Offres</a>
+        <?php if (\App\SAE\Lib\ConnexionUtilisateur::estConnecte()) {
+            echo '
+                <a href="frontController.php?action=getExpProByDefault&controller=ExpPro" class="nav-item" data-action="offre">Offres</a>
+                ';
+        }
+        ?>
         <a href="frontController.php?action=contact" class="nav-item" data-action="contact">Contact</a>
         <?php if (!\App\SAE\Lib\ConnexionUtilisateur::estConnecte()) {
             echo '
