@@ -207,7 +207,7 @@ class ControllerPanelAdmin extends ControllerGenerique {
         }
         $etudiant = (new EtudiantRepository())->getById($_POST["numEtudiant"]);
         $etudiant->setNomEtudiant($_POST["nom"]);
-        $etudiant->setNomEtudiant($_POST["prenom"]);
+        $etudiant->setPrenomEtudiant($_POST["prenom"]);
         $etudiant->setTelephoneEtudiant($_POST["telephone"]);
         $etudiant->setMailUniversitaireEtudiant($_POST["mailUniv"]);
         $etudiant->setMailPersoEtudiant($_POST["mailPerso"]);
