@@ -1,5 +1,5 @@
 <div class="HBox">
-    <h2 id="title">Liste des Etudiants</h2>
+    <h2 id="title"><div class="HBox"><img src="assets/images/etudiant-icon.png" alt="logo etudiant">Liste des Etudiants</div></h2>
     <?php $action="panelListeEtudiants";
     $controller="PanelAdmin";
     require_once __DIR__ . '/../../../utilitaire/searchBar.php';?>
