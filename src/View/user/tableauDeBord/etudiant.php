@@ -12,7 +12,7 @@
     <div class="HBox">
         <div class="VBox" id="infoEtu">
             <h2>Informations personnelles:</h2>
-            <p>Binvenue</p>
+            <p>Bienvenue</p>
             <p>Numéro étudiant : 123456789</p>
             <p>Adresse : 123 rue de la paix</p>
             <p>Code postal : 34000</p>

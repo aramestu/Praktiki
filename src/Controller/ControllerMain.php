@@ -169,7 +169,7 @@ class ControllerMain extends ControllerGenerique
             [
                 'pagetitle' => 'Tableau de bord',
                 'listeExpPro' => $listeExpPro,
-                'cheminVueBody' => 'user/tableauDeBord/entreprise.php',
+                'cheminVueBody' => 'SAE/home.php',//user/tableauDeBord/entreprise.php
             ]
         );
     }
