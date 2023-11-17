@@ -103,8 +103,6 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             $sql = $sql . ")";
             $pdo->prepare($sql)->execute($value);
 
-            (new ConventionRepository())->save(new Convention($lastInsert, "", "", "", "", "", "", "", "", "", "", ""));
-
             return true;
         } catch (\PDOException $e) {
             return false;
