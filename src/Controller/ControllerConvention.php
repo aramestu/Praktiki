@@ -47,4 +47,8 @@ class ControllerConvention extends ControllerGenerique
         );
     }
 
+    public static function modifierConvention(): void {
+
+    }
+
 }

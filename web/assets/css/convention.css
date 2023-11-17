@@ -32,9 +32,10 @@
     align-items: center;
 }
 
-.container-label-input h {
+.container-label-input h4 {
     margin-top: -15px;
     padding: 5px;
+    font-weight: normal;
 }
 
 form {
