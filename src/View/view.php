@@ -17,7 +17,8 @@
 
 <header>
 
-    <a href="frontController.php?action=zoneDetest"><img id="logoToggle" class="logo" src="assets/images/LOGO_UM_filet-blanc.png" alt="LogoUM"></a>
+    <a href="frontController.php?action=zoneDetest"><img id="logoToggle" class="logo"
+                                                         src="assets/images/LOGO_UM_filet-blanc.png" alt="LogoUM"></a>
 
     <div class="burger">
         <span></span>
@@ -31,8 +32,9 @@
             echo '
                 <a href="frontController.php?action=preference" class="nav-item" data-action="connect">Connexion</a>
                 ';
-        }else {
+        } else {
             echo '
+                    <a href="frontController.php?controller=Main&action=displayTDBetu" class="nav-item" data-action="tdbEtudiant">Mes infos</a>
                     <a href="frontController.php?action=disconnect&controller=Entreprise" class="nav-item" data-action="disconnect">Déconnexion</a>
                 ';
         }
@@ -44,7 +46,7 @@
 <main>
     <?php
     foreach (\App\SAE\Lib\MessageFlash::lireTousMessages() as $type => $lireMessage) {
-        echo '<div class="alert alert-'.$type.'">'.$lireMessage.'</div>';
+        echo '<div class="alert alert-' . $type . '">' . $lireMessage . '</div>';
     }
     require __DIR__ . "/{$cheminVueBody}";
     ?>
