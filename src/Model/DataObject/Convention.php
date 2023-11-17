@@ -32,7 +32,7 @@ class Convention extends AbstractDataObject {
      * @param bool $estSignee
      * @param bool $estValidee
      */
-    public function __construct(string $idConvention, string $idStage, string $competencesADevelopper, string $dureeDeTravail, string $languesImpression, string $origineDeLaConvention, bool $sujetEstConfidentiel, string $nbHeuresHebdo, string $modePaiement, string $dureeExperienceProfessionnel, string $caisseAssuranceMaladie, bool $estSignee, bool $estValidee)
+    public function __construct(string $idConvention, string $idStage, string $competencesADevelopper, string $dureeDeTravail, string $languesImpression, string $origineDeLaConvention, $sujetEstConfidentiel, string $nbHeuresHebdo, string $modePaiement, string $dureeExperienceProfessionnel, string $caisseAssuranceMaladie, $estSignee, $estValidee)
     {
         $this->idConvention = $idConvention;
         $this->idStage = $idStage;
@@ -40,12 +40,12 @@ class Convention extends AbstractDataObject {
         $this->dureeDeTravail = $dureeDeTravail;
         $this->languesImpression = $languesImpression;
         $this->origineDeLaConvention = $origineDeLaConvention;
-        $this->sujetEstConfidentiel = $sujetEstConfidentiel;
+        $this->sujetEstConfidentiel = ($sujetEstConfidentiel == '1' || $sujetEstConfidentiel == 1);;
         $this->dureeExperienceProfessionnel = $dureeExperienceProfessionnel;
         $this->nbHeuresHebdo = $nbHeuresHebdo;
         $this->modePaiement = $modePaiement;
         $this->caisseAssuranceMaladie = $caisseAssuranceMaladie;
-        $this->estSignee = $estSignee;
+        $this->estSignee = ($estSignee == '1' || $estSignee == 1);
         $this->estValidee = $estValidee;
     }
 
@@ -109,12 +109,12 @@ class Convention extends AbstractDataObject {
         $this->modePaiement = $modePaiement;
     }
 
-    public function getEstSignee(): string
+    public function getEstSignee(): bool
     {
-        return $this->estSignee;
+        return ($this->estSignee == 1);
     }
 
-    public function setEstSignee(string $estSignee): void
+    public function setEstSignee(bool $estSignee): void
     {
         $this->estSignee = $estSignee;
     }
@@ -151,7 +151,7 @@ class Convention extends AbstractDataObject {
 
     public function isSujetEstConfidentiel(): bool
     {
-        return $this->sujetEstConfidentiel;
+        return ($this->sujetEstConfidentiel == 1);
     }
 
     public function setSujetEstConfidentiel(bool $sujetEstConfidentiel): void
@@ -181,7 +181,7 @@ class Convention extends AbstractDataObject {
 
     public function isEstValidee(): bool
     {
-        return $this->estValidee;
+        return ($this->estValidee == 1);
     }
 
     public function setEstValidee(bool $estValidee): void

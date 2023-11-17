@@ -9,7 +9,7 @@ $et = $etudiant;
 $t = $tuteur;
 $p = $prof;
 ?>
-<form method="post" action="home.php">
+<form method="post" action="frontController.php?controller=Convention&action=modifierConvention">
     <div class="containerConvention">
         <h2>Etudiant : </h2>
         <div class="container-label-input">
@@ -86,11 +86,11 @@ $p = $prof;
         </div>
         <div class="container-label-input">
             <label for="confidentialite">Confidentialité du sujet/thème du stage :</label>
-            <input type="checkbox" name="confidentialite" id="confidentialite" placeholder="Confidentialité du sujet et du thème du Stage" value="<?php echo htmlspecialchars($c->isSujetEstConfidentiel());?>">
+            <input type="checkbox" name="confidentialite" id="confidentialite" placeholder="Confidentialité du sujet et du thème du Stage" checked value="true">
         </div>
         <div class="container-label-input">
-            <label for="nombreHeureHebdo">Nombre d'heures par semaine :</label>
-            <input type="text" name="nombreHeureHebdo" id="nombreHeureHebdo" placeholder="Nombre d'heures par semaine" value="<?php echo htmlspecialchars($c->getNbHeuresHebdo());?>">
+            <label for="nombreHeuresHebdo">Nombre d'heures par semaine :</label>
+            <input type="text" name="nombreHeuresHebdo" id="nombreHeuresHebdo" placeholder="Nombre d'heures par semaine" value="<?php echo htmlspecialchars($c->getNbHeuresHebdo());?>">
         </div>
         <div class="container-label-input">
             <label for="modaliteVersement">Modalité du versement :</label>
@@ -161,5 +161,9 @@ $p = $prof;
     <div>
         <button class="button">Enregistrer le brouillon de la convention</button>
         <button class="button">Envoyer la convention</button>
+        <input type="hidden" name="idConvention" value="<?php echo htmlspecialchars($c->getIdConvention());?>">
+        <input type="hidden" name="idStage" value="<?php echo htmlspecialchars($c->getIdStage());?>">
+        <input type="hidden" name="estSignee" value="true">
+        <input type="hidden" name="estValidee" value="true">
     </div>
 </form>
