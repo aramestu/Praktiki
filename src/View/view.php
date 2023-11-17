@@ -17,7 +17,8 @@
 
 <header>
 
-    <a href="frontController.php?action=zoneDetest"><img id="logoToggle" class="logo" src="assets/images/LOGO_UM_filet-blanc.png" alt="LogoUM"></a>
+    <a href="frontController.php?action=zoneDetest"><img id="logoToggle" class="logo"
+                                                         src="assets/images/LOGO_UM_filet-blanc.png" alt="LogoUM"></a>
 
     <div class="burger">
         <span></span>
@@ -25,14 +26,20 @@
 
     <nav class="navbar">
         <a href="frontController.php?action=home" class="nav-item" data-action="home">Accueil</a>
-        <a href="frontController.php?action=getExpProByDefault&controller=ExpPro" class="nav-item" data-action="offre">Offres</a>
+        <?php if (\App\SAE\Lib\ConnexionUtilisateur::estConnecte()) {
+            echo '
+                <a href="frontController.php?action=getExpProByDefault&controller=ExpPro" class="nav-item" data-action="offre">Offres</a>
+                ';
+        }
+        ?>
         <a href="frontController.php?action=contact" class="nav-item" data-action="contact">Contact</a>
         <?php if (!\App\SAE\Lib\ConnexionUtilisateur::estConnecte()) {
             echo '
                 <a href="frontController.php?action=preference" class="nav-item" data-action="connect">Connexion</a>
                 ';
-        }else {
+        } else {
             echo '
+                    <a href="frontController.php?controller=Main&action=displayTDBetu" class="nav-item" data-action="tdbEtudiant">Mes infos</a>
                     <a href="frontController.php?action=disconnect&controller=Entreprise" class="nav-item" data-action="disconnect">Déconnexion</a>
                 ';
         }
@@ -44,7 +51,7 @@
 <main>
     <?php
     foreach (\App\SAE\Lib\MessageFlash::lireTousMessages() as $type => $lireMessage) {
-        echo '<div class="alert alert-'.$type.'">'.$lireMessage.'</div>';
+        echo '<div class="alert alert-' . $type . '">' . $lireMessage . '</div>';
     }
     require __DIR__ . "/{$cheminVueBody}";
     ?>

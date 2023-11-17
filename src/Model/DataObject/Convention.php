@@ -32,8 +32,9 @@ class Convention extends AbstractDataObject {
      * @param bool $estSignee
      * @param bool $estValidee
      */
-    public function __construct(string $idStage, string $competencesADevelopper, string $dureeDeTravail, string $languesImpression, string $origineDeLaConvention, bool $sujetEstConfidentiel, string $dureeExperienceProfessionnel, string $nbHeuresHebdo, string $modePaiement, string $caisseAssuranceMaladie, bool $estSignee, bool $estValidee)
+    public function __construct(string $idConvention, string $idStage, string $competencesADevelopper, string $dureeDeTravail, string $languesImpression, string $origineDeLaConvention, bool $sujetEstConfidentiel, string $nbHeuresHebdo, string $modePaiement, string $dureeExperienceProfessionnel, string $caisseAssuranceMaladie, bool $estSignee, bool $estValidee)
     {
+        $this->idConvention = $idConvention;
         $this->idStage = $idStage;
         $this->competencesADevelopper = $competencesADevelopper;
         $this->dureeDeTravail = $dureeDeTravail;

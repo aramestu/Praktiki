@@ -34,7 +34,7 @@ $p = $prof;
         </div>
         <div class="container-label-input">
             <label for="assuranceMaladie">Assurance maladie de l'étudiant :</label>
-            <input type="text" name="assuranceMaladie" id="assuranceMaladie" placeholder="Assurance maladie de l'étudiant" value="Ameli">
+            <input type="text" name="assuranceMaladie" id="assuranceMaladie" placeholder="Assurance maladie de l'étudiant" value="<?php echo htmlspecialchars($c->getCaisseAssuranceMaladie());?>">
         </div>
     </div>
 
@@ -63,14 +63,18 @@ $p = $prof;
         <div class="container-label-input">
             <!--TODO: changer les for -->
             <label for="periodeStage">Période du stage :</label>
-            <h4 for="debutPeriodeStage">Début</h4>
+            <h4>Début</h4>
             <input type="date" name="debutPeriodeStage" id="debutPeriodeStage" value="<?php echo htmlspecialchars($s->getDateDebutExperienceProfessionnel());?>">
-            <h4 for="finPeriodeStage">Fin</h4>
+            <h4>Fin</h4>
             <input type="date" name="finPeriodeStage" id="finPeriodeStage" value="<?php echo htmlspecialchars($s->getDateFinExperienceProfessionnel());?>">
         </div>
         <div class="container-label-input">
+            <label for="dureeTravail">Durée de travail :</label>
+            <input type="text" name="dureeTravail" id="dureeTravail" placeholder="Temps plein"  value="<?php echo htmlspecialchars($c->getDureeDeTravail());?>">
+        </div>
+        <div class="container-label-input">
             <label for="langueConvention">Langue de la convention :</label>
-            <input type="text" name="langueConvention" id="langueConvention" placeholder="Langue de la convention"  value="Francais">
+            <input type="text" name="langueConvention" id="langueConvention" placeholder="Langue de la convention"  value="<?php echo htmlspecialchars($c->getLanguesImpression());?>">
         </div>
         <div class="container-label-input">
             <label for="gratificationStage">Gratification lors du stage :</label>
@@ -82,11 +86,11 @@ $p = $prof;
         </div>
         <div class="container-label-input">
             <label for="confidentialite">Confidentialité du sujet/thème du stage :</label>
-            <input type="checkbox" name="confidentialite" id="confidentialite" placeholder="Confidentialité du sujet et du thème du Stage" value="">
+            <input type="checkbox" name="confidentialite" id="confidentialite" placeholder="Confidentialité du sujet et du thème du Stage" value="<?php echo htmlspecialchars($c->isSujetEstConfidentiel());?>">
         </div>
         <div class="container-label-input">
             <label for="nombreHeureHebdo">Nombre d'heures par semaine :</label>
-            <input type="number" name="nombreHeureHebdo" id="nombreHeureHebdo" placeholder="Nombre d'heures par semaine" value="<?php echo htmlspecialchars($c->getNbHeuresHebdo());?>">
+            <input type="text" name="nombreHeureHebdo" id="nombreHeureHebdo" placeholder="Nombre d'heures par semaine" value="<?php echo htmlspecialchars($c->getNbHeuresHebdo());?>">
         </div>
         <div class="container-label-input">
             <label for="modaliteVersement">Modalité du versement :</label>
