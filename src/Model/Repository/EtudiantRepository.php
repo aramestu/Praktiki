@@ -148,7 +148,7 @@ class EtudiantRepository extends AbstractRepository
         return $etudiant;
     }
 
-    public static function getByEmail(string $valeurEmail): ?Etudiant{
+    public function getByEmail(string $valeurEmail): ?Etudiant{
         $sql = "SELECT * from Etudiants WHERE mailUniversitaireEtudiant = :EmailTag";
         // Préparation de la requête
         $pdoStatement = Model::getPdo()->prepare($sql);

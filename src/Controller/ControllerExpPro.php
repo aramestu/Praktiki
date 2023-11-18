@@ -244,6 +244,12 @@ class ControllerExpPro extends ControllerGenerique
     public static function creerOffreDepuisFormulaire(): void
     {
         $msg = "Offre crée avec succés !";
+        if(ConnexionUtilisateur::estConnecte()){
+            $siret=ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        }
+        else{
+            $siret= $_POST["siret"];
+        }
         $tabInfo = [
             "sujetExperienceProfessionnel" => $_POST["sujet"],
             "thematiqueExperienceProfessionnel" => $_POST["thematique"],
@@ -253,7 +259,7 @@ class ControllerExpPro extends ControllerGenerique
             "adresseExperienceProfessionnel" => $_POST["adressePostale"],
             "dateDebutExperienceProfessionnel" => $_POST["dateDebut"],
             "dateFinExperienceProfessionnel" => $_POST["dateFin"],
-            "siret" => $_POST["siret"]];
+            "siret" => $siret];
         if ($_POST["typeOffre"] == "stage") {
             $rep = new StageRepository();
             $tabInfo["gratificationStage"] = $_POST["gratification"];

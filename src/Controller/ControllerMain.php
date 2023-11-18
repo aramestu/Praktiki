@@ -151,15 +151,14 @@ class ControllerMain extends ControllerGenerique
     {
         $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(null, null, null, null,null
             ,null,null,"lastWeek",null,null);
-        $usert=ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user=EtudiantRepository::getByEmail($usert);
+        $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user=(new EtudiantRepository())->getByEmail($mail);
         self::afficheVue(
             'view.php',
             [
                 'pagetitle' => 'Tableau de bord',
                 'listeExpPro' => $listeExpPro,
                 'user'=>$user,
-                'usere'=>$usert,
                 'cheminVueBody' => 'user/tableauDeBord/etudiant.php',
             ]
         );
@@ -168,11 +167,14 @@ class ControllerMain extends ControllerGenerique
     public static function displayTDBentreprise()
     {
         $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(ConnexionUtilisateur::getLoginUtilisateurConnecte());
+        $siret=ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user=(new EntrepriseRepository())->getById($siret);
         self::afficheVue(
             'view.php',
             [
                 'pagetitle' => 'Tableau de bord',
                 'listeExpPro' => $listeExpPro,
+                'user'=>$user,
                 'cheminVueBody' => 'user/tableauDeBord/entreprise.php'
             ]
         );

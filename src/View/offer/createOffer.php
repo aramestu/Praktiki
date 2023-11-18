@@ -56,7 +56,12 @@
                 </p>
                 <p>
                     <label for="siret">Siret</label>
-                    <input type="number" name="siret" id="siret" required placeholder="Siret" value="01234567890123">
+                    <?php if (\App\SAE\Lib\ConnexionUtilisateur::estConnecte()){
+                        $siret= \App\SAE\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte();
+                       echo'<input type="number" name="siret" id="siret" required readonly value='.$siret.'>';
+                    }else{
+                        echo'<input type="number" name="siret" id="siret" required placeholder="Siret" value="01234567890123">';
+                    }?>
                 </p>
                 <p>
                     <input type="submit" id="submitButton" value="Créer l'Offre">
