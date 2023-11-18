@@ -13,15 +13,13 @@
         <div class="VBox" id="infoEtu">
             <h2>Informations personnelles:</h2>
             <p>Bienvenue</p>
-            <p>Numéro étudiant : 123456789</p>
+            <p>Nom : <?php echo $user->getNomEtudiant();?></p>
+            <p>Prenom : <?php echo $user->getPrenomEtudiant();?></p>
+            <p>Numéro étudiant : <?php echo $user->getNumEtudiant();?></p>
             <p>Adresse : 123 rue de la paix</p>
-            <p>Code postal : 34000</p>
-            <p>Téléphone : 0123456789</p>
-            <p>Courriel :
-                <a href="">
-
-                </a>
-            </p>
+            <p>Code postal : <?php echo $user->getCodePostalEtudiant();?></p>
+            <p>Téléphone : <?php echo $user->getTelephoneEtudiant();?></p>
+            <p>Couriel : <?php echo $user->getMailUniversitaireEtudiant();?></p>
             <a href="frontController.php?controller=Main&action=displayTDBetu" class="button">Modifier mes infos</a>
             <a href="frontController.php?controller=Main&action=displayTDBetu" class="button">Accéder à mes brouillons</a>
         </div>

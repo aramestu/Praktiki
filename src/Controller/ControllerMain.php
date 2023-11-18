@@ -150,12 +150,16 @@ class ControllerMain extends ControllerGenerique
     public static function displayTDBetu()
     {
         $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(null, null, null, null,null
-            ,null,null,"lastWeek",null,null);;
+            ,null,null,"lastWeek",null,null);
+        $usert=ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user=EtudiantRepository::getByEmail($usert);
         self::afficheVue(
             'view.php',
             [
                 'pagetitle' => 'Tableau de bord',
                 'listeExpPro' => $listeExpPro,
+                'user'=>$user,
+                'usere'=>$usert,
                 'cheminVueBody' => 'user/tableauDeBord/etudiant.php',
             ]
         );
@@ -169,7 +173,7 @@ class ControllerMain extends ControllerGenerique
             [
                 'pagetitle' => 'Tableau de bord',
                 'listeExpPro' => $listeExpPro,
-                'cheminVueBody' => 'SAE/home.php',//user/tableauDeBord/entreprise.php
+                'cheminVueBody' => 'user/tableauDeBord/entreprise.php'
             ]
         );
     }

@@ -2,6 +2,7 @@
 
 namespace App\SAE\Model\Repository;
 
+use App\SAE\Lib\ConnexionUtilisateur;
 use App\SAE\Model\DataObject\AnneeUniversitaire;
 use App\SAE\Model\DataObject\Departement;
 use App\SAE\Model\DataObject\Etudiant;
@@ -145,6 +146,30 @@ class EtudiantRepository extends AbstractRepository
             $EtudiantFormatTableau["mailPersoEtudiant"], $EtudiantFormatTableau["mailUniversitaireEtudiant"], $EtudiantFormatTableau["telephoneEtudiant"],
             $EtudiantFormatTableau["codePostalEtudiant"]);
         return $etudiant;
+    }
+
+    public static function getByEmail(string $valeurEmail): ?Etudiant{
+        $sql = "SELECT * from Etudiants WHERE mailUniversitaireEtudiant = :EmailTag";
+        // Préparation de la requête
+        $pdoStatement = Model::getPdo()->prepare($sql);
+
+        $values = array(
+            "EmailTag" => ConnexionUtilisateur::getLoginUtilisateurConnecte(),
+            //nomdutag => valeur, ...
+        );
+        // On donne les valeurs et on exécute la requête
+        $pdoStatement->execute($values);
+
+        // On récupère les résultats comme précédemment
+        // Note: fetch() renvoie false si pas de objet correspondante
+        $objetFormatTableau = $pdoStatement->fetch();
+
+        if(!$objetFormatTableau){
+            return null;
+        }
+        else{
+            return (new EtudiantRepository())->construireDepuisTableau($objetFormatTableau);
+        }
     }
 
     protected function getNomTable(): string

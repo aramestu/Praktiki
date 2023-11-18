@@ -1,6 +1,11 @@
 <?php
 namespace App\SAE\Controller;
+use App\SAE\Lib\ConnexionUtilisateur;
+use App\SAE\Model\DataObject\AbstractDataObject;
+use App\SAE\Model\DataObject\Etudiant;
+use App\SAE\Model\Repository\AbstractRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
+use App\SAE\Model\Repository\Model;
 
 class ControllerEtudiant extends ControllerGenerique{
 
@@ -27,4 +32,6 @@ class ControllerEtudiant extends ControllerGenerique{
             ]
         );
     }
+
+
 }
