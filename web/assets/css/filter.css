@@ -70,6 +70,10 @@ input[type="submit"]{
     gap: 15px;
 }
 
+.tableResponsive > a{
+    text-decoration: none;
+}
+
 .tableResponsive:nth-child(2) > .subContainer{
     color : var(--green);
 }

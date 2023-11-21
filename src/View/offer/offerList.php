@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="assets/css/offer.css">
 <link rel="stylesheet" href="assets/css/filter.css">
 <script src="assets/javascript/buildOfferTable.js"></script>
+<script src="assets/javascript/dynamicFilters.js"></script>
 
 <div class="container">
 
