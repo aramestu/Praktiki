@@ -152,8 +152,6 @@ class ControllerExpPro extends ControllerGenerique
             $keywords = null;
         }
 
-
-        // Call your repository method to get filtered offers
         $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(
             $keywords,
             $dateDebut,
@@ -168,7 +166,6 @@ class ControllerExpPro extends ControllerGenerique
         );
 
         for($i=0;$i<count($listeExpPro);$i++){
-            //build a smallOffer for each element of the listeExpPro
             $expPro = $listeExpPro[$i];
             require __DIR__ ."/../View/offer/smallOffer.php";
         }
