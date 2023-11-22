@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const datePublicationValue = document.getElementById('datePublication').value;
         console.log(datePublicationValue);
         updateDatePublication(datePublicationValue);
+        updateOffers();
     });
 
     codePostal.addEventListener('input', () => {
@@ -74,63 +75,98 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //Début Filtres Trier par
     function updateDatePublication(state) {
+        console.log("updateDatePublication");
         const searchbar = document.getElementById('search-bar');
         async function afficherFilms() {
             const reponse = await fetch("http://localhost/sae_web_s1/web/frontController.php?datePublication=lastWeek&dateDebut=&dateFin=&codePostal=&action=getExpProByFiltre&controller=ExpPro");
             const films = await reponse.json();
-            console.log(films);
+            console.log("Fetch Response : " + films);
         }
+        console.log("fin updateDatePublication");
     }
 
     function updateCodePostal(codePostal){
-
         const small = document.querySelectorAll('.small');
-        console.log("Number of small offers: " + small.length);
-
         for (let i = 0; i < small.length; i++) {
-            console.log("Offer number: " + i);
-
-            // Check the code postal element within the small offer
-            const codePostalElement = small[i].querySelector(".codePostalID"); // Assuming class is used, update this based on your HTML
-
-            // Add a check for null before accessing innerText
+            const codePostalElement = small[i].querySelector(".codePostalID");
             if (codePostalElement) {
                 const codePostalValue = codePostalElement.innerText.trim();
-                console.log("Code postal value: " + codePostalValue);
-
-                // Check if the code postal contains the entered value
                 if (codePostalValue.includes(codePostal)) {
-                    // Show the offer
                     small[i].style.display = "block";
                 } else {
-                    // Hide the offer
                     small[i].style.display = "none";
                 }
             } else {
                 console.error("Element with class 'codePostalID' not found in the small offer.");
             }
         }
-
-
-        /*
-        for(let i = 0; i < small.length; i++){
-            console.log("offre nb :" + i);
-            //check the code postal of the small offer which is a child of the offer
-            //if it's not the same as the code postal in the input
-            small[i].getElementById("codePostalID").innerHTML = codePostal;
-            console.log("codepostal :" + small[i].getElementById("codePostalID").innerHTML);
-            if (small[i].getElementById("codePostalID").innerHTML !== codePostal) {
-                //hide the offer
-                small[i].parentNode.style = "display:none";
-            }
-            else{
-                //show the offer
-                small[i].parentNode.style = "display:block";
-            }
-        }
-
-         */
     }
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('rechercher').addEventListener('click', function (event) {
+            event.preventDefault();
+            updateOffers();
+        });
+
+        document.getElementById('reset').addEventListener('click', function () {
+            resetFilters();
+            updateOffers();
+        });
+    });
+
+    function updateOffers() {
+        const datePublication = document.getElementById('datePublication').value;
+        const dateDebut = document.getElementById('dateDebut').value;
+        const dateFin = document.getElementById('dateFin').value;
+        const stage = document.getElementById('stage').checked;
+        const alternance = document.getElementById('alternance').checked;
+        const BUT2 = document.getElementById('BUT2').checked;
+        const BUT3 = document.getElementById('BUT3').checked;
+        const codePostal = document.getElementById('codePostal').value;
+        const optionTri = document.getElementById('optionTri').value;
+
+        const queryParams = new URLSearchParams({
+            datePublication,
+            dateDebut,
+            dateFin,
+            stage,
+            alternance,
+            BUT2,
+            BUT3,
+            codePostal,
+            optionTri,
+        });
+
+        // Update the URL to match your server's URL
+        const url = 'http://localhost:9000/web/frontController.php?controller=ExpPro&action=getFilteredOffers&' + queryParams;
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                try {
+                    // Try to parse the response as JSON
+                    const jsonData = JSON.parse(data);
+
+                    // Update your UI with the filtered offers
+                    console.log(jsonData);
+
+                    // You can implement logic to update the UI here
+                    // For example, you might want to replace the existing offers with the filtered ones
+                    // You can manipulate the DOM as needed
+                    // For simplicity, let's just log the filtered data for now
+                } catch (error) {
+                    console.error('Error parsing JSON:', error);
+                }
+            })
+            .catch(error => console.error('Error fetching offers:', error));
+    }
+
 
 
 

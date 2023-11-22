@@ -106,6 +106,42 @@ class ControllerExpPro extends ControllerGenerique
         );
     }
 
+    // Add this method to your ControllerExpPro class
+    public static function getFilteredOffers(): void
+    {
+        // Extract filter parameters from $_GET
+        $dateDebut = $_GET['dateDebut'] ?? null;
+        $dateFin = $_GET['dateFin'] ?? null;
+        $optionTri = $_GET['optionTri'] ?? null;
+        $stage = $_GET['stage'] ?? null;
+        $alternance = $_GET['alternance'] ?? null;
+        $codePostal = $_GET['codePostal'] ?? null;
+        $datePublication = $_GET['datePublication'] ?? null;
+        $BUT2 = $_GET['BUT2'] ?? null;
+        $BUT3 = $_GET['BUT3'] ?? null;
+
+
+        // Call your repository method to get filtered offers
+        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(
+            null,
+            $dateDebut,
+            $dateFin,
+            $optionTri,
+            $stage,
+            $alternance,
+            $codePostal,
+            $datePublication,
+            $BUT2,
+            $BUT3
+        );
+
+        // Return the filtered offers as JSON
+        header('Content-Type: application/json');
+        echo json_encode($listeExpPro);
+        exit;
+    }
+
+
     public static function modifierDepuisFormulaire(): void
     {
         $msg = "Offre modifiée avec succés !";
