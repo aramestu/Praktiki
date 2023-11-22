@@ -17,10 +17,10 @@ class Ldap {
         ]);
     }
 
-    static public function connection($login, $password): ?UserInformation{
+    static public function connection($login, $password): UserInformation | bool{
         $reponse = file_get_contents(self::$adresseServeur, false, stream_context_create(self::getHTTPRequest("bind", $login, $password)));
         if ($reponse == "error") {
-            return null;
+            return false;
         }
         if($reponse == true){
             $infosUser = self::getInfos($login, $password);
@@ -31,7 +31,7 @@ class Ldap {
                 $infosUser["mail"][0]
             );
         }
-        return null;
+        return false;
     }
 
     private static function getInfos($login, $password): ?array{
@@ -61,32 +61,16 @@ class UserInformation {
         return $this->login;
     }
 
-    public function setLogin(string $login): void{
-        $this->login = $login;
-    }
-
     public function getName(): string{
         return $this->name;
-    }
-
-    public function setName(string $name): void{
-        $this->name = $name;
     }
 
     public function getSurname(): string{
         return $this->surname;
     }
 
-    public function setSurname(string $surname): void{
-        $this->surname = $surname;
-    }
-
     public function getMail(): string{
         return $this->mail;
-    }
-
-    public function setMail(string $mail): void{
-        $this->mail = $mail;
     }
 
 }

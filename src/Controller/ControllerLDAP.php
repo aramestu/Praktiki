@@ -75,7 +75,7 @@ class ControllerLDAP extends ControllerGenerique
         if (isset($_REQUEST["username"],$_REQUEST["password"])) {
 
             $userInformation = Ldap::connection($_REQUEST["username"],$_REQUEST["password"]);
-            if ($userInformation != null) {
+            if ($userInformation) {
                 ConnexionUtilisateur::connecter($userInformation->getMail());
                 self::redirectionVersURL("success", "Connexion réussie", "controller=Main&action=displayTDBetu");
             } else {
