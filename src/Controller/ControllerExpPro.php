@@ -109,21 +109,53 @@ class ControllerExpPro extends ControllerGenerique
     // Add this method to your ControllerExpPro class
     public static function getFilteredOffers(): void
     {
-        // Extract filter parameters from $_GET
-        $dateDebut = $_GET['dateDebut'] ?? null;
-        $dateFin = $_GET['dateFin'] ?? null;
-        $optionTri = $_GET['optionTri'] ?? null;
-        $stage = $_GET['stage'] ?? null;
-        $alternance = $_GET['alternance'] ?? null;
-        $codePostal = $_GET['codePostal'] ?? null;
-        $datePublication = $_GET['datePublication'] ?? null;
-        $BUT2 = $_GET['BUT2'] ?? null;
-        $BUT3 = $_GET['BUT3'] ?? null;
+        $dateDebut = null;
+        $dateFin = null;
+        $optionTri = null;
+        $stage = null;
+        $alternance = null;
+        $codePostal = null;
+        $datePublication = null;
+        $BUT2 = null;
+        $BUT3 = null;
+        if (isset($_GET['dateDebut'])) {
+            $dateDebut = $_GET['dateDebut'];
+        }
+        if (isset($_GET['dateFin'])) {
+            $dateFin = $_GET['dateFin'];
+        }
+        if (isset($_GET['optionTri'])) {
+            $optionTri = $_GET['optionTri'];
+        }
+        if (isset($_GET['stage'])) {
+            $stage = $_GET['stage'];
+        }
+        if (isset($_GET['alternance'])) {
+            $alternance = $_GET['alternance'];
+        }
+        if (isset($_GET['codePostal'])) {
+            $codePostal = $_GET['codePostal'];
+        }
+        if (isset($_GET['datePublication'])) {
+            $datePublication = $_GET['datePublication'];
+        }
+        if (isset($_GET['BUT2'])){
+            $BUT2 = $_GET['BUT2'];
+        }
+        if (isset($_GET['BUT3'])){
+            $BUT3 = $_GET['BUT3'];
+        }
+        if(isset($_GET['keywords'])){
+            $keywords = urldecode($_GET['keywords']);
+        }
+        else{
+            $keywords = null;
+        }
 
 
         // Call your repository method to get filtered offers
         $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(
-            null,
+            $keywords,
             $dateDebut,
             $dateFin,
             $optionTri,
@@ -135,10 +167,11 @@ class ControllerExpPro extends ControllerGenerique
             $BUT3
         );
 
-        // Return the filtered offers as JSON
-        header('Content-Type: application/json');
-        echo json_encode($listeExpPro);
-        exit;
+        for($i=0;$i<count($listeExpPro);$i++){
+            //build a smallOffer for each element of the listeExpPro
+            $expPro = $listeExpPro[$i];
+            require __DIR__ ."/../View/offer/smallOffer.php";
+        }
     }
 
 

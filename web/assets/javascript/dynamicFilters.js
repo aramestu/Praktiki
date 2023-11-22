@@ -3,40 +3,33 @@ document.addEventListener('DOMContentLoaded', function () {
     const alternance = document.getElementById('alternance');
     const datePublication = document.getElementById('datePublication');
     const codePostal = document.getElementById('codePostal');
+    const optionTri = document.getElementById('optionTri');
+    const dateDebut = document.getElementById('dateDebut');
+    const dateFin = document.getElementById('dateFin');
+    const BUT2 = document.getElementById('BUT2');
+    const BUT3 = document.getElementById('BUT3');
+    const searchbar = document.getElementById('search-bar');
     let stageState = "shown";
     let alternanceState = "shown";
 
     stage.addEventListener('click', () => {
-        if (stageState === "shown") {
-            stageState = "hidden";
-            updateAll();
-        } else {
-            stageState = "shown";
-            updateAll();
-        }
+        updateOffers();
     });
 
     alternance.addEventListener('click', () => {
-        if (alternanceState === "shown") {
-            alternanceState = "hidden";
-            updateAll();
-        } else {
-            alternanceState = "shown";
-            updateAll();
-        }
+        updateOffers();
     });
 
     datePublication.addEventListener('input', () => {
-        const datePublicationValue = document.getElementById('datePublication').value;
-        console.log(datePublicationValue);
-        updateDatePublication(datePublicationValue);
         updateOffers();
     });
 
     codePostal.addEventListener('input', () => {
-        const codePostalValue = document.getElementById('codePostal').value;
-        console.log(codePostalValue);
-        updateCodePostal(codePostalValue);
+        updateOffers();
+    });
+
+    searchbar.addEventListener('input', () => {
+        updateOffers();
     });
 
 
@@ -125,18 +118,40 @@ document.addEventListener('DOMContentLoaded', function () {
         const BUT3 = document.getElementById('BUT3').checked;
         const codePostal = document.getElementById('codePostal').value;
         const optionTri = document.getElementById('optionTri').value;
+        const keywords = document.getElementById('search-bar').value;
 
-        const queryParams = new URLSearchParams({
-            datePublication,
-            dateDebut,
-            dateFin,
-            stage,
-            alternance,
-            BUT2,
-            BUT3,
-            codePostal,
-            optionTri,
-        });
+        //if a parameter is null or undefined do not add it
+        const queryParams = new URLSearchParams();
+        if (datePublication) {
+            queryParams.append('datePublication', datePublication);
+        }
+        if (dateDebut) {
+            queryParams.append('dateDebut', dateDebut);
+        }
+        if (dateFin) {
+            queryParams.append('dateFin', dateFin);
+        }
+        if (stage) {
+            queryParams.append('stage', stage);
+        }
+        if (alternance) {
+            queryParams.append('alternance', alternance);
+        }
+        if (BUT2) {
+            queryParams.append('BUT2', BUT2);
+        }
+        if (BUT3) {
+            queryParams.append('BUT3', BUT3);
+        }
+        if (codePostal) {
+            queryParams.append('codePostal', codePostal);
+        }
+        if (optionTri) {
+            queryParams.append('optionTri', optionTri);
+        }
+        if (keywords) {
+            queryParams.append('keywords', keywords);
+        }
 
         // Update the URL to match your server's URL
         const url = 'http://localhost:9000/web/frontController.php?controller=ExpPro&action=getFilteredOffers&' + queryParams;
@@ -146,26 +161,54 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                return response.text();
+                return response.text(); // Use response.text() for non-JSON content
             })
             .then(data => {
-                try {
-                    // Try to parse the response as JSON
-                    const jsonData = JSON.parse(data);
+                console.log('Response received:', data);
 
-                    // Update your UI with the filtered offers
-                    console.log(jsonData);
-
-                    // You can implement logic to update the UI here
-                    // For example, you might want to replace the existing offers with the filtered ones
-                    // You can manipulate the DOM as needed
-                    // For simplicity, let's just log the filtered data for now
-                } catch (error) {
-                    console.error('Error parsing JSON:', error);
-                }
+                // Update your UI with the HTML content
+                const offersContainer = document.querySelector('.tableResponsive');
+                offersContainer.innerHTML = data;
             })
             .catch(error => console.error('Error fetching offers:', error));
     }
+
+// Function to create a new offer element based on offer data
+    function createOfferElement(offer) {
+        const offerElement = document.createElement('div');
+        // Add logic here to construct the HTML structure for the offer element
+        // You can use offer data like offer.title, offer.company, etc.
+
+        // Example:
+        offerElement.innerHTML = `
+        <div>Hello</div>
+    `;
+        /*
+        offerElement.innerHTML = `
+        <div class="subContainer small ${offer.type}">
+            <div class="header">
+                <div class="left">
+                    <p class="bold typeExpPro">${offer.type}</p>
+                    <p>${offer.timeAgo}</p>
+                </div>
+                <div class="right">
+                    <p>Du ${offer.startDate}</p>
+                    <p>Au ${offer.endDate}</p>
+                </div>
+            </div>
+            <div class="information">
+                <h3>${offer.title}</h3>
+                <p>${offer.company}</p>
+                <p><img src="assets/images/map-pin-icon.png" class="mapPin" alt="MapPin"><span class="codePostalID">${offer.codePostal}</span></p>
+            </div>
+        </div>
+    `;
+
+         */
+
+        return offerElement;
+    }
+
 
 
 
