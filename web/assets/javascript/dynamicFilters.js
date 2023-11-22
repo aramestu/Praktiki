@@ -83,25 +83,35 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateCodePostal(codePostal){
+
         const small = document.querySelectorAll('.small');
-        console.log("longueur : " + small.length);
-        console.log("small : "+small);
-        for(let i = 0; i < small.length; i++){
-            console.log("offre nb :" + i);
-            //check the code postal of the small offer which is a child of the offer
-            //if it's not the same as the code postal in the input
-            //small[i].getElementById("codePostalID").innerText = codePostal;
-            console.log("codepostal :" + small[i].getElementById("codePostalID").innerText);
-            console.log("verif checked");
-            if (small[i].getElementById("codePostalID").innerText !== codePostal) {
-                //hide the offer
-                small[i].parentNode.style = "display:none";
-            }
-            else{
-                //show the offer
-                small[i].parentNode.style = "display:block";
+        console.log("Number of small offers: " + small.length);
+
+        for (let i = 0; i < small.length; i++) {
+            console.log("Offer number: " + i);
+
+            // Check the code postal element within the small offer
+            const codePostalElement = small[i].querySelector(".codePostalID"); // Assuming class is used, update this based on your HTML
+
+            // Add a check for null before accessing innerText
+            if (codePostalElement) {
+                const codePostalValue = codePostalElement.innerText.trim();
+                console.log("Code postal value: " + codePostalValue);
+
+                // Check if the code postal contains the entered value
+                if (codePostalValue.includes(codePostal)) {
+                    // Show the offer
+                    small[i].style.display = "block";
+                } else {
+                    // Hide the offer
+                    small[i].style.display = "none";
+                }
+            } else {
+                console.error("Element with class 'codePostalID' not found in the small offer.");
             }
         }
+
+
         /*
         for(let i = 0; i < small.length; i++){
             console.log("offre nb :" + i);
