@@ -2,6 +2,7 @@
 
 namespace App\SAE\Controller;
 
+use App\SAE\Lib\ConnexionUtilisateur;
 use App\SAE\Lib\MessageFlash;
 
 abstract class ControllerGenerique
@@ -38,6 +39,12 @@ abstract class ControllerGenerique
 
     public static function zoneDetest(): void{
         self::afficheVue('view.php', ['pagetitle' => 'Zone de test', 'cheminVueBody' => 'SAE/zoneDeTest.php']);
+    }
+
+    public static function disconnect()
+    {
+        ConnexionUtilisateur::deconnecter();
+        self::redirectionVersURL("success", "Déconnexion réussie", "home");
     }
 
 

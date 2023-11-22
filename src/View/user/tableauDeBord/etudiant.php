@@ -3,9 +3,6 @@
 <link rel="stylesheet" href="assets/css/offer.css">
 <link rel="stylesheet" href="assets/css/filter.css">
 <script src="assets/javascript/buildOfferTable.js"></script>
-<?php
-
-?>
 
 
 <div class="container">
@@ -19,8 +16,10 @@
             <p>Adresse : 123 rue de la paix</p>
             <p>Code postal : <?php echo $user->getCodePostalEtudiant();?></p>
             <p>Téléphone : <?php echo $user->getTelephoneEtudiant();?></p>
-            <p>Couriel : <?php echo $user->getMailUniversitaireEtudiant();?></p>
-            <a href="frontController.php?controller=Main&action=displayTDBetu" class="button">Modifier mes infos</a>
+            <p>Couriel Universitaire: <?php echo $user->getMailUniversitaireEtudiant();?></p>
+            <p>Couriel Personnel: <?php echo $user->getMailPersoEtudiant();?></p>
+
+            <a href="frontController.php?controller=etudiant&action=afficherDetailEtudiant" class="button">Modifier mes infos</a>
             <a href="frontController.php?controller=Main&action=displayTDBetu" class="button">Accéder à mes brouillons</a>
         </div>
         <div class="VBox" id="recentOffers">

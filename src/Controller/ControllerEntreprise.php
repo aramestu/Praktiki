@@ -123,12 +123,6 @@ class ControllerEntreprise extends ControllerGenerique
         }
     }
 
-    public static function disconnect()
-    {
-        ConnexionUtilisateur::deconnecter();
-        self::redirectionVersURL("success", "Déconnexion réussie", "home");
-    }
-
 
     public static function creerDepuisFormulaire(): void
     {

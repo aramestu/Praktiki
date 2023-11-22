@@ -39,8 +39,8 @@
                 ';
         } else {
             echo '
-                    <a href="frontController.php?controller=Main&action=displayTDBetu" class="nav-item" data-action="tdbEtudiant">Mes infos</a>
-                    <a href="frontController.php?action=disconnect&controller=Entreprise" class="nav-item" data-action="disconnect">Déconnexion</a>
+                    <a href="frontController.php?controller=Etudiant&action=displayTDBetu" class="nav-item" data-action="tdbEtudiant">Mes infos</a>
+                    <a href="frontController.php?action=disconnect&controller=Generique" class="nav-item" data-action="disconnect">Déconnexion</a>
                 ';
         }
         ?>

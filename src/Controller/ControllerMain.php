@@ -147,22 +147,7 @@ class ControllerMain extends ControllerGenerique
     /**
      * @throws \Exception
      */
-    public static function displayTDBetu()
-    {
-        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(null, null, null, null,null
-            ,null,null,"lastWeek",null,null);
-        $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user=(new EtudiantRepository())->getByEmail($mail);
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Tableau de bord',
-                'listeExpPro' => $listeExpPro,
-                'user'=>$user,
-                'cheminVueBody' => 'user/tableauDeBord/etudiant.php',
-            ]
-        );
-    }
+
 
     public static function displayTDBentreprise()
     {
