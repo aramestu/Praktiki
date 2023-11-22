@@ -5,6 +5,7 @@ namespace App\SAE\Controller;
 use App\SAE\Config\ConfLDAP;
 use App\SAE\Lib\ConnexionUtilisateur;
 use App\SAE\Lib\Ldap;
+use App\SAE\Lib\UserInformation;
 use App\SAE\Lib\MessageFlash;
 use Exception;
 
@@ -72,8 +73,10 @@ class ControllerLDAP extends ControllerGenerique
     public static function connecter()
     {
         if (isset($_REQUEST["username"],$_REQUEST["password"])) {
-            if (Ldap::connection($_REQUEST["username"],$_REQUEST["password"])) {
-                ConnexionUtilisateur::connecter(Ldap::getUserMail());
+
+            $userInformation = Ldap::connection($_REQUEST["username"],$_REQUEST["password"]);
+            if ($userInformation) {
+                ConnexionUtilisateur::connecter($userInformation->getMail());
                 self::redirectionVersURL("success", "Connexion réussie", "controller=Main&action=displayTDBetu");
             } else {
                 self::redirectionVersURL("warning", "Identifiant ou Mot de passe incorrect", "connect&controller=LDAP");
