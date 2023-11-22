@@ -40,21 +40,6 @@ abstract class ControllerGenerique
         self::afficheVue('view.php', ['pagetitle' => 'Zone de test', 'cheminVueBody' => 'SAE/zoneDeTest.php']);
     }
 
-    // nomData ex: Alternance / Stage / TuteurProfessionnel
-    protected static function getBySearch(string $nomData, string $keywords): void
-    {
-        $keywords = urldecode($_GET['keywords']);
-        $listeExpPro = $nomRepository::search($keywords);
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Recherche',
-                'listeExpPro' => $listeExpPro,
-                'cheminVueBody' => 'offer/offerList.php',
-            ]
-        );
-    }
-
 
     public static function redirectionVersURL(string $type,string $message,string $url): void
     {
