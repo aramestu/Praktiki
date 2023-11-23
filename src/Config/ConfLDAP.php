@@ -46,7 +46,7 @@ class ConfLDAP
             self::$ldapConfig['ldap_conn'] = $ldap_conn;
             return $ldap_conn;
         } else {
-            throw new Exception('LDAP connection');
+            throw new Exception('LDAP connexion');
         }
     }
 }
