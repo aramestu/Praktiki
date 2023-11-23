@@ -18,7 +18,7 @@
         </div>
 
         <p>
-            <input type="hidden" name="action" value="connecterEntreprise">
+            <input type="hidden" name="action" value="connecter">
             <input type="hidden" name="controller" value="Connexion">
             <input type="submit" value="Connexion">
         </p>
