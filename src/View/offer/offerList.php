@@ -48,7 +48,7 @@
             <div class="button-checkbox alternance">
                 <label>
                     <input type="checkbox" id="alternance" name="alternance" value="alternance" <?php if (isset($_GET['alternance'])){ echo "checked";}?>>
-                    <span><i class="fa fa-check" aria-hidden="true"></i>Alternance</span>
+                    <span>Alternance</span>
                 </label>
             </div>
 
@@ -75,7 +75,9 @@
                 <option value="datePublicationInverse" <?php if (isset($_GET['optionTri']) && $_GET['optionTri'] == "datePublicationInverse"){ echo "selected";}?> >Offres les plus anciennes</option>
             </select>
 
-            <button type="reset" id="reset">Tout effacer</button>
+            <button type="reset" id="reset">
+                <span>Effacer</span>
+            </button>
             <input type="hidden" name="action" value="getExpProByFiltre">
             <input type="hidden" name="controller" value="ExpPro">
         </form>

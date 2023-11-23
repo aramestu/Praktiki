@@ -44,8 +44,9 @@ input[type="submit"]{
 }
 
 #reset{
-    background: rgba(0, 0, 0, 0.1);
-    color: var(--white);
+    background: var(--white);
+    color: var(--grey3);
+    border : 2px solid var(--pastelRed);
     width: 100%;
     padding: 15px 0;
     border: none;
@@ -53,12 +54,32 @@ input[type="submit"]{
     cursor: pointer;
     font-weight: bold;
     font-size : 1.2em;
-    box-shadow: inset 10px 10px 20px #ffffff45,
-    inset -10px -10px 20px #00000020,
-    10px 10px 10px #00000020,
-    -10px -10px 10px #ffffff45;
     margin-top: 30px;
     transition: all 0.3s ease-in-out;
+}
+
+#reset:hover{
+    color: var(--grey3);
+    cursor: default;
+}
+
+#reset.active:hover{
+    background: var(--yellow);
+    color: var(--white);
+    cursor: pointer;
+}
+
+#reset.active{
+    background: var(--darkYellow);
+    color: var(--white);
+}
+
+#reset span::before {
+    content: '\f00d';
+    font-family: 'FontAwesome';
+    float: left;
+    margin-left: 15px;
+    margin-top: 2px;
 }
 
 
@@ -103,8 +124,12 @@ input[type="submit"]{
     overflow: hidden;
     display: block;
     width: 170px;
+    border : 2px solid var(--bleuUM);
+    /*
     box-shadow: inset 10px 10px 20px #00000020,
     inset -10px -10px 20px #ffffff45;
+
+     */
 }
 
 .button-checkbox input:checked{
@@ -127,10 +152,24 @@ input[type="submit"]{
     transition: all 0.15s ease-in-out;
 }
 
-
 .button-checkbox label input {
     display: none;
     position: absolute;
+}
+
+.button-checkbox span::before {
+    content: '\f067';
+    font-family: 'FontAwesome';
+    float: left;
+    margin-left: 15px;
+}
+
+.button-checkbox input[type="checkbox"]:checked + span::before {
+    content: '\f00c';
+}
+
+.button-checkbox input[type="checkbox"]:checked:hover + span::before {
+    content: '\f068';
 }
 
 .stage input:checked + span{
@@ -179,7 +218,10 @@ input[type="submit"]{
     background-color: var(--white);
     -webkit-appearance: none;
     -moz-appearance: textfield;
+    /*
     box-shadow: inset 10px 10px 20px #00000020, inset -10px -10px 20px #ffffff45;
+
+     */
     color: var(--darkBlue1);
 }
 
@@ -207,7 +249,10 @@ input[type="submit"]{
     background-color: var(--white);
     -webkit-appearance: none;
     -moz-appearance: textfield;
+    /*
     box-shadow: inset 10px 10px 20px #00000020, inset -10px -10px 20px #ffffff45;
+
+     */
     color: var(--darkBlue1);
 }
 

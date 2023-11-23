@@ -16,7 +16,17 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    function updateResetButton() {
+        const resetButton = document.getElementById('reset');
+        if (stage.checked || alternance.checked || datePublication.value || codePostal.value || optionTri.value || dateDebut.value || dateFin.value || BUT2.checked || BUT3.checked || searchbar.value) {
+            resetButton.classList.add('active');
+        } else {
+            resetButton.classList.remove('active');
+        }
+    }
+
     revealElements();
+    updateResetButton();
 
 
     stage.addEventListener('click', () => {
@@ -112,6 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const offersContainer = document.querySelector('.tableResponsive');
                 offersContainer.innerHTML = data;
                 revealElements();
+                updateResetButton();
             })
             .catch(error => console.error('Error fetching offers:', error));
     }
