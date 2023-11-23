@@ -35,7 +35,9 @@ header::before {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: var(--rougeUM);
+    background: rgba(255, 86, 96, 0.8);
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
     z-index: -1;
 }
 
