@@ -38,7 +38,6 @@
             <input type="date" name="dateFin" id="dateFin" <?php if (isset($_GET['dateFin'])){ echo "value=\"" . $_GET['dateFin'] . "\"";}?>>
 
 
-            <span>Type d'offre</span>
             <div class="button-checkbox stage">
                 <Label>
                     <input type="checkbox" id="stage" name="stage" value="stage" <?php if (isset($_GET['stage'])){ echo "checked";}?>>
@@ -49,11 +48,10 @@
             <div class="button-checkbox alternance">
                 <label>
                     <input type="checkbox" id="alternance" name="alternance" value="alternance" <?php if (isset($_GET['alternance'])){ echo "checked";}?>>
-                    <span>Alternance</span>
+                    <span><i class="fa fa-check" aria-hidden="true"></i>Alternance</span>
                 </label>
             </div>
 
-            <span>Année minimum demandée</span>
             <div class="button-checkbox stage">
                 <Label>
                     <input type="checkbox" id="BUT2" name="BUT2" value="BUT2" <?php if (isset($_GET['BUT2'])){ echo "checked";}?>>
@@ -68,22 +66,18 @@
                 </Label>
             </div>
 
-            <label for="codePostal">Code Postal</label>
-            <input type="number" id="codePostal" name="codePostal"  min="0" max="99999" placeholder="34090" <?php if (isset($_GET['codePostal'])){ echo "value=\"" . rawurldecode($_GET['codePostal'] . "\"");}?>>
+            <input type="number" id="codePostal" name="codePostal"  min="0" max="99999" placeholder="code postal" <?php if (isset($_GET['codePostal'])){ echo "value=\"" . rawurldecode($_GET['codePostal'] . "\"");}?>>
 
 
             <select name="optionTri" id="optionTri">
                 <option value="" disabled <?php if (!isset($_GET['optionTri'])){ echo "selected";}?> style="display:none;">Trier par</option>
                 <option value="datePublication" <?php if (isset($_GET['optionTri']) && $_GET['optionTri'] == "datePublication"){ echo "selected";}?> >Offres les plus récentes</option>
                 <option value="datePublicationInverse" <?php if (isset($_GET['optionTri']) && $_GET['optionTri'] == "datePublicationInverse"){ echo "selected";}?> >Offres les plus anciennes</option>
-                <option value="salaireCroissant" <?php if (isset($_GET['optionTri']) && $_GET['optionTri'] == "salaireCroissant"){ echo "selected";}?> >Salaire croissant</option>
-                <option value="salaireDecroissant" <?php if (isset($_GET['optionTri']) && $_GET['optionTri'] == "salaireDecroissant"){ echo "selected";}?> >Salaire décroissant</option>
             </select>
 
             <button type="reset" id="reset">Tout effacer</button>
             <input type="hidden" name="action" value="getExpProByFiltre">
             <input type="hidden" name="controller" value="ExpPro">
-            <input type="submit" id="rechercher" value="rechercher">
         </form>
     </div>
 

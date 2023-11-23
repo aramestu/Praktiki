@@ -9,6 +9,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const BUT2 = document.getElementById('BUT2');
     const BUT3 = document.getElementById('BUT3');
     const searchbar = document.getElementById('search-bar');
+    function revealElements() {
+        const smallElements = document.querySelectorAll('.small');
+        smallElements.forEach(function(element, index) {
+            element.style.animationDelay = index * 0.06 + "s";
+        });
+    }
+
+    revealElements();
+
 
     stage.addEventListener('click', () => {
         updateOffers();
@@ -102,6 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 const offersContainer = document.querySelector('.tableResponsive');
                 offersContainer.innerHTML = data;
+                revealElements();
             })
             .catch(error => console.error('Error fetching offers:', error));
     }
