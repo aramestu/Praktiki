@@ -3,24 +3,6 @@
 <script src="assets/javascript/buildOfferTable.js"></script>
 <script src="assets/javascript/dynamicFilters.js"></script>
 
-<div class="container">
-
-    <form method="get" action="frontController.php">
-
-        <input type="hidden" name="action" value="getExpProBySearch">
-        <input type="hidden" name="controller" value="ExpPro">
-        <input type="text" placeholder="Rechercher une offre" name="keywords" id="search-bar" <?php
-        if (isset($_GET["keywords"])) {
-            echo "value=\"" . rawurldecode($_GET['keywords']) . "\"";
-        }
-        ?>>
-
-        <button type="submit" class="custom-button" id="search-button">
-            <img src="assets/images/loupe.png" alt="Loupe Icon" width="20" height="20">
-        </button>
-
-    </form>
-</div>
 <div class="HBox" id="center">
 
     <div class="container VBox" id="sideFilter">
@@ -83,8 +65,28 @@
         </form>
     </div>
 
+    <div class="VBox">
+
+            <form id="searchBarParent" method="get" action="frontController.php">
+
+                <input type="hidden" name="action" value="getExpProBySearch">
+                <input type="hidden" name="controller" value="ExpPro">
+                <input type="text" placeholder="Rechercher une offre" name="keywords" id="search-bar" <?php
+                if (isset($_GET["keywords"])) {
+                    echo "value=\"" . rawurldecode($_GET['keywords']) . "\"";
+                }
+                ?>>
+
+                <button type="submit" class="custom-button" id="search-button">
+                    <img src="assets/images/loupe.png" alt="Loupe Icon" width="0" height="0">
+                </button>
+
+            </form>
+
     <div id="tableOffer">
+
         <?php require 'offerTable.php'; ?>
+    </div>
     </div>
 
 </div>

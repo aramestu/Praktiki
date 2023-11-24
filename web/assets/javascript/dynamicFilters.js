@@ -96,10 +96,10 @@ document.addEventListener('DOMContentLoaded', function () {
             queryParams.append('alternance', alternance);
         }
         if (BUT2) {
-            queryParams.append('BUT2', BUT2);
+            queryParams.append('BUT2', 'BUT2');
         }
         if (BUT3) {
-            queryParams.append('BUT3', BUT3);
+            queryParams.append('BUT3', 'BUT3');
         }
         if (codePostal) {
             queryParams.append('codePostal', codePostal);

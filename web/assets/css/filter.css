@@ -45,8 +45,8 @@ input[type="submit"]{
 
 #reset{
     background: var(--white);
-    color: var(--grey3);
-    border : 2px solid var(--darkYellow);
+    color: var(--grey0);
+    border : 2px solid var(--grey0);
     width: 100%;
     padding: 11px 0;
     border-radius: 1.5rem;
@@ -56,19 +56,30 @@ input[type="submit"]{
     transition: all 0.3s ease-in-out;
 }
 
+#reset:not(.active) span:hover{
+    cursor: default;
+}
+
 #reset:hover{
-    color: var(--grey3);
+    color: var(--grey0);
+    cursor: default;
+}
+
+#reset:not(.active):hover span{
+    color: var(--grey0);
     cursor: default;
 }
 
 #reset.active:hover{
     background: var(--yellow);
+    border-color: var(--yellow);
     color: var(--white);
     cursor: pointer;
 }
 
 #reset.active{
     background: var(--darkYellow);
+    border-color: var(--darkYellow);
     color: var(--white);
 }
 
@@ -79,7 +90,6 @@ input[type="submit"]{
     margin-left: 15px;
     margin-top: 2px;
 }
-
 
 .tableResponsive{
     display: flex;
@@ -97,7 +107,6 @@ input[type="submit"]{
     color : var(--green);
 }
 
-
 #search-button{
     width:20px;
     height:20px;
@@ -112,6 +121,15 @@ input[type="submit"]{
     opacity: 0.6;
 }
 
+#search-bar {
+    margin-bottom: 15px;
+    margin-left: 30px;
+    width: 95%;
+}
+
+#searchBarParent {
+    width: 100%;
+}
 
 
 .button-checkbox{
@@ -123,11 +141,6 @@ input[type="submit"]{
     display: block;
     width: 170px;
     border : 2px solid var(--bleuUM);
-    /*
-    box-shadow: inset 10px 10px 20px #00000020,
-    inset -10px -10px 20px #ffffff45;
-
-     */
 }
 
 .button-checkbox input:checked{
@@ -191,7 +204,7 @@ input[type="submit"]{
     backdrop-filter: blur(50px);
     -webkit-backdrop-filter: blur(50px);
     padding: 2%;
-    border-radius: 1.5rem;
+    border-radius: 36px;
     box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1), 0 4px 16px rgba(31, 38, 135, 0.1);
     display: flex;
     flex-direction: column;
