@@ -3,7 +3,7 @@
 
 <div class="container">
     <form method="get">
-        <h2 id="remplaceBaliseLegend">Connexion</h2>
+        <h2 id="remplaceBaliseLegend">Connexion entreprise</h2>
         <p>
             <label for="username">Siret</label>
             <input type="text" name="username" id="username" required placeholder="01234567891011">
@@ -20,7 +20,9 @@
         <p>
             <input type="hidden" name="action" value="connecterEntreprise">
             <input type="hidden" name="controller" value="Connexion">
-            <input type="submit" value="Connexion">
+            <button type="submit" value="Connexion" id="connectButton" class="button">
+                <span>Connexion</span>
+            </button>
         </p>
     </form>
     <div class="create-account">
