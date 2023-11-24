@@ -109,8 +109,10 @@ td {
 
 /*--- START SMALL OFFER ---*/
 .small {
+    opacity: 0;
+    transform: translateY(20px);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    border-radius: 1rem;
+    border-radius: 25px;
     padding: 5px;
     text-align: center;
     min-width: 225px;
@@ -120,6 +122,24 @@ td {
     margin-left: 14%;
     color: var(--darkBlue2);
     border: 2.5px solid #F2F2F200;
+    animation: appear 0.5s ease-in-out;
+    animation-fill-mode: forwards;
+    animation-delay: 0.1s;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+.tableResponsive:nth-child(n + 2) {
+    animation-delay: 1s;
 }
 
 .small:hover {
@@ -270,7 +290,7 @@ h3 {
 }
 
 .typeExpPro {
-    border-radius: 0.5rem;
+    border-radius: 13px;
     padding: 6px;
     font-size: 11px;
     font-weight: bold;

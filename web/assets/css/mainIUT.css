@@ -35,7 +35,9 @@ header::before {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: var(--rougeUM);
+    background: rgba(255, 86, 96, 0.8);
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
     z-index: -1;
 }
 
@@ -144,7 +146,8 @@ header:hover::after {
     position: absolute;
     width:100%;
     height:100%;
-    animation: enter-transition-overlay .4s ease-in-out;
+    z-index: -1;
+    /*animation: enter-transition-overlay .4s ease-in-out;*/
 }
 
 @keyframes enter-transition-overlay {
@@ -403,14 +406,22 @@ textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border: none;
+    border: 2px solid var(--grey0);
     border-radius: 1.5rem;
     background-color: var(--white);
     -webkit-appearance: none;
     -moz-appearance: textfield;
-    box-shadow: inset 10px 10px 20px #00000020,
-    inset -10px -10px 20px #ffffff45;
     color: var(--darkBlue1);
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+input[type='date']:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border : 2px solid var(--bleuUM);
 }
 
 span:hover,
@@ -435,10 +446,6 @@ input[type="submit"] {
     cursor: pointer;
     font-weight: bold;
     font-size : 1.2em;
-    box-shadow: inset 10px 10px 20px #ffffff45,
-    inset -10px -10px 20px #00000020,
-    10px 10px 10px #00000020,
-    -10px -10px 10px #ffffff45;
     margin-top: 30px;
     transition: all 0.3s ease-in-out;
 }
@@ -450,8 +457,6 @@ input[type="submit"]:hover {
 
 input[type="submit"]:active {
     color: var(--white);
-    box-shadow: inset 10px 10px 20px #00000020,
-    inset -10px -10px 20px #ffffff45;
     opacity: 0.8;
 }
 
@@ -476,7 +481,7 @@ textarea:focus{
 /*---START NO RESULTS---*/
 #noOfferFound{
     position: absolute;
-    margin-left: 3%;
+    margin-left: -23%;
     background: none;
     box-shadow: none;
 }

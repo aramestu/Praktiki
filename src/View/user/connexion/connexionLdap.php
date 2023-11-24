@@ -3,7 +3,7 @@
 
 <div class="container">
     <form method="get">
-        <h2 id="remplaceBaliseLegend">Connexion</h2>
+        <h2 id="remplaceBaliseLegend">Connexion étudiant</h2>
         <p>
             <label for="username">Identifiant</label>
             <input type="text" name="username" id="username" required placeholder="Identifiant:">
@@ -16,7 +16,9 @@
         <p>
             <input type="hidden" name="action" value="connecterLDAP">
             <input type="hidden" name="controller" value="Connexion">
-            <input type="submit" value="Connexion">
+            <button type="submit" value="Connexion" id="connectButton" class="button">
+                <span>Connexion</span>
+            </button>
         </p>
     </form>
 </div>

@@ -44,23 +44,52 @@ input[type="submit"]{
 }
 
 #reset{
-    background: rgba(0, 0, 0, 0.1);
-    color: var(--white);
+    background: var(--white);
+    color: var(--grey0);
+    border : 2px solid var(--grey0);
     width: 100%;
-    padding: 15px 0;
-    border: none;
+    padding: 11px 0;
     border-radius: 1.5rem;
     cursor: pointer;
     font-weight: bold;
     font-size : 1.2em;
-    box-shadow: inset 10px 10px 20px #ffffff45,
-    inset -10px -10px 20px #00000020,
-    10px 10px 10px #00000020,
-    -10px -10px 10px #ffffff45;
-    margin-top: 30px;
     transition: all 0.3s ease-in-out;
 }
 
+#reset:not(.active) span:hover{
+    cursor: default;
+}
+
+#reset:hover{
+    color: var(--grey0);
+    cursor: default;
+}
+
+#reset:not(.active):hover span{
+    color: var(--grey0);
+    cursor: default;
+}
+
+#reset.active:hover{
+    background: var(--yellow);
+    border-color: var(--yellow);
+    color: var(--white);
+    cursor: pointer;
+}
+
+#reset.active{
+    background: var(--darkYellow);
+    border-color: var(--darkYellow);
+    color: var(--white);
+}
+
+#reset span::before {
+    content: '\f00d';
+    font-family: 'FontAwesome';
+    float: left;
+    margin-left: 15px;
+    margin-top: 2px;
+}
 
 .tableResponsive{
     display: flex;
@@ -70,10 +99,13 @@ input[type="submit"]{
     gap: 15px;
 }
 
+.tableResponsive > a{
+    text-decoration: none;
+}
+
 .tableResponsive:nth-child(2) > .subContainer{
     color : var(--green);
 }
-
 
 #search-button{
     width:20px;
@@ -89,23 +121,26 @@ input[type="submit"]{
     opacity: 0.6;
 }
 
-input[type="checkbox"]{
-    background: var(--white);
-    filter: none;
-    width: 18px;
-    height: 18px;
+#search-bar {
+    margin-bottom: 15px;
+    margin-left: 30px;
+    width: 95%;
 }
+
+#searchBarParent {
+    width: 100%;
+}
+
 
 .button-checkbox{
     background-color: var(--white);
     padding: 0 0;
-    border-radius: 13px;
+    border-radius: 50px;
     margin-bottom: 15px;
     overflow: hidden;
     display: block;
-    /*box-shadow: inset 2px 2px 8px var(--grey1);*/
-    box-shadow: inset 10px 10px 20px #00000020,
-    inset -10px -10px 20px #ffffff45;
+    width: 170px;
+    border : 2px solid var(--bleuUM);
 }
 
 .button-checkbox input:checked{
@@ -114,7 +149,6 @@ input[type="checkbox"]{
 }
 
 .button-checkbox label {
-    float:left;
     line-height: 3.0em;
     width : 12.0em;
     height: 3.0em;
@@ -129,10 +163,24 @@ input[type="checkbox"]{
     transition: all 0.15s ease-in-out;
 }
 
-
 .button-checkbox label input {
     display: none;
     position: absolute;
+}
+
+.button-checkbox span::before {
+    content: '\f067';
+    font-family: 'FontAwesome';
+    float: left;
+    margin-left: 15px;
+}
+
+.button-checkbox input[type="checkbox"]:checked + span::before {
+    content: '\f00c';
+}
+
+.button-checkbox input[type="checkbox"]:checked:hover + span::before {
+    content: '\f068';
 }
 
 .stage input:checked + span{
@@ -147,6 +195,7 @@ input[type="checkbox"]{
     background-color: var(--bleuUM);
     color :var(--white);
     font-weight: bold;
+
 }
 
 /*---START SIDE FILTER---*/
@@ -155,12 +204,13 @@ input[type="checkbox"]{
     backdrop-filter: blur(50px);
     -webkit-backdrop-filter: blur(50px);
     padding: 2%;
-    border-radius: 1.5rem;
+    border-radius: 36px;
     box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1), 0 4px 16px rgba(31, 38, 135, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
     width:210px;
+    min-width: 210px;
 }
 
 #sideFilter form {
@@ -174,12 +224,14 @@ input[type="checkbox"]{
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border: none;
     border-radius: 1.5rem;
     background-color: var(--white);
     -webkit-appearance: none;
     -moz-appearance: textfield;
+    /*
     box-shadow: inset 10px 10px 20px #00000020, inset -10px -10px 20px #ffffff45;
+
+     */
     color: var(--darkBlue1);
 }
 
@@ -202,12 +254,10 @@ input[type="checkbox"]{
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border: none;
     border-radius: 1.5rem;
     background-color: var(--white);
     -webkit-appearance: none;
     -moz-appearance: textfield;
-    box-shadow: inset 10px 10px 20px #00000020, inset -10px -10px 20px #ffffff45;
     color: var(--darkBlue1);
 }
 

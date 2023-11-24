@@ -106,6 +106,76 @@ class ControllerExpPro extends ControllerGenerique
         );
     }
 
+    public static function getFilteredOffers(): void
+    {
+        $dateDebut = null;
+        $dateFin = null;
+        $optionTri = null;
+        $stage = null;
+        $alternance = null;
+        $codePostal = null;
+        $datePublication = null;
+        $BUT2 = null;
+        $BUT3 = null;
+        if (isset($_GET['dateDebut'])) {
+            $dateDebut = $_GET['dateDebut'];
+        }
+        if (isset($_GET['dateFin'])) {
+            $dateFin = $_GET['dateFin'];
+        }
+        if (isset($_GET['optionTri'])) {
+            $optionTri = $_GET['optionTri'];
+        }
+        if (isset($_GET['stage'])) {
+            $stage = $_GET['stage'];
+        }
+        if (isset($_GET['alternance'])) {
+            $alternance = $_GET['alternance'];
+        }
+        if (isset($_GET['codePostal'])) {
+            $codePostal = $_GET['codePostal'];
+        }
+        if (isset($_GET['datePublication'])) {
+            $datePublication = $_GET['datePublication'];
+        }
+        if (isset($_GET['BUT2'])){
+            $BUT2 = $_GET['BUT2'];
+        }
+        if (isset($_GET['BUT3'])){
+            $BUT3 = $_GET['BUT3'];
+        }
+        if(isset($_GET['keywords'])){
+            $keywords = urldecode($_GET['keywords']);
+        }
+        else{
+            $keywords = null;
+        }
+
+        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(
+            $keywords,
+            $dateDebut,
+            $dateFin,
+            $optionTri,
+            $stage,
+            $alternance,
+            $codePostal,
+            $datePublication,
+            $BUT2,
+            $BUT3
+        );
+
+
+        if(empty($listeExpPro)){
+            require __DIR__ ."/../View/offer/noOfferFound.php";
+        }else{
+            for($i=0;$i<count($listeExpPro);$i++){
+                $expPro = $listeExpPro[$i];
+                require __DIR__ ."/../View/offer/smallOffer.php";
+            }
+        }
+    }
+
+
     public static function modifierDepuisFormulaire(): void
     {
         $msg = "Offre modifiée avec succés !";

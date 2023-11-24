@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="assets/css/button.css">
 
     <script src="assets/javascript/navbar.js"></script>
+    <link rel="stylesheet" href="assets/css/resources/font-awesome-4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
