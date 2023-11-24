@@ -46,15 +46,13 @@ input[type="submit"]{
 #reset{
     background: var(--white);
     color: var(--grey3);
-    border : 2px solid var(--pastelRed);
+    border : 2px solid var(--darkYellow);
     width: 100%;
-    padding: 15px 0;
-    border: none;
+    padding: 11px 0;
     border-radius: 1.5rem;
     cursor: pointer;
     font-weight: bold;
     font-size : 1.2em;
-    margin-top: 30px;
     transition: all 0.3s ease-in-out;
 }
 
@@ -213,7 +211,6 @@ input[type="submit"]{
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border: none;
     border-radius: 1.5rem;
     background-color: var(--white);
     -webkit-appearance: none;
@@ -244,15 +241,10 @@ input[type="submit"]{
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border: none;
     border-radius: 1.5rem;
     background-color: var(--white);
     -webkit-appearance: none;
     -moz-appearance: textfield;
-    /*
-    box-shadow: inset 10px 10px 20px #00000020, inset -10px -10px 20px #ffffff45;
-
-     */
     color: var(--darkBlue1);
 }
 
