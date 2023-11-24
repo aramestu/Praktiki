@@ -106,7 +106,6 @@ class ControllerExpPro extends ControllerGenerique
         );
     }
 
-    // Add this method to your ControllerExpPro class
     public static function getFilteredOffers(): void
     {
         $dateDebut = null;

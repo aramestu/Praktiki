@@ -8,7 +8,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const dateFin = document.getElementById('dateFin');
     const BUT2 = document.getElementById('BUT2');
     const BUT3 = document.getElementById('BUT3');
+
     const searchbar = document.getElementById('search-bar');
+    const resetButton = document.getElementById('reset');
+
     function revealElements() {
         const smallElements = document.querySelectorAll('.small');
         smallElements.forEach(function(element, index) {
@@ -60,11 +63,8 @@ document.addEventListener('DOMContentLoaded', function () {
         updateOffers();
     });
 
-    document.getElementById('rechercher').addEventListener('click', function (event) {
-        updateOffers();
-    });
-    document.getElementById('reset').addEventListener('click', function () {
-        updateOffers();
+    resetButton.addEventListener('click', ()=>{
+        resetFilters();
     });
 
     function updateOffers() {
@@ -125,5 +125,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 updateResetButton();
             })
             .catch(error => console.error('Error fetching offers:', error));
+    }
+
+    function resetFilters() {
+        document.getElementById('datePublication').value = '';
+        document.getElementById('dateDebut').value = '';
+        document.getElementById('dateFin').value = '';
+        document.getElementById('stage').checked = false;
+        document.getElementById('alternance').checked = false;
+        document.getElementById('BUT2').checked = false;
+        document.getElementById('BUT3').checked = false;
+        document.getElementById('codePostal').value = '';
+        document.getElementById('optionTri').value = '';
+        document.getElementById('search-bar').value = '';
+        updateResetButton();
+        updateOffers();
     }
 });
