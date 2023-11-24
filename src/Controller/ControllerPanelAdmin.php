@@ -46,7 +46,7 @@ class ControllerPanelAdmin extends ControllerGenerique {
         if(isset($_GET["keywords"])){
             $keywords .= $_GET["keywords"];
         }
-        $listEtudiants = (new EtudiantRepository())->search($keywords);
+        $listEtudiants = (new EtudiantRepository())->searchs($keywords);
         self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
                                                 'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
                                                 'adminPanelView' => 'user/adminPanel/etudiant/etudiantList.php',
