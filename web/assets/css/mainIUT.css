@@ -481,7 +481,7 @@ textarea:focus{
 /*---START NO RESULTS---*/
 #noOfferFound{
     position: absolute;
-    margin-left: 3%;
+    margin-left: -23%;
     background: none;
     box-shadow: none;
 }

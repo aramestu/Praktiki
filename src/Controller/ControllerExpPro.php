@@ -164,9 +164,14 @@ class ControllerExpPro extends ControllerGenerique
             $BUT3
         );
 
-        for($i=0;$i<count($listeExpPro);$i++){
-            $expPro = $listeExpPro[$i];
-            require __DIR__ ."/../View/offer/smallOffer.php";
+
+        if(empty($listeExpPro)){
+            require __DIR__ ."/../View/offer/noOfferFound.php";
+        }else{
+            for($i=0;$i<count($listeExpPro);$i++){
+                $expPro = $listeExpPro[$i];
+                require __DIR__ ."/../View/offer/smallOffer.php";
+            }
         }
     }
 
