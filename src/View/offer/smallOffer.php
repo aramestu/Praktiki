@@ -16,7 +16,7 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
                         echo htmlspecialchars($expPro->getNomExperienceProfessionnel());
                     }
                     ?></p>
-                <p><?php echo (new ExperienceProfessionnelRepository())->getDatePublication($expPro) ?></p>
+                <p><?php echo ExperienceProfessionnelRepository::getDatePublication($expPro) ?></p>
             </div>
             <div class="right">
                 <p>Du <?php echo htmlspecialchars($expPro->getDateDebutExperienceProfessionnel()); ?></p>

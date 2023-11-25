@@ -187,7 +187,24 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         return $this->construireDepuisTableau($exp);
     }
 
-    private static function sort(array $stages, array $alternances, string $option): array
+    public static function sort(array $stages, array $alternances, string $option): array
+    {
+        $allExperienceProfessionnel = array_merge($stages, $alternances);
+
+        if ($option == "datePublicationInverse") {
+            usort($allExperienceProfessionnel, function ($a, $b) {
+                return strtotime($a->getDatePublication()) - strtotime($b->getDatePublication()); // classe anonyme
+            });
+        } elseif ($option == "datePublication") {
+            usort($allExperienceProfessionnel, function ($a, $b) {
+                return strtotime($b->getDatePublication()) - strtotime($a->getDatePublication());
+            });
+        }
+        return $allExperienceProfessionnel;
+    }
+
+
+    /*public static function sort(array $stages, array $alternances, string $option): array
     {
         if ($option == "salaireCroissant" || $option == "salaireDecroissant") {
             return array_merge($stages, $alternances);
@@ -205,7 +222,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             }
         }
         return array_merge($allExperienceProfessionnel, $stages, $alternances);
-    }
+    }*/
 
     public function mettreAJour(AbstractDataObject $exp): void
     {
@@ -295,8 +312,8 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         $tabStages = (new StageRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
         $tabAlternance = (new AlternanceRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
         $tabOffreNonDefini = (new OffreNonDefiniRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
-        // Si c'est filtré par stage
-        if (isset($stage)) {
+        // Si c'est filtré par stage et pas par alternance
+        if (isset($stage) && ! isset($alternance)) {
             // S'il n'y a pas une option de trie
             if(! isset($optionTri)){
                 return array_merge($tabStages, $tabOffreNonDefini);
@@ -305,8 +322,8 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
                 return self::sort($tabStages, $tabOffreNonDefini, $optionTri);
             }
         }
-        // Si c'est filtré par alternance
-        else if (isset($alternance)) {
+        // Si c'est filtré par alternance et aps par stage
+        else if (isset($alternance) && ! isset($stage)) {
             if(! isset($optionTri)){
                 return array_merge($tabAlternance, $tabOffreNonDefini);
             }
@@ -314,6 +331,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
                 return self::sort($tabAlternance, $tabOffreNonDefini, $optionTri);
             }
         }
+        // S'il n'y a pas de filtre ou que c'est filtré par stage et alternance
         else {
             if (!isset($optionTri)) {
                 return array_merge(array_merge($tabStages, $tabAlternance), $tabOffreNonDefini);
