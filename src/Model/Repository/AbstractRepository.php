@@ -162,7 +162,7 @@ abstract class AbstractRepository {
         }
 
         for($i = 0; $i < $nbColonnes; $i++){
-            // SI ce n'est pas le premier alors je met un OR
+            // SI ce n'est pas le premier alors je met un OR.
             if($i != 0){
                 $chaine = $chaine . "OR ";
             }
