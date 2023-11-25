@@ -209,33 +209,49 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
 
     public function mettreAJour(AbstractDataObject $exp): void
     {
-        // Mise à jour de la table Experience Pro
-        $sql = "UPDATE ExperienceProfessionnel SET
-                sujetExperienceProfessionnel= :sujetTag,
-                thematiqueExperienceProfessionnel= :thematiqueTag,
-                tachesExperienceProfessionnel= :tacheTag,
-                niveauExperienceProfessionnel= :niveauTag,
-                codePostalExperienceProfessionnel= :codePostalTag,
-                adresseExperienceProfessionnel= :adresseTag,
-                dateDebutExperienceProfessionnel= :dateDebutTag,
-                dateFinExperienceProfessionnel= :dateFinTag 
-                WHERE idExperienceProfessionnel= :idExpPro";
+        // On insère d'abord dans ExperienceProfessionnel
+        $pdo = Model::getPdo();
+        $table = $this->getNomTable();
+        $colonnes = $this->getNomsColonnes();
+        array_splice($colonnes, array_search('datePublication', $colonnes), 1); // POur supprimer datePublication car on n'a pas besoin de la modif
 
-        $pdoStatement = Model::getPdo()->prepare($sql);
+        // POur dire dans quel valeur on va insérer
+        $sql = "UPDATE ExperienceProfessionnel SET ";
+
+        // On commence à 1 pour éviter la clé primaire
+        for($i =1; $i<sizeof($colonnes); $i++){
+            $sql = $sql . $colonnes[$i] . "= :" . $colonnes[$i] . "Tag";
+
+            // Si ce n'est pas le dernier alros on met une virgule
+            if($i!=sizeof($colonnes)-1){
+                $sql = $sql . ", ";
+            }
+        }
+
+        $sql .= " WHERE idExperienceProfessionnel= :idExperienceProfessionnelTag";
+
+        $formaTab = $exp->formatTableau();
+        // J'enlève les colonnes supplémentaires ex: gratificatione et idStage
+        foreach ($this->getNomsColonnesSupplementaires() as $col){
+            unset($formaTab[$col . "Tag"]);
+        }
+        unset($formaTab["datePublicationTag"]); // j'enlève la datePublicaiton pour le formatTab
 
 
-        $values = array(
-            "sujetTag" => $exp->getSujetExperienceProfessionnel(),
-            "thematiqueTag" => $exp->getThematiqueExperienceProfessionnel(),
-            "tacheTag" => $exp->getTachesExperienceProfessionnel(),
-            "niveauTag" => $exp->getNiveauExperienceProfessionnel(),
-            "codePostalTag" => $exp->getCodePostalExperienceProfessionnel(),
-            "adresseTag" => $exp->getAdresseExperienceProfessionnel(),
-            "dateDebutTag" => $exp->getDateDebutExperienceProfessionnel(),
-            "dateFinTag" => $exp->getDateFinExperienceProfessionnel(),
-            "idExpPro" => $exp->getIdExperienceProfessionnel()
-        );
-        $pdoStatement->execute($values);
+        // SI les valeures sont vides alors on met null pour insérer
+        if ($exp->getNumEtudiant() == "") {
+            $formaTab["numEtudiantTag"] = null;
+        }
+        if ($exp->getMailEnseignant() == "") {
+            $formaTab["mailEnseignantTag"] = null;
+        }
+        if ($exp->getMailTuteurProfessionnel() == "") {
+            $formaTab["mailTuteurProfessionnelTag"] = null;
+        }
+
+        $requeteStatement = $pdo->prepare($sql);
+        $requeteStatement->execute($formaTab);
+
 
         // Mise à jour de la sous table s'il n'y a pas que la clé primaire
         $colonnes = $this->getNomsColonnesSupplementaires();
