@@ -211,7 +211,6 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
     {
         // On insère d'abord dans ExperienceProfessionnel
         $pdo = Model::getPdo();
-        $table = $this->getNomTable();
         $colonnes = $this->getNomsColonnes();
         array_splice($colonnes, array_search('datePublication', $colonnes), 1); // POur supprimer datePublication car on n'a pas besoin de la modif
 
@@ -263,9 +262,8 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             $sql2 = "UPDATE $nomTable SET ";
             // Je rempli la requête et le tableau de valeur grâce au format Tableau
             for($i = 1; $i < sizeof($colonnes); $i++){
-                $nomColonne = $colonnes[$i];
-                $sql2 .= " $nomColonne= :$nomColonne" . "Tag";
-                $values2[$nomColonne . "Tag"] = $formatTableau[$nomColonne . "Tag"];
+                $sql2 .= " $colonnes[$i]" . "= :" . "$colonnes[$i]" . "Tag";
+                $values2[$colonnes[$i] . "Tag"] = $formatTableau[$colonnes[$i] . "Tag"];
             }
             // Ajout condition WHERE pour
             $sql2 .= " WHERE $nomClePrimaire= :$nomClePrimaire" . "Tag";
