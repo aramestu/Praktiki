@@ -27,7 +27,7 @@ class ControllerConnexion extends ControllerGenerique {
             $userInformation = Ldap::connection($_REQUEST["username"],$_REQUEST["password"]);
             if ($userInformation) {
                 ConnexionUtilisateur::connecter($userInformation->getMail());
-                self::redirectionVersURL("success", "Connexion réussie", "controller=Main&action=displayTDBetu");
+                self::redirectionVersURL("success", "Connexion réussie", "displayTDBetu&controller=Etudiant");
             } else {
                 self::redirectionVersURL("warning", "Identifiant ou Mot de passe incorrect", "afficherConnexionLdap&controller=Connexion");
             }
@@ -79,7 +79,7 @@ class ControllerConnexion extends ControllerGenerique {
                     if (MotDePasse::verifier($_REQUEST["password"], $user->formatTableau()["mdpHacheTag"])) {
                         ConnexionUtilisateur::connecter($_REQUEST["username"]);
                         MessageFlash::ajouter("success", "Connexion réussie");
-                        self::redirectionVersURL("success", "Connexion réussie", "controller=Main&action=displayTDBentreprise");
+                        self::redirectionVersURL("success", "Connexion réussie", "displayTDBentreprise&controller=Entreprise");
 
                     } else {
                         self::redirectionVersURL("warning", "Mot de passe incorrect", "afficherConnexionEntreprise&controller=Connexion");

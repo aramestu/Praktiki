@@ -7,6 +7,7 @@ use App\SAE\Lib\VerificationEmail;
 use App\SAE\Lib\MessageFlash;
 use App\SAE\Lib\MotDePasse;
 use App\SAE\Model\DataObject\Entreprise;
+use App\SAE\Model\Repository\AbstractExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use mysql_xdevapi\Table;
 
@@ -85,17 +86,6 @@ class ControllerEntreprise extends ControllerGenerique
             return $_GET["effectif"];
         }
         return null;
-    }
-
-    public static function companyHome(): void
-    {
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Accueil',
-                'cheminVueBody' => 'company/companyHome.php',
-            ]
-        );
     }
 
     public static function creerDepuisFormulaire(): void
@@ -187,5 +177,21 @@ class ControllerEntreprise extends ControllerGenerique
             }
 
         }
+
+    public static function displayTDBentreprise()
+    {
+        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(ConnexionUtilisateur::getLoginUtilisateurConnecte());
+        $siret=ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user=(new EntrepriseRepository())->getById($siret);
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Tableau de bord',
+                'listeExpPro' => $listeExpPro,
+                'user'=>$user,
+                'cheminVueBody' => 'user/tableauDeBord/entreprise.php'
+            ]
+        );
+    }
 
     }
