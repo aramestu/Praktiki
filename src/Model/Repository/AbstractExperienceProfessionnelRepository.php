@@ -33,62 +33,69 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         return "ExperienceProfessionnel";
     }
 
-    public function save(AbstractDataObject $e): bool
-    {
+    public function save(AbstractDataObject $e): bool{
         try {
+            // On insère d'abord dans ExperienceProfessionnel
             $pdo = Model::getPdo();
-            $sql = "INSERT INTO ExperienceProfessionnel(sujetExperienceProfessionnel, thematiqueExperienceProfessionnel,
-                                                                                    tachesExperienceProfessionnel, niveauExperienceProfessionnel,codePostalExperienceProfessionnel,
-                                                                                    adresseExperienceProfessionnel, dateDebutExperienceProfessionnel, 
-                                                                                    dateFinExperienceProfessionnel, siret";
-            if ($e->getNumEtudiant() != "") {
-                $sql = $sql . ', numEtudiant';
-            }
-            if ($e->getMailEnseignant() != "") {
-                $sql = $sql . ', mailEnseignant';
-            }
-            if ($e->getMailTuteurProfessionnel() != "") {
-                $sql = $sql . ', mailTuteurProfessionnel';
-            }
-            if ($e->getDatePublication() != "") {
-                $sql = $sql . ', datePublication';
-            }
-            $sql = $sql . ') VALUES(:sujetExperienceProfessionnelTag, :thematiqueExperienceProfessionnelTag,
-                                                            :tachesExperienceProfessionnelTag, :niveauExperienceProfessionnelTag, :codePostalExperienceProfessionnelTag,
-                                                            :adresseExperienceProfessionnelTag, :dateDebutExperienceProfessionnelTag, 
-                                                            :dateFinExperienceProfessionnelTag, :siretTag ';
-            $values = array("sujetExperienceProfessionnelTag" => $e->getSujetExperienceProfessionnel(),
-                "thematiqueExperienceProfessionnelTag" => $e->getThematiqueExperienceProfessionnel(),
-                "tachesExperienceProfessionnelTag" => $e->getTachesExperienceProfessionnel(),
-                "niveauExperienceProfessionnelTag" => $e->getNiveauExperienceProfessionnel(),
-                "codePostalExperienceProfessionnelTag" => $e->getCodePostalExperienceProfessionnel(),
-                "adresseExperienceProfessionnelTag" => $e->getAdresseExperienceProfessionnel(),
-                "dateDebutExperienceProfessionnelTag" => $e->getDateDebutExperienceProfessionnel(),
-                "dateFinExperienceProfessionnelTag" => $e->getDateFinExperienceProfessionnel(),
-                "siretTag" => $e->getSiret());
-            if ($e->getNumEtudiant() != "") {
-                $sql = $sql . ', :numEtudiantTag';
-                $values["numEtudiantTag"] = $e->getNumEtudiant();
-            }
-            if ($e->getMailEnseignant() != "") {
-                $sql = $sql . ', :mailEnseignantTag';
-                $values["mailEnseignantTag"] = $e->getMailEnseignant();
-            }
-            if ($e->getMailTuteurProfessionnel() != "") {
-                $sql = $sql . ', :mailTuteurProfessionnelTag';
-                $values["mailTuteurProfessionnelTag"] = $e->getMailTuteurProfessionnel();
-            }
-            if ($e->getDatePublication() != "") {
-                $sql = $sql . ', :datePublicationTag';
-                $values["datePublicationTag"] = $e->getDatePublication();
-            }
-            $sql = $sql . ')';
-            $requestStatement = $pdo->prepare($sql);
+            $table = $this->getNomTable();
+            $colonnes = $this->getNomsColonnes();
+            array_splice($colonnes, array_search('datePublication', $colonnes), 1); // POur supprimer datePublication
 
-            $requestStatement->execute($values);
+            // POur dire dans quel valeur on va insérer
+            $sql = "INSERT INTO ExperienceProfessionnel (";
+
+            // On commence à 1 pour éviter la clé primaire
+            for($i =1; $i<sizeof($colonnes); $i++){
+                // Si ce n'est pas la datePublication
+                $sql = $sql . $colonnes[$i];
+
+                // Si ce n'est pas le dernier alros on met une virgule
+                if($i!=sizeof($colonnes)-1){
+                    $sql = $sql . ", ";
+                }
+            }
+
+            $sql .= ") VALUES (";
+            // On commence à 1 pour éviter la clé primaire
+            for($i =1; $i<sizeof($colonnes); $i++){
+                // Si ce n'est pas la datePublication
+                $sql = $sql . ":" . $colonnes[$i] . "Tag";
+                // Si ce n'est pas le dernier alros on met une virgule
+                if($i!=sizeof($colonnes)-1){
+                    $sql = $sql . ", ";
+                }
+            }
+            $sql .= ")";
+
+            $formaTab = $e->formatTableau();
+            // J'enlève les colonnes supplémentaires ex: gratificatione et idStage
+            foreach ($this->getNomsColonnesSupplementaires() as $col){
+                unset($formaTab[$col . "Tag"]);
+            }
+            unset($formaTab["idExperienceProfessionnelTag"]); // j'enlève l'id pour le formatTab
+            unset($formaTab["datePublicationTag"]); // j'enlève la datePublicaiton pour le formatTab
+
+
+            // SI les valeures sont vides alors on met null pour insérer
+            if ($e->getNumEtudiant() == "") {
+                $formaTab["numEtudiantTag"] = null;
+            }
+            if ($e->getMailEnseignant() == "") {
+                $formaTab["mailEnseignantTag"] = null;
+            }
+            if ($e->getMailTuteurProfessionnel() == "") {
+                $formaTab["mailTuteurProfessionnelTag"] = null;
+            }
+
+            $requeteStatement = $pdo->prepare($sql);
+            $requeteStatement->execute($formaTab);
+
+
+            /* Puis on insère dans une de ses sous classes */
+
 
             $formatTab = $e->formatTableau(); // Pour récupérer les colonnes
-            $lastInsert = $pdo->lastInsertId();
+            $lastInsert = $pdo->lastInsertId(); // Pour récupérer l'id de l'expPro qui vient d'être crée
             $formatTab[$this->getNomClePrimaire() . "Tag"] = $lastInsert; // Pour ajouter la bonne clé primaire aux colonnes
             $sql = "INSERT INTO " . $this->getNomTable() . " VALUES(";
             $colonne = $this->getNomsColonnesSupplementaires(); // Colonnes supplémentaires déjà dans formatTableau
@@ -103,11 +110,13 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             $sql = $sql . ")";
             $pdo->prepare($sql)->execute($value);
 
+
             return true;
         } catch (\PDOException $e) {
             return false;
         }
     }
+
 
     /* utilisé pour construireDepuisTableau afin de dupliquer du code avec StageRepository
      *
