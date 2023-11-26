@@ -309,11 +309,10 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
 
 
     public static function rechercheAllOffreFiltree(string $keywords = null,string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $stage = null, string $alternance = null, string $codePostal = null, string $datePublication = null, string $BUT2 = null, string $BUT3 = null) : array{
-        $tabStages = (new StageRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
-        $tabAlternance = (new AlternanceRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
         $tabOffreNonDefini = (new OffreNonDefiniRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
         // Si c'est filtré par stage et pas par alternance
         if (isset($stage) && ! isset($alternance)) {
+            $tabStages = (new StageRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
             // S'il n'y a pas une option de trie
             if(! isset($optionTri)){
                 return array_merge($tabStages, $tabOffreNonDefini);
@@ -324,6 +323,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         }
         // Si c'est filtré par alternance et aps par stage
         else if (isset($alternance) && ! isset($stage)) {
+            $tabAlternance = (new AlternanceRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
             if(! isset($optionTri)){
                 return array_merge($tabAlternance, $tabOffreNonDefini);
             }
@@ -333,6 +333,8 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         }
         // S'il n'y a pas de filtre ou que c'est filtré par stage et alternance
         else {
+            $tabStages = (new StageRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
+            $tabAlternance = (new AlternanceRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
             if (!isset($optionTri)) {
                 return array_merge(array_merge($tabStages, $tabAlternance), $tabOffreNonDefini);
             } else {
