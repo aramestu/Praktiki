@@ -17,6 +17,27 @@ class AnneeUniversitaireRepository extends AbstractRepository{
         return $anneeUniversitaire;
     }
 
+    public function save(AbstractDataObject|AnneeUniversitaire $anneeUniversitaire): bool {
+        try {
+            if ($this->getByNom($anneeUniversitaire->getNomAnneeUniversitaire()) == null) {
+                $pdo = Model::getPdo();
+                $sql = "INSERT INTO AnneeUniversitaire (nomAnneeUniversitaire,dateFinAnneeUniversitaire,dateDebutAnneeUniversitaire) VALUES (:nomAnneeUniversitaireTag , :dateFinAnneeUniversitaireTag , :dateDebutAnneeUniversitaireTag)";
+                $requestStatement = $pdo->prepare($sql);
+                $values = array(
+                    "nomAnneeUniversitaireTag" => $anneeUniversitaire->getNomAnneeUniversitaire(),
+                    "dateFinAnneeUniversitaire" => $anneeUniversitaire->getDateFinAnneeUniversitaire(),
+                    "dateDebutAnneeUniversitaire" => $anneeUniversitaire->getDateDebutAnneeUniversitaire()
+                );
+                $requestStatement->execute($values);
+                return true;
+            }
+            return false; // Le nom de l'année existe déjà, pas d'insertion nécessaire
+        } catch (\PDOException $e) {
+            return false;
+        }
+    }
+
+
     public function getByNom(string $nom): ?AnneeUniversitaire
     {
         $pdo = Model::getPdo();
