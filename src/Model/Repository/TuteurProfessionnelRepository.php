@@ -23,7 +23,7 @@ class TuteurProfessionnelRepository extends AbstractRepository
         return "mailTuteurProfessionnel";
     }
 
-    protected function getNomsColonnes(): array
+    protected function getNomsColonnesCommunes(): array
     {
         return array("mailTuteurProfessionnel", "prenomTuteurProfessionnel", "nomTuteurProfessionnel", "fonctionTuteurProfessionnel", "telephoneTuteurProfessionnel");
     }

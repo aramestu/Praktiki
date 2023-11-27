@@ -182,7 +182,7 @@ class EtudiantRepository extends AbstractRepository
         return "numEtudiant";
     }
 
-    protected function getNomsColonnes(): array
+    protected function getNomsColonnesCommunes(): array
     {
         return array("numEtudiant", "nomEtudiant", "prenomEtudiant", "mailPersoEtudiant", "mailUniversitaireEtudiant", "telephoneEtudiant", "codePostalEtudiant");
     }

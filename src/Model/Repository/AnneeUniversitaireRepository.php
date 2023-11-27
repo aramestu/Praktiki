@@ -5,31 +5,11 @@ namespace App\SAE\Model\Repository;
 use App\SAE\Model\DataObject\AnneeUniversitaire;
 use App\SAE\Model\DataObject\AbstractDataObject;
 
-class AnneeUniversitaireRepository extends AbstractRepository
-{
+class AnneeUniversitaireRepository extends AbstractRepository{
 
-    public function save(AbstractDataObject|AnneeUniversitaire $anneeUniversitaire): bool
-    {
-        try {
-            if ($this->getByNom($anneeUniversitaire->getNomAnneeUniversitaire()) == null) {
-                $pdo = Model::getPdo();
-                $sql = "INSERT INTO AnneeUniversitaire (nomAnneeUniversitaire) VALUES (:nomAnneeUniversitaireTag)";
-                $requestStatement = $pdo->prepare($sql);
-                $values = array(
-                    "nomAnneeUniversitaireTag" => $anneeUniversitaire->getNomAnneeUniversitaire()
-                );
-                $requestStatement->execute($values);
-                return true;
-            }
-            return false; // Le nom de l'année existe déjà, pas d'insertion nécessaire
-        } catch (\PDOException $e) {
-            return false;
-        }
-    }
-
-    protected function construireDepuisTableau(array $anneeUniversitaireFormatTableau): AnneeUniversitaire
-    {
+    protected function construireDepuisTableau(array $anneeUniversitaireFormatTableau): AnneeUniversitaire{
         $anneeUniversitaire = new AnneeUniversitaire($anneeUniversitaireFormatTableau["nomAnneeUniversitaire"]);
+
         if (isset($anneeUniversitaireFormatTableau["idAnneeUniversitaire"])) {
             $anneeUniversitaire->setIdAnneeUniversitaire($anneeUniversitaireFormatTableau["idAnneeUniversitaire"]);
         }
@@ -63,7 +43,7 @@ class AnneeUniversitaireRepository extends AbstractRepository
         return "idAnneeUniversitaire";
     }
 
-    protected function getNomsColonnes(): array
+    protected function getNomsColonnesCommunes(): array
     {
         return array("idAnneeUniversitaire", "nomAnneeUniversitaire");
     }

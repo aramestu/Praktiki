@@ -6,6 +6,8 @@ class AnneeUniversitaire extends AbstractDataObject
 {
     private string $idAnneeUniversitaire;
     private string $nomAnneeUniversitaire;
+    private string $dateFinAnneeUniversitaire;
+    private string $dateDebutAnneeUniversitaire;
 
     public function __construct(string $nomAnneeUniversitaire)
     {
@@ -36,7 +38,9 @@ class AnneeUniversitaire extends AbstractDataObject
     {
         return array(
             "idAnneeUniversitaireTag" => $this->idAnneeUniversitaire,
-            "nomAnneeUniversitaireTag" => $this->nomAnneeUniversitaire
+            "nomAnneeUniversitaireTag" => $this->nomAnneeUniversitaire,
+            "dateFinAnneeUniversitaireTag" => $this->dateFinAnneeUniversitaire,
+            "dateDebutAnneeUniversitaireTag" => $this->dateDebutAnneeUniversitaire
         );
     }
 }

@@ -25,7 +25,7 @@ class ConventionRepository extends AbstractRepository {
         return "idConvention";
     }
 
-    protected function getNomsColonnes(): array
+    protected function getNomsColonnesCommunes(): array
     {
         return array("idConvention", "idStage", "competencesADevelopper", "dureeDeTravail", "languesImpression", "origineDeLaConvention", "sujetEstConfidentiel", "nbHeuresHebdo", "modePaiement", "dureeExperienceProfessionnel", "caisseAssuranceMaladie", "estSignee", "estValidee");
     }

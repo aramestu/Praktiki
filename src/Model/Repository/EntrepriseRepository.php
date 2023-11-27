@@ -36,7 +36,7 @@ class EntrepriseRepository extends AbstractRepository
         return "siret";
     }
 
-    protected function getNomsColonnes(): array
+    protected function getNomsColonnesCommunes(): array
     {
         return array("siret", "nomEntreprise", "codePostalEntreprise", "effectifEntreprise", "telephoneEntreprise", "siteWebEntreprise", "estValide", "emailEntreprise", "mdpHache",  "emailAValider", "nonce");
     }

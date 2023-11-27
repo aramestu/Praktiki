@@ -60,7 +60,7 @@ abstract class AbstractRepository {
         $pdo = Model::getPdo();
         $table = $this->getNomTable();
         $clePrimaire = $this->getNomClePrimaire();
-        $colonnes = $this->getNomsColonnes();
+        $colonnes = $this->getNomsColonnesCommunes();
         $sql = "UPDATE $table SET ";
         for($i =0; $i<sizeof($colonnes); $i++){
             if($colonnes[$i]!=$clePrimaire){
@@ -79,7 +79,7 @@ abstract class AbstractRepository {
         try {
             $pdo = Model::getPdo();
             $table = $this->getNomTable();
-            $colonnes = $this->getNomsColonnes();
+            $colonnes = $this->getNomsColonnesCommunes();
             $sql = "INSERT INTO $table VALUES (";
             for($i =0; $i<sizeof($colonnes); $i++){
                 $sql = $sql . ":" . $colonnes[$i] . "Tag";
@@ -157,7 +157,7 @@ abstract class AbstractRepository {
 
         // Si c'est vide alors je fais sur toutes les colonnes
         if($nbColonnes == 0){
-            $colonnes = $this->getNomsColonnes();
+            $colonnes = $this->getNomsColonnesCommunes();
             $nbColonnes = sizeof($colonnes);
         }
 
@@ -175,5 +175,5 @@ abstract class AbstractRepository {
     protected abstract function getNomTable() : string;
     protected abstract function construireDepuisTableau(array $objetFormatTableau) : AbstractDataObject;
     protected abstract function getNomClePrimaire():string;
-    protected abstract function getNomsColonnes(): array;
+    protected abstract function getNomsColonnesCommunes(): array;
 }

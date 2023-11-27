@@ -23,7 +23,7 @@ class EnseignantRepository extends AbstractRepository
         return "mailEnseignant";
     }
 
-    protected function getNomsColonnes(): array
+    protected function getNomsColonnesCommunes(): array
     {
         return array("mailEnseignant", "nomEnseignant", "prenomEnseignant", "estAdmin");
     }

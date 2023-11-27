@@ -15,7 +15,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
     protected abstract function getNomDataObject(): string;
     public abstract function construireDepuisTableau(array $objetFormatTableau): ExperienceProfessionnel;
 
-    protected function getNomsColonnes(): array
+    protected function getNomsColonnesCommunes(): array
     {
         return array("idExperienceProfessionnel","sujetExperienceProfessionnel", "thematiqueExperienceProfessionnel",
             "tachesExperienceProfessionnel", "niveauExperienceProfessionnel", "codePostalExperienceProfessionnel",
@@ -383,7 +383,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             $sql .= "AND niveauExperienceProfessionnel = '$BUT3' ";
         }
         if($keywords != null){
-            $sql .= " AND " . $this->colonneToSearch(array_merge($this->getNomsColonnes(), $this->getNomsColonnesSupplementaires()));
+            $sql .= " AND " . $this->colonneToSearch(array_merge($this->getNomsColonnesCommunes(), $this->getNomsColonnesSupplementaires()));
             $values["keywordsTag"] = $keywords;
         }
         if (isset($optionTri)) {
