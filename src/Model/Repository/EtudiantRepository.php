@@ -50,10 +50,15 @@ class EtudiantRepository extends AbstractRepository
 
     public function conventionEtudiantEstValide(Etudiant $etudiant): bool{
         $sql = "SELECT estValidee FROM Etudiants etu
+                JOIN ConventionsStageEtudiant cse ON cse.numEtudiant = etu.numEtudiant
+                JOIN Conventions c ON c.idConvention = cse.idConvention
+                WHERE etu.numEtudiant = :numEtudiantTag";
+
+        /*$sql = "SELECT estValidee FROM Etudiants etu
                 JOIN ExperienceProfessionnel exp ON etu.numEtudiant=exp.numEtudiant
                 JOIN Stages s ON s.idStage=exp.idExperienceProfessionnel
                 JOIN Conventions c ON c.idStage = s.idStage
-                WHERE etu.numEtudiant = :numEtudiantTag";
+                WHERE etu.numEtudiant = :numEtudiantTag";*/
         $request = Model::getPdo()->prepare($sql);
         $values = array(
             "numEtudiantTag" => $etudiant->getNumEtudiant()
@@ -71,7 +76,8 @@ class EtudiantRepository extends AbstractRepository
     }
 
     public function etudiantAStage(Etudiant $etudiant): bool{
-        $sql = "SELECT * FROM Etudiants etu
+        return $this->conventionEtudiantEstValide($etudiant);
+        /*$sql = "SELECT * FROM Etudiants etu
                 JOIN ExperienceProfessionnel exp ON etu.numEtudiant=exp.numEtudiant
                 JOIN Stages s ON s.idStage=exp.idExperienceProfessionnel
                 WHERE etu.numEtudiant = :numEtudiantTag";
@@ -85,11 +91,12 @@ class EtudiantRepository extends AbstractRepository
             return false;
         }else{
             return true;
-        }
+        }*/
     }
 
     public function etudiantAAlternance(Etudiant $etudiant): bool{
-        $sql = "SELECT * FROM Etudiants etu
+        return false;
+        /*$sql = "SELECT * FROM Etudiants etu
                 JOIN ExperienceProfessionnel exp ON etu.numEtudiant=exp.numEtudiant
                 JOIN Alternances a ON a.idAlternance=exp.idExperienceProfessionnel
                 WHERE etu.numEtudiant = :numEtudiantTag";
@@ -103,7 +110,7 @@ class EtudiantRepository extends AbstractRepository
             return false;
         }else{
             return true;
-        }
+        }*/
     }
 
     public static function inscrire(string $numEtudiant, string $nomDepartement, string $nomAnneeUniversitaire): bool
