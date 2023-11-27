@@ -42,6 +42,10 @@
             echo '
                     <a href="frontController.php?controller=Etudiant&action=displayTDBetu" class="nav-item" data-action="tdbEtudiant">Mes infos</a>
                 ';
+        } else if(\App\SAE\Lib\ConnexionUtilisateur::estEnseignant()) {
+            echo '
+                    <a href="frontController.php?controller=Enseignant&action=displayTDBens" class="nav-item" data-action="tdbEnseignant">Mes infos</a>
+                ';
         }else if(\App\SAE\Lib\ConnexionUtilisateur::estEntreprise()) {
             echo '
                     <a href="frontController.php?controller=Entreprise&action=displayTDBEntreprise" class="nav-item" data-action="tdbEntreprise">Mes infos</a>

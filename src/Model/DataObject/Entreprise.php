@@ -2,9 +2,11 @@
 
 namespace App\SAE\Model\DataObject;
 
+use App\SAE\Lib\ConnexionUtilisateur;
 use App\SAE\Lib\MotDePasse;
 
-class Entreprise extends AbstractDataObject {
+class Entreprise extends AbstractDataObject
+{
     private string $siret;
     private string $nomEntreprise;
     private string $codePostalEntreprise;
@@ -17,7 +19,7 @@ class Entreprise extends AbstractDataObject {
     private string $emailAValider;
     private string $nonce;
 
-    public function __construct(string $siret, string $nom, string $codePostal, string $effectif, string $telephone, string $siteWeb, string $email, string $mdpHache,string  $emailAValider, string $nonce)
+    public function __construct(string $siret, string $nom, string $codePostal, string $effectif, string $telephone, string $siteWeb, string $email, string $mdpHache, string $emailAValider, string $nonce)
     {
         $this->siret = $siret;
         $this->nomEntreprise = $nom;
@@ -28,8 +30,8 @@ class Entreprise extends AbstractDataObject {
         $this->estValide = 0;
         $this->emailEntreprise = $email;
         $this->mdpHache = $mdpHache;
-        $this->emailAValider=$emailAValider;
-        $this->nonce=$nonce;
+        $this->emailAValider = $emailAValider;
+        $this->nonce = $nonce;
     }
 
     public function getSiret(): string
@@ -101,13 +103,15 @@ class Entreprise extends AbstractDataObject {
     {
         $this->estValide = $estValide;
     }
+
     public function getMdpHache(): string
     {
         return $this->mdpHache;
     }
 
-    public function setMdpHache($mdpClair):void{
-        $this->mdpHache= MotDePasse::hacher($mdpClair);
+    public function setMdpHache($mdpClair): void
+    {
+        $this->mdpHache = MotDePasse::hacher($mdpClair);
     }
 
     public function getEmailEntreprise(): string
@@ -141,7 +145,6 @@ class Entreprise extends AbstractDataObject {
     }
 
 
-
     public function formatTableau(): array
     {
         return [
@@ -151,7 +154,7 @@ class Entreprise extends AbstractDataObject {
             "effectifEntrepriseTag" => $this->effectifEntreprise,
             "telephoneEntrepriseTag" => $this->telephoneEntreprise,
             "siteWebEntrepriseTag" => $this->siteWebEntreprise,
-            "estValideTag" => $this->estValide? '1': '0',
+            "estValideTag" => $this->estValide ? '1' : '0',
             "emailEntrepriseTag" => $this->emailEntreprise,
             "mdpHacheTag" => $this->mdpHache,
             "emailAValiderTag" => $this->emailAValider,
@@ -159,9 +162,17 @@ class Entreprise extends AbstractDataObject {
         ];
     }
 
-    public static function construireDepuisFormulaire (array $tableauFormulaire) : Entreprise
+    public static function construireDepuisFormulaire(array $tableauFormulaire): Entreprise
     {
-
+        if (ConnexionUtilisateur::estConnecte()) {
+            $email = $tableauFormulaire["email"];
+            $emailValide = "";
+            $nonce = "";
+        } else {
+            $email = "";
+            $emailValide = $tableauFormulaire["email"];;
+            $nonce = MotDePasse::genererChaineAleatoire();
+        }
         $mdpHache = MotDePasse::hacher($tableauFormulaire["password"]);
         return new Entreprise(
             $tableauFormulaire["siret"],
@@ -170,10 +181,10 @@ class Entreprise extends AbstractDataObject {
             $tableauFormulaire["effectif"],
             $tableauFormulaire["telephone"],
             $tableauFormulaire["website"],
-            "",
+            $email,
             $mdpHache,
-            $tableauFormulaire["email"],
-            MotDePasse::genererChaineAleatoire()
+            $emailValide,
+            $nonce
         );
     }
 }

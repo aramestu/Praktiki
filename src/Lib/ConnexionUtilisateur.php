@@ -2,6 +2,7 @@
 namespace App\SAE\Lib;
 
 use App\SAE\Model\HTTP\Session;
+use App\SAE\Model\Repository\EnseignantRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
 
@@ -51,6 +52,12 @@ class ConnexionUtilisateur
     public static function estEntreprise(): bool{
         if (self::estConnecte())
             return (bool)(new EntrepriseRepository())->getEntrepriseAvecEtatFiltree(null,self::getLoginUtilisateurConnecte());
+        return false;
+    }
+
+    public static function estEnseignant(): bool{
+        if (self::estConnecte())
+            return (bool)(new EnseignantRepository())->getByEmail(self::getLoginUtilisateurConnecte());
         return false;
     }
 
