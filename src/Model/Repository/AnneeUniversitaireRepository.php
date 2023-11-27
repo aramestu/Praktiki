@@ -8,7 +8,7 @@ use App\SAE\Model\DataObject\AbstractDataObject;
 class AnneeUniversitaireRepository extends AbstractRepository{
 
     protected function construireDepuisTableau(array $anneeUniversitaireFormatTableau): AnneeUniversitaire{
-        $anneeUniversitaire = new AnneeUniversitaire($anneeUniversitaireFormatTableau["nomAnneeUniversitaire"]);
+        $anneeUniversitaire = new AnneeUniversitaire($anneeUniversitaireFormatTableau["nomAnneeUniversitaire"], $anneeUniversitaireFormatTableau["dateFinAnneeUniversitaire"], $anneeUniversitaireFormatTableau["dateDebutAnneeUniversitaire"]);
 
         if (isset($anneeUniversitaireFormatTableau["idAnneeUniversitaire"])) {
             $anneeUniversitaire->setIdAnneeUniversitaire($anneeUniversitaireFormatTableau["idAnneeUniversitaire"]);
@@ -45,6 +45,6 @@ class AnneeUniversitaireRepository extends AbstractRepository{
 
     protected function getNomsColonnesCommunes(): array
     {
-        return array("idAnneeUniversitaire", "nomAnneeUniversitaire");
+        return array("idAnneeUniversitaire", "nomAnneeUniversitaire", "dateFinAnneeUniversitaire", "dateDebutAnneeUniversitaire");
     }
 }

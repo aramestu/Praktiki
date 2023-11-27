@@ -9,9 +9,11 @@ class AnneeUniversitaire extends AbstractDataObject
     private string $dateFinAnneeUniversitaire;
     private string $dateDebutAnneeUniversitaire;
 
-    public function __construct(string $nomAnneeUniversitaire)
+    public function __construct(string $nomAnneeUniversitaire, string $dateFinAnneeUniversitaire, string $dateDebutAnneeUniversitaire)
     {
         $this->nomAnneeUniversitaire = $nomAnneeUniversitaire;
+        $this->dateFinAnneeUniversitaire = $dateFinAnneeUniversitaire;
+        $this->dateDebutAnneeUniversitaire = $dateDebutAnneeUniversitaire;
     }
 
     public function getIdAnneeUniversitaire(): string
@@ -32,6 +34,26 @@ class AnneeUniversitaire extends AbstractDataObject
     public function setNomAnneeUniversitaire(string $nomAnneeUniversitaire): void
     {
         $this->nomAnneeUniversitaire = $nomAnneeUniversitaire;
+    }
+
+    public function getDateFinAnneeUniversitaire(): string
+    {
+        return $this->dateFinAnneeUniversitaire;
+    }
+
+    public function setDateFinAnneeUniversitaire(string $dateFinAnneeUniversitaire): void
+    {
+        $this->dateFinAnneeUniversitaire = $dateFinAnneeUniversitaire;
+    }
+
+    public function getDateDebutAnneeUniversitaire(): string
+    {
+        return $this->dateDebutAnneeUniversitaire;
+    }
+
+    public function setDateDebutAnneeUniversitaire(string $dateDebutAnneeUniversitaire): void
+    {
+        $this->dateDebutAnneeUniversitaire = $dateDebutAnneeUniversitaire;
     }
 
     public function formatTableau(): array
