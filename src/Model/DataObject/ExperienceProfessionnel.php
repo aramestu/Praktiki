@@ -17,10 +17,7 @@ class ExperienceProfessionnel extends AbstractDataObject
     private string $adresseExperienceProfessionnel;
     private string $dateDebutExperienceProfessionnel;
     private string $dateFinExperienceProfessionnel;
-    private string $numEtudiant;
-    private string $mailEnseignant;
     private string $siret;
-    private string $mailTuteurProfessionnel;
     private string $datePublication;
 
 
@@ -47,9 +44,6 @@ class ExperienceProfessionnel extends AbstractDataObject
         $this->siret = $siret;
         $this->idExperienceProfessionnel = "";
         $this->datePublication = "";
-        $this->numEtudiant = "";
-        $this->mailEnseignant = "";
-        $this->mailTuteurProfessionnel = "";
     }
 
     public function getIdExperienceProfessionnel(): string
@@ -153,36 +147,6 @@ class ExperienceProfessionnel extends AbstractDataObject
         $this->siret = $siret;
     }
 
-    public function getNumEtudiant(): string
-    {
-        return $this->numEtudiant;
-    }
-
-    public function setNumEtudiant(string $numEtudiant): void
-    {
-        $this->numEtudiant = $numEtudiant;
-    }
-
-    public function getMailEnseignant(): string
-    {
-        return $this->mailEnseignant;
-    }
-
-    public function setMailEnseignant(string $mailEnseignant): void
-    {
-        $this->mailEnseignant = $mailEnseignant;
-    }
-
-    public function getMailTuteurProfessionnel(): string
-    {
-        return $this->mailTuteurProfessionnel;
-    }
-
-    public function setMailTuteurProfessionnel(string $mailTuteurProfessionnel): void
-    {
-        $this->mailTuteurProfessionnel = $mailTuteurProfessionnel;
-    }
-
     public function getDatePublication(): string
     {
         return $this->datePublication;
@@ -206,9 +170,6 @@ class ExperienceProfessionnel extends AbstractDataObject
             "dateDebutExperienceProfessionnelTag" => $this->dateDebutExperienceProfessionnel,
             "dateFinExperienceProfessionnelTag" => $this->dateFinExperienceProfessionnel,
             "siretTag" => $this->siret,
-            "numEtudiantTag" => $this->numEtudiant,
-            "mailEnseignantTag" => $this->mailEnseignant,
-            "mailTuteurProfessionnelTag" => $this->mailTuteurProfessionnel,
             "datePublicationTag" => $this->datePublication
         );
     }
