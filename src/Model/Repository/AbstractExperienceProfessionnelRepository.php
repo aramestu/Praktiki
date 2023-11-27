@@ -33,62 +33,69 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         return "ExperienceProfessionnel";
     }
 
-    public function save(AbstractDataObject $e): bool
-    {
+    public function save(AbstractDataObject $e): bool{
         try {
+            // On insère d'abord dans ExperienceProfessionnel
             $pdo = Model::getPdo();
-            $sql = "INSERT INTO ExperienceProfessionnel(sujetExperienceProfessionnel, thematiqueExperienceProfessionnel,
-                                                                                    tachesExperienceProfessionnel, niveauExperienceProfessionnel,codePostalExperienceProfessionnel,
-                                                                                    adresseExperienceProfessionnel, dateDebutExperienceProfessionnel, 
-                                                                                    dateFinExperienceProfessionnel, siret";
-            if ($e->getNumEtudiant() != "") {
-                $sql = $sql . ', numEtudiant';
-            }
-            if ($e->getMailEnseignant() != "") {
-                $sql = $sql . ', mailEnseignant';
-            }
-            if ($e->getMailTuteurProfessionnel() != "") {
-                $sql = $sql . ', mailTuteurProfessionnel';
-            }
-            if ($e->getDatePublication() != "") {
-                $sql = $sql . ', datePublication';
-            }
-            $sql = $sql . ') VALUES(:sujetExperienceProfessionnelTag, :thematiqueExperienceProfessionnelTag,
-                                                            :tachesExperienceProfessionnelTag, :niveauExperienceProfessionnelTag, :codePostalExperienceProfessionnelTag,
-                                                            :adresseExperienceProfessionnelTag, :dateDebutExperienceProfessionnelTag, 
-                                                            :dateFinExperienceProfessionnelTag, :siretTag ';
-            $values = array("sujetExperienceProfessionnelTag" => $e->getSujetExperienceProfessionnel(),
-                "thematiqueExperienceProfessionnelTag" => $e->getThematiqueExperienceProfessionnel(),
-                "tachesExperienceProfessionnelTag" => $e->getTachesExperienceProfessionnel(),
-                "niveauExperienceProfessionnelTag" => $e->getNiveauExperienceProfessionnel(),
-                "codePostalExperienceProfessionnelTag" => $e->getCodePostalExperienceProfessionnel(),
-                "adresseExperienceProfessionnelTag" => $e->getAdresseExperienceProfessionnel(),
-                "dateDebutExperienceProfessionnelTag" => $e->getDateDebutExperienceProfessionnel(),
-                "dateFinExperienceProfessionnelTag" => $e->getDateFinExperienceProfessionnel(),
-                "siretTag" => $e->getSiret());
-            if ($e->getNumEtudiant() != "") {
-                $sql = $sql . ', :numEtudiantTag';
-                $values["numEtudiantTag"] = $e->getNumEtudiant();
-            }
-            if ($e->getMailEnseignant() != "") {
-                $sql = $sql . ', :mailEnseignantTag';
-                $values["mailEnseignantTag"] = $e->getMailEnseignant();
-            }
-            if ($e->getMailTuteurProfessionnel() != "") {
-                $sql = $sql . ', :mailTuteurProfessionnelTag';
-                $values["mailTuteurProfessionnelTag"] = $e->getMailTuteurProfessionnel();
-            }
-            if ($e->getDatePublication() != "") {
-                $sql = $sql . ', :datePublicationTag';
-                $values["datePublicationTag"] = $e->getDatePublication();
-            }
-            $sql = $sql . ')';
-            $requestStatement = $pdo->prepare($sql);
+            $table = $this->getNomTable();
+            $colonnes = $this->getNomsColonnes();
+            array_splice($colonnes, array_search('datePublication', $colonnes), 1); // POur supprimer datePublication
 
-            $requestStatement->execute($values);
+            // POur dire dans quel valeur on va insérer
+            $sql = "INSERT INTO ExperienceProfessionnel (";
+
+            // On commence à 1 pour éviter la clé primaire
+            for($i =1; $i<sizeof($colonnes); $i++){
+                // Si ce n'est pas la datePublication
+                $sql = $sql . $colonnes[$i];
+
+                // Si ce n'est pas le dernier alros on met une virgule
+                if($i!=sizeof($colonnes)-1){
+                    $sql = $sql . ", ";
+                }
+            }
+
+            $sql .= ") VALUES (";
+            // On commence à 1 pour éviter la clé primaire
+            for($i =1; $i<sizeof($colonnes); $i++){
+                // Si ce n'est pas la datePublication
+                $sql = $sql . ":" . $colonnes[$i] . "Tag";
+                // Si ce n'est pas le dernier alros on met une virgule
+                if($i!=sizeof($colonnes)-1){
+                    $sql = $sql . ", ";
+                }
+            }
+            $sql .= ")";
+
+            $formaTab = $e->formatTableau();
+            // J'enlève les colonnes supplémentaires ex: gratificatione et idStage
+            foreach ($this->getNomsColonnesSupplementaires() as $col){
+                unset($formaTab[$col . "Tag"]);
+            }
+            unset($formaTab["idExperienceProfessionnelTag"]); // j'enlève l'id pour le formatTab
+            unset($formaTab["datePublicationTag"]); // j'enlève la datePublicaiton pour le formatTab
+
+
+            // SI les valeures sont vides alors on met null pour insérer
+            if ($e->getNumEtudiant() == "") {
+                $formaTab["numEtudiantTag"] = null;
+            }
+            if ($e->getMailEnseignant() == "") {
+                $formaTab["mailEnseignantTag"] = null;
+            }
+            if ($e->getMailTuteurProfessionnel() == "") {
+                $formaTab["mailTuteurProfessionnelTag"] = null;
+            }
+
+            $requeteStatement = $pdo->prepare($sql);
+            $requeteStatement->execute($formaTab);
+
+
+            /* Puis on insère dans une de ses sous classes */
+
 
             $formatTab = $e->formatTableau(); // Pour récupérer les colonnes
-            $lastInsert = $pdo->lastInsertId();
+            $lastInsert = $pdo->lastInsertId(); // Pour récupérer l'id de l'expPro qui vient d'être crée
             $formatTab[$this->getNomClePrimaire() . "Tag"] = $lastInsert; // Pour ajouter la bonne clé primaire aux colonnes
             $sql = "INSERT INTO " . $this->getNomTable() . " VALUES(";
             $colonne = $this->getNomsColonnesSupplementaires(); // Colonnes supplémentaires déjà dans formatTableau
@@ -103,11 +110,13 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             $sql = $sql . ")";
             $pdo->prepare($sql)->execute($value);
 
+
             return true;
         } catch (\PDOException $e) {
             return false;
         }
     }
+
 
     /* utilisé pour construireDepuisTableau afin de dupliquer du code avec StageRepository
      *
@@ -178,7 +187,24 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         return $this->construireDepuisTableau($exp);
     }
 
-    private static function sort(array $stages, array $alternances, string $option): array
+    public static function sort(array $stages, array $alternances, string $option): array
+    {
+        $allExperienceProfessionnel = array_merge($stages, $alternances);
+
+        if ($option == "datePublicationInverse") {
+            usort($allExperienceProfessionnel, function ($a, $b) {
+                return strtotime($a->getDatePublication()) - strtotime($b->getDatePublication()); // classe anonyme
+            });
+        } elseif ($option == "datePublication") {
+            usort($allExperienceProfessionnel, function ($a, $b) {
+                return strtotime($b->getDatePublication()) - strtotime($a->getDatePublication());
+            });
+        }
+        return $allExperienceProfessionnel;
+    }
+
+
+    /*public static function sort(array $stages, array $alternances, string $option): array
     {
         if ($option == "salaireCroissant" || $option == "salaireDecroissant") {
             return array_merge($stages, $alternances);
@@ -196,37 +222,52 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             }
         }
         return array_merge($allExperienceProfessionnel, $stages, $alternances);
-    }
+    }*/
 
     public function mettreAJour(AbstractDataObject $exp): void
     {
-        // Mise à jour de la table Experience Pro
-        $sql = "UPDATE ExperienceProfessionnel SET
-                sujetExperienceProfessionnel= :sujetTag,
-                thematiqueExperienceProfessionnel= :thematiqueTag,
-                tachesExperienceProfessionnel= :tacheTag,
-                niveauExperienceProfessionnel= :niveauTag,
-                codePostalExperienceProfessionnel= :codePostalTag,
-                adresseExperienceProfessionnel= :adresseTag,
-                dateDebutExperienceProfessionnel= :dateDebutTag,
-                dateFinExperienceProfessionnel= :dateFinTag 
-                WHERE idExperienceProfessionnel= :idExpPro";
+        // On insère d'abord dans ExperienceProfessionnel
+        $pdo = Model::getPdo();
+        $colonnes = $this->getNomsColonnes();
+        array_splice($colonnes, array_search('datePublication', $colonnes), 1); // POur supprimer datePublication car on n'a pas besoin de la modif
 
-        $pdoStatement = Model::getPdo()->prepare($sql);
+        // POur dire dans quel valeur on va insérer
+        $sql = "UPDATE ExperienceProfessionnel SET ";
+
+        // On commence à 1 pour éviter la clé primaire
+        for($i =1; $i<sizeof($colonnes); $i++){
+            $sql = $sql . $colonnes[$i] . "= :" . $colonnes[$i] . "Tag";
+
+            // Si ce n'est pas le dernier alros on met une virgule
+            if($i!=sizeof($colonnes)-1){
+                $sql = $sql . ", ";
+            }
+        }
+
+        $sql .= " WHERE idExperienceProfessionnel= :idExperienceProfessionnelTag";
+
+        $formaTab = $exp->formatTableau();
+        // J'enlève les colonnes supplémentaires ex: gratificatione et idStage
+        foreach ($this->getNomsColonnesSupplementaires() as $col){
+            unset($formaTab[$col . "Tag"]);
+        }
+        unset($formaTab["datePublicationTag"]); // j'enlève la datePublicaiton pour le formatTab
 
 
-        $values = array(
-            "sujetTag" => $exp->getSujetExperienceProfessionnel(),
-            "thematiqueTag" => $exp->getThematiqueExperienceProfessionnel(),
-            "tacheTag" => $exp->getTachesExperienceProfessionnel(),
-            "niveauTag" => $exp->getNiveauExperienceProfessionnel(),
-            "codePostalTag" => $exp->getCodePostalExperienceProfessionnel(),
-            "adresseTag" => $exp->getAdresseExperienceProfessionnel(),
-            "dateDebutTag" => $exp->getDateDebutExperienceProfessionnel(),
-            "dateFinTag" => $exp->getDateFinExperienceProfessionnel(),
-            "idExpPro" => $exp->getIdExperienceProfessionnel()
-        );
-        $pdoStatement->execute($values);
+        // SI les valeures sont vides alors on met null pour insérer
+        if ($exp->getNumEtudiant() == "") {
+            $formaTab["numEtudiantTag"] = null;
+        }
+        if ($exp->getMailEnseignant() == "") {
+            $formaTab["mailEnseignantTag"] = null;
+        }
+        if ($exp->getMailTuteurProfessionnel() == "") {
+            $formaTab["mailTuteurProfessionnelTag"] = null;
+        }
+
+        $requeteStatement = $pdo->prepare($sql);
+        $requeteStatement->execute($formaTab);
+
 
         // Mise à jour de la sous table s'il n'y a pas que la clé primaire
         $colonnes = $this->getNomsColonnesSupplementaires();
@@ -238,9 +279,8 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             $sql2 = "UPDATE $nomTable SET ";
             // Je rempli la requête et le tableau de valeur grâce au format Tableau
             for($i = 1; $i < sizeof($colonnes); $i++){
-                $nomColonne = $colonnes[$i];
-                $sql2 .= " $nomColonne= :$nomColonne" . "Tag";
-                $values2[$nomColonne . "Tag"] = $formatTableau[$nomColonne . "Tag"];
+                $sql2 .= " $colonnes[$i]" . "= :" . "$colonnes[$i]" . "Tag";
+                $values2[$colonnes[$i] . "Tag"] = $formatTableau[$colonnes[$i] . "Tag"];
             }
             // Ajout condition WHERE pour
             $sql2 .= " WHERE $nomClePrimaire= :$nomClePrimaire" . "Tag";
@@ -269,11 +309,18 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
 
 
     public static function rechercheAllOffreFiltree(string $keywords = null,string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $stage = null, string $alternance = null, string $codePostal = null, string $datePublication = null, string $BUT2 = null, string $BUT3 = null) : array{
-        $tabStages = (new StageRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
-        $tabAlternance = (new AlternanceRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
+        // S'il y a BUT2 et BUT3 qui sont cochés alors on met à null car on fait comme si c'était pas coché pour tout afficher
+        // car on ne peut pas avoir les 2 en même temps
+        if(!is_null($BUT2) && !is_null($BUT3)){
+            $BUT2 = null;
+            $BUT3 = null;
+        }
+
         $tabOffreNonDefini = (new OffreNonDefiniRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
-        // Si c'est filtré par stage
-        if (isset($stage)) {
+
+        // Si c'est filtré par stage et pas par alternance
+        if (isset($stage) && ! isset($alternance)) {
+            $tabStages = (new StageRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
             // S'il n'y a pas une option de trie
             if(! isset($optionTri)){
                 return array_merge($tabStages, $tabOffreNonDefini);
@@ -282,8 +329,9 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
                 return self::sort($tabStages, $tabOffreNonDefini, $optionTri);
             }
         }
-        // Si c'est filtré par alternance
-        else if (isset($alternance)) {
+        // Si c'est filtré par alternance et aps par stage
+        else if (isset($alternance) && ! isset($stage)) {
+            $tabAlternance = (new AlternanceRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
             if(! isset($optionTri)){
                 return array_merge($tabAlternance, $tabOffreNonDefini);
             }
@@ -291,13 +339,15 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
                 return self::sort($tabAlternance, $tabOffreNonDefini, $optionTri);
             }
         }
+        // S'il n'y a pas de filtre ou que c'est filtré par stage et alternance
         else {
+            $tabStages = (new StageRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
+            $tabAlternance = (new AlternanceRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
             if (!isset($optionTri)) {
                 return array_merge(array_merge($tabStages, $tabAlternance), $tabOffreNonDefini);
             } else {
                 return self::sort(self::sort($tabStages, $tabOffreNonDefini, $optionTri), $tabAlternance, $optionTri);
             }
-
         }
     }
 
@@ -359,42 +409,6 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             $stageTriee[] = $this->construireDepuisTableau($result);
         }
         return $stageTriee;
-    }
-
-    public static function offreMoins7jours(): array
-    {
-        // Renvoi dans un tableau les offres publiées il y a moins de 7 jours
-        $objects = array();
-        $sql = "SELECT idExperienceProfessionnel FROM ExperienceProfessionnel WHERE datePublication <= CURDATE() and datePublication >= CURDATE()-7";
-        $pdoStatement = Model::getPdo()->prepare($sql);
-        $pdoStatement->execute();
-        $requestStatement = $pdoStatement->fetchAll();
-        foreach ($requestStatement as $objectFormatTableau) {
-            // Convertir la valeur en chaîne de caractères (supposons que la colonne s'appelle "nom")
-            $nomEnChaine = strval($objectFormatTableau['idExperienceProfessionnel']);
-
-            // Créer un nouvel objet avec la valeur convertie
-            $objects[] = (new StageRepository())->get($nomEnChaine);
-
-        }
-        foreach ($requestStatement as $objectFormatTableau) {
-            // Convertir la valeur en chaîne de caractères (supposons que la colonne s'appelle "nom")
-            $nomEnChaine = strval($objectFormatTableau['idExperienceProfessionnel']);
-
-            // Créer un nouvel objet avec la valeur convertie
-            $objects[] = (new AlternanceRepository())->get($nomEnChaine);
-        }
-        foreach ($requestStatement as $objectFormatTableau) {
-            // Convertir la valeur en chaîne de caractères (supposons que la colonne s'appelle "nom")
-            $nomEnChaine = strval($objectFormatTableau['idExperienceProfessionnel']);
-
-            // Créer un nouvel objet avec la valeur convertie
-            $objects[] = (new OffreNonDefiniRepository())->get($nomEnChaine);
-
-
-        }
-
-        return $objects;
     }
 
     public static function getDatePublication(ExperienceProfessionnel $expPro): string
