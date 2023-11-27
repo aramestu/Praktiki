@@ -309,7 +309,15 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
 
 
     public static function rechercheAllOffreFiltree(string $keywords = null,string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $stage = null, string $alternance = null, string $codePostal = null, string $datePublication = null, string $BUT2 = null, string $BUT3 = null) : array{
+        // S'il y a BUT2 et BUT3 qui sont cochés alors on met à null car on fait comme si c'était pas coché pour tout afficher
+        // car on ne peut pas avoir les 2 en même temps
+        if(!is_null($BUT2) && !is_null($BUT3)){
+            $BUT2 = null;
+            $BUT3 = null;
+        }
+
         $tabOffreNonDefini = (new OffreNonDefiniRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
+
         // Si c'est filtré par stage et pas par alternance
         if (isset($stage) && ! isset($alternance)) {
             $tabStages = (new StageRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
@@ -340,7 +348,6 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             } else {
                 return self::sort(self::sort($tabStages, $tabOffreNonDefini, $optionTri), $tabAlternance, $optionTri);
             }
-
         }
     }
 
