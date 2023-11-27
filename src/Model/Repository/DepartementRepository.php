@@ -77,7 +77,7 @@ class DepartementRepository extends AbstractRepository
         return "Departements";
     }
 
-    protected function getNomsColonnesCommunes(): array
+    protected function getNomsColonnes(): array
     {
         return array("codeDepartement", "nomDepartement");
     }

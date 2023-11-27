@@ -5,7 +5,9 @@ namespace App\SAE\Model\DataObject;
 class Convention extends AbstractDataObject {
 
     private string $idConvention;
-    private string $idStage;
+    private string $mailEnseignant;
+    private string $nomEnseignant;
+    private string $prenomEnseignant;
     private string $competencesADevelopper;
     private string $dureeDeTravail;
     private string $languesImpression;

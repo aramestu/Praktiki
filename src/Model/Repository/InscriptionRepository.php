@@ -48,7 +48,7 @@ class InscriptionRepository extends AbstractRepository
         return "numEtudiant";
     }
 
-    protected function getNomsColonnesCommunes(): array
+    protected function getNomsColonnes(): array
     {
         return array("numEtudiant", "idAnneeUniversitaire", "codeDepartement");
     }

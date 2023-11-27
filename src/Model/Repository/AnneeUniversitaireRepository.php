@@ -43,7 +43,7 @@ class AnneeUniversitaireRepository extends AbstractRepository{
         return "idAnneeUniversitaire";
     }
 
-    protected function getNomsColonnesCommunes(): array
+    protected function getNomsColonnes(): array
     {
         return array("idAnneeUniversitaire", "nomAnneeUniversitaire", "dateFinAnneeUniversitaire", "dateDebutAnneeUniversitaire");
     }
