@@ -32,13 +32,7 @@
                 <a href="frontController.php?action=getExpProByDefault&controller=ExpPro" class="nav-item" data-action="offre">Offres</a>
                 ';
         }
-        ?>
-        <a href="frontController.php?action=contact" class="nav-item" data-action="contact">Contact</a>
-        <?php if (!\App\SAE\Lib\ConnexionUtilisateur::estConnecte()) {
-            echo '
-                <a href="frontController.php?action=preference" class="nav-item" data-action="connect">Connexion</a>
-                ';
-        } else if(\App\SAE\Lib\ConnexionUtilisateur::estEtudiant()) {
+         if(\App\SAE\Lib\ConnexionUtilisateur::estEtudiant()) {
             echo '
                     <a href="frontController.php?controller=Etudiant&action=displayTDBetu" class="nav-item" data-action="tdbEtudiant">Mes infos</a>
                 ';
@@ -51,12 +45,17 @@
                     <a href="frontController.php?controller=Entreprise&action=displayTDBEntreprise" class="nav-item" data-action="tdbEntreprise">Mes infos</a>
                 ';
         }
+         echo'<a href="frontController.php?action=contact" class="nav-item" data-action="contact">Contact</a>';
+        if (!\App\SAE\Lib\ConnexionUtilisateur::estConnecte()) {
+            echo '
+                <a href="frontController.php?action=preference" class="nav-item" data-action="connect">Connexion</a>
+                ';
+        } else
         if (\App\SAE\Lib\ConnexionUtilisateur::estConnecte()) {
             echo '
                     <a href="frontController.php?action=disconnect&controller=Connexion" class="nav-item" data-action="disconnect">Déconnexion</a>
                 ';
         }
-
         ?>
 
     </nav>

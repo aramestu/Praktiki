@@ -15,13 +15,17 @@ class ControllerConnexion extends ControllerGenerique
 
     public static function afficherConnexionLdap(): void
     {
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Connexion',
-                'cheminVueBody' => 'user/connexion/connexionLdap.php',
-            ]
-        );
+        if(ConnexionUtilisateur::estConnecte()){
+            ControllerEtudiant::displayTDBetu();
+        }else {
+            self::afficheVue(
+                'view.php',
+                [
+                    'pagetitle' => 'Connexion',
+                    'cheminVueBody' => 'user/connexion/connexionLdap.php',
+                ]
+            );
+        }
     }
 
     public static function connecterLdap()
@@ -45,13 +49,17 @@ class ControllerConnexion extends ControllerGenerique
 
     public static function afficherConnexionPersonnel(): void
     {
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Connexion',
-                'cheminVueBody' => 'user/connexion/connexionPersonnel.php',
-            ]
-        );
+        /*if(ConnexionUtilisateur::estConnecte()){
+            ControllerEnseignant::displayTDBens();
+        }else {*/
+            self::afficheVue(
+                'view.php',
+                [
+                    'pagetitle' => 'Connexion',
+                    'cheminVueBody' => 'user/connexion/connexionPersonnel.php',
+                ]
+            );
+        //}
     }
 
     public static function connecterPersonnel()
@@ -76,13 +84,17 @@ class ControllerConnexion extends ControllerGenerique
 
     public static function afficherConnexionEntreprise(): void
     {
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Connexion',
-                'cheminVueBody' => 'user/connexion/connexionEntreprise.php',
-            ]
-        );
+        if(ConnexionUtilisateur::estConnecte()){
+            ControllerEntreprise::displayTDBentreprise();
+        }else {
+            self::afficheVue(
+                'view.php',
+                [
+                    'pagetitle' => 'Connexion',
+                    'cheminVueBody' => 'user/connexion/connexionEntreprise.php',
+                ]
+            );
+        }
     }
 
     public static function connecter()
