@@ -533,3 +533,30 @@ a img:active{
 #title .HBox{
     margin: 0;
 }
+
+.button span::before {
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    font-size: 1.8em;
+}
+
+.button span{
+    font-size: 1.1em;
+}
+
+#studentListButton span::before {
+    content: '\f007';
+}
+
+#companyListButton span::before {
+    content: '\f0b1';
+}
+
+#offerListButton span::before {
+    content: '\f022';
+}
+
+#importDataButton span::before {
+    content: '\f093';
+}
+
