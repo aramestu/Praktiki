@@ -17,9 +17,9 @@ class EntrepriseRepository extends AbstractRepository
             $entrepriseFormatTableau["effectifEntreprise"],
             $entrepriseFormatTableau["telephoneEntreprise"],
             $entrepriseFormatTableau["siteWebEntreprise"],
-            $entrepriseFormatTableau["emailEntreprise"],
+            $entrepriseFormatTableau["mailEntreprise"],
             $entrepriseFormatTableau["mdpHache"],
-            $entrepriseFormatTableau["emailAValider"],
+            $entrepriseFormatTableau["mailAValider"],
             $entrepriseFormatTableau["nonce"]);
         if(isset($entrepriseFormatTableau["estValide"])){
             $entreprise->setEstValide($entrepriseFormatTableau["estValide"]);
@@ -38,7 +38,7 @@ class EntrepriseRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return array("siret", "nomEntreprise", "codePostalEntreprise", "effectifEntreprise", "telephoneEntreprise", "siteWebEntreprise", "estValide", "emailEntreprise", "mdpHache",  "emailAValider", "nonce");
+        return array("siret", "nomEntreprise", "codePostalEntreprise", "effectifEntreprise", "telephoneEntreprise", "siteWebEntreprise", "estValide", "mailEntreprise", "mdpHache",  "mailAValider", "nonce");
     }
 
     /*

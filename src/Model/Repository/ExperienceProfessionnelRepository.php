@@ -1,9 +1,6 @@
 <?php
 namespace App\SAE\Model\Repository;
-use App\SAE\Model\DataObject\AbstractDataObject;
 use App\SAE\Model\DataObject\ExperienceProfessionnel;
-use App\SAE\Model\DataObject\OffreNonDefini;
-use App\SAE\Model\DataObject\Stage;
 
 class ExperienceProfessionnelRepository{
 
