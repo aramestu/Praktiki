@@ -74,7 +74,7 @@ class ConventionRepository extends AbstractRepository {
                             :telephoneEntrepriseTag, :estValideeTag, :estFiniTag, :mailEnseignantTag, :nomEnseignantTag, :prenomEnseignantTag, :estSigneeTag)";
             $requestStatement = $pdo->prepare($sql);
             $values = $convention->formatTableau();
-            unset($values["idConvention"]);
+            unset($values["idConventionTag"]);
             $requestStatement->execute($values);
             return true;
         } catch (\PDOException $e) {
