@@ -49,9 +49,9 @@ class ControllerConnexion extends ControllerGenerique
 
     public static function afficherConnexionPersonnel(): void
     {
-        /*if(ConnexionUtilisateur::estConnecte()){
+        if(ConnexionUtilisateur::estConnecte()){
             ControllerEnseignant::displayTDBens();
-        }else {*/
+        }else {
             self::afficheVue(
                 'view.php',
                 [
@@ -59,7 +59,7 @@ class ControllerConnexion extends ControllerGenerique
                     'cheminVueBody' => 'user/connexion/connexionPersonnel.php',
                 ]
             );
-        //}
+        }
     }
 
     public static function connecterPersonnel()
