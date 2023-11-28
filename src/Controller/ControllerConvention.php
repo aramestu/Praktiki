@@ -8,7 +8,6 @@ use App\SAE\Model\Repository\EnseignantRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
 use App\SAE\Model\Repository\StageRepository;
-use App\SAE\Model\Repository\TuteurProfessionnelRepository;
 
 class ControllerConvention extends ControllerGenerique
 {
@@ -38,6 +37,7 @@ class ControllerConvention extends ControllerGenerique
     }
 
     public static function modifierConvention(): void {
+        //TODO : refaire la fonction
         $tab = [
             "idConvention" => $_POST["idConvention"],
             "idStage" => $_POST["idStage"],

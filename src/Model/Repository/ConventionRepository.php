@@ -28,7 +28,7 @@ class ConventionRepository extends AbstractRepository {
                                     $conventionFormatTableau["siret"], $conventionFormatTableau["nomEntreprise"],
                                     $conventionFormatTableau["codePostalEntreprise"], $conventionFormatTableau["effectifEntreprise"],
                                     $conventionFormatTableau["telephoneEntreprise"], $conventionFormatTableau["estFini"],
-                                    $conventionFormatTableau["estValidee"]);
+                                    $conventionFormatTableau["estValidee"], $conventionFormatTableau["estSignee"]);
         if(isset($conventionFormatTableau["idConvention"])){
             $convention->setIdConvention($conventionFormatTableau["idConvention"]);
         }
@@ -50,7 +50,7 @@ class ConventionRepository extends AbstractRepository {
             "sujetExperienceProfessionnel", "thematiqueExperienceProfessionnel", "tachesExperienceProfessionnel",
             "codePostalExperienceProfessionnel", "adresseExperienceProfessionnel", "dateDebutExperienceProfessionnel",
             "dateFinExperienceProfessionnel", "nomSignataire", "prenomSignataire", "siret", "nomEntreprise",
-            "codePostalEntreprise", "effectifEntreprise", "telephoneEntreprise", "estFini", "estValidee");
+            "codePostalEntreprise", "effectifEntreprise", "telephoneEntreprise", "estFini", "estValidee", "estSignee");
     }
 
     public function save(AbstractDataObject|Convention $convention): bool
@@ -64,14 +64,14 @@ class ConventionRepository extends AbstractRepository {
                          tachesExperienceProfessionnel, codePostalExperienceProfessionnel, adresseExperienceProfessionnel, 
                          dateDebutExperienceProfessionnel, dateFinExperienceProfessionnel, nomSignataire, prenomSignataire, 
                          siret, nomEntreprise, codePostalEntreprise, effectifEntreprise, telephoneEntreprise, estValidee, 
-                         estFini, mailEnseignant, nomEnseignant, prenomEnseignant) 
+                         estFini, mailEnseignant, nomEnseignant, prenomEnseignant, estSignee) 
                     VALUES (:competencesADevelopperTag, :dureeDeTravailTag, :languesImpressionTag, :origineDeLaConventionTag, :sujetEstConfidentielTag,
                             :nbHeuresHebdoTag, :modePaiementTag, :dureeExperienceProfessionnelTag, :caisseAssuranceMaladieTag, :mailTuteurProfessionnelTag,
-                            :prenomTuteurProfessionnel, :nomTuteurProfessionnel, :fonctionTuteurProfessionnel, :telephoneTuteurProfessionnel,
-                            :sujetExperienceProfessionnel, :thematiqueExperienceProfessionnel, :tachesExperienceProfessionnel,
-                            :codePostalExperienceProfessionnel, :adresseExperienceProfessionnel, :dateDebutExperienceProfessionnel, :dateFinExperienceProfessionnelTag, 
-                            :nomSignataire, :prenomSignataireTag, :siretTag, :nomEntrepriseTag, :codePostalEntreprise, :effectifEntreprise, 
-                            :telephoneEntreprise, :estValidee, :estFini, :mailEnseignant, :nomEnseignant, :prenomEnseignant)";
+                            :prenomTuteurProfessionnelTag, :nomTuteurProfessionnelTag, :fonctionTuteurProfessionnelTag, :telephoneTuteurProfessionnelTag,
+                            :sujetExperienceProfessionnelTag, :thematiqueExperienceProfessionnelTag, :tachesExperienceProfessionnelTag,
+                            :codePostalExperienceProfessionnelTag, :adresseExperienceProfessionnelTag, :dateDebutExperienceProfessionnelTag, :dateFinExperienceProfessionnelTag, 
+                            :nomSignataireTag, :prenomSignataireTag, :siretTag, :nomEntrepriseTag, :codePostalEntrepriseTag, :effectifEntrepriseTag, 
+                            :telephoneEntrepriseTag, :estValideeTag, :estFiniTag, :mailEnseignantTag, :nomEnseignantTag, :prenomEnseignantTag, :estSigneeTag)";
             $requestStatement = $pdo->prepare($sql);
             $values = $convention->formatTableau();
             unset($values["idConvention"]);

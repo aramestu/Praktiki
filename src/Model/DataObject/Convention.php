@@ -38,6 +38,7 @@ class Convention extends AbstractDataObject {
     private string $telephoneEntreprise;
     private bool $estFini;
     private bool $estValidee;
+    private bool $estSignee;
 
     /**
      * @param string $mailEnseignant
@@ -73,8 +74,9 @@ class Convention extends AbstractDataObject {
      * @param string $telephoneEntreprise
      * @param bool $estSignee
      * @param bool $estValidee
+     * @param bool $estSignee
      */
-    public function __construct(string $mailEnseignant, string $nomEnseignant, string $prenomEnseignant, string $competencesADevelopper, string $dureeDeTravail, string $languesImpression, string $origineDeLaConvention, bool $sujetEstConfidentiel, string $nbHeuresHebdo, string $modePaiement, string $dureeExperienceProfessionnel, string $caisseAssuranceMaladie, string $mailTuteurProfessionnel, string $prenomTuteurProfessionnel, string $nomTuteurProfessionnel, string $fonctionTuteurProfessionnel, string $telephoneTuteurProfessionnel, string $sujetExperienceProfessionnel, string $thematiqueExperienceProfessionnel, string $tachesExperienceProfessionnel, string $codePostalExperienceProfessionnel, string $adresseExperienceProfessionnel, string $dateDebutExperienceProfessionnel, string $dateFinExperienceProfessionnel, string $nomSignataire, string $prenomSignataire, string $siret, string $nomEntreprise, string $codePostalEntreprise, string $effectifEntreprise, string $telephoneEntreprise, bool $estFini, bool $estValidee)
+    public function __construct(string $mailEnseignant, string $nomEnseignant, string $prenomEnseignant, string $competencesADevelopper, string $dureeDeTravail, string $languesImpression, string $origineDeLaConvention, bool $sujetEstConfidentiel, string $nbHeuresHebdo, string $modePaiement, string $dureeExperienceProfessionnel, string $caisseAssuranceMaladie, string $mailTuteurProfessionnel, string $prenomTuteurProfessionnel, string $nomTuteurProfessionnel, string $fonctionTuteurProfessionnel, string $telephoneTuteurProfessionnel, string $sujetExperienceProfessionnel, string $thematiqueExperienceProfessionnel, string $tachesExperienceProfessionnel, string $codePostalExperienceProfessionnel, string $adresseExperienceProfessionnel, string $dateDebutExperienceProfessionnel, string $dateFinExperienceProfessionnel, string $nomSignataire, string $prenomSignataire, string $siret, string $nomEntreprise, string $codePostalEntreprise, string $effectifEntreprise, string $telephoneEntreprise, bool $estFini, bool $estValidee, bool $estSignee)
     {
         $this->mailEnseignant = $mailEnseignant;
         $this->nomEnseignant = $nomEnseignant;
@@ -109,8 +111,18 @@ class Convention extends AbstractDataObject {
         $this->telephoneEntreprise = $telephoneEntreprise;
         $this->estFini = $estFini;
         $this->estValidee = $estValidee;
+        $this->estSignee = $estSignee;
     }
 
+    public function getEstSignee(): bool
+    {
+        return $this->estSignee;
+    }
+
+    public function setEstSignee(bool $estSignee): void
+    {
+        $this->estSignee = $estSignee;
+    }
 
     public function getIdConvention(): string
     {
@@ -192,7 +204,7 @@ class Convention extends AbstractDataObject {
         $this->origineDeLaConvention = $origineDeLaConvention;
     }
 
-    public function isSujetEstConfidentiel(): bool
+    public function getSujetEstConfidentiel(): bool
     {
         return ($this->sujetEstConfidentiel == 1);
     }
@@ -442,7 +454,7 @@ class Convention extends AbstractDataObject {
         $this->telephoneEntreprise = $telephoneEntreprise;
     }
 
-    public function isEstValidee(): bool
+    public function getEstValidee(): bool
     {
         return ($this->estValidee == 1);
     }
@@ -487,7 +499,8 @@ class Convention extends AbstractDataObject {
             "effectifEntrepriseTag" => $this->effectifEntreprise,
             "telephoneEntrepriseTag" => $this->telephoneEntreprise,
             "estFiniTag" => $this->estFini,
-            "estValideeTag" => $this->estValidee
+            "estValideeTag" => $this->estValidee,
+            "estSigneeTag" => $this->estSignee
         );
     }
 }
