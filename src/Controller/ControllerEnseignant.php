@@ -24,7 +24,7 @@ class ControllerEnseignant extends ControllerGenerique{
             [
                 'pagetitle' => 'Tableau de bord',
                 'user'=>$user,
-                'cheminVueBody' => 'user/tableauDeBord/Enseignant.php',
+                'cheminVueBody' => 'user/tableauDeBord/enseignant.php',
             ]
         );
     }
