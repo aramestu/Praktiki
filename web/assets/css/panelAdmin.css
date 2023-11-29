@@ -167,6 +167,27 @@ form #search-bar{
     -10px -10px 10px #E74C3C25;
 }
 
+#placeholder .Alternance:hover{
+    border-color: var(--orange);
+    box-shadow : 10px 10px 10px #00000025,
+    -10px -10px 10px #E67E2225;
+}
+
+#placeholder .Stage:hover{
+    border-color: var(--wisteria);
+    box-shadow : 10px 10px 10px #00000025,
+    -10px -10px 10px #8E44AD25;
+}
+
+#placeholder .OffreNonDefini:hover{
+    border-bottom-color: var(--wisteria);
+    border-left-color: var(--orange);
+    border-right-color: var(--wisteria);
+    border-top-color: var(--orange);
+    box-shadow: 10px 10px 10px #00000025,
+    -10px -10px 10px #E67E2225;
+}
+
 #placeholder .line:hover{
     cursor: pointer;
 }
@@ -200,6 +221,76 @@ form #search-bar{
     font-weight: bold;
     font-size: 16px;
 }
+
+
+
+/*---START Offer lines---*/
+.lineSujetOffre{
+    font-weight: bold;
+    position: absolute;
+    left: 13%;
+    width: 25%;
+    text-align: left;
+    text-overflow: ellipsis;
+}
+
+.lineEntrepriseOffre{
+    position: absolute;
+    left: 40%;
+    width: 15%;
+    text-align: left;
+    text-overflow: ellipsis;
+}
+
+.lineDateOffre{
+    position: absolute;
+    left: 55%;
+    width: 15%;
+    text-align: left;
+    text-overflow: ellipsis;
+}
+
+.deleteButtonOrigin{
+    opacity: 0;
+    text-decoration: none;
+    color: var(--darkBlue2);
+    position: absolute;
+    right: 3%;
+    transition: all 0.3s ease-in-out;
+}
+
+.editButton{
+    opacity: 0;
+    text-decoration: none;
+    color: var(--darkBlue2);
+    position: absolute;
+    right: 8%;
+    transition: all 0.3s ease-in-out;
+}
+
+.line > a > span::before{
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    font-size: 1.8em;
+}
+
+.deleteButtonOrigin span::before{
+    content: '\f1f8';
+}
+
+.editButton span::before{
+    content: '\f044';
+}
+
+
+.offre:hover > .editButton,
+.offre:hover > .deleteButtonOrigin{
+    color: var(--darkBlue2);
+    opacity: 0.69;
+}
+/*---END Offer lines---*/
+
+
 
 .lineCodePostalEntreprise{
     position: absolute;

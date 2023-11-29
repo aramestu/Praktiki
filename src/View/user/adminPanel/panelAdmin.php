@@ -2,6 +2,8 @@
 <link rel="stylesheet" href="assets/css/button.css">
 <link rel="stylesheet" href="assets/css/offer.css">
 
+<script src="assets/javascript/popUpDelete.js"></script>
+
 <div class="HBox" id="panel">
     <div class="container" id="option">
         <div class="HBox">

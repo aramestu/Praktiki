@@ -7,11 +7,11 @@
 
 <div class="columnName">
     <div id="columnFirst" class="HBox containerDebutLine">
-        <label>Etat</label>
-        <label class="lineNomPrenomEtudiant">NOM Prénom</label>
+        <label>Type</label>
+        <label class="lineSujetOffre">Sujet offre</label>
     </div>
-    <label class="lineNumEtudiant">Num Etudiant</label>
-    <label class="lineMailUniversitaireEtudidant">Mail</label>
+    <label class="lineEntrepriseOffre">Entreprise</label>
+    <label class="lineDateOffre">Date publication</label>
 </div>
 
 <div class="VBox">
@@ -20,4 +20,15 @@
         require __DIR__."/offreLine.php";
     }
     ?>
+</div>
+
+<div id="popUpDelete" class="subContainer">
+    <a id="popUpDeleteClose"><img src="assets/images/close-icon.png" id="closeIcon" alt="Close"></a>
+    <div id="popUpDeleteContent">
+        <p>Êtes-vous sûr de vouloir supprimer cette offre ?</p>
+        <div class="HBox">
+            <a class="button popUpDeleteButton" id="popUpDeleteNo">Non</a>
+            <a class="button popUpDeleteButton" id="popUpDeleteYes" href="frontController.php?controller=ExpPro&action=supprimerOffre&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel()) ?>">Oui</a>
+        </div>
+    </div>
 </div>
