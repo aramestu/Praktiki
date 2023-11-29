@@ -6,6 +6,7 @@ use App\SAE\Model\DataObject\Etudiant;
 use App\SAE\Model\Repository\AbstractExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\AbstractRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
+use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\Model;
 
 class ControllerEtudiant extends ControllerGenerique{
@@ -34,10 +35,10 @@ class ControllerEtudiant extends ControllerGenerique{
         );
     }
 
-    public static function displayTDBetu()
-    {
-        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(null, null, null, null,null
-            ,null,null,"lastWeek",null,null);
+    public static function displayTDBetu() {
+
+        $listeExpPro = ExperienceProfessionnelRepository::search(null, null, null, null,null,
+                                                        null,null,"lastWeek",null,null); //TODO mauvaise façon de faire (source de bug)
         $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
         $user=(new EtudiantRepository())->getByEmail($mail);
         self::afficheVue(

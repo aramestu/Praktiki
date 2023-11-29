@@ -13,7 +13,11 @@ class ExperienceProfessionnelRepository{
         );
     }
 
-    public static function search(string $keywords = null,string $dateDebut = null, string $dateFin = null, string $optionTri = "datePublication", string $stage = null, string $alternance = null, string $codePostal = null, string $datePublication = null, string $BUT2 = null, string $BUT3 = null){
+    public static function search(?string $keywords = null,?string $dateDebut = null, ?string $dateFin = null, ?string $optionTri = null, ?string $stage = null, ?string $alternance = null, ?string $codePostal = null, ?string $datePublication = null, ?string $BUT2 = null, ?string $BUT3 = null){
+        if($optionTri == null){
+            $optionTri = "datePublication";
+        }
+
         $tabStage = (new StageRepository())->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
         $tabAlternance = (new AlternanceRepository())->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
         $tabOffreNonDefini = (new OffreNonDefiniRepository())->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
@@ -49,6 +53,5 @@ class ExperienceProfessionnelRepository{
             }
         }
         return array_merge($allExperienceProfessionnel, $stages, $alternances);
-
     }
 }

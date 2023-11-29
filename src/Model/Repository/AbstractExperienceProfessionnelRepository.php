@@ -15,8 +15,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
     protected abstract function getNomDataObject(): string;
     public abstract function construireDepuisTableau(array $objetFormatTableau): ExperienceProfessionnel;
 
-    protected function getNomsColonnes(): array
-    {
+    protected function getNomsColonnes(): array {
         return array("idExperienceProfessionnel","sujetExperienceProfessionnel", "thematiqueExperienceProfessionnel",
             "tachesExperienceProfessionnel", "niveauExperienceProfessionnel", "codePostalExperienceProfessionnel",
             "adresseExperienceProfessionnel", "dateDebutExperienceProfessionnel",
@@ -39,7 +38,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             $pdo = Model::getPdo();
             $table = $this->getNomTable();
             $colonnes = $this->getNomsColonnes();
-            array_splice($colonnes, array_search('datePublication', $colonnes), 1); // POur supprimer datePublication
+            array_splice($colonnes, array_search('datePublication', $colonnes), 1); // Pour supprimer datePublication
 
             // POur dire dans quel valeur on va insérer
             $sql = "INSERT INTO ExperienceProfessionnel (";
@@ -136,8 +135,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         return $objects;
     }
 
-    public function get(string $id): ?ExperienceProfessionnel
-    {
+    public function get(string $id): ?ExperienceProfessionnel {
         $nomTable = $this->getNomTable();
         $nomClePrimaire = $this->getNomClePrimaire();
         $sql = "SELECT * 
@@ -231,51 +229,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
 
         $pdoStatement->execute($values);
     }
-
-
-    public static function rechercheAllOffreFiltree(string $keywords = null,string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $stage = null, string $alternance = null, string $codePostal = null, string $datePublication = null, string $BUT2 = null, string $BUT3 = null) : array{
-        // S'il y a BUT2 et BUT3 qui sont cochés alors on met à null car on fait comme si c'était pas coché pour tout afficher
-        // car on ne peut pas avoir les 2 en même temps
-        if(!is_null($BUT2) && !is_null($BUT3)){
-            $BUT2 = null;
-            $BUT3 = null;
-        }
-
-        $tabOffreNonDefini = (new OffreNonDefiniRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
-
-        // Si c'est filtré par stage et pas par alternance
-        if (isset($stage) && ! isset($alternance)) {
-            $tabStages = (new StageRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
-            // S'il n'y a pas une option de trie
-            if(! isset($optionTri)){
-                return array_merge($tabStages, $tabOffreNonDefini);
-            }
-            else{
-                return self::sort($tabStages, $tabOffreNonDefini, $optionTri);
-            }
-        }
-        // Si c'est filtré par alternance et aps par stage
-        else if (isset($alternance) && ! isset($stage)) {
-            $tabAlternance = (new AlternanceRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
-            if(! isset($optionTri)){
-                return array_merge($tabAlternance, $tabOffreNonDefini);
-            }
-            else{
-                return self::sort($tabAlternance, $tabOffreNonDefini, $optionTri);
-            }
-        }
-        // S'il n'y a pas de filtre ou que c'est filtré par stage et alternance
-        else {
-            $tabStages = (new StageRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
-            $tabAlternance = (new AlternanceRepository)->search($keywords, $dateDebut, $dateFin, $optionTri, $codePostal, $datePublication, $BUT2, $BUT3);
-            if (!isset($optionTri)) {
-                return array_merge(array_merge($tabStages, $tabAlternance), $tabOffreNonDefini);
-            } else {
-                return self::sort(self::sort($tabStages, $tabOffreNonDefini, $optionTri), $tabAlternance, $optionTri);
-            }
-        }
-    }
-
+    
     public function search(string $keywords = null,string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null, string $BUT2 = null, string $BUT3 = null): array{
         date_default_timezone_set('Europe/Paris');
         $nomTable = $this->getNomTable();
@@ -312,7 +266,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         }
         if($keywords != null){
             $sql .= " AND " . $this->colonneToSearch(array_merge($this->getNomsColonnes(), $this->getNomsColonnesSupplementaires()));
-            $values["keywordsTag"] = $keywords;
+            $values["keywordsTag"] = "%" . $keywords . "%";
         }
         if (isset($optionTri)) {
             if ($optionTri == "datePublication") {
