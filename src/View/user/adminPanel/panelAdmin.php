@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="assets/css/panelAdmin.css">
 <link rel="stylesheet" href="assets/css/button.css">
+<link rel="stylesheet" href="assets/css/offer.css">
 
 <div class="HBox" id="panel">
     <div class="container" id="option">
