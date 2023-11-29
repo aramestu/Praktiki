@@ -675,29 +675,3 @@ footer > VBox{
     border-color: var(--pastelRed);
 }
 /*---END MESSAGEFLASH---*/
-
-/*---MENU---*/
-.container-home {
-    display: flex;
-}
-
-#titre {
-    width: 95%;
-}
-
-@media screen and (max-width: 900px) {
-    .container-home {
-        display: block;
-        padding-left: 1%;
-
-    }
-
-    .container-home div {
-        width: 95%;
-    }
-
-    .container-home div:first-child {
-        margin-bottom: 5%;
-    }
-}
-/*---END MENU---*/
