@@ -14,9 +14,9 @@ class Entreprise extends AbstractDataObject
     private string $telephoneEntreprise;
     private string $siteWebEntreprise;
     private string $estValide;
-    private string $emailEntreprise;
+    private string $mailEntreprise;
     private string $mdpHache;
-    private string $emailAValider;
+    private string $mailAValider;
     private string $nonce;
 
     public function __construct(string $siret, string $nom, string $codePostal, string $effectif, string $telephone, string $siteWeb, string $email, string $mdpHache, string $emailAValider, string $nonce)
@@ -28,10 +28,10 @@ class Entreprise extends AbstractDataObject
         $this->telephoneEntreprise = $telephone;
         $this->siteWebEntreprise = $siteWeb;
         $this->estValide = 0;
-        $this->emailEntreprise = $email;
+        $this->mailEntreprise = $email;
         $this->mdpHache = $mdpHache;
-        $this->emailAValider = $emailAValider;
-        $this->nonce = $nonce;
+        $this->mailAValider=$emailAValider;
+        $this->nonce=$nonce;
     }
 
     public function getSiret(): string
@@ -116,22 +116,22 @@ class Entreprise extends AbstractDataObject
 
     public function getEmailEntreprise(): string
     {
-        return $this->emailEntreprise;
+        return $this->mailEntreprise;
     }
 
     public function setEmailEntreprise(string $email): void
     {
-        $this->emailEntreprise = $email;
+        $this->mailEntreprise = $email;
     }
 
     public function getEmailAValider(): string
     {
-        return $this->emailAValider;
+        return $this->mailAValider;
     }
 
     public function setEmailAValider(string $emailAValider): void
     {
-        $this->emailAValider = $emailAValider;
+        $this->mailAValider = $emailAValider;
     }
 
     public function getNonce(): string
@@ -154,10 +154,10 @@ class Entreprise extends AbstractDataObject
             "effectifEntrepriseTag" => $this->effectifEntreprise,
             "telephoneEntrepriseTag" => $this->telephoneEntreprise,
             "siteWebEntrepriseTag" => $this->siteWebEntreprise,
-            "estValideTag" => $this->estValide ? '1' : '0',
-            "emailEntrepriseTag" => $this->emailEntreprise,
+            "estValideTag" => $this->estValide? '1': '0',
+            "mailEntrepriseTag" => $this->mailEntreprise,
             "mdpHacheTag" => $this->mdpHache,
-            "emailAValiderTag" => $this->emailAValider,
+            "mailAValiderTag" => $this->mailAValider,
             "nonceTag" => $this->nonce
         ];
     }
