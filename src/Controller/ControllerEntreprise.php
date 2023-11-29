@@ -139,11 +139,15 @@ class ControllerEntreprise extends ControllerGenerique
     public
     static function changePassword(): void
     {
-        if (isset($_REQUEST["siret"], $_REQUEST["mail"])) {
-            $user = (new EntrepriseRepository())->getById($_REQUEST["siret"]);
+        if (isset($_REQUEST["siret"], $_REQUEST["mail"]) || ConnexionUtilisateur::estConnecte()) {
+            if(ConnexionUtilisateur::estConnecte()){
+                $user = (new EntrepriseRepository())->getById(ConnexionUtilisateur::getLoginUtilisateurConnecte());
+            }else{
+                $user = (new EntrepriseRepository())->getById($_REQUEST["siret"]);
+            }
             if (!is_null($user)) {
-                if ($user->getEmailEntreprise() == $_REQUEST["mail"]) {
-                    VerificationEmail::envoiEmailChangementPassword($_REQUEST["siret"], $_REQUEST["mail"]);
+                if ($user->getEmailEntreprise() == $_REQUEST["mail"] || ConnexionUtilisateur::estConnecte()) {
+                    VerificationEmail::envoiEmailChangementPassword($user->getSiret(), $user->getEmailEntreprise());
                     self::redirectionVersURL("success", "Vous allez recevoir un mail", "home");
                 } else {
                     self::redirectionVersURL("warning", "mail incorrect", "forgetPassword");

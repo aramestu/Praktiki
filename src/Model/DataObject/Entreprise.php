@@ -165,12 +165,12 @@ class Entreprise extends AbstractDataObject
     public static function construireDepuisFormulaire(array $tableauFormulaire): Entreprise
     {
         if (ConnexionUtilisateur::estConnecte()) {
-            $email = $tableauFormulaire["email"];
-            $emailValide = "";
+            $mail = $tableauFormulaire["mail"];
+            $mailValide = "";
             $nonce = "";
         } else {
-            $email = "";
-            $emailValide = $tableauFormulaire["email"];;
+            $mail = "";
+            $mailValide = $tableauFormulaire["mail"];;
             $nonce = MotDePasse::genererChaineAleatoire();
         }
         $mdpHache = MotDePasse::hacher($tableauFormulaire["password"]);
@@ -181,9 +181,9 @@ class Entreprise extends AbstractDataObject
             $tableauFormulaire["effectif"],
             $tableauFormulaire["telephone"],
             $tableauFormulaire["website"],
-            $email,
+            $mail,
             $mdpHache,
-            $emailValide,
+            $mailValide,
             $nonce
         );
     }
