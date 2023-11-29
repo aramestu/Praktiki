@@ -48,15 +48,17 @@ class EtudiantRepository extends AbstractRepository
         return $objects;
     }
 
-    public function conventionEtudiantEstValide(Etudiant $etudiant): bool{
+    public function conventionEtudiantEstValide(Etudiant $etudiant, int $idAnneeUniversitaire=3): bool{ //TODO : enlever la valeur par defaut de l'année universitaire quand le pannel admin sera mit à jour
         $sql = "SELECT estValidee FROM Etudiants etu
-                JOIN ExperienceProfessionnel exp ON etu.numEtudiant=exp.numEtudiant
-                JOIN Stages s ON s.idStage=exp.idExperienceProfessionnel
-                JOIN Conventions c ON c.idStage = s.idStage
-                WHERE etu.numEtudiant = :numEtudiantTag";
+                JOIN ConventionsStageEtudiant cse ON cse.numEtudiant = etu.numEtudiant
+                JOIN Conventions c ON c.idConvention = cse.idConvention
+                WHERE etu.numEtudiant = :numEtudiantTag
+                AND idAnneeUniversitaire = :idAnneeUniversitaireTag";
+
         $request = Model::getPdo()->prepare($sql);
         $values = array(
-            "numEtudiantTag" => $etudiant->getNumEtudiant()
+            "numEtudiantTag" => $etudiant->getNumEtudiant(),
+            "idAnneeUniversitaireTag" => $idAnneeUniversitaire
         );
         $request->execute($values);
         $result = $request->fetch();
@@ -70,40 +72,36 @@ class EtudiantRepository extends AbstractRepository
         }
     }
 
-    public function etudiantAStage(Etudiant $etudiant): bool{
-        $sql = "SELECT * FROM Etudiants etu
-                JOIN ExperienceProfessionnel exp ON etu.numEtudiant=exp.numEtudiant
-                JOIN Stages s ON s.idStage=exp.idExperienceProfessionnel
-                WHERE etu.numEtudiant = :numEtudiantTag";
+    public function conventionEtudiantEstSignee(Etudiant $etudiant, int $idAnneeUniversitaire): bool{
+        $sql = "SELECT estSignee FROM Etudiants etu
+                JOIN ConventionsStageEtudiant cse ON cse.numEtudiant = etu.numEtudiant
+                JOIN Conventions c ON c.idConvention = cse.idConvention
+                WHERE etu.numEtudiant = :numEtudiantTag
+                AND idAnneeUniversitaire = :idAnneeUniversitaireTag";
+
         $request = Model::getPdo()->prepare($sql);
         $values = array(
-            "numEtudiantTag" => $etudiant->getNumEtudiant()
+            "numEtudiantTag" => $etudiant->getNumEtudiant(),
+            "idAnneeUniversitaireTag" => $idAnneeUniversitaire
         );
         $request->execute($values);
         $result = $request->fetch();
-        if($result==false){
+        if(!$result){
             return false;
-        }else{
+        }
+        elseif($result["estSignee"] == 1){
             return true;
+        }else{
+            return false;
         }
     }
 
-    public function etudiantAAlternance(Etudiant $etudiant): bool{
-        $sql = "SELECT * FROM Etudiants etu
-                JOIN ExperienceProfessionnel exp ON etu.numEtudiant=exp.numEtudiant
-                JOIN Alternances a ON a.idAlternance=exp.idExperienceProfessionnel
-                WHERE etu.numEtudiant = :numEtudiantTag";
-        $request = Model::getPdo()->prepare($sql);
-        $values = array(
-            "numEtudiantTag" => $etudiant->getNumEtudiant()
-        );
-        $request->execute($values);
-        $result = $request->fetch();
-        if($result==false){
-            return false;
-        }else{
-            return true;
-        }
+    public function etudiantAStage(Etudiant $etudiant): bool{
+        return $this->conventionEtudiantEstValide($etudiant);
+    }
+
+    public function etudiantAAlternance(Etudiant $etudiant): bool{ //TODO : refaire quand l'appartenance à une alternance sera implémentée
+        return false;
     }
 
     public static function inscrire(string $numEtudiant, string $nomDepartement, string $nomAnneeUniversitaire): bool

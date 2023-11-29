@@ -29,8 +29,8 @@
             <input type="text" maxlength="10" minlength="10" name="telephone" id="telephone" required placeholder="0785449977">
         </p>
         <p>
-            <label for="email">Email</label>
-            <input type="text" name="email" id="email" required placeholder="votre.email@entreprise.com">
+            <label for="mail">Email</label>
+            <input type="text" name="mail" id="mail" required placeholder="votre.email@entreprise.com">
         </p>
         <p>
             <label for="password">Mot de passe</label>

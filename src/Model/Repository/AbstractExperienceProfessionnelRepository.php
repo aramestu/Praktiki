@@ -20,7 +20,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         return array("idExperienceProfessionnel","sujetExperienceProfessionnel", "thematiqueExperienceProfessionnel",
             "tachesExperienceProfessionnel", "niveauExperienceProfessionnel", "codePostalExperienceProfessionnel",
             "adresseExperienceProfessionnel", "dateDebutExperienceProfessionnel",
-            "dateFinExperienceProfessionnel", "siret", "numEtudiant", "mailEnseignant", "mailTuteurProfessionnel", "datePublication");
+            "dateFinExperienceProfessionnel", "siret", "datePublication");
     }
 
     protected function getNomClePrimaire(): string
@@ -76,17 +76,6 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             unset($formaTab["datePublicationTag"]); // j'enlève la datePublicaiton pour le formatTab
 
 
-            // SI les valeures sont vides alors on met null pour insérer
-            if ($e->getNumEtudiant() == "") {
-                $formaTab["numEtudiantTag"] = null;
-            }
-            if ($e->getMailEnseignant() == "") {
-                $formaTab["mailEnseignantTag"] = null;
-            }
-            if ($e->getMailTuteurProfessionnel() == "") {
-                $formaTab["mailTuteurProfessionnelTag"] = null;
-            }
-
             $requeteStatement = $pdo->prepare($sql);
             $requeteStatement->execute($formaTab);
 
@@ -126,21 +115,6 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         // Les id ont des noms différents, je vérif qu'ils existent
         if (array_key_exists($nomId, $expProFormatTableau)) {
             $exp->setIdExperienceProfessionnel($expProFormatTableau[$nomId]);
-        }
-        if (array_key_exists("numEtudiant", $expProFormatTableau)) {
-            if (!empty($expProFormatTableau["numEtudiant"])) {
-                $exp->setNumEtudiant($expProFormatTableau["numEtudiant"]);
-            }
-        }
-        if (array_key_exists("mailEnseignant", $expProFormatTableau)) {
-            if (!empty($expProFormatTableau["mailEnseignant"])) {
-                $exp->setMailEnseignant($expProFormatTableau["mailEnseignant"]);
-            }
-        }
-        if (array_key_exists("mailTuteurProfessionnel", $expProFormatTableau)) {
-            if (!empty($expProFormatTableau["mailTuteurProfessionnel"])) {
-                $exp->setMailTuteurProfessionnel($expProFormatTableau["mailTuteurProfessionnel"]);
-            }
         }
         if (array_key_exists("datePublication", $expProFormatTableau)) {
             $exp->setDatePublication($expProFormatTableau["datePublication"]);
@@ -203,27 +177,6 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         return $allExperienceProfessionnel;
     }
 
-
-    /*public static function sort(array $stages, array $alternances, string $option): array
-    {
-        if ($option == "salaireCroissant" || $option == "salaireDecroissant") {
-            return array_merge($stages, $alternances);
-        }
-        $allExperienceProfessionnel = array();
-        while (!empty($stages) && !empty($alternances)) {
-            $order = match ($option) {
-                "datePublication" => strtotime($stages[0]->getDatePublication()) - strtotime($alternances[0]->getDatePublication()),
-                "datePublicationInverse" => strtotime($alternances[0]->getDatePublication()) - strtotime($stages[0]->getDatePublication())
-            };
-            if ($order < 0) {
-                $allExperienceProfessionnel[] = array_shift($stages);
-            } else {
-                $allExperienceProfessionnel[] = array_shift($alternances);
-            }
-        }
-        return array_merge($allExperienceProfessionnel, $stages, $alternances);
-    }*/
-
     public function mettreAJour(AbstractDataObject $exp): void
     {
         // On insère d'abord dans ExperienceProfessionnel
@@ -252,18 +205,6 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             unset($formaTab[$col . "Tag"]);
         }
         unset($formaTab["datePublicationTag"]); // j'enlève la datePublicaiton pour le formatTab
-
-
-        // SI les valeures sont vides alors on met null pour insérer
-        if ($exp->getNumEtudiant() == "") {
-            $formaTab["numEtudiantTag"] = null;
-        }
-        if ($exp->getMailEnseignant() == "") {
-            $formaTab["mailEnseignantTag"] = null;
-        }
-        if ($exp->getMailTuteurProfessionnel() == "") {
-            $formaTab["mailTuteurProfessionnelTag"] = null;
-        }
 
         $requeteStatement = $pdo->prepare($sql);
         $requeteStatement->execute($formaTab);
@@ -357,7 +298,10 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         $nomClePrimaire = $this->getNomClePrimaire();
         $values = array();
         $sql = "SELECT *
-                FROM $nomTable JOIN ExperienceProfessionnel e ON $nomTable.$nomClePrimaire = e.idExperienceProfessionnel WHERE numEtudiant IS NULL ";
+                FROM $nomTable JOIN ExperienceProfessionnel e ON $nomTable.$nomClePrimaire = e.idExperienceProfessionnel ";
+
+        $whereAjoute = false;
+
         if (isset($datePublication)) {
             $sql .= match ($datePublication) {
                 'last24' => "AND DATEDIFF(NOW(), datePublication) < 1 ",

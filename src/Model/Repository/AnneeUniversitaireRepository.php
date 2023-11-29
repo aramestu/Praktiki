@@ -5,18 +5,28 @@ namespace App\SAE\Model\Repository;
 use App\SAE\Model\DataObject\AnneeUniversitaire;
 use App\SAE\Model\DataObject\AbstractDataObject;
 
-class AnneeUniversitaireRepository extends AbstractRepository
-{
+class AnneeUniversitaireRepository extends AbstractRepository{
 
-    public function save(AbstractDataObject|AnneeUniversitaire $anneeUniversitaire): bool
-    {
+    protected function construireDepuisTableau(array $anneeUniversitaireFormatTableau): AnneeUniversitaire{
+        $anneeUniversitaire = new AnneeUniversitaire($anneeUniversitaireFormatTableau["nomAnneeUniversitaire"], $anneeUniversitaireFormatTableau["dateFinAnneeUniversitaire"], $anneeUniversitaireFormatTableau["dateDebutAnneeUniversitaire"]);
+
+        if (isset($anneeUniversitaireFormatTableau["idAnneeUniversitaire"])) {
+            $anneeUniversitaire->setIdAnneeUniversitaire($anneeUniversitaireFormatTableau["idAnneeUniversitaire"]);
+        }
+
+        return $anneeUniversitaire;
+    }
+
+    public function save(AbstractDataObject|AnneeUniversitaire $anneeUniversitaire): bool {
         try {
             if ($this->getByNom($anneeUniversitaire->getNomAnneeUniversitaire()) == null) {
                 $pdo = Model::getPdo();
-                $sql = "INSERT INTO AnneeUniversitaire (nomAnneeUniversitaire) VALUES (:nomAnneeUniversitaireTag)";
+                $sql = "INSERT INTO AnneeUniversitaire (nomAnneeUniversitaire,dateFinAnneeUniversitaire,dateDebutAnneeUniversitaire) VALUES (:nomAnneeUniversitaireTag , :dateFinAnneeUniversitaireTag , :dateDebutAnneeUniversitaireTag)";
                 $requestStatement = $pdo->prepare($sql);
                 $values = array(
-                    "nomAnneeUniversitaireTag" => $anneeUniversitaire->getNomAnneeUniversitaire()
+                    "nomAnneeUniversitaireTag" => $anneeUniversitaire->getNomAnneeUniversitaire(),
+                    "dateFinAnneeUniversitaire" => $anneeUniversitaire->getDateFinAnneeUniversitaire(),
+                    "dateDebutAnneeUniversitaire" => $anneeUniversitaire->getDateDebutAnneeUniversitaire()
                 );
                 $requestStatement->execute($values);
                 return true;
@@ -27,15 +37,6 @@ class AnneeUniversitaireRepository extends AbstractRepository
         }
     }
 
-    protected function construireDepuisTableau(array $anneeUniversitaireFormatTableau): AnneeUniversitaire
-    {
-        $anneeUniversitaire = new AnneeUniversitaire($anneeUniversitaireFormatTableau["nomAnneeUniversitaire"]);
-        if (isset($anneeUniversitaireFormatTableau["idAnneeUniversitaire"])) {
-            $anneeUniversitaire->setIdAnneeUniversitaire($anneeUniversitaireFormatTableau["idAnneeUniversitaire"]);
-        }
-
-        return $anneeUniversitaire;
-    }
 
     public function getByNom(string $nom): ?AnneeUniversitaire
     {
@@ -65,6 +66,6 @@ class AnneeUniversitaireRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return array("idAnneeUniversitaire", "nomAnneeUniversitaire");
+        return array("idAnneeUniversitaire", "nomAnneeUniversitaire", "dateFinAnneeUniversitaire", "dateDebutAnneeUniversitaire");
     }
 }
