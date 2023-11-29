@@ -35,7 +35,7 @@ echo htmlspecialchars($last_element) */
     </div>
     <div id="main">
         <div id="infoOffer">
-            <p><?php echo (new ExperienceProfessionnelRepository())->getDatePublication($expPro) ?></p>
+            <p><?php echo $expPro->getDatePublication() ?></p>
             <p class="bold">Sujet : <?= htmlspecialchars($expPro->getSujetExperienceProfessionnel()) ?></p>
             <?php
             if ($expPro->getNomExperienceProfessionnel() == "Stage") {

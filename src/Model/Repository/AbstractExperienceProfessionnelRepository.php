@@ -161,22 +161,6 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         return $this->construireDepuisTableau($exp);
     }
 
-    public static function sort(array $stages, array $alternances, string $option): array
-    {
-        $allExperienceProfessionnel = array_merge($stages, $alternances);
-
-        if ($option == "datePublicationInverse") {
-            usort($allExperienceProfessionnel, function ($a, $b) {
-                return strtotime($a->getDatePublication()) - strtotime($b->getDatePublication()); // classe anonyme
-            });
-        } elseif ($option == "datePublication") {
-            usort($allExperienceProfessionnel, function ($a, $b) {
-                return strtotime($b->getDatePublication()) - strtotime($a->getDatePublication());
-            });
-        }
-        return $allExperienceProfessionnel;
-    }
-
     public function mettreAJour(AbstractDataObject $exp): void
     {
         // On insère d'abord dans ExperienceProfessionnel

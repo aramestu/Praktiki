@@ -15,7 +15,7 @@ class ControllerExpPro extends ControllerGenerique
 {
     public static function getExpProByDefault(): void
     {
-        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree("");
+        $listeExpPro = ExperienceProfessionnelRepository::search("");
         self::afficheVue(
             'view.php',
             [
@@ -26,17 +26,16 @@ class ControllerExpPro extends ControllerGenerique
         );
     }
 
-    public static function getExpProRecent(): void
-    {
-        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(null, null, null, null,null
-            ,null,null,"lastWeek",null,null);;
+    public static function getExpProRecent(): void{
+        $listeExpPro = ExperienceProfessionnelRepository::search(null, null, null, null,null,
+                                                        null,null,"lastWeek",null,null);;
         extract($listeExpPro);
         require __DIR__ ."/../View/offer/offerTable.php";
     }
 
     public static function getExpProEntreprise(): void
     {
-        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(ConnexionUtilisateur::getLoginUtilisateurConnecte());
+        $listeExpPro = ExperienceProfessionnelRepository::search(ConnexionUtilisateur::getLoginUtilisateurConnecte());
         extract($listeExpPro);
         require __DIR__ ."/../View/offer/offerTable.php";
     }
@@ -46,7 +45,7 @@ class ControllerExpPro extends ControllerGenerique
     public static function getExpProBySearch(): void
     {
         $keywords = urldecode($_GET['keywords']);
-        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree($keywords);
+        $listeExpPro = ExperienceProfessionnelRepository::search($keywords);
         self::afficheVue(
             'view.php',
             [
@@ -95,7 +94,7 @@ class ControllerExpPro extends ControllerGenerique
         if (isset($_GET['BUT3'])){
             $BUT3 = $_GET['BUT3'];
         }
-        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(null, $dateDebut, $dateFin, $optionTri, $stage, $alternance, $codePostal, $datePublication, $BUT2, $BUT3);
+        $listeExpPro = ExperienceProfessionnelRepository::search(null, $dateDebut, $dateFin, $optionTri, $stage, $alternance, $codePostal, $datePublication, $BUT2, $BUT3);
         self::afficheVue(
             'view.php',
             [
@@ -151,7 +150,7 @@ class ControllerExpPro extends ControllerGenerique
             $keywords = null;
         }
 
-        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(
+        $listeExpPro = ExperienceProfessionnelRepository::search(
             $keywords,
             $dateDebut,
             $dateFin,
