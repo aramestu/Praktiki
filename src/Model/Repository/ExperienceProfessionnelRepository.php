@@ -5,7 +5,7 @@ use App\SAE\Model\DataObject\ExperienceProfessionnel;
 
 class ExperienceProfessionnelRepository{
 
-    public static function getAll(){
+    public static function getAll(): array{
         return array_merge(
             (new StageRepository())->getAll(),
             (new AlternanceRepository())->getAll(),
@@ -13,7 +13,7 @@ class ExperienceProfessionnelRepository{
         );
     }
 
-    public static function search(?string $keywords = null,?string $dateDebut = null, ?string $dateFin = null, ?string $optionTri = null, ?string $stage = null, ?string $alternance = null, ?string $codePostal = null, ?string $datePublication = null, ?string $BUT2 = null, ?string $BUT3 = null){
+    public static function search(?string $keywords = null,?string $dateDebut = null, ?string $dateFin = null, ?string $optionTri = null, ?string $stage = null, ?string $alternance = null, ?string $codePostal = null, ?string $datePublication = null, ?string $BUT2 = null, ?string $BUT3 = null): array{
         if($optionTri == null){
             $optionTri = "datePublication";
         }
