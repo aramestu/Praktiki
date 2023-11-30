@@ -36,6 +36,9 @@ class ControllerEtudiant extends ControllerGenerique{
 
     public static function displayTDBetu()
     {
+        if (!ConnexionUtilisateur::estConnecte()){
+            self::redirectHomePageErreurFlash();
+        }
         $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(null, null, null, null,null
             ,null,null,"lastWeek",null,null);
         $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
