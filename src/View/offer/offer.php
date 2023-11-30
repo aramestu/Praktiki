@@ -41,7 +41,7 @@ echo htmlspecialchars($last_element) */
             if ($expPro->getNomExperienceProfessionnel() == "Stage") {
                 ?>
                 <p>Gratification : <?php
-                    $stage = (new StageRepository())->get($expPro->getIdExperienceProfessionnel());
+                    $stage = (new StageRepository())->getById($expPro->getIdExperienceProfessionnel());
                     echo(htmlspecialchars($stage->getGratificationStage()));
                     ?>€</p>
                 <?php

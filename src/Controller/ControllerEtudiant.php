@@ -37,7 +37,7 @@ class ControllerEtudiant extends ControllerGenerique{
 
     public static function displayTDBetu() {
 
-        $listeExpPro = ExperienceProfessionnelRepository::search(null, null, null, null,null,
+        $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null,null,
                                                         null,null,"lastWeek",null,null); //TODO mauvaise façon de faire (source de bug)
         $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
         $user=(new EtudiantRepository())->getByEmail($mail);

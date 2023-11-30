@@ -9,22 +9,18 @@ use App\SAE\Model\DataObject\ExperienceProfessionnel;
 use App\SAE\Model\DataObject\Stage;
 use App\SAE\Model\Repository\Model;
 
-abstract class AbstractExperienceProfessionnelRepository extends AbstractRepository
-{
+abstract class AbstractExperienceProfessionnelRepository extends AbstractRepository{
     protected abstract function getNomsColonnesSupplementaires(): array;
     protected abstract function getNomDataObject(): string;
     public abstract function construireDepuisTableau(array $objetFormatTableau): ExperienceProfessionnel;
+
+    abstract protected function getNomClePrimaire():string;
 
     protected function getNomsColonnes(): array {
         return array("idExperienceProfessionnel","sujetExperienceProfessionnel", "thematiqueExperienceProfessionnel",
             "tachesExperienceProfessionnel", "niveauExperienceProfessionnel", "codePostalExperienceProfessionnel",
             "adresseExperienceProfessionnel", "dateDebutExperienceProfessionnel",
             "dateFinExperienceProfessionnel", "siret", "datePublication");
-    }
-
-    protected function getNomClePrimaire(): string
-    {
-        return "idExperienceProfessionnel";
     }
 
     protected function getNomTable(): string
@@ -45,11 +41,8 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
 
             // On commence à 1 pour éviter la clé primaire
             for($i =1; $i<sizeof($colonnes); $i++){
-                // Si ce n'est pas la datePublication
-                $sql = $sql . $colonnes[$i];
-
-                // Si ce n'est pas le dernier alros on met une virgule
-                if($i!=sizeof($colonnes)-1){
+                $sql = $sql . $colonnes[$i];// Si ce n'est pas la datePublication
+                if($i!=sizeof($colonnes)-1){// Si ce n'est pas le dernier alros on met une virgule
                     $sql = $sql . ", ";
                 }
             }
@@ -109,7 +102,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
     /* utilisé pour construireDepuisTableau afin de dupliquer du code avec StageRepository
      *
      */
-    public function updateAttribut(array $expProFormatTableau, ExperienceProfessionnel $exp): void {
+    protected function updateAttribut(array $expProFormatTableau, ExperienceProfessionnel $exp): void{
         $nomId = $this->getNomClePrimaire();
         // Les id ont des noms différents, je vérif qu'ils existent
         if (array_key_exists($nomId, $expProFormatTableau)) {
@@ -120,8 +113,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         }
     }
 
-    public function getAll(): array
-    {
+    public function getAll(): array{
         $pdo = Model::getPdo();
         $nomTable = $this->getNomTable();
         $nomClePrimaire = $this->getNomClePrimaire();
@@ -135,7 +127,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         return $objects;
     }
 
-    public function get(string $id): ?ExperienceProfessionnel {
+    public function getById(string $id): ?ExperienceProfessionnel {
         $nomTable = $this->getNomTable();
         $nomClePrimaire = $this->getNomClePrimaire();
         $sql = "SELECT * 
@@ -293,7 +285,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         return $stageTriee;
     }
 
-    public static function getDatePublication(ExperienceProfessionnel $expPro): string
+    public static function getDelayDatePublication(ExperienceProfessionnel $expPro): string
     {
         $sql = "SELECT get_delay_experience(:id) AS delai_experience FROM ExperienceProfessionnel WHERE idExperienceProfessionnel = :id;";
         $pdoStatement = Model::getPdo()->prepare($sql);
