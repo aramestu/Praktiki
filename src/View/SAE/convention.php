@@ -39,7 +39,7 @@ $p = $prof;
     </div>
 
     <div class="containerConvention">
-        <h2>Stage et entreprise : </h2>
+        <h2>Stage : </h2>
         <div class="container-label-input">
             <label for="typeStage">Type du stage :</label>
             <input type="text" name="typeStage" id="typeStage" placeholder="Type du stage" value="Formation Initiale - Stage Obligatoire">
@@ -108,6 +108,10 @@ $p = $prof;
             <label for="dureeStage">Durée du stage :</label>
             <input type="number" name="dureeStage" id="dureeStage" placeholder="Durée du stage" value="<?php echo htmlspecialchars($c->getDureeExperienceProfessionnel());?>">
         </div>
+    </div>
+
+    <div class="containerConvention">
+        <h2>Entreprise : </h2>
         <div class="container-label-input">
             <label for="nomEntreprise">Nom de l'entreprise :</label>
             <input type="text" name="nomEntreprise" id="nomEntreprise" placeholder="Nom de l'entreprise" value="<?php echo htmlspecialchars($en->getNomEntreprise());?>">
