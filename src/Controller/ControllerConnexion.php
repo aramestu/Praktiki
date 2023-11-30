@@ -15,9 +15,9 @@ class ControllerConnexion extends ControllerGenerique
 
     public static function afficherConnexionLdap(): void
     {
-        if(ConnexionUtilisateur::estConnecte()){
+        if (ConnexionUtilisateur::estConnecte()) {
             ControllerEtudiant::displayTDBetu();
-        }else {
+        } else {
             self::afficheVue(
                 'view.php',
                 [
@@ -30,28 +30,32 @@ class ControllerConnexion extends ControllerGenerique
 
     public static function connecterLdap()
     {
-        if (isset($_REQUEST["username"], $_REQUEST["password"])) {
-            $userInformation = Ldap::connection($_REQUEST["username"], $_REQUEST["password"]);
+        if (!ConnexionUtilisateur::estConnecte()) {
+            if (isset($_REQUEST["username"], $_REQUEST["password"])) {
+                $userInformation = Ldap::connection($_REQUEST["username"], $_REQUEST["password"]);
                 if ($userInformation) {
                     if ($userInformation->getHomeDirectory() == "ann2" || $userInformation->getHomeDirectory() == "ann3") {
-                    ConnexionUtilisateur::connecter($userInformation->getMail());
-                    self::redirectionVersURL("success", "Connexion réussie", "displayTDBetu&controller=Etudiant");
+                        ConnexionUtilisateur::connecter($userInformation->getMail());
+                        self::redirectionVersURL("success", "Connexion réussie", "displayTDBetu&controller=Etudiant");
+                    } else {
+                        self::redirectionVersURL("warning", "Vous n'êtes pas un étudiant", "afficherConnexionLdap&controller=Connexion");
+                    }
                 } else {
-                    self::redirectionVersURL("warning", "Vous n'êtes pas un étudiant", "afficherConnexionLdap&controller=Connexion");
+                    self::redirectionVersURL("warning", "Identifiant ou Mot de passe incorrect", "afficherConnexionLdap&controller=Connexion");
                 }
-            }else{
-                self::redirectionVersURL("warning", "Identifiant ou Mot de passe incorrect", "afficherConnexionLdap&controller=Connexion");
+            } else {
+                self::redirectionVersURL("warning", "Remplissez les champs libres", "connecterLdap&controller=Connexion");
             }
         } else {
-            self::redirectionVersURL("warning", "Remplissez les champs libres", "connecterLdap&controller=Connexion");
+            self::redirectionVersURL("warning", "Vous êtes déjà connecté", "home");
         }
     }
 
     public static function afficherConnexionPersonnel(): void
     {
-        if(ConnexionUtilisateur::estConnecte()){
+        if (ConnexionUtilisateur::estConnecte()) {
             ControllerEnseignant::displayTDBens();
-        }else {
+        } else {
             self::afficheVue(
                 'view.php',
                 [
@@ -64,29 +68,33 @@ class ControllerConnexion extends ControllerGenerique
 
     public static function connecterPersonnel()
     {
-        if (isset($_REQUEST["username"], $_REQUEST["password"])) {
-            $userInformation = Ldap::connectionBrutForcePersonnel($_REQUEST["username"]);
-            if ($userInformation) {
-                ConnexionUtilisateur::connecter($userInformation->getMail());
-                $user=(new EnseignantRepository())->getByEmail($userInformation->getMail());
-                if($user->isEstAdmin()){
-                    self::redirectionVersURL("success", "Connexion réussie", "panelListeEtudiants&controller=PanelAdmin");
-                }else{
-                    self::redirectionVersURL("success", "Connexion réussie", "displayTDBens&controller=Enseignant");
+        if (!ConnexionUtilisateur::estConnecte()) {
+            if (isset($_REQUEST["username"], $_REQUEST["password"])) {
+                $userInformation = Ldap::connectionBrutForcePersonnel($_REQUEST["username"]);
+                if ($userInformation) {
+                    ConnexionUtilisateur::connecter($userInformation->getMail());
+                    $user = (new EnseignantRepository())->getByEmail($userInformation->getMail());
+                    if ($user->isEstAdmin()) {
+                        self::redirectionVersURL("success", "Connexion réussie", "panelListeEtudiants&controller=PanelAdmin");
+                    } else {
+                        self::redirectionVersURL("success", "Connexion réussie", "displayTDBens&controller=Enseignant");
+                    }
+                } else {
+                    self::redirectionVersURL("warning", "Identifiant ou Mot de passe incorrect", "afficherConnexionPersonnel&controller=Connexion");
                 }
             } else {
-                self::redirectionVersURL("warning", "Identifiant ou Mot de passe incorrect", "afficherConnexionPersonnel&controller=Connexion");
+                self::redirectionVersURL("warning", "Remplissez les champs libres", "afficherConnexionPersonnel&controller=Connexion");
             }
         } else {
-            self::redirectionVersURL("warning", "Remplissez les champs libres", "afficherConnexionPersonnel&controller=Connexion");
+            self::redirectionVersURL("warning", "Vous êtes déjà connecté", "home");
         }
     }
 
     public static function afficherConnexionEntreprise(): void
     {
-        if(ConnexionUtilisateur::estConnecte()){
+        if (ConnexionUtilisateur::estConnecte()) {
             ControllerEntreprise::displayTDBentreprise();
-        }else {
+        } else {
             self::afficheVue(
                 'view.php',
                 [
@@ -99,26 +107,30 @@ class ControllerConnexion extends ControllerGenerique
 
     public static function connecter()
     {
-        if (isset($_REQUEST["username"], $_REQUEST["password"])) {
-            $user = (new EntrepriseRepository())->getById($_REQUEST["username"]);
-            if (!is_null($user)) {
-                if (VerificationEmail::aValideEmail($user)) {
-                    if (MotDePasse::verifier($_REQUEST["password"], $user->formatTableau()["mdpHacheTag"])) {
-                        ConnexionUtilisateur::connecter($_REQUEST["username"]);
-                        MessageFlash::ajouter("success", "Connexion réussie");
-                        self::redirectionVersURL("success", "Connexion réussie", "displayTDBentreprise&controller=Entreprise");
+        if (!ConnexionUtilisateur::estConnecte()) {
+            if (isset($_REQUEST["username"], $_REQUEST["password"])) {
+                $user = (new EntrepriseRepository())->getById($_REQUEST["username"]);
+                if (!is_null($user)) {
+                    if (VerificationEmail::aValideEmail($user)) {
+                        if (MotDePasse::verifier($_REQUEST["password"], $user->formatTableau()["mdpHacheTag"])) {
+                            ConnexionUtilisateur::connecter($_REQUEST["username"]);
+                            MessageFlash::ajouter("success", "Connexion réussie");
+                            self::redirectionVersURL("success", "Connexion réussie", "displayTDBentreprise&controller=Entreprise");
 
+                        } else {
+                            self::redirectionVersURL("warning", "Mot de passe incorrect", "afficherConnexionEntreprise&controller=Connexion");
+                        }
                     } else {
-                        self::redirectionVersURL("warning", "Mot de passe incorrect", "afficherConnexionEntreprise&controller=Connexion");
+                        self::redirectionVersURL("warning", "Email non validé", "afficherConnexionEntreprise&controller=Connexion");
                     }
                 } else {
-                    self::redirectionVersURL("warning", "Email non validé", "afficherConnexionEntreprise&controller=Connexion");
+                    self::redirectionVersURL("warning", "Login incorrect", "afficherConnexionEntreprise&controller=Connexion");
                 }
             } else {
-                self::redirectionVersURL("warning", "Login incorrect", "afficherConnexionEntreprise&controller=Connexion");
+                self::redirectionVersURL("warning", "Remplissez les champs libres", "afficherConnexionEntreprise&controller=Connexion");
             }
         } else {
-            self::redirectionVersURL("warning", "Remplissez les champs libres", "afficherConnexionEntreprise&controller=Connexion");
+            self::redirectionVersURL("warning", "Vous êtes déjà connecté", "home");
         }
     }
 
