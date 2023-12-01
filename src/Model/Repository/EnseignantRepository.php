@@ -38,6 +38,22 @@ class EnseignantRepository extends AbstractRepository
         }
     }
 
+    public function estAdmin(string $mail): bool
+    {
+        $sql="SELECT estAdmin FROM Enseignants WHERE mailEnseignant=:Tag";
+        $pdoStatement=Model::getPdo()->prepare($sql);
+        $array=array(
+            "Tag"=>$mail
+        );
+        $pdoStatement->execute($array);
+        foreach ($pdoStatement as $item) {
+            if ($item["estAdmin"]=="1"){
+                return true;
+            }
+        }
+        return false;
+    }
+
     protected function getNomTable(): string
     {
         return "Enseignants";

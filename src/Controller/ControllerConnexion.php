@@ -39,8 +39,7 @@ class ControllerConnexion extends ControllerGenerique
                         self::redirectionVersURL("success", "Connexion réussie", "displayTDBetu&controller=Etudiant");
                     } else if ($userInformation->getHomeDirectory() == "personnel") {
                         ConnexionUtilisateur::connecter($userInformation->getMail());
-                        $user = (new EnseignantRepository())->getByEmail($userInformation->getMail());
-                        if ($user->isEstAdmin()) {
+                        if (ConnexionUtilisateur::estAdministrateur()) {
                             self::redirectionVersURL("success", "Connexion réussie", "panelListeEtudiants&controller=PanelAdmin");
                         } else {
                             self::redirectionVersURL("success", "Connexion réussie", "displayTDBens&controller=Enseignant");
@@ -85,8 +84,7 @@ static function connecterPersonnel()
             $userInformation = Ldap::connectionBrutForcePersonnel($_REQUEST["username"]);
             if ($userInformation) {
                 ConnexionUtilisateur::connecter($userInformation->getMail());
-                $user = (new EnseignantRepository())->getByEmail($userInformation->getMail());
-                if ($user->isEstAdmin()) {
+                if (ConnexionUtilisateur::estAdministrateur()) {
                     self::redirectionVersURL("success", "Connexion réussie", "panelListeEtudiants&controller=PanelAdmin");
                 } else {
                     self::redirectionVersURL("success", "Connexion réussie", "displayTDBens&controller=Enseignant");
