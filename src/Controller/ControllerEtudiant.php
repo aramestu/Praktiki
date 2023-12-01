@@ -36,9 +36,12 @@ class ControllerEtudiant extends ControllerGenerique{
     }
 
     public static function displayTDBetu() {
-
+        if (!ConnexionUtilisateur::estConnecte()){
+            self::redirectionVersURL("warning", "Veuillez vous connecter pour acceder à cette page", "home");
+            return;
+        }
         $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null,null,
-                                                        null,null,"lastWeek",null,null); //TODO mauvaise façon de faire (source de bug)
+                                                        null,null,"lastWeek",null,null);
         $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
         $user=(new EtudiantRepository())->getByEmail($mail);
         self::afficheVue(

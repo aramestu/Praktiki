@@ -180,7 +180,11 @@ class ControllerEntreprise extends ControllerGenerique
         }
 
     public static function displayTDBentreprise() {
-        $listeExpPro =  ExperienceProfessionnelRepository::search(ConnexionUtilisateur::getLoginUtilisateurConnecte());//TODO mauvaise façon de faire (source de bug)
+        if (!ConnexionUtilisateur::estConnecte()){
+            self::redirectionVersURL("warning", "Veuillez vous connecter pour acceder à cette page", "home");
+            return;
+        }
+        $listeExpPro =  (new ExperienceProfessionnelRepository())->search(ConnexionUtilisateur::getLoginUtilisateurConnecte());
         $siret=ConnexionUtilisateur::getLoginUtilisateurConnecte();
         $user=(new EntrepriseRepository())->getById($siret);
         self::afficheVue(
