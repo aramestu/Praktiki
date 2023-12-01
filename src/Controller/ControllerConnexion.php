@@ -41,9 +41,21 @@ class ControllerConnexion extends ControllerGenerique
                         self::redirectionVersURL("warning", "Vous n'êtes pas un étudiant", "afficherConnexionLdap&controller=Connexion");
                     }
                 } else {
-                    self::redirectionVersURL("warning", "Identifiant ou Mot de passe incorrect", "afficherConnexionLdap&controller=Connexion");
+                    $userInformation = Ldap::connectionBrutForcePersonnel($_REQUEST["username"]);
+                    if ($userInformation) {
+                        ConnexionUtilisateur::connecter($userInformation->getMail());
+                        $user = (new EnseignantRepository())->getByEmail($userInformation->getMail());
+                        if ($user->isEstAdmin()) {
+                            self::redirectionVersURL("success", "Connexion réussie", "panelListeEtudiants&controller=PanelAdmin");
+                        } else {
+                            self::redirectionVersURL("success", "Connexion réussie", "displayTDBens&controller=Enseignant");
+                        }
+                    }
+                    else{
+                        self::redirectionVersURL("warning", "Identifiant ou Mot de passe incorrect", "afficherConnexionLdap&controller=Connexion");
+                    }
                 }
-            } else {
+            }else {
                 self::redirectionVersURL("warning", "Remplissez les champs libres", "connecterLdap&controller=Connexion");
             }
         } else {
