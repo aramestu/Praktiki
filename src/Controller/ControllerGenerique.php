@@ -4,7 +4,6 @@ namespace App\SAE\Controller;
 
 use App\SAE\Lib\MessageFlash;
 use JetBrains\PhpStorm\NoReturn;
-use mysql_xdevapi\Warning;
 
 abstract class ControllerGenerique
 {
