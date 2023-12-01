@@ -653,12 +653,12 @@ a img:active{
 
 /*---START OFFRE---*/
 
-.typeExpPro {
+.containerDebutLine > .typeExpPro {
     border-radius: 13px;
     padding: 6px;
     font-size: 11px;
     font-weight: bold;
-    width: max-content;
+    width: 95px;
     margin-bottom: 5px;
 }
 

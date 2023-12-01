@@ -14,7 +14,7 @@
         <a href="frontController.php?controller=PanelAdmin&action=PanelListeEtudiants" class="button" id="studentListButton"><span>Liste des Étudiants</span></a>
         <a href="frontController.php?controller=PanelAdmin&action=panelListeEntreprises" class="button" id="companyListButton"><span>Liste des Entreprise</span></a>
         <a href="frontController.php?controller=PanelAdmin&action=panelListeOffres" class="button" id="offerListButton"><span>Liste des offres</span></a>
-        <a href="frontController.php?action=import" class="button" id="importDataButton"><span>Importation des données</span></a>
+        <a href="frontController.php?controller=PanelAdmin&action=panelImportPstage" class="button" id="importDataButton"><span>Importation des données</span></a>
     </div>
     <div class="container" id="placeholder">
         <?php

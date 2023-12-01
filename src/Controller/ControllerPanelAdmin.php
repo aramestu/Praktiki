@@ -44,6 +44,12 @@ class ControllerPanelAdmin extends ControllerGenerique {
                                                 'listOffres' => $listOffres ]);
     }
 
+    public static function panelImportPstage(): void{
+        self::afficheVue('view.php', ['pagetitle' => 'Importation des données',
+            'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
+            'adminPanelView' => 'user/adminPanel/import/index.php']);
+    }
+
     public static function panelListeEntreprises(): void {
         $keywords = "";
         if(isset($_GET["keywords"])){
