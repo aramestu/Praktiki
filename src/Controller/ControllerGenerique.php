@@ -4,6 +4,7 @@ namespace App\SAE\Controller;
 
 use App\SAE\Lib\MessageFlash;
 use JetBrains\PhpStorm\NoReturn;
+use mysql_xdevapi\Warning;
 
 abstract class ControllerGenerique
 {
@@ -57,16 +58,10 @@ abstract class ControllerGenerique
     }
 
 
-    public static function redirectionVersURL(string $type,string $message,string $url): void
+    #[NoReturn] public static function redirectionVersURL(string $type, string $message, string $url): void
     {
         MessageFlash::ajouter($type,$message);
         header("Location: frontController.php?action=$url");
-        exit();
-    }
-
-    #[NoReturn] public static function redirectHomePageErreurFlash() : void{
-        MessageFlash::ajouter("warning", "Veuillez vous connecter pour acceder à cette page");
-        self::afficheVue("view.php", ["pagetitle" => "Connexion", "cheminVueBody" => "SAE/home.php"]);
         exit();
     }
 }
