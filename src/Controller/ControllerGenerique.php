@@ -3,6 +3,7 @@
 namespace App\SAE\Controller;
 
 use App\SAE\Lib\MessageFlash;
+use JetBrains\PhpStorm\NoReturn;
 
 abstract class ControllerGenerique
 {
@@ -56,7 +57,7 @@ abstract class ControllerGenerique
     }
 
 
-    public static function redirectionVersURL(string $type,string $message,string $url): void
+    #[NoReturn] public static function redirectionVersURL(string $type, string $message, string $url): void
     {
         MessageFlash::ajouter($type,$message);
         header("Location: frontController.php?action=$url");

@@ -180,6 +180,9 @@ class ControllerEntreprise extends ControllerGenerique
 
     public static function displayTDBentreprise()
     {
+        if (!ConnexionUtilisateur::estConnecte()){
+            self::redirectionVersURL("warning", "Veuillez vous connecter pour acceder à cette page", "home");
+        }
         $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(ConnexionUtilisateur::getLoginUtilisateurConnecte());
         $siret=ConnexionUtilisateur::getLoginUtilisateurConnecte();
         $user=(new EntrepriseRepository())->getById($siret);
