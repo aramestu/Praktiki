@@ -9,6 +9,7 @@ use App\SAE\Lib\MotDePasse;
 use App\SAE\Model\DataObject\Entreprise;
 use App\SAE\Model\Repository\AbstractExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
+use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 use mysql_xdevapi\Table;
 
 class ControllerEntreprise extends ControllerGenerique
@@ -178,12 +179,12 @@ class ControllerEntreprise extends ControllerGenerique
 
         }
 
-    public static function displayTDBentreprise()
-    {
+    public static function displayTDBentreprise() {
         if (!ConnexionUtilisateur::estConnecte()){
             self::redirectionVersURL("warning", "Veuillez vous connecter pour acceder à cette page", "home");
+            return;
         }
-        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(ConnexionUtilisateur::getLoginUtilisateurConnecte());
+        $listeExpPro =  (new ExperienceProfessionnelRepository())->search(ConnexionUtilisateur::getLoginUtilisateurConnecte());
         $siret=ConnexionUtilisateur::getLoginUtilisateurConnecte();
         $user=(new EntrepriseRepository())->getById($siret);
         self::afficheVue(

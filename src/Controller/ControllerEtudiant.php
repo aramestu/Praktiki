@@ -6,6 +6,7 @@ use App\SAE\Model\DataObject\Etudiant;
 use App\SAE\Model\Repository\AbstractExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\AbstractRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
+use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\Model;
 
 class ControllerEtudiant extends ControllerGenerique{
@@ -34,13 +35,13 @@ class ControllerEtudiant extends ControllerGenerique{
         );
     }
 
-    public static function displayTDBetu()
-    {
+    public static function displayTDBetu() {
         if (!ConnexionUtilisateur::estConnecte()){
             self::redirectionVersURL("warning", "Veuillez vous connecter pour acceder à cette page", "home");
+            return;
         }
-        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(null, null, null, null,null
-            ,null,null,"lastWeek",null,null);
+        $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null,null,
+                                                        null,null,"lastWeek",null,null);
         $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
         $user=(new EtudiantRepository())->getByEmail($mail);
         self::afficheVue(
