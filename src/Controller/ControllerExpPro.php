@@ -26,6 +26,36 @@ class ControllerExpPro extends ControllerGenerique
         );
     }
 
+    public static function getNbExpProTotal(): int
+    {
+        $listExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree("");
+        return count($listExpPro);
+    }
+
+    public static function getNbStageTotal(): int
+    {
+        $listExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree("", null, null, null, "stage");
+        $listExpPro = array_filter($listExpPro, function ($expPro) {
+            return !($expPro instanceof \App\SAE\Model\DataObject\OffreNonDefini);
+        });
+        return count($listExpPro);
+    }
+
+    public static function getNbAlternanceTotal(): int
+    {
+        $listExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree("", null, null, null, "alternance");
+        $listExpPro = array_filter($listExpPro, function ($expPro) {
+            return !($expPro instanceof \App\SAE\Model\DataObject\OffreNonDefini);
+        });
+        return count($listExpPro);
+    }
+
+    public static function getNbOffreNonDefiniTotal(): int
+    {
+        $listExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree("", null, null, null, "offreNonDefini");
+        return count($listExpPro);
+    }
+
     public static function getExpProRecent(): void
     {
         $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(null, null, null, null,null

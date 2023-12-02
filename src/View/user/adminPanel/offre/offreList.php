@@ -1,8 +1,20 @@
+<?php
+use App\SAE\Controller\ControllerExpPro;
+use App\SAE\Controller\ControllerEntreprise;
+?>
+
 <div class="HBox">
     <div id="titleOffre" class="title"><span>Liste des Offres</span></div>
     <?php $action="panelListeOffres";
     $controller="PanelAdmin";
     require_once __DIR__ . '/../../../utilitaire/searchBar.php';?>
+</div>
+
+<div class="HBox" id="statBox">
+    <div id="statOffreTotal"><span><?php echo (new ControllerExpPro())->getNbExpProTotal()?></span></div>
+    <div id="statStage"><span><?php echo (new ControllerExpPro())->getNbStageTotal()?></span></div>
+    <div id="statAlternance"><span><?php echo (new ControllerExpPro())->getNbAlternanceTotal()?></span></div>
+    <div id="statNonDefini"><span><?php echo (new ControllerExpPro())->getNbOffreNonDefiniTotal()?></span></div>
 </div>
 
 <div class="columnName">

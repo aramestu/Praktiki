@@ -1,5 +1,5 @@
 <?php
-use App\SAE\Controller\ControllerEtudiant;
+use App\SAE\Controller\ControllerEntreprise;
 ?>
 
 <div class="HBox">
@@ -10,10 +10,10 @@ use App\SAE\Controller\ControllerEtudiant;
 </div>
 
 <div class="HBox" id="statBox">
-    <div id="statTotal"><span><?php echo (new ControllerEtudiant())->getNbEtudiantTotal()?></span></div>
-    <div id="statValide"><span><?php echo (new ControllerEtudiant())->getNbEtudiantExpProValide()?></span></div>
-    <div id="statInter"><span><?php echo (new ControllerEtudiant())->getNbEtudiantExpProValideSansConvention()?></span></div>
-    <div id="statBad"><span><?php echo (new ControllerEtudiant())->getNbEtudiantExpProNonValide()?></span></div>
+    <div id="statTotal"><span><?php echo (new ControllerEntreprise())->getNbEntrepriseTotal()?></span></div>
+    <div id="statValide"><span><?php echo (new ControllerEntreprise())->getNbEntrepriseValide()?></span></div>
+    <div id="statInter"><span><?php echo (new ControllerEntreprise())->getNbEntrepriseEnAttente()?></span></div>
+    <div id="statBad"><span><?php echo (new ControllerEntreprise())->getNbEntrepriseRefuse()?></span></div>
 </div>
 
 <div class="columnName">

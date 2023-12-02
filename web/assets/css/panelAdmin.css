@@ -792,3 +792,48 @@ a img:active{
     margin-right: 10px;
     content: '\f00d';
 }
+
+/*---Specific for offers---*/
+#statOffreTotal{
+    background: var(--lightpastelBlue);
+}
+
+#statOffreTotal span::before{
+    color : var(--blue);
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    content: '\f03a';
+}
+
+#statStage{
+    background: var(--lightpastelPurple);
+}
+
+#statStage span::before{
+    color : var(--purple);
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    content: '\f0b1';
+}
+
+#statAlternance{
+    background: var(--lightpastelOrange);
+}
+
+#statAlternance span::before{
+    color : var(--orange);
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    content: '\f0b1';
+}
+
+#statNonDefini{
+    background: var(--lightpastelRed);
+}
+
+#statNonDefini span::before{
+    color : var(--red);
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    content: '\f0b1';
+}
