@@ -15,7 +15,7 @@ class ControllerExpPro extends ControllerGenerique
 {
     public static function getExpProByDefault(): void
     {
-        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree("");
+        $listeExpPro = (new ExperienceProfessionnelRepository())->search("");
         self::afficheVue(
             'view.php',
             [
@@ -56,17 +56,17 @@ class ControllerExpPro extends ControllerGenerique
         return count($listExpPro);
     }
 
-    public static function getExpProRecent(): void
-    {
-        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(null, null, null, null,null
-            ,null,null,"lastWeek",null,null);;
+
+    public static function getExpProRecent(): void{
+        $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null,null,
+                                                        null,null,"lastWeek",null,null);;
         extract($listeExpPro);
         require __DIR__ ."/../View/offer/offerTable.php";
     }
 
     public static function getExpProEntreprise(): void
     {
-        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(ConnexionUtilisateur::getLoginUtilisateurConnecte());
+        $listeExpPro = (new ExperienceProfessionnelRepository())->search(ConnexionUtilisateur::getLoginUtilisateurConnecte());
         extract($listeExpPro);
         require __DIR__ ."/../View/offer/offerTable.php";
     }
@@ -76,7 +76,7 @@ class ControllerExpPro extends ControllerGenerique
     public static function getExpProBySearch(): void
     {
         $keywords = urldecode($_GET['keywords']);
-        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree($keywords);
+        $listeExpPro = (new ExperienceProfessionnelRepository())->search($keywords);
         self::afficheVue(
             'view.php',
             [
@@ -125,7 +125,7 @@ class ControllerExpPro extends ControllerGenerique
         if (isset($_GET['BUT3'])){
             $BUT3 = $_GET['BUT3'];
         }
-        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(null, $dateDebut, $dateFin, $optionTri, $stage, $alternance, $codePostal, $datePublication, $BUT2, $BUT3);
+        $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, $dateDebut, $dateFin, $optionTri, $stage, $alternance, $codePostal, $datePublication, $BUT2, $BUT3);
         self::afficheVue(
             'view.php',
             [
@@ -181,7 +181,7 @@ class ControllerExpPro extends ControllerGenerique
             $keywords = null;
         }
 
-        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(
+        $listeExpPro = (new ExperienceProfessionnelRepository())->search(
             $keywords,
             $dateDebut,
             $dateFin,
@@ -264,7 +264,7 @@ class ControllerExpPro extends ControllerGenerique
         $cheminVueBody = 'offer/editOffer.php';
 
         $rep = new StageRepository();
-        $stage = $rep->get($idExpPro);
+        $stage = $rep->getById($idExpPro);
 
 
         // Si c'est un stage alors c'est good
@@ -278,7 +278,7 @@ class ControllerExpPro extends ControllerGenerique
         else {
             // On vérifie que c'est une alternance
             $rep = new AlternanceRepository();
-            $alternance = $rep->get($idExpPro); //Dans un else pour éviter de faire 2 requêtes s'il n'y a pas besoin
+            $alternance = $rep->getById($idExpPro); //Dans un else pour éviter de faire 2 requêtes s'il n'y a pas besoin
             if (!is_null($alternance)) {
                 ControllerGenerique::afficheVue('view.php', [
                     "pagetitle" => $pagetitle,
@@ -287,7 +287,7 @@ class ControllerExpPro extends ControllerGenerique
                 ]);
             } else {
                 $rep = new OffreNonDefiniRepository();
-                $offreNonDefini = $rep->get($idExpPro);
+                $offreNonDefini = $rep->getById($idExpPro);
                 if (!is_null($offreNonDefini)) {
                     ControllerGenerique::afficheVue('view.php', [
                         "pagetitle" => $pagetitle,
@@ -307,7 +307,7 @@ class ControllerExpPro extends ControllerGenerique
         $idExpPro = $_GET["experiencePro"];
 
         $rep = new StageRepository();
-        $stage = $rep->get($idExpPro);
+        $stage = $rep->getById($idExpPro);
 
         if (!is_null($stage)) {
             ControllerGenerique::afficheVue('view.php', [
@@ -317,7 +317,7 @@ class ControllerExpPro extends ControllerGenerique
             ]);
         } else {
             $rep = new AlternanceRepository();
-            $alternance = $rep->get($idExpPro);
+            $alternance = $rep->getById($idExpPro);
             if (!is_null($alternance)) {
                 ControllerGenerique::afficheVue('view.php', [
                     "pagetitle" => "Alternance",
@@ -326,7 +326,7 @@ class ControllerExpPro extends ControllerGenerique
                 ]);
             } else {
                 $rep = new OffreNonDefiniRepository();
-                $offreNonDefini = $rep->get($idExpPro);
+                $offreNonDefini = $rep->getById($idExpPro);
                 if (!is_null($offreNonDefini)) {
                     ControllerGenerique::afficheVue('view.php', [
                         "pagetitle" => "Offre non définie",
@@ -380,7 +380,7 @@ class ControllerExpPro extends ControllerGenerique
     {
         $idExpPro = $_GET["experiencePro"];
         $rep = new StageRepository();
-        $stage = $rep->get($idExpPro);
+        $stage = $rep->getById($idExpPro);
 
         // Si c'est un stage alors c'est good
         if (!is_null($stage)) {
@@ -388,13 +388,13 @@ class ControllerExpPro extends ControllerGenerique
             self::afficherVueEndOffer("Stage supprimée avec succès");
         } else {
             $rep = new AlternanceRepository();
-            $alternance = $rep->get($idExpPro); //Dans un else pour éviter de faire 2 requêtes s'il n'y a pas besoin
+            $alternance = $rep->getById($idExpPro); //Dans un else pour éviter de faire 2 requêtes s'il n'y a pas besoin
             if (!is_null($alternance)) {
                 $rep->supprimer($idExpPro);
                 self::afficherVueEndOffer("Alternance supprimée avec succès");
             } else {
                 $rep = new OffreNonDefiniRepository();
-                $nonDefini = $rep->get($idExpPro);
+                $nonDefini = $rep->getById($idExpPro);
                 if (!is_null($nonDefini)) {
                     $rep->supprimer($idExpPro);
                     self::afficherVueEndOffer("Offre non défini supprimée avec succès");
