@@ -28,13 +28,13 @@ class ControllerExpPro extends ControllerGenerique
 
     public static function getNbExpProTotal(): int
     {
-        $listExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree("");
+        $listExpPro = (new ExperienceProfessionnelRepository())->getAll();
         return count($listExpPro);
     }
 
     public static function getNbStageTotal(): int
     {
-        $listExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree("", null, null, null, "stage");
+        $listExpPro = (new ExperienceProfessionnelRepository())->search("", null, null, null, "stage");
         $listExpPro = array_filter($listExpPro, function ($expPro) {
             return !($expPro instanceof \App\SAE\Model\DataObject\OffreNonDefini);
         });
@@ -43,7 +43,7 @@ class ControllerExpPro extends ControllerGenerique
 
     public static function getNbAlternanceTotal(): int
     {
-        $listExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree("", null, null, null, "alternance");
+        $listExpPro = (new ExperienceProfessionnelRepository())->search("", null, null, null, "alternance");
         $listExpPro = array_filter($listExpPro, function ($expPro) {
             return !($expPro instanceof \App\SAE\Model\DataObject\OffreNonDefini);
         });
@@ -52,7 +52,7 @@ class ControllerExpPro extends ControllerGenerique
 
     public static function getNbOffreNonDefiniTotal(): int
     {
-        $listExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree("", null, null, null, "offreNonDefini");
+        $listExpPro = (new ExperienceProfessionnelRepository())->search("", null, null, null, "offreNonDefini");
         return count($listExpPro);
     }
 
