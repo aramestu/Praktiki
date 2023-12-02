@@ -1,5 +1,9 @@
-<link rel="stylesheet" href="assets/css/button.css">
-<link rel="stylesheet" href="assets/css/style.css">
+<div class="HBox">
+    <div id="titleImport" class="title"><span>Importation des données</span></div>
+    <?php $action="panelListeOffres";
+    $controller="PanelAdmin";
+    require_once __DIR__ . '/../../../utilitaire/searchBar.php';?>
+</div>
 <div>
     <form enctype="multipart/form-data" action="frontController.php?action=importation" method="post">
         <div class="input-row">

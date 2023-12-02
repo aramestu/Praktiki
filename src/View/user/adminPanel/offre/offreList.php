@@ -1,5 +1,5 @@
 <div class="HBox">
-    <div id="title"><div class="HBox"><img src="assets/images/etudiant-icon.png" alt="logo etudiant">Liste des Offres</div></div>
+    <div id="titleOffre" class="title"><span>Liste des Offres</span></div>
     <?php $action="panelListeOffres";
     $controller="PanelAdmin";
     require_once __DIR__ . '/../../../utilitaire/searchBar.php';?>

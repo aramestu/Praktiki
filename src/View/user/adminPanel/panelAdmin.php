@@ -11,11 +11,13 @@
             <label id="adminName">Gilles Trombettoni</label>
             <div id="adminBackground"></div>
         </div>
+        <div class="VBox">
         <a href="frontController.php?controller=PanelAdmin&action=PanelListeEtudiants" class="button" id="studentListButton"><span>Liste des Étudiants</span></a>
-        <a href="frontController.php?controller=PanelAdmin&action=panelListeEntreprises" class="button" id="companyListButton"><span>Liste des Entreprise</span></a>
-        <a href="frontController.php?controller=PanelAdmin&action=panelListeOffres" class="button" id="offerListButton"><span>Liste des offres</span></a>
+        <a href="frontController.php?controller=PanelAdmin&action=panelListeEntreprises" class="button" id="companyListButton"><span>Liste des Entreprises</span></a>
+        <a href="frontController.php?controller=PanelAdmin&action=panelListeOffres" class="button" id="offerListButton"><span>Liste des Offres</span></a>
         <a href="frontController.php?controller=PanelAdmin&action=panelImportPstage" class="button" id="importDataButton"><span>Importation des données</span></a>
-    </div>
+        </div>
+        </div>
     <div class="container" id="placeholder">
         <?php
         require __DIR__ . "/../../$adminPanelView";
