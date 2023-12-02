@@ -167,6 +167,27 @@ form #search-bar{
     -10px -10px 10px #E74C3C25;
 }
 
+#placeholder .Alternance:hover{
+    border-color: var(--orange);
+    box-shadow : 10px 10px 10px #00000025,
+    -10px -10px 10px #E67E2225;
+}
+
+#placeholder .Stage:hover{
+    border-color: var(--wisteria);
+    box-shadow : 10px 10px 10px #00000025,
+    -10px -10px 10px #8E44AD25;
+}
+
+#placeholder .OffreNonDefini:hover{
+    border-bottom-color: var(--wisteria);
+    border-left-color: var(--orange);
+    border-right-color: var(--wisteria);
+    border-top-color: var(--orange);
+    box-shadow: 10px 10px 10px #00000025,
+    -10px -10px 10px #E67E2225;
+}
+
 #placeholder .line:hover{
     cursor: pointer;
 }
@@ -187,7 +208,7 @@ form #search-bar{
 }
 
 #placeholder .HBox *{
-    margin-right: 1em;
+    margin-right: 8px;
 }
 
 .line label{
@@ -200,6 +221,81 @@ form #search-bar{
     font-weight: bold;
     font-size: 16px;
 }
+
+
+
+/*---START Offer lines---*/
+.lineSujetOffre{
+    font-weight: bold;
+    position: absolute;
+    left: 13%;
+    width: 35%;
+    text-align: left;
+    text-overflow: ellipsis;
+}
+
+.lineEntrepriseOffre{
+    position: absolute;
+    right: 30%;
+    width: 15%;
+    text-align: left;
+    text-overflow: ellipsis;
+}
+
+.lineDateOffre{
+    position: absolute;
+    right: 10%;
+    width: 15%;
+    text-align: left;
+    text-overflow: ellipsis;
+}
+
+.deleteButtonOrigin{
+    opacity: 0;
+    text-decoration: none;
+    color: var(--darkBlue2);
+    position: absolute;
+    right: 3%;
+    transition: all 0.3s ease-in-out;
+}
+
+.editButton{
+    opacity: 0;
+    text-decoration: none;
+    color: var(--darkBlue2);
+    position: absolute;
+    right: 8%;
+    transition: all 0.3s ease-in-out;
+}
+
+.line > a > span::before{
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    font-size: 1.8em;
+}
+
+.deleteButtonOrigin span::before{
+    content: '\f1f8';
+}
+
+.editButton span::before{
+    content: '\f044';
+}
+
+.offre:hover > .editButton,
+.offre:hover > .deleteButtonOrigin{
+    color: var(--darkBlue2);
+    opacity: 0.9;
+}
+
+.offre:hover > .editButton:hover,
+.offre:hover > .deleteButtonOrigin:hover{
+    color: var(--darkBlue2);
+    opacity: 0.6;
+}
+/*---END Offer lines---*/
+
+
 
 .lineCodePostalEntreprise{
     position: absolute;
@@ -484,10 +580,10 @@ form #search-bar{
     border: none;
     font-weight: bold;
     margin-top: 0;
-    margin-left: -50px;
+    margin-left: -25px;
     white-space: nowrap;
     height: 50px;
-    width: 100%;
+    width: fit-content;
     margin-bottom: 10px;
 }
 
@@ -498,8 +594,16 @@ form #search-bar{
     border: none;
     font-weight: bold;
     margin-top: 0;
-    margin-left: -50px;
+    margin-left: -13px;
     white-space: nowrap;
+}
+
+#option .VBox{
+    width: 100%;
+    height: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
 }
 
 #option a .HBox{
@@ -532,4 +636,204 @@ a img:active{
 
 #title .HBox{
     margin: 0;
+}
+
+.button span::before,
+.title span::before{
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    font-size: 1.8em;
+}
+
+.title span{
+    font-size: 1.5em;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.title:hover span{
+    cursor: default;
+}
+
+.button span{
+    font-size: 1.1em;
+}
+
+#studentListButton span::before,
+#titleEtudiant span::before {
+    content: '\f007';
+}
+
+#companyListButton span::before,
+#titleEntreprise span::before {
+    content: '\f0b1';
+}
+
+#offerListButton span::before,
+#titleOffre span::before {
+    content: '\f022';
+}
+
+#importDataButton span::before,
+#titleImport span::before {
+    content: '\f093';
+}
+
+/*---START OFFRE---*/
+
+.containerDebutLine > .typeExpPro {
+    border-radius: 13px;
+    padding: 6px;
+    font-size: 11px;
+    font-weight: bold;
+    width: 95px;
+    margin-bottom: 5px;
+}
+
+.Stage > .HBox > .typeExpPro,
+.Stage > .header > .information > .typeExpPro {
+    border-color: var(--wisteria);
+    background-color: var(--wisteria);
+    color: var(--white);
+}
+
+.Stage:hover {
+    border-color: var(--wisteria);
+    box-shadow: 10px 10px 10px #00000025,
+    -10px -10px 10px #8E44AD25;
+}
+
+.Alternance > .HBox > .typeExpPro,
+.Alternance > .header > .information > .typeExpPro {
+    border-color: var(--orange);
+    background-color: var(--orange);
+    color: var(--white);
+}
+
+#mainContainer:hover{
+    box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1), 0 4px 16px rgba(31, 38, 135, 0.1);
+}
+
+.Alternance:hover {
+    border-color: var(--orange);
+    box-shadow: 10px 10px 10px #00000025,
+    -10px -10px 10px #E67E2225;
+}
+
+.OffreNonDefini > .HBox > .typeExpPro,
+.OffreNonDefini> .header > .information > .typeExpPro {
+    background: linear-gradient(-45deg, var(--wisteria) 0%, var(--wisteria) 50%, var(--orange) 50%, var(--orange) 100%);
+    color: var(--white);
+    border-bottom-color: var(--wisteria);
+    border-left-color: var(--orange);
+    border-right-color: var(--wisteria);
+    border-top-color: var(--orange);
+}
+
+.OffreNonDefini:hover {
+    border-bottom-color: var(--wisteria);
+    border-left-color: var(--orange);
+    border-right-color: var(--wisteria);
+    border-top-color: var(--orange);
+    box-shadow: 10px 10px 10px #00000025,
+    -10px -10px 10px #E67E2225;
+}
+
+/*---END OFFRE---*/
+
+/*---START STATS ETUDIANT---*/
+#statBox > div{
+    padding: 15px;
+    border-radius: 50px;
+    font-size: 2em;
+    margin-right: 0;
+}
+
+#statTotal{
+    background: var(--lightpastelBlue);
+}
+
+#statTotal span::before{
+    color : var(--blue);
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    content: '\f0c0';
+}
+
+#statValide{
+    background: var(--lightpastelGreen);
+}
+
+#statValide span::before{
+    color : var(--green);
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    content: '\f00c';
+}
+
+#statInter{
+    background: var(--lightpastelYellow);
+}
+
+#statInter span::before{
+    color : var(--yellow);
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    content: '\f06a';
+}
+
+#statBad{
+    background: var(--lightpastelRed);
+}
+
+#statBad span::before{
+    color : var(--red);
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    content: '\f00d';
+}
+
+/*---Specific for offers---*/
+#statOffreTotal{
+    background: var(--lightpastelBlue);
+}
+
+#statOffreTotal span::before{
+    color : var(--blue);
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    content: '\f03a';
+}
+
+#statStage{
+    background: var(--lightpastelPurple);
+}
+
+#statStage span::before{
+    color : var(--purple);
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    content: '\f0b1';
+}
+
+#statAlternance{
+    background: var(--lightpastelOrange);
+}
+
+#statAlternance span::before{
+    color : var(--orange);
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    content: '\f0b1';
+}
+
+#statNonDefini{
+    background: var(--lightpastelRed);
+}
+
+#statNonDefini span::before{
+    color : var(--red);
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    content: '\f0b1';
 }

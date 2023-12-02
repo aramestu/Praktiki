@@ -26,6 +26,48 @@ class ControllerEntreprise extends ControllerGenerique
         );
     }
 
+    public static function getNbEntrepriseTotal(): int
+    {
+        $listEntreprises = (new EntrepriseRepository())->getAll();
+        return count($listEntreprises);
+    }
+
+    public static function getNbEntrepriseValide(): int
+    {
+        $nbEntrepriseValide = 0;
+        $listEntreprises = (new EntrepriseRepository())->getAll();
+        foreach ($listEntreprises as $entreprise) {
+            if ($entreprise->getEstValide() == 1) {
+                $nbEntrepriseValide++;
+            }
+        }
+        return $nbEntrepriseValide;
+    }
+
+    public static function getNbEntrepriseEnAttente(): int
+    {
+        $nbEntrepriseEnAttente = 0;
+        $listEntreprises = (new EntrepriseRepository())->getAll();
+        foreach ($listEntreprises as $entreprise) {
+            if ($entreprise->getEstValide() == 0) {
+                $nbEntrepriseEnAttente++;
+            }
+        }
+        return $nbEntrepriseEnAttente;
+    }
+
+    public static function getNbEntrepriseRefuse(): int
+    {
+        $nbEntrepriseRefuse = 0;
+        $listEntreprises = (new EntrepriseRepository())->getAll();
+        foreach ($listEntreprises as $entreprise) {
+            if ($entreprise->getEstValide() == -1) {
+                $nbEntrepriseRefuse++;
+            }
+        }
+        return $nbEntrepriseRefuse;
+    }
+
     public static function afficherListeEntrepriseValideFiltree(): void
     {
         $keywords = self::keywordsExiste();
