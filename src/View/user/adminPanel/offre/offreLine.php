@@ -27,7 +27,7 @@ use App\SAE\Model\Repository\EntrepriseRepository;
         echo(htmlspecialchars($entreprise->getNomEntreprise()));
         ?>
     </label>
-    <label class="lineDateOffre"><?php echo AbstractExperienceProfessionnelRepository::getDatePublication($offre) ?></label>
+    <label class="lineDateOffre"><?php echo AbstractExperienceProfessionnelRepository::getDelayDatePublication($offre) ?></label>
 
     <a class="deleteButtonOrigin"><span></span></a>
     <a class="editButton" href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($offre->getIdExperienceProfessionnel()) ?>"><span></span></a>
