@@ -7,8 +7,7 @@ use App\SAE\Model\Repository\EnseignantRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
 
-class ConnexionUtilisateur
-{
+class ConnexionUtilisateur {
     // L'Utilisateur connecté sera enregistré en session associé à la clé suivante
     private static string $cleConnexion = "_utilisateurConnecte";
 

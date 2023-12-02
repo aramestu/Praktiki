@@ -180,26 +180,7 @@ class ControllerEntreprise extends ControllerGenerique
         } else {
             self::redirectionVersURL("warning", "Variable non remplit", "resetPassword");
         }
-
-    public static function displayTDBentreprise() {
-        if (!ConnexionUtilisateur::estConnecte()){
-            self::redirectionVersURL("warning", "Veuillez vous connecter pour acceder à cette page", "home");
-            return;
-        }
-        $listeExpPro =  (new ExperienceProfessionnelRepository())->search(ConnexionUtilisateur::getLoginUtilisateurConnecte());
-        $siret=ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user=(new EntrepriseRepository())->getById($siret);
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Tableau de bord',
-                'listeExpPro' => $listeExpPro,
-                'user' => $user,
-                'cheminVueBody' => 'user/tableauDeBord/entreprise.php'
-            ]
-        );
     }
-
 
     public static function afficherMettreAJourEntreprise(): void
     {

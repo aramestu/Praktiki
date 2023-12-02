@@ -16,7 +16,7 @@ class ControllerConnexion extends ControllerGenerique
     public static function afficherConnexionLdap(): void
     {
         if (ConnexionUtilisateur::estConnecte()) {
-            ControllerEtudiant::displayTDBetu();
+            ControllerTDB::displayTDB();
         } else {
             self::afficheVue(
                 'view.php',
@@ -36,13 +36,13 @@ class ControllerConnexion extends ControllerGenerique
                 if ($userInformation) {
                     if ($userInformation->getHomeDirectory() == "ann2" || $userInformation->getHomeDirectory() == "ann3") {
                         ConnexionUtilisateur::connecter($userInformation->getMail());
-                        self::redirectionVersURL("success", "Connexion réussie", "displayTDBetu&controller=Etudiant");
+                        self::redirectionVersURL("success", "Connexion réussie", "displayTDB&controller=TDB");
                     } else if ($userInformation->getHomeDirectory() == "personnel") {
                         ConnexionUtilisateur::connecter($userInformation->getMail());
                         if (ConnexionUtilisateur::estAdministrateur()) {
                             self::redirectionVersURL("success", "Connexion réussie", "panelListeEtudiants&controller=PanelAdmin");
                         } else {
-                            self::redirectionVersURL("success", "Connexion réussie", "displayTDBens&controller=Enseignant");
+                            self::redirectionVersURL("success", "Connexion réussie", "displayTDB&controller=TDB");
                         }
                     }
                     else {
@@ -64,7 +64,7 @@ public
 static function afficherConnexionPersonnel(): void
 {
     if (ConnexionUtilisateur::estConnecte()) {
-        ControllerEnseignant::displayTDBens();
+        ControllerTDB::displayTDB();
     } else {
         self::afficheVue(
             'view.php',
@@ -87,7 +87,7 @@ static function connecterPersonnel()
                 if (ConnexionUtilisateur::estAdministrateur()) {
                     self::redirectionVersURL("success", "Connexion réussie", "panelListeEtudiants&controller=PanelAdmin");
                 } else {
-                    self::redirectionVersURL("success", "Connexion réussie", "displayTDBens&controller=Enseignant");
+                    self::redirectionVersURL("success", "Connexion réussie", "displayTDB&controller=TDB");
                 }
             } else {
                 self::redirectionVersURL("warning", "Identifiant ou Mot de passe incorrect", "afficherConnexionPersonnel&controller=Connexion");
@@ -104,7 +104,7 @@ public
 static function afficherConnexionEntreprise(): void
 {
     if (ConnexionUtilisateur::estConnecte()) {
-        ControllerEntreprise::displayTDBentreprise();
+        ControllerTDB::displayTDB();
     } else {
         self::afficheVue(
             'view.php',
@@ -116,8 +116,7 @@ static function afficherConnexionEntreprise(): void
     }
 }
 
-public
-static function connecter()
+public static function connecterEntreprise()
 {
     if (!ConnexionUtilisateur::estConnecte()) {
         if (isset($_REQUEST["username"], $_REQUEST["password"])) {
@@ -127,7 +126,7 @@ static function connecter()
                     if (MotDePasse::verifier($_REQUEST["password"], $user->formatTableau()["mdpHacheTag"])) {
                         ConnexionUtilisateur::connecter($_REQUEST["username"]);
                         MessageFlash::ajouter("success", "Connexion réussie");
-                        self::redirectionVersURL("success", "Connexion réussie", "displayTDBentreprise&controller=Entreprise");
+                        self::redirectionVersURL("success", "Connexion réussie", "displayTDB&controller=TDB");
 
                     } else {
                         self::redirectionVersURL("warning", "Mot de passe incorrect", "afficherConnexionEntreprise&controller=Connexion");

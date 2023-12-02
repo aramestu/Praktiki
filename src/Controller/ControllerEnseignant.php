@@ -14,20 +14,6 @@ use mysql_xdevapi\Table;
 
 class ControllerEnseignant extends ControllerGenerique{
 
-    public static function displayTDBens()
-    {
-
-        $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user=(new EnseignantRepository())->getByEmail($mail);
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Tableau de bord',
-                'user'=>$user,
-                'cheminVueBody' => 'user/tableauDeBord/enseignant.php',
-            ]
-        );
-    }
 
     public static function afficherMettreAJourEnseignant(): void
     {

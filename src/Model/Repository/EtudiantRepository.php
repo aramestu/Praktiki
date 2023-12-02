@@ -152,8 +152,7 @@ class EtudiantRepository extends AbstractRepository
         $pdoStatement = Model::getPdo()->prepare($sql);
 
         $values = array(
-            "EmailTag" => ConnexionUtilisateur::getLoginUtilisateurConnecte(),
-            //nomdutag => valeur, ...
+            "EmailTag" => $valeurEmail
         );
         // On donne les valeurs et on exécute la requête
         $pdoStatement->execute($values);
