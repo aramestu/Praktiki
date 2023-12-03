@@ -50,6 +50,7 @@ abstract class AbstractRepository {
         $pdo = Model::getPdo();
         $nomTable = $this->getNomTable();
         $clePrimaire = $this->getNomClePrimaire();
+        $this->archiver($valeurClePrimaire);
         $requeteStatement = $pdo->prepare("DELETE FROM $nomTable
                                                  WHERE $clePrimaire = :clePrimaireTag");
         $values = array("clePrimaireTag" => $valeurClePrimaire);
@@ -95,6 +96,17 @@ abstract class AbstractRepository {
         } catch (\PDOException $e) {
             return false;
         }
+    }
+
+    public function archiver(string $valeurClePrimaire) : void{
+        $pdo = Model::getPdo();
+        $table = $this->getNomTable();
+        $tableArchives = $table . "Archives";
+        $clePrimaire = $this->getNomClePrimaire();
+        $sql = "INSERT INTO $tableArchives SELECT * FROM $table WHERE $table.$clePrimaire = :clePrimaireTag";
+        $values = array("clePrimaireTag" => $valeurClePrimaire);
+        $requeteStatement = $pdo->prepare($sql);
+        $requeteStatement->execute($values);
     }
 
     /*
