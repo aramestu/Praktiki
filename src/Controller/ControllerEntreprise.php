@@ -130,7 +130,7 @@ class ControllerEntreprise extends ControllerGenerique
                 if ($bool) {
                     self::redirectionVersURL("success", "Email Valider", "home");
                 } else {
-                    self::redirectionVersURL("warning", "Email non Valider", "home");
+                    self::redirectionVersURL("warning", "Email déjà Valider", "home");
                 }
             } else {
                 self::redirectionVersURL("warning", "Login ou nonce manquant", "home");
