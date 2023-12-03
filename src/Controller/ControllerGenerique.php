@@ -14,7 +14,7 @@ abstract class ControllerGenerique
         require __DIR__ . '/../View/' . $cheminVue;
     }
 
-    public static function home()
+    public static function home(): void
     {
         self::afficheVue(
             'view.php',
@@ -39,21 +39,6 @@ abstract class ControllerGenerique
 
     public static function zoneDetest(): void{
         self::afficheVue('view.php', ['pagetitle' => 'Zone de test', 'cheminVueBody' => 'SAE/zoneDeTest.php']);
-    }
-
-    // nomData ex: Alternance / Stage / TuteurProfessionnel
-    protected static function getBySearch(string $nomData, string $keywords): void
-    {
-        $keywords = urldecode($_GET['keywords']);
-        $listeExpPro = $nomRepository::search($keywords);
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Recherche',
-                'listeExpPro' => $listeExpPro,
-                'cheminVueBody' => 'offer/offerList.php',
-            ]
-        );
     }
 
 

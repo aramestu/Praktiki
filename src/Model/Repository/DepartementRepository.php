@@ -27,7 +27,7 @@ class DepartementRepository extends AbstractRepository
         }
     }
 
-    protected function construireDepuisTableau(array $departementFormatTableau): Departement
+    public function construireDepuisTableau(array $departementFormatTableau): Departement
     {
         $departement = new Departement($departementFormatTableau["nomDepartement"]);
         if (isset($departementFormatTableau["codeDepartement"])) {

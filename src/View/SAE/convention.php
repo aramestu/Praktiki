@@ -3,11 +3,7 @@
 
 <?php
 $c = $convention;
-$s = $stage;
-$en = $entreprise;
 $et = $etudiant;
-$t = $tuteur;
-$p = $prof;
 ?>
 <form method="post" action="frontController.php?controller=Convention&action=modifierConvention">
     <div class="containerConvention">
@@ -46,15 +42,15 @@ $p = $prof;
         </div>
         <div class="container-label-input">
             <label for="thematiqueStage">Thématique du stage :</label>
-            <input type="text" name="thematiqueStage" id="thematiqueStage" placeholder="Thématique du stage" value="<?php echo htmlspecialchars($s->getThematiqueExperienceProfessionnel());?>">
+            <input type="text" name="thematiqueStage" id="thematiqueStage" placeholder="Thématique du stage" value="<?php echo htmlspecialchars($c->getThematiqueExperienceProfessionnel());?>">
         </div>
         <div class="container-label-input">
             <label for="sujetStage">Sujet du stage :</label>
-            <input type="text" name="sujetStage" id="sujetStage" placeholder="Sujet du stage" value="<?php echo htmlspecialchars($s->getSujetExperienceProfessionnel());?>">
+            <input type="text" name="sujetStage" id="sujetStage" placeholder="Sujet du stage" value="<?php echo htmlspecialchars($c->getSujetExperienceProfessionnel());?>">
         </div>
         <div class="container-label-input">
             <label for="fonctionsEtTache">Fonctions et tâches du stage :</label>
-            <input type="text" name="fonctionsEtTache" id="fonctionsEtTache" placeholder="Fonctions et tâches du stage" value="<?php echo htmlspecialchars($s->getTachesExperienceProfessionnel());?>">
+            <input type="text" name="fonctionsEtTache" id="fonctionsEtTache" placeholder="Fonctions et tâches du stage" value="<?php echo htmlspecialchars($c->getTachesExperienceProfessionnel());?>">
         </div>
         <div class="container-label-input">
             <label for="competences">Compétence à développer ou à acquérir :</label>
@@ -64,9 +60,9 @@ $p = $prof;
             <!--TODO: changer les for -->
             <label for="periodeStage">Période du stage :</label>
             <h4>Début</h4>
-            <input type="date" name="debutPeriodeStage" id="debutPeriodeStage" value="<?php echo htmlspecialchars($s->getDateDebutExperienceProfessionnel());?>">
+            <input type="date" name="debutPeriodeStage" id="debutPeriodeStage" value="<?php echo htmlspecialchars($c->getDateDebutExperienceProfessionnel());?>">
             <h4>Fin</h4>
-            <input type="date" name="finPeriodeStage" id="finPeriodeStage" value="<?php echo htmlspecialchars($s->getDateFinExperienceProfessionnel());?>">
+            <input type="date" name="finPeriodeStage" id="finPeriodeStage" value="<?php echo htmlspecialchars($c->getDateFinExperienceProfessionnel());?>">
         </div>
         <div class="container-label-input">
             <label for="dureeTravail">Durée de travail :</label>
@@ -78,7 +74,7 @@ $p = $prof;
         </div>
         <div class="container-label-input">
             <label for="gratificationStage">Gratification lors du stage :</label>
-            <input type="number" name="gratificationStage" id="gratificationStage" placeholder="Gratification lors du stage"  value="<?php echo htmlspecialchars($s->getGratificationStage());?>">
+            <input type="number" name="gratificationStage" id="gratificationStage" placeholder="Gratification lors du stage"  value="<?php echo htmlspecialchars($c->getGratificationStage());?>">
         </div>
         <div class="container-label-input">
             <label for="origineStage">Origine du stage :</label>
@@ -110,27 +106,27 @@ $p = $prof;
         </div>
         <div class="container-label-input">
             <label for="nomEntreprise">Nom de l'entreprise :</label>
-            <input type="text" name="nomEntreprise" id="nomEntreprise" placeholder="Nom de l'entreprise" value="<?php echo htmlspecialchars($en->getNomEntreprise());?>">
+            <input type="text" name="nomEntreprise" id="nomEntreprise" placeholder="Nom de l'entreprise" value="<?php echo htmlspecialchars($c->getNomEntreprise());?>">
         </div>
         <div class="container-label-input">
             <label for="addresseEntreprise">Addresse de l'entreprise :</label>
-            <input type="text" name="addresseEntreprise" id="addresseEntreprise" placeholder="Addresse de l'entreprise" value="<?php echo htmlspecialchars($s->getAdresseExperienceProfessionnel());?>">
+            <input type="text" name="addresseEntreprise" id="addresseEntreprise" placeholder="Addresse de l'entreprise" value="<?php echo htmlspecialchars($c->getAdresseExperienceProfessionnel());?>">
         </div>
         <div class="container-label-input">
             <label for="nomTuteur">Nom du tuteur :</label>
-            <input type="text" name="nomTuteur" id="nomTuteur" placeholder="Nom du tuteur" value="<?php echo htmlspecialchars($t->getNomTuteurProfessionnel());?>">
+            <input type="text" name="nomTuteur" id="nomTuteur" placeholder="Nom du tuteur" value="<?php echo htmlspecialchars($c->getNomTuteurProfessionnel());?>">
         </div>
         <div class="container-label-input">
             <label for="prenomTuteur">Prénom du tuteur :</label>
-            <input type="text" name="prenomTuteur" id="prenomTuteur" placeholder="Prénom du tuteur" value="<?php echo htmlspecialchars($t->getPrenomTuteurProfessionnel());?>">
+            <input type="text" name="prenomTuteur" id="prenomTuteur" placeholder="Prénom du tuteur" value="<?php echo htmlspecialchars($c->getPrenomTuteurProfessionnel());?>">
         </div>
         <div class="container-label-input">
             <label for="professionTuteur">Profession du tuteur :</label>
-            <input type="text" name="professionTuteur" id="professionTuteur" placeholder="Profession du tuteur" value="<?php echo htmlspecialchars($t->getFonctionTuteurProfessionnel());?>">
+            <input type="text" name="professionTuteur" id="professionTuteur" placeholder="Profession du tuteur" value="<?php echo htmlspecialchars($c->getFonctionTuteurProfessionnel());?>">
         </div>
         <div class="container-label-input">
             <label for="mailTuteur">Mail du tuteur :</label>
-            <input type="text" name="mailTuteur" id="mailTuteur" placeholder="Mail du tuteur" value="<?php echo htmlspecialchars($t->getMailTuteurProfessionnel());?>">
+            <input type="text" name="mailTuteur" id="mailTuteur" placeholder="Mail du tuteur" value="<?php echo htmlspecialchars($c->getMailTuteurProfessionnel());?>">
         </div>
         <div class="container-label-input">
             <label for="nomSignataire">Nom du signataire :</label>
@@ -150,11 +146,11 @@ $p = $prof;
         <h2>Etablissement : </h2>
         <div class="container-label-input">
             <label for="nomEnseignant">Nom de l'enseignant référant :</label>
-            <input type="text" name="nomEnseignant" id="nomEnseignant" placeholder="Nom de l'enseignant référant" value="<?php echo htmlspecialchars($p->getNomEnseignant());?>">
+            <input type="text" name="nomEnseignant" id="nomEnseignant" placeholder="Nom de l'enseignant référant" value="<?php echo htmlspecialchars($c->getNomEnseignant());?>">
         </div>
         <div class="container-label-input">
             <label for="prenomEnseignant">Prénom de l'enseignant référant :</label>
-            <input type="text" name="prenomEnseignant" id="prenomEnseignant" placeholder="Prénom de l'enseignant référant" value="<?php echo htmlspecialchars($p->getPrenomEnseignant());?>">
+            <input type="text" name="prenomEnseignant" id="prenomEnseignant" placeholder="Prénom de l'enseignant référant" value="<?php echo htmlspecialchars($c->getPrenomEnseignant());?>">
         </div>
     </div>
 
