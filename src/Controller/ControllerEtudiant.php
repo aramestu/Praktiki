@@ -77,26 +77,30 @@ class ControllerEtudiant extends ControllerGenerique{
         return $nbEtudiantExpProNonValidee;
     }
 
-
-    public static function displayTDBetu() {
-        if (!ConnexionUtilisateur::estConnecte()){
-            self::redirectionVersURL("warning", "Veuillez vous connecter pour acceder à cette page", "home");
-            return;
+    public static function afficherMettreAJourEtudiant(): void
+    {
+        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user = (new EtudiantRepository())->getByEmail($mail);
+        if (is_null($user)) {
+            self::redirectionVersURL("warning", "Etudiant inconnu", "home");
+        } else {
+            self::afficheVue('view.php', ["user" => $user, "pagetitle" => "Detail d'une Etudiant", "cheminVueBody" => "user/tableauDeBord/formulaireEtudiant.php"]);
         }
-        $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null,null,
-                                                        null,null,"lastWeek",null,null);
-        $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user=(new EtudiantRepository())->getByEmail($mail);
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Tableau de bord',
-                'listeExpPro' => $listeExpPro,
-                'user'=>$user,
-                'cheminVueBody' => 'user/tableauDeBord/etudiant.php',
-            ]
-        );
     }
+
+    public static function mettreAJour(): void
+    {
+        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user = (new EtudiantRepository())->getByEmail($mail);
+        if (!is_null($user)) {
+            $user = Etudiant::construireDepuisFormulaire($_GET);
+            (new EtudiantRepository())->mettreAJour($user);
+            self::redirectionVersURL("success", "L'etudiant a été mis à jour", "displayTDB&controller=TDB");
+        } else {
+            self::redirectionVersURL("warning", "Cet etudiant n'existe pas", "afficherFormulaireMiseAJour");
+        }
+    }
+
 
 
 }

@@ -2,9 +2,11 @@
 
 namespace App\SAE\Model\DataObject;
 
+use App\SAE\Lib\ConnexionUtilisateur;
 use App\SAE\Lib\MotDePasse;
 
-class Entreprise extends AbstractDataObject {
+class Entreprise extends AbstractDataObject
+{
     private string $siret;
     private string $nomEntreprise;
     private string $codePostalEntreprise;
@@ -17,7 +19,7 @@ class Entreprise extends AbstractDataObject {
     private string $mailAValider;
     private string $nonce;
 
-    public function __construct(string $siret, string $nom, string $codePostal, string $effectif, string $telephone, string $siteWeb, string $email, string $mdpHache,string  $emailAValider, string $nonce)
+    public function __construct(string $siret, string $nom, string $codePostal, string $effectif, string $telephone, string $siteWeb, string $email, string $mdpHache, string $emailAValider, string $nonce)
     {
         $this->siret = $siret;
         $this->nomEntreprise = $nom;
@@ -101,13 +103,15 @@ class Entreprise extends AbstractDataObject {
     {
         $this->estValide = $estValide;
     }
+
     public function getMdpHache(): string
     {
         return $this->mdpHache;
     }
 
-    public function setMdpHache($mdpClair):void{
-        $this->mdpHache= MotDePasse::hacher($mdpClair);
+    public function setMdpHache($mdpClair): void
+    {
+        $this->mdpHache = MotDePasse::hacher($mdpClair);
     }
 
     public function getEmailEntreprise(): string
@@ -141,7 +145,6 @@ class Entreprise extends AbstractDataObject {
     }
 
 
-
     public function formatTableau(): array
     {
         return [
@@ -159,9 +162,17 @@ class Entreprise extends AbstractDataObject {
         ];
     }
 
-    public static function construireDepuisFormulaire (array $tableauFormulaire) : Entreprise
+    public static function construireDepuisFormulaire(array $tableauFormulaire): Entreprise
     {
-
+        if (ConnexionUtilisateur::estConnecte()) {
+            $mail = $tableauFormulaire["mail"];
+            $mailValide = "";
+            $nonce = "";
+        } else {
+            $mail = "";
+            $mailValide = $tableauFormulaire["mail"];;
+            $nonce = MotDePasse::genererChaineAleatoire();
+        }
         $mdpHache = MotDePasse::hacher($tableauFormulaire["password"]);
         return new Entreprise(
             $tableauFormulaire["siret"],
@@ -170,10 +181,10 @@ class Entreprise extends AbstractDataObject {
             $tableauFormulaire["effectif"],
             $tableauFormulaire["telephone"],
             $tableauFormulaire["website"],
-            "",
+            $mail,
             $mdpHache,
-            $tableauFormulaire["mail"],
-            MotDePasse::genererChaineAleatoire()
+            $mailValide,
+            $nonce
         );
     }
 }

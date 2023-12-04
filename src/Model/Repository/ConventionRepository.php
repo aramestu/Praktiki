@@ -11,7 +11,7 @@ class ConventionRepository extends AbstractRepository {
         return "Conventions";
     }
 
-    protected function construireDepuisTableau(array $conventionFormatTableau): Convention {
+    public function construireDepuisTableau(array $conventionFormatTableau): Convention {
         $convention =  new Convention($conventionFormatTableau["mailEnseignant"], $conventionFormatTableau["nomEnseignant"],
                                     $conventionFormatTableau["prenomEnseignant"], $conventionFormatTableau["competencesADevelopper"],
                                     $conventionFormatTableau["dureeDeTravail"], $conventionFormatTableau["languesImpression"],
@@ -94,5 +94,24 @@ class ConventionRepository extends AbstractRepository {
         $values = array("clePrimaireTag" => $valeurClePrimaire);
         $requeteStatement = $pdo->prepare($sql);
         $requeteStatement->execute($values);
+    }
+
+    public function getConventionAvecEtudiant(string $idEtudiant) : ?Convention{
+        $sql = "SELECT * FROM ConventionsStageEtudiant cse
+                JOIN Conventions c ON c.idConvention = cse.idConvention
+                WHERE cse.numEtudiant = :numEtudiantTag
+                AND cse.idAnneeUniversitaire = 3";
+
+        $values = [
+            "numEtudiantTag" => $idEtudiant
+        ];
+
+        $pdoStatement = Model::getPdo()->prepare($sql);
+        $pdoStatement->execute($values);
+        $result = $pdoStatement->fetch();
+        if(!$result){
+            return null;
+        }
+        return $this->construireDepuisTableau($result);
     }
 }

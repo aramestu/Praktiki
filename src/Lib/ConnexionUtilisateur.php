@@ -1,57 +1,78 @@
 <?php
+
 namespace App\SAE\Lib;
 
 use App\SAE\Model\HTTP\Session;
+use App\SAE\Model\Repository\EnseignantRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
 
-class ConnexionUtilisateur
-{
+class ConnexionUtilisateur {
     // L'Utilisateur connecté sera enregistré en session associé à la clé suivante
     private static string $cleConnexion = "_utilisateurConnecte";
 
     public static function connecter(string $loginUtilisateur): void
     {
-        $session=Session::getInstance();
-        $session->enregistrer(self::$cleConnexion,$loginUtilisateur);
+        $session = Session::getInstance();
+        $session->enregistrer(self::$cleConnexion, $loginUtilisateur);
     }
 
     public static function estConnecte(): bool
     {
         // À compléter
-        $session=Session::getInstance();
+        $session = Session::getInstance();
         return $session->contient(self::$cleConnexion);
     }
 
     public static function deconnecter(): void
     {
         // À compléter
-        $session=Session::getInstance();
+        $session = Session::getInstance();
         $session->supprimer(self::$cleConnexion);
     }
 
     public static function getLoginUtilisateurConnecte(): ?string
     {
-        if (self::estConnecte()){
-            $session=Session::getInstance();
+        if (self::estConnecte()) {
+            $session = Session::getInstance();
             return $session->lire(self::$cleConnexion);
         }
         return null;
     }
-    public static function estUtilisateur($login): bool{
-        return (self::getLoginUtilisateurConnecte()==$login);
+
+    public static function estUtilisateur($login): bool
+    {
+        return (self::getLoginUtilisateurConnecte() == $login);
     }
 
-    public static function estEtudiant(): bool{
+    public static function estEtudiant(): bool
+    {
         if (self::estConnecte())
             return (bool)(new EtudiantRepository())->getByEmail(self::getLoginUtilisateurConnecte());
         return false;
     }
 
-    public static function estEntreprise(): bool{
+    public static function estEntreprise(): bool
+    {
         if (self::estConnecte())
-            return (bool)(new EntrepriseRepository())->getEntrepriseAvecEtatFiltree(null,self::getLoginUtilisateurConnecte());
+            return (bool)(new EntrepriseRepository())->getEntrepriseAvecEtatFiltree(null, self::getLoginUtilisateurConnecte());
         return false;
+    }
+
+    public static function estEnseignant(): bool
+    {
+        if (self::estConnecte())
+            return (bool)(new EnseignantRepository())->getByEmail(self::getLoginUtilisateurConnecte());
+        return false;
+    }
+
+    public static function estAdministrateur(): bool
+    {
+        if (self::estEnseignant()) {
+            return (new EnseignantRepository())->estAdmin(self::getLoginUtilisateurConnecte());
+        } else {
+            return false;
+        }
     }
 
 

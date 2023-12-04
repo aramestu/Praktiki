@@ -9,7 +9,7 @@ use App\SAE\Model\DataObject\Entreprise;
 class EntrepriseRepository extends AbstractRepository
 {
 
-    protected function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise {
+    public function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise {
         $entreprise = new Entreprise(
             $entrepriseFormatTableau["siret"],
             $entrepriseFormatTableau["nomEntreprise"],

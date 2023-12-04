@@ -30,7 +30,7 @@ class InscriptionRepository extends AbstractRepository
 
     }
 
-    protected function construireDepuisTableau(array $InscriptionFormatTableau): Inscription
+    public function construireDepuisTableau(array $InscriptionFormatTableau): Inscription
     {
         return new Inscription($InscriptionFormatTableau["numEtudiant"],
             $InscriptionFormatTableau["idAnneeUniversitaire"], $InscriptionFormatTableau["codeDepartement"]);
