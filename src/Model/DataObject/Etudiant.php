@@ -109,4 +109,18 @@ class Etudiant extends AbstractDataObject
             "codePostalEtudiantTag" => $this->codePostalEtudiant
         );
     }
+
+    public static function construireDepuisFormulaire (array $tableauFormulaire) : Etudiant
+    {
+
+        return new Etudiant(
+            $tableauFormulaire["num"],
+            $tableauFormulaire["nom"],
+            $tableauFormulaire["prenom"],
+            $tableauFormulaire["mailPerso"],
+            $tableauFormulaire["mailUniv"],
+            $tableauFormulaire["telephone"],
+            $tableauFormulaire["postcode"]
+        );
+    }
 }

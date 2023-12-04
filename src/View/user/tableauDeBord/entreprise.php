@@ -3,9 +3,7 @@
 <link rel="stylesheet" href="assets/css/offer.css">
 <link rel="stylesheet" href="assets/css/filter.css">
 <script src="assets/javascript/buildOfferTable.js"></script>
-<?php
 
-?>
 
 
 <div class="container">
@@ -21,7 +19,7 @@
             <p>Téléphone : <?php echo $user->getTelephoneEntreprise();?></p>
             <p>Couriel : <?php echo $user->getEmailEntreprise();?></p>
             <p>Site web : <?php echo $user->getSiteWebEntreprise();?></p>
-            <a href="frontController.php?controller=Main&action=displayTDBetu" class="button">Modifier mes infos</a>
+            <a href="frontController.php?controller=Entreprise&action=afficherMettreAJourEntreprise" class="button">Modifier mes infos</a>
             <a href="frontController.php?controller=Main&action=displayTDBetu" class="button">Accéder à mes brouillons</a>
             <a href="frontController.php?controller=ExpPro&action=createOffer" class="button">Créer une offre</a>
         </div>

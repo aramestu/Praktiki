@@ -6,6 +6,7 @@ use App\SAE\Lib\MessageFlash;
 use App\SAE\Model\DataObject\Etudiant;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
+use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 
 class ControllerPanelAdmin extends ControllerGenerique {
 
@@ -26,6 +27,27 @@ class ControllerPanelAdmin extends ControllerGenerique {
                                                 'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
                                                 'adminPanelView' => 'company/companyListWaiting.php',
                                                 'listEntreprises' => $listEntreprises ]);
+    }
+
+    public static function panelOffres(): void {
+        $keywords = ControllerExpPro::keywordsExiste();
+        $dateDebut = ControllerExpPro::dateDebutExiste();
+        $dateFin = ControllerExpPro::dateFinExiste();
+        $typeContrat = ControllerExpPro::typeContratExiste();
+        $niveauEtude = ControllerExpPro::niveauEtudeExiste();
+        $codePostal = ControllerExpPro::codePostalExiste();
+        $optionTri = ControllerExpPro::optionTriExiste();
+        $listOffres = (new ExperienceProfessionnelRepository())->getExpProFiltree($keywords, $dateDebut, $dateFin, $typeContrat, $niveauEtude, $codePostal, $optionTri);
+        self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
+                                                'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
+                                                'adminPanelView' => 'offre/offerList.php',
+                                                'listOffres' => $listOffres ]);
+    }
+
+    public static function panelImportPstage(): void{
+        self::afficheVue('view.php', ['pagetitle' => 'Importation des données',
+            'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
+            'adminPanelView' => 'user/adminPanel/import/index.php']);
     }
 
     public static function panelListeEntreprises(): void {
@@ -51,6 +73,18 @@ class ControllerPanelAdmin extends ControllerGenerique {
                                                 'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
                                                 'adminPanelView' => 'user/adminPanel/etudiant/etudiantList.php',
                                                 'listEtudiants' => $listEtudiants ]);
+    }
+
+    public static function panelListeOffres(): void {
+        $keywords = "";
+        if(isset($_GET["keywords"])){
+            $keywords .= $_GET["keywords"];
+        }
+        $listOffres = (new ExperienceProfessionnelRepository())->search($keywords);
+        self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
+                                                'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
+                                                'adminPanelView' => 'user/adminPanel/offre/offreList.php',
+                                                'listOffres' => $listOffres ]);
     }
 
     public static function panelGestionEntreprise(): void {

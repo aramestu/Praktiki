@@ -7,7 +7,7 @@ use App\SAE\Model\DataObject\AbstractDataObject;
 
 class AnneeUniversitaireRepository extends AbstractRepository{
 
-    protected function construireDepuisTableau(array $anneeUniversitaireFormatTableau): AnneeUniversitaire{
+    public function construireDepuisTableau(array $anneeUniversitaireFormatTableau): AnneeUniversitaire{
         $anneeUniversitaire = new AnneeUniversitaire($anneeUniversitaireFormatTableau["nomAnneeUniversitaire"], $anneeUniversitaireFormatTableau["dateFinAnneeUniversitaire"], $anneeUniversitaireFormatTableau["dateDebutAnneeUniversitaire"]);
 
         if (isset($anneeUniversitaireFormatTableau["idAnneeUniversitaire"])) {

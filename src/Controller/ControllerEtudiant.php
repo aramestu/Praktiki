@@ -6,6 +6,7 @@ use App\SAE\Model\DataObject\Etudiant;
 use App\SAE\Model\Repository\AbstractExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\AbstractRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
+use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\Model;
 
 class ControllerEtudiant extends ControllerGenerique{
@@ -34,22 +35,72 @@ class ControllerEtudiant extends ControllerGenerique{
         );
     }
 
-    public static function displayTDBetu()
+    public static function getNbEtudiantTotal(): int
     {
-        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(null, null, null, null,null
-            ,null,null,"lastWeek",null,null);
-        $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user=(new EtudiantRepository())->getByEmail($mail);
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Tableau de bord',
-                'listeExpPro' => $listeExpPro,
-                'user'=>$user,
-                'cheminVueBody' => 'user/tableauDeBord/etudiant.php',
-            ]
-        );
+        $listEtudiants = (new EtudiantRepository())->getAll();
+        return count($listEtudiants);
     }
+
+    public static function getNbEtudiantExpProValide(): int
+    {
+        $nbEtudiantExpProValidee = 0;
+        $listEtudiants = (new EtudiantRepository())->getAll();
+        foreach ($listEtudiants as $etudiant) {
+            if ((new EtudiantRepository())->conventionEtudiantEstValide($etudiant)) {
+                $nbEtudiantExpProValidee++;
+            }
+        }
+        return $nbEtudiantExpProValidee;
+    }
+
+    public static function getNbEtudiantExpProValideSansConvention(): int
+    {
+        $nbEtudiantExpProValideeSansConvention = 0;
+        $listEtudiants = (new EtudiantRepository())->getAll();
+        foreach ($listEtudiants as $etudiant) {
+            if ((new EtudiantRepository())->conventionEtudiantEstValide($etudiant) && !(new EtudiantRepository())->etudiantAStage($etudiant) && !(new EtudiantRepository())->etudiantAAlternance($etudiant)) {
+                $nbEtudiantExpProValideeSansConvention++;
+            }
+        }
+        return $nbEtudiantExpProValideeSansConvention;
+    }
+
+    public static function getNbEtudiantExpProNonValide(): int
+    {
+        $nbEtudiantExpProNonValidee = 0;
+        $listEtudiants = (new EtudiantRepository())->getAll();
+        foreach ($listEtudiants as $etudiant) {
+            if (!(new EtudiantRepository())->conventionEtudiantEstValide($etudiant)) {
+                $nbEtudiantExpProNonValidee++;
+            }
+        }
+        return $nbEtudiantExpProNonValidee;
+    }
+
+    public static function afficherMettreAJourEtudiant(): void
+    {
+        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user = (new EtudiantRepository())->getByEmail($mail);
+        if (is_null($user)) {
+            self::redirectionVersURL("warning", "Etudiant inconnu", "home");
+        } else {
+            self::afficheVue('view.php', ["user" => $user, "pagetitle" => "Detail d'une Etudiant", "cheminVueBody" => "user/tableauDeBord/formulaireEtudiant.php"]);
+        }
+    }
+
+    public static function mettreAJour(): void
+    {
+        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user = (new EtudiantRepository())->getByEmail($mail);
+        if (!is_null($user)) {
+            $user = Etudiant::construireDepuisFormulaire($_GET);
+            (new EtudiantRepository())->mettreAJour($user);
+            self::redirectionVersURL("success", "L'etudiant a été mis à jour", "displayTDB&controller=TDB");
+        } else {
+            self::redirectionVersURL("warning", "Cet etudiant n'existe pas", "afficherFormulaireMiseAJour");
+        }
+    }
+
 
 
 }
