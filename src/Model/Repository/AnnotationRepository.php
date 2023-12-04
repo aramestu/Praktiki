@@ -27,7 +27,7 @@ class AnnotationRepository extends AbstractRepository {
         return "Annotations";
     }
 
-    protected function construireDepuisTableau(array $annotationFormatTableau): AbstractDataObject | Annotation {
+    public function construireDepuisTableau(array $annotationFormatTableau): AbstractDataObject | Annotation {
         $annotation = new Annotation($annotationFormatTableau["siret"], $annotationFormatTableau["mailEnseignant"], $annotationFormatTableau["contenu"], $annotationFormatTableau["estVisibleEtudiant"]);
         if(isset($annotationFormatTableau["idAnnotation"])){
             $annotation->setIdAnnotation($annotationFormatTableau["idAnnotation"]);

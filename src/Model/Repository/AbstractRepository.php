@@ -173,7 +173,7 @@ abstract class AbstractRepository {
     }
 
     protected abstract function getNomTable() : string;
-    protected abstract function construireDepuisTableau(array $objetFormatTableau) : AbstractDataObject;
+    public abstract function construireDepuisTableau(array $objetFormatTableau) : AbstractDataObject;
     protected abstract function getNomClePrimaire():string;
     protected abstract function getNomsColonnes(): array;
 }
