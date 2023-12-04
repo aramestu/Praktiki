@@ -63,11 +63,14 @@ document.addEventListener('DOMContentLoaded', function () {
         updateOffers();
     });
     searchbar.addEventListener('input', () => {
-        var currentTime = new Date();
-        if(lastCallTime == null || currentTime - lastCallTime > 7000) {
-            updateOffers();
+        if (rechercheEnAttente !== null) {
+            clearTimeout(rechercheEnAttente);
         }
-        lastCallTime = currentTime;
+
+        rechercheEnAttente = setTimeout(() => {
+            updateOffers();
+            rechercheEnAttente = null;
+        }, 3000);
     });
 
     resetButton.addEventListener('click', ()=>{
