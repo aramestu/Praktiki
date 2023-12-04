@@ -121,7 +121,16 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 const offersContainer = document.querySelector('.tableResponsive');
                 offersContainer.innerHTML = data;
-                revealElements();
+                if(keywords == '') {
+                    revealElements();
+                }
+                else {
+                    const smallElements = document.querySelectorAll('.small');
+                    smallElements.forEach(function(element) {
+                        element.style.animation = "none";
+                        element.style.opacity = 1;
+                    });
+                }
                 updateResetButton();
             })
             .catch(error => console.error('Error fetching offers:', error));
