@@ -209,7 +209,6 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
     public function supprimer(string $id): void
     {
         // On supprime d'abord les sous classes puis dans ExpPro
-        parent::archiver($id);
         parent::supprimer($id);
         $sql = "DELETE FROM ExperienceProfessionnel WHERE idExperienceProfessionnel= :idTag;";
 
@@ -224,6 +223,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
 
     public function archiver(string $valeurClePrimaire): void
     {
+        parent::archiver($valeurClePrimaire);
         $pdo = Model::getPdo();
         $table = "ExperienceProfessionnel";
         $tableArchives = "ExperienceProfessionnelArchives";
