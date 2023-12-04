@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const searchbar = document.getElementById('search-bar');
     const resetButton = document.getElementById('reset');
 
+    var rechercheEnAttente = null;
+
     function revealElements() {
         const smallElements = document.querySelectorAll('.small');
         smallElements.forEach(function(element, index) {
@@ -78,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const codePostal = document.getElementById('codePostal').value;
         const optionTri = document.getElementById('optionTri').value;
         const keywords = document.getElementById('search-bar').value;
+        rechercheEnAttente = keywords;
 
         const queryParams = new URLSearchParams();
         if (datePublication) {
@@ -135,6 +138,16 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(error => console.error('Error fetching offers:', error));
     }
+
+    //setInterval(updateOffers, 3000);
+
+    //function if the searchbar is not modified during 3 second
+    setInterval(function(){
+        if(rechercheEnAttente != searchbar.value){
+            rechercheEnAttente = searchbar.value;
+            updateOffers();
+        }
+    }, 3000);
 
     function resetFilters() {
         document.getElementById('datePublication').value = '';
