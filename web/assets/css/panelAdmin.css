@@ -70,7 +70,7 @@ form #search-bar{
 
 /*---END SEARCH BAR---*/
 
-#placeholder{
+#mainContent{
     display: flex;
     flex-direction: column;
     justify-content: stretch;
@@ -86,12 +86,12 @@ form #search-bar{
     overflow-x: hidden;
 }
 
-#placeholder > .VBox{
+#mainContent > .VBox{
     align-items: center;
     justify-content: flex-start;
 }
 
-#placeholder .line,
+#mainContent .line,
 .columnName{
     display: flex;
     justify-content: space-between;
@@ -115,10 +115,10 @@ form #search-bar{
     border-radius: 0;
 }
 
-#placeholder .line:nth-child(odd){
+#mainContent .line:nth-child(odd){
     background: rgba(0, 0, 0, 0.1);
 }
-#placeholder .line:nth-child(even){
+#mainContent .line:nth-child(even){
     background: rgba(0, 0, 0, 0.05);
 }
 
@@ -149,37 +149,37 @@ form #search-bar{
 }
 
 
-#placeholder .greenHover:hover{
+#mainContent .greenHover:hover{
     border-color: var(--green);
     box-shadow : 10px 10px 10px #00000025,
     -10px -10px 10px #27AE6025;
 }
 
-#placeholder .yellowHover:hover{
+#mainContent .yellowHover:hover{
     border-color: var(--yellow);
     box-shadow : 10px 10px 10px #00000025,
     -10px -10px 10px #F1C40F25;
 }
 
-#placeholder .redHover:hover{
+#mainContent .redHover:hover{
     border-color: var(--red);
     box-shadow : 10px 10px 10px #00000025,
     -10px -10px 10px #E74C3C25;
 }
 
-#placeholder .Alternance:hover{
+#mainContent .Alternance:hover{
     border-color: var(--orange);
     box-shadow : 10px 10px 10px #00000025,
     -10px -10px 10px #E67E2225;
 }
 
-#placeholder .Stage:hover{
+#mainContent .Stage:hover{
     border-color: var(--wisteria);
     box-shadow : 10px 10px 10px #00000025,
     -10px -10px 10px #8E44AD25;
 }
 
-#placeholder .OffreNonDefini:hover{
+#mainContent .OffreNonDefini:hover{
     border-bottom-color: var(--wisteria);
     border-left-color: var(--orange);
     border-right-color: var(--wisteria);
@@ -188,7 +188,7 @@ form #search-bar{
     -10px -10px 10px #E67E2225;
 }
 
-#placeholder .line:hover{
+#mainContent .line:hover{
     cursor: pointer;
 }
 
@@ -207,7 +207,7 @@ form #search-bar{
     width: 10%;
 }
 
-#placeholder .HBox *{
+#mainContent .HBox *{
     margin-right: 8px;
 }
 
@@ -518,7 +518,7 @@ form #search-bar{
         height: auto;
     }
 
-    #placeholder .line, .columnName{
+    #mainContent .line, .columnName{
         width: 95%;
     }
 
@@ -679,6 +679,7 @@ a img:active{
     content: '\f093';
 }
 
+
 /*---START OFFRE---*/
 
 .containerDebutLine > .typeExpPro {
@@ -836,4 +837,32 @@ a img:active{
     font-family: 'FontAwesome';
     margin-right: 10px;
     content: '\f0b1';
+}
+
+/*---START Import page---*/
+input[type="file"]{
+    margin: 10px;
+    padding: 0;
+    border: none;
+    background: none;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--darkBlue2);
+    cursor: pointer;
+}
+
+.input-row{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    align-items: center;
+    width: 100%;
+}
+
+.input-row > label{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--darkBlue2);
+    margin: 50px;
 }

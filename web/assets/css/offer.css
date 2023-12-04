@@ -113,6 +113,7 @@ td {
     transform: translateY(20px);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     border-radius: 25px;
+    background: var(--activeGrey);
     padding: 5px;
     text-align: center;
     min-width: 225px;
@@ -120,7 +121,7 @@ td {
     height: 225px;
     word-break: break-word;
     margin-left: 14%;
-    color: var(--darkBlue2);
+    color: var(--textColor2);
     border: 2.5px solid #F2F2F200;
     animation: appear 0.5s ease-in-out;
     animation-fill-mode: forwards;
@@ -300,22 +301,22 @@ h3 {
 
 .Stage > .header > .left > .typeExpPro,
 .Stage > .header > .information > .typeExpPro {
-    border-color: var(--wisteria);
-    background-color: var(--wisteria);
-    color: var(--white);
+    border-color: var(--lightpastelPurple);
+    background-color: var(--lightpastelPurple);
+    color: var(--darkPurple);
 }
 
 .Stage:hover {
-    border-color: var(--wisteria);
+    border-color: var(--pastelPurple);
     box-shadow: 10px 10px 10px #00000025,
-    -10px -10px 10px #8E44AD25;
+    -10px -10px 10px #B08AB625;
 }
 
 .Alternance > .header > .left > .typeExpPro,
 .Alternance > .header > .information > .typeExpPro {
-    border-color: var(--orange);
-    background-color: var(--orange);
-    color: var(--white);
+    border-color: var(--lightpastelOrange);
+    background-color: var(--lightpastelOrange);
+    color: var(--darkOrange);
 }
 
 #mainContainer:hover{
@@ -323,28 +324,28 @@ h3 {
 }
 
 .Alternance:hover {
-    border-color: var(--orange);
+    border-color: var(--pastelOrange);
     box-shadow: 10px 10px 10px #00000025,
-    -10px -10px 10px #E67E2225;
+    -10px -10px 10px #F8C9A025;
 }
 
 .OffreNonDefini > .header > .left > .typeExpPro,
 .OffreNonDefini> .header > .information > .typeExpPro {
-    background: linear-gradient(-45deg, var(--wisteria) 0%, var(--wisteria) 50%, var(--orange) 50%, var(--orange) 100%);
-    color: var(--white);
-    border-bottom-color: var(--wisteria);
-    border-left-color: var(--orange);
-    border-right-color: var(--wisteria);
-    border-top-color: var(--orange);
+    background: linear-gradient(-45deg, var(--lightpastelPurple) 0%, var(--lightpastelPurple) 50%, var(--lightpastelOrange) 50%, var(--lightpastelOrange) 100%);
+    color: var(--darkBlue2);
+    border-bottom-color: var(--pastelPurple);
+    border-left-color: var(--pastelOrange);
+    border-right-color: var(--pastelPurple);
+    border-top-color: var(--pastelOrange);
 }
 
 .OffreNonDefini:hover {
-    border-bottom-color: var(--wisteria);
-    border-left-color: var(--orange);
-    border-right-color: var(--wisteria);
-    border-top-color: var(--orange);
+    border-bottom-color: var(--pastelPurple);
+    border-left-color: var(--pastelOrange);
+    border-right-color: var(--pastelPurple);
+    border-top-color: var(--pastelOrange);
     box-shadow: 10px 10px 10px #00000025,
-    -10px -10px 10px #E67E2225;
+    -10px -10px 10px #F8C9A025;
 }
 /*--- END SMALL OFFER ---*/
 
