@@ -209,8 +209,8 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
     public function supprimer(string $id): void
     {
         // On supprime d'abord les sous classes puis dans ExpPro
+        parent::archiver($id);
         parent::supprimer($id);
-
         $sql = "DELETE FROM ExperienceProfessionnel WHERE idExperienceProfessionnel= :idTag;";
 
         $pdoStatement = Model::getPdo()->prepare($sql);
@@ -221,7 +221,19 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
 
         $pdoStatement->execute($values);
     }
-    
+
+    public function archiver(string $valeurClePrimaire): void
+    {
+        $pdo = Model::getPdo();
+        $table = "ExperienceProfessionnel";
+        $tableArchives = "ExperienceProfessionnelArchives";
+        $clePrimaire = "idExperienceProfessionnel";
+        $sql = "INSERT INTO $tableArchives SELECT * FROM $table WHERE $table.$clePrimaire = :clePrimaireTag";
+        $values = array("clePrimaireTag" => $valeurClePrimaire);
+        $requeteStatement = $pdo->prepare($sql);
+        $requeteStatement->execute($values);
+    }
+
     public function search(string $keywords = null,string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null, string $BUT2 = null, string $BUT3 = null): array{
         date_default_timezone_set('Europe/Paris');
         $nomTable = $this->getNomTable();
