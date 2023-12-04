@@ -67,13 +67,18 @@ class ControllerMain extends ControllerGenerique
     }
 
     public static function preference():void{
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Préférence',
-                'cheminVueBody' => 'user/preference.php',
-            ]
-        );
+        if(ConnexionUtilisateur::estConnecte()){
+            self::home();
+        }else{
+            self::afficheVue(
+                'view.php',
+                [
+                    'pagetitle' => 'Préférence',
+                    'cheminVueBody' => 'user/preference.php',
+                ]
+            );
+        }
+
     }
 
 
