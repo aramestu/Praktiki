@@ -34,7 +34,7 @@
             <input class="InputAddOn-field" type="text" value="' . $siteWeb . '" name="website" id="website" required>
             <br>
             <label class="InputAddOn-item" for="email">Email :</label> 
-            <input class="InputAddOn-field" type="text" value="' . $mail . '" name="email" id="email" required>
+            <input class="InputAddOn-field" type="text" value="' . $mail . '" name="mail" id="email" required>
             <input type="hidden" value="' . $password . '" name="password" id="password" required>
             <div class="forget-password">
                 <p>Mot de passe oublié ? <a href="frontController.php?controller=Entreprise&action=changePassword" class="link">Changer de mot de passe</a></p>
