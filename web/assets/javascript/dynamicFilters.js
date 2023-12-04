@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const searchbar = document.getElementById('search-bar');
     const resetButton = document.getElementById('reset');
 
+    var rechercheEnAttente = null;
+
     function revealElements() {
         const smallElements = document.querySelectorAll('.small');
         smallElements.forEach(function(element, index) {
@@ -60,7 +62,13 @@ document.addEventListener('DOMContentLoaded', function () {
         updateOffers();
     });
     searchbar.addEventListener('input', () => {
-        updateOffers();
+        if (rechercheEnAttente !== null) {
+            clearTimeout(rechercheEnAttente);
+        }
+        rechercheEnAttente = setTimeout(() => {
+            updateOffers();
+            rechercheEnAttente = null;
+        }, 750);
     });
 
     resetButton.addEventListener('click', ()=>{
@@ -78,6 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const codePostal = document.getElementById('codePostal').value;
         const optionTri = document.getElementById('optionTri').value;
         const keywords = document.getElementById('search-bar').value;
+        rechercheEnAttente = keywords;
 
         const queryParams = new URLSearchParams();
         if (datePublication) {

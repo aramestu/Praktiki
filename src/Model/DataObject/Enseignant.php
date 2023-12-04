@@ -63,10 +63,28 @@ class Enseignant extends AbstractDataObject
 
     public function formatTableau(): array
     {
+        if ($this->estAdmin){
+            $bool=1;
+        }else $bool=0;
         return array(
             "mailEnseignantTag" => $this->mailEnseignant,
             "nomEnseignantTag" => $this->nomEnseignant,
-            "prenomEnseignantTag" => $this->prenomEnseignant
+            "prenomEnseignantTag" => $this->prenomEnseignant,
+            "estAdminTag" => $bool
+        );
+    }
+
+    public static function construireDepuisFormulaire (array $tableauFormulaire) : Enseignant
+    {
+        if (isset($tableauFormulaire["estAdmin"]) && $tableauFormulaire["estAdmin"]=="on"){
+            $bool=true;
+        }else $bool=false;
+        return new Enseignant(
+            $tableauFormulaire["mail"],
+            $tableauFormulaire["nom"],
+            $tableauFormulaire["prenom"],
+            $bool
+
         );
     }
 }

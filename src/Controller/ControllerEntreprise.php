@@ -26,6 +26,48 @@ class ControllerEntreprise extends ControllerGenerique
         );
     }
 
+    public static function getNbEntrepriseTotal(): int
+    {
+        $listEntreprises = (new EntrepriseRepository())->getAll();
+        return count($listEntreprises);
+    }
+
+    public static function getNbEntrepriseValide(): int
+    {
+        $nbEntrepriseValide = 0;
+        $listEntreprises = (new EntrepriseRepository())->getAll();
+        foreach ($listEntreprises as $entreprise) {
+            if ($entreprise->getEstValide() == 1) {
+                $nbEntrepriseValide++;
+            }
+        }
+        return $nbEntrepriseValide;
+    }
+
+    public static function getNbEntrepriseEnAttente(): int
+    {
+        $nbEntrepriseEnAttente = 0;
+        $listEntreprises = (new EntrepriseRepository())->getAll();
+        foreach ($listEntreprises as $entreprise) {
+            if ($entreprise->getEstValide() == 0) {
+                $nbEntrepriseEnAttente++;
+            }
+        }
+        return $nbEntrepriseEnAttente;
+    }
+
+    public static function getNbEntrepriseRefuse(): int
+    {
+        $nbEntrepriseRefuse = 0;
+        $listEntreprises = (new EntrepriseRepository())->getAll();
+        foreach ($listEntreprises as $entreprise) {
+            if ($entreprise->getEstValide() == -1) {
+                $nbEntrepriseRefuse++;
+            }
+        }
+        return $nbEntrepriseRefuse;
+    }
+
     public static function afficherListeEntrepriseValideFiltree(): void
     {
         $keywords = self::keywordsExiste();
@@ -113,89 +155,97 @@ class ControllerEntreprise extends ControllerGenerique
                         self::redirectionVersURL("warning", "Effectif ", "createAccount");
                     }
                 } else {
-                        self::redirectionVersURL("warning", "Code postal incorrect", "createAccount");
-                    }
-                } else {
-                    self::redirectionVersURL("warning", "Siret déjà utilisé", "createAccount");
+                    self::redirectionVersURL("warning", "Code postal incorrect", "createAccount");
                 }
             } else {
-                self::redirectionVersURL("warning ", "Siret incorrect", "createAccount");
+                self::redirectionVersURL("warning", "Siret déjà utilisé", "createAccount");
             }
+        } else {
+            self::redirectionVersURL("warning ", "Siret incorrect", "createAccount");
         }
+    }
 
-        public static function validerEmail(): void
-        {
-            if (isset($_GET["siret"], $_GET["nonce"])) {
-                $bool = VerificationEmail::traiterEmailValidation($_GET["siret"], $_GET["nonce"]);
-                if ($bool) {
-                    self::redirectionVersURL("success", "Email Valider", "home");
-                } else {
-                    self::redirectionVersURL("warning", "Email déjà Valider", "home");
-                }
+    public static function validerEmail(): void
+    {
+        if (isset($_GET["siret"], $_GET["nonce"])) {
+            $bool = VerificationEmail::traiterEmailValidation($_GET["siret"], $_GET["nonce"]);
+            if ($bool) {
+                self::redirectionVersURL("success", "Email Valider", "home");
             } else {
-                self::redirectionVersURL("warning", "Login ou nonce manquant", "home");
+                self::redirectionVersURL("warning", "Email non Valider", "home");
             }
+        } else {
+            self::redirectionVersURL("warning", "Login ou nonce manquant", "home");
         }
+    }
 
-        public
-        static function changePassword(): void
-        {
-            if (isset($_REQUEST["siret"], $_REQUEST["mail"])) {
+    public
+    static function changePassword(): void
+    {
+        if (isset($_REQUEST["siret"], $_REQUEST["mail"]) || ConnexionUtilisateur::estConnecte()) {
+            if(ConnexionUtilisateur::estConnecte()){
+                $user = (new EntrepriseRepository())->getById(ConnexionUtilisateur::getLoginUtilisateurConnecte());
+            }else{
                 $user = (new EntrepriseRepository())->getById($_REQUEST["siret"]);
-                if (!is_null($user)) {
-                    if ($user->getEmailEntreprise() == $_REQUEST["mail"]) {
-                        VerificationEmail::envoiEmailChangementPassword($_REQUEST["siret"], $_REQUEST["mail"]);
-                        self::redirectionVersURL("success", "Vous allez recevoir un mail", "home");
-                    }else{
-                        self::redirectionVersURL("warning", "mail incorrect", "forgetPassword");
-                    }
+            }
+            if (!is_null($user)) {
+                if ($user->getEmailEntreprise() == $_REQUEST["mail"] || ConnexionUtilisateur::estConnecte()) {
+                    VerificationEmail::envoiEmailChangementPassword($user->getSiret(), $user->getEmailEntreprise());
+                    self::redirectionVersURL("success", "Vous allez recevoir un mail", "home");
                 } else {
                     self::redirectionVersURL("warning", "mail incorrect", "forgetPassword");
                 }
             } else {
-                self::redirectionVersURL("warning", "Siret inconnu", "forgetPassword");
+                self::redirectionVersURL("warning", "mail incorrect", "forgetPassword");
             }
+        } else {
+            self::redirectionVersURL("warning", "Siret inconnu", "forgetPassword");
         }
+    }
 
-        public
-        static function resetPassword(): void
-        {
-            if (isset($_REQUEST["siret"], $_REQUEST["newPassword"], $_REQUEST["confirmNewMdp"])) {
-                if ($_REQUEST["newPassword"] == $_REQUEST["confirmNewMdp"]) {
-                    $user = (new EntrepriseRepository())->getById($_REQUEST["siret"]);
-                    if (!is_null($user)) {
-                        $user->setMdpHache($_REQUEST["newPassword"]);
-                        (new EntrepriseRepository())->mettreAJour($user);
-                        self::redirectionVersURL("success", "Mot de passe changé", "home");
-                    } else {
-                        self::redirectionVersURL("warning", "Utilisateur inconnu", "resetPassword");
-                    }
+    public
+    static function resetPassword(): void
+    {
+        if (isset($_REQUEST["siret"], $_REQUEST["newPassword"], $_REQUEST["confirmNewMdp"])) {
+            if ($_REQUEST["newPassword"] == $_REQUEST["confirmNewMdp"]) {
+                $user = (new EntrepriseRepository())->getById($_REQUEST["siret"]);
+                if (!is_null($user)) {
+                    $user->setMdpHache($_REQUEST["newPassword"]);
+                    (new EntrepriseRepository())->mettreAJour($user);
+                    self::redirectionVersURL("success", "Mot de passe changé", "home");
                 } else {
-                    self::redirectionVersURL("warning", "Mot de passe différent", "resetPassword");
+                    self::redirectionVersURL("warning", "Utilisateur inconnu", "resetPassword");
                 }
             } else {
-                self::redirectionVersURL("warning", "Variable non remplit", "resetPassword");
+                self::redirectionVersURL("warning", "Mot de passe différent", "resetPassword");
             }
-
+        } else {
+            self::redirectionVersURL("warning", "Variable non remplit", "resetPassword");
         }
-
-    public static function displayTDBentreprise() {
-        if (!ConnexionUtilisateur::estConnecte()){
-            self::redirectionVersURL("warning", "Veuillez vous connecter pour acceder à cette page", "home");
-            return;
-        }
-        $listeExpPro =  (new ExperienceProfessionnelRepository())->search(ConnexionUtilisateur::getLoginUtilisateurConnecte());
-        $siret=ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user=(new EntrepriseRepository())->getById($siret);
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Tableau de bord',
-                'listeExpPro' => $listeExpPro,
-                'user'=>$user,
-                'cheminVueBody' => 'user/tableauDeBord/entreprise.php'
-            ]
-        );
     }
 
+    public static function afficherMettreAJourEntreprise(): void
+    {
+        $siret = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user = (new EntrepriseRepository())->getById($siret);
+        if (is_null($user)) {
+            self::redirectionVersURL("warning", "Entreprise inconnu", "home");
+        } else {
+            self::afficheVue('view.php', ["user" => $user, "pagetitle" => "Detail d'une entreprise", "cheminVueBody" => "user/tableauDeBord/formulaireEntreprise.php"]);
+        }
     }
+
+    public static function mettreAJour(): void
+    {
+        $siret = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user = (new entrepriseRepository())->getById($siret);
+        if (!is_null($user)) {
+            $user = Entreprise::construireDepuisFormulaire($_GET);
+            (new entrepriseRepository())->mettreAJour($user);
+            self::redirectionVersURL("success", "L'entreprise a été mis à jour", "displayTDB&controller=TDB");
+        } else {
+            self::redirectionVersURL("warning", "cet entreprise n'existe pas", "afficherFormulaireMiseAJour");
+        }
+    }
+
+}

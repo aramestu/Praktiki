@@ -1,8 +1,19 @@
+<?php
+use App\SAE\Controller\ControllerEntreprise;
+?>
+
 <div class="HBox">
-    <div id="title"><div class="HBox"><img src="assets/images/company-icon.png" alt="logo entreprise">Liste des Entreprises</div></div>
+    <div id="titleEntreprise" class="title"><span>Liste des Entreprises</span></div>
     <?php $action="panelListeEntreprises";
     $controller="PanelAdmin";
     require_once __DIR__ . '/../../../utilitaire/searchBar.php';?>
+</div>
+
+<div class="HBox" id="statBox">
+    <div id="statTotal"><span><?php echo (new ControllerEntreprise())->getNbEntrepriseTotal()?></span></div>
+    <div id="statValide"><span><?php echo (new ControllerEntreprise())->getNbEntrepriseValide()?></span></div>
+    <div id="statInter"><span><?php echo (new ControllerEntreprise())->getNbEntrepriseEnAttente()?></span></div>
+    <div id="statBad"><span><?php echo (new ControllerEntreprise())->getNbEntrepriseRefuse()?></span></div>
 </div>
 
 <div class="columnName">
