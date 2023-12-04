@@ -170,9 +170,9 @@ class ControllerEntreprise extends ControllerGenerique
         if (isset($_GET["siret"], $_GET["nonce"])) {
             $bool = VerificationEmail::traiterEmailValidation($_GET["siret"], $_GET["nonce"]);
             if ($bool) {
-                self::redirectionVersURL("success", "Email Valider", "home");
+                self::redirectionVersURL("success", "Email Validé", "home");
             } else {
-                self::redirectionVersURL("warning", "Email non Valider", "home");
+                self::redirectionVersURL("warning", "Email non Validé", "home");
             }
         } else {
             self::redirectionVersURL("warning", "Login ou nonce manquant", "home");
