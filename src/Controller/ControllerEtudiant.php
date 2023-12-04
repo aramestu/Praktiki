@@ -95,7 +95,7 @@ class ControllerEtudiant extends ControllerGenerique{
         if (!is_null($user)) {
             $user = Etudiant::construireDepuisFormulaire($_GET);
             (new EtudiantRepository())->mettreAJour($user);
-            self::redirectionVersURL("success", "L'etudiant a été mis à jour", "displayTDBetu&controller=Etudiant");
+            self::redirectionVersURL("success", "L'etudiant a été mis à jour", "displayTDB&controller=TDB");
         } else {
             self::redirectionVersURL("warning", "Cet etudiant n'existe pas", "afficherFormulaireMiseAJour");
         }

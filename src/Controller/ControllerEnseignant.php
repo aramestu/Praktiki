@@ -33,7 +33,7 @@ class ControllerEnseignant extends ControllerGenerique{
         if (!is_null($user)) {
             $user = Enseignant::construireDepuisFormulaire($_GET);
             (new EnseignantRepository())->mettreAJour($user);
-            self::redirectionVersURL("success", "L'enseignant a été mis à jour", "displayTDBens&controller=Enseignant");
+            self::redirectionVersURL("success", "L'enseignant a été mis à jour", "displayTDB&controller=TDB");
         } else {
             self::redirectionVersURL("warning", "cet enseignant n'existe pas", "afficherFormulaireMiseAJour");
         }

@@ -242,7 +242,7 @@ class ControllerEntreprise extends ControllerGenerique
         if (!is_null($user)) {
             $user = Entreprise::construireDepuisFormulaire($_GET);
             (new entrepriseRepository())->mettreAJour($user);
-            self::redirectionVersURL("success", "L'entreprise a été mis à jour", "displayTDBentreprise&controller=entreprise");
+            self::redirectionVersURL("success", "L'entreprise a été mis à jour", "displayTDB&controller=TDB");
         } else {
             self::redirectionVersURL("warning", "cet entreprise n'existe pas", "afficherFormulaireMiseAJour");
         }
