@@ -16,10 +16,10 @@ $et = $etudiant;
             <label for="prenomEtudiant">Prénom de l'étudiant :</label>
             <input type="text" name="prenomEtudiant" id="prenomEtudiant" placeholder="Prénom de l'étudiant" value="<?php echo htmlspecialchars($et->getPrenomEtudiant());?>">
         </div>
-        <div class="container-label-input">
+        <!--<div class="container-label-input">
             <label for="addresseEtudiant">Adresse de l'étudiant :</label>
             <input type="text" name="addresseEtudiant" id="addresseEtudiant" placeholder="Adresse de l'étudiant" value="">
-        </div>
+        </div> -->
         <div class="container-label-input">
             <label for="telephoneEtudiant">Téléphone de l'étudiant :</label>
             <input type="text" name="telephoneEtudiant" id="telephoneEtudiant" placeholder="Téléphone de l'étudiant" value="<?php echo htmlspecialchars($et->getTelephoneEtudiant());?>">
@@ -36,10 +36,10 @@ $et = $etudiant;
 
     <div class="containerConvention">
         <h2>Stage et entreprise : </h2>
-        <div class="container-label-input">
+        <!--<div class="container-label-input">
             <label for="typeStage">Type du stage :</label>
             <input type="text" name="typeStage" id="typeStage" placeholder="Type du stage" value="Formation Initiale - Stage Obligatoire">
-        </div>
+        </div>-->
         <div class="container-label-input">
             <label for="thematiqueStage">Thématique du stage :</label>
             <input type="text" name="thematiqueStage" id="thematiqueStage" placeholder="Thématique du stage" value="<?php echo htmlspecialchars($c->getThematiqueExperienceProfessionnel());?>">
@@ -72,10 +72,10 @@ $et = $etudiant;
             <label for="langueConvention">Langue de la convention :</label>
             <input type="text" name="langueConvention" id="langueConvention" placeholder="Langue de la convention"  value="<?php echo htmlspecialchars($c->getLanguesImpression());?>">
         </div>
-        <div class="container-label-input">
+        <!--<div class="container-label-input">
             <label for="gratificationStage">Gratification lors du stage :</label>
-            <input type="number" name="gratificationStage" id="gratificationStage" placeholder="Gratification lors du stage"  value="<?php echo htmlspecialchars($c->getGratificationStage());?>">
-        </div>
+            <input type="number" name="gratificationStage" id="gratificationStage" placeholder="Gratification lors du stage"  value="<?php /*echo htmlspecialchars($c->getGratificationStage());*/?>">
+        </div> -->
         <div class="container-label-input">
             <label for="origineStage">Origine du stage :</label>
             <input type="text" name="origineStage" id="origineStage" placeholder="Origine du stage"  value="<?php echo htmlspecialchars($c->getOrigineDeLaConvention());?>">
@@ -92,14 +92,14 @@ $et = $etudiant;
             <label for="modaliteVersement">Modalité du versement :</label>
             <input type="text" name="modaliteVersement" id="modaliteVersement" placeholder="Modalité du versement" value="<?php echo htmlspecialchars($c->getModePaiement());?>">
         </div>
-        <div class="container-label-input">
+        <!--<div class="container-label-input">
             <label for="travailApresStage">Nature du travail après le stage :</label>
             <input type="text" name="travailApresStage" id="travailApresStage" placeholder="Nature du travail après le stage" value="Rapport de Stage">
-        </div>
-        <div class="container-label-input">
+        </div> -->
+        <!--<div class="container-label-input">
             <label for="modaliteValidationStage">Modalité de validation du stage :</label>
             <input type="text" name="modaliteValidationStage" id="modaliteValidationStage" placeholder="Modalité de validation du stage" value="Soutenance">
-        </div>
+        </div> -->
         <div class="container-label-input">
             <label for="dureeStage">Durée du stage :</label>
             <input type="number" name="dureeStage" id="dureeStage" placeholder="Durée du stage" value="<?php echo htmlspecialchars($c->getDureeExperienceProfessionnel());?>">
@@ -130,16 +130,16 @@ $et = $etudiant;
         </div>
         <div class="container-label-input">
             <label for="nomSignataire">Nom du signataire :</label>
-            <input type="text" name="nomSignataire" id="nomSignataire" placeholder="Nom du signataire" value="">
+            <input type="text" name="nomSignataire" id="nomSignataire" placeholder="Nom du signataire" value="<?php echo htmlspecialchars($c->getNomSignataire());?>">
         </div>
         <div class="container-label-input">
             <label for="prenomSignataire">Prénom du signataire :</label>
-            <input type="text" name="prenomSignataire" id="prenomSignataire" placeholder="Prénom du signataire" value="">
+            <input type="text" name="prenomSignataire" id="prenomSignataire" placeholder="Prénom du signataire" value="<?php echo htmlspecialchars($c->getPrenomSignataire());?>">
         </div>
-        <div class="container-label-input">
+        <!--<div class="container-label-input">
             <label for="professionSignataire">Profession du signataire :</label>
             <input type="text" name="professionSignataire" id="professionSignataire" placeholder="Profession du signataire" value="">
-        </div>
+        </div>-->
     </div>
 
     <div class="containerConvention">
