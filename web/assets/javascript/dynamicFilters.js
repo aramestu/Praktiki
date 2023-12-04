@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const resetButton = document.getElementById('reset');
 
     var rechercheEnAttente = null;
-    var lastCallTime = null;
 
     function revealElements() {
         const smallElements = document.querySelectorAll('.small');
@@ -66,11 +65,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (rechercheEnAttente !== null) {
             clearTimeout(rechercheEnAttente);
         }
-
         rechercheEnAttente = setTimeout(() => {
             updateOffers();
             rechercheEnAttente = null;
-        }, 3000);
+        }, 750);
     });
 
     resetButton.addEventListener('click', ()=>{
@@ -132,22 +130,11 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 const offersContainer = document.querySelector('.tableResponsive');
                 offersContainer.innerHTML = data;
-                if(keywords == '') {
-                    revealElements();
-                }
-                else {
-                    const smallElements = document.querySelectorAll('.small');
-                    smallElements.forEach(function(element) {
-                        element.style.animation = "none";
-                        element.style.opacity = 1;
-                    });
-                }
+                revealElements();
                 updateResetButton();
             })
             .catch(error => console.error('Error fetching offers:', error));
     }
-
-    //setInterval(updateOffers, 3000);
 
     function resetFilters() {
         document.getElementById('datePublication').value = '';
