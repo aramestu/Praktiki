@@ -8,7 +8,7 @@ use App\SAE\Model\DataObject\Enseignant;
 class EnseignantRepository extends AbstractRepository
 {
 
-    protected function construireDepuisTableau(array $enseignantFormatTableau): Enseignant
+    public function construireDepuisTableau(array $enseignantFormatTableau): Enseignant
     {
         $enseignant = new Enseignant($enseignantFormatTableau["mailEnseignant"], $enseignantFormatTableau["nomEnseignant"], $enseignantFormatTableau["prenomEnseignant"],$enseignantFormatTableau["estAdmin"]);
         return $enseignant;

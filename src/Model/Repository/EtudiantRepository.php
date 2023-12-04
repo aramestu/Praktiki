@@ -138,7 +138,7 @@ class EtudiantRepository extends AbstractRepository
         return $listeEtudiants;
     }
 
-    protected function construireDepuisTableau(array $EtudiantFormatTableau): Etudiant
+    public function construireDepuisTableau(array $EtudiantFormatTableau): Etudiant
     {
         $etudiant = new Etudiant($EtudiantFormatTableau["numEtudiant"], $EtudiantFormatTableau["prenomEtudiant"], $EtudiantFormatTableau["nomEtudiant"],
             $EtudiantFormatTableau["mailPersoEtudiant"], $EtudiantFormatTableau["mailUniversitaireEtudiant"], $EtudiantFormatTableau["telephoneEtudiant"],
