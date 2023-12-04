@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const resetButton = document.getElementById('reset');
 
     var rechercheEnAttente = null;
+    var lastCallTime = null;
 
     function revealElements() {
         const smallElements = document.querySelectorAll('.small');
@@ -62,7 +63,11 @@ document.addEventListener('DOMContentLoaded', function () {
         updateOffers();
     });
     searchbar.addEventListener('input', () => {
-        updateOffers();
+        var currentTime = new Date();
+        if(lastCallTime == null || currentTime - lastCallTime > 7000) {
+            updateOffers();
+        }
+        lastCallTime = currentTime;
     });
 
     resetButton.addEventListener('click', ()=>{
@@ -140,14 +145,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     //setInterval(updateOffers, 3000);
-
-    //function if the searchbar is not modified during 3 second
-    setInterval(function(){
-        if(rechercheEnAttente != searchbar.value){
-            rechercheEnAttente = searchbar.value;
-            updateOffers();
-        }
-    }, 3000);
 
     function resetFilters() {
         document.getElementById('datePublication').value = '';
