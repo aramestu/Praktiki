@@ -82,6 +82,20 @@ class ConventionRepository extends AbstractRepository {
         }
     }
 
+    public function archiver(string $valeurClePrimaire): void
+    {
+        //TODO : a tester lorsque la supression sera possible
+        parent::archiver($valeurClePrimaire);
+        $pdo = Model::getPdo();
+        $table = "ConventionStageEtudiant";
+        $tableArchives = "ConventionStageEtudiantArchives";
+        $clePrimaire = "idConvention";
+        $sql = "INSERT INTO $tableArchives SELECT * FROM $table WHERE $table.$clePrimaire = :clePrimaireTag";
+        $values = array("clePrimaireTag" => $valeurClePrimaire);
+        $requeteStatement = $pdo->prepare($sql);
+        $requeteStatement->execute($values);
+    }
+
     public function getConventionAvecEtudiant(string $idEtudiant) : ?Convention{
         $sql = "SELECT * FROM ConventionsStageEtudiant cse
                 JOIN Conventions c ON c.idConvention = cse.idConvention
@@ -100,6 +114,4 @@ class ConventionRepository extends AbstractRepository {
         }
         return $this->construireDepuisTableau($result);
     }
-
-
 }
