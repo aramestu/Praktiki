@@ -1,0 +1,72 @@
+/*--- START Container Styles ---*/
+.container {
+    background: var(--lightGrey);
+    padding: 1px 75px 20px 75px;
+    min-width: 330px;
+    border-radius: 20px;
+    box-shadow: 10px 10px 20px #00000020, -10px -10px 20px #ffffff45;
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto;
+    margin-top: 50px;
+    position: relative;
+}
+/*--- END Container Styles ---*/
+
+/*--- START Form Styles ---*/
+form {
+    text-align: left;
+    margin-top: 20px;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+    color: var(--darkBlue1);
+}
+
+
+.column {
+    float: left;
+    width: 45%; /* Adjust the width as needed */
+    margin-right: 5%; /* Adjust the margin between columns as needed */
+    box-sizing: border-box;
+}
+
+.btn{
+    text-align: center;
+}
+
+h2 {
+    position: relative;
+    color: #ffffff;
+}
+
+/* Clearfix to clear the float and contain the columns */
+.container:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px; /* Hauteur du fond rouge */
+    background-color: var(--rougeUM);
+
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+
+/*--- START Hidden Element Styles ---*/
+.hidden {
+    display: none;
+}
+/*--- END Hidden Element Styles ---*/
