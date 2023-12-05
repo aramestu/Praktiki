@@ -625,7 +625,7 @@ footer > VBox{
     top : 90px;
     padding: 15px;
     margin-bottom: 20px;
-    border: 1px solid transparent;
+    /*border: 1px solid transparent;*/
     border-radius: 1.5rem;
     z-index: 5;
     animation: slideDown 1s, fadeOut 9.5s 1s;
@@ -634,21 +634,21 @@ footer > VBox{
 @keyframes slideDown {
     0% {
         transform: translateY(-100%);
-        opacity: 1;
+        opacity: 0.9;
     }
     100% {
         transform: translateY(0);
-        opacity: 1;
+        opacity: 0.9;
     }
 }
 
 @keyframes fadeOut {
     0% {
-        opacity: 1;
+        opacity: 0.9;
         z-index: 5;
     }
     90% {
-        opacity: 1;
+        opacity: 0.9;
         z-index: 5;
     }
     99% {
