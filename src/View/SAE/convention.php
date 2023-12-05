@@ -29,8 +29,8 @@ $et = $etudiant;
             <input type="text" name="courrielEtudiant" id="courrielEtudiant" placeholder="Mail de l'étudiant" value="<?php echo htmlspecialchars($et->getMailUniversitaireEtudiant());?>">
         </div>
         <div class="container-label-input">
-            <label for="assuranceMaladie">Assurance maladie de l'étudiant :</label>
-            <input type="text" name="assuranceMaladie" id="assuranceMaladie" placeholder="Assurance maladie de l'étudiant" value="<?php echo htmlspecialchars($c->getCaisseAssuranceMaladie());?>">
+            <label for="caisseAssuranceMaladie">Assurance maladie de l'étudiant :</label>
+            <input type="text" name="caisseAssuranceMaladie" id="caisseAssuranceMaladie" placeholder="Assurance maladie de l'étudiant" value="<?php echo htmlspecialchars($c->getCaisseAssuranceMaladie());?>">
         </div>
     </div>
 
@@ -53,8 +53,8 @@ $et = $etudiant;
             <input type="text" name="tachesExperienceProfessionnel" id="tachesExperienceProfessionnel" placeholder="Fonctions et tâches du stage" value="<?php echo htmlspecialchars($c->getTachesExperienceProfessionnel());?>">
         </div>
         <div class="container-label-input">
-            <label for="competences">Compétence à développer ou à acquérir :</label>
-            <input type="text" name="competences" id="competences" placeholder="Compétence à développer ou à acquérir" value="<?php echo htmlspecialchars($c->getCompetencesADevelopper());?>">
+            <label for="competencesADevelopper">Compétence à développer ou à acquérir :</label>
+            <input type="text" name="competencesADevelopper" id="competencesADevelopper" placeholder="Compétence à développer ou à acquérir" value="<?php echo htmlspecialchars($c->getCompetencesADevelopper());?>">
         </div>
         <div class="container-label-input">
             <!--TODO: changer les for -->
@@ -65,32 +65,32 @@ $et = $etudiant;
             <input type="date" name="dateFinExperienceProfessionnel" id="dateFinExperienceProfessionnel" value="<?php echo htmlspecialchars($c->getDateFinExperienceProfessionnel());?>">
         </div>
         <div class="container-label-input">
-            <label for="dureeTravail">Durée de travail :</label>
-            <input type="text" name="dureeTravail" id="dureeTravail" placeholder="Temps plein"  value="<?php echo htmlspecialchars($c->getDureeDeTravail());?>">
+            <label for="dureeDeTravail">Durée de travail :</label>
+            <input type="text" name="dureeDeTravail" id="dureeDeTravail" placeholder="Temps plein"  value="<?php echo htmlspecialchars($c->getDureeDeTravail());?>">
         </div>
         <div class="container-label-input">
-            <label for="langueConvention">Langue de la convention :</label>
-            <input type="text" name="langueConvention" id="langueConvention" placeholder="Langue de la convention"  value="<?php echo htmlspecialchars($c->getLanguesImpression());?>">
+            <label for="languesImpression">Langue de la convention :</label>
+            <input type="text" name="languesImpression" id="languesImpression" placeholder="Langue de la convention"  value="<?php echo htmlspecialchars($c->getLanguesImpression());?>">
         </div>
         <!--<div class="container-label-input">
             <label for="gratificationStage">Gratification lors du stage :</label>
             <input type="number" name="gratificationStage" id="gratificationStage" placeholder="Gratification lors du stage"  value="<?php /*echo htmlspecialchars($c->getGratificationStage());*/?>">
         </div> -->
         <div class="container-label-input">
-            <label for="origineStage">Origine du stage :</label>
-            <input type="text" name="origineStage" id="origineStage" placeholder="Origine du stage"  value="<?php echo htmlspecialchars($c->getOrigineDeLaConvention());?>">
+            <label for="origineDeLaConvention">Origine du stage :</label>
+            <input type="text" name="origineDeLaConvention" id="origineDeLaConvention" placeholder="Origine du stage"  value="<?php echo htmlspecialchars($c->getOrigineDeLaConvention());?>">
         </div>
         <div class="container-label-input">
-            <label for="confidentialite">Confidentialité du sujet/thème du stage :</label>
-            <input type="checkbox" name="confidentialite" id="confidentialite" placeholder="Confidentialité du sujet et du thème du Stage" checked value="true">
+            <label for="sujetEstConfidentiel">Confidentialité du sujet/thème du stage :</label>
+            <input type="checkbox" name="sujetEstConfidentiel" id="sujetEstConfidentiel" placeholder="Confidentialité du sujet et du thème du Stage" checked value="true">
         </div>
         <div class="container-label-input">
-            <label for="nombreHeuresHebdo">Nombre d'heures par semaine :</label>
-            <input type="text" name="nombreHeuresHebdo" id="nombreHeuresHebdo" placeholder="Nombre d'heures par semaine" value="<?php echo htmlspecialchars($c->getNbHeuresHebdo());?>">
+            <label for="nbHeuresHebdo">Nombre d'heures par semaine :</label>
+            <input type="text" name="nbHeuresHebdo" id="nbHeuresHebdo" placeholder="Nombre d'heures par semaine" value="<?php echo htmlspecialchars($c->getNbHeuresHebdo());?>">
         </div>
         <div class="container-label-input">
-            <label for="modaliteVersement">Modalité du versement :</label>
-            <input type="text" name="modaliteVersement" id="modaliteVersement" placeholder="Modalité du versement" value="<?php echo htmlspecialchars($c->getModePaiement());?>">
+            <label for="modePaiement">Modalité du versement :</label>
+            <input type="text" name="modePaiement" id="modePaiement" placeholder="Modalité du versement" value="<?php echo htmlspecialchars($c->getModePaiement());?>">
         </div>
         <!--<div class="container-label-input">
             <label for="travailApresStage">Nature du travail après le stage :</label>
@@ -101,8 +101,8 @@ $et = $etudiant;
             <input type="text" name="modaliteValidationStage" id="modaliteValidationStage" placeholder="Modalité de validation du stage" value="Soutenance">
         </div> -->
         <div class="container-label-input">
-            <label for="dureeStage">Durée du stage :</label>
-            <input type="number" name="dureeStage" id="dureeStage" placeholder="Durée du stage" value="<?php echo htmlspecialchars($c->getDureeExperienceProfessionnel());?>">
+            <label for="dureeExperienceProfessionnel">Durée du stage :</label>
+            <input type="number" name="dureeExperienceProfessionnel" id="dureeExperienceProfessionnel" placeholder="Durée du stage" value="<?php echo htmlspecialchars($c->getDureeExperienceProfessionnel());?>">
         </div>
         <div class="container-label-input">
             <label for="codePostalExperienceProfessionnel">Code postal du lieu du stage :</label>
