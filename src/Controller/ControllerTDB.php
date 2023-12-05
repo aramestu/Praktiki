@@ -15,13 +15,24 @@ class ControllerTDB extends ControllerGenerique {
             self::redirectionVersURL("warning", "Veuillez vous connecter pour acceder à cette page", "home");
             return;
         }
-
-        match (true) {
-            ConnexionUtilisateur::estEtudiant() => self::displayTDBetu(),
-            ConnexionUtilisateur::estEnseignant() => self::displayTDBens(),
-            ConnexionUtilisateur::estEntreprise() => self::displayTDBentreprise(),
-            default => self::redirectionVersURL("danger", "Utilisateur non enregistré dans la base de données", "home")
-        };
+        $tdbAction = isset($_GET["tdbAction"]) ? ucfirst($_GET["tdbAction"]) : "";
+        $reflexion = new \ReflectionClass(new ControllerTDB());
+        $methode =  match (true) {
+                        ConnexionUtilisateur::estEtudiant() =>  'displayTDBetu',
+                        ConnexionUtilisateur::estEnseignant() => 'displayTDBens',
+                        ConnexionUtilisateur::estEntreprise() => 'displayTDBentreprise',
+                        default => ""
+                    };
+        if($methode = ""){
+            self::redirectionVersURL("danger", "Utilisateur non enregistré dans la base de données", "home");
+            return;
+        }
+        $methode = 'displayTDBetu' . $tdbAction;
+        if($reflexion->hasMethod($methode)){
+            self::$methode();
+        }else{
+            self::error("");
+        }
     }
     private static function displayTDBens() {
         $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
@@ -52,15 +63,32 @@ class ControllerTDB extends ControllerGenerique {
     }
 
     private static function displayTDBetu() {
+        $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null,null,
+            null,null,"lastWeek",null,null);
         $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
         $user=(new EtudiantRepository())->getByEmail($mail);
         self::afficheVue(
             'view.php',
             [
                 'pagetitle' => 'Tableau de bord',
-                'user'=>$user,
                 'cheminVueBody' => 'user/tableauDeBord/etudiant.php',
-                'TDBView' => 'user/tableauDeBord/etudiant/infoEtudiant.php'
+                'TDBView' => 'user/tableauDeBord/etudiant/accueilEtudiant.php',
+                'user'=>$user,
+                'listeExpPro' => $listeExpPro
+            ]
+        );
+    }
+
+    private static function displayTDBetuInfo() {
+        $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user=(new EtudiantRepository())->getByEmail($mail);
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Tableau de bord',
+                'cheminVueBody' => 'user/tableauDeBord/etudiant.php',
+                'TDBView' => 'user/tableauDeBord/etudiant/infoEtudiant.php',
+                'user'=>$user
             ]
         );
     }

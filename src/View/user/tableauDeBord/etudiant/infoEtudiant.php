@@ -1,4 +1,4 @@
-<div class="VBox" id="infoEtu">
+<div class="VBox" id="">
     <h2>Informations personnelles:</h2>
     <p>Bienvenue</p>
     <p>Nom : <?php echo $user->getNomEtudiant();?></p>
