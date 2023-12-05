@@ -404,15 +404,17 @@ input[type="password"],
 input[type='date'],
 select,
 textarea {
+    color: var(--textColor);
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border: 2px solid var(--grey0);
+    border: 2px solid var(--lightGrey);
     border-radius: 1.5rem;
     background-color: var(--white);
     -webkit-appearance: none;
     -moz-appearance: textfield;
     color: var(--darkBlue1);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
 }
 
 input[type="text"]:focus,
@@ -422,7 +424,7 @@ input[type='date']:focus,
 select:focus,
 textarea:focus {
     outline: none;
-    border : 2px solid var(--bleuUM);
+    border : 2px solid var(--lightpastelBlue);
 }
 
 span:hover,
@@ -439,8 +441,8 @@ select:invalid {
 }
 
 input[type="submit"] {
-    background-color: var(--bleuUM);
-    color: var(--white);
+    background-color: var(--lightpastelBlue);
+    color: var(--blue);
     padding: 15px 0;
     border: none;
     border-radius: 1.5rem;

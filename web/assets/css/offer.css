@@ -331,12 +331,16 @@ h3 {
 
 .OffreNonDefini > .header > .left > .typeExpPro,
 .OffreNonDefini> .header > .information > .typeExpPro {
-    background: linear-gradient(-45deg, var(--lightpastelPurple) 0%, var(--lightpastelPurple) 50%, var(--lightpastelOrange) 50%, var(--lightpastelOrange) 100%);
+    /*background: linear-gradient(-45deg, var(--lightpastelPurple) 0%, var(--lightpastelPurple) 50%, var(--lightpastelOrange) 50%, var(--lightpastelOrange) 100%);*/
+    background: linear-gradient(-45deg, var(--pastelPurple) 0%, var(--pastelPurple) 50%, var(--pastelOrange) 50%, var(--pastelOrange) 100%);
     color: var(--darkBlue2);
     border-bottom-color: var(--pastelPurple);
     border-left-color: var(--pastelOrange);
     border-right-color: var(--pastelPurple);
     border-top-color: var(--pastelOrange);
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .OffreNonDefini:hover {
