@@ -297,4 +297,13 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         return $result["delai_experience"]; // Utilisez le même alias que celui défini dans la requête SQL
     }
 
+    public function count(): int
+    {
+        $sql = "SELECT COUNT(*) AS nb FROM " . $this->getNomTable() . ";";
+        $pdoStatement = Model::getPdo()->prepare($sql);
+        $pdoStatement->execute();
+        $result = $pdoStatement->fetch();
+        return $result["nb"];
+    }
+
 }

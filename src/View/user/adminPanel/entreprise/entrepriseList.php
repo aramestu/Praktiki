@@ -1,5 +1,6 @@
 <?php
 use App\SAE\Controller\ControllerEntreprise;
+use App\SAE\Model\Repository\EntrepriseRepository;
 ?>
 
 <div class="HBox">
@@ -10,7 +11,7 @@ use App\SAE\Controller\ControllerEntreprise;
 </div>
 
 <div class="HBox" id="statBox">
-    <div id="statTotal"><span><?php echo (new ControllerEntreprise())->getNbEntrepriseTotal()?></span></div>
+    <div id="statTotal"><span><?php echo (new EntrepriseRepository())->count()?></span></div>
     <div id="statValide"><span><?php echo (new ControllerEntreprise())->getNbEntrepriseValide()?></span></div>
     <div id="statInter"><span><?php echo (new ControllerEntreprise())->getNbEntrepriseEnAttente()?></span></div>
     <div id="statBad"><span><?php echo (new ControllerEntreprise())->getNbEntrepriseRefuse()?></span></div>

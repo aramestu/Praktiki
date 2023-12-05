@@ -121,6 +121,9 @@ td {
     height: 225px;
     word-break: break-word;
     margin-left: 14%;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-top: 0;
     color: var(--textColor2);
     border: 2.5px solid #F2F2F200;
     animation: appear 0.5s ease-in-out;

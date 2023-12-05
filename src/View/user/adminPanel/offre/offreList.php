@@ -1,5 +1,6 @@
 <?php
 use App\SAE\Controller\ControllerExpPro;
+use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 use App\SAE\Controller\ControllerEntreprise;
 ?>
 
@@ -11,7 +12,7 @@ use App\SAE\Controller\ControllerEntreprise;
 </div>
 
 <div class="HBox" id="statBox">
-    <div id="statOffreTotal"><span><?php echo (new ControllerExpPro())->getNbExpProTotal()?></span></div>
+    <div id="statOffreTotal"><span><?php echo (new ExperienceProfessionnelRepository())->count()?></span></div>
     <div id="statStage"><span><?php echo (new ControllerExpPro())->getNbStageTotal()?></span></div>
     <div id="statAlternance"><span><?php echo (new ControllerExpPro())->getNbAlternanceTotal()?></span></div>
     <div id="statNonDefini"><span><?php echo (new ControllerExpPro())->getNbOffreNonDefiniTotal()?></span></div>

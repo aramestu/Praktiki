@@ -1,14 +1,10 @@
 <div class="HBox">
     <div id="titleImport" class="title"><span>Importation des données</span></div>
-    <?php $action="panelListeOffres";
-    $controller="PanelAdmin";
-    require_once __DIR__ . '/../../../utilitaire/searchBar.php';?>
 </div>
-<div>
+<div class="VBox">
     <form enctype="multipart/form-data" action="frontController.php?action=importation" method="post">
         <div class="input-row">
-            <label class="col-md-4 control-label">Choisir un fichier CSV</label>
-            <img src="assets/images/upload-icon.png" id="uploadIcon" alt="uploadIcon">
+            <label class="col-md-4 control-label">Choisir un fichier au format CSV </label>
             <input type="file" name="file" id="file" accept=".csv">
             <br>
             <br>

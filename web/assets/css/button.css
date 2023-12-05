@@ -20,7 +20,7 @@
 }
 
 .button:hover {
-    color: var(--pastelBlue);
+    color: var(--lightpastelBlue);
     opacity: 0.69;
 }
 
