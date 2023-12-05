@@ -179,6 +179,7 @@ body {
     min-height: 100vh;
     background: var(--background);
     background-position: center;
+    -webkit-font-smoothing: antialiased;
 }
 /*---END BODY---*/
 
@@ -361,7 +362,7 @@ main{
     padding: 2%;
     margin: 1.5%;
     border-radius: 1.5rem;
-    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.05);
+    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
     z-index: 1;
 }
 
@@ -376,7 +377,7 @@ main{
     padding: 2%;
     margin: 1.5%;
     border-radius: 1.5rem;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
+    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
     z-index: 1;
 }
 
@@ -416,7 +417,7 @@ textarea {
     -webkit-appearance: none;
     -moz-appearance: textfield;
     color: var(--darkBlue1);
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
+    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
 }
 
 input[type="text"]:focus,

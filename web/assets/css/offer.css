@@ -124,7 +124,7 @@ td {
     margin-top: 0;
     margin-bottom: 0;
     margin-top: 0;
-    color: var(--textColor2);
+    color: var(--textColor3);
     border: 2.5px solid #F2F2F200;
     animation: appear 0.5s ease-in-out;
     animation-fill-mode: forwards;
@@ -148,6 +148,8 @@ td {
 
 .small:hover {
     cursor: pointer;
+    box-shadow: 2px 4px 16px rgba(0,0,0,.16);
+    transform: scale3d(1.01,1.01,1.01);
 }
 
 .small div {
