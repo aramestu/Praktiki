@@ -52,18 +52,17 @@ class ControllerTDB extends ControllerGenerique {
     }
 
     private static function displayTDBetu() {
-        $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null,null,
-            null,null,"lastWeek",null,null);
         $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
         $user=(new EtudiantRepository())->getByEmail($mail);
         self::afficheVue(
             'view.php',
             [
                 'pagetitle' => 'Tableau de bord',
-                'listeExpPro' => $listeExpPro,
                 'user'=>$user,
                 'cheminVueBody' => 'user/tableauDeBord/etudiant.php',
+                'TDBView' => 'user/tableauDeBord/etudiant/infoEtudiant.php'
             ]
         );
     }
+
 }
