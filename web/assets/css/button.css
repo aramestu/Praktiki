@@ -1,8 +1,8 @@
 .button{
     display: block;
     text-decoration: none;
-    background-color: var(--lightpastelBlue);
-    color: var(--blue);
+    background-color: var(--darkBlue2);
+    color: var(--white);
     width: 100%;
     padding: 15px;
     border: none;

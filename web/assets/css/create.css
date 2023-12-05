@@ -6,28 +6,26 @@
 
     textarea{
         width:400px;
-        height:420px;
-        max-height: 515px;
+        height:520px;
+        max-height: 520px;
         margin-right:15px;
     }
 
     #submitButton{
-        width: 730px;
+        width: 400px;
+        height: 46px;
         margin-top: 0;
         margin-left: -15px;
-        position:absolute;
-        left: 50px;
-        bottom: 30px;
     }
 
     #dateDebut,
     #dateFin{
         width: 175px;
-        margin-bottom: 65px;
+        margin-bottom: 33px;
     }
 
     #siret{
-        margin-bottom: 85px;
+        /*margin-bottom: 85px;*/
     }
 
     input[type="text"],
@@ -54,7 +52,8 @@
     }
 
     #submitButton{
-        width: 730px;
+        width: 400px;
+        height: 46px;
         margin-top: 0;
         margin-left: -15px;
     }

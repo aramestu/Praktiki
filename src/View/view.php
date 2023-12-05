@@ -24,7 +24,7 @@ use App\SAE\Lib\ConnexionUtilisateur;
 <header>
 
     <a href="frontController.php?action=zoneDetest"><img id="logoToggle" class="logo"
-                                                         src="assets/images/LOGO_UM_filet-blanc.png" alt="LogoUM"></a>
+                                                         src="assets/images/logo_sae_clear.png" alt="LogoUM"></a>
 
     <div class="burger">
         <span></span>

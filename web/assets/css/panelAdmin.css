@@ -3,7 +3,7 @@
     width: 100px;
     border-radius: 50%;
     margin: 0;
-    border: var(--rougeUM) solid 4px;
+    border: var(--darkBlue2) solid 4px;
     margin: 10px;
     z-index: 5;
 }
@@ -20,7 +20,7 @@
 #adminBackground{
     position: absolute;
     left: 0;
-    background: var(--rougeUM);
+    background: var(--darkBlue2);
     height: 98px;
     width: 90px;
     z-index: 4;

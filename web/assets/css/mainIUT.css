@@ -36,9 +36,7 @@ header::before {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: var(--header);
-    backdrop-filter: blur(50px);
-    -webkit-backdrop-filter: blur(50px);
+    backdrop-filter: blur(15px);
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
     z-index: -1;
 }
@@ -62,8 +60,7 @@ header:hover::after {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    color: var(--red);
-    background: var(--white);
+    color: var(--darkBlue2);
     text-decoration: none;
     font-weight: bold;
     width: 110px;
@@ -74,15 +71,17 @@ header:hover::after {
 }
 
 .nav-item:active, .nav-item.active {
-    background: var(--rougeUM);
-    color: var(--white);
+    background: var(--lightGrey);
     text-decoration: none;
     border-radius: 1.5rem;
     transform: scale(0.95);
+    /*
     box-shadow: inset 10px 10px 20px #ffffff25,
     inset -10px -10px 20px #00000015,
     10px 10px 10px #00000015,
     -10px -10px 10px #ffffff25;
+
+     */
 }
 
 .nav-item:hover {
@@ -91,8 +90,11 @@ header:hover::after {
     text-decoration: none;
     border-radius: 1.5rem;
     text-decoration: none;
+    /*
     box-shadow: inset 10px 10px 20px #00000020,
     inset -10px -10px 20px #ffffff45;
+
+     */
 }
 
 .icons {
@@ -114,7 +116,7 @@ header:hover::after {
 .burger span::after {
     content: "";
     width: 100%;
-    background-color: var(--white);
+    background-color: var(--darkBlue2);
     display: block;
     transition: all 0.5s ease-in-out;
     border-radius: 12px;
@@ -282,7 +284,7 @@ main{
     .burger span {
         width: 100%;
         height: 4px;
-        background-color: var(--white);
+        background-color: var(--darkBlue2);
         border-radius: 12px;
         display: block;
         transition: background-color 0.5s ease-in-out;
@@ -351,7 +353,7 @@ main{
 
 /*---START CONTAINER---*/
 .container {
-    color: var(--textColor);
+    color: var(--darkBlue2);
     width: 69%;
     text-align: center;
     font-size: 12px;
@@ -414,7 +416,7 @@ textarea {
     -webkit-appearance: none;
     -moz-appearance: textfield;
     color: var(--darkBlue1);
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
 }
 
 input[type="text"]:focus,
@@ -441,8 +443,8 @@ select:invalid {
 }
 
 input[type="submit"] {
-    background-color: var(--lightpastelBlue);
-    color: var(--blue);
+    background-color: var(--darkBlue2);
+    color: var(--white);
     padding: 15px 0;
     border: none;
     border-radius: 1.5rem;
