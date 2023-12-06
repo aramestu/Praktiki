@@ -181,6 +181,21 @@ body {
     background-position: center;
     -webkit-font-smoothing: antialiased;
 }
+
+/* Pour les versions récentes de Firefox */
+@supports (-moz-appearance:none) {
+    body {
+        font-smooth: always;
+    }
+}
+
+/* Pour les versions plus anciennes de Firefox */
+@-moz-document url-prefix() {
+    body {
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
 /*---END BODY---*/
 
 
