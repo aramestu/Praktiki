@@ -26,7 +26,7 @@ use App\SAE\Model\Repository\EntrepriseRepository;
     <label class="lineTelephoneEntreprise">Téléphone</label>
     <label class="lineSiteWebEntreprise">Site web</label>
 </div>
-<div class="VBox">
+<div class="VBox" id="dynamicList">
     <?php
     foreach ($listEntreprises as $entreprise){
         require __DIR__."/entrepriseLine.php";

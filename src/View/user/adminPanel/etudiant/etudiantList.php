@@ -25,7 +25,7 @@ use App\SAE\Model\Repository\EtudiantRepository;
     <label class="lineMailUniversitaireEtudidant">Mail</label>
 </div>
 
-<div class="VBox">
+<div class="VBox" id="dynamicList">
     <?php
     foreach ($listEtudiants as $etudiant){
         require __DIR__."/etudiantLine.php";

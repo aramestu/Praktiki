@@ -48,8 +48,8 @@
 }
 
 form #search-button{
-    top: 35px;
-    right: 65px;
+    top: 33px;
+    right: 34px;
 }
 
 #title{
@@ -71,6 +71,7 @@ form #search-bar{
 /*---END SEARCH BAR---*/
 
 #mainContent{
+    padding: 0;
     position: absolute;
     left: 20%;
     display: flex;
@@ -80,15 +81,19 @@ form #search-bar{
     height: 85vh;
     width: 77%;
     margin-top: 0;
-    overflow: auto;
     padding-top: 10px;
-    border : rgba(0,0,0,0.005) solid 10px;
-    overflow-x: hidden;
+    border-top: rgba(0,0,0,0.005) solid 10px;
+    border-bottom: rgba(0,0,0,0.005) solid 10px;
 }
 
 #mainContent > .VBox{
     align-items: center;
     justify-content: flex-start;
+}
+
+#mainContent > .HBox{
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 #mainContent .line,
@@ -103,6 +108,11 @@ form #search-bar{
     position: relative;
     border: rgba(0,0,0,0) solid 3px;
     transition: all 0.3s ease-in-out;
+}
+
+#dynamicList{
+    overflow: auto;
+    overflow-x: hidden;
 }
 
 .line{
@@ -127,15 +137,14 @@ form #search-bar{
 }
 
 .columnName{
-    background: var(--grey0);
+    background: var(--background);
     margin-top: 10px;
     border: none;
     font-weight: bold;
     width: 99%;
     padding: 9px;
     height: 30px;
-    border-radius: 1rem 1rem 0 0;
-    border-bottom: var(--grey1) solid 3px;
+    border-bottom: var(--grey1) solid 1px;
 }
 
 .line:hover .button{

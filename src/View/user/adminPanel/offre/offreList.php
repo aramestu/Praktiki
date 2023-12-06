@@ -27,7 +27,7 @@ use App\SAE\Controller\ControllerEntreprise;
     <label class="lineDateOffre">Date publication</label>
 </div>
 
-<div class="VBox">
+<div class="VBox" id="dynamicList">
     <?php
     foreach ($listOffres as $offre){
         require __DIR__."/offreLine.php";
