@@ -82,7 +82,7 @@ $et = $etudiant;
         </div>
         <div class="container-label-input">
             <label for="sujetEstConfidentiel">Confidentialité du sujet/thème du stage :</label>
-            <input type="checkbox" name="sujetEstConfidentiel" id="sujetEstConfidentiel" placeholder="Confidentialité du sujet et du thème du Stage" checked value="true">
+            <input type="checkbox" name="sujetEstConfidentiel" id="sujetEstConfidentiel" placeholder="Confidentialité du sujet et du thème du Stage" <?php echo ($c->getSujetEstConfidentiel()) ? "checked" : "";?>>
         </div>
         <div class="container-label-input">
             <label for="nbHeuresHebdo">Nombre d'heures par semaine :</label>

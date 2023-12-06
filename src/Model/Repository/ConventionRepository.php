@@ -12,6 +12,9 @@ class ConventionRepository extends AbstractRepository {
     }
 
     public function construireDepuisTableau(array $conventionFormatTableau): Convention {
+        if (!isset($conventionFormatTableau["sujetEstConfidentiel"])) {
+            $conventionFormatTableau["sujetEstConfidentiel"] = !true;
+        }
         $convention =  new Convention($conventionFormatTableau["mailEnseignant"], $conventionFormatTableau["nomEnseignant"],
                                     $conventionFormatTableau["prenomEnseignant"], $conventionFormatTableau["competencesADevelopper"],
                                     $conventionFormatTableau["dureeDeTravail"], $conventionFormatTableau["languesImpression"],
