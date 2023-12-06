@@ -116,10 +116,14 @@ form #search-bar{
 }
 
 #mainContent .line:nth-child(odd){
-    background: rgba(0, 0, 0, 0.1);
+    background: var(--activeGrey);
 }
 #mainContent .line:nth-child(even){
-    background: rgba(0, 0, 0, 0.05);
+    background: var(--footer);
+}
+
+#mainContent .line{
+    /*border-bottom: 1px solid var(--grey1);*/
 }
 
 .columnName{
@@ -381,39 +385,39 @@ form #search-bar{
 }
 
 #validation, .managementActions input[type="submit"]{
-    background-color: var(--green);
-    color: var(--white);
+    background-color: var(--lightpastelGreen);
+    color: var(--green);
 }
 
 #validation:hover{
-    background-color: var(--emerald);
+    background-color: var(--pastelGreen);
 }
 
 #invalidation{
-    background-color: var(--yellow);
-    color: var(--white);
+    background-color: var(--pastelYellow);
+    color: var(--darkYellow);
 }
 
 #invalidation:hover{
-    background-color: var(--darkYellow);
+    background-color: var(--pastelYellow);
 }
 
 #suppression{
-    background-color: var(--red);
-    color: var(--white);
+    background-color: var(--lightpastelRed);
+    color: var(--red);
 }
 
 #suppression:hover{
-    background-color: var(--pomegranate);
+    background-color: var(--pastelRed);
 }
 
 #modification{
-    background-color: var(--grey1);
-    color: var(--white);
+    background-color: var(--lightpastelBlue);
+    color: var(--blue);
 }
 
 #modification:hover{
-    background-color: var(--grey0);
+    background-color: var(--pastelBlue);
 }
 .managementActions *{
     font-size: 1vw;
