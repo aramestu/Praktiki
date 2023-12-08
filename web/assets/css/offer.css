@@ -314,7 +314,7 @@ h3 {
 }
 
 .Stage:hover > .header > .left > .typeExpPro{
-    box-shadow: 0px 0px 40px 20px  #D1C6D6;
+    box-shadow: 0px 0px 90px 70px  #D1C6D6;
 }
 
 .Stage:hover {
@@ -335,7 +335,7 @@ h3 {
 }
 
 .Alternance:hover > .header > .left > .typeExpPro{
-    box-shadow: 0px 0px 40px 20px  #f3dbc2;
+    box-shadow: 0px 0px 90px 70px #f3dbc2;
 }
 
 .Alternance:hover {
@@ -367,6 +367,17 @@ h3 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+.small:hover,
+.small{
+    border: none;
+}
+
+.OffreNonDefini:hover > .header > .left > .typeExpPro {
+    box-shadow:50px 30px 45px 35px #D1C6D6,
+    -50px -30px 45px 35px #f3dbc2;
+}
+
 
 
 .OffreNonDefini:hover {
