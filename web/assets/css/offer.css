@@ -129,6 +129,7 @@ td {
     animation: appear 0.5s ease-in-out;
     animation-fill-mode: forwards;
     animation-delay: 0.1s;
+    overflow: hidden;
 }
 
 @keyframes appear {
@@ -302,6 +303,7 @@ h3 {
     font-weight: bold;
     width: max-content;
     margin-bottom: 5px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .Stage > .header > .left > .typeExpPro,
@@ -309,6 +311,10 @@ h3 {
     border-color: var(--lightpastelPurple);
     background-color: var(--lightpastelPurple);
     color: var(--darkPurple);
+}
+
+.Stage:hover > .header > .left > .typeExpPro{
+    box-shadow: 0px 0px 40px 20px  #D1C6D6;
 }
 
 .Stage:hover {
@@ -326,6 +332,10 @@ h3 {
 
 #mainContainer:hover{
     box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1), 0 4px 16px rgba(31, 38, 135, 0.1);
+}
+
+.Alternance:hover > .header > .left > .typeExpPro{
+    box-shadow: 0px 0px 40px 20px  #f3dbc2;
 }
 
 .Alternance:hover {
