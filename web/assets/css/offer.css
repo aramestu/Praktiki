@@ -137,6 +137,7 @@ td {
 .small div {
     font-size: 11px;
     padding: 5px;
+    font-weight: 500;
 }
 
 h3 {
