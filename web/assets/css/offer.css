@@ -44,25 +44,6 @@ ul li {
     padding-bottom: 2px;
 }
 
-#apply {
-    background-color: var(--darkBlue2);
-    color: var(--white);
-    width: 25%;
-    padding: 15px 0;
-    border: none;
-    border-radius: 1.5rem;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1.2em;
-    box-shadow: inset 10px 10px 20px #ffffff45,
-    inset -10px -10px 20px #00000020,
-    10px 10px 10px #00000020,
-    -10px -10px 10px #ffffff45;
-
-    margin-top: 22px;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
 #apply:hover {
     color: var(--white);
     opacity: 0.69;

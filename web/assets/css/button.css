@@ -34,3 +34,7 @@
     opacity: 0.8;
 }
 
+.secondary {
+    background: var(--grey0);
+}
+

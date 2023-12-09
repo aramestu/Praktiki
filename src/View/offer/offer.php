@@ -20,7 +20,7 @@ echo htmlspecialchars($last_element) */
 <div id="mainContainer" class="subContainer <?php echo $expPro->getNomExperienceProfessionnel(); ?>">
     <div class="header">
         <div class="information">
-            <p class="bold typeExpPro"> <?php echo $expPro->getNomExperienceProfessionnel(); ?></p>
+            <p class="bold typeExpPro"><label><?php echo $expPro->getNomExperienceProfessionnel(); ?></label></p>
             <p>du <?= htmlspecialchars($expPro->getDateDebutExperienceProfessionnel()) ?></p>
             <p>au <?= htmlspecialchars($expPro->getDateFinExperienceProfessionnel()) ?></p>
         </div>
@@ -65,10 +65,12 @@ echo htmlspecialchars($last_element) */
     <a id="deleteButtonOrigin"><img src="assets/images/bin-icon.png" id="deleteIcon" alt="Bin"></a>
     <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel()) ?>"><img
                 src="assets/images/edit-icon.png" id="editIcon" alt="EditButton"></a>
-    <a href="frontController.php?controller=ExpPro&action=getExpProByDefault"><img src="assets/images/back-icon.png"
-                                                                                   id="backIcon" alt="BackToOffer"></a>
 
-    <button id="apply">Postuler</button>
+
+    <div class="HBox">
+        <a href="frontController.php?controller=ExpPro&action=getExpProByDefault" class="button secondary">Retour aux offres</a>
+        <button id="apply" class="button">Postuler</button>
+    </div>
 </div>
 
 <div id="popUpDelete" class="subContainer">
