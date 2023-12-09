@@ -157,5 +157,13 @@ class EntrepriseRepository extends AbstractRepository
         $pdoStatement->execute($values);
     }
 
-
+    public function getNbENtrpriseRefusee() : int{
+        $result = 0;
+        $sql = "SELECT COUNT(*) FROM EntreprisesArchives";
+        $pdostatement = Model::getPdo()->query($sql);
+        foreach ($pdostatement as $i){
+            $result++;
+        }
+        return $result;
+    }
 }

@@ -35,12 +35,6 @@ class ControllerEtudiant extends ControllerGenerique{
         );
     }
 
-    public static function getNbEtudiantTotal(): int
-    {
-        $listEtudiants = (new EtudiantRepository())->getAll();
-        return count($listEtudiants);
-    }
-
     public static function getNbEtudiantExpProValide(): int
     {
         $nbEtudiantExpProValidee = 0;

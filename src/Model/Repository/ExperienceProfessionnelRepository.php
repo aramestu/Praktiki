@@ -67,4 +67,12 @@ class ExperienceProfessionnelRepository
         }
         return array_merge($allExperienceProfessionnel, $stages, $alternances);
     }
+
+    public function count(): int
+    {
+        $stageCount = (new StageRepository())->count();
+        $alternanceCount = (new AlternanceRepository())->count();
+        $offreNonDefiniCount = (new OffreNonDefiniRepository())->count();
+        return $stageCount + $alternanceCount + $offreNonDefiniCount;
+    }
 }
