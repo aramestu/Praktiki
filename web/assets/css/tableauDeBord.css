@@ -30,12 +30,11 @@
 .sidebar{
     display: flex;
     flex-direction: column;
-    width: 25%;
-    margin: 0;
+    margin: 0 40px 0 0;
 }
 
 .content{
-    width: 75%;
+    flex: 3;
     margin: 0 10px 0 10px;
     display: flex;
     align-items: center;

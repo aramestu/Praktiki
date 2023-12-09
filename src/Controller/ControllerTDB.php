@@ -93,4 +93,18 @@ class ControllerTDB extends ControllerGenerique {
         );
     }
 
+    private static function displayTDBetuGestion() {
+        $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user=(new EtudiantRepository())->getByEmail($mail);
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Tableau de bord',
+                'cheminVueBody' => 'user/tableauDeBord/etudiant.php',
+                'TDBView' => 'user/tableauDeBord/etudiant/gestionEtudiant.php',
+                'user'=>$user
+            ]
+        );
+    }
+
 }
