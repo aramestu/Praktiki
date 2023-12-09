@@ -57,26 +57,6 @@ class ConventionRepository extends AbstractRepository {
             "codePostalEntreprise", "effectifEntreprise", "telephoneEntreprise", "estFini", "estValidee", "estSignee");
     }
 
-    public function mettreAJour(AbstractDataObject $object): void{
-        $pdo = Model::getPdo();
-        $table = $this->getNomTable();
-        $clePrimaire = $this->getNomClePrimaire();
-        $colonnes = $this->getNomsColonnes();
-        $sql = "UPDATE $table SET ";
-        for($i =0; $i<sizeof($colonnes); $i++){
-            if($colonnes[$i]!=$clePrimaire){
-                $sql = $sql . $colonnes[$i] ." = :" . $colonnes[$i] . "Tag";
-                if($i!=sizeof($colonnes)-1){
-                    $sql = $sql . ", ";
-                }
-            }
-        }
-        $sql = $sql . " WHERE $clePrimaire = :" . $clePrimaire . "Tag";
-        $requeteStatement = $pdo->prepare($sql);
-        $requeteStatement->bindValue(':sujetEstConfidentielTag', $object->getSujetEstConfidentiel(), $pdo::PARAM_INT);
-        $requeteStatement->execute($object->formatTableau());
-    }
-
     public function save(AbstractDataObject|Convention $convention): bool
     {
         try {

@@ -465,7 +465,7 @@ class Convention extends AbstractDataObject {
     }
 
     public function formatTableau(): array {
-        return array(
+        $tab = array(
             "idConventionTag" => $this->idConvention,
             "mailEnseignantTag" => $this->mailEnseignant,
             "nomEnseignantTag" => $this->nomEnseignant,
@@ -474,7 +474,6 @@ class Convention extends AbstractDataObject {
             "dureeDeTravailTag" => $this->dureeDeTravail,
             "languesImpressionTag" => $this->languesImpression,
             "origineDeLaConventionTag" => $this->origineDeLaConvention,
-            "sujetEstConfidentielTag" => $this->sujetEstConfidentiel,
             "nbHeuresHebdoTag" => $this->nbHeuresHebdo,
             "modePaiementTag" => $this->modePaiement,
             "dureeExperienceProfessionnelTag" => $this->dureeExperienceProfessionnel,
@@ -497,10 +496,12 @@ class Convention extends AbstractDataObject {
             "nomEntrepriseTag" => $this->nomEntreprise,
             "codePostalEntrepriseTag" => $this->codePostalEntreprise,
             "effectifEntrepriseTag" => $this->effectifEntreprise,
-            "telephoneEntrepriseTag" => $this->telephoneEntreprise,
-            "estFiniTag" => $this->estFini,
-            "estValideeTag" => $this->estValidee,
-            "estSigneeTag" => $this->estSignee
+            "telephoneEntrepriseTag" => $this->telephoneEntreprise
         );
+        $tab["sujetEstConfidentielTag"] = ($this->sujetEstConfidentiel) ? 1 : 0;
+        $tab["estFiniTag"] = ($this->estFini) ? 1 : 0;
+        $tab["estValideeTag"] = ($this->estValidee) ? 1 : 0;
+        $tab["estSigneeTag"] = ($this->estSignee) ? 1 : 0;
+        return $tab;
     }
 }
