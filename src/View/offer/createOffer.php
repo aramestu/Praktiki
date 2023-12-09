@@ -63,9 +63,7 @@
                         echo'<input type="number" name="siret" id="siret" required placeholder="Siret" value="01234567890123">';
                     }?>
                 </p>
-                <p>
-                    <input type="submit" id="submitButton" value="Créer l'Offre">
-                </p>
+
             </div>
             <div id="createOfferSpacerBIS"></div>
             <div class="VBox">
@@ -84,6 +82,9 @@
                         <input type="date" name="dateFin" id="dateFin" required>
                     </p>
                 </div>
+                <p>
+                    <input type="submit" id="submitButton" value="Créer l'Offre">
+                </p>
             </div>
         </div>
     </form>

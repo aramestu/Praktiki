@@ -26,10 +26,10 @@ class ControllerExpPro extends ControllerGenerique
         );
     }
 
-    public static function getNbExpProTotal(): int
+    public static function getNbTotal(): int
     {
-        $listExpPro = (new ExperienceProfessionnelRepository())->getAll();
-        return count($listExpPro);
+        $NbExpPro = (new ExperienceProfessionnelRepository())->getNbTotal();
+        return $NbExpPro;
     }
 
     public static function getNbStageTotal(): int

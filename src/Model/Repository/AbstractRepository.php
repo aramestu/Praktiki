@@ -20,6 +20,14 @@ abstract class AbstractRepository {
         return $objects;
     }
 
+    public function count(): int {
+        $pdo = Model::getPdo();
+        $nomTable = $this->getNomTable();
+        $requestStatement =  $pdo->query("SELECT COUNT(*) FROM $nomTable");
+        $nb = $requestStatement->fetch();
+        return $nb[0];
+    }
+
     public function getById(string $valeurClePrimaire): ?AbstractDataObject{
         $nomTable = $this->getNomTable();
         $clePrimaire = $this->getNomClePrimaire();
