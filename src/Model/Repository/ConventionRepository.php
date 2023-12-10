@@ -12,6 +12,21 @@ class ConventionRepository extends AbstractRepository {
     }
 
     public function construireDepuisTableau(array $conventionFormatTableau): Convention {
+        if (!isset($conventionFormatTableau["sujetEstConfidentiel"])) {
+            $conventionFormatTableau["sujetEstConfidentiel"] = false;
+        }
+        if ($conventionFormatTableau["dureeExperienceProfessionnel"] == null) {
+            $conventionFormatTableau["dureeExperienceProfessionnel"] = 0;
+        }
+        if ($conventionFormatTableau["effectifEntreprise"] == null) {
+            $conventionFormatTableau["effectifEntreprise"] = 0;
+        }
+        if ($conventionFormatTableau["dateDebutExperienceProfessionnel"] == null) {
+            $conventionFormatTableau["dateDebutExperienceProfessionnel"] = "2000-01-01";
+        }
+        if ($conventionFormatTableau["dateFinExperienceProfessionnel"] == null) {
+            $conventionFormatTableau["dateFinExperienceProfessionnel"] = "2000-01-01";
+        }
         $convention =  new Convention($conventionFormatTableau["mailEnseignant"], $conventionFormatTableau["nomEnseignant"],
                                     $conventionFormatTableau["prenomEnseignant"], $conventionFormatTableau["competencesADevelopper"],
                                     $conventionFormatTableau["dureeDeTravail"], $conventionFormatTableau["languesImpression"],
