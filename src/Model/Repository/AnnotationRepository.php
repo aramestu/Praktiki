@@ -19,8 +19,29 @@ class AnnotationRepository extends AbstractRepository {
             $requestStatement->execute($values);
             return true;
         } catch (\PDOException $e) {
+            var_dump($e);
             return false;
         }
+    }
+
+    public function getBySiret(string $siret) : array
+    {
+        $sql = "SELECT * FROM Annotations
+                WHERE siret = :siretTag";
+
+        $values = [
+            "siretTag" => $siret
+        ];
+
+        $pdo = Model::getPdo();
+        $requestStatement = $pdo->prepare($sql);
+        $requestStatement->execute($values);
+
+        $objects = [];
+        foreach ($requestStatement as $objectFormatTableau) {
+            $objects[] = $this->construireDepuisTableau($objectFormatTableau);
+        }
+        return $objects;
     }
 
     protected function getNomTable(): string {
