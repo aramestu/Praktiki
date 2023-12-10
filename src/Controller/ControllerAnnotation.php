@@ -30,8 +30,8 @@ class ControllerAnnotation extends ControllerGenerique
         $siret = $_POST["siret"];
 
         // Pour récupérer le mail du prof
-        //$mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $mail = "antoine.lefevre@umontpellier.fr";
+        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        //$mail = "antoine.lefevre@umontpellier.fr";
         $user = (new EnseignantRepository())->getById($mail);
 
         $entreprise = (new EntrepriseRepository())->getById($siret);
@@ -67,8 +67,8 @@ class ControllerAnnotation extends ControllerGenerique
         $siret = "01234567890123";
         $listAnnotation = (new AnnotationRepository())->getBySiret($siret);
 
-        //$mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $mail = "antoine.lefevre@umontpellier.fr";
+        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        //$mail = "antoine.lefevre@umontpellier.fr";
         $user = (new EnseignantRepository())->getById($mail);
 
         $entreprise = (new EntrepriseRepository())->getById($siret);
@@ -83,5 +83,37 @@ class ControllerAnnotation extends ControllerGenerique
                 'entreprise' => $entreprise
             ]
         );
+    }
+
+    public static function afficherFormulaireModificationAnnotation(): void
+    {
+        $annotation = $_POST["annotation"];
+
+        if(ConnexionUtilisateur::getLoginUtilisateurConnecte() == $annotation->getMailEnseignant()) {
+            self::afficheVue(
+                'view.php',
+                [
+                    'pagetitle' => 'Modifier message',
+                    'cheminVueBody' => 'user/annotation/modifierAnnotation.php',
+                    'annotation' => $annotation
+                ]
+            );
+        }
+        else{
+            self::error("Vous n'avez pas la permission de faire ça !");
+        }
+    }
+
+    public static function modifierAnnotation(): void
+    {
+        $annotation = $_POST["annotation"];
+        $contenu = $_POST["message"];
+
+        if(ConnexionUtilisateur::getLoginUtilisateurConnecte() == $annotation->getMailEnseignant()) {
+            $annotation->setContenu($contenu);
+            (new AnnotationRepository())->mettreAJour($annotation);
+
+            self::afficherAllAnnotationEntreprise();
+        }
     }
 }

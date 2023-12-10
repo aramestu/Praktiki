@@ -1,6 +1,6 @@
 <div class="container">
     <h2>
-
+        Ecrire un message
     </h2>
     <form action="frontController.php?controller=Annotation&action=enregistrerAnnotation" method="post">
         <label>
