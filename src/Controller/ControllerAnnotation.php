@@ -63,31 +63,43 @@ class ControllerAnnotation extends ControllerGenerique
     }
 
     public static function afficherAllAnnotationEntreprise() : void {
-        //$siret = $_POST["siret"];
-        $siret = "01234567890123";
-        $listAnnotation = (new AnnotationRepository())->getBySiret($siret);
+        $login = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        // Si personne n'est connecté
+        if(is_null($login)){
+            self::error("Vous n'avez pas la permission pour faire ça");
+        }
+        // Si l'utilisateur connecté est un prof
+        else if(! is_null((new EnseignantRepository())->getById($login))) {
+            //$siret = $_POST["siret"];
+            $siret = "01234567890123";
+            $listAnnotation = (new AnnotationRepository())->getBySiret($siret);
 
-        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        //$mail = "antoine.lefevre@umontpellier.fr";
-        $user = (new EnseignantRepository())->getById($mail);
+            $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+            //$mail = "antoine.lefevre@umontpellier.fr";
+            $user = (new EnseignantRepository())->getById($mail);
 
-        $entreprise = (new EntrepriseRepository())->getById($siret);
+            $entreprise = (new EntrepriseRepository())->getById($siret);
 
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Annoter',
-                'cheminVueBody' => 'user/annotation/annotationList.php',
-                'listAnnotation' => $listAnnotation,
-                'enseignant' => $user,
-                'entreprise' => $entreprise
-            ]
-        );
+            self::afficheVue(
+                'view.php',
+                [
+                    'pagetitle' => 'Annoter',
+                    'cheminVueBody' => 'user/annotation/annotationList.php',
+                    'listAnnotation' => $listAnnotation,
+                    'enseignant' => $user,
+                    'entreprise' => $entreprise
+                ]
+            );
+        }
+        else{
+            self::error("Vous n'avez pas la permission pour faire ça");
+        }
     }
 
     public static function afficherFormulaireModificationAnnotation(): void
     {
-        $annotation = $_POST["annotation"];
+        $id = $_GET["idAnnotation"];
+        $annotation = (new AnnotationRepository())->getById($id);
 
         if(ConnexionUtilisateur::getLoginUtilisateurConnecte() == $annotation->getMailEnseignant()) {
             self::afficheVue(
@@ -106,7 +118,8 @@ class ControllerAnnotation extends ControllerGenerique
 
     public static function modifierAnnotation(): void
     {
-        $annotation = $_POST["annotation"];
+        $id = $_POST["idAnnotation"];
+        $annotation = (new AnnotationRepository())->getById($id);
         $contenu = $_POST["message"];
 
         if(ConnexionUtilisateur::getLoginUtilisateurConnecte() == $annotation->getMailEnseignant()) {
@@ -114,6 +127,23 @@ class ControllerAnnotation extends ControllerGenerique
             (new AnnotationRepository())->mettreAJour($annotation);
 
             self::afficherAllAnnotationEntreprise();
+        }
+        else{
+            self::error("Vous n'avez pas la permission de faire ça !");
+        }
+    }
+
+    public static function supprimerAnnotation() : void {
+        $id = $_GET["idAnnotation"];
+        $rep = new AnnotationRepository();
+        $annotation = $rep->getById($id);
+        // Si l'utilisateur connecté est le même que celui qui a posté le message ou qu'il est admin
+        if(ConnexionUtilisateur::getLoginUtilisateurConnecte() == $annotation->getMailEnseignant() || ConnexionUtilisateur::estAdministrateur()) {
+            $rep->supprimer($id);
+            self::afficherAllAnnotationEntreprise();
+        }
+        else{
+            self::error("Vous n'avez pas la permission de faire ça !");
         }
     }
 }
