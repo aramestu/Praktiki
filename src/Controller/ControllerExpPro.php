@@ -28,7 +28,7 @@ class ControllerExpPro extends ControllerGenerique
 
     public static function getNbTotal(): int
     {
-        $NbExpPro = (new ExperienceProfessionnelRepository())->getNbTotal();
+        $NbExpPro = (new ExperienceProfessionnelRepository())->getAll();
         return $NbExpPro;
     }
 

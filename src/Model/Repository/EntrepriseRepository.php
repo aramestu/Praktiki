@@ -157,11 +157,29 @@ class EntrepriseRepository extends AbstractRepository
         $pdoStatement->execute($values);
     }
 
-    public function getNbENtrpriseRefusee() : int{
+    public function getNbEntrepriseValide(): int
+    {
+        $result = 0;
+        $sql = "SELECT * FROM Entreprises WHERE estValide = 1";
+        foreach (Model::getPdo()->query($sql) as $ignored){
+            $result++;
+        }
+        return $result;
+    }
+
+    public function getNbEntrepriseAttente() : int{
+        $result = 0;
+        $sql = "SELECT * FROM Entreprises WHERE estValide = 0";
+        foreach (Model::getPdo()->query($sql) as $ignored){
+            $result++;
+        }
+        return $result;
+    }
+
+    public function getNbEntrpriseRefusee() : int{
         $result = 0;
         $sql = "SELECT COUNT(*) FROM EntreprisesArchives";
-        $pdostatement = Model::getPdo()->query($sql);
-        foreach ($pdostatement as $i){
+        foreach (Model::getPdo()->query($sql) as $ignored){
             $result++;
         }
         return $result;
