@@ -1,0 +1,23 @@
+#studentChoice::before{
+    font-family: 'FontAwesome';
+    font-size: 5em;
+    content: '\f19d';
+    display: block;
+    margin:20px;
+}
+
+#companyChoice::before{
+    font-family: 'FontAwesome';
+    font-size: 5em;
+    content: '\f0b1';
+    display: block;
+    margin: 20px;
+}
+
+#professorChoice::before{
+    font-family: 'FontAwesome';
+    font-size: 5em;
+    content: '\f19c';
+    display: block;
+    margin: 20px;
+}
