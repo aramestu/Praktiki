@@ -1,4 +1,10 @@
+<link rel="stylesheet" href="assets/css/offer.css">
+<link rel="stylesheet" href="assets/css/button.css">
+<script src="assets/javascript/popUpDelete.js"></script>
+
+
 <div class="container">
+    <a href="frontController.php?controller=Annotation&action=afficherAllAnnotationEntreprise" id="backIcon"><img src="assets/images/back-icon.png" id="deleteIcon" alt="Bin"></a>
     <h2>Modifier le message</h2>
     <form action="frontController.php?controller=Annotation&action=modifierAnnotation" method="post">
         <label>

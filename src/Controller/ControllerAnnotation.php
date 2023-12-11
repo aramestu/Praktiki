@@ -35,8 +35,10 @@ class ControllerAnnotation extends ControllerGenerique
         //$mail = "antoine.lefevre@umontpellier.fr";
         $user = (new EnseignantRepository())->getById($mail);
 
-
-        if (!is_null($user)) {
+        if(strlen($message) > 500){
+            self::redirectionVersURL("warning", "Le contenu est trop long", "afficherAllAnnotationEntreprise&controller=Annotation");
+        }
+        else if (!is_null($user)) {
             $annotation = new Annotation($siret, $mail, $message, false);
             $save = (new AnnotationRepository())->save($annotation);
             // Si l'insertion n'a pas fonctionné
