@@ -2,9 +2,9 @@
     height: 100px;
     width: 100px;
     border-radius: 50%;
-    margin: 0;
-    border: var(--rougeUM) solid 4px;
-    margin: 10px;
+    border: var(--darkBlue2) solid 4px;
+    margin-left: -10px;
+    margin-top: -10px;
     z-index: 5;
 }
 
@@ -18,9 +18,10 @@
 }
 
 #adminBackground{
+    opacity: 0;
     position: absolute;
     left: 0;
-    background: var(--rougeUM);
+    background: var(--darkBlue2);
     height: 98px;
     width: 90px;
     z-index: 4;
@@ -48,8 +49,8 @@
 }
 
 form #search-button{
-    top: 35px;
-    right: 65px;
+    top: 33px;
+    right: 34px;
 }
 
 #title{
@@ -70,28 +71,33 @@ form #search-bar{
 
 /*---END SEARCH BAR---*/
 
-#placeholder{
+#mainContent{
+    padding: 0;
+    position: absolute;
+    left: 20%;
     display: flex;
     flex-direction: column;
     justify-content: stretch;
     align-items: center;
     height: 85vh;
-    width: 89%;
-    margin-left: 15%;
-    margin-right: -4%;
+    width: 77%;
     margin-top: 0;
-    overflow: auto;
     padding-top: 10px;
-    border : rgba(0,0,0,0.005) solid 10px;
-    overflow-x: hidden;
+    border-top: rgba(0,0,0,0.005) solid 10px;
+    border-bottom: rgba(0,0,0,0.005) solid 10px;
 }
 
-#placeholder > .VBox{
+#mainContent > .VBox{
     align-items: center;
     justify-content: flex-start;
 }
 
-#placeholder .line,
+#mainContent > .HBox{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#mainContent .line,
 .columnName{
     display: flex;
     justify-content: space-between;
@@ -105,6 +111,11 @@ form #search-bar{
     transition: all 0.3s ease-in-out;
 }
 
+#dynamicList{
+    overflow: auto;
+    overflow-x: hidden;
+}
+
 .line{
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -115,23 +126,26 @@ form #search-bar{
     border-radius: 0;
 }
 
-#placeholder .line:nth-child(odd){
-    background: rgba(0, 0, 0, 0.1);
+#mainContent .line:nth-child(odd){
+    background: var(--activeGrey);
 }
-#placeholder .line:nth-child(even){
-    background: rgba(0, 0, 0, 0.05);
+#mainContent .line:nth-child(even){
+    background: var(--footer);
+}
+
+#mainContent .line{
+    /*border-bottom: 1px solid var(--grey1);*/
 }
 
 .columnName{
-    background: var(--grey0);
+    background: var(--background);
     margin-top: 10px;
     border: none;
     font-weight: bold;
     width: 99%;
     padding: 9px;
     height: 30px;
-    border-radius: 1rem 1rem 0 0;
-    border-bottom: var(--grey1) solid 3px;
+    border-bottom: var(--grey1) solid 1px;
 }
 
 .line:hover .button{
@@ -149,37 +163,37 @@ form #search-bar{
 }
 
 
-#placeholder .greenHover:hover{
+#mainContent .greenHover:hover{
     border-color: var(--green);
     box-shadow : 10px 10px 10px #00000025,
     -10px -10px 10px #27AE6025;
 }
 
-#placeholder .yellowHover:hover{
+#mainContent .yellowHover:hover{
     border-color: var(--yellow);
     box-shadow : 10px 10px 10px #00000025,
     -10px -10px 10px #F1C40F25;
 }
 
-#placeholder .redHover:hover{
+#mainContent .redHover:hover{
     border-color: var(--red);
     box-shadow : 10px 10px 10px #00000025,
     -10px -10px 10px #E74C3C25;
 }
 
-#placeholder .Alternance:hover{
+#mainContent .Alternance:hover{
     border-color: var(--orange);
     box-shadow : 10px 10px 10px #00000025,
     -10px -10px 10px #E67E2225;
 }
 
-#placeholder .Stage:hover{
+#mainContent .Stage:hover{
     border-color: var(--wisteria);
     box-shadow : 10px 10px 10px #00000025,
     -10px -10px 10px #8E44AD25;
 }
 
-#placeholder .OffreNonDefini:hover{
+#mainContent .OffreNonDefini:hover{
     border-bottom-color: var(--wisteria);
     border-left-color: var(--orange);
     border-right-color: var(--wisteria);
@@ -188,7 +202,7 @@ form #search-bar{
     -10px -10px 10px #E67E2225;
 }
 
-#placeholder .line:hover{
+#mainContent .line:hover{
     cursor: pointer;
 }
 
@@ -205,10 +219,6 @@ form #search-bar{
 
 #columnCodePostal{
     width: 10%;
-}
-
-#placeholder .HBox *{
-    margin-right: 8px;
 }
 
 .line label{
@@ -385,39 +395,39 @@ form #search-bar{
 }
 
 #validation, .managementActions input[type="submit"]{
-    background-color: var(--green);
-    color: var(--white);
+    background-color: var(--lightpastelGreen);
+    color: var(--green);
 }
 
 #validation:hover{
-    background-color: var(--emerald);
+    background-color: var(--pastelGreen);
 }
 
 #invalidation{
-    background-color: var(--yellow);
-    color: var(--white);
+    background-color: var(--pastelYellow);
+    color: var(--darkYellow);
 }
 
 #invalidation:hover{
-    background-color: var(--darkYellow);
+    background-color: var(--pastelYellow);
 }
 
 #suppression{
-    background-color: var(--red);
-    color: var(--white);
+    background-color: var(--lightpastelRed);
+    color: var(--red);
 }
 
 #suppression:hover{
-    background-color: var(--pomegranate);
+    background-color: var(--pastelRed);
 }
 
 #modification{
-    background-color: var(--grey1);
-    color: var(--white);
+    background-color: var(--lightpastelBlue);
+    color: var(--blue);
 }
 
 #modification:hover{
-    background-color: var(--grey0);
+    background-color: var(--pastelBlue);
 }
 .managementActions *{
     font-size: 1vw;
@@ -518,7 +528,7 @@ form #search-bar{
         height: auto;
     }
 
-    #placeholder .line, .columnName{
+    #mainContent .line, .columnName{
         width: 95%;
     }
 
@@ -559,9 +569,9 @@ form #search-bar{
     position: absolute;
     top: 80px;
     left: 0;
-    min-width: 20em;
-    width: 25em;
-    max-width: 25em;
+    min-width: 20%;
+    width: 20%;
+    max-width: 25%;
     font-size: 10px;
     height: 100%;
     border-radius: 0 1.5rem 0 1.5rem;
@@ -679,6 +689,7 @@ a img:active{
     content: '\f093';
 }
 
+
 /*---START OFFRE---*/
 
 .containerDebutLine > .typeExpPro {
@@ -687,27 +698,28 @@ a img:active{
     font-size: 11px;
     font-weight: bold;
     width: 95px;
+    height: 29px;
     margin-bottom: 5px;
 }
 
 .Stage > .HBox > .typeExpPro,
 .Stage > .header > .information > .typeExpPro {
-    border-color: var(--wisteria);
-    background-color: var(--wisteria);
-    color: var(--white);
+    border-color: var(--lightpastelPurple);
+    background-color: var(--lightpastelPurple);
+    color: var(--darkPurple);
 }
 
 .Stage:hover {
-    border-color: var(--wisteria);
+    border-color: var(--pastelPurple);
     box-shadow: 10px 10px 10px #00000025,
-    -10px -10px 10px #8E44AD25;
+    -10px -10px 10px #B08AB625;
 }
 
 .Alternance > .HBox > .typeExpPro,
 .Alternance > .header > .information > .typeExpPro {
-    border-color: var(--orange);
-    background-color: var(--orange);
-    color: var(--white);
+    border-color: var(--lightpastelOrange);
+    background-color: var(--lightpastelOrange);
+    color: var(--darkOrange);
 }
 
 #mainContainer:hover{
@@ -715,28 +727,41 @@ a img:active{
 }
 
 .Alternance:hover {
-    border-color: var(--orange);
+    border-color: var(--pastelOrange);
     box-shadow: 10px 10px 10px #00000025,
-    -10px -10px 10px #E67E2225;
+    -10px -10px 10px #F8C9A025;
 }
 
 .OffreNonDefini > .HBox > .typeExpPro,
 .OffreNonDefini> .header > .information > .typeExpPro {
-    background: linear-gradient(-45deg, var(--wisteria) 0%, var(--wisteria) 50%, var(--orange) 50%, var(--orange) 100%);
-    color: var(--white);
-    border-bottom-color: var(--wisteria);
-    border-left-color: var(--orange);
-    border-right-color: var(--wisteria);
-    border-top-color: var(--orange);
+    background: linear-gradient(-45deg, var(--lightpastelPurple) 0%, var(--lightpastelPurple) 50%, var(--lightpastelOrange) 50%, var(--lightpastelOrange) 100%);
+    color: var(--darkBlue2);
+    border-bottom-color: var(--pastelPurple);
+    border-left-color: var(--pastelOrange);
+    border-right-color: var(--pastelPurple);
+    border-top-color: var(--pastelOrange);
+}
+
+.OffreNonDefini > .HBox > .typeExpPro > label,
+.OffreNonDefini> .header > .information > .typeExpPro > label {
+    background: linear-gradient(-45deg, var(--darkPurple) 0%, var(--darkPurple) 50%, var(--darkOrange) 50%, var(--darkOrange) 100%);
+    color: transparent; /* Make text transparent to apply gradient */
+    border-bottom-color: var(--pastelPurple);
+    border-left-color: var(--pastelOrange);
+    border-right-color: var(--pastelPurple);
+    border-top-color: var(--pastelOrange);
+    display: inline-block; /* Ensure the gradient is applied to the text */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .OffreNonDefini:hover {
-    border-bottom-color: var(--wisteria);
-    border-left-color: var(--orange);
-    border-right-color: var(--wisteria);
-    border-top-color: var(--orange);
+    border-bottom-color: var(--pastelPurple);
+    border-left-color: var(--pastelOrange);
+    border-right-color: var(--pastelPurple);
+    border-top-color: var(--pastelOrange);
     box-shadow: 10px 10px 10px #00000025,
-    -10px -10px 10px #E67E2225;
+    -10px -10px 10px #F8C9A025;
 }
 
 /*---END OFFRE---*/
@@ -836,4 +861,32 @@ a img:active{
     font-family: 'FontAwesome';
     margin-right: 10px;
     content: '\f0b1';
+}
+
+/*---START Import page---*/
+input[type="file"]{
+    margin: 10px;
+    padding: 0;
+    border: none;
+    background: none;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--darkBlue2);
+    cursor: pointer;
+}
+
+.input-row{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    align-items: center;
+    width: 100%;
+}
+
+.input-row > label{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--darkBlue2);
+    margin: 50px;
 }

@@ -58,14 +58,14 @@ class ControllerEntreprise extends ControllerGenerique
 
     public static function getNbEntrepriseRefuse(): int
     {
-        $nbEntrepriseRefuse = 0;
-        $listEntreprises = (new EntrepriseRepository())->getAll();
-        foreach ($listEntreprises as $entreprise) {
-            if ($entreprise->getEstValide() == -1) {
-                $nbEntrepriseRefuse++;
-            }
-        }
-        return $nbEntrepriseRefuse;
+        //        $listEntreprises = ;
+//        foreach ($listEntreprises as $entreprise) {
+//            if ($entreprise->getEstValide() == -1) {
+//                $nbEntrepriseRefuse++;
+//            }
+//        }
+        //TODO : verifier quand archive presente
+        return (new EntrepriseRepository())->getNbENtrpriseRefusee();
     }
 
     public static function afficherListeEntrepriseValideFiltree(): void

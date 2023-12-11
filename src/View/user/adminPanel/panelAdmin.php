@@ -18,7 +18,7 @@
         <a href="frontController.php?controller=PanelAdmin&action=panelImportPstage" class="button" id="importDataButton"><span>Importation des données</span></a>
         </div>
         </div>
-    <div class="container" id="placeholder">
+    <div class="container" id="mainContent">
         <?php
         require __DIR__ . "/../../$adminPanelView";
         ?>

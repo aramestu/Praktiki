@@ -9,14 +9,17 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
     <div class="subContainer small <?php echo $expPro->getNomExperienceProfessionnel(); ?>">
         <div class="header">
             <div class="left">
-                <p class="bold typeExpPro"><?php
+                <p class="bold typeExpPro">
+                    <label><?php
                     $expPro->getNomExperienceProfessionnel();
                     if ($expPro->getNomExperienceProfessionnel() == "Stalternance") {
                         echo "Non définie";
                     } else {
                         echo htmlspecialchars($expPro->getNomExperienceProfessionnel());
                     }
-                    ?></p>
+                    ?>
+                    </label>
+                </p>
                 <p><?php echo AbstractExperienceProfessionnelRepository::getDelayDatePublication($expPro) ?></p>
             </div>
             <div class="right">

@@ -4,6 +4,7 @@
 
 <?php
 
+use App\SAE\Lib\ConnexionUtilisateur;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\StageRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
@@ -61,12 +62,24 @@ echo htmlspecialchars($last_element) */
             </ul>
         </div>
     </div>
-
+    <?php
+    if (ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::getLoginUtilisateurConnecte()==$entreprise->getSiret()) {
+        ?>
     <a id="deleteButtonOrigin"><img src="assets/images/bin-icon.png" id="deleteIcon" alt="Bin"></a>
-    <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel()) ?>"><img
+    <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel())?>"><img
                 src="assets/images/edit-icon.png" id="editIcon" alt="EditButton"></a>
-    <a href="frontController.php?controller=ExpPro&action=getExpProByDefault"><img src="assets/images/back-icon.png"
-                                                                                   id="backIcon" alt="BackToOffer"></a>
+        <?php
+    }
+    if(ConnexionUtilisateur::estEntreprise()){
+        echo'<a href="frontController.php?controller=TDB&action=displayTDB"><img src="assets/images/back-icon.png"
+                                            id="backIcon" alt="Back"></a> ';
+    }
+    else{
+        echo'<a href="frontController.php?action=getExpProByDefault&controller=ExpPro"><img src="assets/images/back-icon.png"
+                                            id="backIcon" alt="Back"></a> ';
+    }
+    ?>
+
 
     <button id="apply">Postuler</button>
 </div>
@@ -77,7 +90,8 @@ echo htmlspecialchars($last_element) */
         <p>Êtes-vous sûr de vouloir supprimer cette offre ?</p>
         <div class="HBox">
             <a class="button popUpDeleteButton" id="popUpDeleteNo">Non</a>
-            <a class="button popUpDeleteButton" id="popUpDeleteYes" href="frontController.php?controller=ExpPro&action=supprimerOffre&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel()) ?>">Oui</a>
+            <a class="button popUpDeleteButton" id="popUpDeleteYes"
+               href="frontController.php?controller=ExpPro&action=supprimerOffre&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel()) ?>">Oui</a>
         </div>
     </div>
 </div>

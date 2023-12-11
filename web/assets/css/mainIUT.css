@@ -26,6 +26,7 @@ header {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0px 0px 100px 0px rgba(0,0,0,0.06);
 }
 
 header::before {
@@ -35,9 +36,8 @@ header::before {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: rgba(255, 86, 96, 0.8);
-    backdrop-filter: blur(50px);
-    -webkit-backdrop-filter: blur(50px);
+    backdrop-filter: blur(15px);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
     z-index: -1;
 }
 
@@ -60,7 +60,7 @@ header:hover::after {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    color: var(--white);
+    color: var(--darkBlue2);
     text-decoration: none;
     font-weight: bold;
     width: 110px;
@@ -71,15 +71,17 @@ header:hover::after {
 }
 
 .nav-item:active, .nav-item.active {
-    background: var(--rougeUM);
-    color: var(--white);
+    background: var(--lightGrey);
     text-decoration: none;
     border-radius: 1.5rem;
     transform: scale(0.95);
+    /*
     box-shadow: inset 10px 10px 20px #ffffff25,
     inset -10px -10px 20px #00000015,
     10px 10px 10px #00000015,
     -10px -10px 10px #ffffff25;
+
+     */
 }
 
 .nav-item:hover {
@@ -88,8 +90,11 @@ header:hover::after {
     text-decoration: none;
     border-radius: 1.5rem;
     text-decoration: none;
+    /*
     box-shadow: inset 10px 10px 20px #00000020,
     inset -10px -10px 20px #ffffff45;
+
+     */
 }
 
 .icons {
@@ -111,7 +116,7 @@ header:hover::after {
 .burger span::after {
     content: "";
     width: 100%;
-    background-color: var(--white);
+    background-color: var(--darkBlue2);
     display: block;
     transition: all 0.5s ease-in-out;
     border-radius: 12px;
@@ -172,9 +177,25 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: white;
+    background: var(--background);
     background-position: center;
+    -webkit-font-smoothing: antialiased;
 }
+
+/* Pour les versions récentes de Firefox */
+@supports (-moz-appearance:none) {
+    body {
+        font-smooth: always;
+    }
+}
+
+/* Pour les versions plus anciennes de Firefox */
+@-moz-document url-prefix() {
+    body {
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
 /*---END BODY---*/
 
 
@@ -279,7 +300,7 @@ main{
     .burger span {
         width: 100%;
         height: 4px;
-        background-color: var(--white);
+        background-color: var(--darkBlue2);
         border-radius: 12px;
         display: block;
         transition: background-color 0.5s ease-in-out;
@@ -352,13 +373,11 @@ main{
     width: 69%;
     text-align: center;
     font-size: 12px;
-    background: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(50px);
-    -webkit-backdrop-filter: blur(50px);
+    background: var(--activeGrey);
     padding: 2%;
     margin: 1.5%;
     border-radius: 1.5rem;
-    box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1), 0 4px 16px rgba(31, 38, 135, 0.1);
+    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
     z-index: 1;
 }
 
@@ -367,13 +386,13 @@ main{
     width: 69%;
     text-align: center;
     font-size: 12px;
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.05);
     backdrop-filter: blur(50px);
     -webkit-backdrop-filter: blur(50px);
     padding: 2%;
     margin: 1.5%;
     border-radius: 1.5rem;
-    box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1), 0 4px 16px rgba(31, 38, 135, 0.1);
+    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
     z-index: 1;
 }
 
@@ -403,15 +422,17 @@ input[type="password"],
 input[type='date'],
 select,
 textarea {
+    color: var(--textColor);
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border: 2px solid var(--grey0);
-    border-radius: 1.5rem;
+    border: 2px solid var(--lightGrey);
+    border-radius: 15px;
     background-color: var(--white);
     -webkit-appearance: none;
     -moz-appearance: textfield;
     color: var(--darkBlue1);
+    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
 }
 
 input[type="text"]:focus,
@@ -421,7 +442,7 @@ input[type='date']:focus,
 select:focus,
 textarea:focus {
     outline: none;
-    border : 2px solid var(--bleuUM);
+    border : 2px solid var(--lightpastelBlue);
 }
 
 span:hover,
@@ -438,11 +459,11 @@ select:invalid {
 }
 
 input[type="submit"] {
-    background-color: var(--bleuUM);
+    background-color: var(--darkBlue2);
     color: var(--white);
     padding: 15px 0;
     border: none;
-    border-radius: 1.5rem;
+    border-radius: 15px;
     cursor: pointer;
     font-weight: bold;
     font-size : 1.2em;
@@ -589,9 +610,7 @@ footer {
     text-align: center;
     font-size: 12px;
     font-weight: bold;
-    background: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(50px);
-    -webkit-backdrop-filter: blur(50px);
+    background: var(--footer);
     padding: 3%;
     box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1), 0 4px 16px rgba(31, 38, 135, 0.1);
     z-index: 11;
@@ -620,7 +639,7 @@ footer > VBox{
     top : 90px;
     padding: 15px;
     margin-bottom: 20px;
-    border: 1px solid transparent;
+    /*border: 1px solid transparent;*/
     border-radius: 1.5rem;
     z-index: 5;
     animation: slideDown 1s, fadeOut 9.5s 1s;
@@ -629,21 +648,21 @@ footer > VBox{
 @keyframes slideDown {
     0% {
         transform: translateY(-100%);
-        opacity: 1;
+        opacity: 0.9;
     }
     100% {
         transform: translateY(0);
-        opacity: 1;
+        opacity: 0.9;
     }
 }
 
 @keyframes fadeOut {
     0% {
-        opacity: 1;
+        opacity: 0.9;
         z-index: 5;
     }
     90% {
-        opacity: 1;
+        opacity: 0.9;
         z-index: 5;
     }
     99% {
