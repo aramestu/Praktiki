@@ -183,4 +183,27 @@ class EtudiantRepository extends AbstractRepository
     {
         return array("numEtudiant", "nomEtudiant", "prenomEtudiant", "mailPersoEtudiant", "mailUniversitaireEtudiant", "telephoneEtudiant", "codePostalEtudiant");
     }
+
+    //TODO : a revoir quand les conventions seront bien implemanté
+    public function getNbEtudiantConventionValide(): int{
+        $sql = "SELECT COUNT(*) FROM Etudiants e JOIN ConventionsStageEtudiant cse ON e.numEtudiant = cse.numEtudiant JOIN Conventions c ON c.idConvention = cse.idConvention 
+                WHERE estValidee = 1";
+        $requestStatement = Model::getPdo()->prepare($sql);
+        $requestStatement->execute();
+        return $requestStatement->fetchColumn();
+    }
+
+    public function getNbEtudiantConventionAttente(): int{
+        $sql = "SELECT COUNT(*) FROM Etudiants e JOIN ConventionsStageEtudiant cse ON e.numEtudiant = cse.numEtudiant";
+        $requestStatement = Model::getPdo()->prepare($sql);
+        $requestStatement->execute();
+        return $requestStatement->fetchColumn();
+    }
+
+    public function getNbEtudiantSansConvention(): int{
+        $sql = "SELECT COUNT(*) FROM Etudiants e WHERE NOT EXISTS (SELECT * FROM ConventionsStageEtudiant cse WHERE e.numEtudiant = cse.numEtudiant);";
+        $requestStatement = Model::getPdo()->prepare($sql);
+        $requestStatement->execute();
+        return $requestStatement->fetchColumn();
+    }
 }
