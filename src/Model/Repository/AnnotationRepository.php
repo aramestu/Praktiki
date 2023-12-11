@@ -44,7 +44,9 @@ class AnnotationRepository extends AbstractRepository {
         return $objects;
     }
 
-    /* Retourne un tableau contenant 2 tableau. Le 1er est un dataobjet Annotation et l'autre tableau contient des Dataobjet Enseignants*/
+    /* Retourne un tableau contenant 2 tableau. Le 1er est un dataobjet Annotation et l'autre tableau contient des Dataobjet Enseignants
+     (c'est triés du plus vieux au plus jeune par défaut)
+    */
     public function getAnnotationEtPersonneBySiret(string $siret) : array{
         $sql = "SELECT * FROM Annotations a
                 JOIN Enseignants e ON e.mailEnseignant = a.mailEnseignant

@@ -3,6 +3,7 @@
 namespace App\SAE\Controller;
 
 use App\SAE\Lib\ConnexionUtilisateur;
+use App\SAE\Lib\MessageFlash;
 use App\SAE\Model\DataObject\Annotation;
 use App\SAE\Model\Repository\AnnotationRepository;
 use App\SAE\Model\Repository\EnseignantRepository;
@@ -34,27 +35,16 @@ class ControllerAnnotation extends ControllerGenerique
         //$mail = "antoine.lefevre@umontpellier.fr";
         $user = (new EnseignantRepository())->getById($mail);
 
-        $entreprise = (new EntrepriseRepository())->getById($siret);
 
         if (!is_null($user)) {
             $annotation = new Annotation($siret, $mail, $message, false);
             $save = (new AnnotationRepository())->save($annotation);
-            $listAnnotation = (new AnnotationRepository())->getBySiret($siret);
             // Si l'insertion n'a pas fonctionné
             if(! $save){
-                self::error("L'annotation n'a pas pu être enregistré");
+                self::redirectionVersURL("warning", "L'annotation n'a pas pu être enregistré", "afficherAllAnnotationEntreprise&controller=Annotation");
             }
             else{ // Si ça a fonctionné
-                self::afficheVue(
-                    'view.php',
-                    [
-                        'pagetitle' => 'Annoter',
-                        'cheminVueBody' => 'user/annotation/annotationList.php',
-                        'listAnnotation' => $listAnnotation,
-                        'enseignant' => $user,
-                        'entreprise' => $entreprise
-                    ]
-                );
+                self::redirectionVersURL("success", "Annotation crée avec succés", "afficherAllAnnotationEntreprise&controller=Annotation");
             }
         }
         else{
@@ -75,8 +65,6 @@ class ControllerAnnotation extends ControllerGenerique
             $listAnnotationEtPersonne = (new AnnotationRepository())->getAnnotationEtPersonneBySiret($siret);
 
             $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
-            //$mail = "antoine.lefevre@umontpellier.fr";
-            $user = (new EnseignantRepository())->getById($mail);
 
             $entreprise = (new EntrepriseRepository())->getById($siret);
 
@@ -86,7 +74,6 @@ class ControllerAnnotation extends ControllerGenerique
                     'pagetitle' => 'Annoter',
                     'cheminVueBody' => 'user/annotation/annotationList.php',
                     'listAnnotationPersonne' => $listAnnotationEtPersonne,
-                    'enseignant' => $user,
                     'entreprise' => $entreprise
                 ]
             );
@@ -101,7 +88,10 @@ class ControllerAnnotation extends ControllerGenerique
         $id = $_GET["idAnnotation"];
         $annotation = (new AnnotationRepository())->getById($id);
 
-        if(ConnexionUtilisateur::getLoginUtilisateurConnecte() == $annotation->getMailEnseignant()) {
+        if(is_null($annotation)){
+            self::redirectionVersURL("warning", "L'annotation n'existe pas", "afficherAllAnnotationEntreprise&controller=Annotation");
+        }
+        else if(ConnexionUtilisateur::getLoginUtilisateurConnecte() == $annotation->getMailEnseignant()) {
             self::afficheVue(
                 'view.php',
                 [
@@ -122,11 +112,14 @@ class ControllerAnnotation extends ControllerGenerique
         $annotation = (new AnnotationRepository())->getById($id);
         $contenu = $_POST["message"];
 
-        if(ConnexionUtilisateur::getLoginUtilisateurConnecte() == $annotation->getMailEnseignant()) {
+        if(is_null($annotation)){
+            self::redirectionVersURL("warning", "L'annotation n'existe pas", "afficherAllAnnotationEntreprise&controller=Annotation");
+        }
+        else if(ConnexionUtilisateur::getLoginUtilisateurConnecte() == $annotation->getMailEnseignant()) {
             $annotation->setContenu($contenu);
             (new AnnotationRepository())->mettreAJour($annotation);
 
-            self::afficherAllAnnotationEntreprise();
+            self::redirectionVersURL("success", "Annotation a été modifié avec succés", "afficherAllAnnotationEntreprise&controller=Annotation");
         }
         else{
             self::error("Vous n'avez pas la permission de faire ça !");
@@ -137,10 +130,14 @@ class ControllerAnnotation extends ControllerGenerique
         $id = $_GET["idAnnotation"];
         $rep = new AnnotationRepository();
         $annotation = $rep->getById($id);
+        if(is_null($annotation)){
+            self::redirectionVersURL("warning", "L'annotation n'existe pas", "afficherAllAnnotationEntreprise&controller=Annotation");
+        }
         // Si l'utilisateur connecté est le même que celui qui a posté le message ou qu'il est admin
-        if(ConnexionUtilisateur::getLoginUtilisateurConnecte() == $annotation->getMailEnseignant() || ConnexionUtilisateur::estAdministrateur()) {
+        else if(ConnexionUtilisateur::getLoginUtilisateurConnecte() == $annotation->getMailEnseignant() || ConnexionUtilisateur::estAdministrateur()) {
             $rep->supprimer($id);
-            self::afficherAllAnnotationEntreprise();
+            self::redirectionVersURL("success", "Annotation supprimé avec succès", "afficherAllAnnotationEntreprise&controller=Annotation");
+            //self::afficherAllAnnotationEntreprise();
         }
         else{
             self::error("Vous n'avez pas la permission de faire ça !");
