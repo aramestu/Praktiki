@@ -74,10 +74,7 @@ echo htmlspecialchars($last_element) */
         echo'<a href="frontController.php?controller=TDB&action=displayTDB"><img src="assets/images/back-icon.png"
                                             id="backIcon" alt="Back"></a> ';
     }
-    else if(ConnexionUtilisateur::estEtudiant() || ConnexionUtilisateur::estEnseignant()){
-        echo'<a href="javascript:history.go(-1)"><img src="assets/images/back-icon.png"
-                                            id="backIcon" alt="Back"></a>';
-    }else{
+    else{
         echo'<a href="frontController.php?action=getExpProByDefault&controller=ExpPro"><img src="assets/images/back-icon.png"
                                             id="backIcon" alt="Back"></a> ';
     }
