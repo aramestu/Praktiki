@@ -27,7 +27,12 @@ class ControllerTDB extends ControllerGenerique {
             self::redirectionVersURL("danger", "Utilisateur non enregistré dans la base de données", "home");
             return;
         }
-        $methode = 'displayTDBetu' . $tdbAction;
+        if(ConnexionUtilisateur::estEtudiant()){
+            $methode = 'displayTDBetu'.$tdbAction;
+        }
+        if(ConnexionUtilisateur::estEntreprise()){
+            $methode = 'displayTDBentreprise'.$tdbAction;
+        }
         if($reflexion->hasMethod($methode)){
             self::$methode();
         }else{
@@ -55,9 +60,24 @@ class ControllerTDB extends ControllerGenerique {
             'view.php',
             [
                 'pagetitle' => 'Tableau de bord',
-                'listeExpPro' => $listeExpPro,
-                'user' => $user,
-                'cheminVueBody' => 'user/tableauDeBord/entreprise.php'
+                'cheminVueBody' => 'user/tableauDeBord/entreprise.php',
+                'TDBView' => 'user/tableauDeBord/entreprise/accueilEntreprise.php',
+                'user'=>$user,
+                'listeExpPro' => $listeExpPro
+            ]
+        );
+    }
+
+    private static function displayTDBentrepriseInfo() {
+        $siret=ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user=(new EntrepriseRepository())->getById($siret);
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Tableau de bord',
+                'cheminVueBody' => 'user/tableauDeBord/entreprise.php',
+                'TDBView' => 'user/tableauDeBord/entreprise/infoEntreprise.php',
+                'user'=>$user
             ]
         );
     }

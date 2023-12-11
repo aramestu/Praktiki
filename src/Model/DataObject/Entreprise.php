@@ -168,12 +168,14 @@ class Entreprise extends AbstractDataObject
             $mail = $tableauFormulaire["mail"];
             $mailValide = "";
             $nonce = "";
+            $mdpHache = $tableauFormulaire["password"];
         } else {
             $mail = "";
             $mailValide = $tableauFormulaire["mail"];;
             $nonce = MotDePasse::genererChaineAleatoire();
+            $mdpHache = MotDePasse::hacher($tableauFormulaire["password"]);
         }
-        $mdpHache = MotDePasse::hacher($tableauFormulaire["password"]);
+
         return new Entreprise(
             $tableauFormulaire["siret"],
             $tableauFormulaire["nom"],

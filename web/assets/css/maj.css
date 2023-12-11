@@ -31,30 +31,12 @@ label {
 
 }
 
-#remplaceBaliseLegend{
-    position: relative;
-    color: #ffffff;
-    z-index: 1;
-}
 
 /* Clearfix to clear the float and contain the columns */
-.container:after {
+.containerInfo:after {
     content: "";
     display: table;
     clear: both;
-}
-
-.containerInfo::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px; /* Hauteur du fond rouge */
-    background-color: var(--rougeUM);
-
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
 }
 
 

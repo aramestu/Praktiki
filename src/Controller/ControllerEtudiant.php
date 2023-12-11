@@ -71,17 +71,6 @@ class ControllerEtudiant extends ControllerGenerique{
         return $nbEtudiantExpProNonValidee;
     }
 
-    public static function afficherMettreAJourEtudiant(): void
-    {
-        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user = (new EtudiantRepository())->getByEmail($mail);
-        if (is_null($user)) {
-            self::redirectionVersURL("warning", "Etudiant inconnu", "home");
-        } else {
-            self::afficheVue('view.php', ["user" => $user, "pagetitle" => "Detail d'une Etudiant", "cheminVueBody" => "user/tableauDeBord/formulaireEtudiant.php"]);
-        }
-    }
-
     public static function mettreAJour(): void
     {
         $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
