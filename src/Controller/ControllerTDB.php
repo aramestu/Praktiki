@@ -3,6 +3,7 @@
 namespace App\SAE\Controller;
 
 use App\SAE\Lib\ConnexionUtilisateur;
+use App\SAE\Model\DataObject\Etudiant;
 use App\SAE\Model\Repository\EnseignantRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
@@ -143,6 +144,18 @@ class ControllerTDB extends ControllerGenerique {
                 'user'=>$user
             ]
         );
+    }
+
+    public static function displayTDBetuMettreAJour(): void {
+        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user = (new EtudiantRepository())->getByEmail($mail);
+        if (!is_null($user)) {
+            $user = Etudiant::construireDepuisFormulaire($_GET);
+            (new EtudiantRepository())->mettreAJour($user);
+            self::redirectionVersURL("success", "L'etudiant a été mis à jour", "displayTDB&controller=TDB");
+        } else {
+            self::redirectionVersURL("warning", "Cet etudiant n'existe pas", "afficherFormulaireMiseAJour");
+        }
     }
 
 }

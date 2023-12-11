@@ -42,8 +42,9 @@ $codePostal = htmlspecialchars($user->getCodePostalEtudiant());
         </div>
 <div class=btn>
     <p>
-            <input type="hidden" name="action" value="mettreAJour">
-            <input type="hidden" name="controller" value="Etudiant">
+            <input type="hidden" name="action" value="displayTDB">
+            <input type="hidden" name="controller" value="TDB">
+            <input type="hidden" name="tdbAction" value="MettreAJour">
             <input type="submit" value="Mettre à jour">
         </p>
     </div>
