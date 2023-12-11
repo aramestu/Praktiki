@@ -30,8 +30,11 @@ class ControllerTDB extends ControllerGenerique {
         if(ConnexionUtilisateur::estEtudiant()){
             $methode = 'displayTDBetu'.$tdbAction;
         }
-        if(ConnexionUtilisateur::estEntreprise()){
+        else if(ConnexionUtilisateur::estEntreprise()){
             $methode = 'displayTDBentreprise'.$tdbAction;
+        }
+        else if(ConnexionUtilisateur::estEnseignant()){
+            $methode = 'displayTDBens'.$tdbAction;
         }
         if($reflexion->hasMethod($methode)){
             self::$methode();
@@ -48,6 +51,21 @@ class ControllerTDB extends ControllerGenerique {
                 'pagetitle' => 'Tableau de bord',
                 'user'=>$user,
                 'cheminVueBody' => 'user/tableauDeBord/enseignant.php',
+                'TDBView' => 'user/tableauDeBord/enseignant/accueilEnseignant.php'
+            ]
+        );
+    }
+
+    private static function displayTDBensInfo() {
+        $siret=ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user=(new EnseignantRepository())->getById($siret);
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Tableau de bord',
+                'cheminVueBody' => 'user/tableauDeBord/enseignant.php',
+                'TDBView' => 'user/tableauDeBord/enseignant/infoEnseignant.php',
+                'user'=>$user
             ]
         );
     }
