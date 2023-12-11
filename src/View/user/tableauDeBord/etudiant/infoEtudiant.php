@@ -20,9 +20,9 @@ $codePostal = htmlspecialchars($user->getCodePostalEtudiant());
                 <label class="InputAddOn-item" for="num">Numéro Etudiant :</label>
                 <input class="InputAddOn-field" type="text" value=<?= $num ?> name="num" id="num" readonly>
                 <label class="InputAddOn-item" for="nom">Nom :</label>
-                <input class="InputAddOn-field" type="text" value=<?= $nom ?> name="nom" id="nom" required/>
+                <input class="InputAddOn-field" type="text" value=<?= $nom ?> name="nom" id="nom" readonly/>
                 <label class="InputAddOn-item" for="prenom">Prenom : </label>
-                <input class="InputAddOn-field" type="text" value=<?= $prenom ?> name="prenom" id="prenom" required>
+                <input class="InputAddOn-field" type="text" value=<?= $prenom ?> name="prenom" id="prenom" readonly>
                 <label class="InputAddOn-item" for="telephone">Telephone :</label>
                 <input class="InputAddOn-field" type="text" value=<?= $Telephone ?> name="telephone" id="telephone" required>
    
@@ -34,7 +34,7 @@ $codePostal = htmlspecialchars($user->getCodePostalEtudiant());
                 <label class="InputAddOn-item" for="postcode">Code Postal :</label>
                 <input class="InputAddOn-field" type="text" value=<?= $codePostal ?> name="postcode" id="postcode" required>
                 <label class="InputAddOn-item" for="mailUniv">Email Universitaire :</label>
-                <input class="InputAddOn-field" type="text" value=<?= $mailUniv ?> name="mailUniv" id="mailUniv" required>
+                <input class="InputAddOn-field" type="text" value=<?= $mailUniv ?> name="mailUniv" id="mailUniv" readonly>
                 <label class="InputAddOn-item" for="mailPerso">Email Personnel :</label>
                 <input class="InputAddOn-field" type="text" value=<?= $mailPerso ?> name="mailPerso" id="mailPerso" required>
 
