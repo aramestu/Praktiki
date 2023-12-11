@@ -1,0 +1,65 @@
+.containerInfo {
+    margin-left:55px ;
+
+}
+
+/*--- START Form Styles ---*/
+form {
+    text-align: left;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+    color: var(--darkBlue1);
+}
+
+
+.column {
+    margin-top: 10px;
+    float: left;
+    width: 45%; /* Adjust the width as needed */
+    margin-right: 5%; /* Adjust the margin between columns as needed */
+    box-sizing: border-box;
+}
+
+.btn{
+    width: 30%;
+    margin-left: 32%;
+
+}
+
+h2 {
+    position: relative;
+    color: #ffffff;
+    z-index: 1;
+}
+
+/* Clearfix to clear the float and contain the columns */
+.container:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.containerInfo::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px; /* Hauteur du fond rouge */
+    background-color: var(--rougeUM);
+
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+
+/*--- START Hidden Element Styles ---*/
+.hidden {
+    display: none;
+}
+/*--- END Hidden Element Styles ---*/
