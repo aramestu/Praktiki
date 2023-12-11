@@ -72,7 +72,7 @@ class ControllerAnnotation extends ControllerGenerique
         else if(! is_null((new EnseignantRepository())->getById($login))) {
             //$siret = $_POST["siret"];
             $siret = "01234567890123";
-            $listAnnotation = (new AnnotationRepository())->getBySiret($siret);
+            $listAnnotationEtPersonne = (new AnnotationRepository())->getAnnotationEtPersonneBySiret($siret);
 
             $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
             //$mail = "antoine.lefevre@umontpellier.fr";
@@ -85,7 +85,7 @@ class ControllerAnnotation extends ControllerGenerique
                 [
                     'pagetitle' => 'Annoter',
                     'cheminVueBody' => 'user/annotation/annotationList.php',
-                    'listAnnotation' => $listAnnotation,
+                    'listAnnotationPersonne' => $listAnnotationEtPersonne,
                     'enseignant' => $user,
                     'entreprise' => $entreprise
                 ]

@@ -44,6 +44,30 @@ class AnnotationRepository extends AbstractRepository {
         return $objects;
     }
 
+    /* Retourne un tableau contenant 2 tableau. Le 1er est un dataobjet Annotation et l'autre tableau contient des Dataobjet Enseignants*/
+    public function getAnnotationEtPersonneBySiret(string $siret) : array{
+        $sql = "SELECT * FROM Annotations a
+                JOIN Enseignants e ON e.mailEnseignant = a.mailEnseignant
+                WHERE siret = :siretTag";
+
+        $values = [
+            "siretTag" => $siret
+        ];
+
+        $pdo = Model::getPdo();
+        $requestStatement = $pdo->prepare($sql);
+        $requestStatement->execute($values);
+
+        $annotations = [];
+        $enseignants = [];
+        $rep = new EnseignantRepository();
+        foreach ($requestStatement as $objectFormatTableau) {
+            $annotations[] = $this->construireDepuisTableau($objectFormatTableau);
+            $enseignants[] = $rep->construireDepuisTableau($objectFormatTableau);
+        }
+        return array($annotations, $enseignants);
+    }
+
     protected function getNomTable(): string {
         return "Annotations";
     }
