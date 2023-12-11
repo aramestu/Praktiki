@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="assets/css/offer.css">
 <link rel="stylesheet" href="assets/css/button.css">
-<script src="assets/javascript/popUpDelete.js"></script>
+<link rel="stylesheet" href="assets/css/annotation.css">
 
-<div class="container">
+<div class="container annotation">
         <h1> Message de <?php use App\SAE\Lib\ConnexionUtilisateur;
 
             echo $enseignant->getNomEnseignant() . ' ' . $enseignant->getPrenomEnseignant() . ' le ' . $annotation->getDateAnnotation();?> </h1>
