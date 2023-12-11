@@ -12,14 +12,17 @@ use App\SAE\Model\Repository\EntrepriseRepository;
                                 }
                                 ?>">
     <div class="HBox containerDebutLine">
-        <p class="bold typeExpPro"><?php
+        <p class="bold typeExpPro">
+            <label><?php
             $offre->getNomExperienceProfessionnel();
             if ($offre->getNomExperienceProfessionnel() == "Stalternance") {
                 echo "Non définie";
             } else {
                 echo htmlspecialchars($offre->getNomExperienceProfessionnel());
             }
-            ?></p>
+            ?>
+            </label>
+        </p>
         <label class="lineSujetOffre"><?=htmlspecialchars($offre->getSujetExperienceProfessionnel())?></label>
     </div>
     <label class="lineEntrepriseOffre">

@@ -45,7 +45,7 @@ ul li {
 }
 
 #apply {
-    background-color: var(--bleuUM);
+    background-color: var(--darkBlue2);
     color: var(--white);
     width: 25%;
     padding: 15px 0;
@@ -113,6 +113,7 @@ td {
     transform: translateY(20px);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     border-radius: 25px;
+    background: var(--activeGrey);
     padding: 5px;
     text-align: center;
     min-width: 225px;
@@ -120,11 +121,15 @@ td {
     height: 225px;
     word-break: break-word;
     margin-left: 14%;
-    color: var(--darkBlue2);
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+    color: var(--textColor3);
     border: 2.5px solid #F2F2F200;
     animation: appear 0.5s ease-in-out;
     animation-fill-mode: forwards;
     animation-delay: 0.1s;
+    overflow: hidden;
 }
 
 @keyframes appear {
@@ -144,6 +149,8 @@ td {
 
 .small:hover {
     cursor: pointer;
+    box-shadow: 2px 4px 16px rgba(0,0,0,.16);
+    transform: scale3d(1.01,1.01,1.01);
 }
 
 .small div {
@@ -296,55 +303,90 @@ h3 {
     font-weight: bold;
     width: max-content;
     margin-bottom: 5px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .Stage > .header > .left > .typeExpPro,
 .Stage > .header > .information > .typeExpPro {
-    border-color: var(--wisteria);
-    background-color: var(--wisteria);
-    color: var(--white);
+    border-color: var(--lightpastelPurple);
+    background-color: var(--lightpastelPurple);
+    color: var(--darkPurple);
+}
+
+.Stage:hover > .header > .left > .typeExpPro{
+    box-shadow: 0px 0px 90px 70px  #D1C6D6;
 }
 
 .Stage:hover {
-    border-color: var(--wisteria);
+    border-color: var(--pastelPurple);
     box-shadow: 10px 10px 10px #00000025,
-    -10px -10px 10px #8E44AD25;
+    -10px -10px 10px #B08AB625;
 }
 
 .Alternance > .header > .left > .typeExpPro,
 .Alternance > .header > .information > .typeExpPro {
-    border-color: var(--orange);
-    background-color: var(--orange);
-    color: var(--white);
+    border-color: var(--lightpastelOrange);
+    background-color: var(--lightpastelOrange);
+    color: var(--darkOrange);
 }
 
 #mainContainer:hover{
     box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1), 0 4px 16px rgba(31, 38, 135, 0.1);
 }
 
-.Alternance:hover {
-    border-color: var(--orange);
-    box-shadow: 10px 10px 10px #00000025,
-    -10px -10px 10px #E67E2225;
+.Alternance:hover > .header > .left > .typeExpPro{
+    box-shadow: 0px 0px 90px 70px #f3dbc2;
 }
+
+.Alternance:hover {
+    border-color: var(--pastelOrange);
+    box-shadow: 10px 10px 10px #00000025,
+    -10px -10px 10px #F8C9A025;
+}
+
 
 .OffreNonDefini > .header > .left > .typeExpPro,
 .OffreNonDefini> .header > .information > .typeExpPro {
-    background: linear-gradient(-45deg, var(--wisteria) 0%, var(--wisteria) 50%, var(--orange) 50%, var(--orange) 100%);
-    color: var(--white);
-    border-bottom-color: var(--wisteria);
-    border-left-color: var(--orange);
-    border-right-color: var(--wisteria);
-    border-top-color: var(--orange);
+    background: linear-gradient(-45deg, var(--lightpastelPurple) 0%, var(--lightpastelPurple) 50%, var(--lightpastelOrange) 50%, var(--lightpastelOrange) 100%);
+    color: var(--darkBlue2);
+    border-bottom-color: var(--pastelPurple);
+    border-left-color: var(--pastelOrange);
+    border-right-color: var(--pastelPurple);
+    border-top-color: var(--pastelOrange);
 }
 
+.OffreNonDefini > .header > .left > .typeExpPro > label,
+.OffreNonDefini> .header > .information > .typeExpPro > label {
+    background: linear-gradient(-45deg, var(--darkPurple) 0%, var(--darkPurple) 50%, var(--darkOrange) 50%, var(--darkOrange) 100%);
+    color: transparent; /* Make text transparent to apply gradient */
+    border-bottom-color: var(--pastelPurple);
+    border-left-color: var(--pastelOrange);
+    border-right-color: var(--pastelPurple);
+    border-top-color: var(--pastelOrange);
+    display: inline-block; /* Ensure the gradient is applied to the text */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.small:hover,
+.small{
+    border: none;
+}
+
+.OffreNonDefini:hover > .header > .left > .typeExpPro {
+    box-shadow:50px 30px 45px 35px #D1C6D6,
+    -50px -30px 45px 35px #f3dbc2;
+}
+
+
+
 .OffreNonDefini:hover {
-    border-bottom-color: var(--wisteria);
-    border-left-color: var(--orange);
-    border-right-color: var(--wisteria);
-    border-top-color: var(--orange);
+    border-bottom-color: var(--pastelPurple);
+    border-left-color: var(--pastelOrange);
+    border-right-color: var(--pastelPurple);
+    border-top-color: var(--pastelOrange);
     box-shadow: 10px 10px 10px #00000025,
-    -10px -10px 10px #E67E2225;
+    -10px -10px 10px #F8C9A025;
 }
 /*--- END SMALL OFFER ---*/
 
