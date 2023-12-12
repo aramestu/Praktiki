@@ -39,6 +39,7 @@ header::before {
     backdrop-filter: blur(15px);
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
     z-index: -1;
+    background: var(--darkBlue2);
 }
 
 header:hover::after {
@@ -57,12 +58,14 @@ header:hover::after {
 }
 
 .nav-item {
+    position: relative;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    color: var(--darkBlue2);
+    color: var(--lightGrey);
     text-decoration: none;
     font-weight: bold;
+    font-size: 1.1rem;
     width: 110px;
     height: 50px;
     margin-left: 2.5rem;
@@ -71,17 +74,23 @@ header:hover::after {
 }
 
 .nav-item:active, .nav-item.active {
-    background: var(--lightGrey);
-    text-decoration: none;
+    background: var(--darkBlue2);
     border-radius: 1.5rem;
     transform: scale(0.95);
-    /*
-    box-shadow: inset 10px 10px 20px #ffffff25,
-    inset -10px -10px 20px #00000015,
-    10px 10px 10px #00000015,
-    -10px -10px 10px #ffffff25;
+    text-decoration: none;
+}
 
-     */
+.nav-item.active::after {
+    content: '';
+    position: absolute; /* Position the dot absolutely within the nav item */
+    left: 50%; /* Center the dot */
+    transform: translateX(-50%); /* Ensure the dot is centered correctly */
+    bottom: 0; /* Position the dot at the bottom of the nav item */
+    display: block;
+    height: 8px;
+    width: 8px;
+    background: currentColor;
+    border-radius: 50%;
 }
 
 .nav-item:hover {
@@ -536,6 +545,7 @@ legend{
     height: 50px;
     margin: 0;
     padding: 0;
+    filter: invert(100%);
 }
 
 #errorIcon{
