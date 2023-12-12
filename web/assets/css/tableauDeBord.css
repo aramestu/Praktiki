@@ -78,7 +78,27 @@
     width: 100%;
 }
 
+#popUpConfirmation{
+    opacity: 0;
+    position: absolute;
+    top: 45%;
+    left: 48%;
+    transform: translate(-50%, -50%);
+    border-radius: 1rem;
+    padding: 15px;
+    text-align: center;
+    font-size: 1.2em;
+    word-break: break-word;
+    color: var(--darkBlue2);
+    border: 2.5px solid #F2F2F200;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: -1;
+}
 
+#popUpConfirmationNo,
+#popUpConfirmationYes{
+    margin: 20px;
+}
 
 
 

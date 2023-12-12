@@ -40,7 +40,6 @@ class ControllerConvention extends ControllerGenerique
 
     public static function modifierConvention(): void {
         $rep = new ConventionRepository();
-
         $convention = $rep->construireDepuisTableau($_POST);
         $rep->mettreAJour($convention);
         ControllerGenerique::home();
