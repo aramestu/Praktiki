@@ -29,7 +29,6 @@ class ControllerTDB extends ControllerGenerique {
             return;
         }
         $methode = $methode . $tdbAction;
-        var_dump($methode);
         if($reflexion->hasMethod($methode)){
             self::$methode();
         }else{
