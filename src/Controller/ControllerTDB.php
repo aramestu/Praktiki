@@ -44,6 +44,8 @@ class ControllerTDB extends ControllerGenerique {
         }
     }
     private static function displayTDBens() {
+        $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null,null,
+            null,null,"lastWeek",null,null);
         $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
         $user=(new EnseignantRepository())->getByEmail($mail);
         self::afficheVue(
@@ -52,7 +54,8 @@ class ControllerTDB extends ControllerGenerique {
                 'pagetitle' => 'Tableau de bord',
                 'user'=>$user,
                 'cheminVueBody' => 'user/tableauDeBord/enseignant.php',
-                'TDBView' => 'user/tableauDeBord/enseignant/accueilEnseignant.php'
+                'TDBView' => 'user/tableauDeBord/enseignant/accueilEnseignant.php',
+                'listeExpPro' => $listeExpPro
             ]
         );
     }

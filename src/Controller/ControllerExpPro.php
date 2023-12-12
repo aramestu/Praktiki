@@ -323,29 +323,41 @@ class ControllerExpPro extends ControllerGenerique
         $stage = $rep->getById($idExpPro);
 
         if (!is_null($stage)) {
-            ControllerGenerique::afficheVue('view.php', [
+            if (!ConnexionUtilisateur::getLoginUtilisateurConnecte() == $stage->getSiret() && ConnexionUtilisateur::estEntreprise()) {
+                self::redirectionVersURL("danger", "Vous n'avez pas les droits pour afficher cette offre", "home");
+            }else{
+                ControllerGenerique::afficheVue('view.php', [
                 "pagetitle" => "Stage",
                 "cheminVueBody" => "offer/offer.php",
                 "expPro" => $stage
             ]);
+            }
         } else {
             $rep = new AlternanceRepository();
             $alternance = $rep->getById($idExpPro);
             if (!is_null($alternance)) {
-                ControllerGenerique::afficheVue('view.php', [
-                    "pagetitle" => "Alternance",
-                    "cheminVueBody" => "offer/offer.php",
-                    "expPro" => $alternance
-                ]);
+                if (!ConnexionUtilisateur::getLoginUtilisateurConnecte() == $alternance->getSiret() && ConnexionUtilisateur::estEntreprise()) {
+                    self::redirectionVersURL("danger", "Vous n'avez pas les droits pour afficher cette offre", "home");
+                }else {
+                    ControllerGenerique::afficheVue('view.php', [
+                        "pagetitle" => "Alternance",
+                        "cheminVueBody" => "offer/offer.php",
+                        "expPro" => $alternance
+                    ]);
+                }
             } else {
                 $rep = new OffreNonDefiniRepository();
                 $offreNonDefini = $rep->getById($idExpPro);
                 if (!is_null($offreNonDefini)) {
-                    ControllerGenerique::afficheVue('view.php', [
-                        "pagetitle" => "Offre non définie",
-                        "cheminVueBody" => "offer/offer.php",
-                        "expPro" => $offreNonDefini
-                    ]);
+                    if (!ConnexionUtilisateur::getLoginUtilisateurConnecte() == $offreNonDefini->getSiret() && ConnexionUtilisateur::estEntreprise()) {
+                        self::redirectionVersURL("danger", "Vous n'avez pas les droits pour afficher cette offre", "home");
+                    }else {
+                        ControllerGenerique::afficheVue('view.php', [
+                            "pagetitle" => "Offre non définie",
+                            "cheminVueBody" => "offer/offer.php",
+                            "expPro" => $offreNonDefini
+                        ]);
+                    }
                 } else {
                     $messageErreur = 'Cette offre n existe pas !';
                     ControllerGenerique::error($messageErreur);
@@ -435,13 +447,17 @@ class ControllerExpPro extends ControllerGenerique
 
     public static function createOffer(): void
     {
-        ControllerGenerique::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Créer une offre',
-                'cheminVueBody' => 'offer/createOffer.php',
-            ]
-        );
+        if (ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::estEntreprise()) {
+            ControllerGenerique::afficheVue(
+                'view.php',
+                [
+                    'pagetitle' => 'Créer une offre',
+                    'cheminVueBody' => 'offer/createOffer.php',
+                ]
+            );
+        } else {
+            self::redirectionVersURL("danger", "Vous n'êtes pas habilité à créer une offre", "home");
+        }
     }
 
     public static function displayOffer(): void
