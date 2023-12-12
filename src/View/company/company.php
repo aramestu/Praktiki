@@ -3,7 +3,7 @@ $siteWeb = htmlspecialchars($entreprise->getSiteWebEntreprise());
 $siret = $entreprise->getSiret();
 ?>
 <link rel="stylesheet" href="assets/css/button.css">
-<div class="container">
+<div class="container companyDetail">
     <div class="header">
         <div class="company">
             <h2>

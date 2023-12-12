@@ -1,7 +1,9 @@
-<?php require_once __DIR__."/../../company/company.php"; ?>
-<?php require_once __DIR__."/creerAnnotation.php"; ?>
+<div class="HBox topContainer">
+    <?php require_once __DIR__."/../../company/company.php"; ?>
+    <?php require_once __DIR__."/creerAnnotation.php"; ?>
+</div>
 
-<div class="VBox">
+<div class="VBox annotationTable">
     <?php
     $annotations = $listAnnotationPersonne[0];
     $enseignants = $listAnnotationPersonne[1];
