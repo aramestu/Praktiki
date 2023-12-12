@@ -68,11 +68,10 @@ class ExperienceProfessionnelRepository
         return array_merge($allExperienceProfessionnel, $stages, $alternances);
     }
 
-    public function count(): int
-    {
-        $stageCount = (new StageRepository())->count();
-        $alternanceCount = (new AlternanceRepository())->count();
-        $offreNonDefiniCount = (new OffreNonDefiniRepository())->count();
-        return $stageCount + $alternanceCount + $offreNonDefiniCount;
+    public function getNbExperienceProfessionnel() : int{
+        $sql = "SELECT COUNT(*) FROM ExperienceProfessionnel";
+        $requestStatement = Model::getPdo()->prepare($sql);
+        $requestStatement->execute();
+        return $requestStatement->fetchColumn();
     }
 }
