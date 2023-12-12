@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="assets/css/connect.css">
-<link rel="stylesheet" href="assets/css/choiceConnection.css">
 <script src="assets/javascript/showPassword.js"></script>
 
 <div class="container">
