@@ -18,25 +18,18 @@ class ControllerTDB extends ControllerGenerique {
         }
         $tdbAction = isset($_GET["tdbAction"]) ? ucfirst($_GET["tdbAction"]) : "";
         $reflexion = new \ReflectionClass(new ControllerTDB());
-        $methode =  match (true) {
-                        ConnexionUtilisateur::estEtudiant() =>  'displayTDBetu',
-                        ConnexionUtilisateur::estEnseignant() => 'displayTDBens',
-                        ConnexionUtilisateur::estEntreprise() => 'displayTDBentreprise',
-                        default => ""
-                    };
-        if($methode = ""){
+        if (ConnexionUtilisateur::estEtudiant()) {
+            $methode = 'displayTDBetu';
+        } elseif (ConnexionUtilisateur::estEnseignant()) {
+            $methode = 'displayTDBens';
+        } elseif (ConnexionUtilisateur::estEntreprise()) {
+            $methode = 'displayTDBentreprise';
+        } else {
             self::redirectionVersURL("danger", "Utilisateur non enregistré dans la base de données", "home");
             return;
         }
-        if(ConnexionUtilisateur::estEtudiant()){
-            $methode = 'displayTDBetu'.$tdbAction;
-        }
-        else if(ConnexionUtilisateur::estEntreprise()){
-            $methode = 'displayTDBentreprise'.$tdbAction;
-        }
-        else if(ConnexionUtilisateur::estEnseignant()){
-            $methode = 'displayTDBens'.$tdbAction;
-        }
+        $methode = $methode . $tdbAction;
+        var_dump($methode);
         if($reflexion->hasMethod($methode)){
             self::$methode();
         }else{
