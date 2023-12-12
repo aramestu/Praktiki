@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="assets/css/connectBIS.css">
 <link rel="stylesheet" href="assets/css/choiceConnection.css">
 <div class="container">
     <h2 id="remplaceBaliseLegend">Choisissez votre compte</h2>

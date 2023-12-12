@@ -1,9 +1,10 @@
 <link rel="stylesheet" href="assets/css/connect.css">
+<link rel="stylesheet" href="assets/css/choiceConnection.css">
 <script src="assets/javascript/showPassword.js"></script>
 
 <div class="container">
     <form method="get">
-        <h2 id="remplaceBaliseLegend">Connexion étudiant</h2>
+        <h2 id="remplaceBaliseLegend" class="connexionEtu">Connexion étudiant</h2>
         <p>
             <label for="username">Identifiant</label>
             <input type="text" name="username" id="username" required placeholder="Identifiant:">

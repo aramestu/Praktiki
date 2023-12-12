@@ -2,12 +2,23 @@
     width: 50%;
 }
 
+h2{
+    margin-bottom: 20px;
+}
+
 #studentChoice::before{
     font-family: 'FontAwesome';
     font-size: 5em;
     content: '\f19d';
     display: block;
     margin: 20px;
+}
+
+.connexionEtu::before{
+    font-family: 'FontAwesome';
+    font-size: 1.1em;
+    content: '\f19d';
+    margin-right: 10px;
 }
 
 #companyChoice::before{
@@ -18,10 +29,24 @@
     margin: 20px;
 }
 
+.connexionComp::before{
+    font-family: 'FontAwesome';
+    font-size: 1.1em;
+    content: '\f0b1';
+    margin-right: 10px;
+}
+
 #professorChoice::before{
     font-family: 'FontAwesome';
     font-size: 5em;
     content: '\f007';
     display: block;
     margin: 20px;
+}
+
+.connexionProf::before{
+    font-family: 'FontAwesome';
+    font-size: 1.1em;
+    content: '\f007';
+    margin-right: 10px;
 }
