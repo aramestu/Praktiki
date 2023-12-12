@@ -155,7 +155,29 @@ label {
 #connectButton span::before{
     content: '\f090';
     font-family: 'FontAwesome';
-    float: left;
-    margin-left: 15px;
-    margin-top: 2px;
+    margin-right: 10px;
+}
+
+/*--- END Create Offer ---*/
+
+/*--- START ICONS ---*/
+.connexionEtu::before{
+    font-family: 'FontAwesome';
+    font-size: 1.1em;
+    content: '\f19d';
+    margin-right: 10px;
+}
+
+.connexionComp::before{
+    font-family: 'FontAwesome';
+    font-size: 1.1em;
+    content: '\f0b1';
+    margin-right: 10px;
+}
+
+.connexionProf::before{
+    font-family: 'FontAwesome';
+    font-size: 1.1em;
+    content: '\f007';
+    margin-right: 10px;
 }

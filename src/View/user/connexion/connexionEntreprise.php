@@ -3,7 +3,7 @@
 
 <div class="container">
     <form method="get">
-        <h2 id="remplaceBaliseLegend">Connexion entreprise</h2>
+        <h2 id="remplaceBaliseLegend" class="connexionComp">Connexion entreprise</h2>
         <p>
             <label for="username">Siret</label>
             <input type="text" name="username" id="username" required placeholder="01234567891011">
