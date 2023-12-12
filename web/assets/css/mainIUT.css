@@ -11,6 +11,9 @@
 
 
 /*---START HEADER---*/
+html {
+    scroll-behavior: smooth;
+}
 
 header {
     position: fixed;
@@ -615,6 +618,15 @@ legend{
 
 .jusitfyTexte{
     text-align: justify;
+}
+
+#stageSection::before,
+#alternanceSection::before {
+    content: "";
+    display: block;
+    height: 60px; /* Adjust based on the height of your header */
+    margin-top: -60px; /* This should be the same value as height */
+    visibility: hidden;
 }
 /*---END MISCELLANEOUS---*/
 

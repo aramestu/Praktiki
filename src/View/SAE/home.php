@@ -3,8 +3,10 @@
 
 <div class="container">
     <h2 class="remplaceBaliseLegend">Bienvenue sur Praktiki !</h2>
+    <a href="#stageSection" class="button">En savoir plus sur les stages</a>
+    <a href="#alternanceSection" class="button">en savoir plus sur les alternances</a>
 </div>
-<div class="container jusitfyTexte">
+<div id="stageSection" class="container jusitfyTexte">
     <h2 class="remplaceBaliseLegend">Les stages BUT2 et BUT3 en France</h2>
     <br>
     <p>Responsable : Rémi Coletta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;remi.coletta@umontpellier.fr</p>
@@ -39,7 +41,7 @@
     <p>Vous trouverez des informations supplémentaires sur vos droits et devoirs en tant que stagiaire <a href="https://www.service-public.fr/particuliers/vosdroits/F16734" class="link">ici</a>, ainsi qu&#8217;un simulateur de votre rémunération en cliquant <a href="https://www.service-public.fr/particuliers/vosdroits/F32131#:~:text=Montant%20minimum,%E2%82%AC%20x%200%2C15)." target="_blank" rel="noopener noreferrer" class="link">ici</a>.</p>
 </div>
 
-<div class="container jusitfyTexte">
+<div id="alternanceSection" class="container jusitfyTexte">
     <h2 class="remplaceBaliseLegend">Les Alternances</h2>
     <br>
     <p>Vous pouvez réaliser votre BUT en alternance dès la seconde année.</p>
