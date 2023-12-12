@@ -5,5 +5,6 @@
             administration </p>
         <?php if ($convention == null) {echo '<a href="frontController.php?controller=Convention&action=creerFormulaire&idEtudiant=' . $user->getNumEtudiant() . '" class="button">Créer ma convention de stage</a>';}?>
         <a href="frontController.php?controller=Convention&action=afficherFormulaire&idEtudiant=<?php echo $user->getNumEtudiant();?>" class="button">Editer ma Convention</a>
+        <a href="frontController.php?controller=Convention&action=enregistrerConvention&idEtudiant=<?php echo $user->getNumEtudiant();?>" class="button">Envoyer ma Convention</a>
     </div>
 </div>

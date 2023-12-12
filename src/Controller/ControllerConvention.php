@@ -60,4 +60,13 @@ class ControllerConvention extends ControllerGenerique
             ]
         );
     }
+
+    public static function enregistrerConvention() {
+        $rep = new ConventionRepository();
+        $idEtudiant = $_GET["idEtudiant"];
+        $convention = $rep->getConventionAvecEtudiant($idEtudiant);
+        $convention->setEstFini(true);
+        $rep->mettreAJour($convention);
+        ControllerTDB::displayTDB();
+    }
 }
