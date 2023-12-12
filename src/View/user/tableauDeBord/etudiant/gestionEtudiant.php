@@ -4,7 +4,17 @@
         <p>C'est ici que vous pouvez avoir accès aux différentes fonctionnalités du site vous aidant à faire le lien avec votre
             administration </p>
         <?php if ($convention == null) {echo '<a href="frontController.php?controller=Convention&action=creerFormulaire&idEtudiant=' . $user->getNumEtudiant() . '" class="button">Créer ma convention de stage</a>';}?>
-        <a href="frontController.php?controller=Convention&action=afficherFormulaire&idEtudiant=<?php echo $user->getNumEtudiant();?>" class="button">Editer ma Convention</a>
-        <a href="frontController.php?controller=Convention&action=enregistrerConvention&idEtudiant=<?php echo $user->getNumEtudiant();?>" class="button">Envoyer ma Convention</a>
+        <?php
+        if ($convention != null) {
+            echo '<a href="frontController.php?controller=Convention&action=afficherFormulaire&idEtudiant=' . $user->getNumEtudiant() . '" class="button">Editer ma Convention</a>';
+            if (!$convention->getEstFini()) {
+                echo '<a href="frontController.php?controller=Convention&action=enregistrerConvention&idEtudiant=' . $user->getNumEtudiant() .'" class="button">Envoyer ma Convention</a>';
+            }
+            echo "<br>";
+            if ($convention->getEstFini()) {
+                echo "<p>Votre convention a été envoyée, veuillez attendre sa validation ou non.</p>";
+            }
+        }
+        ?>
     </div>
 </div>
