@@ -1,3 +1,4 @@
+<script src="assets/javascript/popUpConfirmation.js"></script>
 <h1>Gestion</h1>
 <div class="VBox">
     <div>
@@ -5,17 +6,6 @@
             administration </p>
         <a class="button">Créer ma convention de stage</a>
         <a href="frontController.php?controller=Convention&action=afficherFormulaire&idEtudiant=<?php echo $user->getNumEtudiant();?>" class="button">Editer ma Convention</a>
-        <a class="button">Valider la convention</a>
-    </div>
-    <div id="popUpConfirmation" class="subContainer">
-        <a id="popUpConfirmationClose"><img src="assets/images/close-icon.png" id="closeIcon" alt="Close"></a>
-        <div id="popUpConfirmationContent">
-            <p>Êtes-vous sûr de vouloir supprimer cette offre ?</p>
-            <div class="HBox">
-                <a class="button popUpConfirmationButton" id="popUpDeleteNo">Non</a>
-                <a class="button popUpConfirmationButton" id="popUpConfirmationYes"
-                   href="">Oui</a>
-            </div>
-        </div>
+        <a id="confirmationButtonOrigin" class="button">Valider la convention</a>
     </div>
 </div>

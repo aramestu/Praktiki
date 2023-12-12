@@ -111,14 +111,15 @@ class ConventionRepository extends AbstractRepository {
         $requeteStatement->execute($values);
     }
 
-    public function getConventionAvecEtudiant(string $idEtudiant) : ?Convention{
+    public function getConventionAvecEtudiant(string $idEtudiant, int $idAnneeUniversitaire = 3) : ?Convention{
         $sql = "SELECT * FROM ConventionsStageEtudiant cse
                 JOIN Conventions c ON c.idConvention = cse.idConvention
                 WHERE cse.numEtudiant = :numEtudiantTag
-                AND cse.idAnneeUniversitaire = 3";
+                AND cse.idAnneeUniversitaire = :idAnneeUniversitaireTag";
 
         $values = [
-            "numEtudiantTag" => $idEtudiant
+            "numEtudiantTag" => $idEtudiant,
+            "idAnneeUniversitaireTag" => $idAnneeUniversitaire
         ];
 
         $pdoStatement = Model::getPdo()->prepare($sql);

@@ -100,6 +100,98 @@
     margin: 20px;
 }
 
+@media (max-width: 41200px) {
+    #popUpConfirmation{
+        min-width: 400px;
+        max-width: 550px;
+        min-height: 169px;
+        height: 169px;
+        max-height: 400px;
+    }
+
+    .popUpConfirmationButton > a{
+        width: 200px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 1300px) {
+    #popUpConfirmation{
+        min-width: 400px;
+        max-width: 550px;
+        min-height: 169px;
+        height: 169px;
+        max-height: 400px;
+    }
+
+    .popUpConfirmationButton > a{
+        width: 200px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 950px) {
+    #popUpConfirmation{
+        min-width: 280px;
+        max-width: 550px;
+        height: 350px;
+        max-height: 350px;
+    }
+
+    #popUpConfirmationContent > p{
+        margin-top: 20px;
+        margin-left: 4%;
+        margin-right: 4%;
+    }
+
+    .popUpConfirmationButton > a{
+        width: 80%;
+        height: 59px;
+    }
+}
+
+#popUpConfirmation > p{
+    margin: 10px;
+    margin-top: 20px;
+}
+
+#popUpConfirmationContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.popUpConfirmationButton > a{
+    font-size: 1.2em;
+    margin: 20px;
+    border-radius: 1rem;
+    padding: 5px;
+    text-align: center;
+    word-break: break-word;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+#popUpConfirmationNo:hover{
+    background-color: var(--red);
+    color: var(--white);
+}
+
+#popUpConfirmationNo{
+    background-color: var(--pomegranate);
+    color: var(--white);
+}
+
+#popUpConfirmationYes:hover{
+    background-color: var(--emerald);
+    color: var(--white);
+}
+
+#popUpConfirmationYes{
+    background-color: var(--green);
+    color: var(--white);
+}
+
 
 
 
