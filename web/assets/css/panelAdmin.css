@@ -9,10 +9,9 @@
 }
 
 #adminName{
-    margin-left: 10px;
+    margin: 0 0 0 10px;
     font-size: 1.5em;
     font-weight: bold;
-    margin: 0;
     text-align: left;
     z-index: 5;
 }
@@ -142,7 +141,7 @@ form #search-bar{
     margin-top: 10px;
     border: none;
     font-weight: bold;
-    width: 99%;
+    width: 98.5%;
     padding: 9px;
     height: 30px;
     border-bottom: var(--grey1) solid 1px;

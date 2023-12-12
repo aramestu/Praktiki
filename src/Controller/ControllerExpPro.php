@@ -28,32 +28,22 @@ class ControllerExpPro extends ControllerGenerique
 
     public static function getNbTotal(): int
     {
-        $NbExpPro = (new ExperienceProfessionnelRepository())->getNbTotal();
-        return $NbExpPro;
+        return (new ExperienceProfessionnelRepository())->getNbExperienceProfessionnel();
     }
 
     public static function getNbStageTotal(): int
     {
-        $listExpPro = (new ExperienceProfessionnelRepository())->search("", null, null, null, "stage");
-        $listExpPro = array_filter($listExpPro, function ($expPro) {
-            return !($expPro instanceof \App\SAE\Model\DataObject\OffreNonDefini);
-        });
-        return count($listExpPro);
+        return (new StageRepository())->getNbOffre();
     }
 
     public static function getNbAlternanceTotal(): int
     {
-        $listExpPro = (new ExperienceProfessionnelRepository())->search("", null, null, null, "alternance");
-        $listExpPro = array_filter($listExpPro, function ($expPro) {
-            return !($expPro instanceof \App\SAE\Model\DataObject\OffreNonDefini);
-        });
-        return count($listExpPro);
+        return (new AlternanceRepository())->getNbOffre();
     }
 
     public static function getNbOffreNonDefiniTotal(): int
     {
-        $listExpPro = (new ExperienceProfessionnelRepository())->search("", null, null, null, "offreNonDefini");
-        return count($listExpPro);
+        return (new OffreNonDefiniRepository())->getNbOffre();
     }
 
 

@@ -8,20 +8,12 @@ use App\SAE\Lib\ConnexionUtilisateur;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\StageRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
-
-/* IL Y AVAIT CELA A LA PLACE DE echo $expPro->getNomExperienceProfessionnel();
-* DONC SI CA NE FONCTIONNE PLUS, C EST PEUT ETRE A CAUSE DE CA
-
-$full_path = get_class($expPro);
-$elements = explode('\\', $full_path);
-$last_element = end($elements);
-echo htmlspecialchars($last_element) */
 ?>
 
 <div id="mainContainer" class="subContainer <?php echo $expPro->getNomExperienceProfessionnel(); ?>">
     <div class="header">
         <div class="information">
-            <p class="bold typeExpPro"> <?php echo $expPro->getNomExperienceProfessionnel(); ?></p>
+            <p class="bold typeExpPro"><label><?php echo $expPro->getNomExperienceProfessionnel(); ?></label></p>
             <p>du <?= htmlspecialchars($expPro->getDateDebutExperienceProfessionnel()) ?></p>
             <p>au <?= htmlspecialchars($expPro->getDateFinExperienceProfessionnel()) ?></p>
         </div>
@@ -30,7 +22,7 @@ echo htmlspecialchars($last_element) */
                 $entreprise = (new EntrepriseRepository())->getById($expPro->getSiret());
                 echo(htmlspecialchars($entreprise->getNomEntreprise()));
                 ?></h2>
-            <label><?= htmlspecialchars($expPro->getAdresseExperienceProfessionnel()) ?>
+            <label class="codePostalID"><?= htmlspecialchars($expPro->getAdresseExperienceProfessionnel()) ?>
                 / <?= htmlspecialchars($expPro->getCodePostalExperienceProfessionnel()) ?></label>
         </div>
     </div>
@@ -68,20 +60,25 @@ echo htmlspecialchars($last_element) */
     <a id="deleteButtonOrigin"><img src="assets/images/bin-icon.png" id="deleteIcon" alt="Bin"></a>
     <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel())?>"><img
                 src="assets/images/edit-icon.png" id="editIcon" alt="EditButton"></a>
-        <?php
-    }
-    if(ConnexionUtilisateur::estEntreprise()){
-        echo'<a href="frontController.php?controller=TDB&action=displayTDB"><img src="assets/images/back-icon.png"
-                                            id="backIcon" alt="Back"></a> ';
-    }
-    else{
-        echo'<a href="frontController.php?action=getExpProByDefault&controller=ExpPro"><img src="assets/images/back-icon.png"
-                                            id="backIcon" alt="Back"></a> ';
+    <?php
     }
     ?>
 
 
-    <button id="apply">Postuler</button>
+
+
+    <div class="HBox">
+        <?php
+
+    if(ConnexionUtilisateur::estEntreprise()){
+        echo'<a href="frontController.php?controller=TDB&action=displayTDB" class="button secondary">Retour au tableau de bord</a> ';
+    }
+    else{
+        echo'<a href="frontController.php?action=getExpProByDefault&controller=ExpPro" class="button secondary">Retour aux offres</a> ';
+    }
+    ?>
+        <button id="apply" class="button">Postuler</button>
+    </div>
 </div>
 
 <div id="popUpDelete" class="subContainer">
