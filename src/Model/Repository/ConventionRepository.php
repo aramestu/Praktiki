@@ -129,4 +129,14 @@ class ConventionRepository extends AbstractRepository {
         }
         return $this->construireDepuisTableau($result);
     }
+
+    public function creerConvention(string $numEtudiant, int $idAnneeUniversitaire): void {
+        $sql = "CALL creationConvention(:numEtudiantTag, :idAnneeUniversitaireTag)";
+
+        $values = array("numEtudiantTag" => $numEtudiant,
+            "idAnneeUniversitaireTag" => $idAnneeUniversitaire);
+
+        $pdoStatement = Model::getPdo()->prepare($sql);
+        $pdoStatement->execute($values);
+    }
 }

@@ -25,6 +25,7 @@ class ControllerConvention extends ControllerGenerique
     public static function afficherFormulaire(): void{
         $idEtudiant = $_GET["idEtudiant"];
         $etudiant = (new EtudiantRepository())->getById($idEtudiant);
+        (new ConventionRepository())->creerConvention($idEtudiant, 3);
         $convention = (new ConventionRepository())->getConventionAvecEtudiant($idEtudiant);
         ControllerGenerique::afficheVue(
             'view.php',

@@ -20,7 +20,7 @@
             <p>Adresse Mail Universitaire: <?php echo $user->getMailUniversitaireEtudiant();?></p>
             <p>Adresse Mail Personnel: <?php echo $user->getMailPersoEtudiant();?></p>
             <a href="frontController.php?controller=Etudiant&action=afficherMettreAJourEtudiant" class="button">Modifier mes infos</a>
-            <a href="frontController.php?controller=Main&action=displayTDBetu" class="button">Accéder à mes brouillons</a>
+            <a href="frontController.php?controller=Convention&action=afficherFormulaire&idEtudiant=<?php echo $user->getNumEtudiant();?>" class="button">Accéder à mes brouillons</a>
         </div>
         <div class="VBox" id="recentOffers">
             <h2>Offres récentes</h2>
