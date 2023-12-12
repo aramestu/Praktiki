@@ -25,7 +25,6 @@ class ControllerConvention extends ControllerGenerique
     public static function afficherFormulaire(): void{
         $idEtudiant = $_GET["idEtudiant"];
         $etudiant = (new EtudiantRepository())->getById($idEtudiant);
-        (new ConventionRepository())->creerConvention($idEtudiant, 3);
         $convention = (new ConventionRepository())->getConventionAvecEtudiant($idEtudiant);
         ControllerGenerique::afficheVue(
             'view.php',
@@ -43,6 +42,22 @@ class ControllerConvention extends ControllerGenerique
 
         $convention = $rep->construireDepuisTableau($_POST);
         $rep->mettreAJour($convention);
-        ControllerGenerique::home();
+        ControllerTDB::displayTDB();
+    }
+
+    public static function creerFormulaire(): void{
+        $idEtudiant = $_GET["idEtudiant"];
+        $etudiant = (new EtudiantRepository())->getById($idEtudiant);
+        (new ConventionRepository())->creerConvention($idEtudiant, 3);
+        $convention = (new ConventionRepository())->getConventionAvecEtudiant($idEtudiant);
+        ControllerGenerique::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Convention',
+                'cheminVueBody' => 'SAE/convention.php',
+                'convention' => $convention,
+                'etudiant' => $etudiant
+            ]
+        );
     }
 }
