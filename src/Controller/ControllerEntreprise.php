@@ -34,26 +34,12 @@ class ControllerEntreprise extends ControllerGenerique
 
     public static function getNbEntrepriseValide(): int
     {
-        $nbEntrepriseValide = 0;
-        $listEntreprises = (new EntrepriseRepository())->getAll();
-        foreach ($listEntreprises as $entreprise) {
-            if ($entreprise->getEstValide() == 1) {
-                $nbEntrepriseValide++;
-            }
-        }
-        return $nbEntrepriseValide;
+        return (new EntrepriseRepository())->getNbEntrepriseValide();
     }
 
     public static function getNbEntrepriseEnAttente(): int
     {
-        $nbEntrepriseEnAttente = 0;
-        $listEntreprises = (new EntrepriseRepository())->getAll();
-        foreach ($listEntreprises as $entreprise) {
-            if ($entreprise->getEstValide() == 0) {
-                $nbEntrepriseEnAttente++;
-            }
-        }
-        return $nbEntrepriseEnAttente;
+        return (new EntrepriseRepository())->getNbEntrepriseAttente();
     }
 
     public static function getNbEntrepriseRefuse(): int
@@ -65,7 +51,7 @@ class ControllerEntreprise extends ControllerGenerique
 //            }
 //        }
         //TODO : verifier quand archive presente
-        return (new EntrepriseRepository())->getNbENtrpriseRefusee();
+        return (new EntrepriseRepository())->getNbEntrpriseRefusee();
     }
 
     public static function afficherListeEntrepriseValideFiltree(): void
