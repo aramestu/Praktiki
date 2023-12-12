@@ -8,14 +8,6 @@ use App\SAE\Lib\ConnexionUtilisateur;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\StageRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
-
-/* IL Y AVAIT CELA A LA PLACE DE echo $expPro->getNomExperienceProfessionnel();
-* DONC SI CA NE FONCTIONNE PLUS, C EST PEUT ETRE A CAUSE DE CA
-
-$full_path = get_class($expPro);
-$elements = explode('\\', $full_path);
-$last_element = end($elements);
-echo htmlspecialchars($last_element) */
 ?>
 
 <div id="mainContainer" class="subContainer <?php echo $expPro->getNomExperienceProfessionnel(); ?>">
