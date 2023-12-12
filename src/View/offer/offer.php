@@ -30,7 +30,7 @@ echo htmlspecialchars($last_element) */
                 $entreprise = (new EntrepriseRepository())->getById($expPro->getSiret());
                 echo(htmlspecialchars($entreprise->getNomEntreprise()));
                 ?></h2>
-            <label><?= htmlspecialchars($expPro->getAdresseExperienceProfessionnel()) ?>
+            <label class="codePostalID"><?= htmlspecialchars($expPro->getAdresseExperienceProfessionnel()) ?>
                 / <?= htmlspecialchars($expPro->getCodePostalExperienceProfessionnel()) ?></label>
         </div>
     </div>
@@ -68,22 +68,23 @@ echo htmlspecialchars($last_element) */
     <a id="deleteButtonOrigin"><img src="assets/images/bin-icon.png" id="deleteIcon" alt="Bin"></a>
     <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel())?>"><img
                 src="assets/images/edit-icon.png" id="editIcon" alt="EditButton"></a>
-        <?php
-    }
-    if(ConnexionUtilisateur::estEntreprise()){
-        echo'<a href="frontController.php?controller=TDB&action=displayTDB"><img src="assets/images/back-icon.png"
-                                            id="backIcon" alt="Back"></a> ';
-    }
-    else{
-        echo'<a href="frontController.php?action=getExpProByDefault&controller=ExpPro"><img src="assets/images/back-icon.png"
-                                            id="backIcon" alt="Back"></a> ';
+    <?php
     }
     ?>
 
 
 
+
     <div class="HBox">
-        <a href="frontController.php?controller=ExpPro&action=getExpProByDefault" class="button secondary">Retour aux offres</a>
+        <?php
+
+    if(ConnexionUtilisateur::estEntreprise()){
+        echo'<a href="frontController.php?controller=TDB&action=displayTDB" class="button secondary">Retour au tableau de bord</a> ';
+    }
+    else{
+        echo'<a href="frontController.php?action=getExpProByDefault&controller=ExpPro" class="button secondary">Retour aux offres</a> ';
+    }
+    ?>
         <button id="apply" class="button">Postuler</button>
     </div>
 </div>

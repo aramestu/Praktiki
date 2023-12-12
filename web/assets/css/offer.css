@@ -44,6 +44,13 @@ ul li {
     padding-bottom: 2px;
 }
 
+#apply::before {
+    content: '\f0c1';
+    font-family: FontAwesome;
+    font-weight: 900;
+    margin-right: 10px;
+}
+
 #apply:hover {
     color: var(--white);
     opacity: 0.69;
@@ -288,6 +295,10 @@ h3 {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+#mainContainer:hover{
+    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
+}
+
 .Stage > .header > .left > .typeExpPro,
 .Stage > .header > .information > .typeExpPro {
     border-color: var(--lightpastelPurple);
@@ -310,10 +321,6 @@ h3 {
     border-color: var(--lightpastelOrange);
     background-color: var(--lightpastelOrange);
     color: var(--darkOrange);
-}
-
-#mainContainer:hover{
-    box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1), 0 4px 16px rgba(31, 38, 135, 0.1);
 }
 
 .Alternance:hover > .header > .left > .typeExpPro{
@@ -487,3 +494,11 @@ h3 {
     color: var(--white);
 }
 /*--- END POP UP ---*/
+
+.codePostalID::before{
+    content: '\f041';
+    font-family: FontAwesome;
+    font-weight: 900;
+    margin-right: 10px;
+    font-size: 1.2em;
+}

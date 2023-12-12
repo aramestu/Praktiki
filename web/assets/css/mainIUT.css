@@ -65,7 +65,7 @@ header:hover::after {
     color: var(--lightGrey);
     text-decoration: none;
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     width: 110px;
     height: 50px;
     margin-left: 2.5rem;
@@ -82,10 +82,10 @@ header:hover::after {
 
 .nav-item.active::after {
     content: '';
-    position: absolute; /* Position the dot absolutely within the nav item */
-    left: 50%; /* Center the dot */
-    transform: translateX(-50%); /* Ensure the dot is centered correctly */
-    bottom: 0; /* Position the dot at the bottom of the nav item */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
     display: block;
     height: 8px;
     width: 8px;
@@ -99,11 +99,6 @@ header:hover::after {
     text-decoration: none;
     border-radius: 1.5rem;
     text-decoration: none;
-    /*
-    box-shadow: inset 10px 10px 20px #00000020,
-    inset -10px -10px 20px #ffffff45;
-
-     */
 }
 
 .icons {
@@ -395,9 +390,7 @@ main{
     width: 69%;
     text-align: center;
     font-size: 12px;
-    background: rgba(0, 0, 0, 0.05);
-    backdrop-filter: blur(50px);
-    -webkit-backdrop-filter: blur(50px);
+    background: var(--activeGrey);
     padding: 2%;
     margin: 1.5%;
     border-radius: 1.5rem;
@@ -546,6 +539,23 @@ legend{
     margin: 0;
     padding: 0;
     filter: invert(100%);
+}
+
+.logo:hover{
+    animation: logo-react 1s infinite;
+}
+
+@keyframes logo-react {
+    0% {
+        filter : invert(100%);
+    }
+    75% {
+        filter: invert(50%);
+    }
+    100% {
+        filter: invert(100%);
+    }
+
 }
 
 #errorIcon{

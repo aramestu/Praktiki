@@ -35,6 +35,21 @@
 }
 
 .secondary {
-    background: var(--grey0);
+    border: 2px solid var(--darkBlue2);
+    background-color: var(--activeGrey);
+    color: var(--darkBlue2);
+}
+
+.secondary::before {
+    content: '\f060';
+    font-family: FontAwesome;
+    font-weight: 900;
+    margin-right: 10px;
+}
+
+.secondary:hover {
+    color: var(--pastelBlue);
+    opacity: 0.69;
+    border: 2px solid var(--pastelBlue);
 }
 

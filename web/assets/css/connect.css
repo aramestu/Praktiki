@@ -155,9 +155,7 @@ label {
 #connectButton span::before{
     content: '\f090';
     font-family: 'FontAwesome';
-    float: left;
-    margin-left: 15px;
-    margin-top: 2px;
+    margin-right: 10px;
 }
 
 /*--- END Create Offer ---*/
