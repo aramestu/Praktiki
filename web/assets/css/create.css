@@ -38,6 +38,13 @@
     }
 }
 
+#backIcon {
+    margin-right: 275px;
+    width: 30px;
+    height: 30px;
+
+}
+
 @media (max-width: 1300px) {
     #createOffer{
         min-width: 800px;
@@ -117,4 +124,6 @@
         width: 266px;
         margin-right: 0px;
     }
+
 }
+

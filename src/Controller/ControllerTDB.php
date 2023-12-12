@@ -3,6 +3,7 @@
 namespace App\SAE\Controller;
 
 use App\SAE\Lib\ConnexionUtilisateur;
+use App\SAE\Model\DataObject\Etudiant;
 use App\SAE\Model\Repository\EnseignantRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
@@ -15,15 +16,28 @@ class ControllerTDB extends ControllerGenerique {
             self::redirectionVersURL("warning", "Veuillez vous connecter pour acceder à cette page", "home");
             return;
         }
-
-        match (true) {
-            ConnexionUtilisateur::estEtudiant() => self::displayTDBetu(),
-            ConnexionUtilisateur::estEnseignant() => self::displayTDBens(),
-            ConnexionUtilisateur::estEntreprise() => self::displayTDBentreprise(),
-            default => self::redirectionVersURL("danger", "Utilisateur non enregistré dans la base de données", "home")
-        };
+        $tdbAction = isset($_GET["tdbAction"]) ? ucfirst($_GET["tdbAction"]) : "";
+        $reflexion = new \ReflectionClass(new ControllerTDB());
+        if (ConnexionUtilisateur::estEtudiant()) {
+            $methode = 'displayTDBetu';
+        } elseif (ConnexionUtilisateur::estEnseignant()) {
+            $methode = 'displayTDBens';
+        } elseif (ConnexionUtilisateur::estEntreprise()) {
+            $methode = 'displayTDBentreprise';
+        } else {
+            self::redirectionVersURL("danger", "Utilisateur non enregistré dans la base de données", "home");
+            return;
+        }
+        $methode = $methode . $tdbAction;
+        if($reflexion->hasMethod($methode)){
+            self::$methode();
+        }else{
+            self::error("");
+        }
     }
     private static function displayTDBens() {
+        $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null,null,
+            null,null,"lastWeek",null,null);
         $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
         $user=(new EnseignantRepository())->getByEmail($mail);
         self::afficheVue(
@@ -32,6 +46,22 @@ class ControllerTDB extends ControllerGenerique {
                 'pagetitle' => 'Tableau de bord',
                 'user'=>$user,
                 'cheminVueBody' => 'user/tableauDeBord/enseignant.php',
+                'TDBView' => 'user/tableauDeBord/enseignant/accueilEnseignant.php',
+                'listeExpPro' => $listeExpPro
+            ]
+        );
+    }
+
+    private static function displayTDBensInfo() {
+        $siret=ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user=(new EnseignantRepository())->getById($siret);
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Tableau de bord',
+                'cheminVueBody' => 'user/tableauDeBord/enseignant.php',
+                'TDBView' => 'user/tableauDeBord/enseignant/infoEnseignant.php',
+                'user'=>$user
             ]
         );
     }
@@ -44,9 +74,24 @@ class ControllerTDB extends ControllerGenerique {
             'view.php',
             [
                 'pagetitle' => 'Tableau de bord',
-                'listeExpPro' => $listeExpPro,
-                'user' => $user,
-                'cheminVueBody' => 'user/tableauDeBord/entreprise.php'
+                'cheminVueBody' => 'user/tableauDeBord/entreprise.php',
+                'TDBView' => 'user/tableauDeBord/entreprise/accueilEntreprise.php',
+                'user'=>$user,
+                'listeExpPro' => $listeExpPro
+            ]
+        );
+    }
+
+    private static function displayTDBentrepriseInfo() {
+        $siret=ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user=(new EntrepriseRepository())->getById($siret);
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Tableau de bord',
+                'cheminVueBody' => 'user/tableauDeBord/entreprise.php',
+                'TDBView' => 'user/tableauDeBord/entreprise/infoEntreprise.php',
+                'user'=>$user
             ]
         );
     }
@@ -60,10 +105,52 @@ class ControllerTDB extends ControllerGenerique {
             'view.php',
             [
                 'pagetitle' => 'Tableau de bord',
-                'listeExpPro' => $listeExpPro,
-                'user'=>$user,
                 'cheminVueBody' => 'user/tableauDeBord/etudiant.php',
+                'TDBView' => 'user/tableauDeBord/etudiant/accueilEtudiant.php',
+                'user'=>$user,
+                'listeExpPro' => $listeExpPro
             ]
         );
     }
+
+    private static function displayTDBetuInfo() {
+        $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user=(new EtudiantRepository())->getByEmail($mail);
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Tableau de bord',
+                'cheminVueBody' => 'user/tableauDeBord/etudiant.php',
+                'TDBView' => 'user/tableauDeBord/etudiant/infoEtudiant.php',
+                'user'=>$user
+            ]
+        );
+    }
+
+    private static function displayTDBetuGestion() {
+        $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user=(new EtudiantRepository())->getByEmail($mail);
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Tableau de bord',
+                'cheminVueBody' => 'user/tableauDeBord/etudiant.php',
+                'TDBView' => 'user/tableauDeBord/etudiant/gestionEtudiant.php',
+                'user'=>$user
+            ]
+        );
+    }
+
+    public static function displayTDBetuMettreAJour(): void {
+        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user = (new EtudiantRepository())->getByEmail($mail);
+        if (!is_null($user)) {
+            $user = Etudiant::construireDepuisFormulaire($_GET);
+            (new EtudiantRepository())->mettreAJour($user);
+            self::redirectionVersURL("success", "L'etudiant a été mis à jour", "displayTDB&controller=TDB");
+        } else {
+            self::redirectionVersURL("warning", "Cet etudiant n'existe pas", "afficherFormulaireMiseAJour");
+        }
+    }
+
 }

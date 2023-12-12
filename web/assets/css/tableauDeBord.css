@@ -15,3 +15,82 @@
 #infoEtu p{
     text-align: left;
 }
+
+.container{
+    width: auto;
+}
+
+.TDB{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 85vh;
+}
+
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    margin: 0 40px 0 0;
+}
+
+.content{
+    flex: 3;
+    margin: 0 10px 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px 5px 10px;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+#recentOffers{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    flex: 2;
+}
+
+#noOfferFound{
+    display: block;
+    position: static;
+    max-width: unset;
+    margin: 10px;
+}
+
+.infoUtilisateur{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 60%;
+}
+
+.accueilContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding-top: 5%;
+    height: 100%;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

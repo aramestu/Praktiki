@@ -2,6 +2,8 @@
 <link rel="stylesheet" href="assets/css/create.css">
 <script src="assets/javascript/showHideToggle.js"></script>
 
+
+
 <div class="container" id="createOffer">
     <form method="post" action="frontController.php?controller=ExpPro&action=creerOffreDepuisFormulaire">
         <h2 id="remplaceBaliseLegend">Création d'Offre</h2>
@@ -63,6 +65,7 @@
                         echo'<input type="number" name="siret" id="siret" required placeholder="Siret" value="01234567890123">';
                     }?>
                 </p>
+                <a href="frontController.php?action=displayTDB&controller=TDB"><img src="assets/images/back-icon.png" id="backIcon" alt="Back"></a>
 
             </div>
             <div id="createOfferSpacerBIS"></div>

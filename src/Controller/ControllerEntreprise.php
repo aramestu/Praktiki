@@ -224,17 +224,6 @@ class ControllerEntreprise extends ControllerGenerique
         }
     }
 
-    public static function afficherMettreAJourEntreprise(): void
-    {
-        $siret = ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user = (new EntrepriseRepository())->getById($siret);
-        if (is_null($user)) {
-            self::redirectionVersURL("warning", "Entreprise inconnu", "home");
-        } else {
-            self::afficheVue('view.php', ["user" => $user, "pagetitle" => "Detail d'une entreprise", "cheminVueBody" => "user/tableauDeBord/formulaireEntreprise.php"]);
-        }
-    }
-
     public static function mettreAJour(): void
     {
         $siret = ConnexionUtilisateur::getLoginUtilisateurConnecte();

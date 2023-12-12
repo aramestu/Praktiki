@@ -9,6 +9,7 @@ use App\SAE\Lib\MotDePasse;
 use App\SAE\Lib\VerificationEmail;
 use App\SAE\Model\Repository\EnseignantRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
+use App\SAE\Model\Repository\EtudiantRepository;
 
 class ControllerConnexion extends ControllerGenerique
 {
@@ -33,7 +34,7 @@ class ControllerConnexion extends ControllerGenerique
         if (!ConnexionUtilisateur::estConnecte()) {
             if (isset($_REQUEST["username"], $_REQUEST["password"])) {
                 $userInformation = Ldap::connection($_REQUEST["username"], $_REQUEST["password"]);
-                if ($userInformation) {
+                if ($userInformation && (new EtudiantRepository())->getByEmail($userInformation->getMail())) {
                     if ($userInformation->getHomeDirectory() == "ann2" || $userInformation->getHomeDirectory() == "ann3") {
                         ConnexionUtilisateur::connecter($userInformation->getMail());
                         self::redirectionVersURL("success", "Connexion réussie", "displayTDB&controller=TDB");
