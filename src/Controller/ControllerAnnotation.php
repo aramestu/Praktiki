@@ -61,7 +61,7 @@ class ControllerAnnotation extends ControllerGenerique
             self::error("Vous n'avez pas la permission pour faire ça");
         }
         // Si l'utilisateur connecté est un prof
-        else if(! is_null((new EnseignantRepository())->getById($login))) {
+        else if(ConnexionUtilisateur::estEnseignant()) {
             //$siret = $_POST["siret"];
             $siret = "01234567890123";
             $listAnnotationEtPersonne = (new AnnotationRepository())->getAnnotationEtPersonneBySiret($siret);
