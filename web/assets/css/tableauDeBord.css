@@ -192,6 +192,20 @@
     color: var(--white);
 }
 
+.sidebar > a{
+    background: none;
+    color: var(--darkBlue2);
+    box-shadow: none;
+    text-align: left;
+}
+
+.sidebar > a:hover {
+    background: var(--lightGrey);
+    color: var(--darkBlue2);
+    box-shadow: none;
+    text-align: left;
+    transform: translateX(5px);
+}
 
 #accueilButton::before {
     font-family: 'FontAwesome';
