@@ -1,3 +1,5 @@
+
+
 #recentOffers {
     width: 69%;
     border-left: 2px solid var(--grey1);
@@ -24,25 +26,26 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    height: 85vh;
+    height: 88vh;
 }
 
 .sidebar {
     display: flex;
     flex-direction: column;
-    margin: 0 40px 0 0;
+    margin: -13px 0 0 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
 }
 
 .content {
     flex: 3;
-    margin: 0 10px 0 10px;
+    margin: 0 15px 0 15px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     padding: 20px 5px 10px;
     flex-direction: column;
     overflow-y: scroll;
-    padding: 20px;
 }
 
 #recentOffers {
