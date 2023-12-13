@@ -212,6 +212,7 @@
     margin-right: 10px;
     font-size: 1.8em;
     content: "\f015";
+    vertical-align: middle;
 }
 
 #infoButton::before {
@@ -219,6 +220,7 @@
     margin-right: 10px;
     font-size: 1.8em;
     content: "\f05a";
+    vertical-align: middle;
 }
 
 #stageButton::before {
@@ -226,6 +228,7 @@
     margin-right: 10px;
     font-size: 1.8em;
     content: "\f0b1";
+    vertical-align: middle;
 }
 
 
