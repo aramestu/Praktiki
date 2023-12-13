@@ -125,6 +125,14 @@ form #search-bar{
     border-radius: 0;
 }
 
+#mainContent .line:hover{
+    cursor: pointer;
+    background: var(--activeGrey);
+    border-color: var(--grey0);
+    box-shadow: none;
+    border-radius: 0;
+}
+
 #mainContent .line:nth-child(odd){
     background: var(--activeGrey);
 }
@@ -161,7 +169,7 @@ form #search-bar{
     transition: all 0.3s ease-in-out;
 }
 
-
+/*
 #mainContent .greenHover:hover{
     border-color: var(--green);
     box-shadow : 10px 10px 10px #00000025,
@@ -201,9 +209,7 @@ form #search-bar{
     -10px -10px 10px #E67E2225;
 }
 
-#mainContent .line:hover{
-    cursor: pointer;
-}
+ */
 
 .HBox.containerDebutLine{
     justify-content: flex-start;
@@ -605,6 +611,16 @@ form #search-bar{
     font-weight: bold;
     margin-top: 0;
     margin-left: -13px;
+    white-space: nowrap;
+}
+
+#option .button.active{
+    background: rgba(0, 0, 0, 0.1);
+    color: var(--darkBlue2);
+    box-shadow: none;
+    border: none;
+    font-weight: bold;
+    margin-top: 0;
     white-space: nowrap;
 }
 
