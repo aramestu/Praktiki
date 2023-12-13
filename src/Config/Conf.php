@@ -10,19 +10,19 @@ class Conf
         //
         // ou webinfo.iutmontp.univ-montp2.fr
         // pour accéder à webinfo depuis l'extérieur
-        'hostname' => '176.131.31.93',
+        'hostname' => 'webinfo.iutmontp.univ-montp2.fr',
         // A l'IUT, vous avez une BDD nommee comme votre login
         // Sur votre machine, vous devrez creer une BDD
-        'database' => 'SAE',
+        'database' => 'francoisn',
         // À l'IUT, le port de MySQL est particulier : 3316
         // Ailleurs, on utilise le port par défaut : 3306
-        'port' => '3306',
+        'port' => '3316',
         // A l'IUT, c'est votre login
         // Sur votre machine, vous avez surement un compte 'root'
-        'login' => 'member',
+        'login' => 'francoisn',
         // A l'IUT, c'est le même mdp que PhpMyAdmin
         // Sur votre machine personelle, vous avez creez ce mdp a l'installation
-        'password' => 'NormanLeBest_66'
+        'password' => 'rairflashi7tiounklex'
     );
 
     static public function getLogin(): string

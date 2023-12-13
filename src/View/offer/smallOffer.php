@@ -10,6 +10,7 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
         <div class="header">
             <div class="left">
                 <p class="bold typeExpPro">
+                    <!--TODO: soren change tes labels-->
                     <label><?php
                     $expPro->getNomExperienceProfessionnel();
                     if ($expPro->getNomExperienceProfessionnel() == "Stalternance") {
