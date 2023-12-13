@@ -97,7 +97,7 @@ header:hover::after {
 }
 
 .nav-item:hover {
-    color: var(--grey3);
+    color: var(--darkBlue2);
     background-color: var(--white);
     text-decoration: none;
     border-radius: 1.5rem;
