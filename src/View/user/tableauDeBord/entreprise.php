@@ -7,9 +7,9 @@
 <div class="TDB">
     <div class="sidebar container">
         <h2><?php echo $user->getNomEntreprise()?> </h2>
-        <a class="button" href="frontController.php?action=displayTDB&controller=TDB">Accueil</a>
-        <a class="button" href="frontController.php?action=displayTDB&controller=TDB&tdbAction=info">Mes Informations</a>
-        <a class="button" href="frontController.php?controller=ExpPro&action=createOffer">Créer une Offre</a>
+        <a class="button<?= !isset($_GET["tdbAction"]) ? " active" : ""?>" href="frontController.php?action=displayTDB&controller=TDB">Accueil</a>
+        <a class="button<?= isset($_GET["tdbAction"]) && $_GET["tdbAction"]=="info" ? " active" : ""?>" href="frontController.php?action=displayTDB&controller=TDB&tdbAction=info">Mes Informations</a>
+        <a class="button<?= isset($_GET["tdbAction"]) && $_GET["tdbAction"]=="gestion" ? " active" : ""?>" href="frontController.php?controller=ExpPro&action=createOffer">Créer une Offre</a>
     </div>
 
     <div class="content container">
