@@ -1,3 +1,4 @@
+<script src="assets/javascript/popUpConfirmation.js"></script>
 <h1>Gestion</h1>
 <div class="VBox">
     <div>

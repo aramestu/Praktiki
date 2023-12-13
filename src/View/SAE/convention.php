@@ -57,8 +57,7 @@ $et = $etudiant;
             <input type="text" name="competencesADevelopper" id="competencesADevelopper" placeholder="Compétence à développer ou à acquérir" value="<?php echo htmlspecialchars($c->getCompetencesADevelopper());?>" <?php if ($c->getEstFini()) echo 'readonly';?>>
         </div>
         <div class="container-label-input">
-            <!--TODO: changer les for -->
-            <label for="periodeStage">Période du stage :</label>
+            <label>Période du stage :</label>
             <h4>Début</h4>
             <input type="date" name="dateDebutExperienceProfessionnel" id="dateDebutExperienceProfessionnel" value="<?php echo htmlspecialchars($c->getDateDebutExperienceProfessionnel());?>" <?php if ($c->getEstFini()) echo 'readonly';?>>
             <h4>Fin</h4>
@@ -72,17 +71,13 @@ $et = $etudiant;
             <label for="languesImpression">Langue de la convention :</label>
             <input type="text" name="languesImpression" id="languesImpression" placeholder="Langue de la convention"  value="<?php echo htmlspecialchars($c->getLanguesImpression());?>" <?php if ($c->getEstFini()) echo 'readonly';?>>
         </div>
-        <!--<div class="container-label-input">
-            <label for="gratificationStage">Gratification lors du stage :</label>
-            <input type="number" name="gratificationStage" id="gratificationStage" placeholder="Gratification lors du stage"  value="<?php /*echo htmlspecialchars($c->getGratificationStage());*/?>">
-        </div> -->
         <div class="container-label-input">
             <label for="origineDeLaConvention">Origine du stage :</label>
             <input type="text" name="origineDeLaConvention" id="origineDeLaConvention" placeholder="Origine du stage"  value="<?php echo htmlspecialchars($c->getOrigineDeLaConvention());?>" <?php if ($c->getEstFini()) echo 'readonly';?>>
         </div>
         <div class="container-label-input">
             <label for="sujetEstConfidentiel">Confidentialité du sujet/thème du stage :</label>
-            <input type="checkbox" name="sujetEstConfidentiel" id="sujetEstConfidentiel" placeholder="Confidentialité du sujet et du thème du Stage" <?php echo ($c->getSujetEstConfidentiel()) ? "checked" : "";?> <?php if ($c->getEstFini()) echo 'disabled';?>>
+            <input type="checkbox" name="sujetEstConfidentiel" id="sujetEstConfidentiel"  <?php echo ($c->getSujetEstConfidentiel()) ? "checked" : "";?> <?php if ($c->getEstFini()) echo 'disabled';?>>
         </div>
         <div class="container-label-input">
             <label for="nbHeuresHebdo">Nombre d'heures par semaine :</label>
