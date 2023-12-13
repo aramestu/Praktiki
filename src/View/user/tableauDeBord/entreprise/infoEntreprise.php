@@ -25,9 +25,9 @@ $password=htmlspecialchars($user->getMdpHache());
             <input class="InputAddOn-field" type="text" value=<?= $mail ?> name="mail" id="email" required>
             <label class="InputAddOn-item" for="telephone">Telephone :</label> 
             <input class="InputAddOn-field" type="text" value=<?= $Telephone ?> name="telephone" id="telephone" required>
-            <input type="hidden" value="' . $password . '" name="password" id="password" required>      
-   
+            <input type="hidden" value="' . $password . '" name="password" id="password" required>
             </p>
+
         </div>
 
         <div class="column">
@@ -38,8 +38,9 @@ $password=htmlspecialchars($user->getMdpHache());
             <input class="InputAddOn-field" type="text" value=<?= $siteWeb ?> name="website" id="website" required>
             <label class="InputAddOn-item" for="effectif">Effectif : </label> 
             <input class="InputAddOn-field" type="text" value=<?= $effectif ?> name="effectif" id="effectif" required>
-
-            </p>
+            <div class="forget-password">
+                <p><a class="button" href="frontController.php?action=resetPassword">Changer de mot de passe</a> </p>
+            </div>
         </div>
 <div class=btn>
     <p>
