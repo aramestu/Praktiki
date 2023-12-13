@@ -234,6 +234,11 @@
     vertical-align: middle;
 }
 
+input[readonly]{
+    background-color: var(--lightGrey);
+    color: var(--grey2);
+}
+
 
 
 
