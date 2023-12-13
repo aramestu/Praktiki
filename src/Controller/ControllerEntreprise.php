@@ -193,11 +193,20 @@ class ControllerEntreprise extends ControllerGenerique
     static function resetPassword(): void
     {
         if (isset($_REQUEST["siret"], $_REQUEST["newPassword"], $_REQUEST["confirmNewMdp"])) {
+            if(ConnexionUtilisateur::estEntreprise() && !isset($_REQUEST["ancienMdp"])){
+                self::redirectionVersURL("warning", "Vous n'avez pas remplit l'ancien mot de passe", "displayTDB&controller=TDB");
+            }
             if ($_REQUEST["newPassword"] == $_REQUEST["confirmNewMdp"]) {
                 $user = (new EntrepriseRepository())->getById($_REQUEST["siret"]);
                 if (!is_null($user)) {
+                    if(ConnexionUtilisateur::estEntreprise() && !MotDePasse::verifier($_REQUEST["ancienMdp"], $user->formatTableau()["mdpHacheTag"])){
+                        self::redirectionVersURL("warning", "Ancien mot de passe incorrect", "displayTDB&controller=TDB");
+                    }
                     $user->setMdpHache($_REQUEST["newPassword"]);
                     (new EntrepriseRepository())->mettreAJour($user);
+                    if(ConnexionUtilisateur::estEntreprise()){
+                        self::redirectionVersURL("success", "Mot de passe changé", "displayTDB&controller=TDB");
+                    }
                     self::redirectionVersURL("success", "Mot de passe changé", "home");
                 } else {
                     self::redirectionVersURL("warning", "Utilisateur inconnu", "resetPassword");
