@@ -42,6 +42,7 @@
     padding: 20px 5px 10px;
     flex-direction: column;
     overflow-y: scroll;
+    padding: 20px;
 }
 
 #recentOffers {
@@ -67,6 +68,7 @@
     flex-direction: column;
     justify-content: space-between;
     height: 60%;
+    text-align: left;
 }
 
 .accueilContainer {
@@ -197,6 +199,7 @@
     color: var(--darkBlue2);
     box-shadow: none;
     text-align: left;
+    margin-top: 10px;
 }
 
 .sidebar > a:hover {
