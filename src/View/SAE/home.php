@@ -6,6 +6,10 @@
         <h1 class="remplaceBaliseLegend">Bienvenue sur Praktiki !</h1>
         <img src="assets/images/logo_sae_clear.png" alt="Logo Praktiki" class="welcomeLogo">
     </div>
+    <h2 class="remplaceBaliseLegend">Le site des stages et alternances du département informatique de
+        l'Université de Montpellier</h2>
+</div>
+<div class="container">
     <a href="#stageSection" class="button">En savoir plus sur les stages</a>
     <a href="#alternanceSection" class="button">En savoir plus sur les alternances</a>
 </div>
