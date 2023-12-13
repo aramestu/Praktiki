@@ -1,16 +1,17 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     const currentAction = window.location.search.split('=')[1];
-
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentController = urlParams.get('controller');
     const navItems = document.querySelectorAll('.navbar .nav-item');
     navItems.forEach(item => {
         if (item.getAttribute('data-action') === currentAction) {
             item.classList.add('active');
-        }else if(currentAction === 'createAccount' && item.getAttribute('data-action') === 'connect'){
+        }else if(currentAction === 'createAccount' && item.getAttribute('data-action') === 'connect' || currentAction === 'preference' && item.getAttribute('data-action') === 'connect' || currentController === 'Connexion' && item.getAttribute('data-action') === 'connect'){
             item.classList.add('active');
         }else if(currentAction === 'createOffer' && item.getAttribute('data-action') === 'home'){
             item.classList.add('active');
-        }else if((currentAction === 'getExpProByDefault&controller' || currentAction === 'ExpPro&action') && item.getAttribute('data-action') === 'offre'){
+        }else if((currentController === 'ExpPro' || currentAction === 'ExpPro&action') && item.getAttribute('data-action') === 'offre'){
             item.classList.add('active');
         }
     });

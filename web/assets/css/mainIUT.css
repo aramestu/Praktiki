@@ -389,6 +389,7 @@ main{
 }
 
 .subContainer {
+    position: relative;
     color: var(--darkBlue2);
     width: 69%;
     text-align: center;
