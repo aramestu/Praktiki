@@ -6,7 +6,7 @@ $c = $convention;
 $et = $etudiant;
 ?>
 <form method="post" action="frontController.php?controller=Convention&action=modifierConvention">
-    <div class="containerConvention">
+    <div class="container containerConvention">
         <h2>Etudiant : </h2>
         <div class="container-label-input">
             <label for="nomEtudiant">Nom de l'étudiant :</label>
@@ -34,7 +34,7 @@ $et = $etudiant;
         </div>
     </div>
 
-    <div class="containerConvention">
+    <div class="container containerConvention">
         <h2>Stage : </h2>
         <!--<div class="container-label-input">
             <label for="typeStage">Type du stage :</label>
@@ -109,7 +109,7 @@ $et = $etudiant;
         </div>
     </div>
 
-    <div class="containerConvention">
+    <div class="container containerConvention">
         <h2>Entreprise : </h2>
         <div class="container-label-input">
             <label for="nomEntreprise">Nom de l'entreprise :</label>
@@ -165,7 +165,7 @@ $et = $etudiant;
         </div>-->
     </div>
 
-    <div class="containerConvention">
+    <div class="container containerConvention">
         <h2>Etablissement : </h2>
         <div class="container-label-input">
             <label for="nomEnseignant">Nom de l'enseignant référant :</label>
