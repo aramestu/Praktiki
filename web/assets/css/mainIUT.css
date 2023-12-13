@@ -574,10 +574,6 @@ legend{
     animation: ultimateAnimation 10s infinite;
 }
 
-.welcomeLogo:hover{
-    animation: hovering 1s ;
-}
-
 @keyframes hovering {
     0% {
         transform: rotate3d(0, 0, 0, 0deg);
@@ -602,7 +598,6 @@ legend{
     }
 
 }
-
 
 #errorIcon{
     height:200px;
