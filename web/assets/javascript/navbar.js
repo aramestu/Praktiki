@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-
     const currentAction = window.location.search.split('=')[1];
     const urlParams = new URLSearchParams(window.location.search);
     const currentController = urlParams.get('controller');
