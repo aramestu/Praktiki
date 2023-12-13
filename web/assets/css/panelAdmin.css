@@ -281,6 +281,7 @@ form #search-bar{
     font-family: 'FontAwesome';
     margin-right: 10px;
     font-size: 1.8em;
+    vertical-align: middle;
 }
 
 .deleteButtonOrigin span::before{
@@ -652,6 +653,7 @@ a img:active{
     font-family: 'FontAwesome';
     margin-right: 10px;
     font-size: 1.8em;
+    vertical-align: middle;
 }
 
 .title span{
