@@ -1,17 +1,256 @@
-#recentOffers{
-    width : 69%;
-    border-left : 2px solid var(--grey1);
+
+
+#recentOffers {
+    width: 69%;
+    border-left: 2px solid var(--grey1);
     height: 400px;
 }
 
-#infoEtu{
-    width : 31%;
-    position : sticky;
-    top : 0;
+#infoEtu {
+    width: 31%;
+    position: sticky;
+    top: 0;
     display: grid;
-    flex : 3;
+    flex: 3;
 }
 
-#infoEtu p{
+#infoEtu p {
     text-align: left;
 }
+
+.container {
+    width: auto;
+}
+
+.TDB {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 88vh;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    margin: -13px 0 0 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.sidebar > a.active{
+    background: var(--lightGrey);
+    color: var(--darkBlue2);
+    box-shadow: none;
+    text-align: left;
+}
+
+.content {
+    flex: 3;
+    margin: 0 15px 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+#recentOffers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    flex: 2;
+}
+
+#noOfferFound {
+    display: block;
+    position: static;
+    max-width: unset;
+    margin: 10px;
+}
+
+.infoUtilisateur {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 60%;
+    text-align: left;
+}
+
+.accueilContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding-top: 5%;
+    height: 100%;
+    width: 100%;
+}
+
+#popUpConfirmation {
+    opacity: 0;
+    position: absolute;
+    top: 45%;
+    left: 48%;
+    transform: translate(-50%, -50%);
+    border-radius: 1rem;
+    padding: 15px;
+    text-align: center;
+    font-size: 1.2em;
+    word-break: break-word;
+    color: var(--darkBlue2);
+    border: 2.5px solid #F2F2F200;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: -1;
+}
+
+#popUpConfirmationNo,
+#popUpConfirmationYes {
+    margin: 20px;
+}
+
+@media (max-width: 41200px) {
+    #popUpConfirmation {
+        min-width: 400px;
+        max-width: 550px;
+        min-height: 169px;
+        height: 169px;
+        max-height: 400px;
+    }
+
+    .popUpConfirmationButton > a {
+        width: 200px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 1300px) {
+    #popUpConfirmation {
+        min-width: 400px;
+        max-width: 550px;
+        min-height: 169px;
+        height: 169px;
+        max-height: 400px;
+    }
+
+    .popUpConfirmationButton > a {
+        width: 200px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 950px) {
+    #popUpConfirmation {
+        min-width: 280px;
+        max-width: 550px;
+        height: 350px;
+        max-height: 350px;
+    }
+
+    #popUpConfirmationContent > p {
+        margin-top: 20px;
+        margin-left: 4%;
+        margin-right: 4%;
+    }
+
+    .popUpConfirmationButton > a {
+        width: 80%;
+        height: 59px;
+    }
+}
+
+#popUpConfirmation > p {
+    margin: 10px;
+    margin-top: 20px;
+}
+
+#popUpConfirmationContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.popUpConfirmationButton > a {
+    font-size: 1.2em;
+    margin: 20px;
+    border-radius: 1rem;
+    padding: 5px;
+    text-align: center;
+    word-break: break-word;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+#popUpConfirmationNo:hover {
+    background-color: var(--red);
+    color: var(--white);
+}
+
+#popUpConfirmationNo {
+    background-color: var(--pomegranate);
+    color: var(--white);
+}
+
+#popUpConfirmationYes:hover {
+    background-color: var(--emerald);
+    color: var(--white);
+}
+
+#popUpConfirmationYes {
+    background-color: var(--green);
+    color: var(--white);
+}
+
+.sidebar > a{
+    background: none;
+    color: var(--darkBlue2);
+    box-shadow: none;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.sidebar > a:hover {
+    background: var(--lightGrey);
+    color: var(--darkBlue2);
+    box-shadow: none;
+    text-align: left;
+    transform: translateX(5px);
+}
+
+#accueilButton::before {
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    font-size: 1.8em;
+    content: "\f015";
+    vertical-align: middle;
+}
+
+#infoButton::before {
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    font-size: 1.8em;
+    content: "\f05a";
+    vertical-align: middle;
+}
+
+#stageButton::before {
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    font-size: 1.8em;
+    content: "\f0b1";
+    vertical-align: middle;
+}
+
+
+
+
+
+
+
+
+
+
+

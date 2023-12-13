@@ -193,11 +193,20 @@ class ControllerEntreprise extends ControllerGenerique
     static function resetPassword(): void
     {
         if (isset($_REQUEST["siret"], $_REQUEST["newPassword"], $_REQUEST["confirmNewMdp"])) {
+            if(ConnexionUtilisateur::estEntreprise() && !isset($_REQUEST["ancienMdp"])){
+                self::redirectionVersURL("warning", "Vous n'avez pas remplit l'ancien mot de passe", "displayTDB&controller=TDB");
+            }
             if ($_REQUEST["newPassword"] == $_REQUEST["confirmNewMdp"]) {
                 $user = (new EntrepriseRepository())->getById($_REQUEST["siret"]);
                 if (!is_null($user)) {
+                    if(ConnexionUtilisateur::estEntreprise() && !MotDePasse::verifier($_REQUEST["ancienMdp"], $user->formatTableau()["mdpHacheTag"])){
+                        self::redirectionVersURL("warning", "Ancien mot de passe incorrect", "displayTDB&controller=TDB");
+                    }
                     $user->setMdpHache($_REQUEST["newPassword"]);
                     (new EntrepriseRepository())->mettreAJour($user);
+                    if(ConnexionUtilisateur::estEntreprise()){
+                        self::redirectionVersURL("success", "Mot de passe changé", "displayTDB&controller=TDB");
+                    }
                     self::redirectionVersURL("success", "Mot de passe changé", "home");
                 } else {
                     self::redirectionVersURL("warning", "Utilisateur inconnu", "resetPassword");
@@ -207,17 +216,6 @@ class ControllerEntreprise extends ControllerGenerique
             }
         } else {
             self::redirectionVersURL("warning", "Variable non remplit", "resetPassword");
-        }
-    }
-
-    public static function afficherMettreAJourEntreprise(): void
-    {
-        $siret = ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user = (new EntrepriseRepository())->getById($siret);
-        if (is_null($user)) {
-            self::redirectionVersURL("warning", "Entreprise inconnu", "home");
-        } else {
-            self::afficheVue('view.php', ["user" => $user, "pagetitle" => "Detail d'une entreprise", "cheminVueBody" => "user/tableauDeBord/formulaireEntreprise.php"]);
         }
     }
 

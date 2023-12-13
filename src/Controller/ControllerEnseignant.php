@@ -14,18 +14,6 @@ use mysql_xdevapi\Table;
 
 class ControllerEnseignant extends ControllerGenerique{
 
-
-    public static function afficherMettreAJourEnseignant(): void
-    {
-        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user = (new EnseignantRepository())->getByEmail($mail);
-        if (is_null($user)) {
-            self::redirectionVersURL("warning", "Enseignant inconnu", "home");
-        } else {
-            self::afficheVue('view.php', ["user" => $user, "pagetitle" => "Detail d'une Enseignant", "cheminVueBody" => "user/tableauDeBord/formulaireEnseignant.php"]);
-        }
-    }
-
     public static function mettreAJour(): void
     {
         $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();

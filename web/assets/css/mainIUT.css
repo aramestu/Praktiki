@@ -97,7 +97,7 @@ header:hover::after {
 }
 
 .nav-item:hover {
-    color: var(--grey3);
+    color: var(--darkBlue2);
     background-color: var(--white);
     text-decoration: none;
     border-radius: 1.5rem;
@@ -449,6 +449,11 @@ select:focus,
 textarea:focus {
     outline: none;
     border : 2px solid var(--lightpastelBlue);
+}
+
+input[readonly]{
+    background-color: var(--lightGrey);
+    color: var(--grey2);
 }
 
 span:hover,

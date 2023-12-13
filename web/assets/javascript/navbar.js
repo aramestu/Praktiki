@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
             item.classList.add('active');
         }else if((currentController === 'ExpPro' || currentAction === 'ExpPro&action') && item.getAttribute('data-action') === 'offre'){
             item.classList.add('active');
+        }else if(currentController === 'TDB' && item.getAttribute('data-action') === 'tdbEtudiant'){
+            item.classList.add('active');
         }
     });
 
