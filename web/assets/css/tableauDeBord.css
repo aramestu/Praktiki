@@ -37,12 +37,11 @@
     border-top-left-radius: 0;
 }
 
-.sidebar > a:active{
+.sidebar > a.active{
     background: var(--lightGrey);
     color: var(--darkBlue2);
     box-shadow: none;
     text-align: left;
-    transform: translateX(5px);
 }
 
 .content {
