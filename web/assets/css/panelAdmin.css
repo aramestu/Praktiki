@@ -345,21 +345,45 @@ form #search-bar{
 }
 
 .circle {
-    width: 1.3em;
-    height: 1.3em;
+    width: 1.8em;
+    height: 1.8em;
     border-radius: 50%;
 }
 
 .greenColor{
-    background-color: var(--green);
+    background-color: var(--lightpastelGreen);
+}
+
+.greenColor::before{
+    content: '\f00c';
+    font-family: 'FontAwesome';
+    color: var(--green);
+    font-size: 1.2em;
+    vertical-align: middle;
 }
 
 .yellowColor{
-    background-color: var(--yellow);
+    background-color: var(--lightpastelYellow);
+}
+
+.yellowColor::before{
+    content: '\f06a';
+    font-family: 'FontAwesome';
+    color: var(--yellow);
+    font-size: 1.2em;
+    vertical-align: middle;
 }
 
 .redColor{
-    background-color: var(--red);
+    background-color: var(--lightpastelRed);
+}
+
+.redColor::before{
+    content: '\f00d';
+    font-family: 'FontAwesome';
+    color: var(--red);
+    font-size: 1.2em;
+    vertical-align: middle;
 }
 
 /**************************************************
@@ -893,12 +917,17 @@ input[type="file"]{
 }
 
 .input-row{
+    margin-top: 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     margin-bottom: 10px;
     align-items: center;
     width: 100%;
+    background: var(--lightGrey);
+    padding: 25px;
+    border-radius: 1.5rem;
+    border: 2px dashed var(--darkBlue2);
 }
 
 .input-row > label{
