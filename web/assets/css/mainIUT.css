@@ -451,6 +451,11 @@ textarea:focus {
     border : 2px solid var(--lightpastelBlue);
 }
 
+input[readonly]{
+    background-color: var(--lightGrey);
+    color: var(--grey2);
+}
+
 span:hover,
 select{
     cursor: pointer;
