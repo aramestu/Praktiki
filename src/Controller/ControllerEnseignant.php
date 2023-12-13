@@ -14,17 +14,4 @@ use mysql_xdevapi\Table;
 
 class ControllerEnseignant extends ControllerGenerique{
 
-    public static function mettreAJour(): void
-    {
-        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user = (new EnseignantRepository())->getByEmail($mail);
-        if (!is_null($user)) {
-            $user = Enseignant::construireDepuisFormulaire($_GET);
-            (new EnseignantRepository())->mettreAJour($user);
-            self::redirectionVersURL("success", "L'enseignant a été mis à jour", "displayTDB&controller=TDB");
-        } else {
-            self::redirectionVersURL("warning", "cet enseignant n'existe pas", "afficherFormulaireMiseAJour");
-        }
-    }
-
 }

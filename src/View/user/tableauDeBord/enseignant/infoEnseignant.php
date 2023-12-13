@@ -27,12 +27,13 @@ $admin = htmlspecialchars($user->isEstAdmin());
                 <label class="InputAddOn-item" for="prenom">Prenom : </label>
                 <input class="InputAddOn-field" type="text" value=<?= $prenom ?> name="prenom" id="prenom" required>
                 <input type="hidden" value="' . $admin . '" name="admin" id="admin" required>
-
-                <input type="hidden" name="action" value="mettreAJour">
-                <input type="hidden" name="controller" value="Enseignant">
-                <input type="submit" value="Mettre à jour">
             </p>
         </div>
+
+        <input type="hidden" name="action" value="displayTDB">
+        <input type="hidden" name="controller" value="TDB">
+        <input type="hidden" name="tdbAction" value="mettreAJour">
+        <input type="submit" value="Mettre à jour">
     </form>
 </div>
 
