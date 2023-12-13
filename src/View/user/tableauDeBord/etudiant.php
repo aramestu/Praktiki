@@ -22,4 +22,14 @@ use App\SAE\Lib\ConversionMajuscule;
         ?>
     </div>
 </div>
-
+<div id="popUpConfirmation" class="subContainer">
+    <a id="popUpConfirmationClose"><img src="assets/images/close-icon.png" id="closeIcon" alt="Close"></a>
+    <div id="popUpConfirmationContent">
+        <p>Voulez vous envoyer votre convention ? Vous ne pourrez plus la modifier par la suite</p>
+        <div class="HBox">
+            <a class="button popUpConfirmationButton" id="popUpConfirmationNo">Non</a>
+            <a class="button popUpConfirmationButton" id="popUpConfirmationYes"
+               href="frontController.php?action=displayTDB&controller=TDB&tdbAction=envoyerConvention">Oui</a>
+        </div>
+    </div>
+</div>

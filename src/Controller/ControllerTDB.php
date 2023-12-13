@@ -4,6 +4,7 @@ namespace App\SAE\Controller;
 
 use App\SAE\Lib\ConnexionUtilisateur;
 use App\SAE\Model\DataObject\Etudiant;
+use App\SAE\Model\Repository\ConventionRepository;
 use App\SAE\Model\Repository\EnseignantRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
@@ -130,13 +131,15 @@ class ControllerTDB extends ControllerGenerique {
     private static function displayTDBetuGestion() {
         $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
         $user=(new EtudiantRepository())->getByEmail($mail);
+        $convention=(new ConventionRepository())->getConventionAvecEtudiant($user->getNumEtudiant());
         self::afficheVue(
             'view.php',
             [
                 'pagetitle' => 'Tableau de bord',
                 'cheminVueBody' => 'user/tableauDeBord/etudiant.php',
                 'TDBView' => 'user/tableauDeBord/etudiant/gestionEtudiant.php',
-                'user'=>$user
+                'user'=>$user,
+                'convention'=>$convention
             ]
         );
     }
@@ -150,6 +153,17 @@ class ControllerTDB extends ControllerGenerique {
             self::redirectionVersURL("success", "L'etudiant a été mis à jour", "displayTDB&controller=TDB");
         } else {
             self::redirectionVersURL("warning", "Cet etudiant n'existe pas", "afficherFormulaireMiseAJour");
+        }
+    }
+
+    public static function displayTDBetuEnvoyerConvention(): void {
+        $convention = (new ConventionRepository())->getConventionAvecEtudiant((new EtudiantRepository())->getByEmail(ConnexionUtilisateur::getLoginUtilisateurConnecte())->getNumEtudiant());
+        if (!is_null($convention)) {
+            $convention->setEstFini(true);
+            (new ConventionRepository())->mettreAJour($convention);
+            self::redirectionVersURL("success", "Convention envoyée", "displayTDB&controller=TDB&tdbAction=gestion");
+        } else {
+            self::redirectionVersURL("warning", "Cet etudiant ne possède pas de convention", "afficherFormulaireMiseAJour");
         }
     }
 

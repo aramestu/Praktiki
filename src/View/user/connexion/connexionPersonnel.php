@@ -3,7 +3,7 @@
 
 <div class="container">
     <form method="get">
-        <h2 id="remplaceBaliseLegend">Connexion personnel</h2>
+        <h2 id="remplaceBaliseLegend" class="connexionProf">Connexion personnel</h2>
         <p>
             <label for="username">Identifiant</label>
             <input type="text" name="username" id="username" required placeholder="Identifiant:">

@@ -32,8 +32,7 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
             <p><?php $entreprise = (new EntrepriseRepository())->getById($expPro->getSiret());
                 echo(htmlspecialchars($entreprise->getNomEntreprise()));
                 ?></p>
-            <p><img src="assets/images/map-pin-icon.png"
-                    class="mapPin" alt="MapPin"><span class="codePostalID"><?php echo htmlspecialchars($expPro->getCodePostalExperienceProfessionnel()); ?></span>
+            <p><span class="codePostalID"><?php echo htmlspecialchars($expPro->getCodePostalExperienceProfessionnel()); ?></span>
             </p>
         </div>
     </div>

@@ -4,7 +4,7 @@ namespace App\SAE\Model\DataObject;
 
 class Annotation extends AbstractDataObject {
 
-    private int $idAnnotation;
+    private string $idAnnotation;
     private string $siret;
     private string $mailEnseignant;
     private string $contenu;
@@ -15,7 +15,6 @@ class Annotation extends AbstractDataObject {
      * @param string $siret
      * @param string $mailEnseignant
      * @param string $contenu
-     * @param string $dateAnnotation
      * @param bool $estVisibleEtudiant
      */
     public function __construct(string $siret, string $mailEnseignant, string $contenu, bool $estVisibleEtudiant)
@@ -24,6 +23,8 @@ class Annotation extends AbstractDataObject {
         $this->mailEnseignant = $mailEnseignant;
         $this->contenu = $contenu;
         $this->estVisibleEtudiant = $estVisibleEtudiant;
+        $this->idAnnotation = "";
+        $this->dateAnnotation = "";
     }
 
     public function getIdAnnotation(): int
@@ -93,7 +94,7 @@ class Annotation extends AbstractDataObject {
             "mailEnseignantTag" => $this->mailEnseignant,
             "contenuTag" => $this->contenu,
             "dateAnnotationTag" => $this->dateAnnotation,
-            "estVisibleEtudiantTag" => $this->estVisibleEtudiant
+            "estVisibleEtudiantTag" => $this->estVisibleEtudiant?1:0
         );
     }
 }

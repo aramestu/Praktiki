@@ -16,4 +16,7 @@
     <p>
         <a href="frontController.php?controller=Main&action=displayTDBentreprise" class="button">tableau de bord entreprise</a>
     </p>
+    <p>
+        <a href="frontController.php?controller=Annotation&action=afficherAllAnnotationEntreprise" class="button">Annotation Entreprise</a>
+    </p>
 </div>

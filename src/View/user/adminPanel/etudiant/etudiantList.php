@@ -1,4 +1,6 @@
 <?php
+
+use App\SAE\Controller\ControllerEtudiant;
 use App\SAE\Model\Repository\EtudiantRepository;
 ?>
 
@@ -11,9 +13,9 @@ use App\SAE\Model\Repository\EtudiantRepository;
 
 <div class="HBox" id="statBox">
     <div id="statTotal"><span><?php echo (new EtudiantRepository())->count()?></span></div>
-    <div id="statValide"><span><?php echo (new EtudiantRepository())->getNbEtudiantExpProValide()?></span></div>
-    <div id="statInter"><span><?php echo (new EtudiantRepository())->getNbEtudiantExpProValideSansConvention()?></span></div>
-    <div id="statBad"><span><?php echo (new EtudiantRepository())->getNbEtudiantExpProNonValide()?></span></div>
+    <div id="statValide"><span><?php echo (new ControllerEtudiant())->getNbEtudiantExpProValide()?></span></div>
+    <div id="statInter"><span><?php echo (new ControllerEtudiant())->getNbEtudiantExpProValideSansConvention()?></span></div>
+    <div id="statBad"><span><?php echo (new ControllerEtudiant())->getNbEtudiantExpProNonValide()?></span></div>
 </div>
 
 <div class="columnName">
