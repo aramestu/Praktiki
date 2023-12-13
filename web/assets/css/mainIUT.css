@@ -571,21 +571,36 @@ legend{
     width: 300px;
     filter: invert(0) brightness(1.5) ;
     border-radius: 50%;
+    animation: ultimateAnimation 10s infinite;
+}
+
+.welcomeLogo:hover{
+    animation: hovering 1s ;
 }
 
 @keyframes hovering {
     0% {
-        transform: translateY(0) rotate3d(0, 0, 0, 0deg);
+        transform: rotate3d(0, 0, 0, 0deg);
     }
-    25% {
-        transform: translateY(-10px) rotate3d(1, 1, 1, 20deg);
-    }
-    75% {
-        transform: translateY(10px) rotate3d(1, 1, 1, -20deg);
+    50% {
+        transform: rotate3d(1, 1, 1, 360deg);
     }
     100% {
-        transform: translateY(0) rotate3d(50, 50, 50, 0deg);
+        transform: rotate3d(0, 0, 0, 0deg);
     }
+}
+
+@keyframes ultimateAnimation {
+    0% {
+        transform: perspective(500px);
+    }
+    50% {
+        transform: perspective(500px) rotate3d(1, 1, 1, 360deg);
+    }
+    100% {
+        transform: perspective(500px);
+    }
+
 }
 
 

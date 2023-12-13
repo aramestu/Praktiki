@@ -1,13 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-
-    window.addEventListener('mousemove', function(e) {
-        const logo = document.querySelector('.welcomeLogo');
-        const xAxis = (window.innerWidth / 2 - e.pageX) / 10; // Adjusted from 25 to 10
-        const yAxis = (window.innerHeight / 2 - e.pageY) / 10; // Adjusted from 25 to 10
-        logo.style.transform = `rotate3d(${xAxis}, ${yAxis}, 0, 15deg)`;
-    });
-
     const currentAction = window.location.search.split('=')[1];
     const urlParams = new URLSearchParams(window.location.search);
     const currentController = urlParams.get('controller');
