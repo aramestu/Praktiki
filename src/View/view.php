@@ -16,6 +16,9 @@ use App\SAE\Lib\ConnexionUtilisateur;
 
     <script src="assets/javascript/navbar.js"></script>
     <link rel="stylesheet" href="assets/css/resources/font-awesome-4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
 

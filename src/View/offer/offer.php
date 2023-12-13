@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="assets/css/offer.css">
 <link rel="stylesheet" href="assets/css/button.css">
 <script src="assets/javascript/popUpDelete.js"></script>
+<script src="assets/javascript/map.js"></script>
 
 <?php
 
@@ -53,6 +54,7 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
                        class="link">Site web</a></li>
             </ul>
         </div>
+
     </div>
     <?php
     if (ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::getLoginUtilisateurConnecte()==$entreprise->getSiret()) {
@@ -67,6 +69,7 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 
 
 
+    <div id="map"></div>
     <div class="HBox">
         <?php
 
