@@ -11,9 +11,9 @@ use App\SAE\Lib\ConversionMajuscule;
 <div class="TDB">
     <div class="sidebar container">
         <h2><?php echo $user->getPrenomEtudiant()?> <?=ConversionMajuscule::convertirEnMajuscules($user->getNomEtudiant())?></h2>
-        <a class="button" href="frontController.php?action=displayTDB&controller=TDB">Accueil</a>
-        <a class="button" href="frontController.php?action=displayTDB&controller=TDB&tdbAction=info">Mes Informations</a>
-        <a class="button" href="frontController.php?action=displayTDB&controller=TDB&tdbAction=gestion">Mon Stage/Alternance</a>
+        <a id="accueilButton" class="button" href="frontController.php?action=displayTDB&controller=TDB">Accueil</a>
+        <a id="infoButton" class="button" href="frontController.php?action=displayTDB&controller=TDB&tdbAction=info">Mes Informations</a>
+        <a id="stageButton" class="button" href="frontController.php?action=displayTDB&controller=TDB&tdbAction=gestion">Mon Stage/Alternance</a>
     </div>
 
     <div class="content container">
