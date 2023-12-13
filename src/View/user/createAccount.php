@@ -44,8 +44,8 @@
                                                          alt="ShowPassword"></button>
         </div>
         <p>
-            <label for="password">Confirmer mot de passe</label>
-            <input type="password" name="confirmPassword" id="password" required placeholder="Confirmer le mot de passe">
+            <label for="passwordConfirmation">Confirmer mot de passe</label>
+            <input type="password" name="confirmPassword" id="passwordConfirmation" required placeholder="Confirmer le mot de passe">
         </p>
 
         <p>
