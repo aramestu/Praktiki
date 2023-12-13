@@ -3,6 +3,8 @@
 namespace App\SAE\Controller;
 
 use App\SAE\Lib\ConnexionUtilisateur;
+use App\SAE\Model\DataObject\Enseignant;
+use App\SAE\Model\DataObject\Entreprise;
 use App\SAE\Model\DataObject\Etudiant;
 use App\SAE\Model\Repository\ConventionRepository;
 use App\SAE\Model\Repository\EnseignantRepository;
@@ -67,6 +69,19 @@ class ControllerTDB extends ControllerGenerique {
         );
     }
 
+    public static function displayTDBensMettreAJour(): void
+    {
+        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user = (new EnseignantRepository())->getByEmail($mail);
+        if (!is_null($user)) {
+            $user = Enseignant::construireDepuisFormulaire($_GET);
+            (new EnseignantRepository())->mettreAJour($user);
+            self::redirectionVersURL("success", "L'enseignant a été mis à jour", "displayTDB&controller=TDB");
+        } else {
+            self::redirectionVersURL("warning", "cet enseignant n'existe pas", "afficherFormulaireMiseAJour");
+        }
+    }
+
     private static function displayTDBentreprise(): void {
         $listeExpPro =  (new ExperienceProfessionnelRepository())->search(ConnexionUtilisateur::getLoginUtilisateurConnecte());
         $siret=ConnexionUtilisateur::getLoginUtilisateurConnecte();
@@ -95,6 +110,19 @@ class ControllerTDB extends ControllerGenerique {
                 'user'=>$user
             ]
         );
+    }
+
+    public static function displayTDBentrepriseMettreAJour(): void
+    {
+        $siret = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user = (new entrepriseRepository())->getById($siret);
+        if (!is_null($user)) {
+            $user = Entreprise::construireDepuisFormulaire($_GET);
+            (new entrepriseRepository())->mettreAJour($user);
+            self::redirectionVersURL("success", "L'entreprise a été mis à jour", "displayTDB&controller=TDB");
+        } else {
+            self::redirectionVersURL("warning", "cet entreprise n'existe pas", "afficherFormulaireMiseAJour");
+        }
     }
 
     private static function displayTDBetu() {

@@ -27,6 +27,10 @@ label {
 
 .btn{
     width: 30%;
+}
+
+input[type="submit"]{
+    width: 30%;
     margin-left: 32%;
 }
 

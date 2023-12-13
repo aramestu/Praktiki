@@ -42,10 +42,11 @@ $password=htmlspecialchars($user->getMdpHache());
                 <p><a class="button" href="frontController.php?action=resetPassword">Changer de mot de passe</a> </p>
             </div>
 
-            <input type="hidden" name="action" value="mettreAJour">
-            <input type="hidden" name="controller" value="Entreprise">
-            <input type="submit" value="Mettre à jour">
         </div>
+        <input type="hidden" name="action" value="displayTDB">
+        <input type="hidden" name="controller" value="TDB">
+        <input type="hidden" name="tdbAction" value="mettreAJour">
+        <input type="submit" value="Mettre à jour">
     </form>
 </div>
 
