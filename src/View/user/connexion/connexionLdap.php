@@ -6,7 +6,7 @@
         <h2 id="remplaceBaliseLegend" class="connexionEtu">Connexion étudiant</h2>
         <p>
             <label for="username">Identifiant</label>
-            <input type="text" name="username" id="username" required placeholder="Identifiant:">
+            <input type="text" name="username" id="username" required placeholder="Identifiant">
         <p>
             <label for="password">Mot de passe</label>
         <div class="password-input">

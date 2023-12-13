@@ -4,7 +4,7 @@
 <div class="container">
     <h2 class="remplaceBaliseLegend">Bienvenue sur Praktiki !</h2>
     <a href="#stageSection" class="button">En savoir plus sur les stages</a>
-    <a href="#alternanceSection" class="button">en savoir plus sur les alternances</a>
+    <a href="#alternanceSection" class="button">En savoir plus sur les alternances</a>
 </div>
 <div id="stageSection" class="container jusitfyTexte">
     <h2 class="remplaceBaliseLegend">Les stages BUT2 et BUT3 en France</h2>

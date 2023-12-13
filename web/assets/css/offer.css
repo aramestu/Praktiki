@@ -475,23 +475,23 @@ h3 {
 }
 
 #popUpDeleteNo:hover{
-    background-color: var(--red);
-    color: var(--white);
+    background-color: var(--lightpastelRed);
+    color: var(--red);
 }
 
 #popUpDeleteNo{
-    background-color: var(--pomegranate);
-    color: var(--white);
+    background-color: var(--lightpastelRed);
+    color: var(--darkRed);
 }
 
 #popUpDeleteYes:hover{
-    background-color: var(--emerald);
-    color: var(--white);
+    background-color: var(--lightpastelGreen);
+    color: var(--green);
 }
 
 #popUpDeleteYes{
-    background-color: var(--green);
-    color: var(--white);
+    background-color: var(--lightpastelGreen);
+    color: var(--darkGreen);
 }
 /*--- END POP UP ---*/
 

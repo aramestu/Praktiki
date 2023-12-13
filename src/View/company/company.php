@@ -25,7 +25,7 @@ $siret = $entreprise->getSiret();
             Numéro de téléphone : <?php echo(htmlspecialchars($entreprise->getTelephoneEntreprise()));?>
         </p>
         <p>
-            Site web : <a href="https://<?php echo $siteWeb; ?>"> <?php echo $siteWeb;?> </a>
+            Site web : <a class="link" href="https://<?php echo $siteWeb; ?>"> <?php echo $siteWeb;?> </a>
         </p>
     </div>
     <!--<?php /*if (! $entreprise->getEstValide()) :*/ ?>

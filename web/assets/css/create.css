@@ -38,13 +38,6 @@
     }
 }
 
-#backIcon {
-    margin-right: 275px;
-    width: 30px;
-    height: 30px;
-
-}
-
 @media (max-width: 1300px) {
     #createOffer{
         min-width: 800px;
@@ -72,7 +65,7 @@
     }
 
     #siret{
-        margin-bottom: 85px;
+        /*margin-bottom: 85px;*/
     }
 
     input[type="text"],
@@ -124,6 +117,12 @@
         width: 266px;
         margin-right: 0px;
     }
-
 }
 
+#submitButton::before {
+    font-family: 'FontAwesome';
+    font-size: 5em;
+    content: '\f19d';
+    display: block;
+    margin: 20px;
+}

@@ -389,6 +389,7 @@ main{
 }
 
 .subContainer {
+    position: relative;
     color: var(--darkBlue2);
     width: 69%;
     text-align: center;
@@ -541,7 +542,8 @@ legend{
     height: 50px;
     margin: 0;
     padding: 0;
-    filter: invert(100%);
+    /*filter: invert(100%);*/
+    filter: invert(1) brightness(1.5) ;
 }
 
 .logo:hover{
