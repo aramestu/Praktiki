@@ -586,7 +586,7 @@ legend{
     }
 }
 
-@keyframes ultimateAnimation {
+@keyframes ultimateAnimationBIS {
     0% {
         transform: perspective(500px);
     }
