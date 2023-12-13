@@ -38,17 +38,13 @@ $codePostal = htmlspecialchars($user->getCodePostalEtudiant());
                 <label class="InputAddOn-item" for="mailPerso">Email Personnel :</label>
                 <input class="InputAddOn-field" type="text" value=<?= $mailPerso ?> name="mailPerso" id="mailPerso" required>
 
+                <input type="hidden" name="action" value="displayTDB">
+                <input type="hidden" name="controller" value="TDB">
+                <input type="hidden" name="tdbAction" value="MettreAJour">
+                <input type="submit" value="Mettre à jour">
+
             </p>
         </div>
-<div class=btn>
-    <p>
-            <input type="hidden" name="action" value="displayTDB">
-            <input type="hidden" name="controller" value="TDB">
-            <input type="hidden" name="tdbAction" value="MettreAJour">
-            <input type="submit" value="Mettre à jour">
-        </p>
-    </div>
-        
     </form>
 </div>
 
