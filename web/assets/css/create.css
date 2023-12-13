@@ -65,7 +65,7 @@
     }
 
     #siret{
-        margin-bottom: 85px;
+        /*margin-bottom: 85px;*/
     }
 
     input[type="text"],
@@ -117,4 +117,12 @@
         width: 266px;
         margin-right: 0px;
     }
+}
+
+#submitButton::before {
+    font-family: 'FontAwesome';
+    font-size: 5em;
+    content: '\f19d';
+    display: block;
+    margin: 20px;
 }
