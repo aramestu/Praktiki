@@ -3,7 +3,7 @@ $siteWeb = htmlspecialchars($entreprise->getSiteWebEntreprise());
 $siret = $entreprise->getSiret();
 ?>
 <link rel="stylesheet" href="assets/css/button.css">
-<div class="container">
+<div class="container companyDetail">
     <div class="header">
         <div class="company">
             <h2>
@@ -25,11 +25,11 @@ $siret = $entreprise->getSiret();
             Numéro de téléphone : <?php echo(htmlspecialchars($entreprise->getTelephoneEntreprise()));?>
         </p>
         <p>
-            Site web : <a href="https://<?php echo $siteWeb; ?>"> <?php echo $siteWeb;?> </a>
+            Site web : <a class="link" href="https://<?php echo $siteWeb; ?>"> <?php echo $siteWeb;?> </a>
         </p>
     </div>
-    <?php if (! $entreprise->getEstValide()) : ?>
-        <a href="frontController.php?controller=Entreprise&action=accepter&siret=<?php echo $siret; ?>" class="button">Accepter</a>
-    <?php endif; ?>
-    <a href="frontController.php?controller=Entreprise&action=refuser&siret=<?php echo $siret?>" class="button">Supprimer</a>
+    <!--<?php /*if (! $entreprise->getEstValide()) :*/ ?>
+        <a href="frontController.php?controller=Entreprise&action=accepter&siret=<?php //echo $siret; ?>" class="button">Accepter</a>
+    <?php /*endif;*/ ?>
+    <a href="frontController.php?controller=Entreprise&action=refuser&siret=<?php //echo $siret?>" class="button">Supprimer</a> -->
 </div>

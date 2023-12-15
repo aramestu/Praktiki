@@ -44,23 +44,11 @@ ul li {
     padding-bottom: 2px;
 }
 
-#apply {
-    background-color: var(--bleuUM);
-    color: var(--white);
-    width: 25%;
-    padding: 15px 0;
-    border: none;
-    border-radius: 1.5rem;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1.2em;
-    box-shadow: inset 10px 10px 20px #ffffff45,
-    inset -10px -10px 20px #00000020,
-    10px 10px 10px #00000020,
-    -10px -10px 10px #ffffff45;
-
-    margin-top: 22px;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+#apply::before {
+    content: '\f0c1';
+    font-family: FontAwesome;
+    font-weight: 900;
+    margin-right: 10px;
 }
 
 #apply:hover {
@@ -109,8 +97,11 @@ td {
 
 /*--- START SMALL OFFER ---*/
 .small {
+    opacity: 0;
+    transform: translateY(20px);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    border-radius: 1rem;
+    border-radius: 25px;
+    background: var(--activeGrey);
     padding: 5px;
     text-align: center;
     min-width: 225px;
@@ -118,17 +109,42 @@ td {
     height: 225px;
     word-break: break-word;
     margin-left: 14%;
-    color: var(--darkBlue2);
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+    color: var(--textColor3);
     border: 2.5px solid #F2F2F200;
+    animation: appear 0.5s ease-in-out;
+    animation-fill-mode: forwards;
+    animation-delay: 0.1s;
+    overflow: hidden;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+.tableResponsive:nth-child(n + 2) {
+    animation-delay: 1s;
 }
 
 .small:hover {
     cursor: pointer;
+    box-shadow: 2px 4px 16px rgba(0,0,0,.16);
+    transform: scale3d(1.01,1.01,1.01);
 }
 
 .small div {
     font-size: 11px;
     padding: 5px;
+    font-weight: 500;
 }
 
 h3 {
@@ -270,61 +286,96 @@ h3 {
 }
 
 .typeExpPro {
-    border-radius: 0.5rem;
+    border-radius: 13px;
     padding: 6px;
     font-size: 11px;
     font-weight: bold;
     width: max-content;
     margin-bottom: 5px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+#mainContainer:hover{
+    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
 }
 
 .Stage > .header > .left > .typeExpPro,
 .Stage > .header > .information > .typeExpPro {
-    border-color: var(--wisteria);
-    background-color: var(--wisteria);
-    color: var(--white);
+    border-color: var(--lightpastelPurple);
+    background-color: var(--lightpastelPurple);
+    color: var(--darkPurple);
+}
+
+.Stage:hover > .header > .left > .typeExpPro{
+    box-shadow: 0px 0px 90px 70px  #D1C6D6;
 }
 
 .Stage:hover {
-    border-color: var(--wisteria);
+    border-color: var(--pastelPurple);
     box-shadow: 10px 10px 10px #00000025,
-    -10px -10px 10px #8E44AD25;
+    -10px -10px 10px #B08AB625;
 }
 
 .Alternance > .header > .left > .typeExpPro,
 .Alternance > .header > .information > .typeExpPro {
-    border-color: var(--orange);
-    background-color: var(--orange);
-    color: var(--white);
+    border-color: var(--lightpastelOrange);
+    background-color: var(--lightpastelOrange);
+    color: var(--darkOrange);
 }
 
-#mainContainer:hover{
-    box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1), 0 4px 16px rgba(31, 38, 135, 0.1);
+.Alternance:hover > .header > .left > .typeExpPro{
+    box-shadow: 0px 0px 90px 70px #f3dbc2;
 }
 
 .Alternance:hover {
-    border-color: var(--orange);
+    border-color: var(--pastelOrange);
     box-shadow: 10px 10px 10px #00000025,
-    -10px -10px 10px #E67E2225;
+    -10px -10px 10px #F8C9A025;
 }
+
 
 .OffreNonDefini > .header > .left > .typeExpPro,
 .OffreNonDefini> .header > .information > .typeExpPro {
-    background: linear-gradient(-45deg, var(--wisteria) 0%, var(--wisteria) 50%, var(--orange) 50%, var(--orange) 100%);
-    color: var(--white);
-    border-bottom-color: var(--wisteria);
-    border-left-color: var(--orange);
-    border-right-color: var(--wisteria);
-    border-top-color: var(--orange);
+    background: linear-gradient(-45deg, var(--lightpastelPurple) 0%, var(--lightpastelPurple) 50%, var(--lightpastelOrange) 50%, var(--lightpastelOrange) 100%);
+    color: var(--darkBlue2);
+    border-bottom-color: var(--pastelPurple);
+    border-left-color: var(--pastelOrange);
+    border-right-color: var(--pastelPurple);
+    border-top-color: var(--pastelOrange);
 }
 
+.OffreNonDefini > .header > .left > .typeExpPro > label,
+.OffreNonDefini> .header > .information > .typeExpPro > label {
+    background: linear-gradient(-45deg, var(--darkPurple) 0%, var(--darkPurple) 50%, var(--darkOrange) 50%, var(--darkOrange) 100%);
+    color: transparent; /* Make text transparent to apply gradient */
+    border-bottom-color: var(--pastelPurple);
+    border-left-color: var(--pastelOrange);
+    border-right-color: var(--pastelPurple);
+    border-top-color: var(--pastelOrange);
+    display: inline-block; /* Ensure the gradient is applied to the text */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.small:hover,
+.small{
+    border: none;
+}
+
+.OffreNonDefini:hover > .header > .left > .typeExpPro {
+    box-shadow:50px 30px 45px 35px #D1C6D6,
+    -50px -30px 45px 35px #f3dbc2;
+}
+
+
+
 .OffreNonDefini:hover {
-    border-bottom-color: var(--wisteria);
-    border-left-color: var(--orange);
-    border-right-color: var(--wisteria);
-    border-top-color: var(--orange);
+    border-bottom-color: var(--pastelPurple);
+    border-left-color: var(--pastelOrange);
+    border-right-color: var(--pastelPurple);
+    border-top-color: var(--pastelOrange);
     box-shadow: 10px 10px 10px #00000025,
-    -10px -10px 10px #E67E2225;
+    -10px -10px 10px #F8C9A025;
 }
 /*--- END SMALL OFFER ---*/
 
@@ -424,22 +475,38 @@ h3 {
 }
 
 #popUpDeleteNo:hover{
-    background-color: var(--red);
-    color: var(--white);
+    background-color: var(--lightpastelRed);
+    color: var(--red);
 }
 
 #popUpDeleteNo{
-    background-color: var(--pomegranate);
-    color: var(--white);
+    background-color: var(--lightpastelRed);
+    color: var(--darkRed);
 }
 
 #popUpDeleteYes:hover{
-    background-color: var(--emerald);
-    color: var(--white);
+    background-color: var(--lightpastelGreen);
+    color: var(--green);
 }
 
 #popUpDeleteYes{
-    background-color: var(--green);
-    color: var(--white);
+    background-color: var(--lightpastelGreen);
+    color: var(--darkGreen);
 }
 /*--- END POP UP ---*/
+
+.codePostalID::before{
+    content: '\f041';
+    font-family: FontAwesome;
+    font-weight: 900;
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+#map {
+    height: 400px;
+    width: 100%;
+    border-radius: 1.5rem;
+    margin-bottom: -20px;
+}
+

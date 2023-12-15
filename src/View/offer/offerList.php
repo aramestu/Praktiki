@@ -1,25 +1,8 @@
 <link rel="stylesheet" href="assets/css/offer.css">
 <link rel="stylesheet" href="assets/css/filter.css">
 <script src="assets/javascript/buildOfferTable.js"></script>
+<script src="assets/javascript/dynamicFilters.js"></script>
 
-<div class="container">
-
-    <form method="get" action="frontController.php">
-
-        <input type="hidden" name="action" value="getExpProBySearch">
-        <input type="hidden" name="controller" value="ExpPro">
-        <input type="text" placeholder="Rechercher une offre" name="keywords" id="search-bar" <?php
-        if (isset($_GET["keywords"])) {
-            echo "value=\"" . rawurldecode($_GET['keywords']) . "\"";
-        }
-        ?>>
-
-        <button type="submit" class="custom-button" id="search-button">
-            <img src="assets/images/loupe.png" alt="Loupe Icon" width="20" height="20">
-        </button>
-
-    </form>
-</div>
 <div class="HBox" id="center">
 
     <div class="container VBox" id="sideFilter">
@@ -37,7 +20,6 @@
             <input type="date" name="dateFin" id="dateFin" <?php if (isset($_GET['dateFin'])){ echo "value=\"" . $_GET['dateFin'] . "\"";}?>>
 
 
-            <span>Type d'offre</span>
             <div class="button-checkbox stage">
                 <Label>
                     <input type="checkbox" id="stage" name="stage" value="stage" <?php if (isset($_GET['stage'])){ echo "checked";}?>>
@@ -52,7 +34,6 @@
                 </label>
             </div>
 
-            <span>Année minimum demandée</span>
             <div class="button-checkbox stage">
                 <Label>
                     <input type="checkbox" id="BUT2" name="BUT2" value="BUT2" <?php if (isset($_GET['BUT2'])){ echo "checked";}?>>
@@ -67,27 +48,45 @@
                 </Label>
             </div>
 
-            <label for="codePostal">Code Postal</label>
-            <input type="number" id="codePostal" name="codePostal"  min="0" max="99999" placeholder="34090" <?php if (isset($_GET['codePostal'])){ echo "value=\"" . rawurldecode($_GET['codePostal'] . "\"");}?>>
+            <input type="number" id="codePostal" name="codePostal"  min="0" max="99999" placeholder="code postal" <?php if (isset($_GET['codePostal'])){ echo "value=\"" . rawurldecode($_GET['codePostal'] . "\"");}?>>
 
 
             <select name="optionTri" id="optionTri">
                 <option value="" disabled <?php if (!isset($_GET['optionTri'])){ echo "selected";}?> style="display:none;">Trier par</option>
                 <option value="datePublication" <?php if (isset($_GET['optionTri']) && $_GET['optionTri'] == "datePublication"){ echo "selected";}?> >Offres les plus récentes</option>
                 <option value="datePublicationInverse" <?php if (isset($_GET['optionTri']) && $_GET['optionTri'] == "datePublicationInverse"){ echo "selected";}?> >Offres les plus anciennes</option>
-                <option value="salaireCroissant" <?php if (isset($_GET['optionTri']) && $_GET['optionTri'] == "salaireCroissant"){ echo "selected";}?> >Salaire croissant</option>
-                <option value="salaireDecroissant" <?php if (isset($_GET['optionTri']) && $_GET['optionTri'] == "salaireDecroissant"){ echo "selected";}?> >Salaire décroissant</option>
             </select>
 
-            <button type="reset" id="reset">Tout effacer</button>
+            <button type="reset" id="reset">
+                <span>Effacer</span>
+            </button>
             <input type="hidden" name="action" value="getExpProByFiltre">
             <input type="hidden" name="controller" value="ExpPro">
-            <input type="submit" id="rechercher" value="rechercher">
         </form>
     </div>
 
+    <div class="VBox">
+
+            <form id="searchBarParent" method="get" action="frontController.php">
+
+                <input type="hidden" name="action" value="getExpProBySearch">
+                <input type="hidden" name="controller" value="ExpPro">
+                <input type="text" placeholder="Rechercher une offre" name="keywords" id="search-bar" <?php
+                if (isset($_GET["keywords"])) {
+                    echo "value=\"" . rawurldecode($_GET['keywords']) . "\"";
+                }
+                ?>>
+
+                <button type="submit" class="custom-button" id="search-button">
+                    <img src="assets/images/loupe.png" alt="Loupe Icon" width="0" height="0">
+                </button>
+
+            </form>
+
     <div id="tableOffer">
+
         <?php require 'offerTable.php'; ?>
+    </div>
     </div>
 
 </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\SAE\Model\Repository\AbstractExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 ?>
@@ -8,15 +9,19 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
     <div class="subContainer small <?php echo $expPro->getNomExperienceProfessionnel(); ?>">
         <div class="header">
             <div class="left">
-                <p class="bold typeExpPro"><?php
+                <p class="bold typeExpPro">
+                    <!--TODO: soren change tes labels-->
+                    <label><?php
                     $expPro->getNomExperienceProfessionnel();
                     if ($expPro->getNomExperienceProfessionnel() == "Stalternance") {
                         echo "Non définie";
                     } else {
                         echo htmlspecialchars($expPro->getNomExperienceProfessionnel());
                     }
-                    ?></p>
-                <p><?php echo (new ExperienceProfessionnelRepository())->getDatePublication($expPro) ?></p>
+                    ?>
+                    </label>
+                </p>
+                <p><?php echo AbstractExperienceProfessionnelRepository::getDelayDatePublication($expPro) ?></p>
             </div>
             <div class="right">
                 <p>Du <?php echo htmlspecialchars($expPro->getDateDebutExperienceProfessionnel()); ?></p>
@@ -28,8 +33,7 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
             <p><?php $entreprise = (new EntrepriseRepository())->getById($expPro->getSiret());
                 echo(htmlspecialchars($entreprise->getNomEntreprise()));
                 ?></p>
-            <p><img src="assets/images/map-pin-icon.png"
-                    class="mapPin" alt="MapPin"><span><?php echo htmlspecialchars($expPro->getCodePostalExperienceProfessionnel()); ?></span>
+            <p><span class="codePostalID"><?php echo htmlspecialchars($expPro->getCodePostalExperienceProfessionnel()); ?></span>
             </p>
         </div>
     </div>

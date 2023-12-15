@@ -1,10 +1,9 @@
 /*--- START Container Styles ---*/
 .container {
-    background: var(--lightGrey);
     padding: 20px;
     min-width: 330px;
     border-radius: 20px;
-    box-shadow: 10px 10px 20px #00000020, -10px -10px 20px #ffffff45;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
     display: inline-block;
     text-align: center;
     max-width: 400px;
@@ -151,4 +150,37 @@ label {
     height: 600px;
     margin: 15px;
     background: red;
+}
+
+#connectButton span::before{
+    content: '\f090';
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+}
+
+/*--- END Create Offer ---*/
+
+/*--- START ICONS ---*/
+.connexionEtu::before{
+    font-family: 'FontAwesome';
+    font-size: 1.1em;
+    content: '\f19d';
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.connexionComp::before{
+    font-family: 'FontAwesome';
+    font-size: 1.1em;
+    content: '\f0b1';
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.connexionProf::before{
+    font-family: 'FontAwesome';
+    font-size: 1.1em;
+    content: '\f007';
+    margin-right: 10px;
+    vertical-align: middle;
 }

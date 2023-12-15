@@ -1,3 +1,8 @@
+<?php
+
+use App\SAE\Lib\ConnexionUtilisateur;
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -10,6 +15,10 @@
     <link rel="stylesheet" href="assets/css/button.css">
 
     <script src="assets/javascript/navbar.js"></script>
+    <link rel="stylesheet" href="assets/css/resources/font-awesome-4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
 
@@ -18,7 +27,7 @@
 <header>
 
     <a href="frontController.php?action=zoneDetest"><img id="logoToggle" class="logo"
-                                                         src="assets/images/LOGO_UM_filet-blanc.png" alt="LogoUM"></a>
+                                                         src="assets/images/logo_sae_clear.png" alt="LogoUM"></a>
 
     <div class="burger">
         <span></span>
@@ -26,21 +35,21 @@
 
     <nav class="navbar">
         <a href="frontController.php?action=home" class="nav-item" data-action="home">Accueil</a>
-        <?php if (\App\SAE\Lib\ConnexionUtilisateur::estConnecte()) {
+        <?php if (ConnexionUtilisateur::estConnecte()) {
             echo '
                 <a href="frontController.php?action=getExpProByDefault&controller=ExpPro" class="nav-item" data-action="offre">Offres</a>
+                <a href="frontController.php?controller=TDB&action=displayTDB" class="nav-item" data-action="tdbEtudiant">Mes infos</a>
                 ';
         }
-        ?>
-        <a href="frontController.php?action=contact" class="nav-item" data-action="contact">Contact</a>
-        <?php if (!\App\SAE\Lib\ConnexionUtilisateur::estConnecte()) {
+         echo'<a href="frontController.php?action=contact" class="nav-item" data-action="contact">Contact</a>';
+        if (!ConnexionUtilisateur::estConnecte()) {
             echo '
                 <a href="frontController.php?action=preference" class="nav-item" data-action="connect">Connexion</a>
                 ';
-        } else {
+        } else
+        if (ConnexionUtilisateur::estConnecte()) {
             echo '
-                    <a href="frontController.php?controller=Etudiant&action=displayTDBetu" class="nav-item" data-action="tdbEtudiant">Mes infos</a>
-                    <a href="frontController.php?action=disconnect&controller=Generique" class="nav-item" data-action="disconnect">Déconnexion</a>
+                    <a href="frontController.php?action=disconnect&controller=Connexion" class="nav-item" data-action="disconnect">Déconnexion</a>
                 ';
         }
         ?>

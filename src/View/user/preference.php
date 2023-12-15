@@ -1,24 +1,9 @@
-<link rel="stylesheet" href="assets/css/connect.css">
+<link rel="stylesheet" href="assets/css/choiceConnection.css">
 <div class="container">
-    <form method="get">
-        <h2 id="remplaceBaliseLegend">Choisissez votre compte</h2>
-        <p>
-            <input type="hidden" name="action" value="connect">
-            <input type="hidden" name="controller" value="LDAP">
-            <input type="submit" value="Compte IUT">
-    </form>
-    <form method="get">
-        <p>
-            <input type="hidden" name="action" value="connect">
-            <input type="hidden" name="controller" value="Entreprise">
-            <input type="submit" value="Compte Entreprise">
-        </p>
-    </form>
-    <form method="get">
-        <p>
-            <input type="hidden" name="action" value="connect">
-            <input type="hidden" name="controller" value="Enseignant">
-            <input type="submit" value="Compte Enseignant">
-        </p>
-    </form>
+    <h2 id="remplaceBaliseLegend">Choisissez votre compte</h2>
+    <div class="HBox">
+        <a id="studentChoice" class="button" href="frontController.php?action=afficherConnexionLdap&controller=Connexion">Compte IUT</a>
+        <a id="companyChoice" class="button" href="frontController.php?action=afficherConnexionEntreprise&controller=Connexion">Compte Entreprise</a>
+        <a id="professorChoice" class="button" href="frontController.php?action=afficherConnexionPersonnel&controller=Connexion">Compte Personnel</a>
+    </div>
 </div>

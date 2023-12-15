@@ -9,7 +9,7 @@ use App\SAE\Model\DataObject\Entreprise;
 class EntrepriseRepository extends AbstractRepository
 {
 
-    protected function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise {
+    public function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise {
         $entreprise = new Entreprise(
             $entrepriseFormatTableau["siret"],
             $entrepriseFormatTableau["nomEntreprise"],
@@ -17,9 +17,9 @@ class EntrepriseRepository extends AbstractRepository
             $entrepriseFormatTableau["effectifEntreprise"],
             $entrepriseFormatTableau["telephoneEntreprise"],
             $entrepriseFormatTableau["siteWebEntreprise"],
-            $entrepriseFormatTableau["emailEntreprise"],
+            $entrepriseFormatTableau["mailEntreprise"],
             $entrepriseFormatTableau["mdpHache"],
-            $entrepriseFormatTableau["emailAValider"],
+            $entrepriseFormatTableau["mailAValider"],
             $entrepriseFormatTableau["nonce"]);
         if(isset($entrepriseFormatTableau["estValide"])){
             $entreprise->setEstValide($entrepriseFormatTableau["estValide"]);
@@ -38,7 +38,7 @@ class EntrepriseRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return array("siret", "nomEntreprise", "codePostalEntreprise", "effectifEntreprise", "telephoneEntreprise", "siteWebEntreprise", "estValide", "emailEntreprise", "mdpHache",  "emailAValider", "nonce");
+        return array("siret", "nomEntreprise", "codePostalEntreprise", "effectifEntreprise", "telephoneEntreprise", "siteWebEntreprise", "estValide", "mailEntreprise", "mdpHache",  "mailAValider", "nonce");
     }
 
     /*
@@ -157,5 +157,25 @@ class EntrepriseRepository extends AbstractRepository
         $pdoStatement->execute($values);
     }
 
+    public function getNbEntrepriseValide(): int
+    {
+        $sql = "SELECT COUNT(*) FROM Entreprises WHERE estValide = 1";
+        $requestStatement = Model::getPdo()->prepare($sql);
+        $requestStatement->execute();
+        return $requestStatement->fetchColumn();
+    }
 
+    public function getNbEntrepriseAttente() : int{
+        $sql = "SELECT COUNT(*) FROM Entreprises WHERE estValide = 0";
+        $requestStatement = Model::getPdo()->prepare($sql);
+        $requestStatement->execute();
+        return $requestStatement->fetchColumn();
+    }
+
+    public function getNbEntrpriseRefusee() : int{
+        $sql = "SELECT COUNT(*) FROM EntreprisesArchives";
+        $requestStatement = Model::getPdo()->prepare($sql);
+        $requestStatement->execute();
+        return $requestStatement->fetchColumn();
+    }
 }

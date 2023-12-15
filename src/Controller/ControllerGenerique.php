@@ -2,8 +2,8 @@
 
 namespace App\SAE\Controller;
 
-use App\SAE\Lib\ConnexionUtilisateur;
 use App\SAE\Lib\MessageFlash;
+use JetBrains\PhpStorm\NoReturn;
 
 abstract class ControllerGenerique
 {
@@ -14,7 +14,7 @@ abstract class ControllerGenerique
         require __DIR__ . '/../View/' . $cheminVue;
     }
 
-    public static function home()
+    public static function home(): void
     {
         self::afficheVue(
             'view.php',
@@ -41,14 +41,8 @@ abstract class ControllerGenerique
         self::afficheVue('view.php', ['pagetitle' => 'Zone de test', 'cheminVueBody' => 'SAE/zoneDeTest.php']);
     }
 
-    public static function disconnect()
-    {
-        ConnexionUtilisateur::deconnecter();
-        self::redirectionVersURL("success", "Déconnexion réussie", "home");
-    }
 
-
-    public static function redirectionVersURL(string $type,string $message,string $url): void
+    #[NoReturn] public static function redirectionVersURL(string $type, string $message, string $url): void
     {
         MessageFlash::ajouter($type,$message);
         header("Location: frontController.php?action=$url");

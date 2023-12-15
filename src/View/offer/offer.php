@@ -1,26 +1,20 @@
 <link rel="stylesheet" href="assets/css/offer.css">
 <link rel="stylesheet" href="assets/css/button.css">
 <script src="assets/javascript/popUpDelete.js"></script>
+<script src="assets/javascript/map.js"></script>
 
 <?php
 
+use App\SAE\Lib\ConnexionUtilisateur;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\StageRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
-
-/* IL Y AVAIT CELA A LA PLACE DE echo $expPro->getNomExperienceProfessionnel();
-* DONC SI CA NE FONCTIONNE PLUS, C EST PEUT ETRE A CAUSE DE CA
-
-$full_path = get_class($expPro);
-$elements = explode('\\', $full_path);
-$last_element = end($elements);
-echo htmlspecialchars($last_element) */
 ?>
 
 <div id="mainContainer" class="subContainer <?php echo $expPro->getNomExperienceProfessionnel(); ?>">
     <div class="header">
         <div class="information">
-            <p class="bold typeExpPro"> <?php echo $expPro->getNomExperienceProfessionnel(); ?></p>
+            <p class="bold typeExpPro"><label><?php echo $expPro->getNomExperienceProfessionnel(); ?></label></p>
             <p>du <?= htmlspecialchars($expPro->getDateDebutExperienceProfessionnel()) ?></p>
             <p>au <?= htmlspecialchars($expPro->getDateFinExperienceProfessionnel()) ?></p>
         </div>
@@ -29,19 +23,19 @@ echo htmlspecialchars($last_element) */
                 $entreprise = (new EntrepriseRepository())->getById($expPro->getSiret());
                 echo(htmlspecialchars($entreprise->getNomEntreprise()));
                 ?></h2>
-            <label><?= htmlspecialchars($expPro->getAdresseExperienceProfessionnel()) ?>
+            <label class="codePostalID"><?= htmlspecialchars($expPro->getAdresseExperienceProfessionnel()) ?>
                 / <?= htmlspecialchars($expPro->getCodePostalExperienceProfessionnel()) ?></label>
         </div>
     </div>
     <div id="main">
         <div id="infoOffer">
-            <p><?php echo (new ExperienceProfessionnelRepository())->getDatePublication($expPro) ?></p>
+            <p><?php echo $expPro->getDatePublication() ?></p>
             <p class="bold">Sujet : <?= htmlspecialchars($expPro->getSujetExperienceProfessionnel()) ?></p>
             <?php
             if ($expPro->getNomExperienceProfessionnel() == "Stage") {
                 ?>
                 <p>Gratification : <?php
-                    $stage = (new StageRepository())->get($expPro->getIdExperienceProfessionnel());
+                    $stage = (new StageRepository())->getById($expPro->getIdExperienceProfessionnel());
                     echo(htmlspecialchars($stage->getGratificationStage()));
                     ?>€</p>
                 <?php
@@ -60,15 +54,34 @@ echo htmlspecialchars($last_element) */
                        class="link">Site web</a></li>
             </ul>
         </div>
+
     </div>
-
+    <?php
+    if (ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::getLoginUtilisateurConnecte()==$entreprise->getSiret()) {
+        ?>
     <a id="deleteButtonOrigin"><img src="assets/images/bin-icon.png" id="deleteIcon" alt="Bin"></a>
-    <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel()) ?>"><img
+    <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel())?>"><img
                 src="assets/images/edit-icon.png" id="editIcon" alt="EditButton"></a>
-    <a href="frontController.php?controller=ExpPro&action=getExpProByDefault"><img src="assets/images/back-icon.png"
-                                                                                   id="backIcon" alt="BackToOffer"></a>
+    <?php
+    }
+    ?>
 
-    <button id="apply">Postuler</button>
+
+
+
+    <div id="map"></div>
+    <div class="HBox">
+        <?php
+
+    if(ConnexionUtilisateur::estEntreprise()){
+        echo'<a href="frontController.php?controller=TDB&action=displayTDB" class="button secondary">Retour au tableau de bord</a> ';
+    }
+    else{
+        echo'<a href="frontController.php?action=getExpProByDefault&controller=ExpPro" class="button secondary">Retour aux offres</a> ';
+    }
+    ?>
+        <button id="apply" class="button">Postuler</button>
+    </div>
 </div>
 
 <div id="popUpDelete" class="subContainer">
@@ -77,7 +90,8 @@ echo htmlspecialchars($last_element) */
         <p>Êtes-vous sûr de vouloir supprimer cette offre ?</p>
         <div class="HBox">
             <a class="button popUpDeleteButton" id="popUpDeleteNo">Non</a>
-            <a class="button popUpDeleteButton" id="popUpDeleteYes" href="frontController.php?controller=ExpPro&action=supprimerOffre&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel()) ?>">Oui</a>
+            <a class="button popUpDeleteButton" id="popUpDeleteYes"
+               href="frontController.php?controller=ExpPro&action=supprimerOffre&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel()) ?>">Oui</a>
         </div>
     </div>
 </div>

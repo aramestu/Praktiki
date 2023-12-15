@@ -115,11 +115,12 @@ class Etudiant extends AbstractDataObject
 
         return new Etudiant(
             $tableauFormulaire["num"],
-            $tableauFormulaire["prenom"],
             $tableauFormulaire["nom"],
+            $tableauFormulaire["prenom"],
             $tableauFormulaire["mailPerso"],
             $tableauFormulaire["mailUniv"],
-            $tableauFormulaire["tel"],
-            $tableauFormulaire["codePostal"]);
+            $tableauFormulaire["telephone"],
+            $tableauFormulaire["postcode"]
+        );
     }
 }

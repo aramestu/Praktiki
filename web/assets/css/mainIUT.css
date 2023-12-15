@@ -11,6 +11,9 @@
 
 
 /*---START HEADER---*/
+html {
+    scroll-behavior: smooth;
+}
 
 header {
     position: fixed;
@@ -26,6 +29,7 @@ header {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0px 0px 100px 0px rgba(0,0,0,0.06);
 }
 
 header::before {
@@ -35,8 +39,10 @@ header::before {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: var(--rougeUM);
+    backdrop-filter: blur(15px);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
     z-index: -1;
+    background: var(--darkBlue2);
 }
 
 header:hover::after {
@@ -55,12 +61,14 @@ header:hover::after {
 }
 
 .nav-item {
+    position: relative;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    color: var(--white);
+    color: var(--lightGrey);
     text-decoration: none;
     font-weight: bold;
+    font-size: 1.05rem;
     width: 110px;
     height: 50px;
     margin-left: 2.5rem;
@@ -69,25 +77,31 @@ header:hover::after {
 }
 
 .nav-item:active, .nav-item.active {
-    background: var(--rougeUM);
-    color: var(--white);
-    text-decoration: none;
+    background: var(--darkBlue2);
     border-radius: 1.5rem;
     transform: scale(0.95);
-    box-shadow: inset 10px 10px 20px #ffffff25,
-    inset -10px -10px 20px #00000015,
-    10px 10px 10px #00000015,
-    -10px -10px 10px #ffffff25;
+    text-decoration: none;
+}
+
+.nav-item.active::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    display: block;
+    height: 8px;
+    width: 8px;
+    background: currentColor;
+    border-radius: 50%;
 }
 
 .nav-item:hover {
-    color: var(--grey3);
+    color: var(--darkBlue2);
     background-color: var(--white);
     text-decoration: none;
     border-radius: 1.5rem;
     text-decoration: none;
-    box-shadow: inset 10px 10px 20px #00000020,
-    inset -10px -10px 20px #ffffff45;
 }
 
 .icons {
@@ -109,7 +123,7 @@ header:hover::after {
 .burger span::after {
     content: "";
     width: 100%;
-    background-color: var(--white);
+    background-color: var(--darkBlue2);
     display: block;
     transition: all 0.5s ease-in-out;
     border-radius: 12px;
@@ -144,7 +158,8 @@ header:hover::after {
     position: absolute;
     width:100%;
     height:100%;
-    animation: enter-transition-overlay .4s ease-in-out;
+    z-index: -1;
+    /*animation: enter-transition-overlay .4s ease-in-out;*/
 }
 
 @keyframes enter-transition-overlay {
@@ -169,9 +184,25 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: white;
+    background: var(--background);
     background-position: center;
+    -webkit-font-smoothing: antialiased;
 }
+
+/* Pour les versions récentes de Firefox */
+@supports (-moz-appearance:none) {
+    body {
+        font-smooth: always;
+    }
+}
+
+/* Pour les versions plus anciennes de Firefox */
+@-moz-document url-prefix() {
+    body {
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
 /*---END BODY---*/
 
 
@@ -204,7 +235,7 @@ main{
         align-items: center;
         width: 100%;
         height: 100%;
-        margin-bottom: 20px;
+        gap: 20px;
     }
 
     input[type="submit"]{
@@ -233,7 +264,7 @@ main{
         align-items: center;
         width: 100%;
         height: 100%;
-        margin-bottom: 20px;
+        gap:20px;
     }
 
     input[type="submit"]{
@@ -276,7 +307,7 @@ main{
     .burger span {
         width: 100%;
         height: 4px;
-        background-color: var(--white);
+        background-color: var(--darkBlue2);
         border-radius: 12px;
         display: block;
         transition: background-color 0.5s ease-in-out;
@@ -349,28 +380,25 @@ main{
     width: 69%;
     text-align: center;
     font-size: 12px;
-    background: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(50px);
-    -webkit-backdrop-filter: blur(50px);
+    background: var(--activeGrey);
     padding: 2%;
     margin: 1.5%;
     border-radius: 1.5rem;
-    box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1), 0 4px 16px rgba(31, 38, 135, 0.1);
+    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
     z-index: 1;
 }
 
 .subContainer {
+    position: relative;
     color: var(--darkBlue2);
     width: 69%;
     text-align: center;
     font-size: 12px;
-    background: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(50px);
-    -webkit-backdrop-filter: blur(50px);
+    background: var(--activeGrey);
     padding: 2%;
     margin: 1.5%;
     border-radius: 1.5rem;
-    box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1), 0 4px 16px rgba(31, 38, 135, 0.1);
+    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
     z-index: 1;
 }
 
@@ -400,17 +428,32 @@ input[type="password"],
 input[type='date'],
 select,
 textarea {
+    color: var(--textColor);
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border: none;
-    border-radius: 1.5rem;
+    border: 2px solid var(--lightGrey);
+    border-radius: 15px;
     background-color: var(--white);
     -webkit-appearance: none;
     -moz-appearance: textfield;
-    box-shadow: inset 10px 10px 20px #00000020,
-    inset -10px -10px 20px #ffffff45;
     color: var(--darkBlue1);
+    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+input[type='date']:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border : 2px solid var(--lightpastelBlue);
+}
+
+input[readonly]{
+    background-color: var(--lightGrey);
+    color: var(--grey2);
 }
 
 span:hover,
@@ -427,18 +470,14 @@ select:invalid {
 }
 
 input[type="submit"] {
-    background-color: var(--bleuUM);
+    background-color: var(--darkBlue2);
     color: var(--white);
     padding: 15px 0;
     border: none;
-    border-radius: 1.5rem;
+    border-radius: 15px;
     cursor: pointer;
     font-weight: bold;
     font-size : 1.2em;
-    box-shadow: inset 10px 10px 20px #ffffff45,
-    inset -10px -10px 20px #00000020,
-    10px 10px 10px #00000020,
-    -10px -10px 10px #ffffff45;
     margin-top: 30px;
     transition: all 0.3s ease-in-out;
 }
@@ -450,8 +489,6 @@ input[type="submit"]:hover {
 
 input[type="submit"]:active {
     color: var(--white);
-    box-shadow: inset 10px 10px 20px #00000020,
-    inset -10px -10px 20px #ffffff45;
     opacity: 0.8;
 }
 
@@ -476,7 +513,7 @@ textarea:focus{
 /*---START NO RESULTS---*/
 #noOfferFound{
     position: absolute;
-    margin-left: 3%;
+    margin-left: -23%;
     background: none;
     box-shadow: none;
 }
@@ -510,6 +547,56 @@ legend{
     height: 50px;
     margin: 0;
     padding: 0;
+    /*filter: invert(100%);*/
+    filter: invert(1) brightness(1.5) ;
+}
+
+.logo:hover{
+    animation: logo-react 1s infinite;
+}
+
+@keyframes logo-react {
+    0% {
+        filter : invert(100%);
+    }
+    75% {
+        filter: invert(50%);
+    }
+    100% {
+        filter: invert(100%);
+    }
+}
+
+.welcomeLogo{
+    width: 300px;
+    filter: invert(0) brightness(1.8) ;
+    border-radius: 50%;
+    animation: ultimateAnimation 10s infinite;
+}
+
+@keyframes hovering {
+    0% {
+        transform: rotate3d(0, 0, 0, 0deg);
+    }
+    50% {
+        transform: rotate3d(1, 1, 1, 360deg);
+    }
+    100% {
+        transform: rotate3d(0, 0, 0, 0deg);
+    }
+}
+
+@keyframes ultimateAnimationBIS {
+    0% {
+        transform: perspective(500px);
+    }
+    50% {
+        transform: perspective(500px) rotate3d(1, 1, 1, 360deg);
+    }
+    100% {
+        transform: perspective(500px);
+    }
+
 }
 
 #errorIcon{
@@ -570,6 +657,15 @@ legend{
 .jusitfyTexte{
     text-align: justify;
 }
+
+#stageSection::before,
+#alternanceSection::before {
+    content: "";
+    display: block;
+    height: 60px; /* Adjust based on the height of your header */
+    margin-top: -60px; /* This should be the same value as height */
+    visibility: hidden;
+}
 /*---END MISCELLANEOUS---*/
 
 
@@ -584,9 +680,7 @@ footer {
     text-align: center;
     font-size: 12px;
     font-weight: bold;
-    background: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(50px);
-    -webkit-backdrop-filter: blur(50px);
+    background: var(--footer);
     padding: 3%;
     box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1), 0 4px 16px rgba(31, 38, 135, 0.1);
     z-index: 11;
@@ -615,7 +709,7 @@ footer > VBox{
     top : 90px;
     padding: 15px;
     margin-bottom: 20px;
-    border: 1px solid transparent;
+    /*border: 1px solid transparent;*/
     border-radius: 1.5rem;
     z-index: 5;
     animation: slideDown 1s, fadeOut 9.5s 1s;
@@ -624,21 +718,21 @@ footer > VBox{
 @keyframes slideDown {
     0% {
         transform: translateY(-100%);
-        opacity: 1;
+        opacity: 0.9;
     }
     100% {
         transform: translateY(0);
-        opacity: 1;
+        opacity: 0.9;
     }
 }
 
 @keyframes fadeOut {
     0% {
-        opacity: 1;
+        opacity: 0.9;
         z-index: 5;
     }
     90% {
-        opacity: 1;
+        opacity: 0.9;
         z-index: 5;
     }
     99% {

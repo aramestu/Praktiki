@@ -1,0 +1,41 @@
+.container{
+    min-width: 580px;
+    max-width: 60%;
+}
+
+.button{
+    min-width: 170px;
+    max-width: 30%;
+    height: 170px;
+}
+
+h2{
+    margin-bottom: 20px;
+}
+
+#studentChoice::before{
+    font-family: 'FontAwesome';
+    font-size: 5em;
+    content: '\f19d';
+    display: block;
+    margin: 20px;
+    vertical-align: middle;
+}
+
+#companyChoice::before{
+    font-family: 'FontAwesome';
+    font-size: 5em;
+    content: '\f0b1';
+    display: block;
+    margin: 20px;
+    vertical-align: middle;
+}
+
+#professorChoice::before{
+    font-family: 'FontAwesome';
+    font-size: 5em;
+    content: '\f007';
+    display: block;
+    margin: 20px;
+    vertical-align: middle;
+}

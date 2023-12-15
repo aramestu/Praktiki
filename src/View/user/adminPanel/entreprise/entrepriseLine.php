@@ -6,6 +6,5 @@
     <label class="lineCodePostalEntreprise"><?= htmlspecialchars($entreprise->getCodePostalEntreprise())?></label>
     <label class="lineTelephoneEntreprise"><a class="link" href="tel:<?=$entreprise->getTelephoneEntreprise()?>"><?=htmlspecialchars($entreprise->getTelephoneEntreprise())?></a></label>
     <label class="lineSiteWebEntreprise"><a class="link" href="https://<?= rawurlencode($entreprise->getSiteWebEntreprise())?>">Site web</a></label>
-    <!--TODO: voir avec norman comment faire affichage -->
     <a class="button" href="frontController.php?action=panelGestionEntreprise&controller=PanelAdmin&siret=<?=rawurlencode($entreprise->getSiret())?>">Consulter</a>
 </div>

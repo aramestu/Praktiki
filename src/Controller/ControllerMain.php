@@ -57,25 +57,42 @@ class ControllerMain extends ControllerGenerique
 
     public static function resetPassword(): void
     {
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'changer le mot de passe',
-                'cheminVueBody' => 'user/resetPassword.php',
-            ]
-        );
+        if (ConnexionUtilisateur::estEntreprise()) {
+            $user = (new EntrepriseRepository())->getById(ConnexionUtilisateur::getLoginUtilisateurConnecte());
+            self::afficheVue(
+                'view.php',
+                [
+                    'pagetitle' => 'changer le mot de passe',
+                    'cheminVueBody' => 'user/resetPassword.php',
+                    'user' => $user,
+                ]
+            );
+        } else {
+            self::afficheVue(
+                'view.php',
+                [
+                    'pagetitle' => 'changer le mot de passe',
+                    'cheminVueBody' => 'user/resetPassword.php',
+                ]
+            );
+        }
     }
 
-    public static function preference():void{
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Préférence',
-                'cheminVueBody' => 'user/preference.php',
-            ]
-        );
-    }
+    public static function preference(): void
+    {
+        if (ConnexionUtilisateur::estConnecte()) {
+            self::home();
+        } else {
+            self::afficheVue(
+                'view.php',
+                [
+                    'pagetitle' => 'Préférence',
+                    'cheminVueBody' => 'user/preference.php',
+                ]
+            );
+        }
 
+    }
 
 
     public static function import(): void
@@ -112,7 +129,7 @@ class ControllerMain extends ControllerGenerique
                                 $column[3], $column[6], $column[7], $column[5], $column[45]));
                         } else if ($i == 3) {//Entreprises
                             (new EntrepriseRepository())->save(new Entreprise($column[55], $column[54], $column[59],
-                                $column[64], $column[66], $column[69],"","","",""));
+                                $column[64], $column[66], $column[69], "", "", "", ""));
                         } else if ($i == 4) {//Enseignants
                             (new EnseignantRepository())->save(new Enseignant($column[31], $column[29], $column[30]));
                         } else if ($i == 5) {//stages
@@ -149,19 +166,4 @@ class ControllerMain extends ControllerGenerique
      */
 
 
-    public static function displayTDBentreprise()
-    {
-        $listeExpPro = AbstractExperienceProfessionnelRepository::rechercheAllOffreFiltree(ConnexionUtilisateur::getLoginUtilisateurConnecte());
-        $siret=ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user=(new EntrepriseRepository())->getById($siret);
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Tableau de bord',
-                'listeExpPro' => $listeExpPro,
-                'user'=>$user,
-                'cheminVueBody' => 'user/tableauDeBord/entreprise.php'
-            ]
-        );
-    }
 }
