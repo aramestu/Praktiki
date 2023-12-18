@@ -26,7 +26,7 @@ function getRandomValue(range) {
     }
 
     // Create 50 snowflakes
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 150; i++) {
       createSnowflake();
     }
 });
