@@ -187,6 +187,7 @@ body {
     background: var(--background);
     background-position: center;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
 }
 
 /* Pour les versions récentes de Firefox */
