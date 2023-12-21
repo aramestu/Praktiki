@@ -13,6 +13,7 @@ use App\SAE\Lib\ConnexionUtilisateur;
     <link id="theme" rel="stylesheet" type="text/css" href="assets/css/mainIUT.css">
     <link rel="stylesheet" href="assets/css/charte-graphique-UM.css">
     <link rel="stylesheet" href="assets/css/button.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
 
     <script src="assets/javascript/navbar.js"></script>
     <link rel="stylesheet" href="assets/css/resources/font-awesome-4.7.0/css/font-awesome.min.css">

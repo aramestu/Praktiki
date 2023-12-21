@@ -123,7 +123,7 @@ header:hover::after {
 .burger span::after {
     content: "";
     width: 100%;
-    background-color: var(--darkBlue2);
+    background-color: var(--white);
     display: block;
     transition: all 0.5s ease-in-out;
     border-radius: 12px;
@@ -308,7 +308,7 @@ main{
     .burger span {
         width: 100%;
         height: 4px;
-        background-color: var(--darkBlue2);
+        background-color: var(--white);
         border-radius: 12px;
         display: block;
         transition: background-color 0.5s ease-in-out;
@@ -378,11 +378,9 @@ main{
 /*---START CONTAINER---*/
 .container {
     color: var(--darkBlue2);
-    width: 69%;
     text-align: center;
     font-size: 12px;
     background: var(--activeGrey);
-    padding: 2%;
     margin: 1.5%;
     border-radius: 1.5rem;
     box-shadow: 2px 4px 12px rgba(0,0,0,.08);
@@ -570,15 +568,12 @@ legend{
 
 .welcomeLogo{
     display: block;
-    width: 300px;
     filter: invert(0) brightness(1.8) ;
     border-radius: 50%;
 }
 
 #bgLogo{
     position: absolute;
-    width:220px;
-    height:228px;
     background: var(--activeGrey);
     border-radius: 50%;
 }
@@ -589,10 +584,7 @@ legend{
   justify-content: center;
   align-items: center;
   z-index: -2;
-  height: 500px;
-  width: 500px;
   position: relative;
-  right: 5em;
 }
 
 
@@ -700,13 +692,13 @@ legend{
 
 .link {
     text-decoration: none;
-    color: var(--grey3);
+    color: var(--purple);
     position: relative;
     transition: color 0.3s ease-in-out;
 }
 
 .link:hover {
-    color: var(--rougeUM);
+    color: var(--darkPurple);
 }
 
 .link::before {
@@ -716,7 +708,7 @@ legend{
     left: 0;
     width: 0;
     height: 1.5px;
-    background: var(--rougeUM);
+    background: var(--darkPurple);
     transition: width 0.3s ease-in-out;
 }
 
