@@ -1,4 +1,42 @@
+@media (max-width: 41200px) {
+    .sidebar {
+        width: auto;
+    }
+}
 
+@media (max-width: 1300px) {
+    .sidebar {
+        width: auto;
+    }
+}
+
+@media (max-width: 950px) {
+    .sidebar {
+        width:55px;
+    }
+
+    .sidebar > a {
+        font-size: 1em;
+    white-space: nowrap;
+    overflow: hidden;
+        color: var(--activeGrey);
+        width: 45px;
+        margin-left: -15px;
+    }
+
+    .sidebar > a:hover,
+    .sidebar > a.active {
+        color: var(--lightGrey);
+    }
+
+    .sidebar > h2 {
+        display: none;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+}
 
 #recentOffers {
     width: 69%;
@@ -18,10 +56,6 @@
     text-align: left;
 }
 
-.container {
-    width: auto;
-}
-
 .TDB {
     width: 100%;
     display: flex;
@@ -39,7 +73,6 @@
 
 .sidebar > a.active{
     background: var(--lightGrey);
-    color: var(--darkBlue2);
     box-shadow: none;
     text-align: left;
 }
@@ -206,7 +239,6 @@
 
 .sidebar > a{
     background: none;
-    color: var(--darkBlue2);
     box-shadow: none;
     text-align: left;
     margin-top: 10px;
@@ -214,7 +246,6 @@
 
 .sidebar > a:hover {
     background: var(--lightGrey);
-    color: var(--darkBlue2);
     box-shadow: none;
     text-align: left;
     transform: translateX(5px);
@@ -226,6 +257,7 @@
     font-size: 1.8em;
     content: "\f015";
     vertical-align: middle;
+    color: var(--darkBlue2);
 }
 
 #infoButton::before {
@@ -234,6 +266,7 @@
     font-size: 1.8em;
     content: "\f05a";
     vertical-align: middle;
+    color: var(--darkBlue2);
 }
 
 #stageButton::before {
@@ -242,4 +275,5 @@
     font-size: 1.8em;
     content: "\f0b1";
     vertical-align: middle;
+    color: var(--darkBlue2);
 }
