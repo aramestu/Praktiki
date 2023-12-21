@@ -575,6 +575,14 @@ legend{
     border-radius: 50%;
 }
 
+#bgLogo{
+    position: absolute;
+    width:220px;
+    height:228px;
+    background: var(--activeGrey);
+    border-radius: 50%;
+}
+
 .blob-cont {
   display: flex;
   flex-direction: column;
@@ -594,7 +602,7 @@ legend{
 }
 
 .yellow {
-  background-color: var(--lightpastelOrange);
+  background-color: var(--lightpastelBlue);
   position: absolute;
   top: 200px;
   left: 100px;
@@ -605,7 +613,7 @@ legend{
 }
 
 .green {
-  background-color: var(--lightpastelPurple);
+  background-color: var(--lightpastelBlue);
   position: absolute;
   top: 80px;
   right: -20px;
@@ -616,7 +624,7 @@ legend{
 }
 
 .red {
-  background-color: var(--lightpastelRed);
+  background-color: var(--lightpastelBlue);
   position: absolute;
   right: 0;
   top: 300px;
