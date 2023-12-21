@@ -692,13 +692,14 @@ legend{
 
 .link {
     text-decoration: none;
-    color: var(--purple);
+    color: var(--darkBlue2);
+    font-weight: bold;
     position: relative;
     transition: color 0.3s ease-in-out;
 }
 
 .link:hover {
-    color: var(--darkPurple);
+    color: var(--darkBlue);
 }
 
 .link::before {
@@ -708,7 +709,7 @@ legend{
     left: 0;
     width: 0;
     height: 1.5px;
-    background: var(--darkPurple);
+    background: var(--darkBlue);
     transition: width 0.3s ease-in-out;
 }
 
