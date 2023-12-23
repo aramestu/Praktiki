@@ -2,11 +2,35 @@
     .sidebar {
         width: auto;
     }
+
+    .sidebar > a{
+        color: var(--darkBlue2);
+    }
+
+    .sidebar > a:hover{
+        color: var(--darkBlue2);
+    }
+
+    .accueilContainer{
+        flex-direction: row;
+    }
 }
 
 @media (max-width: 1300px) {
     .sidebar {
         width: auto;
+    }
+
+    .sidebar > a{
+        color: var(--darkBlue2);
+    }
+
+    .sidebar > a:hover{
+        color: var(--darkBlue2);
+    }
+
+    .accueilContainer{
+        flex-direction: row;
     }
 }
 
@@ -17,8 +41,8 @@
 
     .sidebar > a {
         font-size: 1em;
-    white-space: nowrap;
-    overflow: hidden;
+        white-space: nowrap;
+        overflow: hidden;
         color: var(--activeGrey);
         width: 45px;
         margin-left: -15px;
@@ -35,6 +59,14 @@
 
     h2 {
         font-size: 1.2em;
+    }
+
+    .accueilContainer{
+        flex-direction: column;
+    }
+
+    .infoUtilisateur{
+        margin-bottom: 20px;
     }
 }
 
@@ -116,7 +148,6 @@
 
 .accueilContainer {
     display: flex;
-    flex-direction: row;
     align-items: flex-start;
     padding-top: 5%;
     height: 100%;

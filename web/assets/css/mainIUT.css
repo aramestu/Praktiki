@@ -320,9 +320,7 @@ main{
         left: 0;
         width: 100%;
         height: 0;
-        background: rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(50px);
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        background: var(--darkBlue2);
         overflow: hidden;
         transition: all 0.5s ease-in-out;
     }
@@ -369,6 +367,15 @@ main{
     #noResults-icon{
         width: 100px;
         height: 100px;
+    }
+
+    .navbar a:last-child {
+        margin-bottom: 4rem;
+    }
+
+    .nav-item:active{
+        background: var(--darkBlue2);
+        color: var(--white);
     }
 }
 /*---END RESPONSIVE---*/
