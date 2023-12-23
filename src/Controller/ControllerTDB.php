@@ -11,6 +11,7 @@ use App\SAE\Model\Repository\EnseignantRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
+use App\SAE\Service\ServiceEnseignant;
 use App\SAE\Service\ServiceEtudiant;
 
 class ControllerTDB extends ControllerGenerique {
@@ -73,14 +74,10 @@ class ControllerTDB extends ControllerGenerique {
     public static function displayTDBensMettreAJour(): void
     {
         $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user = (new EnseignantRepository())->getByEmail($mail);
-        if (!is_null($user)) {
-            $user = Enseignant::construireDepuisFormulaire($_GET);
-            (new EnseignantRepository())->mettreAJour($user);
-            self::redirectionVersURL("success", "L'enseignant a été mis à jour", "displayTDB&controller=TDB");
-        } else {
-            self::redirectionVersURL("warning", "cet enseignant n'existe pas", "afficherFormulaireMiseAJour");
-        }
+        $enseignant = (new EnseignantRepository())->getByEmail($mail);
+
+        ServiceEnseignant::mettreAJour($enseignant, []);
+        self::redirectionVersURL("success", "L'enseignant a été mis à jour", "displayTDB&controller=TDB");
     }
 
     private static function displayTDBentreprise(): void {
@@ -187,7 +184,7 @@ class ControllerTDB extends ControllerGenerique {
             $attributs["codePostalEtudiant"] = $_POST["postcode"];
         }
 
-        ServiceEtudiant::miseAJour($etudiant, $attributs);
+        ServiceEtudiant::mettreAJour($etudiant, $attributs);
         self::redirectionVersURL("success", "L'etudiant a été mis à jour", "displayTDB&controller=TDB");
     }
 

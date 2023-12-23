@@ -7,7 +7,7 @@ use App\SAE\Model\Repository\EtudiantRepository;
 
 class ServiceEtudiant {
 
-    public static function miseAJour(Etudiant $etudiant, array $attributs){
+    public static function mettreAJour(Etudiant $etudiant, array $attributs): void{
         if(isset($attributs["numEtudiant"])){
             $etudiant->setNumEtudiant($attributs["numEtudiant"]);
         }
