@@ -14,6 +14,15 @@
     .accueilContainer{
         flex-direction: row;
     }
+
+    .column{
+        width:45%;
+    }
+
+    input[type="submit"]{
+        width: 30%;
+        margin-left: 32%;
+    }
 }
 
 @media (max-width: 1300px) {
@@ -31,6 +40,15 @@
 
     .accueilContainer{
         flex-direction: row;
+    }
+
+    .column{
+        width:45%;
+    }
+
+    input[type="submit"]{
+        width: 30%;
+        margin-left: 32%;
     }
 }
 
@@ -67,6 +85,16 @@
 
     .infoUtilisateur{
         margin-bottom: 20px;
+    }
+
+    .column{
+        width:120%;
+        margin-left: -50px;
+    }
+
+    input[type="submit"]{
+        width: 120%;
+        margin-left: -50px;
     }
 }
 
