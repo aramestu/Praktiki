@@ -815,6 +815,53 @@ a img:active{
     margin-right: 0;
 }
 
+/*---START TOOLTIP---*/
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    opacity: 0;
+    width: 300%;
+    background-color: var(--darkBlue2);
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 15;
+    transition: all 0.3s ease-in-out;
+    animation: disappearTooltip 0.3s ease-in-out forwards;
+}
+
+.tooltip:hover > .tooltiptext {
+    animation: appearTooltip 0.3s ease-in-out forwards;
+}
+
+@keyframes appearTooltip {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@keyframes disappearTooltip {
+    0% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+/*---END TOOLTIP---*/
+
 #statTotal{
     background: var(--lightpastelBlue);
 }
