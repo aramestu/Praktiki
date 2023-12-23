@@ -336,3 +336,12 @@
     vertical-align: middle;
     color: var(--darkBlue2);
 }
+
+#adminButton::before {
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    font-size: 1.8em;
+    content: "\f0ad";
+    vertical-align: middle;
+    color: var(--darkBlue2);
+}
