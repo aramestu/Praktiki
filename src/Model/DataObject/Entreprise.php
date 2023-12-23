@@ -124,12 +124,12 @@ class Entreprise extends AbstractDataObject
         $this->mailEntreprise = $email;
     }
 
-    public function getEmailAValider(): string
+    public function getMailAValider(): string
     {
         return $this->mailAValider;
     }
 
-    public function setEmailAValider(string $emailAValider): void
+    public function setMailAValider(string $emailAValider): void
     {
         $this->mailAValider = $emailAValider;
     }

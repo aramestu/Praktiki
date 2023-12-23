@@ -12,6 +12,7 @@ use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 use App\SAE\Service\ServiceEnseignant;
+use App\SAE\Service\ServiceEntreprise;
 use App\SAE\Service\ServiceEtudiant;
 
 class ControllerTDB extends ControllerGenerique {
@@ -113,14 +114,29 @@ class ControllerTDB extends ControllerGenerique {
     public static function displayTDBentrepriseMettreAJour(): void
     {
         $siret = ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user = (new entrepriseRepository())->getById($siret);
-        if (!is_null($user)) {
-            $user = Entreprise::construireDepuisFormulaire($_GET);
-            (new entrepriseRepository())->mettreAJour($user);
-            self::redirectionVersURL("success", "L'entreprise a été mis à jour", "displayTDB&controller=TDB");
-        } else {
-            self::redirectionVersURL("warning", "cet entreprise n'existe pas", "afficherFormulaireMiseAJour");
+        $entreprise = (new entrepriseRepository())->getById($siret);
+        $attributs = [];
+        if($_POST["nom"]){
+            $attributs["nomEntreprise"] = $_POST["nom"];
         }
+        if($_POST["mail"]){
+            $attributs["mailEntreprise"] = $_POST["mail"];
+        }
+        if($_POST["telephone"]){
+            $attributs["telephoneEntreprise"] = $_POST["telephone"];
+        }
+        if($_POST["postcode"]){
+            $attributs["codePostalEntreprise"] = $_POST["postcode"];
+        }
+        if($_POST["website"]){
+            $attributs["siteWebEntreprise"] = $_POST["website"];
+        }
+        if($_POST["effectif"]){
+            $attributs["effectifEntreprise"] = $_POST["effectif"];
+        }
+
+        ServiceEntreprise::mettreAJour($entreprise, $attributs);
+        self::redirectionVersURL("success", "L'entreprise a été mis à jour", "displayTDB&controller=TDB");
     }
 
     private static function displayTDBetu() {
