@@ -3,10 +3,11 @@
 namespace App\SAE\Service;
 
 use App\SAE\Model\DataObject\Entreprise;
+use App\SAE\Model\DataObject\AbstractDataObject;
 
-class ServiceEntreprise {
+class ServiceEntreprise implements ServiceInterface {
 
-    public static function mettreAJour(Entreprise $entreprise, array $attributs): void{
+    public static function mettreAJour(Entreprise|AbstractDataObject $entreprise, array $attributs): void{
         if(isset($attributs["siret"])){
             $entreprise->setSiret($attributs["siret"]);
         }

@@ -2,12 +2,13 @@
 
 namespace App\SAE\Service;
 
+use App\SAE\Model\DataObject\AbstractDataObject;
 use App\SAE\Model\DataObject\Enseignant;
 use App\SAE\Model\Repository\EnseignantRepository;
 
-class ServiceEnseignant {
+class ServiceEnseignant implements ServiceInterface {
 
-    public static function mettreAJour(Enseignant $enseignant, array $attributs): void{
+    public static function mettreAJour(Enseignant|AbstractDataObject $enseignant, array $attributs): void{
         if(isset($attributs["mailEnseignant"])){
             $enseignant->setMailEnseignant($attributs["mailEnseignant"]);
         }

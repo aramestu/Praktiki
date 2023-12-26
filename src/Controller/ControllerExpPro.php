@@ -3,6 +3,9 @@
 namespace App\SAE\Controller;
 
 use App\SAE\Lib\ConnexionUtilisateur;
+use App\SAE\Model\DataObject\Alternance;
+use App\SAE\Model\DataObject\ExperienceProfessionnel;
+use App\SAE\Model\DataObject\OffreNonDefini;
 use App\SAE\Model\Repository\AbstractExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\AlternanceRepository;
 use App\SAE\Model\Repository\Model;
@@ -10,6 +13,9 @@ use App\SAE\Model\Repository\OffreNonDefiniRepository;
 use App\SAE\Model\Repository\StageRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 use App\SAE\Model\DataObject\Stage;
+use App\SAE\Service\ServiceAlternance;
+use App\SAE\Service\ServiceOffreNonDefini;
+use App\SAE\Service\ServiceStage;
 
 class ControllerExpPro extends ControllerGenerique
 {
@@ -195,50 +201,81 @@ class ControllerExpPro extends ControllerGenerique
     }
 
 
-    public static function modifierDepuisFormulaire(): void
-    {
-        $msg = "Offre modifiée avec succés !";
-        $tab = [
-            "sujetExperienceProfessionnel" => $_POST["sujet"],
-            "thematiqueExperienceProfessionnel" => $_POST["thematique"],
-            "tachesExperienceProfessionnel" => $_POST["taches"],
-            "niveauExperienceProfessionnel" => $_POST["niveau"],
-            "codePostalExperienceProfessionnel" => $_POST["codePostal"],
-            "adresseExperienceProfessionnel" => $_POST["adressePostale"],
-            "dateDebutExperienceProfessionnel" => $_POST["dateDebut"],
-            "dateFinExperienceProfessionnel" => $_POST["dateFin"],
-            "siret" => $_POST["siret"]
-        ];
-        if (ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::getLoginUtilisateurConnecte() == $_POST["siret"]->getSiret()) {
-            // Si c'est un stage
-            if ($_POST["typeOffre"] == "stage") {
-                $tab["gratificationStage"] = $_POST["gratification"]; // Un stage a une gratification à renseigner en plus
-                $tab["idStage"] = $_POST["id"];
-                $rep = new StageRepository();
-                $stage = $rep->construireDepuisTableau($tab);
-                $rep->mettreAJour($stage);
-                self::afficherVueEndOffer($msg); // Redirection vers une page
-            } // Si c'est une alternance
-            elseif ($_POST["typeOffre"] == "alternance") {
-                $tab["idAlternance"] = $_POST["id"];
-                $rep = new AlternanceRepository();
-                $alternance = $rep->construireDepuisTableau($tab);
-                $rep->mettreAJour($alternance);
-                self::afficherVueEndOffer($msg); // Redirection vers une page
-            } // Si c'est une offre non défini
-            elseif ($_POST["typeOffre"] == "offreNonDefini") {
-                $tab["idOffreNonDefini"] = $_POST["id"];
-                $rep = new OffreNonDefiniRepository();
-                $stalternance = $rep->construireDepuisTableau($tab);
-                $rep->mettreAJour($stalternance);
-                self::afficherVueEndOffer($msg); // Redirection vers une page
-            } // Si ce n'est aucun des 3 alors ce n'est pas normal
-            else {
-                ControllerGenerique::error("Ce type d'offre n'existe pas");
-            }
-        } else {
-            self::redirectionVersURL("danger", "Vous n'avez pas les droits pour modifier cette offre", "home");
+    public static function modifierDepuisFormulaire(): void {
+
+        if(!isset($_POST["id"])){
+            self::redirectionVersURL("warning", "Aucune offre selectionnée", "home");
+            return;
         }
+        if(!isset($_POST["typeOffre"])){
+            self::redirectionVersURL("warning", "Aucun type d'offre fourni", "home");
+            return;
+        }
+
+        $tab = [];
+        if(isset($_POST["sujet"])){
+            $tab["sujetExperienceProfessionnel"] = $_POST["sujet"];
+        }
+        if(isset($_POST["thematique"])){
+            $tab["thematiqueExperienceProfessionnel"] = $_POST["thematique"];
+        }
+        if(isset($_POST["taches"])){
+            $tab["tachesExperienceProfessionnel"] = $_POST["taches"];
+        }
+        if(isset($_POST["niveau"])){
+            $tab["niveauExperienceProfessionnel"] = $_POST["niveau"];
+        }
+        if(isset($_POST["codePostal"])){
+            $tab["codePostalExperienceProfessionnel"] = $_POST["codePostal"];
+        }
+        if(isset($_POST["adressePostale"])){
+            $tab["adresseExperienceProfessionnel"] = $_POST["adressePostale"];
+        }
+        if(isset($_POST["dateDebut"])){
+            $tab["dateDebutExperienceProfessionnel"] = $_POST["dateDebut"];
+        }
+        if(isset($_POST["dateFin"])){
+            $tab["dateFinExperienceProfessionnel"] = $_POST["dateFin"];
+        }
+
+        // Si c'est un stage
+        if ($_POST["typeOffre"] == "stage") {
+            if(isset($_POST["gratification"])){
+                $tab["gratificationStage"] = $_POST["gratification"];
+            }
+            $stage = (new StageRepository())->getById($_POST["id"]);
+            if( !self::utilisateurPeutModifier($stage) ){
+                self::redirectionVersURL("danger", "Vous n'avez pas les droits pour modifier cette offre", "home");
+                return;
+            }
+            ServiceStage::mettreAJour($stage, $tab);
+        } // Si c'est une alternance
+        elseif ($_POST["typeOffre"] == "alternance") {
+            $alternance = (new AlternanceRepository())->getById($_POST["id"]);
+            if( !self::utilisateurPeutModifier($alternance) ){
+                self::redirectionVersURL("danger", "Vous n'avez pas les droits pour modifier cette offre", "home");
+                return;
+            }
+            ServiceAlternance::mettreAJour($alternance, $tab);
+        } // Si c'est une offre non défini
+        elseif ($_POST["typeOffre"] == "offreNonDefini") {
+            $offreNonDefini = (new OffreNonDefiniRepository())->getById($_POST["id"]);
+            if( !self::utilisateurPeutModifier($offreNonDefini) ){
+                self::redirectionVersURL("danger", "Vous n'avez pas les droits pour modifier cette offre", "home");
+                return;
+            }
+            ServiceOffreNonDefini::mettreAJour($offreNonDefini, $tab);
+        } // Si ce n'est aucun des 3 alors ce n'est pas normal
+        else {
+            self::redirectionVersURL("danger", "Le type d'offre fourni n'existe pas", "home");
+            return;
+        }
+
+        self::redirectionVersURL("success", "Offre modifié avec succès", "home");
+    }
+
+    private static function utilisateurPeutModifier(ExperienceProfessionnel $experienceProfessionnel) {
+        return ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::getLoginUtilisateurConnecte() == $experienceProfessionnel->getSiret();
     }
 
     public static function afficherVueEndOffer($msg): void

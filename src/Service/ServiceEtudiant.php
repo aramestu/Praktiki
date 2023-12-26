@@ -4,10 +4,11 @@ namespace App\SAE\Service;
 
 use App\SAE\Model\DataObject\Etudiant;
 use App\SAE\Model\Repository\EtudiantRepository;
+use App\SAE\Model\DataObject\AbstractDataObject;
 
-class ServiceEtudiant {
+class ServiceEtudiant implements ServiceInterface {
 
-    public static function mettreAJour(Etudiant $etudiant, array $attributs): void{
+    public static function mettreAJour(Etudiant|AbstractDataObject $etudiant, array $attributs): void{
         if(isset($attributs["numEtudiant"])){
             $etudiant->setNumEtudiant($attributs["numEtudiant"]);
         }
