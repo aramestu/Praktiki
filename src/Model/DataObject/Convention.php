@@ -504,4 +504,43 @@ class Convention extends AbstractDataObject {
         $tab["estSigneeTag"] = ($this->estSignee) ? 1 : 0;
         return $tab;
     }
+
+    public function getSetters(): array{
+        return [
+            "mailEnseignant" => "setMailEnseignant",
+            "nomEnseignant" => "setNomEnseignant",
+            "prenomEnseignant" => "setPrenomEnseignant",
+            "competencesADevelopper" => "setCompetencesADevelopper",
+            "dureeDeTravail" => "setDureeDeTravail",
+            "languesImpression" => "setLanguesImpression",
+            "origineDeLaConvention" => "setOrigineDeLaConvention",
+            "sujetEstConfidentiel" => "setSujetEstConfidentiel",
+            "nbHeuresHebdo" => "setNbHeuresHebdo",
+            "modePaiement" => "setModePaiement",
+            "dureeExperienceProfessionnel" => "setDureeExperienceProfessionnel",
+            "caisseAssuranceMaladie" => "setCaisseAssuranceMaladie",
+            "mailTuteurProfessionnel" => "setMailTuteurProfessionnel",
+            "prenomTuteurProfessionnel" => "setPrenomTuteurProfessionnel",
+            "nomTuteurProfessionnel" => "setNomTuteurProfessionnel",
+            "fonctionTuteurProfessionnel" => "setFonctionTuteurProfessionnel",
+            "telephoneTuteurProfessionnel" => "setTelephoneTuteurProfessionnel",
+            "sujetExperienceProfessionnel" => "setSujetExperienceProfessionnel",
+            "thematiqueExperienceProfessionnel" => "setThematiqueExperienceProfessionnel",
+            "tachesExperienceProfessionnel" => "setTachesExperienceProfessionnel",
+            "codePostalExperienceProfessionnel" => "setCodePostalExperienceProfessionnel",
+            "adresseExperienceProfessionnel" => "setAdresseExperienceProfessionnel",
+            "dateDebutExperienceProfessionnel" => "setDateDebutExperienceProfessionnel",
+            "dateFinExperienceProfessionnel" => "setDateFinExperienceProfessionnel",
+            "nomSignataire" => "setNomSignataire",
+            "prenomSignataire" => "setPrenomSignataire",
+            "siret" => "setSiret",
+            "nomEntreprise" => "setNomEntreprise",
+            "codePostalEntreprise" => "setCodePostalEntreprise",
+            "effectifEntreprise" => "setEffectifEntreprise",
+            "telephoneEntreprise" => "setTelephoneEntreprise",
+            "estFini" => "setEstFini",
+            "estValidee" => "setEstValidee",
+            "estSignee" => "setEstSignee"
+        ];
+    }
 }

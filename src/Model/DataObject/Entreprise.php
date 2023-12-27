@@ -189,4 +189,22 @@ class Entreprise extends AbstractDataObject
             $nonce
         );
     }
+
+
+    public function getSetters(): array {
+        return [
+            "siret" => "setSiret",
+            "nomEntreprise" => "setNomEntreprise",
+            "codePostalEntreprise" => "setCodePostalEntreprise",
+            "effectifEntreprise" => "setEffectifEntreprise",
+            "telephoneEntreprise" => "setTelephoneEntreprise",
+            "siteWebEntreprise" => "setSiteWebEntreprise",
+            "estValide" => "setEstValide",
+            "mailEntreprise" => "setMailEntreprise",
+            "mdpHache" => "setMdpHache",
+            "mailAValider" => "setMailAValider",
+            "nonce" => "setNonce",
+        ];
+
+    }
 }

@@ -248,7 +248,7 @@ class ControllerExpPro extends ControllerGenerique
                 self::redirectionVersURL("danger", "Vous n'avez pas les droits pour modifier cette offre", "home");
                 return;
             }
-            ServiceStage::mettreAJour($stage, $tab);
+            (new ServiceStage())->mettreAJour($stage, $tab);
         } // Si c'est une alternance
         elseif ($_POST["typeOffre"] == "alternance") {
             $alternance = (new AlternanceRepository())->getById($_POST["id"]);
@@ -256,7 +256,7 @@ class ControllerExpPro extends ControllerGenerique
                 self::redirectionVersURL("danger", "Vous n'avez pas les droits pour modifier cette offre", "home");
                 return;
             }
-            ServiceAlternance::mettreAJour($alternance, $tab);
+            (new ServiceAlternance())->mettreAJour($alternance, $tab);
         } // Si c'est une offre non défini
         elseif ($_POST["typeOffre"] == "offreNonDefini") {
             $offreNonDefini = (new OffreNonDefiniRepository())->getById($_POST["id"]);
@@ -264,7 +264,7 @@ class ControllerExpPro extends ControllerGenerique
                 self::redirectionVersURL("danger", "Vous n'avez pas les droits pour modifier cette offre", "home");
                 return;
             }
-            ServiceOffreNonDefini::mettreAJour($offreNonDefini, $tab);
+            (new ServiceOffreNonDefini())->mettreAJour($offreNonDefini, $tab);
         } // Si ce n'est aucun des 3 alors ce n'est pas normal
         else {
             self::redirectionVersURL("danger", "Le type d'offre fourni n'existe pas", "home");

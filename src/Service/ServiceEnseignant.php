@@ -6,22 +6,8 @@ use App\SAE\Model\DataObject\AbstractDataObject;
 use App\SAE\Model\DataObject\Enseignant;
 use App\SAE\Model\Repository\EnseignantRepository;
 
-class ServiceEnseignant implements ServiceInterface {
-
-    public static function mettreAJour(Enseignant|AbstractDataObject $enseignant, array $attributs): void{
-        if(isset($attributs["mailEnseignant"])){
-            $enseignant->setMailEnseignant($attributs["mailEnseignant"]);
-        }
-        if(isset($attributs["nomEnseignant"])){
-            $enseignant->setNomEnseignant($attributs["nomEnseignant"]);
-        }
-        if(isset($attributs["prenomEnseignant"])){
-            $enseignant->setPrenomEnseignant($attributs["prenomEnseignant"]);
-        }
-        if(isset($attributs["estAdmin"])){
-            $enseignant->setEstAdmin($attributs["estAdmin"]);
-        }
-
-        (new EnseignantRepository())->mettreAJour($enseignant);
+class ServiceEnseignant extends AbstractService {
+    public function getRepository(): string {
+        return "EnseignantRepository";
     }
 }

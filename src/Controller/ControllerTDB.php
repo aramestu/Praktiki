@@ -77,7 +77,7 @@ class ControllerTDB extends ControllerGenerique {
         $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
         $enseignant = (new EnseignantRepository())->getByEmail($mail);
 
-        ServiceEnseignant::mettreAJour($enseignant, []);
+        (new ServiceEnseignant())->mettreAJour($enseignant, []);
         self::redirectionVersURL("success", "L'enseignant a été mis à jour", "displayTDB&controller=TDB");
     }
 
@@ -134,7 +134,7 @@ class ControllerTDB extends ControllerGenerique {
             $attributs["effectifEntreprise"] = $_POST["effectif"];
         }
 
-        ServiceEntreprise::mettreAJour($entreprise, $attributs);
+        (new ServiceEntreprise())->mettreAJour($entreprise, $attributs);
         self::redirectionVersURL("success", "L'entreprise a été mis à jour", "displayTDB&controller=TDB");
     }
 
@@ -199,7 +199,7 @@ class ControllerTDB extends ControllerGenerique {
             $attributs["codePostalEtudiant"] = $_POST["postcode"];
         }
 
-        ServiceEtudiant::mettreAJour($etudiant, $attributs);
+        (new ServiceEtudiant())->mettreAJour($etudiant, $attributs);
         self::redirectionVersURL("success", "L'etudiant a été mis à jour", "displayTDB&controller=TDB");
     }
 

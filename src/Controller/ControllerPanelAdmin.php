@@ -173,7 +173,7 @@ class ControllerPanelAdmin extends ControllerGenerique {
             self::redirectionVersURL("warning", "aucune entreprise ne correspond à ce siret", "panelListeEntreprises&controller=PanelAdmin");
             return;
         }
-        ServiceEntreprise::mettreAJour($entreprise, $attributs);
+        (new ServiceEntreprise())->mettreAJour($entreprise, $attributs);
         self::panelGestionEntreprise();
     }
 
@@ -241,7 +241,7 @@ class ControllerPanelAdmin extends ControllerGenerique {
         if($etudiant == null){
             self::redirectionVersURL("warning", "aucun etudiant ne possède se numEtudiant", "panelListeEtudiants&controller=PanelAdmin");
         }
-        ServiceEtudiant::mettreAJour($etudiant, $attributs);
+        (new ServiceEtudiant())->mettreAJour($etudiant, $attributs);
         self::panelGestionEtudiant();
     }
 

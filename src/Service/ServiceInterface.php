@@ -5,5 +5,5 @@ namespace App\SAE\Service;
 use App\SAE\Model\DataObject\AbstractDataObject;
 
 interface ServiceInterface {
-    public static function mettreAJour(AbstractDataObject $dataObject, array $attributs): void;
+    public function mettreAJour(AbstractDataObject $dataObject, array $attributs): void;
 }

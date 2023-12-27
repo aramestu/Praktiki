@@ -2,8 +2,7 @@
 
 namespace App\SAE\Model\DataObject;
 
-class Departement extends AbstractDataObject
-{
+class Departement extends AbstractDataObject {
     private string $codeDepartement;
     private string $nomDepartement;
 
@@ -38,5 +37,13 @@ class Departement extends AbstractDataObject
             "codeDepartementTag" => $this->codeDepartement,
             "nomDepartementTag" => $this->nomDepartement
         );
+    }
+
+    public function getSetters(): array {
+       return [
+           "codeDepartement" => "setCodeDepartement",
+           "nomDepartement" => "setNomDepartement",
+       ];
+
     }
 }

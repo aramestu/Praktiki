@@ -87,4 +87,14 @@ class Enseignant extends AbstractDataObject
 
         );
     }
+
+    public function getSetters(): array {
+        return [
+            "mailEnseignant" => "setMailEnseignant",
+            "nomEnseignant" => "setNomEnseignant",
+            "prenomEnseignant" => "setPrenomEnseignant",
+            "estAdmin" => "setEstAdmin",
+        ];
+
+    }
 }

@@ -2,8 +2,7 @@
 
 namespace App\SAE\Model\DataObject;
 
-class AnneeUniversitaire extends AbstractDataObject
-{
+class AnneeUniversitaire extends AbstractDataObject {
     private string $idAnneeUniversitaire;
     private string $nomAnneeUniversitaire;
     private string $dateFinAnneeUniversitaire;
@@ -64,5 +63,15 @@ class AnneeUniversitaire extends AbstractDataObject
             "dateFinAnneeUniversitaireTag" => $this->dateFinAnneeUniversitaire,
             "dateDebutAnneeUniversitaireTag" => $this->dateDebutAnneeUniversitaire
         );
+    }
+
+    public function getSetters(): array {
+        return [
+            "idAnneeUniversitaire" => "setIdAnneeUniversitaire",
+            "nomAnneeUniversitaire" => "setNomAnneeUniversitaire",
+            "dateFinAnneeUniversitaire" => "setDateFinAnneeUniversitaire",
+            "dateDebutAnneeUniversitaire" => "setDateDebutAnneeUniversitaire"
+        ];
+
     }
 }
