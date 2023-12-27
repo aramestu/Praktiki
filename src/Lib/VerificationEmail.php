@@ -148,7 +148,7 @@ class VerificationEmail
         $user = (new EntrepriseRepository())->getById($login);
         if (!is_null($user)) {
             if ($user->formatTableau()["nonceTag"] == $nonce) {
-                $user->setEmailEntreprise($user->getMailAValider());
+                $user->setMailEntreprise($user->getMailAValider());
                 $user->setMailAValider("");
                 $user->setNonce("");
                 (new EntrepriseRepository())->mettreAJour($user);
@@ -160,6 +160,6 @@ class VerificationEmail
 
     public static function aValideEmail(Entreprise $Entreprise): bool
     {
-        return (bool) $Entreprise->getEmailEntreprise();
+        return (bool) $Entreprise->getMailEntreprise();
     }
 }

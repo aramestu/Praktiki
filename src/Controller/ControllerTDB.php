@@ -111,27 +111,26 @@ class ControllerTDB extends ControllerGenerique {
         );
     }
 
-    public static function displayTDBentrepriseMettreAJour(): void
-    {
+    public static function displayTDBentrepriseMettreAJour(): void {
         $siret = ConnexionUtilisateur::getLoginUtilisateurConnecte();
         $entreprise = (new entrepriseRepository())->getById($siret);
         $attributs = [];
-        if($_POST["nom"]){
+        if(isset($_POST["nom"])){
             $attributs["nomEntreprise"] = $_POST["nom"];
         }
-        if($_POST["mail"]){
+        if(isset($_POST["mail"])){
             $attributs["mailEntreprise"] = $_POST["mail"];
         }
-        if($_POST["telephone"]){
+        if(isset($_POST["telephone"])){
             $attributs["telephoneEntreprise"] = $_POST["telephone"];
         }
-        if($_POST["postcode"]){
+        if(isset($_POST["postcode"])){
             $attributs["codePostalEntreprise"] = $_POST["postcode"];
         }
-        if($_POST["website"]){
+        if(isset($_POST["website"])){
             $attributs["siteWebEntreprise"] = $_POST["website"];
         }
-        if($_POST["effectif"]){
+        if(isset($_POST["effectif"])){
             $attributs["effectifEntreprise"] = $_POST["effectif"];
         }
 

@@ -13,7 +13,7 @@ class ServiceEtudiant implements ServiceInterface {
             $etudiant->setNumEtudiant($attributs["numEtudiant"]);
         }
         if(isset($attributs["prenomEtudiant"])){
-            $etudiant->setPrenomEtudiant($attributs["numEtudiant"]);
+            $etudiant->setPrenomEtudiant($attributs["prenomEtudiant"]);
         }
         if(isset($attributs["nomEtudiant"])){
             $etudiant->setNomEtudiant($attributs["nomEtudiant"]);

@@ -7,6 +7,8 @@ use App\SAE\Model\DataObject\Etudiant;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
+use App\SAE\Service\ServiceEntreprise;
+use App\SAE\Service\ServiceEtudiant;
 
 class ControllerPanelAdmin extends ControllerGenerique {
 
@@ -143,37 +145,35 @@ class ControllerPanelAdmin extends ControllerGenerique {
     }
 
     public static function modifierEntreprise(): void{
+        $attributs = [];
         if(!isset($_POST["siret"])){
-            self::error("siret non défini");
+            self::redirectionVersURL("warning", "aucun siret fourni, impossible d'identifier l'entreprise", "panelListeEntreprises&controller=PanelAdmin");
             return;
         }
-        if(!isset($_POST["nom"])){
-            self::error("nom non défini");
-            return;
+        if(isset($_POST["nom"])){
+            $attributs["nomEntreprise"] = $_POST["nom"];
         }
-        if(!isset($_POST["telephone"])){
-            self::error("telephone non défini");
-            return;
+        if(isset($_POST["mail"])){
+            $attributs["mailEntreprise"] = $_POST["mail"];
         }
-        if(!isset($_POST["mail"])){
-            self::error("mail non défini");
-            return;
+        if(isset($_POST["telephone"])){
+            $attributs["telephoneEntreprise"] = $_POST["telephone"];
         }
-        if(!isset($_POST["effectif"])){
-            self::error("effectif non défini");
-            return;
+        if(isset($_POST["codePostal"])){
+            $attributs["codePostalEntreprise"] = $_POST["codePostal"];
         }
-        if(!isset($_POST["codePostal"])){
-            self::error("code postal non défini");
-            return;
+        if(isset($_POST["website"])){
+            $attributs["siteWebEntreprise"] = $_POST["website"];
+        }
+        if(isset($_POST["effectif"])){
+            $attributs["effectifEntreprise"] = $_POST["effectif"];
         }
         $entreprise = (new EntrepriseRepository())->getById($_POST["siret"]);
-        $entreprise->setNomEntreprise($_POST["nom"]);
-        $entreprise->setTelephoneEntreprise($_POST["telephone"]);
-        $entreprise->setEmailEntreprise($_POST["mail"]);
-        $entreprise->setEffectifEntreprise($_POST["effectif"]);
-        $entreprise->setCodePostalEntreprise($_POST["codePostal"]);
-        (new EntrepriseRepository())->mettreAJour($entreprise);
+        if($entreprise == null){
+            self::redirectionVersURL("warning", "aucune entreprise ne correspond à ce siret", "panelListeEntreprises&controller=PanelAdmin");
+            return;
+        }
+        ServiceEntreprise::mettreAJour($entreprise, $attributs);
         self::panelGestionEntreprise();
     }
 
@@ -211,42 +211,37 @@ class ControllerPanelAdmin extends ControllerGenerique {
     }
 
     public static function modifierEtudiant(): void{
+        $attributs = [];
         if(!isset($_POST["numEtudiant"])){
-            self::error("siret non défini");
+            self::redirectionVersURL("warning", "aucun numEtudiant fourni, impossible d'identifier l'étudiant", "panelListeEtudiants&controller=PanelAdmin");
             return;
         }
-        if(!isset($_POST["nom"])){
-            self::error("nom non défini");
-            return;
+        if(isset($_POST["mailPerso"])){
+            $attributs["mailPersoEtudiant"] = $_POST["mailPerso"];
         }
-        if(!isset($_POST["prenom"])){
-            self::error("prenom non défini");
-            return;
+        if(isset($_POST["telephone"])){
+            $attributs["telephoneEtudiant"] = $_POST["telephone"];
         }
-        if(!isset($_POST["telephone"])){
-            self::error("telephone non défini");
-            return;
+        if(isset($_POST["codePostal"])){
+            $attributs["codePostalEtudiant"] = $_POST["codePostal"];
         }
-        if(!isset($_POST["mailUniv"])){
-            self::error("mail Univ non défini");
-            return;
+        if(isset($_POST["nom"])){
+            $attributs["nomEtudiant"] = $_POST["nom"];
         }
-        if(!isset($_POST["mailPerso"])){
-            self::error("mail Perso non défini");
-            return;
+        if(isset($_POST["prenom"])){
+            $attributs["prenomEtudiant"] = $_POST["prenom"];
         }
-        if(!isset($_POST["codePostal"])){
-            self::error("code postal non défini");
-            return;
+        if(isset($_POST["telephone"])){
+            $attributs["telephoneEtudiant"] = $_POST["telephone"];
+        }
+        if(isset($_POST["mailUniv"])){
+            $attributs["mailUniversitaireEtudidant"] = $_POST["mailUniv"];
         }
         $etudiant = (new EtudiantRepository())->getById($_POST["numEtudiant"]);
-        $etudiant->setNomEtudiant($_POST["nom"]);
-        $etudiant->setPrenomEtudiant($_POST["prenom"]);
-        $etudiant->setTelephoneEtudiant($_POST["telephone"]);
-        $etudiant->setMailUniversitaireEtudiant($_POST["mailUniv"]);
-        $etudiant->setMailPersoEtudiant($_POST["mailPerso"]);
-        $etudiant->setCodePostalEtudiant($_POST["codePostal"]);
-        (new EtudiantRepository())->mettreAJour($etudiant);
+        if($etudiant == null){
+            self::redirectionVersURL("warning", "aucun etudiant ne possède se numEtudiant", "panelListeEtudiants&controller=PanelAdmin");
+        }
+        ServiceEtudiant::mettreAJour($etudiant, $attributs);
         self::panelGestionEtudiant();
     }
 

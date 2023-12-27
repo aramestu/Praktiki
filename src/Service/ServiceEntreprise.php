@@ -4,6 +4,7 @@ namespace App\SAE\Service;
 
 use App\SAE\Model\DataObject\Entreprise;
 use App\SAE\Model\DataObject\AbstractDataObject;
+use App\SAE\Model\Repository\EntrepriseRepository;
 
 class ServiceEntreprise implements ServiceInterface {
 
@@ -50,5 +51,7 @@ class ServiceEntreprise implements ServiceInterface {
         if(isset($attributs["nonce"])){
             $entreprise->setNonce($attributs["nonce"]);
         }
+
+        (new EntrepriseRepository())->mettreAJour($entreprise);
     }
 }
