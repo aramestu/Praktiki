@@ -8,6 +8,7 @@ use App\SAE\Model\DataObject\Annotation;
 use App\SAE\Model\Repository\AnnotationRepository;
 use App\SAE\Model\Repository\EnseignantRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
+use App\SAE\Service\ServiceAnnotation;
 
 class ControllerAnnotation extends ControllerGenerique
 {
@@ -110,17 +111,19 @@ class ControllerAnnotation extends ControllerGenerique
 
     public static function modifierAnnotation(): void
     {
+        if(!isset($_POST["idAnnotation"])){
+            self::redirectionVersURL("warning", "Aucune idAnnotation fourni", "afficherAllAnnotationEntreprise&controller=Annotation");
+            return;
+        }
         $id = $_POST["idAnnotation"];
         $annotation = (new AnnotationRepository())->getById($id);
-        $contenu = $_POST["message"];
+        $attributs["contenu"] = $_POST["message"];
 
         if(is_null($annotation)){
             self::redirectionVersURL("warning", "L'annotation n'existe pas", "afficherAllAnnotationEntreprise&controller=Annotation");
         }
         else if(ConnexionUtilisateur::getLoginUtilisateurConnecte() == $annotation->getMailEnseignant()) {
-            $annotation->setContenu($contenu);
-            (new AnnotationRepository())->mettreAJour($annotation);
-
+            (new ServiceAnnotation())->mettreAJour($annotation, $attributs);
             self::redirectionVersURL("success", "Annotation a été modifié avec succés", "afficherAllAnnotationEntreprise&controller=Annotation");
         }
         else{
