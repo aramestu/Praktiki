@@ -12,9 +12,9 @@ abstract class AbstractService implements ServiceInterface {
 
     public function mettreAJour(AbstractDataObject $dataObject, array $attributs): void {
         $setters = $dataObject->getSetters();
-        foreach($setters as $key => $value){
-            if(isset($attributs[$key])){
-                $dataObject->$value($attributs[$key]);
+        foreach($setters as $nomAttribut => $nomSetterAttribut){
+            if(isset($attributs[$nomAttribut])){
+                $dataObject->$nomSetterAttribut($attributs[$nomAttribut]);
             }
         }
         $repository = "{$this->repositoryPath}{$this->getRepository()}";
