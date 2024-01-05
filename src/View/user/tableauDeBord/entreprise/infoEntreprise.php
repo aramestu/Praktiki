@@ -12,9 +12,8 @@ $password=htmlspecialchars($user->getMdpHache());
 ?>
 
     <div class="containerInfo">
-    <form method="get">
+    <form method="post" action="frontController.php?action=displayTDB&controller=TDB&tdbAction=MettreAJour">
         <h2 id="remplaceBaliseLegend">Généralités</h2>
-
         <div class="column">
             <p>
             <label class="InputAddOn-item" for="siret">Siret :</label> 
@@ -25,7 +24,6 @@ $password=htmlspecialchars($user->getMdpHache());
             <input class="InputAddOn-field" type="text" value=<?= $mail ?> name="mail" id="email" required>
             <label class="InputAddOn-item" for="telephone">Telephone :</label> 
             <input class="InputAddOn-field" type="text" value=<?= $Telephone ?> name="telephone" id="telephone" required>
-            <input type="hidden" value="' . $password . '" name="password" id="password" required>
             </p>
 
         </div>
@@ -43,9 +41,7 @@ $password=htmlspecialchars($user->getMdpHache());
             </div>
 
         </div>
-        <input type="hidden" name="action" value="displayTDB">
-        <input type="hidden" name="controller" value="TDB">
-        <input type="hidden" name="tdbAction" value="mettreAJour">
+
         <input type="submit" value="Mettre à jour">
     </form>
 </div>

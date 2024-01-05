@@ -33,4 +33,12 @@ class Stage extends ExperienceProfessionnel
     {
         return "Stage";
     }
+
+    public function getSetters(): array {
+
+        return array_merge(parent::getSetters(), [
+            "gratificationStage" => "setGratificationStage"
+        ]);
+
+    }
 }

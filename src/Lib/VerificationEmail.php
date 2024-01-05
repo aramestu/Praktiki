@@ -69,7 +69,7 @@ class VerificationEmail
         $headers.= 'Content-Type:text/html; charset="utf-8"'."\n";
         $headers.= 'Content-Transfert-Encoding: 8bit';
 
-        mail($Entreprise->getEmailAValider(), "Validation de votre email",
+        mail($Entreprise->getMailAValider(), "Validation de votre email",
             $message, $headers);
 
 
@@ -148,8 +148,8 @@ class VerificationEmail
         $user = (new EntrepriseRepository())->getById($login);
         if (!is_null($user)) {
             if ($user->formatTableau()["nonceTag"] == $nonce) {
-                $user->setEmailEntreprise($user->getEmailAValider());
-                $user->setEmailAValider("");
+                $user->setMailEntreprise($user->getMailAValider());
+                $user->setMailAValider("");
                 $user->setNonce("");
                 (new EntrepriseRepository())->mettreAJour($user);
                 return true;
@@ -160,6 +160,6 @@ class VerificationEmail
 
     public static function aValideEmail(Entreprise $Entreprise): bool
     {
-        return (bool) $Entreprise->getEmailEntreprise();
+        return (bool) $Entreprise->getMailEntreprise();
     }
 }
