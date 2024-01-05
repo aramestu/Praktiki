@@ -41,7 +41,7 @@ class ControllerConvention extends ControllerGenerique
         $rep = new ConventionRepository();
         $convention = $rep->construireDepuisTableau($_POST);
         $rep->mettreAJour($convention);
-        ControllerTDB::displayTDB();
+        self::redirectionVersURL("success", "Convention sauvergardée", "displayTDB&controller=TDB&tdbAction=gestion");
     }
 
     public static function creerFormulaire(): void{

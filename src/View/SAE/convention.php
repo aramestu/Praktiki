@@ -16,10 +16,6 @@ $et = $etudiant;
             <label for="prenomEtudiant">Prénom de l'étudiant :</label>
             <input type="text" name="prenomEtudiant" id="prenomEtudiant" placeholder="Prénom de l'étudiant" value="<?php echo htmlspecialchars($et->getPrenomEtudiant());?>" <?php if ($c->getEstFini()) echo 'readonly';?>>
         </div>
-        <!--<div class="container-label-input">
-            <label for="addresseEtudiant">Adresse de l'étudiant :</label>
-            <input type="text" name="addresseEtudiant" id="addresseEtudiant" placeholder="Adresse de l'étudiant" value="">
-        </div> -->
         <div class="container-label-input">
             <label for="telephoneEtudiant">Téléphone de l'étudiant :</label>
             <input type="text" name="telephoneEtudiant" id="telephoneEtudiant" placeholder="Téléphone de l'étudiant" value="<?php echo htmlspecialchars($et->getTelephoneEtudiant());?>" <?php if ($c->getEstFini()) echo 'readonly';?>>
@@ -36,10 +32,6 @@ $et = $etudiant;
 
     <div class="container containerConvention">
         <h2>Stage : </h2>
-        <!--<div class="container-label-input">
-            <label for="typeStage">Type du stage :</label>
-            <input type="text" name="typeStage" id="typeStage" placeholder="Type du stage" value="Formation Initiale - Stage Obligatoire">
-        </div>-->
         <div class="container-label-input">
             <label for="thematiqueExperienceProfessionnel">Thématique du stage :</label>
             <input type="text" name="thematiqueExperienceProfessionnel" id="thematiqueExperienceProfessionnel" placeholder="Thématique du stage" value="<?php echo htmlspecialchars($c->getThematiqueExperienceProfessionnel());?>" <?php if ($c->getEstFini()) echo 'readonly';?>>
@@ -87,14 +79,6 @@ $et = $etudiant;
             <label for="modePaiement">Modalité du versement :</label>
             <input type="text" name="modePaiement" id="modePaiement" placeholder="Modalité du versement" value="<?php echo htmlspecialchars($c->getModePaiement());?>" <?php if ($c->getEstFini()) echo 'readonly';?>>
         </div>
-        <!--<div class="container-label-input">
-            <label for="travailApresStage">Nature du travail après le stage :</label>
-            <input type="text" name="travailApresStage" id="travailApresStage" placeholder="Nature du travail après le stage" value="Rapport de Stage">
-        </div> -->
-        <!--<div class="container-label-input">
-            <label for="modaliteValidationStage">Modalité de validation du stage :</label>
-            <input type="text" name="modaliteValidationStage" id="modaliteValidationStage" placeholder="Modalité de validation du stage" value="Soutenance">
-        </div> -->
         <div class="container-label-input">
             <label for="dureeExperienceProfessionnel">Durée du stage :</label>
             <input type="number" name="dureeExperienceProfessionnel" id="dureeExperienceProfessionnel" placeholder="Durée du stage" value="<?php echo htmlspecialchars($c->getDureeExperienceProfessionnel());?>" <?php if ($c->getEstFini()) echo 'readonly';?>>
@@ -159,10 +143,6 @@ $et = $etudiant;
             <label for="prenomSignataire">Prénom du signataire :</label>
             <input type="text" name="prenomSignataire" id="prenomSignataire" placeholder="Prénom du signataire" value="<?php echo htmlspecialchars($c->getPrenomSignataire());?>" <?php if ($c->getEstFini()) echo 'readonly';?>>
         </div>
-        <!--<div class="container-label-input">
-            <label for="professionSignataire">Profession du signataire :</label>
-            <input type="text" name="professionSignataire" id="professionSignataire" placeholder="Profession du signataire" value="">
-        </div>-->
     </div>
 
     <div class="container containerConvention">
@@ -183,9 +163,7 @@ $et = $etudiant;
 
     <div>
         <button class="button">Enregistrer le brouillon de la convention</button>
-        <!--<button class="button">Envoyer la convention</button>-->
         <input type="hidden" name="idConvention" value="<?php echo htmlspecialchars($c->getIdConvention());?>">
-        <!--<input type="hidden" name="idStage" value="<?php //echo htmlspecialchars($c->getIdStage());?>">-->
         <input type="hidden" name="estSignee" value="<?php echo htmlspecialchars($c->getEstSignee());?>">
         <input type="hidden" name="estValidee" value="<?php echo htmlspecialchars($c->getEstValidee());?>">
         <input type="hidden" name="estFini" value="<?php echo htmlspecialchars($c->getEstFini());?>">
