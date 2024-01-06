@@ -1,3 +1,117 @@
+@media (max-width: 41200px) {
+    #option{
+        width: 20%;
+    }
+
+    #option .button{
+        margin-left: -25px;
+        width: fit-content;
+        color: var(--darkBlue2);
+    }
+
+    #mainContent{
+        width: 77%;
+        left: 20%;
+        height: 85vh;
+    }
+
+    #search-bar{
+        width: 55%;
+    }
+
+    .down{
+        flex-direction: row;
+    }
+
+    .down:first-child{
+        max-width: 40%;
+    }
+
+    .down > .VBox{
+        max-width: 60%;
+    }
+}
+
+@media (max-width: 1300px) {
+    #option{
+        width: 20%;
+    }
+
+    #option .button{
+        margin-left: -25px;
+        width: fit-content;
+        color: var(--darkBlue2);
+    }
+
+    #mainContent{
+        width: 77%;
+        left: 20%;
+        height: 85vh;
+    }
+
+    #search-bar{
+        width: 55%;
+    }
+
+    .down{
+        flex-direction: row;
+    }
+
+    .down:first-child{
+        max-width: 40%;
+    }
+
+    .down > .VBox{
+        max-width: 60%;
+    }
+}
+
+@media (max-width: 950px) {
+    #option{
+        width: 55px;
+    }
+
+    #option .button{
+        font-size: 1em;
+        white-space: nowrap;
+        overflow: hidden;
+        /*color: var(--activeGrey);*/
+        width: 45px;
+        margin-left: -20px;
+    }
+
+    #option span::before{
+        margin-right : 50px;
+    }
+
+    #mainContent{
+        width: 87%;
+        left: 10%;
+        height: 114vh;
+    }
+
+    #search-bar{
+        width: 100%;
+    }
+
+    .down{
+        flex-direction: column;
+    }
+
+    .down:first-child,
+    .down > .VBox{
+        max-width: 100%;
+        font-size: 2em;
+    }
+
+    #option > h2,
+    #adminPP,
+    #adminName,
+    #adminBackground{
+        display: none;
+    }
+}
+
 #adminPP {
     height: 100px;
     width: 100px;
@@ -59,7 +173,6 @@ form #search-button{
 }
 
 form #search-bar{
-    width: 55%;
     margin-right: 0;
 }
 
@@ -73,13 +186,10 @@ form #search-bar{
 #mainContent{
     padding: 0;
     position: absolute;
-    left: 20%;
     display: flex;
     flex-direction: column;
     justify-content: stretch;
     align-items: center;
-    height: 85vh;
-    width: 77%;
     margin-top: 0;
     padding-top: 10px;
     border-top: rgba(0,0,0,0.005) solid 10px;
@@ -504,7 +614,6 @@ form #search-bar{
 
 .entityInformation > .down{
     display: flex;
-    flex-direction: row;
     height: 100%;
     width: 100%;
 }
@@ -514,12 +623,10 @@ form #search-bar{
     align-items: flex-start;
     margin-left: 5%;
     flex-grow: 2;
-    max-width: 60%;
 }
 
 .entityInformation > .down > .VBox:first-child{
     border-right: var(--grey1) solid 3px;
-    max-width: 40%;
 }
 
 .entityInformation > .down div{
@@ -599,8 +706,6 @@ form #search-bar{
     position: absolute;
     top: 80px;
     left: 0;
-    min-width: 20%;
-    width: 20%;
     max-width: 25%;
     font-size: 10px;
     height: 100%;
@@ -615,15 +720,12 @@ form #search-bar{
 
 #option .button{
     background: none;
-    color: var(--darkBlue2);
     box-shadow: none;
     border: none;
     font-weight: bold;
     margin-top: 0;
-    margin-left: -25px;
     white-space: nowrap;
     height: 50px;
-    width: fit-content;
     margin-bottom: 10px;
 }
 
