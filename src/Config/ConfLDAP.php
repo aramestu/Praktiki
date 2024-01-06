@@ -8,6 +8,9 @@ use LDAP\Connection;
 class ConfLDAP
 {
 
+    /**
+     * @var array|string[] configuration des parametres pour se connecter au serveur LDAP de l'IUT
+     */
     static private array $ldapConfig = array(
         'ldap_host' => '10.10.1.30',
         'ldap_basedn' => "dc=info,dc=iutmontp,dc=univ-montp2,dc=fr",
