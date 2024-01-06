@@ -36,7 +36,11 @@ class ConfLDAP
     }
 
     /**
-     * @throws Exception
+     * Effectue le lien de connexion sur le serveur LDAP de l'iut
+     *
+     * @deprecated fonction fournit par l'IUT, retravaillé par Norman {@see Ldap}
+     * @return Connection
+     * @throws Exception si la connexion est un échec
      */
     static public function connect(): Connection
     {
