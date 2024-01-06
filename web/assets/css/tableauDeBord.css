@@ -23,6 +23,12 @@
         width: 30%;
         margin-left: 32%;
     }
+
+    #recentOffers {
+        width: 69%;
+        border-left: 2px solid var(--grey1);
+        height: 400px;
+    }
 }
 
 @media (max-width: 1300px) {
@@ -49,6 +55,12 @@
     input[type="submit"]{
         width: 30%;
         margin-left: 32%;
+    }
+
+    #recentOffers {
+        width: 69%;
+        border-left: 2px solid var(--grey1);
+        height: 400px;
     }
 }
 
@@ -96,12 +108,12 @@
         width: 120%;
         margin-left: -50px;
     }
-}
 
-#recentOffers {
-    width: 69%;
-    border-left: 2px solid var(--grey1);
-    height: 400px;
+    #recentOffers {
+        width: 100%;
+        border-left: none;
+        height: 100%;
+    }
 }
 
 #infoEtu {
