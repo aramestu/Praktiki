@@ -23,7 +23,7 @@ class ImportationData {
                 $convention = (new ConventionRepository())->getConventionAvecEtudiant($column[1], $anneeUniversitaireCourante->getIdAnneeUniversitaire());
             }
             $attributs = [
-                "estValidee" => $column[28] == "Oui"
+                "estValideePstage" => $column[28] == "Oui"
             ];
 
             (new ServiceConvention())->mettreAJour($convention, $attributs);
