@@ -37,7 +37,10 @@ class Convention extends AbstractDataObject {
     private string $effectifEntreprise;
     private string $telephoneEntreprise;
     private bool $estFini;
-    private bool $estValidee;
+    private bool $estValideeAdmin;
+    private bool $estValideeSecretariat;
+    private bool $estValideePstage;
+    private string $raisonRefus;
     private bool $estSignee;
 
     /**
@@ -73,10 +76,13 @@ class Convention extends AbstractDataObject {
      * @param string $effectifEntreprise
      * @param string $telephoneEntreprise
      * @param bool $estSignee
-     * @param bool $estValidee
+     * @param bool $estValideeAdmin
+     * @param bool $estValideeSecretariat
+     * @param bool $estValideePstage
+     * @param string $raisonRefus
      * @param bool $estSignee
      */
-    public function __construct(string $mailEnseignant, string $nomEnseignant, string $prenomEnseignant, string $competencesADevelopper, string $dureeDeTravail, string $languesImpression, string $origineDeLaConvention, bool $sujetEstConfidentiel, string $nbHeuresHebdo, string $modePaiement, string $dureeExperienceProfessionnel, string $caisseAssuranceMaladie, string $mailTuteurProfessionnel, string $prenomTuteurProfessionnel, string $nomTuteurProfessionnel, string $fonctionTuteurProfessionnel, string $telephoneTuteurProfessionnel, string $sujetExperienceProfessionnel, string $thematiqueExperienceProfessionnel, string $tachesExperienceProfessionnel, string $codePostalExperienceProfessionnel, string $adresseExperienceProfessionnel, string $dateDebutExperienceProfessionnel, string $dateFinExperienceProfessionnel, string $nomSignataire, string $prenomSignataire, string $siret, string $nomEntreprise, string $codePostalEntreprise, string $effectifEntreprise, string $telephoneEntreprise, bool $estFini, bool $estValidee, bool $estSignee)
+    public function __construct(string $mailEnseignant, string $nomEnseignant, string $prenomEnseignant, string $competencesADevelopper, string $dureeDeTravail, string $languesImpression, string $origineDeLaConvention, bool $sujetEstConfidentiel, string $nbHeuresHebdo, string $modePaiement, string $dureeExperienceProfessionnel, string $caisseAssuranceMaladie, string $mailTuteurProfessionnel, string $prenomTuteurProfessionnel, string $nomTuteurProfessionnel, string $fonctionTuteurProfessionnel, string $telephoneTuteurProfessionnel, string $sujetExperienceProfessionnel, string $thematiqueExperienceProfessionnel, string $tachesExperienceProfessionnel, string $codePostalExperienceProfessionnel, string $adresseExperienceProfessionnel, string $dateDebutExperienceProfessionnel, string $dateFinExperienceProfessionnel, string $nomSignataire, string $prenomSignataire, string $siret, string $nomEntreprise, string $codePostalEntreprise, string $effectifEntreprise, string $telephoneEntreprise, bool $estFini, bool $estValideeAdmin, bool $estValideeSecretariat, bool $estValideePstage, string $raisonRefus, bool $estSignee)
     {
         $this->mailEnseignant = $mailEnseignant;
         $this->nomEnseignant = $nomEnseignant;
@@ -110,7 +116,10 @@ class Convention extends AbstractDataObject {
         $this->effectifEntreprise = $effectifEntreprise;
         $this->telephoneEntreprise = $telephoneEntreprise;
         $this->estFini = $estFini;
-        $this->estValidee = $estValidee;
+        $this->estValideeAdmin = $estValideeAdmin;
+        $this->estValideeSecretariat = $estValideeSecretariat;
+        $this->estValideePstage = $estValideePstage;
+        $this->raisonRefus = $raisonRefus;
         $this->estSignee = $estSignee;
     }
 
@@ -454,14 +463,43 @@ class Convention extends AbstractDataObject {
         $this->telephoneEntreprise = $telephoneEntreprise;
     }
 
-    public function getEstValidee(): bool
-    {
-        return ($this->estValidee == 1);
+    public function getEstValideeAdmin(): bool{
+        return $this->estValideeAdmin;
+
     }
 
-    public function setEstValidee(bool $estValidee): void
+    public function setEstValideeAdmin(bool $estValideeAdmin): void{
+        $this->estValideeAdmin = $estValideeAdmin;
+    }
+
+    public function isEstValideeSecretariat(): bool
     {
-        $this->estValidee = $estValidee;
+        return $this->estValideeSecretariat;
+    }
+
+    public function setEstValideeSecretariat(bool $estValideeSecretariat): void
+    {
+        $this->estValideeSecretariat = $estValideeSecretariat;
+    }
+
+    public function isEstValideePstage(): bool
+    {
+        return $this->estValideePstage;
+    }
+
+    public function setEstValideePstage(bool $estValideePstage): void
+    {
+        $this->estValideePstage = $estValideePstage;
+    }
+
+    public function getRaisonRefus(): string
+    {
+        return $this->raisonRefus;
+    }
+
+    public function setRaisonRefus(string $raisonRefus): void
+    {
+        $this->raisonRefus = $raisonRefus;
     }
 
     public function formatTableau(): array {
@@ -496,11 +534,14 @@ class Convention extends AbstractDataObject {
             "nomEntrepriseTag" => $this->nomEntreprise,
             "codePostalEntrepriseTag" => $this->codePostalEntreprise,
             "effectifEntrepriseTag" => $this->effectifEntreprise,
-            "telephoneEntrepriseTag" => $this->telephoneEntreprise
+            "telephoneEntrepriseTag" => $this->telephoneEntreprise,
+            "raisonRefusTag" => $this->raisonRefus
         );
         $tab["sujetEstConfidentielTag"] = ($this->sujetEstConfidentiel) ? 1 : 0;
         $tab["estFiniTag"] = ($this->estFini) ? 1 : 0;
-        $tab["estValideeTag"] = ($this->estValidee) ? 1 : 0;
+        $tab["estValideeAdminTag"] = ($this->estValideeAdmin) ? 1 : 0;
+        $tab["estValideeSecretariatTag"] = ($this->estValideeSecretariat) ? 1 : 0;
+        $tab["estValideePstageTag"] = ($this->estValideePstage) ? 1 : 0;
         $tab["estSigneeTag"] = ($this->estSignee) ? 1 : 0;
         return $tab;
     }
@@ -539,7 +580,10 @@ class Convention extends AbstractDataObject {
             "effectifEntreprise" => "setEffectifEntreprise",
             "telephoneEntreprise" => "setTelephoneEntreprise",
             "estFini" => "setEstFini",
-            "estValidee" => "setEstValidee",
+            "estValideeAdmin" => "setEstValideeAdmin",
+            "estValideeSecretariat" => "setEstValideeSecretariat",
+            "estValideePstage" => "setEstValideePstage",
+            "raisonRefus" => "setRaisonRefus",
             "estSignee" => "setEstSignee"
         ];
     }
