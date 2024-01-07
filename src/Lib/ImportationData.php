@@ -8,7 +8,7 @@ use App\SAE\Service\ServiceConvention;
 
 class ImportationData {
 
-    public static function importFromPstage($fileName) {
+    public static function importFromPstage($fileName): void {
         $file = fopen($fileName, "r");
         $anneeUniversitaireCourante = (new AnneeUniversitaireRepository())->getCurrentAnneeUniversitaire();
         $isFirstLine = true;
