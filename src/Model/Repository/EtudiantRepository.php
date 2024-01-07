@@ -16,7 +16,7 @@ class EtudiantRepository extends AbstractRepository
         return $this->getEtudiantAvecConvention(true,true);
     }
 
-    public function getEtudiantAvecConvention(bool $estSigne, bool $estValide): array{
+    public function getEtudiantAvecConvention(bool $estSigne, bool $estValide): array{ //TODO mettre à jour pour les nouvelles conventions
         $sql = "SELECT * FROM Etudiants e 
                 JOIN Conventions c ON c.idStage = e.idStage ";
 
@@ -49,7 +49,7 @@ class EtudiantRepository extends AbstractRepository
     }
 
     public function conventionEtudiantEstValide(Etudiant $etudiant, int $idAnneeUniversitaire=3): bool{ //TODO : enlever la valeur par defaut de l'année universitaire quand le pannel admin sera mit à jour
-        $sql = "SELECT estValidee FROM Etudiants etu
+        $sql = "SELECT estValideeAdmin FROM Etudiants etu
                 JOIN ConventionsStageEtudiant cse ON cse.numEtudiant = etu.numEtudiant
                 JOIN Conventions c ON c.idConvention = cse.idConvention
                 WHERE etu.numEtudiant = :numEtudiantTag
@@ -65,7 +65,7 @@ class EtudiantRepository extends AbstractRepository
         if($result==false){
             return false;
         }
-        elseif($result["estValidee"] == 1){
+        elseif($result["estValideeAdmin"] == 1){
             return true;
         }else{
             return false;
@@ -187,7 +187,7 @@ class EtudiantRepository extends AbstractRepository
     //TODO : a revoir quand les conventions seront bien implemanté
     public function getNbEtudiantConventionValide(): int{
         $sql = "SELECT COUNT(*) FROM Etudiants e JOIN ConventionsStageEtudiant cse ON e.numEtudiant = cse.numEtudiant JOIN Conventions c ON c.idConvention = cse.idConvention 
-                WHERE estValidee = 1";
+                WHERE estValideeAdmin = 1";
         $requestStatement = Model::getPdo()->prepare($sql);
         $requestStatement->execute();
         return $requestStatement->fetchColumn();

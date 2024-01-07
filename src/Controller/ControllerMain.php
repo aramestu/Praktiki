@@ -123,10 +123,4 @@ class ControllerMain extends ControllerGenerique
             self::home();
         }
     }
-
-    /**
-     * @throws \Exception
-     */
-
-
 }
