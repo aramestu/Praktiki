@@ -4,6 +4,7 @@ namespace App\SAE\Lib;
 
 use App\SAE\Model\Repository\AnneeUniversitaireRepository;
 use App\SAE\Model\Repository\ConventionRepository;
+use App\SAE\Model\Repository\EtudiantRepository;
 use App\SAE\Service\ServiceConvention;
 
 class ImportationData {
@@ -15,6 +16,9 @@ class ImportationData {
         while (($column = fgetcsv($file, 10000, ",")) !== false) {
             if ($isFirstLine) {
                 $isFirstLine = false;
+                continue;
+            }
+            if((new EtudiantRepository())->getById($column[1]) == null){
                 continue;
             }
             $convention = (new ConventionRepository())->getConventionAvecEtudiant($column[1], $anneeUniversitaireCourante->getIdAnneeUniversitaire());
