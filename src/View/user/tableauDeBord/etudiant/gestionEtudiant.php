@@ -13,7 +13,7 @@
             }
             echo "<br>";
             if ($convention->getEstFini()) {
-                echo "<p>Votre convention a été envoyée, veuillez attendre sa validation ou non.</p>";
+                echo "<p class='italic'>Votre convention a été envoyée, veuillez attendre sa validation ou non.</p>";
             }
         }
         ?>
