@@ -746,6 +746,61 @@ legend{
     margin-top: -60px; /* This should be the same value as height */
     visibility: hidden;
 }
+
+#cookie-banner {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--pastelYellow);
+    color: #000;
+    padding: 20px;
+    text-align: center;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#cookie-banner h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    flex-basis: 100%;
+    text-align: left;
+}
+
+#cookie-banner p {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 40px 0 20px;
+    justify-content: center;
+    text-align: justify;
+}
+
+#cookie-banner button {
+    background-color: transparent;
+    border: none;
+    color: #000;
+    cursor: pointer;
+    font-size: 20px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+#cookie-banner button::before {
+    content: "\f00d";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: var(--darkBlue2);
+}
+
+#cookie-banner button:hover + #cookie-banner button::before {
+    color: var(--pastelBlue);
+}
 /*---END MISCELLANEOUS---*/
 
 

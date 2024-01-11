@@ -114,22 +114,22 @@ class Entreprise extends AbstractDataObject
         $this->mdpHache = MotDePasse::hacher($mdpClair);
     }
 
-    public function getEmailEntreprise(): string
+    public function getMailEntreprise(): string
     {
         return $this->mailEntreprise;
     }
 
-    public function setEmailEntreprise(string $email): void
+    public function setMailEntreprise(string $email): void
     {
         $this->mailEntreprise = $email;
     }
 
-    public function getEmailAValider(): string
+    public function getMailAValider(): string
     {
         return $this->mailAValider;
     }
 
-    public function setEmailAValider(string $emailAValider): void
+    public function setMailAValider(string $emailAValider): void
     {
         $this->mailAValider = $emailAValider;
     }
@@ -188,5 +188,23 @@ class Entreprise extends AbstractDataObject
             $mailValide,
             $nonce
         );
+    }
+
+
+    public function getSetters(): array {
+        return [
+            "siret" => "setSiret",
+            "nomEntreprise" => "setNomEntreprise",
+            "codePostalEntreprise" => "setCodePostalEntreprise",
+            "effectifEntreprise" => "setEffectifEntreprise",
+            "telephoneEntreprise" => "setTelephoneEntreprise",
+            "siteWebEntreprise" => "setSiteWebEntreprise",
+            "estValide" => "setEstValide",
+            "mailEntreprise" => "setMailEntreprise",
+            "mdpHache" => "setMdpHache",
+            "mailAValider" => "setMailAValider",
+            "nonce" => "setNonce",
+        ];
+
     }
 }

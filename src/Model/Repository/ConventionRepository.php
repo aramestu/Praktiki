@@ -43,7 +43,7 @@ class ConventionRepository extends AbstractRepository {
                                     $conventionFormatTableau["siret"], $conventionFormatTableau["nomEntreprise"],
                                     $conventionFormatTableau["codePostalEntreprise"], $conventionFormatTableau["effectifEntreprise"],
                                     $conventionFormatTableau["telephoneEntreprise"], $conventionFormatTableau["estFini"],
-                                    $conventionFormatTableau["estValidee"], $conventionFormatTableau["estSignee"]);
+                                    $conventionFormatTableau["estValideeAdmin"], $conventionFormatTableau["estValideeSecretariat"], $conventionFormatTableau["estValideePstage"], $conventionFormatTableau["raisonRefus"], $conventionFormatTableau["estSignee"]);
         if(isset($conventionFormatTableau["idConvention"])){
             $convention->setIdConvention($conventionFormatTableau["idConvention"]);
         }
@@ -65,7 +65,7 @@ class ConventionRepository extends AbstractRepository {
             "sujetExperienceProfessionnel", "thematiqueExperienceProfessionnel", "tachesExperienceProfessionnel",
             "codePostalExperienceProfessionnel", "adresseExperienceProfessionnel", "dateDebutExperienceProfessionnel",
             "dateFinExperienceProfessionnel", "nomSignataire", "prenomSignataire", "siret", "nomEntreprise",
-            "codePostalEntreprise", "effectifEntreprise", "telephoneEntreprise", "estFini", "estValidee", "estSignee");
+            "codePostalEntreprise", "effectifEntreprise", "telephoneEntreprise", "estFini", "estValideeAdmin", "estValideeSecretariat", "estValideePstage", "raisonRefus", "estSignee");
     }
 
     public function save(AbstractDataObject|Convention $convention): bool
