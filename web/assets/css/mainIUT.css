@@ -742,8 +742,8 @@ legend{
 #alternanceSection::before {
     content: "";
     display: block;
-    height: 60px; /* Adjust based on the height of your header */
-    margin-top: -60px; /* This should be the same value as height */
+    height: 60px;
+    margin-top: -60px;
     visibility: hidden;
 }
 
