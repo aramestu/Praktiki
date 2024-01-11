@@ -12,6 +12,7 @@ use App\SAE\Model\DataObject\Entreprise;
 use App\SAE\Model\DataObject\Etudiant;
 use App\SAE\Model\DataObject\Inscription;
 use App\SAE\Model\DataObject\TuteurProfessionnel;
+use App\SAE\Model\HTTP\Cookie;
 use App\SAE\Model\Repository\AbstractExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\AlternanceRepository;
 use App\SAE\Model\Repository\AnneeUniversitaireRepository;
@@ -105,6 +106,29 @@ class ControllerMain extends ControllerGenerique
                 'cheminVueBody' => 'SAE/index.php',
             ]
         );
+    }
+
+    public static function setCookie(): void
+    {
+        Cookie::enregistrer('bannerClosed', true);
+        header('Location: frontController.php?action=home');
+        exit();
+    }
+
+    public static function checkCookie(): void
+    {
+        if (!Cookie::contient('bannerClosed')) {
+            echo '<div id="cookie-banner"><h2>Politique de confidentialité</h2>
+        <p>Nous utilisons des cookies pour améliorer votre expérience sur notre site. Les cookies sont de petits
+            fichiers de données qui sont stockés sur votre ordinateur ou appareil mobile lorsque vous visitez un site
+            web. Ils nous permettent de collecter des informations sur votre comportement de navigation, comme les pages
+            que vous visitez et les services que vous utilisez. Nous utilisons ces informations pour personnaliser votre
+            expérience, pour comprendre comment notre site est utilisé et pour améliorer nos services. En continuant à
+            utiliser notre site, vous acceptez notre utilisation des cookies. Pour plus dinformations sur notre
+            utilisation des cookies et sur la manière dont vous pouvez contrôler les cookies, veuillez consulter notre
+            politique de confidentialité.</p>
+        <a href="frontController.php?action=setCookie" id="close-banner">Close</a></div>';
+        }
     }
 
     public static function importation(): void
