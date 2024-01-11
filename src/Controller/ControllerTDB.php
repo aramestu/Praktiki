@@ -6,16 +6,20 @@ use App\SAE\Lib\ConnexionUtilisateur;
 use App\SAE\Model\DataObject\Enseignant;
 use App\SAE\Model\DataObject\Entreprise;
 use App\SAE\Model\DataObject\Etudiant;
+use App\SAE\Model\DataObject\Personnel;
 use App\SAE\Model\Repository\ConventionRepository;
 use App\SAE\Model\Repository\EnseignantRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
+use App\SAE\Model\Repository\PersonnelRepository;
 
-class ControllerTDB extends ControllerGenerique {
+class ControllerTDB extends ControllerGenerique
+{
 
-    public static function displayTDB():void{
-        if (!ConnexionUtilisateur::estConnecte()){
+    public static function displayTDB(): void
+    {
+        if (!ConnexionUtilisateur::estConnecte()) {
             self::redirectionVersURL("warning", "Veuillez vous connecter pour acceder à cette page", "home");
             return;
         }
@@ -27,27 +31,31 @@ class ControllerTDB extends ControllerGenerique {
             $methode = 'displayTDBens';
         } elseif (ConnexionUtilisateur::estEntreprise()) {
             $methode = 'displayTDBentreprise';
+        } elseif (ConnexionUtilisateur::estPersonnel()) {
+            $methode = 'displayTDBpers';
         } else {
             self::redirectionVersURL("danger", "Utilisateur non enregistré dans la base de données", "home");
             return;
         }
         $methode = $methode . $tdbAction;
-        if($reflexion->hasMethod($methode)){
+        if ($reflexion->hasMethod($methode)) {
             self::$methode();
-        }else{
+        } else {
             self::error("");
         }
     }
-    private static function displayTDBens() {
-        $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null,null,
-            null,null,"lastWeek",null,null);
-        $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user=(new EnseignantRepository())->getByEmail($mail);
+
+    private static function displayTDBens()
+    {
+        $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null, null,
+            null, null, "lastWeek", null, null);
+        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user = (new EnseignantRepository())->getByEmail($mail);
         self::afficheVue(
             'view.php',
             [
                 'pagetitle' => 'Tableau de bord',
-                'user'=>$user,
+                'user' => $user,
                 'cheminVueBody' => 'user/tableauDeBord/enseignant.php',
                 'TDBView' => 'user/tableauDeBord/enseignant/accueilEnseignant.php',
                 'listeExpPro' => $listeExpPro
@@ -55,16 +63,17 @@ class ControllerTDB extends ControllerGenerique {
         );
     }
 
-    private static function displayTDBensInfo() {
-        $siret=ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user=(new EnseignantRepository())->getById($siret);
+    private static function displayTDBensInfo()
+    {
+        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user = (new EnseignantRepository())->getById($mail);
         self::afficheVue(
             'view.php',
             [
                 'pagetitle' => 'Tableau de bord',
                 'cheminVueBody' => 'user/tableauDeBord/enseignant.php',
                 'TDBView' => 'user/tableauDeBord/enseignant/infoEnseignant.php',
-                'user'=>$user
+                'user' => $user
             ]
         );
     }
@@ -82,32 +91,80 @@ class ControllerTDB extends ControllerGenerique {
         }
     }
 
-    private static function displayTDBentreprise(): void {
-        $listeExpPro =  (new ExperienceProfessionnelRepository())->search(ConnexionUtilisateur::getLoginUtilisateurConnecte());
-        $siret=ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user=(new EntrepriseRepository())->getById($siret);
+    private static function displayTDBpers()
+    {
+        $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null, null,
+            null, null, "lastWeek", null, null);
+        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user = (new PersonnelRepository())->getByEmail($mail);
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Tableau de bord',
+                'user' => $user,
+                'cheminVueBody' => 'user/tableauDeBord/personnel.php',
+                'TDBView' => 'user/tableauDeBord/personnel/accueilPersonnel.php',
+                'listeExpPro' => $listeExpPro
+            ]
+        );
+    }
+
+    private static function displayTDBpersInfo()
+    {
+        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user = (new PersonnelRepository())->getById($mail);
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Tableau de bord',
+                'cheminVueBody' => 'user/tableauDeBord/personnel.php',
+                'TDBView' => 'user/tableauDeBord/personnel/infoPersonnel.php',
+                'user' => $user
+            ]
+        );
+    }
+
+    public static function displayTDBpersMettreAJour(): void
+    {
+        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user = (new PersonnelRepository())->getByEmail($mail);
+        if (!is_null($user)) {
+            $user = Personnel::construireDepuisFormulaire($_GET);
+            (new PersonnelRepository())->mettreAJour($user);
+            self::redirectionVersURL("success", "L'personnel a été mis à jour", "displayTDB&controller=TDB");
+        } else {
+            self::redirectionVersURL("warning", "cet personnel n'existe pas", "afficherFormulaireMiseAJour");
+        }
+    }
+
+    private static function displayTDBentreprise(): void
+    {
+        $listeExpPro = (new ExperienceProfessionnelRepository())->search(ConnexionUtilisateur::getLoginUtilisateurConnecte());
+        $siret = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user = (new EntrepriseRepository())->getById($siret);
         self::afficheVue(
             'view.php',
             [
                 'pagetitle' => 'Tableau de bord',
                 'cheminVueBody' => 'user/tableauDeBord/entreprise.php',
                 'TDBView' => 'user/tableauDeBord/entreprise/accueilEntreprise.php',
-                'user'=>$user,
+                'user' => $user,
                 'listeExpPro' => $listeExpPro
             ]
         );
     }
 
-    private static function displayTDBentrepriseInfo() {
-        $siret=ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user=(new EntrepriseRepository())->getById($siret);
+    private static function displayTDBentrepriseInfo()
+    {
+        $siret = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user = (new EntrepriseRepository())->getById($siret);
         self::afficheVue(
             'view.php',
             [
                 'pagetitle' => 'Tableau de bord',
                 'cheminVueBody' => 'user/tableauDeBord/entreprise.php',
                 'TDBView' => 'user/tableauDeBord/entreprise/infoEntreprise.php',
-                'user'=>$user
+                'user' => $user
             ]
         );
     }
@@ -125,54 +182,58 @@ class ControllerTDB extends ControllerGenerique {
         }
     }
 
-    private static function displayTDBetu() {
-        $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null,null,
-            null,null,"lastWeek",null,null);
-        $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user=(new EtudiantRepository())->getByEmail($mail);
+    private static function displayTDBetu()
+    {
+        $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null, null,
+            null, null, "lastWeek", null, null);
+        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user = (new EtudiantRepository())->getByEmail($mail);
         self::afficheVue(
             'view.php',
             [
                 'pagetitle' => 'Tableau de bord',
                 'cheminVueBody' => 'user/tableauDeBord/etudiant.php',
                 'TDBView' => 'user/tableauDeBord/etudiant/accueilEtudiant.php',
-                'user'=>$user,
+                'user' => $user,
                 'listeExpPro' => $listeExpPro
             ]
         );
     }
 
-    private static function displayTDBetuInfo() {
-        $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user=(new EtudiantRepository())->getByEmail($mail);
+    private static function displayTDBetuInfo()
+    {
+        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user = (new EtudiantRepository())->getByEmail($mail);
         self::afficheVue(
             'view.php',
             [
                 'pagetitle' => 'Tableau de bord',
                 'cheminVueBody' => 'user/tableauDeBord/etudiant.php',
                 'TDBView' => 'user/tableauDeBord/etudiant/infoEtudiant.php',
-                'user'=>$user
+                'user' => $user
             ]
         );
     }
 
-    private static function displayTDBetuGestion() {
-        $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user=(new EtudiantRepository())->getByEmail($mail);
-        $convention=(new ConventionRepository())->getConventionAvecEtudiant($user->getNumEtudiant());
+    private static function displayTDBetuGestion()
+    {
+        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user = (new EtudiantRepository())->getByEmail($mail);
+        $convention = (new ConventionRepository())->getConventionAvecEtudiant($user->getNumEtudiant());
         self::afficheVue(
             'view.php',
             [
                 'pagetitle' => 'Tableau de bord',
                 'cheminVueBody' => 'user/tableauDeBord/etudiant.php',
                 'TDBView' => 'user/tableauDeBord/etudiant/gestionEtudiant.php',
-                'user'=>$user,
-                'convention'=>$convention
+                'user' => $user,
+                'convention' => $convention
             ]
         );
     }
 
-    public static function displayTDBetuMettreAJour(): void {
+    public static function displayTDBetuMettreAJour(): void
+    {
         $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
         $user = (new EtudiantRepository())->getByEmail($mail);
         if (!is_null($user)) {
@@ -184,7 +245,8 @@ class ControllerTDB extends ControllerGenerique {
         }
     }
 
-    public static function displayTDBetuEnvoyerConvention(): void {
+    public static function displayTDBetuEnvoyerConvention(): void
+    {
         $convention = (new ConventionRepository())->getConventionAvecEtudiant((new EtudiantRepository())->getByEmail(ConnexionUtilisateur::getLoginUtilisateurConnecte())->getNumEtudiant());
         if (!is_null($convention)) {
             $convention->setEstFini(true);
