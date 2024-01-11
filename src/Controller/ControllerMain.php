@@ -109,7 +109,7 @@ class ControllerMain extends ControllerGenerique
     public static function setCookie(): void
     {
         Cookie::enregistrer('bannerClosed', true, time() + (10 * 365 * 24 * 60 * 60));
-        header('Location: frontController.php?action=home'); // Redirect to home page after setting the cookie
+        header('Location: frontController.php?action=home');
         exit();
     }
 

@@ -38,17 +38,4 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     });
-/*
-    document.getElementById('close-banner').addEventListener('click', function () {
-        document.getElementById('cookie-banner').style.display = 'none';
-        localStorage.setItem('bannerClosed', 'true');
-    });
-
-    window.onload = function () {
-        if (localStorage.getItem('bannerClosed') === 'true') {
-            document.getElementById('cookie-banner').style.display = 'none';
-        }
-    };
-
- */
 });
