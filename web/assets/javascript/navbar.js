@@ -6,13 +6,13 @@ document.addEventListener('DOMContentLoaded', function () {
     navItems.forEach(item => {
         if (item.getAttribute('data-action') === currentAction) {
             item.classList.add('active');
-        }else if(currentAction === 'createAccount' && item.getAttribute('data-action') === 'connect' || currentAction === 'preference' && item.getAttribute('data-action') === 'connect' || currentController === 'Connexion' && item.getAttribute('data-action') === 'connect'){
+        } else if (currentAction === 'createAccount' && item.getAttribute('data-action') === 'connect' || currentAction === 'preference' && item.getAttribute('data-action') === 'connect' || currentController === 'Connexion' && item.getAttribute('data-action') === 'connect') {
             item.classList.add('active');
-        }else if(currentAction === 'createOffer' && item.getAttribute('data-action') === 'home'){
+        } else if (currentAction === 'createOffer' && item.getAttribute('data-action') === 'home') {
             item.classList.add('active');
-        }else if((currentController === 'ExpPro' || currentAction === 'ExpPro&action') && item.getAttribute('data-action') === 'offre'){
+        } else if ((currentController === 'ExpPro' || currentAction === 'ExpPro&action') && item.getAttribute('data-action') === 'offre') {
             item.classList.add('active');
-        }else if(currentController === 'TDB' && item.getAttribute('data-action') === 'tdbEtudiant'){
+        } else if (currentController === 'TDB' && item.getAttribute('data-action') === 'tdbEtudiant') {
             item.classList.add('active');
         }
     });
@@ -31,22 +31,24 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.querySelectorAll('.nav-item')[i].style = "opacity: 0; margin-left: 2.5rem";
                 }
             }, 500);
-        }else{
+        } else {
             document.querySelector('.navbar').style = "height: 90vh";
             for (let i = 0; i < document.querySelectorAll('.nav-item').length; i++) {
                 document.querySelectorAll('.nav-item')[i].style = "opacity: 1; margin-left: 0";
             }
         }
     });
-
-    document.getElementById('close-banner').addEventListener('click', function() {
-    document.getElementById('cookie-banner').style.display = 'none';
-    localStorage.setItem('bannerClosed', 'true');
-});
-
-window.onload = function() {
-    if (localStorage.getItem('bannerClosed') === 'true') {
+/*
+    document.getElementById('close-banner').addEventListener('click', function () {
         document.getElementById('cookie-banner').style.display = 'none';
-    }
-};
+        localStorage.setItem('bannerClosed', 'true');
+    });
+
+    window.onload = function () {
+        if (localStorage.getItem('bannerClosed') === 'true') {
+            document.getElementById('cookie-banner').style.display = 'none';
+        }
+    };
+
+ */
 });
