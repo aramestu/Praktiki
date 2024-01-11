@@ -439,8 +439,7 @@ class ControllerExpPro extends ControllerGenerique
                 "adresseExperienceProfessionnel" => $_POST["adressePostale"],
                 "dateDebutExperienceProfessionnel" => $_POST["dateDebut"],
                 "dateFinExperienceProfessionnel" => $_POST["dateFin"],
-                "siret" => $siret,
-                "commentaireProfesseur" => ""];
+                "siret" => $siret];
 
             if ($_POST["typeOffre"] == "stage") {
                 $rep = new StageRepository();
