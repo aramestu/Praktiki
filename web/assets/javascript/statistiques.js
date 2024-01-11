@@ -25,25 +25,26 @@ backgroundColor: "rgba(11,59,159,0.6)",
 },
 });*/
 
-const pie = document.getElementById('myPieChart').getContext('2d');
+const pie = document.getElementById('test').getContext('2d');
 const myPieChart = new Chart(pie, {
     type: 'pie',
     data: {
         labels: ['gain du casino', 'gain des joueurs'],
         datasets: [{
-            data: [<?php echo $PourcentageGainCasino ?>, <?php echo $PourcentageGainJoueur ?>],
-backgroundColor: ['#f50036', '#eeb500'],
-}]
-},
-options: {
-    responsive: true,
+            data: [0.5, 0.5],
+            backgroundColor: ['#f50036', '#eeb500']
+        }]
+    },
+    options: {
+        responsive: true,
         maintainAspectRatio: false,
         width: 300,
         height: 300
-}
+    }
 });
 
-const barData = {
+
+/*const barData = {
     labels: ['Deuxieme', 'Premier', 'Troisieme'],
     datasets: [{
         label: 'gains',
@@ -56,4 +57,4 @@ const barCtx = document.getElementById('myHorizontalBarChart').getContext('2d');
 const myHorizontalBarChart = new Chart(barCtx, {
     type: 'bar',
     data: barData,
-});
+});*/

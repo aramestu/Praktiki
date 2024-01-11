@@ -245,4 +245,10 @@ class ControllerPanelAdmin extends ControllerGenerique {
         self::panelGestionEtudiant();
     }
 
+    public static function panelStatistique(){
+        self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
+            'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
+            'adminPanelView' => 'user/adminPanel/statistique/statistiques.php']);
+    }
+
 }
