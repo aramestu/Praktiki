@@ -145,7 +145,7 @@ class ControllerConvention extends ControllerGenerique
         }
 
         (new ServiceConvention())->mettreAJour($convention, $attributs);
-        ControllerTDB::displayTDB();
+        self::redirectionVersURL("success", "Convention sauvergardée", "displayTDB&controller=TDB&tdbAction=gestion");
     }
 
     public static function creerFormulaire(): void{
