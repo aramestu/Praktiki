@@ -248,6 +248,14 @@ h3 {
     }
 }
 
+#commentaireIcon::before{
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    font-size: 1.8em;
+    content: "\f0e6";
+    vertical-align: middle;
+}
+
 #deleteIcon, #commentaireIcon{
     height: 35px;
     width: 35px;

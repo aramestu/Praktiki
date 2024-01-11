@@ -61,8 +61,8 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
     <?php
         if(ConnexionUtilisateur::estEnseignant() || ConnexionUtilisateur::estAdministrateur()){
     ?>
-    <a id="commentaireButtonOrigin" href="frontController.php?controller=ExpPro&action=afficherAjoutCommentaire&id=<?php echo $expPro->getIdExperienceProfessionnel()?>&type=<?php echo $expPro->getNomExperienceProfessionnel()?>">
-        <img src="assets/images/commentaire.png" id="commentaireIcon" alt="Com"></a>
+    <a id="commentaireIcon" href="frontController.php?controller=ExpPro&action=afficherAjoutCommentaire&id=<?php echo $expPro->getIdExperienceProfessionnel()?>&type=<?php echo $expPro->getNomExperienceProfessionnel()?>">
+        </a>
     <?php } ?>
     <?php
     if (ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::getLoginUtilisateurConnecte()==$entreprise->getSiret()) {
