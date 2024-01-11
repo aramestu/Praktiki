@@ -54,6 +54,25 @@ class AnneeUniversitaireRepository extends AbstractRepository{
         return $anneeUniversitaire;
     }
 
+    public function getCurrentAnneeUniversitaire(): ?AnneeUniversitaire {
+        $pdo = Model::getPdo();
+        $sql = "SELECT * FROM AnneeUniversitaire
+                WHERE dateDebutAnneeUniversitaire = (SELECT MAX(dateDebutAnneeUniversitaire) FROM (SELECT * FROM AnneeUniversitaire
+                                                                                                   WHERE dateDebutAnneeUniversitaire <= :currentDateTag) as A2)";
+        $requestStatement = $pdo->prepare($sql);
+        $values = [
+            "currentDateTag" => date("Y-m-d")
+        ];
+        $requestStatement->execute($values);
+        $tableauAnneeUniversitaire = $requestStatement->fetch();
+        if ($tableauAnneeUniversitaire != null) {
+            $anneeUniversitaire = $this->construireDepuisTableau($tableauAnneeUniversitaire);
+        } else {
+            $anneeUniversitaire = null;
+        }
+        return $anneeUniversitaire;
+    }
+
     protected function getNomTable(): string
     {
         return "AnneeUniversitaire";
