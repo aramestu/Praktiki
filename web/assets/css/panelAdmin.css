@@ -30,6 +30,19 @@
     .down > .VBox{
         max-width: 60%;
     }
+
+    .lineSujetOffre {
+        left: 13%;
+        width: 35%;
+    }
+
+    .input-row{
+        width: 100%;
+    }
+
+    input[type="file"]{
+        margin-left: 10px;
+    }
 }
 
 @media (max-width: 1300px) {
@@ -64,9 +77,26 @@
     .down > .VBox{
         max-width: 60%;
     }
+
+    .lineSujetOffre {
+        left: 13%;
+        width: 35%;
+    }
+
+    .input-row{
+        width: 100%;
+    }
+
+    input[type="file"]{
+        margin-left: 10px;
+    }
 }
 
 @media (max-width: 950px) {
+    body{
+        zoom: 87%;
+    }
+
     #option{
         width: 55px;
     }
@@ -109,6 +139,21 @@
     #adminName,
     #adminBackground{
         display: none;
+    }
+
+    .lineSujetOffre {
+        left: 27%;
+        width: 25%;
+    }
+
+    .input-row{
+        width: 80%;
+        position: absolute;
+        left:10%;
+    }
+
+    input[type="file"]{
+        margin-left: 60px;
     }
 }
 
@@ -353,8 +398,6 @@ form #search-bar{
 .lineSujetOffre{
     font-weight: bold;
     position: absolute;
-    left: 13%;
-    width: 35%;
     text-align: left;
     text-overflow: ellipsis;
 }
@@ -1055,7 +1098,6 @@ a img:active{
 
 /*---START Import page---*/
 input[type="file"]{
-    margin: 10px;
     padding: 0;
     border: none;
     background: none;
@@ -1072,7 +1114,6 @@ input[type="file"]{
     justify-content: space-between;
     margin-bottom: 10px;
     align-items: center;
-    width: 100%;
     background: var(--lightGrey);
     padding: 25px;
     border-radius: 1.5rem;
