@@ -12,6 +12,7 @@ use App\SAE\Model\DataObject\Entreprise;
 use App\SAE\Model\DataObject\Etudiant;
 use App\SAE\Model\DataObject\Inscription;
 use App\SAE\Model\DataObject\TuteurProfessionnel;
+use App\SAE\Model\HTTP\Cookie;
 use App\SAE\Model\Repository\AbstractExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\AlternanceRepository;
 use App\SAE\Model\Repository\AnneeUniversitaireRepository;
@@ -109,7 +110,7 @@ class ControllerMain extends ControllerGenerique
 
     public static function setCookie(): void
     {
-        Cookie::enregistrer('bannerClosed', true, time() + (10 * 365 * 24 * 60 * 60));
+        Cookie::enregistrer('bannerClosed', true);
         header('Location: frontController.php?action=home');
         exit();
     }
