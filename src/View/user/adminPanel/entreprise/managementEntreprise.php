@@ -30,7 +30,7 @@
                 </div>
                 <div id="managementEntrepriseMail">
                     <label>Mail : </label>
-                    <label><a class="link" href="mailto:<?=$entreprise->getEmailEntreprise()?>"><?=htmlspecialchars($entreprise->getEmailEntreprise())?></a></label>
+                    <label><a class="link" href="mailto:<?=$entreprise->getMailEntreprise()?>"><?=htmlspecialchars($entreprise->getMailEntreprise())?></a></label>
                 </div>
 
             </div>

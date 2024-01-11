@@ -175,8 +175,8 @@ class ControllerEntreprise extends ControllerGenerique
                 $user = (new EntrepriseRepository())->getById($_REQUEST["siret"]);
             }
             if (!is_null($user)) {
-                if ($user->getEmailEntreprise() == $_REQUEST["mail"] || ConnexionUtilisateur::estConnecte()) {
-                    VerificationEmail::envoiEmailChangementPassword($user->getSiret(), $user->getEmailEntreprise());
+                if ($user->getMailEntreprise() == $_REQUEST["mail"] || ConnexionUtilisateur::estConnecte()) {
+                    VerificationEmail::envoiEmailChangementPassword($user->getSiret(), $user->getMailEntreprise());
                     self::redirectionVersURL("success", "Vous allez recevoir un mail", "home");
                 } else {
                     self::redirectionVersURL("warning", "mail incorrect", "forgetPassword");

@@ -8,7 +8,7 @@
         <p>Adresse : 123 rue de la paix</p>
         <p>Code postal : <?php echo $user->getCodePostalEntreprise();?></p>
         <p>Téléphone : <?php echo $user->getTelephoneEntreprise();?></p>
-        <p>Couriel : <?php echo $user->getEmailEntreprise();?></p>
+        <p>Couriel : <?php echo $user->getMailEntreprise();?></p>
         <p>Site web : <?php echo $user->getSiteWebEntreprise();?></p>
     </div>
     <div id="recentOffers">
