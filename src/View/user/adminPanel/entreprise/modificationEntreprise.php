@@ -30,7 +30,7 @@
                 </div>
                 <div id="managementEntrepriseMail">
                     <label for="mailInput">Mail : </label>
-                    <input id="mailInput" name="mail" type="text" value="<?=htmlspecialchars($entreprise->getEmailEntreprise())?>">
+                    <input id="mailInput" name="mail" type="text" value="<?=htmlspecialchars($entreprise->getMailEntreprise())?>">
                 </div>
 
             </div>

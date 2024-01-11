@@ -11,6 +11,9 @@ use App\SAE\Model\Repository\EnseignantRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
+use App\SAE\Service\ServiceEnseignant;
+use App\SAE\Service\ServiceEntreprise;
+use App\SAE\Service\ServiceEtudiant;
 
 class ControllerTDB extends ControllerGenerique {
 
@@ -72,14 +75,10 @@ class ControllerTDB extends ControllerGenerique {
     public static function displayTDBensMettreAJour(): void
     {
         $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user = (new EnseignantRepository())->getByEmail($mail);
-        if (!is_null($user)) {
-            $user = Enseignant::construireDepuisFormulaire($_GET);
-            (new EnseignantRepository())->mettreAJour($user);
-            self::redirectionVersURL("success", "L'enseignant a été mis à jour", "displayTDB&controller=TDB");
-        } else {
-            self::redirectionVersURL("warning", "cet enseignant n'existe pas", "afficherFormulaireMiseAJour");
-        }
+        $enseignant = (new EnseignantRepository())->getByEmail($mail);
+
+        (new ServiceEnseignant())->mettreAJour($enseignant, []);
+        self::redirectionVersURL("success", "L'enseignant a été mis à jour", "displayTDB&controller=TDB");
     }
 
     private static function displayTDBentreprise(): void {
@@ -112,17 +111,31 @@ class ControllerTDB extends ControllerGenerique {
         );
     }
 
-    public static function displayTDBentrepriseMettreAJour(): void
-    {
+    public static function displayTDBentrepriseMettreAJour(): void {
         $siret = ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user = (new entrepriseRepository())->getById($siret);
-        if (!is_null($user)) {
-            $user = Entreprise::construireDepuisFormulaire($_GET);
-            (new entrepriseRepository())->mettreAJour($user);
-            self::redirectionVersURL("success", "L'entreprise a été mis à jour", "displayTDB&controller=TDB");
-        } else {
-            self::redirectionVersURL("warning", "cet entreprise n'existe pas", "afficherFormulaireMiseAJour");
+        $entreprise = (new entrepriseRepository())->getById($siret);
+        $attributs = [];
+        if(isset($_POST["nom"])){
+            $attributs["nomEntreprise"] = $_POST["nom"];
         }
+        if(isset($_POST["mail"])){
+            $attributs["mailEntreprise"] = $_POST["mail"];
+        }
+        if(isset($_POST["telephone"])){
+            $attributs["telephoneEntreprise"] = $_POST["telephone"];
+        }
+        if(isset($_POST["postcode"])){
+            $attributs["codePostalEntreprise"] = $_POST["postcode"];
+        }
+        if(isset($_POST["website"])){
+            $attributs["siteWebEntreprise"] = $_POST["website"];
+        }
+        if(isset($_POST["effectif"])){
+            $attributs["effectifEntreprise"] = $_POST["effectif"];
+        }
+
+        (new ServiceEntreprise())->mettreAJour($entreprise, $attributs);
+        self::redirectionVersURL("success", "L'entreprise a été mis à jour", "displayTDB&controller=TDB");
     }
 
     private static function displayTDBetu() {
@@ -174,14 +187,20 @@ class ControllerTDB extends ControllerGenerique {
 
     public static function displayTDBetuMettreAJour(): void {
         $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user = (new EtudiantRepository())->getByEmail($mail);
-        if (!is_null($user)) {
-            $user = Etudiant::construireDepuisFormulaire($_GET);
-            (new EtudiantRepository())->mettreAJour($user);
-            self::redirectionVersURL("success", "L'etudiant a été mis à jour", "displayTDB&controller=TDB");
-        } else {
-            self::redirectionVersURL("warning", "Cet etudiant n'existe pas", "afficherFormulaireMiseAJour");
+        $etudiant = (new EtudiantRepository())->getByEmail($mail);
+        $attributs = [];
+        if(isset($_POST["mailPerso"])){
+            $attributs["mailPersoEtudiant"] = $_POST["mailPerso"];
         }
+        if(isset($_POST["telephone"])){
+            $attributs["telephoneEtudiant"] = $_POST["telephone"];
+        }
+        if(isset($_POST["postcode"])){
+            $attributs["codePostalEtudiant"] = $_POST["postcode"];
+        }
+
+        (new ServiceEtudiant())->mettreAJour($etudiant, $attributs);
+        self::redirectionVersURL("success", "L'etudiant a été mis à jour", "displayTDB&controller=TDB");
     }
 
     public static function displayTDBetuEnvoyerConvention(): void {

@@ -53,4 +53,13 @@ class Inscription extends AbstractDataObject
             "codeDepartementTag" => $this->codeDepartement
         );
     }
+
+    public function getSetters(): array {
+        return [
+            "numEtudiant" => "setNumEtudiant",
+            "idAnneeUniversitaire" => "setIdAnneeUniversitaire",
+            "codeDepartement" => "setCodeDepartement",
+        ];
+
+    }
 }
