@@ -6,7 +6,7 @@ $effectif=htmlspecialchars($user->getEffectifEntreprise());
 $siret=htmlspecialchars($user->getSiret());
 $codePostal=htmlspecialchars($user->getCodePostalEntreprise());
 $Telephone=htmlspecialchars($user->getTelephoneEntreprise());
-$mail=htmlspecialchars($user->getEmailEntreprise());
+$mail=htmlspecialchars($user->getMailEntreprise());
 $siteWeb=htmlspecialchars($user->getSiteWebEntreprise());
 $password=htmlspecialchars($user->getMdpHache());
 ?>
