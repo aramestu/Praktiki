@@ -31,8 +31,7 @@ class ExperienceProfessionnel extends AbstractDataObject
         string $adresse,
         string $dateDebut,
         string $dateFin,
-        string $siret,
-        string $commentaireProfesseur
+        string $siret
     )
     {
         $this->sujetExperienceProfessionnel = $sujet;
@@ -46,7 +45,7 @@ class ExperienceProfessionnel extends AbstractDataObject
         $this->siret = $siret;
         $this->idExperienceProfessionnel = "";
         $this->datePublication = "";
-        $this->commentaireProfesseur = $commentaireProfesseur;
+        $this->commentaireProfesseur = "";
     }
 
     public function getIdExperienceProfessionnel(): string

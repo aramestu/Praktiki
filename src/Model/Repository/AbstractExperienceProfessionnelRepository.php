@@ -111,6 +111,9 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         if (array_key_exists("datePublication", $expProFormatTableau)) {
             $exp->setDatePublication($expProFormatTableau["datePublication"]);
         }
+        if(array_key_exists("commentaireProfesseur", $expProFormatTableau)) {
+            $exp->setCommentaireProfesseur($expProFormatTableau["commentaireProfesseur"]);
+        }
     }
 
     public function getAll(): array{

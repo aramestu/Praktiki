@@ -4,9 +4,9 @@ namespace App\SAE\Model\DataObject;
 
 class OffreNonDefini extends ExperienceProfessionnel
 {
-    public function __construct(string $sujet, string $thematique, string $taches, string $niveau, string $codePostal, string $adresse, string $dateDebut, string $dateFin, string $siret, string $commentaireProfesseur)
+    public function __construct(string $sujet, string $thematique, string $taches, string $niveau, string $codePostal, string $adresse, string $dateDebut, string $dateFin, string $siret)
     {
-        parent::__construct($sujet, $thematique, $taches, $niveau,$codePostal, $adresse, $dateDebut, $dateFin, $siret, $commentaireProfesseur);
+        parent::__construct($sujet, $thematique, $taches, $niveau,$codePostal, $adresse, $dateDebut, $dateFin, $siret);
 
     }
 
