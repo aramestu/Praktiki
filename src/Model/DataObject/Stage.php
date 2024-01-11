@@ -6,9 +6,9 @@ class Stage extends ExperienceProfessionnel
 {
     private float $gratificationStage;
 
-    public function __construct(string $sujet, string $thematique, string $taches, string $niveau, string $codePostal, string $adresse, string $dateDebut, string $dateFin, string $siret, float $gratification)
+    public function __construct(string $sujet, string $thematique, string $taches, string $niveau, string $codePostal, string $adresse, string $dateDebut, string $dateFin, string $siret, float $gratification, string $commentaireProfesseur)
     {
-        parent::__construct($sujet, $thematique, $taches, $niveau, $codePostal, $adresse, $dateDebut, $dateFin, $siret);
+        parent::__construct($sujet, $thematique, $taches, $niveau, $codePostal, $adresse, $dateDebut, $dateFin, $siret, $commentaireProfesseur);
         $this->gratificationStage = $gratification;
     }
 

@@ -44,6 +44,8 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
             <p>Thématique : <?= htmlspecialchars($expPro->getThematiqueExperienceProfessionnel()) ?></p>
             <p>Tâches : <?= htmlspecialchars($expPro->getTachesExperienceProfessionnel()) ?></p>
             <p>Année minimum demandée : <?= htmlspecialchars($expPro->getNiveauExperienceProfessionnel()) ?></p>
+            <?php if($expPro->getCommentaireProfesseur() != ""){ ?>
+                <p> Commentaire professeur : <?php echo htmlspecialchars($expPro->getCommentaireProfesseur()); ?> </p> <?php } ?>
         </div>
 
         <div id="infoCompany">

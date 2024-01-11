@@ -26,6 +26,28 @@ class ControllerExpPro extends ControllerGenerique
         );
     }
 
+    public static function ajouterCommentaire() : void{
+        $id = $_POST["id"];
+        $typeOffre = $_POST["typeOffre"];
+        $commentaire = $_POST["commentaireProfesseur"];
+
+        if(ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::estEnseignant()){
+            if($typeOffre == "Stage"){
+                $rep = new StageRepository();
+            }
+            else if ($typeOffre == "Alternance"){
+                $rep = new AlternanceRepository();
+            }
+            else{
+                $rep = new OffreNonDefiniRepository();
+            }
+
+            $exp = $rep->getById($id);
+            $exp->setCommentaireProfesseur($commentaire);
+            $rep->mettreAJour($exp);
+        }
+    }
+
     public static function getNbTotal(): int
     {
         return (new ExperienceProfessionnelRepository())->getNbExperienceProfessionnel();
@@ -207,7 +229,7 @@ class ControllerExpPro extends ControllerGenerique
             "adresseExperienceProfessionnel" => $_POST["adressePostale"],
             "dateDebutExperienceProfessionnel" => $_POST["dateDebut"],
             "dateFinExperienceProfessionnel" => $_POST["dateFin"],
-            "siret" => $_POST["siret"]
+            "siret" => $_POST["siret"],
         ];
         if (ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::getLoginUtilisateurConnecte() == $_POST["siret"]->getSiret()) {
             // Si c'est un stage
@@ -374,7 +396,9 @@ class ControllerExpPro extends ControllerGenerique
                 "adresseExperienceProfessionnel" => $_POST["adressePostale"],
                 "dateDebutExperienceProfessionnel" => $_POST["dateDebut"],
                 "dateFinExperienceProfessionnel" => $_POST["dateFin"],
-                "siret" => $siret];
+                "siret" => $siret,
+                "commentaireProfesseur" => ""];
+
             if ($_POST["typeOffre"] == "stage") {
                 $rep = new StageRepository();
                 $tabInfo["gratificationStage"] = $_POST["gratification"];

@@ -30,7 +30,7 @@ class OffreNonDefiniRepository extends  AbstractExperienceProfessionnelRepositor
         $exp = new OffreNonDefini($expProFormatTableau["sujetExperienceProfessionnel"], $expProFormatTableau["thematiqueExperienceProfessionnel"],
             $expProFormatTableau["tachesExperienceProfessionnel"], $expProFormatTableau["niveauExperienceProfessionnel"], $expProFormatTableau["codePostalExperienceProfessionnel"],
             $expProFormatTableau["adresseExperienceProfessionnel"], $expProFormatTableau["dateDebutExperienceProfessionnel"],
-            $expProFormatTableau["dateFinExperienceProfessionnel"], $expProFormatTableau["siret"]);
+            $expProFormatTableau["dateFinExperienceProfessionnel"], $expProFormatTableau["siret"], $expProFormatTableau["commentaireProfesseur"]);
         $this->updateAttribut($expProFormatTableau, $exp);
         return $exp;
     }

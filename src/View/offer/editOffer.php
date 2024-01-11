@@ -1,16 +1,17 @@
 <?php
 
+use App\SAE\Lib\ConnexionUtilisateur;
 use App\SAE\Model\DataObject\Stage;
 use App\SAE\Model\Repository\StageRepository;
-
+// https://webinfo.iutmontp.univ-montp2.fr/~audouyt/sae_web_s1/web/frontController.php?action=afficherFormulaireModification&controller=ExpPro&experiencePro=1
 $gratification = 0;
 $expPro = $experiencePro;
-$typeExperience = 'alternance';
+$typeExperience = 'Alternance';
 if (is_a($expPro, 'App\SAE\Model\DataObject\Stage')) { // Si c'est un stage
-    $typeExperience = 'stage';
+    $typeExperience = 'Stage';
     $gratification = $expPro->getGratificationStage();
-} else {//si c'est une stalerternance
-    $typeExperience = 'offreNonDefini';
+} else {//si c'est une offre non défini
+    $typeExperience = 'OffreNonDefini';
 }
 ?>
 <link rel="stylesheet" href="assets/css/connect.css">
@@ -49,9 +50,14 @@ if (is_a($expPro, 'App\SAE\Model\DataObject\Stage')) { // Si c'est un stage
         </p>
         <p>
             <label for="taches">Tâches</label>
+            <textarea name="taches" id="taches" cols="30" rows="10" maxlength="500" required
+                      placeholder="Tâches"><?php echo htmlspecialchars($expPro->getTachesExperienceProfessionnel()); ?></textarea>
+        </p>
+        <!--<p>
+            <label for="taches">Tâches</label>
             <input type="text" name="taches" id="taches" required placeholder="Tâches"
                    value="<?php echo htmlspecialchars($expPro->getTachesExperienceProfessionnel()); ?>">
-        </p>
+        </p> -->
         <p>
             <label for="niveau">Niveau Requis</label>
             <input type="text" name="niveau" id="niveau" required placeholder="Niveau Requis"
@@ -77,6 +83,7 @@ if (is_a($expPro, 'App\SAE\Model\DataObject\Stage')) { // Si c'est un stage
             <input type="date" name="dateFin" id="dateFin" required
                    value="<?php echo htmlspecialchars($expPro->getDateFinExperienceProfessionnel()); ?>">
         </p>
+
 
         <p>
             <input type="hidden" name="siret" value="<?php echo htmlspecialchars($expPro->getSiret()); ?>">
