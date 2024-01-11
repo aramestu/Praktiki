@@ -62,7 +62,7 @@ class Conf
     }
 
     /**
-     * Effectue une multiplication simple afin de supprimer une @Session au besoin
+     * Effectue une multiplication simple afin de supprimer une $_SESSION au besoin
      * TODO : Exemple de ce que cela donne dans le code, supprimer le param a la fin
      * @param string $exemple un exemple pour param
      * @return float|int le *produit* de la multiplication
