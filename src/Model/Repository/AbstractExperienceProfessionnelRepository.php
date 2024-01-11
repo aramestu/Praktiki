@@ -20,7 +20,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         return array("idExperienceProfessionnel","sujetExperienceProfessionnel", "thematiqueExperienceProfessionnel",
             "tachesExperienceProfessionnel", "niveauExperienceProfessionnel", "codePostalExperienceProfessionnel",
             "adresseExperienceProfessionnel", "dateDebutExperienceProfessionnel",
-            "dateFinExperienceProfessionnel", "siret", "datePublication");
+            "dateFinExperienceProfessionnel", "siret", "datePublication", "commentaireProfesseur");
     }
 
     protected function getNomTable(): string
