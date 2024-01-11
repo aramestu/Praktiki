@@ -9,11 +9,40 @@ use App\SAE\Model\DataObject\ExperienceProfessionnel;
 use App\SAE\Model\DataObject\Stage;
 use App\SAE\Model\Repository\Model;
 
+/**
+ * Classe abstraite pour la gestion de la persistance des objets de type ExperienceProfessionnel.
+ *
+ * @package App\SAE\Model\Repository
+ */
 abstract class AbstractExperienceProfessionnelRepository extends AbstractRepository{
+
+    /**
+     * Retourne les noms des colonnes spécifiques à la sous-classe.
+     *
+     * @return array Les noms des colonnes supplémentaires.
+     */
     protected abstract function getNomsColonnesSupplementaires(): array;
+
+    /**
+     * Retourne le nom du DataObject associé à cette classe.
+     *
+     * @return string Le nom du DataObject.
+     */
     protected abstract function getNomDataObject(): string;
+
+    /**
+     * Construit un objet ExperienceProfessionnel depuis un tableau de données.
+     *
+     * @param array $objetFormatTableau Le tableau de données.
+     * @return ExperienceProfessionnel L'objet ExperienceProfessionnel.
+     */
     public abstract function construireDepuisTableau(array $objetFormatTableau): ExperienceProfessionnel;
 
+    /**
+     * Retourne le nom de la clé primaire utilisée pour les objets ExperienceProfessionnel.
+     *
+     * @return string Le nom de la clé primaire.
+     */
     abstract protected function getNomClePrimaire():string;
 
     protected function getNomsColonnes(): array {
@@ -23,11 +52,22 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
             "dateFinExperienceProfessionnel", "siret", "datePublication");
     }
 
+    /**
+     * Retourne le nom de la table utilisée pour les objets ExperienceProfessionnel.
+     *
+     * @return string Le nom de la table.
+     */
     protected function getNomTable(): string
     {
         return "ExperienceProfessionnel";
     }
 
+    /**
+     * Enregistre un objet ExperienceProfessionnel dans la base de données.
+     *
+     * @param AbstractDataObject $e L'objet à enregistrer.
+     * @return bool True si l'enregistrement a réussi, sinon false.
+     */
     public function save(AbstractDataObject $e): bool{
         try {
             // On insère d'abord dans ExperienceProfessionnel
@@ -99,58 +139,92 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
     }
 
 
-    /* utilisé pour construireDepuisTableau afin de dupliquer du code avec StageRepository
+    /**
+     * Met à jour les attributs de l'instance d'ExperienceProfessionnel en fonction du tableau de données.
      *
+     * @param array $expProFormatTableau Le tableau de données formaté.
+     * @param ExperienceProfessionnel $exp L'instance d'ExperienceProfessionnel à mettre à jour.
      */
-    protected function updateAttribut(array $expProFormatTableau, ExperienceProfessionnel $exp): void{
+    protected function updateAttribut(array $expProFormatTableau, ExperienceProfessionnel $exp): void
+    {
         $nomId = $this->getNomClePrimaire();
-        // Les id ont des noms différents, je vérif qu'ils existent
+
+        // Vérifie si l'id existe dans le tableau avant de le mettre à jour
         if (array_key_exists($nomId, $expProFormatTableau)) {
             $exp->setIdExperienceProfessionnel($expProFormatTableau[$nomId]);
         }
+
+        // Vérifie si la date de publication existe dans le tableau avant de la mettre à jour
         if (array_key_exists("datePublication", $expProFormatTableau)) {
             $exp->setDatePublication($expProFormatTableau["datePublication"]);
         }
     }
 
-    public function getAll(): array{
+    /**
+     * Récupère tous les objets ExperienceProfessionnel de la base de données.
+     *
+     * @return array Un tableau d'objets ExperienceProfessionnel.
+     */
+    public function getAll(): array
+    {
         $pdo = Model::getPdo();
         $nomTable = $this->getNomTable();
         $nomClePrimaire = $this->getNomClePrimaire();
-        $requestStatement =  $pdo->query("SELECT * FROM $nomTable 
-        JOIN ExperienceProfessionnel e ON e.idExperienceProfessionnel = $nomTable.$nomClePrimaire");
+
+        // Utilisation d'une requête JOIN pour récupérer les données liées de la table ExperienceProfessionnel
+        $requestStatement = $pdo->query("SELECT * FROM $nomTable 
+    JOIN ExperienceProfessionnel e ON e.idExperienceProfessionnel = $nomTable.$nomClePrimaire");
 
         $objects = [];
+
+        // Parcours des résultats et construction des objets ExperienceProfessionnel
         foreach ($requestStatement as $objectFormatTableau) {
             $objects[] = $this->construireDepuisTableau($objectFormatTableau);
         }
+
         return $objects;
     }
 
-    public function getById(string $id): ?ExperienceProfessionnel {
+    /**
+     * Récupère un objet ExperienceProfessionnel par son identifiant.
+     *
+     * @param string $id L'identifiant de l'objet ExperienceProfessionnel à récupérer.
+     * @return ExperienceProfessionnel|null L'objet ExperienceProfessionnel correspondant à l'identifiant ou null s'il n'existe pas.
+     */
+    public function getById(string $id): ?ExperienceProfessionnel
+    {
         $nomTable = $this->getNomTable();
         $nomClePrimaire = $this->getNomClePrimaire();
-        $sql = "SELECT * 
-                FROM $nomTable 
-                JOIN ExperienceProfessionnel e ON e.idExperienceProfessionnel = $nomTable.$nomClePrimaire
-                WHERE e.idExperienceProfessionnel = :id";
+
+        // Utilisation d'une requête JOIN pour récupérer les données liées de la table ExperienceProfessionnel
+        $sql = "SELECT * FROM $nomTable 
+            JOIN ExperienceProfessionnel e ON e.idExperienceProfessionnel = $nomTable.$nomClePrimaire
+            WHERE e.idExperienceProfessionnel = :id";
+
         $pdoStatement = Model::getPdo()->prepare($sql);
 
-        $values = array(
-            "id" => $id,
-        );
+        $values = ["id" => $id];
 
         $pdoStatement->execute($values);
 
+        // Récupération du résultat
         $exp = $pdoStatement->fetch();
 
         // S'il n'y a pas d'offre associée
-        if (! $exp) {
+        if (!$exp) {
             return null;
         }
+
+        // Construction de l'objet ExperienceProfessionnel
         return $this->construireDepuisTableau($exp);
     }
 
+
+    /**
+     * Met à jour un objet ExperienceProfessionnel dans la base de données.
+     *
+     * @param AbstractDataObject $exp L'objet à mettre à jour.
+     */
     public function mettreAJour(AbstractDataObject $exp): void
     {
         // On insère d'abord dans ExperienceProfessionnel
@@ -206,6 +280,11 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
 
     }
 
+    /**
+     * Supprime un objet ExperienceProfessionnel de la base de données.
+     *
+     * @param string $id L'identifiant de l'objet à supprimer.
+     */
     public function supprimer(string $id): void
     {
         // On supprime d'abord les sous classes puis dans ExpPro
@@ -221,6 +300,11 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         $pdoStatement->execute($values);
     }
 
+    /**
+     * Archive un objet ExperienceProfessionnel en le déplaçant vers la table d'archives.
+     *
+     * @param string $valeurClePrimaire La valeur de la clé primaire de l'objet à archiver.
+     */
     public function archiver(string $valeurClePrimaire): void
     {
         parent::archiver($valeurClePrimaire);
@@ -234,6 +318,19 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         $requeteStatement->execute($values);
     }
 
+    /**
+     * Recherche des objets ExperienceProfessionnel en fonction des critères spécifiés.
+     *
+     * @param string|null $keywords Mots-clés à rechercher.
+     * @param string|null $dateDebut Date de début de l'expérience.
+     * @param string|null $dateFin Date de fin de l'expérience.
+     * @param string|null $optionTri Option de tri pour les résultats.
+     * @param string|null $codePostal Code postal de l'expérience.
+     * @param string|null $datePublication Option de filtrage par date de publication.
+     * @param string|null $BUT2 Niveau d'études de type BUT2.
+     * @param string|null $BUT3 Niveau d'études de type BUT3.
+     * @return array Un tableau d'objets ExperienceProfessionnel correspondant aux critères de recherche.
+     */
     public function search(string $keywords = null,string $dateDebut = null, string $dateFin = null, string $optionTri = null, string $codePostal = null, string $datePublication = null, string $BUT2 = null, string $BUT3 = null): array{
         date_default_timezone_set('Europe/Paris');
         $nomTable = $this->getNomTable();
@@ -297,6 +394,12 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         return $stageTriee;
     }
 
+    /**
+     * Obtient le délai de la date de publication d'une expérience professionnelle.
+     *
+     * @param ExperienceProfessionnel $expPro L'objet ExperienceProfessionnel.
+     * @return string Le délai depuis la date de publication.
+     */
     public static function getDelayDatePublication(ExperienceProfessionnel $expPro): string
     {
         $sql = "SELECT get_delay_experience(:id) AS delai_experience FROM ExperienceProfessionnel WHERE idExperienceProfessionnel = :id;";
@@ -309,6 +412,11 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         return $result["delai_experience"]; // Utilisez le même alias que celui défini dans la requête SQL
     }
 
+    /**
+     * Obtient le nombre total d'objets ExperienceProfessionnel dans la base de données.
+     *
+     * @return int Le nombre total d'objets ExperienceProfessionnel.
+     */
     public function getNbOffre() : int{
         $nomTable = $this->getNomTable();
         $sql = "SELECT COUNT(*) FROM $nomTable";
