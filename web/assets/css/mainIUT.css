@@ -771,7 +771,7 @@ legend{
     text-align: justify;
 }
 
-#cookie-banner button {
+#cookie-banner a {
     background-color: transparent;
     border: none;
     color: #000;
@@ -780,9 +780,10 @@ legend{
     position: absolute;
     right: 20px;
     top: 20px;
+    text-decoration: none;
 }
 
-#cookie-banner button::before {
+#cookie-banner a::before {
     content: "\f00d";
     font-family: FontAwesome;
     font-style: normal;
@@ -791,7 +792,7 @@ legend{
     color: var(--darkBlue2);
 }
 
-#cookie-banner button:hover + #cookie-banner button::before {
+#cookie-banner a:hover + #cookie-banner a::before {
     color: var(--pastelBlue);
 }
 /*---END MISCELLANEOUS---*/
