@@ -5,7 +5,7 @@ class MotDePasse
 {
 
     // Exécutez genererChaineAleatoire() et stockez sa sortie dans le poivre
-    private static string $poivre = "";
+    private static string $poivre = "6pbFwtXjgJe4hq8XXi859L";
 
     public static function hacher(string $mdpClair): string
     {
