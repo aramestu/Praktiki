@@ -20,4 +20,9 @@ class OffreNonDefini extends ExperienceProfessionnel
     {
         return "OffreNonDefini";
     }
+
+    public function getSetters(): array {
+        return array_merge(parent::getSetters(), array());
+
+    }
 }

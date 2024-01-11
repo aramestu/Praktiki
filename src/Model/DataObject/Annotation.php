@@ -97,4 +97,16 @@ class Annotation extends AbstractDataObject {
             "estVisibleEtudiantTag" => $this->estVisibleEtudiant?1:0
         );
     }
+
+    public function getSetters(): array {
+        return [
+            "idAnnotation" => "setIdAnnotation",
+            "siret" => "setSiret",
+            "mailEnseignant" => "setMailEnseignant",
+            "contenu" => "setContenu",
+            "dateAnnotation" => "setDateAnnotation",
+            "estVisibleEtudiant" => "setEstVisibleEtudiant",
+        ];
+
+    }
 }

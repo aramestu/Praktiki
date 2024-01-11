@@ -9,7 +9,7 @@ $admin = htmlspecialchars($user->isEstAdmin());
 
 
 <div class="containerInfo">
-    <form method="get">
+    <form method="post" action="frontController.php?action=displayTDB&controller=TDB&tdbAction=MettreAJour">
         <h2 id="remplaceBaliseLegend">Généralités</h2>
 
         <div class="column">
@@ -17,7 +17,7 @@ $admin = htmlspecialchars($user->isEstAdmin());
                 <label class="InputAddOn-item" for="mail">Adresse mail :</label>
                 <input class="InputAddOn-field" type="text" value=<?= $mail ?> name="mail" id="mail" readonly>
                 <label class="InputAddOn-item" for="nom">Nom :</label>
-                <input class="InputAddOn-field" type="text" value=<?= $nom ?> name="nom" id="nom" required/>
+                <input class="InputAddOn-field" type="text" value=<?= $nom ?> name="nom" id="nom" readonly/>
 
             </p>
         </div>
@@ -25,14 +25,11 @@ $admin = htmlspecialchars($user->isEstAdmin());
         <div class="column">
             <p>
                 <label class="InputAddOn-item" for="prenom">Prenom : </label>
-                <input class="InputAddOn-field" type="text" value=<?= $prenom ?> name="prenom" id="prenom" required>
+                <input class="InputAddOn-field" type="text" value=<?= $prenom ?> name="prenom" id="prenom" readonly>
                 <input type="hidden" value="' . $admin . '" name="admin" id="admin" required>
             </p>
         </div>
 
-        <input type="hidden" name="action" value="displayTDB">
-        <input type="hidden" name="controller" value="TDB">
-        <input type="hidden" name="tdbAction" value="mettreAJour">
         <input type="submit" value="Mettre à jour">
     </form>
 </div>
