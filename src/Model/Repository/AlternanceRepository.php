@@ -32,7 +32,7 @@ class AlternanceRepository extends AbstractExperienceProfessionnelRepository
         $exp = new Alternance($expProFormatTableau["sujetExperienceProfessionnel"], $expProFormatTableau["thematiqueExperienceProfessionnel"],
             $expProFormatTableau["tachesExperienceProfessionnel"], $expProFormatTableau["niveauExperienceProfessionnel"], $expProFormatTableau["codePostalExperienceProfessionnel"],
             $expProFormatTableau["adresseExperienceProfessionnel"], $expProFormatTableau["dateDebutExperienceProfessionnel"],
-            $expProFormatTableau["dateFinExperienceProfessionnel"], $expProFormatTableau["siret"], $expProFormatTableau["commentaireProfesseur"]);
+            $expProFormatTableau["dateFinExperienceProfessionnel"], $expProFormatTableau["siret"]);
         $this->updateAttribut($expProFormatTableau, $exp);
         return $exp;
     }

@@ -273,7 +273,7 @@ class ControllerExpPro extends ControllerGenerique
             "dateFinExperienceProfessionnel" => $_POST["dateFin"],
             "siret" => $_POST["siret"]
         ];
-        if (ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::getLoginUtilisateurConnecte() == $_POST["siret"]->getSiret()) {
+        if (ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::getLoginUtilisateurConnecte() == $_POST["siret"]) {
             // Si c'est un stage
             if ($_POST["typeOffre"] == "stage") {
                 $tab["gratificationStage"] = $_POST["gratification"]; // Un stage a une gratification à renseigner en plus
