@@ -12,6 +12,9 @@ use App\SAE\Model\Repository\EnseignantRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use mysql_xdevapi\Table;
 
+/*
+ * Controller gérant les actions liées aux enseignants
+ */
 class ControllerEnseignant extends ControllerGenerique{
 
 }

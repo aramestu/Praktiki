@@ -16,9 +16,16 @@ use App\SAE\Model\DataObject\Stage;
 use App\SAE\Service\ServiceAlternance;
 use App\SAE\Service\ServiceOffreNonDefini;
 use App\SAE\Service\ServiceStage;
-
+/**
+ * Contrôleur gérant les actions liées aux expériences professionnelles.
+ */
 class ControllerExpPro extends ControllerGenerique
 {
+    /**
+     * Affiche la liste des expériences professionnelles par défaut.
+     *
+     * @return void
+     */
     public static function getExpProByDefault(): void
     {
         $listeExpPro = (new ExperienceProfessionnelRepository())->search("");
@@ -32,27 +39,51 @@ class ControllerExpPro extends ControllerGenerique
         );
     }
 
+    /**
+     * Obtient le nombre total d'expériences professionnelles.
+     *
+     * @return int Le nombre total d'expériences professionnelles.
+     */
     public static function getNbTotal(): int
     {
         return (new ExperienceProfessionnelRepository())->getNbExperienceProfessionnel();
     }
 
+    /**
+     * Obtient le nombre total de stages.
+     *
+     * @return int Le nombre total de stages.
+     */
     public static function getNbStageTotal(): int
     {
         return (new StageRepository())->getNbOffre();
     }
 
+    /**
+     * Obtient le nombre total d'alternances.
+     *
+     * @return int Le nombre total d'alternances.
+     */
     public static function getNbAlternanceTotal(): int
     {
         return (new AlternanceRepository())->getNbOffre();
     }
 
+    /**
+     * Obtient le nombre total d'offres non définies.
+     *
+     * @return int Le nombre total d'offres non définies.
+     */
     public static function getNbOffreNonDefiniTotal(): int
     {
         return (new OffreNonDefiniRepository())->getNbOffre();
     }
 
-
+    /**
+     * Affiche les expériences professionnelles récentes.
+     *
+     * @return void
+     */
     public static function getExpProRecent(): void
     {
         $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null, null,
@@ -61,6 +92,11 @@ class ControllerExpPro extends ControllerGenerique
         require __DIR__ . "/../View/offer/offerTable.php";
     }
 
+    /**
+     * Affiche les expériences professionnelles d'une entreprise.
+     *
+     * @return void
+     */
     public static function getExpProEntreprise(): void
     {
         $listeExpPro = (new ExperienceProfessionnelRepository())->search(ConnexionUtilisateur::getLoginUtilisateurConnecte());
@@ -69,6 +105,11 @@ class ControllerExpPro extends ControllerGenerique
     }
 
 
+    /**
+     * Obtient les expériences professionnelles en fonction de la recherche par mots-clés.
+     *
+     * @return void
+     */
     public static function getExpProBySearch(): void
     {
         $keywords = urldecode($_GET['keywords']);
@@ -83,6 +124,11 @@ class ControllerExpPro extends ControllerGenerique
         );
     }
 
+    /**
+     * Obtient les expériences professionnelles en fonction des filtres spécifiés.
+     *
+     * @return void
+     */
     public static function getExpProByFiltre(): void
     {
         $dateDebut = null;
@@ -132,6 +178,11 @@ class ControllerExpPro extends ControllerGenerique
         );
     }
 
+    /**
+     * Obtient les offres filtrées et les affiche.
+     *
+     * @return void
+     */
     public static function getFilteredOffers(): void
     {
         $dateDebut = null;
@@ -201,6 +252,11 @@ class ControllerExpPro extends ControllerGenerique
     }
 
 
+    /**
+     * Modifie une expérience professionnelle depuis un formulaire.
+     *
+     * @return void
+     */
     public static function modifierDepuisFormulaire(): void {
 
         if(!isset($_POST["id"])){
@@ -274,11 +330,24 @@ class ControllerExpPro extends ControllerGenerique
         self::redirectionVersURL("success", "Offre modifié avec succès", "home");
     }
 
-    private static function utilisateurPeutModifier(ExperienceProfessionnel $experienceProfessionnel) {
+    /**
+     * Vérifie si l'utilisateur peut modifier une expérience professionnelle.
+     *
+     * @param ExperienceProfessionnel $experienceProfessionnel L'expérience professionnelle à vérifier.
+     * @return bool True si l'utilisateur peut modifier, sinon false.
+     */
+    private static function utilisateurPeutModifier(ExperienceProfessionnel $experienceProfessionnel): bool
+    {
         return ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::getLoginUtilisateurConnecte() == $experienceProfessionnel->getSiret();
     }
 
-    public static function afficherVueEndOffer($msg): void
+    /**
+     * Affiche la vue de fin d'offre avec un message spécifié.
+     *
+     * @param string $msg Le message à afficher.
+     * @return void
+     */
+    public static function afficherVueEndOffer(string $msg): void
     {
         ControllerGenerique::afficheVue("view.php", [
             "pagetitle" => "Gestion d'offre",
@@ -287,6 +356,11 @@ class ControllerExpPro extends ControllerGenerique
         ]);
     }
 
+    /**
+     * Affiche le formulaire de modification d'une offre.
+     *
+     * @return void
+     */
     public static function afficherFormulaireModification(): void
     {
         $idExpPro = $_GET["experiencePro"];
@@ -342,6 +416,11 @@ class ControllerExpPro extends ControllerGenerique
         }
     }
 
+    /**
+     * Affiche une offre spécifiée.
+     *
+     * @return void
+     */
     public static function afficherOffre(): void
     {
         $idExpPro = $_GET["experiencePro"];
@@ -393,6 +472,11 @@ class ControllerExpPro extends ControllerGenerique
         }
     }
 
+    /**
+     * Crée une offre depuis un formulaire.
+     *
+     * @return void
+     */
     public static function creerOffreDepuisFormulaire(): void
     {
         if (ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::estEntreprise()) {
@@ -431,6 +515,11 @@ class ControllerExpPro extends ControllerGenerique
         }
     }
 
+    /**
+     * Supprime une offre spécifiée.
+     *
+     * @return void
+     */
     public static function supprimerOffre(): void
     {
         $idExpPro = $_GET["experiencePro"];
@@ -472,6 +561,11 @@ class ControllerExpPro extends ControllerGenerique
         }
     }
 
+    /**
+     * Affiche le formulaire de création d'une offre.
+     *
+     * @return void
+     */
     public static function createOffer(): void
     {
         if (ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::estEntreprise()) {
@@ -487,6 +581,11 @@ class ControllerExpPro extends ControllerGenerique
         }
     }
 
+    /**
+     * Affiche la liste des offres.
+     *
+     * @return void
+     */
     public static function displayOffer(): void
     {
         ControllerGenerique::afficheVue(
@@ -499,8 +598,11 @@ class ControllerExpPro extends ControllerGenerique
     }
 
     /**
-     * @param AlternanceRepository $rep
-     * @param string $msg
+     * Sauvegarde une expérience professionnelle à partir des données du formulaire POST.
+     *
+     * @param AbstractExperienceProfessionnelRepository $rep Le repository associé.
+     * @param string $msg Le message de succès.
+     * @param array $tab Les données du formulaire POST.
      * @return void
      */
     public static function saveExpByFormulairePost(AbstractExperienceProfessionnelRepository $rep, string $msg, array $tab): void
