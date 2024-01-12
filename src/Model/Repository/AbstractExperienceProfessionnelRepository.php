@@ -20,7 +20,7 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         return array("idExperienceProfessionnel","sujetExperienceProfessionnel", "thematiqueExperienceProfessionnel",
             "tachesExperienceProfessionnel", "niveauExperienceProfessionnel", "codePostalExperienceProfessionnel",
             "adresseExperienceProfessionnel", "dateDebutExperienceProfessionnel",
-            "dateFinExperienceProfessionnel", "siret", "datePublication");
+            "dateFinExperienceProfessionnel", "siret", "datePublication", "commentaireProfesseur");
     }
 
     protected function getNomTable(): string
@@ -110,6 +110,9 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         }
         if (array_key_exists("datePublication", $expProFormatTableau)) {
             $exp->setDatePublication($expProFormatTableau["datePublication"]);
+        }
+        if(array_key_exists("commentaireProfesseur", $expProFormatTableau)) {
+            $exp->setCommentaireProfesseur($expProFormatTableau["commentaireProfesseur"]);
         }
     }
 

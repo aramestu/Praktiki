@@ -18,6 +18,7 @@ class ExperienceProfessionnel extends AbstractDataObject {
     private string $dateFinExperienceProfessionnel;
     private string $siret;
     private string $datePublication;
+    private string $commentaireProfesseur;
 
 
     public function __construct(
@@ -43,6 +44,7 @@ class ExperienceProfessionnel extends AbstractDataObject {
         $this->siret = $siret;
         $this->idExperienceProfessionnel = "";
         $this->datePublication = "";
+        $this->commentaireProfesseur = "";
     }
 
     public function getIdExperienceProfessionnel(): string
@@ -156,6 +158,22 @@ class ExperienceProfessionnel extends AbstractDataObject {
         $this->datePublication = $datePublication;
     }
 
+    /**
+     * @return string
+     */
+    public function getCommentaireProfesseur(): string
+    {
+        return $this->commentaireProfesseur;
+    }
+
+    /**
+     * @param string $commentaireProfesseur
+     */
+    public function setCommentaireProfesseur(string $commentaireProfesseur): void
+    {
+        $this->commentaireProfesseur = $commentaireProfesseur;
+    }
+
     public function formatTableau(): array
     {
         return array(
@@ -169,7 +187,8 @@ class ExperienceProfessionnel extends AbstractDataObject {
             "dateDebutExperienceProfessionnelTag" => $this->dateDebutExperienceProfessionnel,
             "dateFinExperienceProfessionnelTag" => $this->dateFinExperienceProfessionnel,
             "siretTag" => $this->siret,
-            "datePublicationTag" => $this->datePublication
+            "datePublicationTag" => $this->datePublication,
+            "commentaireProfesseurTag" => $this->commentaireProfesseur
         );
     }
 

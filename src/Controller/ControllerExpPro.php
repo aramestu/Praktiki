@@ -32,6 +32,70 @@ class ControllerExpPro extends ControllerGenerique
         );
     }
 
+    public static function afficherAjoutCommentaire() : void{
+        $id = $_GET["id"];
+        $type = $_GET["type"];
+
+        if(ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::estEnseignant()){
+            if($type == "Stage"){
+                $rep = new StageRepository();
+            }
+            else if ($type == "Alternance"){
+                $rep = new AlternanceRepository();
+            }
+            else{
+                $rep = new OffreNonDefiniRepository();
+            }
+            try {
+                $expPro = $rep->getById($id);
+            }catch (\Exception $e){
+                self::redirectionVersURL("danger", "Cette offre n'existe pas !", "home");
+            }
+            if(is_null($expPro)){
+                self::redirectionVersURL("danger", "Cette offre n'existe pas", "home");
+            }
+
+            self::afficheVue('view.php',[
+                'pagetitle' => 'Ajout commentaire offre',
+                'expPro' => $expPro,
+                'cheminVueBody' => 'offer/commentaireProfesseur.php',
+            ]);
+        }
+        else {
+            self::redirectionVersURL("danger", "Vous n'avez pas les droits pour modifier cette offre", "home");
+        }
+    }
+
+    public static function ajouterCommentaire() : void{
+        $id = $_POST["id"];
+        $typeOffre = $_POST["typeOffre"];
+        $commentaire = $_POST["commentaireProfesseur"];
+
+        if(ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::estEnseignant()){
+            if($typeOffre == "Stage"){
+                $rep = new StageRepository();
+            }
+            else if ($typeOffre == "Alternance"){
+                $rep = new AlternanceRepository();
+            }
+            else{
+                $rep = new OffreNonDefiniRepository();
+            }
+
+            try{
+                $exp = $rep->getById($id);
+                $exp->setCommentaireProfesseur($commentaire);
+                $rep->mettreAJour($exp);
+            }catch (\Exception $e){
+                self::redirectionVersURL("danger", "Le commentaire n'a pas pu être mis à jour", "home");
+            }
+            self::redirectionVersURL("success", "Commentaire mis à jour avec succès", "afficherOffre&controller=ExpPro&experiencePro=$id");
+        }
+        else {
+            self::redirectionVersURL("danger", "Vous n'avez pas les droits pour modifier cette offre", "home");
+        }
+    }
+
     public static function getNbTotal(): int
     {
         return (new ExperienceProfessionnelRepository())->getNbExperienceProfessionnel();
@@ -278,6 +342,7 @@ class ControllerExpPro extends ControllerGenerique
         return ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::getLoginUtilisateurConnecte() == $experienceProfessionnel->getSiret();
     }
 
+
     public static function afficherVueEndOffer($msg): void
     {
         ControllerGenerique::afficheVue("view.php", [
@@ -412,6 +477,7 @@ class ControllerExpPro extends ControllerGenerique
                 "dateDebutExperienceProfessionnel" => $_POST["dateDebut"],
                 "dateFinExperienceProfessionnel" => $_POST["dateFin"],
                 "siret" => $siret];
+
             if ($_POST["typeOffre"] == "stage") {
                 $rep = new StageRepository();
                 $tabInfo["gratificationStage"] = $_POST["gratification"];
