@@ -11,25 +11,5 @@
 <div class="VBox">
     <canvas id="test"></canvas>
 </div>
-
-<script>
-    /*const pie = document.getElementById('test').getContext('2d');
-    const myPieChart = new Chart(pie, {
-        type: 'pie',
-        data: {
-            labels: ['Stage', 'Alternance', 'Rien'],
-            datasets: [{
-                data: [0.3,0.3,0.3],
-                backgroundColor: ['#f50036', '#eeb500', '#aef']
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            width: 300,
-            height: 300
-        }
-    });*/
-</script>
 </body>
 </html>
