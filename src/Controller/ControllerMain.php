@@ -50,7 +50,7 @@ class ControllerMain extends ControllerGenerique
         self::afficheVue(
             'view.php',
             [
-                'pagetitle' => 'Créer un compte',
+                'pagetitle' => 'Mot de passe oublié',
                 'cheminVueBody' => 'user/forgetPassword.php',
             ]
         );
@@ -87,7 +87,7 @@ class ControllerMain extends ControllerGenerique
             self::afficheVue(
                 'view.php',
                 [
-                    'pagetitle' => 'Préférence',
+                    'pagetitle' => 'Connexion',
                     'cheminVueBody' => 'user/preference.php',
                 ]
             );
