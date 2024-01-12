@@ -24,7 +24,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 12;
+    z-index: 13;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -376,6 +376,10 @@ main{
     .nav-item:active{
         background: var(--darkBlue2);
         color: var(--white);
+    }
+
+    #cookie-banner p {
+        font-size: 10px;
     }
 }
 /*---END RESPONSIVE---*/
@@ -760,6 +764,7 @@ legend{
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    z-index: 12;
 }
 
 #cookie-banner h2 {
