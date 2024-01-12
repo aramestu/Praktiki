@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Votre Page</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/javascript/statistiques.js"></script>
 </head>
 <body>
 <div class="VBox">
@@ -12,7 +13,7 @@
 </div>
 
 <script>
-    const pie = document.getElementById('test').getContext('2d');
+    /*const pie = document.getElementById('test').getContext('2d');
     const myPieChart = new Chart(pie, {
         type: 'pie',
         data: {
@@ -28,7 +29,7 @@
             width: 300,
             height: 300
         }
-    });
+    });*/
 </script>
 </body>
 </html>

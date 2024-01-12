@@ -1,4 +1,4 @@
-import Chart from 'chart.js/auto';
+//import Chart from 'chart.js/auto';
 
 /*const ctx = document.getElementById("myChart").getContext("2d");
 const myChart = new Chart(ctx, {
@@ -25,14 +25,34 @@ backgroundColor: "rgba(11,59,159,0.6)",
 },
 });*/
 
-const pie = document.getElementById('test').getContext('2d');
+document.addEventListener("DOMContentLoaded", function() {
+    const pie = document.getElementById('test').getContext('2d');
+    const myPieChart = new Chart(pie, {
+        type: 'pie',
+        data: {
+            labels: ['Stage', 'Alternance', 'Rien'],
+            datasets: [{
+                data: [0.3, 0.3, 0.3],
+                backgroundColor: ['#f50036', '#eeb500', '#aef']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            width: 300,
+            height: 300
+        }
+    });
+});
+
+/*const pie = document.getElementById('test').getContext('2d');
 const myPieChart = new Chart(pie, {
     type: 'pie',
     data: {
-        labels: ['gain du casino', 'gain des joueurs'],
+        labels: ['Stage', 'Alternance', 'Rien'],
         datasets: [{
-            data: [0.5, 0.5],
-            backgroundColor: ['#f50036', '#eeb500']
+            data: [0.3,0.3,0.3],
+            backgroundColor: ['#f50036', '#eeb500', '#aef']
         }]
     },
     options: {
@@ -41,7 +61,7 @@ const myPieChart = new Chart(pie, {
         width: 300,
         height: 300
     }
-});
+});*/
 
 
 /*const barData = {
