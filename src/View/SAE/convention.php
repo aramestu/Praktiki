@@ -186,8 +186,5 @@ $et = $etudiant;
         <!--<button class="button">Envoyer la convention</button>-->
         <input type="hidden" name="idConvention" value="<?php echo htmlspecialchars($c->getIdConvention());?>">
         <!--<input type="hidden" name="idStage" value="<?php //echo htmlspecialchars($c->getIdStage());?>">-->
-        <input type="hidden" name="estSignee" value="<?php echo htmlspecialchars($c->getEstSignee());?>">
-        <input type="hidden" name="estValidee" value="<?php echo htmlspecialchars($c->getEstValidee());?>">
-        <input type="hidden" name="estFini" value="<?php echo htmlspecialchars($c->getEstFini());?>">
     </div>
 </form>

@@ -82,11 +82,10 @@ if (is_a($expPro, 'App\SAE\Model\DataObject\Stage')) { // Si c'est un stage
         </p>
 
         <p>
-            <input type="hidden" name="siret" value="<?php echo htmlspecialchars($expPro->getSiret()); ?>">
             <input type="hidden" name="id"
-                   value="<?php echo htmlspecialchars($expPro->getIdExperienceProfessionnel()); ?>">
+                   value="<?= htmlspecialchars($expPro->getIdExperienceProfessionnel()); ?>">
             <input type="hidden" id="typeOffre" name="typeOffre"
-                   value="<?php echo htmlspecialchars($typeExperience); ?>">
+                   value="<?= htmlspecialchars($typeExperience); ?>">
             <input type="submit" value="Modifier l'offre">
         </p>
     </form>

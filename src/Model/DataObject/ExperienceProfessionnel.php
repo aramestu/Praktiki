@@ -5,8 +5,7 @@ namespace App\SAE\Model\DataObject;
 use App\SAE\Model\Repository\AbstractExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 
-class ExperienceProfessionnel extends AbstractDataObject
-{
+class ExperienceProfessionnel extends AbstractDataObject {
 
     private string $idExperienceProfessionnel;
     private string $sujetExperienceProfessionnel;
@@ -193,8 +192,24 @@ class ExperienceProfessionnel extends AbstractDataObject
         );
     }
 
-    public function getNomExperienceProfessionnel(): string
-    {
+    public function getNomExperienceProfessionnel(): string {
         return "ExperienceProfessionnel";
+    }
+
+    public function getSetters(): array {
+        return [
+            "idExperienceProfessionnel" => "setIdExperienceProfessionnel",
+            "sujetExperienceProfessionnel" => "setSujetExperienceProfessionnel",
+            "thematiqueExperienceProfessionnel" => "setThematiqueExperienceProfessionnel",
+            "tachesExperienceProfessionnel" => "setTachesExperienceProfessionnel",
+            "niveauExperienceProfessionnel" => "setNiveauExperienceProfessionnel",
+            "codePostalExperienceProfessionnel" => "setCodePostalExperienceProfessionnel",
+            "adresseExperienceProfessionnel" => "setAdresseExperienceProfessionnel",
+            "dateDebutExperienceProfessionnel" => "setDateDebutExperienceProfessionnel",
+            "dateFinExperienceProfessionnel" => "setDateFinExperienceProfessionnel",
+            "siret" => "setSiret",
+            "datePublication" => "setDatePublication",
+        ];
+
     }
 }

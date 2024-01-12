@@ -1,10 +1,10 @@
 <?php
 namespace App\SAE\Model\Repository;
+
 use App\SAE\Model\DataObject\Alternance;
 use App\SAE\Model\DataObject\ExperienceProfessionnel;
 
-class ExperienceProfessionnelRepository
-{
+class ExperienceProfessionnelRepository{
 
     public function getAll(): array
     {
@@ -16,7 +16,7 @@ class ExperienceProfessionnelRepository
     }
 
     public function mettreAJour(ExperienceProfessionnel $experienceProfessionnel):void{
-        $repository = $experienceProfessionnel->getNomExperienceProfessionnel() . "Repository";
+        $repository = "App\SAE\Model\Repository\\" . $experienceProfessionnel->getNomExperienceProfessionnel() . "Repository";
         (new $repository())->mettreAJour($experienceProfessionnel);
     }
 

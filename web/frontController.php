@@ -30,7 +30,3 @@ if (class_exists($classNameController)) {
 } else {
     ControllerMain::home();
 }
-
-
-
-?>

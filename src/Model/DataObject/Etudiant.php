@@ -123,4 +123,16 @@ class Etudiant extends AbstractDataObject
             $tableauFormulaire["postcode"]
         );
     }
+
+    public function getSetters():array{
+        return [
+            "numEtudiant" => "setNumEtudiant",
+            "prenomEtudiant" => "setPrenomEtudiant",
+            "nomEtudiant" => "setNomEtudiant",
+            "mailPersoEtudiant" => "setMailPersoEtudiant",
+            "mailUniversitaireEtudiant" => "setMailUniversitaireEtudiant",
+            "telephoneEtudiant" => "setTelephoneEtudiant",
+            "codePostalEtudiant" => "setCodePostalEtudiant"
+        ];
+    }
 }

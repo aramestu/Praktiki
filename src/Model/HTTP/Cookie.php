@@ -4,7 +4,6 @@ namespace App\SAE\Model\HTTP;
 
 class Cookie
 {
-
     public static function enregistrer(string $cle, $valeur, ?int $dureeExpiration = null): void{
         if (!is_null($dureeExpiration)) {
             setcookie($cle, serialize($valeur),$dureeExpiration);
@@ -23,7 +22,4 @@ class Cookie
         unset($_COOKIE[$cle]);
         setcookie($cle,"",1);
     }
-
-
-
 }
