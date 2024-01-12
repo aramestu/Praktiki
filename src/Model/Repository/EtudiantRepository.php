@@ -20,7 +20,7 @@ class EtudiantRepository extends AbstractRepository
      */
     public function getEtudiantAvecConventionValidee(): array
     {
-        return $this->getEtudiantAvecConvention(true, true);
+        return $this->getEtudiantConventionValide(true,true);
     }
 
     /**
@@ -30,8 +30,8 @@ class EtudiantRepository extends AbstractRepository
      * @param bool $estValide Indique si la convention est validée.
      * @return array La liste des étudiants avec une convention en fonction des critères donnés.
      */
-    public function getEtudiantAvecConvention(bool $estSigne, bool $estValide): array{ //TODO mettre à jour pour les nouvelles conventions
-        $sql = "SELECT * FROM Etudiants e 
+    public function getEtudiantConventionValide(bool $estSigne, bool $estValide): array{ //TODO mettre à jour pour les nouvelles conventions
+            $sql = "SELECT * FROM Etudiants e 
                 JOIN Conventions c ON c.idStage = e.idStage ";
 
         $whereAjoutee = false;
@@ -234,7 +234,28 @@ class EtudiantRepository extends AbstractRepository
         }
     }
 
-    /**
+    public function getEtudiantAvecConvention(string $idConvention): ?Etudiant{
+        $sql = "SELECT * FROM Etudiants e
+                WHERE EXISTS(SELECT * FROM ConventionsStageEtudiant cse
+                             WHERE e.numEtudiant= cse.numEtudiant
+                             AND idConvention = :idConventionTag)";
+        // Préparation de la requête
+        $pdoStatement = Model::getPdo()->prepare($sql);
+        $values = [
+            "idConventionTag" => $idConvention
+        ];
+        $pdoStatement->execute($values);
+
+        $etudiantFormatTableau = $pdoStatement->fetch();
+        if(!$etudiantFormatTableau){
+            return null;
+        }
+        else{
+            return (new EtudiantRepository())->construireDepuisTableau($etudiantFormatTableau);
+        }
+    }
+
+     /**
      * Obtient le nom de la table pour la requête SQL.
      *
      * @return string Le nom de la table.

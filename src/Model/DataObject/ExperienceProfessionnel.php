@@ -66,6 +66,7 @@ class ExperienceProfessionnel extends AbstractDataObject
      * @var string Date de publication de l'expérience professionnelle.
      */
     private string $datePublication;
+    private string $commentaireProfesseur;
 
     /**
      * Constructeur de la classe ExperienceProfessionnel.
@@ -103,6 +104,7 @@ class ExperienceProfessionnel extends AbstractDataObject
         $this->siret = $siret;
         $this->idExperienceProfessionnel = "";
         $this->datePublication = "";
+        $this->commentaireProfesseur = "";
     }
 
     /**
@@ -326,6 +328,22 @@ class ExperienceProfessionnel extends AbstractDataObject
     }
 
     /**
+     * @return string
+     */
+    public function getCommentaireProfesseur(): string
+    {
+        return $this->commentaireProfesseur;
+    }
+
+    /**
+     * @param string $commentaireProfesseur
+     */
+    public function setCommentaireProfesseur(string $commentaireProfesseur): void
+    {
+        $this->commentaireProfesseur = $commentaireProfesseur;
+    }
+
+    /**
      * Formater les données de l'expérience professionnelle sous forme de tableau.
      *
      * @return array Les données formatées.
@@ -343,7 +361,8 @@ class ExperienceProfessionnel extends AbstractDataObject
             "dateDebutExperienceProfessionnelTag" => $this->dateDebutExperienceProfessionnel,
             "dateFinExperienceProfessionnelTag" => $this->dateFinExperienceProfessionnel,
             "siretTag" => $this->siret,
-            "datePublicationTag" => $this->datePublication
+            "datePublicationTag" => $this->datePublication,
+            "commentaireProfesseurTag" => $this->commentaireProfesseur
         );
     }
 

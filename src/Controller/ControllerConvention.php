@@ -2,6 +2,7 @@
 
 namespace App\SAE\Controller;
 
+use App\SAE\Lib\ConnexionUtilisateur;
 use App\SAE\Model\DataObject\Convention;
 use App\SAE\Model\Repository\ConventionRepository;
 use App\SAE\Model\Repository\EnseignantRepository;
@@ -52,14 +53,19 @@ class ControllerConvention extends ControllerGenerique
     public static function modifierConvention(): void {
         if(!isset($_POST["idConvention"])){
             self::redirectionVersURL("waring", "Aucune idConvention renseigné", "home");
+            return;
         }
         $convention = (new ConventionRepository())->getById($_POST["idConvention"]);
-        if($convention == null){
+        if($convention == null) {
             self::redirectionVersURL("waring", "Aucune convention ne correspond à l'idConvention fourni", "home");
+            return;
         }
-        //---------------------------------------------------------------------------
-        //TODO vérifier si la convention appartient bien à l'étudiant qui la modifie
-        //---------------------------------------------------------------------------
+        $etudiant = (new EtudiantRepository())->getEtudiantAvecConvention($convention->getIdConvention());
+        if($etudiant->getMailUniversitaireEtudiant() != ConnexionUtilisateur::getLoginUtilisateurConnecte() && !ConnexionUtilisateur::estAdministrateur()){
+            self::redirectionVersURL("danger", "Vous n'avez pas la permission de modifier cette convention", "home");
+            return;
+        }
+
         $attributs = [];
         if(isset($_POST["caisseAssuranceMaladie"])){
             $attributs["caisseAssuranceMaladie"] = $_POST["caisseAssuranceMaladie"];
