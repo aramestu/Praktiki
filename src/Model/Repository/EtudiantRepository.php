@@ -13,10 +13,10 @@ class EtudiantRepository extends AbstractRepository
 
     public function getEtudiantAvecConventionValidee(): array
     {
-        return $this->getEtudiantAvecConvention(true,true);
+        return $this->getEtudiantConventionValide(true,true);
     }
 
-    public function getEtudiantAvecConvention(bool $estSigne, bool $estValide): array{ //TODO mettre à jour pour les nouvelles conventions
+    public function getEtudiantConventionValide(bool $estSigne, bool $estValide): array{ //TODO mettre à jour pour les nouvelles conventions
         $sql = "SELECT * FROM Etudiants e 
                 JOIN Conventions c ON c.idStage = e.idStage ";
 
@@ -166,6 +166,27 @@ class EtudiantRepository extends AbstractRepository
         }
         else{
             return (new EtudiantRepository())->construireDepuisTableau($objetFormatTableau);
+        }
+    }
+
+    public function getEtudiantAvecConvention(string $idConvention): ?Etudiant{
+        $sql = "SELECT * FROM Etudiants e
+                WHERE EXISTS(SELECT * FROM ConventionsStageEtudiant cse
+                             WHERE e.numEtudiant= cse.numEtudiant
+                             AND idConvention = :idConventionTag)";
+        // Préparation de la requête
+        $pdoStatement = Model::getPdo()->prepare($sql);
+        $values = [
+            "idConventionTag" => $idConvention
+        ];
+        $pdoStatement->execute($values);
+
+        $etudiantFormatTableau = $pdoStatement->fetch();
+        if(!$etudiantFormatTableau){
+            return null;
+        }
+        else{
+            return (new EtudiantRepository())->construireDepuisTableau($etudiantFormatTableau);
         }
     }
 
