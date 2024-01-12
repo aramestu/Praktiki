@@ -11,8 +11,14 @@ use App\SAE\Model\Repository\EtudiantRepository;
 use App\SAE\Model\Repository\StageRepository;
 use App\SAE\Service\ServiceConvention;
 
+/**
+ * Contrôleur gérant les actions liées aux conventions dans l'application.
+ */
 class ControllerConvention extends ControllerGenerique
 {
+    /**
+     * Affiche la vue principale des conventions.
+     */
     public static function displayConvention(): void{
         ControllerGenerique::afficheVue(
             'view.php',
@@ -23,7 +29,9 @@ class ControllerConvention extends ControllerGenerique
         );
     }
 
-
+    /**
+     * Affiche le formulaire de modification de convention.
+     */
     public static function afficherFormulaire(): void{
         $idEtudiant = $_GET["idEtudiant"];
         $etudiant = (new EtudiantRepository())->getById($idEtudiant);
@@ -39,6 +47,9 @@ class ControllerConvention extends ControllerGenerique
         );
     }
 
+    /**
+     * Modifie une convention.
+     */
     public static function modifierConvention(): void {
         if(!isset($_POST["idConvention"])){
             self::redirectionVersURL("waring", "Aucune idConvention renseigné", "home");
@@ -154,6 +165,9 @@ class ControllerConvention extends ControllerGenerique
         ControllerTDB::displayTDB();
     }
 
+    /**
+     * Crée un formulaire de convention.
+     */
     public static function creerFormulaire(): void{
         $idEtudiant = $_GET["idEtudiant"];
         $etudiant = (new EtudiantRepository())->getById($idEtudiant);
@@ -170,7 +184,10 @@ class ControllerConvention extends ControllerGenerique
         );
     }
 
-    public static function enregistrerConvention() {
+    /**
+     * Enregistre une convention nouvellement créée.
+     */
+    public static function enregistrerConvention() : void{
         $rep = new ConventionRepository();
         $idEtudiant = $_GET["idEtudiant"];
         $convention = $rep->getConventionAvecEtudiant($idEtudiant);

@@ -4,13 +4,32 @@ namespace App\SAE\Model\Repository;
 
 use App\SAE\Config\Conf;
 
+use Exception;
 use PDO;
 
+/**
+ * Repository pour la base de données
+ */
 class Model
 {
+    /**
+     * Instance unique de la classe Model.
+     *
+     * @var Model|null
+     */
     private static ?Model $instance = null;
+
+    /**
+     * Objet PDO pour la connexion à la base de données.
+     *
+     * @var PDO
+     */
     private PDO $pdo;
 
+    /**
+     * Constructeur privé pour empêcher l'instanciation directe de la classe.
+     * @throws Exception
+     */
     private function __construct()
     {
         try {
@@ -19,6 +38,7 @@ class Model
             $login = Conf::getLogin();
             $password = Conf::getPassword();
             $port = Conf::getPort();
+
             // Connexion à la base de données
             // Le dernier argument sert à ce que toutes les chaînes de caractères
             // en entrée et sortie de MySQL soient dans le codage UTF-8
@@ -33,11 +53,21 @@ class Model
         }
     }
 
+    /**
+     * Obtient l'objet PDO pour la connexion à la base de données.
+     *
+     * @return PDO L'objet PDO.
+     */
     public static function getPdo(): PDO
     {
         return self::getInstance()->pdo;
     }
 
+    /**
+     * Obtient l'instance unique de la classe Model.
+     *
+     * @return Model L'instance de la classe Model.
+     */
     private static function getInstance(): Model
     {
         if (is_null(self::$instance)) {
