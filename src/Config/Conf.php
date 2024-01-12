@@ -1,6 +1,8 @@
 <?php
 
 namespace App\SAE\Config;
+use mysqli;
+
 class Conf
 {
 
@@ -53,15 +55,29 @@ class Conf
         return self::$databaseConfiguration['port'];
     }
 
-    static public function conn(): \mysqli
+
+    static public function conn(): mysqli
     {
         return mysqli_connect(self::getHostName(), self::getLogin(), self::getPassword(), self::getDataBase());
     }
 
-    public static function getDelai(){
+    /**
+     * Effectue une multiplication simple afin de supprimer une $_SESSION au besoin
+     * TODO : Exemple de ce que cela donne dans le code, supprimer le param a la fin
+     * @param string $exemple un exemple pour param
+     * @return float|int le *produit* de la multiplication
+     * */
+    public static function getDelai(): float|int
+    {
         return 30*60;
     }
 
+
+    /**
+     * Renvoie un URL afin de pouvoir envoyer des mails depuis un local host
+     *
+     * @return string l'*URL* du webinfo de Lorick vergnes
+     */
     public static function getAbsoluteURL():string{
         return "https://webinfo.iutmontp.univ-montp2.fr/~vergnesl/SAE/sae_web_s1/web/frontController.php";
     }

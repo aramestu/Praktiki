@@ -44,7 +44,13 @@
                 </p>
                 <p>
                     <label for="niveau">Niveau Requis</label>
-                    <input type="text" name="niveau" id="niveau" required placeholder="BUT2/BUT3">
+                    <select name="niveau" id="niveau" required>
+                        <option disabled selected value> -- Veuillez choisir une option -- </option>
+                        <option value="BUT2">BUT2</option>
+                        <option value="BUT3">BUT3</option>
+                    </select>
+                    <!--<label for="niveau">Niveau Requis</label>
+                    <input type="text" name="niveau" id="niveau" required placeholder="BUT2/BUT3">-->
                 </p>
                 <p>
                     <label for="codePostal">Code Postal</label>

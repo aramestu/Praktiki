@@ -459,6 +459,7 @@ form #search-bar{
     content: '\f1f8';
 }
 
+
 .editButton span::before{
     content: '\f044';
 }
