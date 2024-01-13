@@ -661,6 +661,15 @@ form #search-bar {
     background-color: var(--pastelBlue);
 }
 
+#ajoutAnnotation{
+    background-color: var(--grey0);
+    color: #2F4F4F;
+}
+
+#ajoutAnnotation:hover{
+    background-color: var(--grey1);
+}
+
 .managementActions * {
     font-size: 1vw;
 }
