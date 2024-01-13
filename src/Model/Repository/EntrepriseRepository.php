@@ -195,6 +195,20 @@ class EntrepriseRepository extends AbstractRepository
         $requete->execute($values);
     }
 
+    public function archiver(string $valeurClePrimaire): void
+    {
+        parent::archiver($valeurClePrimaire);
+        $pdo = Model::getPdo();
+        $table = "Annotation";
+        $tableArchives = $table . "Archives";
+        $clePrimaire = "idAnnotation";
+        $sql = "INSERT INTO $tableArchives SELECT $clePrimaire FROM $table WHERE $table.$clePrimaire = :clePrimaireTag";
+        $values = array("clePrimaireTag" => $valeurClePrimaire);
+        $requeteStatement = $pdo->prepare($sql);
+        $requeteStatement->execute($values);
+    }
+
+
     /**
      * Change l'état d'une entreprise lorsqu'elle a été refusée.
      *
