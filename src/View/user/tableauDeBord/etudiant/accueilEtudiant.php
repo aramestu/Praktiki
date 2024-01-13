@@ -2,11 +2,11 @@
 <div class="accueilContainer">
     <div class="infoUtilisateur">
         <h2>Informations personnelles:</h2>
-        <p>Nom : <?php echo $user->getNomEtudiant();?></p>
-        <p>Prenom : <?php echo $user->getPrenomEtudiant();?></p>
-        <p>Numéro étudiant : <?php echo $user->getNumEtudiant();?></p>
-        <p>Code postal : <?php echo $user->getCodePostalEtudiant();?></p>
-        <p>Téléphone : <?php echo $user->getTelephoneEtudiant();?></p>
+        <p>Nom : <?php echo htmlspecialchars($user->getNomEtudiant());?></p>
+        <p>Prenom : <?php echo htmlspecialchars($user->getPrenomEtudiant());?></p>
+        <p>Numéro étudiant : <?php echo htmlspecialchars($user->getNumEtudiant());?></p>
+        <p>Code postal : <?php echo htmlspecialchars($user->getCodePostalEtudiant());?></p>
+        <p>Téléphone : <?php echo htmlspecialchars($user->getTelephoneEtudiant());?></p>
     </div>
     <div id="recentOffers">
         <h2>Offres récentes</h2>
