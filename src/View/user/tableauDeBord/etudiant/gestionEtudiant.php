@@ -12,7 +12,14 @@
                 echo '<a id="confirmationButtonOrigin" class="button">Soumettre ma convention à l\'administration</a>';
             }
             echo "<br>";
-            if ($convention->getEstFini()) {
+            if ($convention->getEstValideeAdmin() && $convention->getEstValideeSecretariat()) {
+                echo "<p class='italic'>Votre convention a été validée! Elle peut être retranscrite sur PStage.</p>";
+            }
+            else if ($convention->getRaisonRefus() != "") {
+                echo "<p class='italic'>Votre convention a été refusée.</p>";
+                echo "<p class='italic'>Raison : " . $convention->getRaisonRefus() . "</p>";
+            }
+            else if ($convention->getEstFini()) {
                 echo "<p class='italic'>Votre convention a été envoyée, veuillez attendre sa validation ou non.</p>";
             }
         }
