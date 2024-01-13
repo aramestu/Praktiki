@@ -5,12 +5,12 @@
     <div class="HBox">
         <h1 class="remplaceBaliseLegend">Bienvenue sur Praktiki !</h1>
         <div class="blob-cont">
-    <div class="yellow blob"></div>
-    <div class="red blob"></div>
-    <div class="green blob"></div>
+            <div class="yellow blob"></div>
+            <div class="red blob"></div>
+            <div class="green blob"></div>
             <div id="bgLogo"></div>
-            <img src="assets/images/logo_sae_clear.png" alt="Logo Praktiki" class="welcomeLogo" />
-  </div>
+            <img src="assets/images/logo_sae_clear.png" alt="Logo Praktiki" class="welcomeLogo"/>
+        </div>
     </div>
     <h2 class="remplaceBaliseLegend">Le site des stages et alternances du département informatique de
         l'Université de Montpellier</h2>
