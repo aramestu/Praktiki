@@ -24,7 +24,7 @@ class ImportationData {
         $anneeUniversitaireCourante = (new AnneeUniversitaireRepository())->getCurrentAnneeUniversitaire();
 
         $isFirstLine = true;
-        while (($column = fgetcsv($file, 10000, ",")) !== false) {
+        while (($column = fgetcsv($file, 10000, ";")) !== false) {
             // Ignorer la première ligne du fichier
             if ($isFirstLine) {
                 $isFirstLine = false;
@@ -39,8 +39,13 @@ class ImportationData {
             // Récupérer ou créer la convention pour l'étudiant et l'année universitaire courante
             $convention = (new ConventionRepository())->getConventionAvecEtudiant($column[1], $anneeUniversitaireCourante->getIdAnneeUniversitaire());
             if ($convention == null) {
-                (new ConventionRepository())->creerConvention($column[1], $anneeUniversitaireCourante->getIdAnneeUniversitaire());
-                $convention = (new ConventionRepository())->getConventionAvecEtudiant($column[1], $anneeUniversitaireCourante->getIdAnneeUniversitaire());
+                // Si l'étudiant n'a pas déjà une alternance alors la convention peut être crée (true)
+                if((new ConventionRepository())->creerConvention($column[1], $anneeUniversitaireCourante->getIdAnneeUniversitaire())) {
+                    $convention = (new ConventionRepository())->getConventionAvecEtudiant($column[1], $anneeUniversitaireCourante->getIdAnneeUniversitaire());
+                }
+                else{
+                    continue;
+                }
             }
 
             // Attributs à mettre à jour dans la convention
