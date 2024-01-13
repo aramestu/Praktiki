@@ -196,7 +196,7 @@ class ControllerTDB extends ControllerGenerique {
      *
      * @return void
      */
-    private static function displ1ayTDBetu(): void
+    private static function displayTDBetu(): void
     {
         $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null,null,
             null,null,"lastWeek",null,null);

@@ -493,7 +493,7 @@ class ControllerExpPro extends ControllerGenerique
         $stage = $rep->getById($idExpPro);
 
         if (!is_null($stage)) {
-            if (!ConnexionUtilisateur::getLoginUtilisateurConnecte() == $stage->getSiret() && ConnexionUtilisateur::estEntreprise()) {
+            if (ConnexionUtilisateur::getLoginUtilisateurConnecte() != $stage->getSiret() && ConnexionUtilisateur::estEntreprise()) {
                 self::redirectionVersURL("danger", "Vous n'avez pas les droits pour afficher cette offre", "home");
             }else{
                 ControllerGenerique::afficheVue('view.php', [
@@ -506,7 +506,7 @@ class ControllerExpPro extends ControllerGenerique
             $rep = new AlternanceRepository();
             $alternance = $rep->getById($idExpPro);
             if (!is_null($alternance)) {
-                if (!ConnexionUtilisateur::getLoginUtilisateurConnecte() == $alternance->getSiret() && ConnexionUtilisateur::estEntreprise()) {
+                if (ConnexionUtilisateur::getLoginUtilisateurConnecte() != $alternance->getSiret() && ConnexionUtilisateur::estEntreprise()) {
                     self::redirectionVersURL("danger", "Vous n'avez pas les droits pour afficher cette offre", "home");
                 }else {
                     ControllerGenerique::afficheVue('view.php', [
@@ -519,7 +519,7 @@ class ControllerExpPro extends ControllerGenerique
                 $rep = new OffreNonDefiniRepository();
                 $offreNonDefini = $rep->getById($idExpPro);
                 if (!is_null($offreNonDefini)) {
-                    if (!ConnexionUtilisateur::getLoginUtilisateurConnecte() == $offreNonDefini->getSiret() && ConnexionUtilisateur::estEntreprise()) {
+                    if (ConnexionUtilisateur::getLoginUtilisateurConnecte() != $offreNonDefini->getSiret() && ConnexionUtilisateur::estEntreprise()) {
                         self::redirectionVersURL("danger", "Vous n'avez pas les droits pour afficher cette offre", "home");
                     }else {
                         ControllerGenerique::afficheVue('view.php', [

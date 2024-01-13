@@ -246,7 +246,9 @@ class ControllerEntreprise extends ControllerGenerique
             }
             if (!is_null($user)) {
                 if ($user->getMailEntreprise() == $_REQUEST["mail"] || ConnexionUtilisateur::estConnecte()) {
-                    VerificationEmail::envoiEmailChangementPassword($user->getSiret(), $user->getMailEntreprise());
+                    $user->setNonce(MotDePasse::genererChaineAleatoire());
+                    (new EntrepriseRepository())->mettreAJour($user);
+                    VerificationEmail::envoiEmailChangementPassword($user);
                     self::redirectionVersURL("success", "Vous allez recevoir un mail", "home");
                 } else {
                     self::redirectionVersURL("warning", "mail incorrect", "forgetPassword");
@@ -266,7 +268,7 @@ class ControllerEntreprise extends ControllerGenerique
      */
     public static function resetPassword(): void
     {
-        if (isset($_REQUEST["siret"], $_REQUEST["newPassword"], $_REQUEST["confirmNewMdp"])) {
+        if (isset($_REQUEST["siret"], $_REQUEST["newPassword"], $_REQUEST["confirmNewMdp"], $_REQUEST["nonce"])) {
             if(ConnexionUtilisateur::estEntreprise() && !isset($_REQUEST["ancienMdp"])){
                 self::redirectionVersURL("warning", "Vous n'avez pas remplit l'ancien mot de passe", "displayTDB&controller=TDB");
             }
@@ -276,7 +278,11 @@ class ControllerEntreprise extends ControllerGenerique
                     if(ConnexionUtilisateur::estEntreprise() && !MotDePasse::verifier($_REQUEST["ancienMdp"], $user->formatTableau()["mdpHacheTag"])){
                         self::redirectionVersURL("warning", "Ancien mot de passe incorrect", "displayTDB&controller=TDB");
                     }
+                    if($user->FormatTableau()["nonceTag"] != $_REQUEST["nonce"]){
+                        self::redirectionVersURL("warning", "Vous ne pouvez pas réutiliser le même mail", "home");
+                    }
                     $user->setMdpHache($_REQUEST["newPassword"]);
+                    $user->setNonce("");
                     (new EntrepriseRepository())->mettreAJour($user);
                     if(ConnexionUtilisateur::estEntreprise()){
                         self::redirectionVersURL("success", "Mot de passe changé", "displayTDB&controller=TDB");

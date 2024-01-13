@@ -94,10 +94,11 @@ class VerificationEmail
      * @param string $mail L'adresse e-mail à laquelle envoyer l'e-mail.
      * @return void
      */
-    public static function envoiEmailChangementPassword(string $login, string $mail): void{
-        $loginURL = rawurlencode($login);
+    public static function envoiEmailChangementPassword(Entreprise $entreprise): void{
+        $loginURL = rawurlencode($entreprise->getSiret());
+        $nonceURL = rawurlencode($entreprise->getNonce());
         $absoluteURL = Conf::getAbsoluteURL();
-        $lienChangementPassword = "$absoluteURL?action=resetPassword&siret=$loginURL";
+        $lienChangementPassword = "$absoluteURL?action=resetPassword&siret=$loginURL&nonce=$nonceURL";
         $corpsEmail = "<a href=\"$lienChangementPassword\">Validation</a>";
         $message = '
 <!DOCTYPE html>

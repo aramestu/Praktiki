@@ -34,6 +34,10 @@ class ControllerConvention extends ControllerGenerique
      */
     public static function afficherFormulaire(): void{
         $idEtudiant = $_GET["idEtudiant"];
+        $etudiant= (new EtudiantRepository())->getByEmail(ConnexionUtilisateur::getLoginUtilisateurConnecte());
+        if($idEtudiant != $etudiant->getNumEtudiant()){
+            self::redirectionVersURL("warning", "Vous n'avez pas accès à cette convention", "home");
+        }
         $etudiant = (new EtudiantRepository())->getById($idEtudiant);
         $convention = (new ConventionRepository())->getConventionAvecEtudiant($idEtudiant);
         ControllerGenerique::afficheVue(
@@ -170,6 +174,10 @@ class ControllerConvention extends ControllerGenerique
      */
     public static function creerFormulaire(): void{
         $idEtudiant = $_GET["idEtudiant"];
+        $etudiant= (new EtudiantRepository())->getByEmail(ConnexionUtilisateur::getLoginUtilisateurConnecte());
+        if($idEtudiant != $etudiant->getNumEtudiant()){
+            self::redirectionVersURL("warning", "Vous n'avez pas accès à cette convention", "home");
+        }
         $etudiant = (new EtudiantRepository())->getById($idEtudiant);
         (new ConventionRepository())->creerConvention($idEtudiant, 3);
         $convention = (new ConventionRepository())->getConventionAvecEtudiant($idEtudiant);
@@ -190,6 +198,10 @@ class ControllerConvention extends ControllerGenerique
     public static function enregistrerConvention() : void{
         $rep = new ConventionRepository();
         $idEtudiant = $_GET["idEtudiant"];
+        $etudiant= (new EtudiantRepository())->getByEmail(ConnexionUtilisateur::getLoginUtilisateurConnecte());
+        if($idEtudiant != $etudiant->getNumEtudiant()){
+            self::redirectionVersURL("warning", "Vous n'avez pas accès à cette convention", "home");
+        }
         $convention = $rep->getConventionAvecEtudiant($idEtudiant);
         $convention->setEstFini(true);
         $rep->mettreAJour($convention);
