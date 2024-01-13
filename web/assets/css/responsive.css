@@ -1,0 +1,71 @@
+@media (max-width: 41200px) {
+    .welcomeLogo{
+        width: 300px;
+        height: 300px;
+    }
+
+    #bgLogo{
+        width: 225px;
+        height: 225px;
+    }
+
+    .container,
+    .subContainer{
+        width: 69%;
+        padding: 2%;
+    }
+
+    .blob-cont{
+        height: 500px;
+        width: 500px;
+        right: 5em;
+    }
+}
+
+@media (max-width: 1300px) {
+    .welcomeLogo{
+        width: 250px;
+        height: 250px;
+    }
+
+    #bgLogo{
+        width: 188px;
+        height: 188px;
+    }
+
+    .container,
+    .subContainer{
+        width: 69%;
+        padding: 2%;
+    }
+
+    .blob-cont{
+        height: 500px;
+        width: 500px;
+        right: 5em;
+    }
+}
+
+@media (max-width: 950px) {
+    .welcomeLogo{
+        width: 200px;
+        height: 200px;
+    }
+
+    #bgLogo{
+        width: 150px;
+        height: 150px;
+    }
+
+    .container,
+    .subContainer{
+        width: 95%;
+        padding: 5%;
+    }
+
+    .blob-cont{
+        height: 200px;
+        width: 100%;
+        right: 0;
+    }
+}
