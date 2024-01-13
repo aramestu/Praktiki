@@ -630,7 +630,7 @@ class Convention extends AbstractDataObject {
         $this->estValideeAdmin = $estValideeAdmin;
     }
 
-    public function isEstValideeSecretariat(): bool
+    public function getEstValideeSecretariat(): bool
     {
         return $this->estValideeSecretariat;
     }

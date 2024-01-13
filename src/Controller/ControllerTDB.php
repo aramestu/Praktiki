@@ -360,12 +360,66 @@ class ControllerTDB extends ControllerGenerique {
     public static function displayTDBetuEnvoyerConvention(): void {
         $convention = (new ConventionRepository())->getConventionAvecEtudiant((new EtudiantRepository())->getByEmail(ConnexionUtilisateur::getLoginUtilisateurConnecte())->getNumEtudiant());
         if (!is_null($convention)) {
-            $convention->setEstFini(true);
-            (new ConventionRepository())->mettreAJour($convention);
-            self::redirectionVersURL("success", "Convention envoyée", "displayTDB&controller=TDB&tdbAction=gestion");
+            if (!self::verifierSiAttributsVide($convention)) {
+                $convention->setEstFini(true);
+                (new ConventionRepository())->mettreAJour($convention);
+                self::redirectionVersURL("success", "Convention envoyée", "displayTDB&controller=TDB&tdbAction=gestion");
+            }
+            else {
+                self::redirectionVersURL("warning", "Veuillez compléter votre convention en entier avant de l'envoyer", "displayTDB&controller=TDB&tdbAction=gestion");
+            }
         } else {
             self::redirectionVersURL("warning", "Cet etudiant ne possède pas de convention", "afficherFormulaireMiseAJour");
         }
+    }
+
+    /**
+     * Retourne true si au moins 1 attribut est vide, false sinon.
+     *
+     * @return bool
+     */
+    public static function verifierSiAttributsVide($convention): bool {
+        $ret = false;
+        $attributs = [
+            'mailEnseignant',
+            'nomEnseignant',
+            'prenomEnseignant',
+            'competencesADevelopper',
+            'dureeDeTravail',
+            'languesImpression',
+            'origineDeLaConvention',
+            'nbHeuresHebdo',
+            'modePaiement',
+            'dureeExperienceProfessionnel',
+            'caisseAssuranceMaladie',
+            'mailTuteurProfessionnel',
+            'prenomTuteurProfessionnel',
+            'nomTuteurProfessionnel',
+            'fonctionTuteurProfessionnel',
+            'telephoneTuteurProfessionnel',
+            'sujetExperienceProfessionnel',
+            'thematiqueExperienceProfessionnel',
+            'tachesExperienceProfessionnel',
+            'codePostalExperienceProfessionnel',
+            'adresseExperienceProfessionnel',
+            'dateDebutExperienceProfessionnel',
+            'dateFinExperienceProfessionnel',
+            'nomSignataire',
+            'prenomSignataire',
+            'siret',
+            'nomEntreprise',
+            'codePostalEntreprise',
+            'effectifEntreprise',
+            'telephoneEntreprise'
+        ];
+        foreach ($attributs as $attribut) {
+            $getter = 'get' . ucfirst($attribut);
+            echo $getter;
+            if ($convention->$getter() == "") {
+                $ret = true;
+            }
+        }
+        return $ret;
     }
 
 }
