@@ -3,7 +3,7 @@
 namespace App\SAE\Model\Repository;
 
 use App\SAE\Lib\MotDePasse;
-use App\SAE\Model\DataObject\AbstractDataObject;
+use App\SAE\Model\DataObject\Annotation;
 use App\SAE\Model\DataObject\Entreprise;
 /**
  * Repository pour la gestion des entreprises.
@@ -210,18 +210,30 @@ class EntrepriseRepository extends AbstractRepository
 
 
     /**
-     * Change l'état d'une entreprise lorsqu'elle a été refusée.
+     * Crée ou met à jour le mot de passe haché d'une entreprise dans la base de données.
      *
-     * @param string $siret Le siret de l'entreprise à refuser.
+     * Cette méthode prend un mot de passe en clair, le hache à l'aide de la classe MotDePasse,
+     * puis exécute une requête SQL pour mettre à jour le mot de passe haché de l'entreprise
+     * ayant le siret spécifié.
+     *
+     * @param string $mdp Le mot de passe en clair à hacher et enregistrer.
+     * @return void
      */
-    public static function creermdp($mdp): void
+    public static function creermdp(string $mdp): void
     {
-        $sql="update Entreprises set mdpHache=:mdpHacheTag where siret=:siretTag";
+        // Requête SQL pour mettre à jour le mot de passe haché de l'entreprise dans la base de données
+        $sql = "UPDATE Entreprises SET mdpHache=:mdpHacheTag WHERE siret=:siretTag";
+
+        // Préparation de la requête SQL avec PDO
         $pdoStatement = Model::getPdo()->prepare($sql);
+
+        // Paramètres à lier dans la requête SQL
         $values = array(
-            "mdpHacheTag" => MotDePasse::hacher($mdp),
-            "siretTag" => '01234567890123'
+            "mdpHacheTag" => MotDePasse::hacher($mdp), // Hacher le mot de passe
+            "siretTag" => '01234567890123' // Siret de l'entreprise concernée (remplacez-le par le bon siret)
         );
+
+        // Exécution de la requête SQL avec les valeurs spécifiées
         $pdoStatement->execute($values);
     }
 
