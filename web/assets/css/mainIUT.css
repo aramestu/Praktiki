@@ -24,7 +24,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 12;
+    z-index: 13;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -123,7 +123,7 @@ header:hover::after {
 .burger span::after {
     content: "";
     width: 100%;
-    background-color: var(--darkBlue2);
+    background-color: var(--white);
     display: block;
     transition: all 0.5s ease-in-out;
     border-radius: 12px;
@@ -308,7 +308,7 @@ main{
     .burger span {
         width: 100%;
         height: 4px;
-        background-color: var(--darkBlue2);
+        background-color: var(--white);
         border-radius: 12px;
         display: block;
         transition: background-color 0.5s ease-in-out;
@@ -320,9 +320,7 @@ main{
         left: 0;
         width: 100%;
         height: 0;
-        background: rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(50px);
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        background: var(--darkBlue2);
         overflow: hidden;
         transition: all 0.5s ease-in-out;
     }
@@ -370,6 +368,19 @@ main{
         width: 100px;
         height: 100px;
     }
+
+    .navbar a:last-child {
+        margin-bottom: 4rem;
+    }
+
+    .nav-item:active{
+        background: var(--darkBlue2);
+        color: var(--white);
+    }
+
+    #cookie-banner p {
+        font-size: 10px;
+    }
 }
 /*---END RESPONSIVE---*/
 
@@ -378,11 +389,9 @@ main{
 /*---START CONTAINER---*/
 .container {
     color: var(--darkBlue2);
-    width: 69%;
     text-align: center;
     font-size: 12px;
     background: var(--activeGrey);
-    padding: 2%;
     margin: 1.5%;
     border-radius: 1.5rem;
     box-shadow: 2px 4px 12px rgba(0,0,0,.08);
@@ -392,7 +401,6 @@ main{
 .subContainer {
     position: relative;
     color: var(--darkBlue2);
-    width: 69%;
     text-align: center;
     font-size: 12px;
     background: var(--activeGrey);
@@ -570,8 +578,13 @@ legend{
 
 .welcomeLogo{
     display: block;
-    width: 300px;
     filter: invert(0) brightness(1.8) ;
+    border-radius: 50%;
+}
+
+#bgLogo{
+    position: absolute;
+    background: var(--activeGrey);
     border-radius: 50%;
 }
 
@@ -581,10 +594,7 @@ legend{
   justify-content: center;
   align-items: center;
   z-index: -2;
-  height: 500px;
-  width: 500px;
   position: relative;
-  right: 5em;
 }
 
 
@@ -594,7 +604,7 @@ legend{
 }
 
 .yellow {
-  background-color: var(--lightpastelOrange);
+  background-color: var(--lightpastelBlue);
   position: absolute;
   top: 200px;
   left: 100px;
@@ -605,7 +615,7 @@ legend{
 }
 
 .green {
-  background-color: var(--lightpastelPurple);
+  background-color: var(--lightpastelBlue);
   position: absolute;
   top: 80px;
   right: -20px;
@@ -616,7 +626,7 @@ legend{
 }
 
 .red {
-  background-color: var(--lightpastelRed);
+  background-color: var(--lightpastelBlue);
   position: absolute;
   right: 0;
   top: 300px;
@@ -692,13 +702,14 @@ legend{
 
 .link {
     text-decoration: none;
-    color: var(--grey3);
+    color: var(--darkBlue2);
+    font-weight: bold;
     position: relative;
     transition: color 0.3s ease-in-out;
 }
 
 .link:hover {
-    color: var(--rougeUM);
+    color: var(--darkBlue);
 }
 
 .link::before {
@@ -708,7 +719,7 @@ legend{
     left: 0;
     width: 0;
     height: 1.5px;
-    background: var(--rougeUM);
+    background: var(--darkBlue);
     transition: width 0.3s ease-in-out;
 }
 
@@ -725,6 +736,7 @@ legend{
     height: 173px;
     border: 1px solid;
     width: 349px;
+    max-width: 100%;
 }
 
 .jusitfyTexte{
@@ -735,8 +747,8 @@ legend{
 #alternanceSection::before {
     content: "";
     display: block;
-    height: 60px; /* Adjust based on the height of your header */
-    margin-top: -60px; /* This should be the same value as height */
+    height: 60px;
+    margin-top: -60px;
     visibility: hidden;
 }
 
@@ -753,6 +765,7 @@ legend{
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    z-index: 12;
 }
 
 #cookie-banner h2 {

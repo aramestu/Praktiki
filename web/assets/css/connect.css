@@ -35,16 +35,6 @@ label {
 .password-input input[type="password"] {
     padding-right: 40px;
 }
-
-.password-input button {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-}
 /*--- END Password Input Styles ---*/
 
 .create-account {
@@ -58,6 +48,21 @@ label {
     height: 20px;
     opacity: 0.6;
     margin-bottom: 13px;
+}
+
+#showPassword::before {
+    content: '\f070';
+    font-family: 'FontAwesome';
+    font-size: 1.1em;
+    margin-right: 10px;
+    vertical-align: middle;
+    position: absolute;
+    top: 20%;
+    right: 3px;
+}
+
+#showPassword:hover {
+    cursor: pointer;
 }
 /*--- END Show Password Icon Styles (Connect) ---*/
 
