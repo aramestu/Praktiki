@@ -547,7 +547,11 @@ class ControllerExpPro extends ControllerGenerique
             $msg = "Offre crée avec succés !";
             if (ConnexionUtilisateur::estConnecte()) {
                 $siret = ConnexionUtilisateur::getLoginUtilisateurConnecte();
-            } else {
+            }
+            elseif (ConnexionUtilisateur::estAdministrateur()){
+                $siret = "01234567890123";
+            }
+            else {
                 $siret = $_POST["siret"];
             }
             $tabInfo = [
