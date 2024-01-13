@@ -16,6 +16,7 @@ use App\SAE\Model\Repository\PersonnelRepository;
 use App\SAE\Service\ServiceEnseignant;
 use App\SAE\Service\ServiceEntreprise;
 use App\SAE\Service\ServiceEtudiant;
+use App\SAE\Service\ServicePersonnel;
 
 /**
  * Contrôleur pour l'affichage du tableau de bord des utilisateurs.
@@ -121,6 +122,75 @@ class ControllerTDB extends ControllerGenerique {
         // Rediriger vers le tableau de bord avec un message de succès
         self::redirectionVersURL("success", "L'enseignant a été mis à jour", "displayTDB&controller=TDB");
     }
+
+    /**
+     * Affiche le tableau de bord pour un personnel.
+     *
+     * @return void
+     */
+    private static function displayTDBpers(): void
+    {
+        $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null,null,
+            null,null,"lastWeek",null,null);
+        $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user=(new PersonnelRepository())->getByEmail($mail);
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Tableau de bord',
+                'user'=>$user,
+                'cheminVueBody' => 'user/tableauDeBord/personnel.php',
+                'TDBView' => 'user/tableauDeBord/personnel/accueilPersonnel.php',
+                'listeExpPro' => $listeExpPro
+            ]
+        );
+    }
+
+    /**
+     * Affiche les informations du tableau de bord pour un personnel.
+     *
+     * @return void
+     */
+    private static function displayTDBpersInfo(): void
+    {
+        $siret=ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user=(new PersonnelRepository())->getById($siret);
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Tableau de bord',
+                'cheminVueBody' => 'user/tableauDeBord/personnel.php',
+                'TDBView' => 'user/tableauDeBord/personnel/infoPersonnel.php',
+                'user'=>$user
+            ]
+        );
+    }
+
+
+    /**
+     * Met à jour les informations de l'personnel depuis le tableau de bord.
+     *
+     * Cette méthode récupère l'personnel connecté, utilise le service Personnel
+     * pour mettre à jour ses informations avec des attributs vides (aucune modification spécifiée).
+     * Enfin, elle redirige l'utilisateur vers le tableau de bord avec un message de succès.
+     *
+     * @return void
+     */
+    public static function displayTDBpersMettreAJour(): void
+    {
+        // Récupérer l'adresse e-mail de l'utilisateur connecté
+        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+
+        // Récupérer l'objet personnel correspondant à l'adresse e-mail
+        $personnel = (new PersonnelRepository())->getByEmail($mail);
+
+        // Utiliser le service Personnel pour mettre à jour les informations (avec attributs vides)
+        (new ServicePersonnel())->mettreAJour($personnel, []);
+
+        // Rediriger vers le tableau de bord avec un message de succès
+        self::redirectionVersURL("success", "L'personnel a été mis à jour", "displayTDB&controller=TDB");
+    }
+    
 
     /**
      * Affiche le tableau de bord pour une entreprise.
