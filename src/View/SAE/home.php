@@ -8,6 +8,7 @@
     <div class="yellow blob"></div>
     <div class="red blob"></div>
     <div class="green blob"></div>
+            <div id="bgLogo"></div>
             <img src="assets/images/logo_sae_clear.png" alt="Logo Praktiki" class="welcomeLogo" />
   </div>
     </div>
