@@ -4,7 +4,7 @@
 
 
 <div class="container">
-    <a href="frontController.php?controller=Annotation&action=afficherAllAnnotationEntreprise" id="backIcon"><img src="assets/images/back-icon.png" id="deleteIcon" alt="Bin"></a>
+    <a href="frontController.php?controller=Annotation&action=afficherAllAnnotationEntreprise&siret=<?php echo htmlspecialchars($siret)?>" id="backIcon"><img src="assets/images/back-icon.png" id="deleteIcon" alt="Bin"></a>
     <h2>Modifier le message</h2>
     <form action="frontController.php?controller=Annotation&action=modifierAnnotation" method="post">
         <label>
