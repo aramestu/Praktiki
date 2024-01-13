@@ -40,5 +40,6 @@
         <a class="button" id="<?=$entreprise->getEstValide()? "invalidation":"validation"?>" href="frontController.php?action=<?=$entreprise->getEstValide()? "invalider":"valider"?>Entreprise&controller=PanelAdmin&siret=<?=rawurlencode($entreprise->getSiret())?>"><?=$entreprise->getEstValide()? "Invalider":"Valider"?></a>
         <a class="button" id="suppression" href="frontController.php?action=supprimerEntreprise&controller=PanelAdmin&siret=<?=rawurlencode($entreprise->getSiret())?>">Supprimer</a>
         <a class="button" id="modification" href="frontController.php?action=panelModificationEntreprise&controller=PanelAdmin&siret=<?=rawurlencode($entreprise->getSiret())?>">Modifier</a>
+        <a class="button" id="ajoutAnnotation" href="frontController.php?controller=Annotation&action=afficherAllAnnotationEntreprise">Ajouter Annotation</a>
     </div>
 </div>
