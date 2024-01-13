@@ -123,6 +123,37 @@ class ControllerTDB extends ControllerGenerique {
         self::redirectionVersURL("success", "L'enseignant a été mis à jour", "displayTDB&controller=TDB");
     }
 
+
+    /**
+     * Affiche la liste des entreprises dans le tableau de bord de l'enseignant.
+     *
+     * Cette méthode récupère éventuellement des mots-clés de la requête GET, filtre les entreprises
+     * en fonction de ces mots-clés, puis affiche la liste des entreprises dans la vue correspondante.
+     *
+     * @return void
+     */
+    public static function displayTDBensListeEntreprise(): void
+    {
+        $keywords = "";
+
+        // Vérifier si des mots-clés sont présents dans la requête GET
+        if (isset($_GET["keywords"])) {
+            $keywords .= $_GET["keywords"];
+        }
+
+        // Récupérer la liste des entreprises filtrée en fonction des mots-clés
+        $listEntreprises = (new EntrepriseRepository())->getEntrepriseAvecEtatFiltree(null, $keywords);
+
+        // Afficher la vue correspondante avec la liste des entreprises
+        self::afficheVue('view.php', [
+            'pagetitle' => 'Tableau de bord Enseignant',
+            'cheminVueBody' => 'user/tableauDeBord/enseignant/listeEntreprise.php',
+            'listEntreprises' => $listEntreprises,
+            'keywords' => $keywords
+        ]);
+    }
+
+
     /**
      * Affiche le tableau de bord pour un personnel.
      *
