@@ -54,8 +54,11 @@ if (is_a($expPro, 'App\SAE\Model\DataObject\Stage')) { // Si c'est un stage
         </p>
         <p>
             <label for="niveau">Niveau Requis</label>
-            <input type="text" name="niveau" id="niveau" required placeholder="Niveau Requis"
-                   value="<?php echo htmlspecialchars($expPro->getNiveauExperienceProfessionnel()); ?>">
+            <select name="niveau" id="niveau" required>
+                <option disabled value> -- Veuillez choisir une option -- </option>
+                <option value="BUT2" <?php if ($expPro->getNiveauExperienceProfessionnel() == "BUT2") echo "selected"; ?>>BUT2</option>
+                <option value="BUT3" <?php if ($expPro->getNiveauExperienceProfessionnel() == "BUT3") echo "selected"; ?>>BUT3</option>
+            </select>
         </p>
         <p>
             <label for="codePostal">Code Postal</label>

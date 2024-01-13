@@ -6,8 +6,17 @@ use App\SAE\Controller\ControllerGenerique;
 use App\SAE\Model\DataObject\AbstractDataObject;
 use PDOException;
 
+/**
+ * Classe abstraite représentant un repository générique pour les objets de données.
+ */
+
 abstract class AbstractRepository {
 
+    /**
+     * Récupère tous les objets de la table associée.
+     *
+     * @return array Tableau d'objets de données.
+     */
     public function getAll(): array {
         $pdo = Model::getPdo();
         $nomTable = $this->getNomTable();
@@ -20,6 +29,11 @@ abstract class AbstractRepository {
         return $objects;
     }
 
+    /**
+     * Compte le nombre total d'objets dans la table associée.
+     *
+     * @return int Nombre total d'objets.
+     */
     public function count(): int {
         $pdo = Model::getPdo();
         $nomTable = $this->getNomTable();
@@ -28,6 +42,12 @@ abstract class AbstractRepository {
         return $nb[0];
     }
 
+    /**
+     * Récupère un objet par son identifiant primaire.
+     *
+     * @param string $valeurClePrimaire La valeur de la clé primaire.
+     * @return AbstractDataObject|null L'objet associé ou null s'il n'existe pas.
+     */
     public function getById(string $valeurClePrimaire): ?AbstractDataObject{
         $nomTable = $this->getNomTable();
         $clePrimaire = $this->getNomClePrimaire();
@@ -54,7 +74,14 @@ abstract class AbstractRepository {
         }
     }
 
-    public function supprimer(string $valeurClePrimaire){
+    /**
+     * Supprime un objet par son identifiant primaire et archive l'objet avant suppression.
+     *
+     * @param string $valeurClePrimaire La valeur de la clé primaire.
+     * @return void
+     */
+    public function supprimer(string $valeurClePrimaire): void
+    {
         $pdo = Model::getPdo();
         $nomTable = $this->getNomTable();
         $clePrimaire = $this->getNomClePrimaire();
@@ -65,6 +92,12 @@ abstract class AbstractRepository {
         $requeteStatement->execute($values);
     }
 
+    /**
+     * Met à jour un objet dans la base de données.
+     *
+     * @param AbstractDataObject $object L'objet à mettre à jour.
+     * @return void
+     */
     public function mettreAJour(AbstractDataObject $object): void{
         $pdo = Model::getPdo();
         $table = $this->getNomTable();
@@ -84,6 +117,12 @@ abstract class AbstractRepository {
         $requeteStatement->execute($object->formatTableau());
     }
 
+    /**
+     * Sauvegarde un nouvel objet dans la base de données.
+     *
+     * @param AbstractDataObject $object L'objet à sauvegarder.
+     * @return bool True si la sauvegarde est réussie, sinon false.
+     */
     public function save(AbstractDataObject $object) : bool {
         try {
             $pdo = Model::getPdo();
@@ -106,6 +145,12 @@ abstract class AbstractRepository {
         }
     }
 
+    /**
+     * Archive un objet en le déplaçant vers une table d'archives.
+     *
+     * @param string $valeurClePrimaire La valeur de la clé primaire.
+     * @return void
+     */
     public function archiver(string $valeurClePrimaire) : void{
         $pdo = Model::getPdo();
         $table = $this->getNomTable();
@@ -117,18 +162,17 @@ abstract class AbstractRepository {
         $requeteStatement->execute($values);
     }
 
-    /*
-     * - keyword est le mot clé que l'on recherche
-     * - colonnes est un tableau de string où l'on recherche le keyword (optionnel). S'il n'est pas renseigné ou tableau vide, alors on fait la recherche sur toutes les colonnes de l'objet associé au repository !
-     *      Je spécifie les colonnes pour éviter de faire une recherche sur des mdp ou autres infos
-     * - colonneTrie pour savoir par quel colonne on trie le résultat
-     * - ordre pour savoir si on trie par ordre croissant (false) ou décroissant (true)
+    /**
+     * Recherche des objets basés sur des mots-clés, colonnes spécifiques et options de tri.
      *
-     * S'il n'y a aucun paramètre alors ça fait la même chose que getAll
-     *
-     * Renvoie un tableau d'AbstractObject
+     * @param string|null $keywords Les mots-clés à rechercher.
+     * @param array|null $colonnes Les colonnes sur lesquelles effectuer la recherche.
+     * @param string|null $colonneTrie La colonne selon laquelle trier les résultats.
+     * @param bool|null $ordre True pour un tri décroissant, false pour un tri croissant.
+     * @return array Tableau d'objets de données résultants de la recherche.
      */
-    public function searchs(string $keywords = null, array $colonnes = null ,string $colonneTrie = null, bool $ordre = null){
+    public function searchs(string $keywords = null, array $colonnes = null ,string $colonneTrie = null, bool $ordre = null): array
+    {
         $sql = "SELECT * 
                 FROM " . $this->getNomTable() . " ";
 
@@ -162,12 +206,12 @@ abstract class AbstractRepository {
     }
 
 
-    /*
-     * Retourne un string. Utilisé dans la clause
-     * WHERE d'une requête SQL de recherche avec un LIKE.
-     * notamment pour la fonction search
-     * ex: sujetExperienceProfessionnel LIKE :keywordsTag OR ...
-    */
+    /**
+     * Construit la partie WHERE d'une requête SQL de recherche avec LIKE.
+     *
+     * @param array|null $colonnes Les colonnes sur lesquelles effectuer la recherche.
+     * @return string La partie WHERE construite.
+     */
     protected function colonneToSearch(array $colonnes = null) :string {
         $chaine = " (";
         if(is_null($colonnes)){
@@ -192,8 +236,32 @@ abstract class AbstractRepository {
         return $chaine . ") ";
     }
 
+    /**
+     * Méthode abstraite pour obtenir le nom de la table associée.
+     *
+     * @return string Nom de la table.
+     */
     protected abstract function getNomTable() : string;
+
+    /**
+     * Méthode abstraite pour construire un objet de données depuis un tableau formaté.
+     *
+     * @param array $objetFormatTableau Le tableau formaté représentant l'objet.
+     * @return AbstractDataObject L'objet de données construit.
+     */
     public abstract function construireDepuisTableau(array $objetFormatTableau) : AbstractDataObject;
+
+    /**
+     * Méthode abstraite pour obtenir le nom de la clé primaire de la table.
+     *
+     * @return string Nom de la clé primaire.
+     */
     protected abstract function getNomClePrimaire():string;
+
+    /**
+     * Méthode abstraite pour obtenir les noms des colonnes de la table.
+     *
+     * @return array Noms des colonnes.
+     */
     protected abstract function getNomsColonnes(): array;
 }

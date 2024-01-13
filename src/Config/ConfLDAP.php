@@ -8,6 +8,9 @@ use LDAP\Connection;
 class ConfLDAP
 {
 
+    /**
+     * @var array|string[] configuration des parametres pour se connecter au serveur LDAP de l'IUT
+     */
     static private array $ldapConfig = array(
         'ldap_host' => '10.10.1.30',
         'ldap_basedn' => "dc=info,dc=iutmontp,dc=univ-montp2,dc=fr",
@@ -36,7 +39,11 @@ class ConfLDAP
     }
 
     /**
-     * @throws Exception
+     * Effectue le lien de connexion sur le serveur LDAP de l'iut
+     *
+     * @deprecated fonction fournit par l'IUT, retravaillé par Norman {@see Ldap}
+     * @return Connection
+     * @throws Exception si la connexion est un échec
      */
     static public function connect(): Connection
     {

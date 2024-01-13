@@ -1,10 +1,10 @@
-<h1>Bienvenue <?= $user->getNomEnseignant()?></h1>
+<h1>Bienvenue <?= $user->getNomPersonnel()?></h1>
 <div class="accueilContainer">
     <div class="infoUtilisateur">
         <h2>Informations personnelles:</h2>
-        <p>Nom : <?php echo $user->getNomEnseignant();?></p>
-        <p>Prenom : <?php echo $user->getPrenomEnseignant();?></p>
-        <p>Adresse Mail : <?php echo $user->getMailEnseignant();?></p>
+        <p>Nom : <?php echo $user->getNomPersonnel();?></p>
+        <p>Prenom : <?php echo $user->getPrenomPersonnel();?></p>
+        <p>Adresse Mail : <?php echo $user->getMailPersonnel();?></p>
     </div>
     <div id="recentOffers">
         <h2>Offres récentes</h2>

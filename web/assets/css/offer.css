@@ -189,6 +189,7 @@ h3 {
     margin-top: -5px;
 }
 
+#commentaireIcon,
 #editIcon,
 #deleteIcon,
 #backIcon,
@@ -202,6 +203,7 @@ h3 {
     cursor: pointer;
 }
 
+#commentaireIcon:hover,
 #editIcon:hover,
 #deleteIcon:hover,
 #backIcon:hover,
@@ -250,7 +252,15 @@ h3 {
     }
 }
 
-#deleteIcon{
+#commentaireIcon::before{
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    font-size: 1.8em;
+    content: "\f0e6";
+    vertical-align: middle;
+}
+
+#deleteIcon, #commentaireIcon{
     height: 35px;
     width: 35px;
 }
@@ -261,6 +271,11 @@ h3 {
 
 #backIcon:hover {
     transform: translateX(-4px);
+}
+
+#commentaireIcon {
+    top : 14px;
+    right: 8%;
 }
 
 #deleteIcon {

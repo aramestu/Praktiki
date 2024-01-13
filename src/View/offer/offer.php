@@ -44,6 +44,8 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
             <p>Thématique : <?= htmlspecialchars($expPro->getThematiqueExperienceProfessionnel()) ?></p>
             <p>Tâches : <?= htmlspecialchars($expPro->getTachesExperienceProfessionnel()) ?></p>
             <p>Année minimum demandée : <?= htmlspecialchars($expPro->getNiveauExperienceProfessionnel()) ?></p>
+            <?php if($expPro->getCommentaireProfesseur() != ""){ ?>
+                <p> Commentaire professeur : <?php echo htmlspecialchars($expPro->getCommentaireProfesseur()); ?> </p> <?php } ?>
         </div>
 
         <div id="infoCompany">
@@ -57,6 +59,12 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 
     </div>
     <?php
+        if(ConnexionUtilisateur::estEnseignant() || ConnexionUtilisateur::estAdministrateur()){
+    ?>
+    <a id="commentaireIcon" href="frontController.php?controller=ExpPro&action=afficherAjoutCommentaire&id=<?php echo $expPro->getIdExperienceProfessionnel()?>&type=<?php echo $expPro->getNomExperienceProfessionnel()?>">
+        </a>
+    <?php } ?>
+    <?php
     if (ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::getLoginUtilisateurConnecte()==$entreprise->getSiret()) {
         ?>
     <a id="deleteButtonOrigin"><img src="assets/images/bin-icon.png" id="deleteIcon" alt="Bin"></a>
@@ -65,9 +73,6 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
     <?php
     }
     ?>
-
-
-
 
     <div id="map"></div>
     <div class="HBox">
