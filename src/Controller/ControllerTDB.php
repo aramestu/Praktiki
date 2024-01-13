@@ -373,6 +373,11 @@ class ControllerTDB extends ControllerGenerique {
         }
     }
 
+    /**
+     * Retourne true si au moins 1 attribut est vide, false sinon.
+     *
+     * @return bool
+     */
     public static function verifierSiAttributsVide($convention): bool {
         $ret = false;
         $attributs = [
