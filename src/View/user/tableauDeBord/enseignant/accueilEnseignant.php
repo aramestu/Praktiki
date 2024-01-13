@@ -1,4 +1,4 @@
-<h1>Bienvenue M.<?= $user->getNomEnseignant()?></h1>
+<h1>Bienvenue <?= $user->getNomEnseignant()?></h1>
 <div class="accueilContainer">
     <div class="infoUtilisateur">
         <h2>Informations personnelles:</h2>
