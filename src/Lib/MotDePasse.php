@@ -13,7 +13,7 @@ class MotDePasse
     /**
      * @var string Le poivre utilisé pour renforcer le hachage des mots de passe.
      */
-    private static string $poivre = "";
+    private static string $poivre = "6pbFwtXjgJe4hq8XXi859L";
 
     /**
      * Hache le mot de passe clair en utilisant le poivre.

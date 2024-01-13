@@ -13,8 +13,14 @@ $loader->register();
 $loader->addNamespace('App\SAE', __DIR__ . '/../src');
 
 
-$controller = isset($_GET['controller']) ? $_GET['controller'] : 'Main';
+$controller = $_GET['controller'] ?? 'Main';
 if($controller == 'PanelAdmin' && !ConnexionUtilisateur::estAdministrateur()){
+    ControllerMain::home();
+}
+elseif($controller == 'TDB' && !ConnexionUtilisateur::estConnecte()){
+    ControllerMain::home();
+}
+elseif($controller == 'ExpPro' && !ConnexionUtilisateur::estConnecte()){
     ControllerMain::home();
 }
 else{
