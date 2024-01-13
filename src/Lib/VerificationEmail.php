@@ -94,12 +94,11 @@ class VerificationEmail
      * @param string $mail L'adresse e-mail à laquelle envoyer l'e-mail.
      * @return void
      */
-    public static function envoiEmailChangementPassword(Entreprise $entreprise): void{
+    public static function envoiEmailChangementPassword($entreprise): void{
         $loginURL = rawurlencode($entreprise->getSiret());
         $nonceURL = rawurlencode($entreprise->getNonce());
         $absoluteURL = Conf::getAbsoluteURL();
-        $lienChangementPassword = "$absoluteURL?action=resetPassword&siret=$loginURL&nonce=$nonceURL";
-        $corpsEmail = "<a href=\"$lienChangementPassword\">Validation</a>";
+        $lienChangementPassword = "$absoluteURL?action=verifNonce&controller=Entreprise&siret=$loginURL&nonce=$nonceURL";
         $message = '
 <!DOCTYPE html>
 <html lang="fr">
@@ -154,10 +153,8 @@ class VerificationEmail
         $headers .= "Cc: IUT-Montpellier-Sete\r\n";
         $headers.= 'Content-Type:text/html; charset="utf-8"'."\n";
         $headers.= 'Content-Transfert-Encoding: 8bit';
-        mail($mail, "Changement de votre mot de passe",
+        mail($entreprise->getMailEntreprise(), "Changement de votre mot de passe",
             $message, $headers);
-
-        MessageFlash::ajouter("success", $corpsEmail);
     }
 
     /**

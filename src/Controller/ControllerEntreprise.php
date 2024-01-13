@@ -268,7 +268,7 @@ class ControllerEntreprise extends ControllerGenerique
      */
     public static function resetPassword(): void
     {
-        if (isset($_REQUEST["siret"], $_REQUEST["newPassword"], $_REQUEST["confirmNewMdp"], $_REQUEST["nonce"])) {
+        if (isset($_REQUEST["siret"], $_REQUEST["newPassword"], $_REQUEST["confirmNewMdp"])) {
             if(ConnexionUtilisateur::estEntreprise() && !isset($_REQUEST["ancienMdp"])){
                 self::redirectionVersURL("warning", "Vous n'avez pas remplit l'ancien mot de passe", "displayTDB&controller=TDB");
             }
@@ -277,9 +277,6 @@ class ControllerEntreprise extends ControllerGenerique
                 if (!is_null($user)) {
                     if(ConnexionUtilisateur::estEntreprise() && !MotDePasse::verifier($_REQUEST["ancienMdp"], $user->formatTableau()["mdpHacheTag"])){
                         self::redirectionVersURL("warning", "Ancien mot de passe incorrect", "displayTDB&controller=TDB");
-                    }
-                    if($user->FormatTableau()["nonceTag"] != $_REQUEST["nonce"]){
-                        self::redirectionVersURL("warning", "Vous ne pouvez pas réutiliser le même mail", "home");
                     }
                     $user->setMdpHache($_REQUEST["newPassword"]);
                     $user->setNonce("");
@@ -296,6 +293,21 @@ class ControllerEntreprise extends ControllerGenerique
             }
         } else {
             self::redirectionVersURL("warning", "Variable non remplit", "resetPassword");
+        }
+    }
+
+    public static function verifNonce(): void
+    {
+        $user = (new EntrepriseRepository())->getById($_REQUEST["siret"]);
+        if($user->FormatTableau()["nonceTag"] != $_REQUEST["nonce"]){
+            self::redirectionVersURL("warning", "Vous ne pouvez pas réutiliser le même mail", "home");
+        }else{
+            self::afficheVue("view.php", [
+                "pagetitle" => "Changement de mot de passe",
+                "cheminVueBody" => "user/resetPassword.php",
+                "siret" => $_REQUEST["siret"],
+                "nonce" => $_REQUEST["nonce"]
+            ]);
         }
     }
 
