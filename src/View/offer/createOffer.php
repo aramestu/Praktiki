@@ -64,12 +64,13 @@
                 </p>
                 <p>
                     <label for="siret">Siret</label>
-                    <?php if (\App\SAE\Lib\ConnexionUtilisateur::estConnecte()){
+                    <?php
+                    if (\App\SAE\Lib\ConnexionUtilisateur::estAdministrateur()){
+                        echo '<input type="text" name="siret" id="siret" placeholder="offreAdmin" required>';
+                    }
+                    else if (\App\SAE\Lib\ConnexionUtilisateur::estConnecte()){
                         $siret= \App\SAE\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte();
-                        if (\App\SAE\Lib\ConnexionUtilisateur::estAdministrateur()){
-                        $siret = "01234567890123";
-                        }
-                       echo'<input type="number" name="siret" id="siret" required readonly value='.$siret.'>';
+                        echo'<input type="number" name="siret" id="siret" required readonly value='.$siret.'>';
                     }else{
                         echo'<input type="number" name="siret" id="siret" required placeholder="Siret" value="01234567890123">';
                     }?>

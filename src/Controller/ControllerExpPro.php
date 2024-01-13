@@ -545,11 +545,11 @@ class ControllerExpPro extends ControllerGenerique
     {
         if (ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::estEntreprise()) {
             $msg = "Offre crée avec succés !";
-            if (ConnexionUtilisateur::estConnecte()) {
-                $siret = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+            if (ConnexionUtilisateur::estAdministrateur()){
+                $siret = $_POST["siret"];
             }
-            elseif (ConnexionUtilisateur::estAdministrateur()){
-                $siret = "01234567890123";
+            else if (ConnexionUtilisateur::estConnecte()) {
+                $siret = ConnexionUtilisateur::getLoginUtilisateurConnecte();
             }
             else {
                 $siret = $_POST["siret"];
