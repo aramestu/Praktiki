@@ -40,3 +40,13 @@
     white-space: pre-wrap;
     margin-top: 15px;
 }
+
+#annotationRelative{
+    position: relative;
+}
+
+#backIconAnnotation{
+    position: absolute;
+    top: 0.5%;
+    left: 5%;
+}
