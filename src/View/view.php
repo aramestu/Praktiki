@@ -1,6 +1,8 @@
 <?php
 
 use App\SAE\Lib\ConnexionUtilisateur;
+use App\SAE\Lib\MessageFlash;
+use App\SAE\Model\HTTP\Cookie;
 
 ?>
 <!DOCTYPE html>
@@ -17,10 +19,10 @@ use App\SAE\Lib\ConnexionUtilisateur;
     <script src="assets/javascript/navbar.js"></script>
     <link rel="stylesheet" href="assets/css/resources/font-awesome-4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="assets/css/CSB.css" />
+    <link rel="stylesheet" href="assets/css/CSB.css"/>
     <script src="assets/javascript/CSB.js"></script>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
@@ -44,17 +46,17 @@ use App\SAE\Lib\ConnexionUtilisateur;
                 <a href="frontController.php?controller=TDB&action=displayTDB" class="nav-item" data-action="tdbEtudiant">Mes infos</a>
                 ';
         }
-         echo'<a href="frontController.php?action=contact" class="nav-item" data-action="contact">Contact</a>';
+        echo '<a href="frontController.php?action=contact" class="nav-item" data-action="contact">Contact</a>';
         if (!ConnexionUtilisateur::estConnecte()) {
             echo '
                 <a href="frontController.php?action=preference" class="nav-item" data-action="connect">Connexion</a>
                 ';
         } else
-        if (ConnexionUtilisateur::estConnecte()) {
-            echo '
+            if (ConnexionUtilisateur::estConnecte()) {
+                echo '
                     <a href="frontController.php?action=disconnect&controller=Connexion" class="nav-item" data-action="disconnect">Déconnexion</a>
                 ';
-        }
+            }
         ?>
 
     </nav>
@@ -62,11 +64,31 @@ use App\SAE\Lib\ConnexionUtilisateur;
 
 <main>
     <?php
-    foreach (\App\SAE\Lib\MessageFlash::lireTousMessages() as $type => $lireMessage) {
+    foreach (MessageFlash::lireTousMessages() as $type => $lireMessage) {
         echo '<div class="alert alert-' . $type . '">' . $lireMessage . '</div>';
     }
     require __DIR__ . "/{$cheminVueBody}";
     ?>
+
+    <?php if (!Cookie::contient("bannerClosed")): ?>
+        <div id="cookie-banner"><h2>Politique de confidentialité</h2>
+            <p>Nous utilisons des cookies pour améliorer votre expérience sur notre site. Les cookies sont de petits
+                fichiers de données qui sont stockés sur votre ordinateur ou appareil mobile lorsque vous visitez un
+                site
+                web. Ils nous permettent de collecter des informations sur votre comportement de navigation, comme les
+                pages
+                que vous visitez et les services que vous utilisez. Nous utilisons ces informations pour personnaliser
+                votre
+                expérience, pour comprendre comment notre site est utilisé et pour améliorer nos services. En continuant
+                à
+                utiliser notre site, vous acceptez notre utilisation des cookies. Pour plus dinformations sur notre
+                utilisation des cookies et sur la manière dont vous pouvez contrôler les cookies, veuillez consulter
+                notre
+                politique de confidentialité.</p>
+            <a href="frontController.php?action=setCookie" id="close-banner"></a>
+        </div>
+    <?php endif; ?>
+
 </main>
 
 <footer>
@@ -79,11 +101,11 @@ use App\SAE\Lib\ConnexionUtilisateur;
             </div>
             <div class="VBox" id="footer-team">
                 <p>Notre équipe</p>
-                <a class="link" href="mailto:Lorick@mail.fr">Lorick</a>
-                <a class="link" href="mailto:Mathias@mail.fr">Mathias</a>
-                <a class="link" href="mailto:Clément@mail.fr">Clément</a>
-                <a class="link" href="mailto:Thibaut@mail.fr">Thibaut</a>
-                <a class="link" href="mailto:norman@mail.fr">Norman</a>
+                <a class="link" href="mailto:lorick.vergnes@etu.umontpellier.fr">Lorick</a>
+                <a class="link" href="mailto:lemoine.mathias@homtail.fr">Mathias</a>
+                <a class="link" href="mailto:clement.hamel@etu.umontpellier.fr">Clément</a>
+                <a class="link" href="mailto:thibaut.audouy@etu.umontpellier.fr">Thibaut</a>
+                <a class="link" href="mailto:norman.francois@etu.umontpellier.fr">Norman</a>
                 <a class="link" href="mailto:soren.starck@free.fr">Soren</a>
             </div>
             <div class="VBox">

@@ -2,81 +2,245 @@
 
 namespace App\SAE\Model\DataObject;
 
+/**
+ * La classe Convention représente une convention de stage.
+ *
+ * @package App\SAE\Model\DataObject
+ */
 class Convention extends AbstractDataObject {
 
+    /**
+     * @var string Identifiant de la convention.
+     */
     private string $idConvention;
+
+    /**
+     * @var string Adresse e-mail de l'enseignant.
+     */
     private string $mailEnseignant;
+
+    /**
+     * @var string Nom de l'enseignant.
+     */
     private string $nomEnseignant;
+
+    /**
+     * @var string Prénom de l'enseignant.
+     */
     private string $prenomEnseignant;
+
+    /**
+     * @var string Compétences à développer pendant le stage.
+     */
     private string $competencesADevelopper;
+
+    /**
+     * @var string Durée de travail hebdomadaire.
+     */
     private string $dureeDeTravail;
+
+    /**
+     * @var string Langues d'impression de la convention.
+     */
     private string $languesImpression;
+
+    /**
+     * @var string Origine de la convention.
+     */
     private string $origineDeLaConvention;
+
+    /**
+     * @var bool Indique si le sujet est confidentiel.
+     */
     private bool $sujetEstConfidentiel;
+
+    /**
+     * @var string Nombre d'heures hebdomadaires.
+     */
     private string $nbHeuresHebdo;
+
+    /**
+     * @var string Mode de paiement.
+     */
     private string $modePaiement;
+
+    /**
+     * @var string Durée de l'expérience professionnelle.
+     */
     private string $dureeExperienceProfessionnel;
+
+    /**
+     * @var string Caisse d'assurance maladie.
+     */
     private string $caisseAssuranceMaladie;
+
+    /**
+     * @var string Adresse e-mail du tuteur professionnel.
+     */
     private string $mailTuteurProfessionnel;
+
+    /**
+     * @var string Prénom du tuteur professionnel.
+     */
     private string $prenomTuteurProfessionnel;
+
+    /**
+     * @var string Nom du tuteur professionnel.
+     */
     private string $nomTuteurProfessionnel;
+
+    /**
+     * @var string Fonction du tuteur professionnel.
+     */
     private string $fonctionTuteurProfessionnel;
+
+    /**
+     * @var string Numéro de téléphone du tuteur professionnel.
+     */
     private string $telephoneTuteurProfessionnel;
+
+    /**
+     * @var string Sujet de l'expérience professionnelle.
+     */
     private string $sujetExperienceProfessionnel;
+
+    /**
+     * @var string Thématique de l'expérience professionnelle.
+     */
     private string $thematiqueExperienceProfessionnel;
+
+    /**
+     * @var string Tâches de l'expérience professionnelle.
+     */
     private string $tachesExperienceProfessionnel;
+
+    /**
+     * @var string Code postal de l'expérience professionnelle.
+     */
     private string $codePostalExperienceProfessionnel;
+
+    /**
+     * @var string Adresse de l'expérience professionnelle.
+     */
     private string $adresseExperienceProfessionnel;
+
+    /**
+     * @var string Date de début de l'expérience professionnelle.
+     */
     private string $dateDebutExperienceProfessionnel;
+
+    /**
+     * @var string Date de fin de l'expérience professionnelle.
+     */
     private string $dateFinExperienceProfessionnel;
+
+    /**
+     * @var string Nom du signataire.
+     */
     private string $nomSignataire;
+
+    /**
+     * @var string Prénom du signataire.
+     */
     private string $prenomSignataire;
+
+    /**
+     * @var string Numéro SIRET de l'entreprise.
+     */
     private string $siret;
+
+    /**
+     * @var string Nom de l'entreprise.
+     */
     private string $nomEntreprise;
+
+    /**
+     * @var string Code postal de l'entreprise.
+     */
     private string $codePostalEntreprise;
+
+    /**
+     * @var string Effectif de l'entreprise.
+     */
     private string $effectifEntreprise;
+
+    /**
+     * @var string Numéro de téléphone de l'entreprise.
+     */
     private string $telephoneEntreprise;
+
+    /**
+     * @var bool Indique si la convention est terminée.
+     */
     private bool $estFini;
-    private bool $estValidee;
+
+    /**
+     * @var bool Indique si la convention est validée par l'administration.
+     */
+    private bool $estValideeAdmin;
+
+    /**
+     * @var bool Indique si la convention est validée par le secrétariat.
+     */
+    private bool $estValideeSecretariat;
+
+    /**
+     * @var bool Indique si la convention est validée par le service des stages.
+     */
+    private bool $estValideePstage;
+
+    /**
+     * @var string Raison du refus, le cas échéant.
+     */
+    private string $raisonRefus;
+
+    /**
+     * @var bool Indique si la convention est signée.
+     */
     private bool $estSignee;
 
     /**
-     * @param string $mailEnseignant
-     * @param string $nomEnseignant
-     * @param string $prenomEnseignant
-     * @param string $competencesADevelopper
-     * @param string $dureeDeTravail
-     * @param string $languesImpression
-     * @param string $origineDeLaConvention
-     * @param bool $sujetEstConfidentiel
-     * @param string $nbHeuresHebdo
-     * @param string $modePaiement
-     * @param string $dureeExperienceProfessionnel
-     * @param string $caisseAssuranceMaladie
-     * @param string $mailTuteurProfessionnel
-     * @param string $prenomTuteurProfessionnel
-     * @param string $nomTuteurProfessionnel
-     * @param string $fonctionTuteurProfessionnel
-     * @param string $telephoneTuteurProfessionnel
-     * @param string $sujetExperienceProfessionnel
-     * @param string $thematiqueExperienceProfessionnel
-     * @param string $tachesExperienceProfessionnel
-     * @param string $codePostalExperienceProfessionnel
-     * @param string $adresseExperienceProfessionnel
-     * @param string $dateDebutExperienceProfessionnel
-     * @param string $dateFinExperienceProfessionnel
-     * @param string $nomSignataire
-     * @param string $prenomSignataire
-     * @param string $siret
-     * @param string $nomEntreprise
-     * @param string $codePostalEntreprise
-     * @param string $effectifEntreprise
-     * @param string $telephoneEntreprise
-     * @param bool $estSignee
-     * @param bool $estValidee
-     * @param bool $estSignee
+     * Constructeur de la classe Convention.
+     *
+     * @param string $mailEnseignant Adresse e-mail de l'enseignant.
+     * @param string $nomEnseignant Nom de l'enseignant.
+     * @param string $prenomEnseignant Prénom de l'enseignant.
+     * @param string $competencesADevelopper Compétences à développer pendant le stage.
+     * @param string $dureeDeTravail Durée de travail hebdomadaire.
+     * @param string $languesImpression Langues d'impression de la convention.
+     * @param string $origineDeLaConvention Origine de la convention (par exemple, école, entreprise).
+     * @param bool $sujetEstConfidentiel Indique si le sujet de la convention est confidentiel.
+     * @param string $nbHeuresHebdo Nombre d'heures hebdomadaires.
+     * @param string $modePaiement Mode de paiement pour le stage.
+     * @param string $dureeExperienceProfessionnel Durée totale de l'expérience professionnelle.
+     * @param string $caisseAssuranceMaladie Caisse d'assurance maladie.
+     * @param string $mailTuteurProfessionnel Adresse e-mail du tuteur professionnel.
+     * @param string $prenomTuteurProfessionnel Prénom du tuteur professionnel.
+     * @param string $nomTuteurProfessionnel Nom du tuteur professionnel.
+     * @param string $fonctionTuteurProfessionnel Fonction du tuteur professionnel.
+     * @param string $telephoneTuteurProfessionnel Numéro de téléphone du tuteur professionnel.
+     * @param string $sujetExperienceProfessionnel Sujet de l'expérience professionnelle.
+     * @param string $thematiqueExperienceProfessionnel Thématique de l'expérience professionnelle.
+     * @param string $tachesExperienceProfessionnel Tâches de l'expérience professionnelle.
+     * @param string $codePostalExperienceProfessionnel Code postal de l'expérience professionnelle.
+     * @param string $adresseExperienceProfessionnel Adresse de l'expérience professionnelle.
+     * @param string $dateDebutExperienceProfessionnel Date de début de l'expérience professionnelle.
+     * @param string $dateFinExperienceProfessionnel Date de fin de l'expérience professionnelle.
+     * @param string $nomSignataire Nom du signataire de la convention.
+     * @param string $prenomSignataire Prénom du signataire de la convention.
+     * @param string $siret Numéro SIRET de l'entreprise.
+     * @param string $nomEntreprise Nom de l'entreprise.
+     * @param string $codePostalEntreprise Code postal de l'entreprise.
+     * @param string $effectifEntreprise Effectif de l'entreprise.
+     * @param string $telephoneEntreprise Numéro de téléphone de l'entreprise.
+     * @param bool $estFini Indique si la convention est terminée.
+     * @param bool $estValideeAdmin Indique si la convention est validée par l'administration.
+     * @param bool $estValideeSecretariat Indique si la convention est validée par le secrétariat.
+     * @param bool $estValideePstage Indique si la convention est validée par le pôle stage.
+     * @param string $raisonRefus Raison du refus de la convention.
+     * @param bool $estSignee Indique si la convention est signée.
      */
-    public function __construct(string $mailEnseignant, string $nomEnseignant, string $prenomEnseignant, string $competencesADevelopper, string $dureeDeTravail, string $languesImpression, string $origineDeLaConvention, bool $sujetEstConfidentiel, string $nbHeuresHebdo, string $modePaiement, string $dureeExperienceProfessionnel, string $caisseAssuranceMaladie, string $mailTuteurProfessionnel, string $prenomTuteurProfessionnel, string $nomTuteurProfessionnel, string $fonctionTuteurProfessionnel, string $telephoneTuteurProfessionnel, string $sujetExperienceProfessionnel, string $thematiqueExperienceProfessionnel, string $tachesExperienceProfessionnel, string $codePostalExperienceProfessionnel, string $adresseExperienceProfessionnel, string $dateDebutExperienceProfessionnel, string $dateFinExperienceProfessionnel, string $nomSignataire, string $prenomSignataire, string $siret, string $nomEntreprise, string $codePostalEntreprise, string $effectifEntreprise, string $telephoneEntreprise, bool $estFini, bool $estValidee, bool $estSignee)
+    public function __construct(string $mailEnseignant, string $nomEnseignant, string $prenomEnseignant, string $competencesADevelopper, string $dureeDeTravail, string $languesImpression, string $origineDeLaConvention, bool $sujetEstConfidentiel, string $nbHeuresHebdo, string $modePaiement, string $dureeExperienceProfessionnel, string $caisseAssuranceMaladie, string $mailTuteurProfessionnel, string $prenomTuteurProfessionnel, string $nomTuteurProfessionnel, string $fonctionTuteurProfessionnel, string $telephoneTuteurProfessionnel, string $sujetExperienceProfessionnel, string $thematiqueExperienceProfessionnel, string $tachesExperienceProfessionnel, string $codePostalExperienceProfessionnel, string $adresseExperienceProfessionnel, string $dateDebutExperienceProfessionnel, string $dateFinExperienceProfessionnel, string $nomSignataire, string $prenomSignataire, string $siret, string $nomEntreprise, string $codePostalEntreprise, string $effectifEntreprise, string $telephoneEntreprise, bool $estFini, bool $estValideeAdmin, bool $estValideeSecretariat, bool $estValideePstage, string $raisonRefus, bool $estSignee)
     {
         $this->mailEnseignant = $mailEnseignant;
         $this->nomEnseignant = $nomEnseignant;
@@ -110,7 +274,10 @@ class Convention extends AbstractDataObject {
         $this->effectifEntreprise = $effectifEntreprise;
         $this->telephoneEntreprise = $telephoneEntreprise;
         $this->estFini = $estFini;
-        $this->estValidee = $estValidee;
+        $this->estValideeAdmin = $estValideeAdmin;
+        $this->estValideeSecretariat = $estValideeSecretariat;
+        $this->estValideePstage = $estValideePstage;
+        $this->raisonRefus = $raisonRefus;
         $this->estSignee = $estSignee;
     }
 
@@ -454,16 +621,50 @@ class Convention extends AbstractDataObject {
         $this->telephoneEntreprise = $telephoneEntreprise;
     }
 
-    public function getEstValidee(): bool
-    {
-        return ($this->estValidee == 1);
+    public function getEstValideeAdmin(): bool{
+        return $this->estValideeAdmin;
+
     }
 
-    public function setEstValidee(bool $estValidee): void
-    {
-        $this->estValidee = $estValidee;
+    public function setEstValideeAdmin(bool $estValideeAdmin): void{
+        $this->estValideeAdmin = $estValideeAdmin;
     }
 
+    public function isEstValideeSecretariat(): bool
+    {
+        return $this->estValideeSecretariat;
+    }
+
+    public function setEstValideeSecretariat(bool $estValideeSecretariat): void
+    {
+        $this->estValideeSecretariat = $estValideeSecretariat;
+    }
+
+    public function isEstValideePstage(): bool
+    {
+        return $this->estValideePstage;
+    }
+
+    public function setEstValideePstage(bool $estValideePstage): void
+    {
+        $this->estValideePstage = $estValideePstage;
+    }
+
+    public function getRaisonRefus(): string
+    {
+        return $this->raisonRefus;
+    }
+
+    public function setRaisonRefus(string $raisonRefus): void
+    {
+        $this->raisonRefus = $raisonRefus;
+    }
+
+    /**
+     * Formatte les données de l'objet en un tableau associatif.
+     *
+     * @return array Tableau associatif contenant les données formatées.
+     */
     public function formatTableau(): array {
         $tab = array(
             "idConventionTag" => $this->idConvention,
@@ -496,12 +697,62 @@ class Convention extends AbstractDataObject {
             "nomEntrepriseTag" => $this->nomEntreprise,
             "codePostalEntrepriseTag" => $this->codePostalEntreprise,
             "effectifEntrepriseTag" => $this->effectifEntreprise,
-            "telephoneEntrepriseTag" => $this->telephoneEntreprise
+            "telephoneEntrepriseTag" => $this->telephoneEntreprise,
+            "raisonRefusTag" => $this->raisonRefus
         );
         $tab["sujetEstConfidentielTag"] = ($this->sujetEstConfidentiel) ? 1 : 0;
         $tab["estFiniTag"] = ($this->estFini) ? 1 : 0;
-        $tab["estValideeTag"] = ($this->estValidee) ? 1 : 0;
+        $tab["estValideeAdminTag"] = ($this->estValideeAdmin) ? 1 : 0;
+        $tab["estValideeSecretariatTag"] = ($this->estValideeSecretariat) ? 1 : 0;
+        $tab["estValideePstageTag"] = ($this->estValideePstage) ? 1 : 0;
         $tab["estSigneeTag"] = ($this->estSignee) ? 1 : 0;
         return $tab;
+    }
+
+    /**
+     * Récupère les noms des setters associés aux propriétés de l'objet.
+     *
+     * @return array Tableau associatif des noms des setters.
+     */
+    public function getSetters(): array{
+        return [
+            "mailEnseignant" => "setMailEnseignant",
+            "nomEnseignant" => "setNomEnseignant",
+            "prenomEnseignant" => "setPrenomEnseignant",
+            "competencesADevelopper" => "setCompetencesADevelopper",
+            "dureeDeTravail" => "setDureeDeTravail",
+            "languesImpression" => "setLanguesImpression",
+            "origineDeLaConvention" => "setOrigineDeLaConvention",
+            "sujetEstConfidentiel" => "setSujetEstConfidentiel",
+            "nbHeuresHebdo" => "setNbHeuresHebdo",
+            "modePaiement" => "setModePaiement",
+            "dureeExperienceProfessionnel" => "setDureeExperienceProfessionnel",
+            "caisseAssuranceMaladie" => "setCaisseAssuranceMaladie",
+            "mailTuteurProfessionnel" => "setMailTuteurProfessionnel",
+            "prenomTuteurProfessionnel" => "setPrenomTuteurProfessionnel",
+            "nomTuteurProfessionnel" => "setNomTuteurProfessionnel",
+            "fonctionTuteurProfessionnel" => "setFonctionTuteurProfessionnel",
+            "telephoneTuteurProfessionnel" => "setTelephoneTuteurProfessionnel",
+            "sujetExperienceProfessionnel" => "setSujetExperienceProfessionnel",
+            "thematiqueExperienceProfessionnel" => "setThematiqueExperienceProfessionnel",
+            "tachesExperienceProfessionnel" => "setTachesExperienceProfessionnel",
+            "codePostalExperienceProfessionnel" => "setCodePostalExperienceProfessionnel",
+            "adresseExperienceProfessionnel" => "setAdresseExperienceProfessionnel",
+            "dateDebutExperienceProfessionnel" => "setDateDebutExperienceProfessionnel",
+            "dateFinExperienceProfessionnel" => "setDateFinExperienceProfessionnel",
+            "nomSignataire" => "setNomSignataire",
+            "prenomSignataire" => "setPrenomSignataire",
+            "siret" => "setSiret",
+            "nomEntreprise" => "setNomEntreprise",
+            "codePostalEntreprise" => "setCodePostalEntreprise",
+            "effectifEntreprise" => "setEffectifEntreprise",
+            "telephoneEntreprise" => "setTelephoneEntreprise",
+            "estFini" => "setEstFini",
+            "estValideeAdmin" => "setEstValideeAdmin",
+            "estValideeSecretariat" => "setEstValideeSecretariat",
+            "estValideePstage" => "setEstValideePstage",
+            "raisonRefus" => "setRaisonRefus",
+            "estSignee" => "setEstSignee"
+        ];
     }
 }

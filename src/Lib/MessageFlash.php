@@ -1,67 +1,94 @@
 <?php
+
 namespace App\SAE\Lib;
 
 use App\SAE\Model\HTTP\Session;
 
+/**
+ * Classe MessageFlash gérant les messages flash enregistrés en session.
+ */
 class MessageFlash
 {
 
-    // Les messages sont enregistrés en session associée à la clé suivante
+    /**
+     * @var string La clé associée aux messages flash en session.
+     */
     private static string $cleFlash = "_messagesFlash";
 
-    // $type parmi "success", "info", "warning" ou "danger"
+    /**
+     * Ajoute un message flash de type spécifié.
+     *
+     * @param string $type Le type du message flash ("success", "info", "warning" ou "danger").
+     * @param string $message Le message à ajouter.
+     */
     //TODO si y'a plusieurs messageFlash du même type, ne fonctionne pas
     public static function ajouter(string $type, string $message): void
     {
-        // À compléter
-        $array=array(
-          $type => $message
+        $array = array(
+            $type => $message
         );
-        $session=Session::getInstance();
-        if ($session->contient(self::$cleFlash)){
-            $array=MessageFlash::lireMessages(self::$cleFlash);
-            $array[$type]=$message;
+        $session = Session::getInstance();
+        if ($session->contient(self::$cleFlash)) {
+            $array = MessageFlash::lireMessages(self::$cleFlash);
+            $array[$type] = $message;
         }
-        $session->enregistrer(self::$cleFlash,$array);
+        $session->enregistrer(self::$cleFlash, $array);
     }
 
+    /**
+     * Vérifie si un message flash du type spécifié existe.
+     *
+     * @param string $type Le type du message flash.
+     * @return bool True si un message flash du type spécifié existe, false sinon.
+     */
     public static function contientMessage(string $type): bool
     {
-        // À compléter
-            $session = Session::getInstance();
-            if ($session->contient(self::$cleFlash)) {
-                $array = $session->lire(self::$cleFlash);
-                return isset($array[$type]);
-            }
-            return false;
-    }
-
-    // Attention : la lecture doit détruire le message
-    public static function lireMessages(string $type):array
-    {
-        // À compléter
-        $session=Session::getInstance();
-        $array= array();
+        $session = Session::getInstance();
         if ($session->contient(self::$cleFlash)) {
             $array = $session->lire(self::$cleFlash);
-            foreach ($array as $typ=>$message){
-                if ($typ==$type) $array[]=$message;
-            }
+            return isset($array[$type]);
         }
-        $session->supprimer(self::$cleFlash);
-        return$array;
+        return false;
     }
 
-    public static function lireTousMessages() : array
+    /**
+     * Lit les messages flash du type spécifié et les détruit.
+     *
+     * @param string $type Le type du message flash.
+     * @return array Les messages flash du type spécifié.
+     */
+    public static function lireMessages(string $type): array
     {
-        // À compléter
-        $session=Session::getInstance();
-        if($session->contient(self::$cleFlash)) {
+        $session = Session::getInstance();
+        $array = array();
+        if ($session->contient(self::$cleFlash)) {
+            $array = $session->lire(self::$cleFlash);
+            $messages = array();
+            foreach ($array as $typ => $message) {
+                if ($typ == $type) {
+                    $messages[] = $message;
+                    unset($array[$typ]);
+                }
+            }
+            $session->enregistrer(self::$cleFlash, $array);
+            return $messages;
+        }
+        return $array;
+    }
+
+    /**
+     * Lit tous les messages flash et les détruit.
+     *
+     * @return array Tous les messages flash enregistrés.
+     */
+    public static function lireTousMessages(): array
+    {
+        $session = Session::getInstance();
+        if ($session->contient(self::$cleFlash)) {
             $array = $session->lire(self::$cleFlash);
             $session->supprimer(self::$cleFlash);
             return $array;
         }
         return array();
     }
-
 }

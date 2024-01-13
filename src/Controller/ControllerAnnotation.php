@@ -8,11 +8,18 @@ use App\SAE\Model\DataObject\Annotation;
 use App\SAE\Model\Repository\AnnotationRepository;
 use App\SAE\Model\Repository\EnseignantRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
+use App\SAE\Service\ServiceAnnotation;
 
+/**
+ * Contrôleur gérant les actions liées aux annotations dans l'application.
+ */
 class ControllerAnnotation extends ControllerGenerique
 {
-    // http://localhost/S3/PHP/sae_web_s1/web/frontController.php?controller=Annotation&action=afficherFormulaireAnnotation
-    public static function afficherFormulaireAnnotation() : void {
+    /**
+     * Affiche le formulaire d'annotation.
+     */
+    public static function afficherFormulaireAnnotation(): void
+    {
         //$siret = $_POST["siret"];
         $siret = "01234567890123";
         self::afficheVue(
@@ -25,6 +32,9 @@ class ControllerAnnotation extends ControllerGenerique
         );
     }
 
+    /**
+     * Enregistre une nouvelle annotation.
+     */
     public static function enregistrerAnnotation(): void
     {
         $message = $_POST["message"];
@@ -35,33 +45,34 @@ class ControllerAnnotation extends ControllerGenerique
         //$mail = "antoine.lefevre@umontpellier.fr";
         $user = (new EnseignantRepository())->getById($mail);
 
-        if(strlen($message) > 500){
+        if (strlen($message) > 500) {
             self::redirectionVersURL("warning", "Le contenu est trop long", "afficherAllAnnotationEntreprise&controller=Annotation");
-        }
-        else if (!is_null($user)) {
+        } elseif (!is_null($user)) {
             $annotation = new Annotation($siret, $mail, $message, false);
             $save = (new AnnotationRepository())->save($annotation);
             // Si l'insertion n'a pas fonctionné
-            if(! $save){
-                self::redirectionVersURL("warning", "L'annotation n'a pas pu être enregistré", "afficherAllAnnotationEntreprise&controller=Annotation");
+            if (!$save) {
+                self::redirectionVersURL("warning", "L'annotation n'a pas pu être enregistrée", "afficherAllAnnotationEntreprise&controller=Annotation");
+            } else { // Si ça a fonctionné
+                self::redirectionVersURL("success", "Annotation créée avec succès", "afficherAllAnnotationEntreprise&controller=Annotation");
             }
-            else{ // Si ça a fonctionné
-                self::redirectionVersURL("success", "Annotation crée avec succés", "afficherAllAnnotationEntreprise&controller=Annotation");
-            }
-        }
-        else{
-            self::error('Vous n avez pas la permission');
+        } else {
+            self::error('Vous n\'avez pas la permission');
         }
     }
 
-    public static function afficherAllAnnotationEntreprise() : void {
+    /**
+     * Affiche toutes les annotations pour une entreprise donnée.
+     */
+    public static function afficherAllAnnotationEntreprise(): void
+    {
         $login = ConnexionUtilisateur::getLoginUtilisateurConnecte();
         // Si personne n'est connecté
-        if(is_null($login)){
+        if (is_null($login)) {
             self::error("Vous n'avez pas la permission pour faire ça");
         }
         // Si l'utilisateur connecté est un prof
-        else if(ConnexionUtilisateur::estEnseignant()) {
+        elseif (ConnexionUtilisateur::estEnseignant()) {
             //$siret = $_POST["siret"];
             $siret = "01234567890123";
             $listAnnotationEtPersonne = (new AnnotationRepository())->getAnnotationEtPersonneBySiret($siret);
@@ -79,21 +90,22 @@ class ControllerAnnotation extends ControllerGenerique
                     'entreprise' => $entreprise
                 ]
             );
-        }
-        else{
+        } else {
             self::error("Vous n'avez pas la permission pour faire ça");
         }
     }
 
+    /**
+     * Affiche le formulaire de modification d'une annotation.
+     */
     public static function afficherFormulaireModificationAnnotation(): void
     {
         $id = $_GET["idAnnotation"];
         $annotation = (new AnnotationRepository())->getById($id);
 
-        if(is_null($annotation)){
+        if (is_null($annotation)) {
             self::redirectionVersURL("warning", "L'annotation n'existe pas", "afficherAllAnnotationEntreprise&controller=Annotation");
-        }
-        else if(ConnexionUtilisateur::getLoginUtilisateurConnecte() == $annotation->getMailEnseignant()) {
+        } elseif (ConnexionUtilisateur::getLoginUtilisateurConnecte() == $annotation->getMailEnseignant()) {
             self::afficheVue(
                 'view.php',
                 [
@@ -102,46 +114,51 @@ class ControllerAnnotation extends ControllerGenerique
                     'annotation' => $annotation
                 ]
             );
-        }
-        else{
+        } else {
             self::error("Vous n'avez pas la permission de faire ça !");
         }
     }
 
+    /**
+     * Modifie le contenu d'une annotation.
+     */
     public static function modifierAnnotation(): void
     {
+        if (!isset($_POST["idAnnotation"])) {
+            self::redirectionVersURL("warning", "Aucun idAnnotation fourni", "afficherAllAnnotationEntreprise&controller=Annotation");
+            return;
+        }
         $id = $_POST["idAnnotation"];
         $annotation = (new AnnotationRepository())->getById($id);
-        $contenu = $_POST["message"];
+        $attributs["contenu"] = $_POST["message"];
 
-        if(is_null($annotation)){
+        if (is_null($annotation)) {
             self::redirectionVersURL("warning", "L'annotation n'existe pas", "afficherAllAnnotationEntreprise&controller=Annotation");
-        }
-        else if(ConnexionUtilisateur::getLoginUtilisateurConnecte() == $annotation->getMailEnseignant()) {
-            $annotation->setContenu($contenu);
-            (new AnnotationRepository())->mettreAJour($annotation);
-
-            self::redirectionVersURL("success", "Annotation a été modifié avec succés", "afficherAllAnnotationEntreprise&controller=Annotation");
-        }
-        else{
+        } elseif (ConnexionUtilisateur::getLoginUtilisateurConnecte() == $annotation->getMailEnseignant()) {
+            (new ServiceAnnotation())->mettreAJour($annotation, $attributs);
+            self::redirectionVersURL("success", "Annotation a été modifiée avec succès", "afficherAllAnnotationEntreprise&controller=Annotation");
+        } else {
             self::error("Vous n'avez pas la permission de faire ça !");
         }
     }
 
-    public static function supprimerAnnotation() : void {
+    /**
+     * Supprime une annotation.
+     */
+    public static function supprimerAnnotation(): void
+    {
         $id = $_GET["idAnnotation"];
         $rep = new AnnotationRepository();
         $annotation = $rep->getById($id);
-        if(is_null($annotation)){
+        if (is_null($annotation)) {
             self::redirectionVersURL("warning", "L'annotation n'existe pas", "afficherAllAnnotationEntreprise&controller=Annotation");
         }
         // Si l'utilisateur connecté est le même que celui qui a posté le message ou qu'il est admin
-        else if(ConnexionUtilisateur::getLoginUtilisateurConnecte() == $annotation->getMailEnseignant() || ConnexionUtilisateur::estAdministrateur()) {
+        elseif (ConnexionUtilisateur::getLoginUtilisateurConnecte() == $annotation->getMailEnseignant() || ConnexionUtilisateur::estAdministrateur()) {
             $rep->supprimer($id);
-            self::redirectionVersURL("success", "Annotation supprimé avec succès", "afficherAllAnnotationEntreprise&controller=Annotation");
+            self::redirectionVersURL("success", "Annotation supprimée avec succès", "afficherAllAnnotationEntreprise&controller=Annotation");
             //self::afficherAllAnnotationEntreprise();
-        }
-        else{
+        } else {
             self::error("Vous n'avez pas la permission de faire ça !");
         }
     }

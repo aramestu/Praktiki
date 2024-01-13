@@ -12,7 +12,7 @@ $codePostal = htmlspecialchars($user->getCodePostalEtudiant());
 
 
     <div class="containerInfo">
-    <form method="get">
+    <form method="post" action="frontController.php?action=displayTDB&controller=TDB&tdbAction=MettreAJour">
         <h2 id="remplaceBaliseLegend">Généralités</h2>
 
         <div class="column">
@@ -40,9 +40,6 @@ $codePostal = htmlspecialchars($user->getCodePostalEtudiant());
 
             </p>
         </div>
-        <input type="hidden" name="action" value="displayTDB">
-        <input type="hidden" name="controller" value="TDB">
-        <input type="hidden" name="tdbAction" value="MettreAJour">
         <input type="submit" value="Mettre à jour">
     </form>
 </div>
