@@ -4,7 +4,10 @@
     <div>
         <h3 class="bold">C'est ici que vous pouvez avoir accès aux différentes fonctionnalités du site vous aidant à faire le lien avec votre
             administration.</h3>
-        <?php if ($convention == null) {echo '<a href="frontController.php?controller=Convention&action=creerFormulaire&idEtudiant=' . $user->getNumEtudiant() . '" class="button">Créer ma convention de stage</a>';}?>
+        <?php if ($convention == null && !$alternant) {echo '<a href="frontController.php?controller=Convention&action=creerFormulaire&idEtudiant=' . $user->getNumEtudiant() . '" class="button">Créer ma convention de stage</a>';}
+        else{
+            echo '<h3 class="bold"> Mais il semblerait que vous ayez déjà votre alternance :)</h3>';
+        }?>
         <?php
         if ($convention != null) {
             echo '<a href="frontController.php?controller=Convention&action=afficherFormulaire&idEtudiant=' . $user->getNumEtudiant() . '" class="button">Editer ma Convention</a>';

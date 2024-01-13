@@ -270,7 +270,7 @@ class ControllerTDB extends ControllerGenerique {
      *
      * @return void
      */
-    private static function displ1ayTDBetu(): void
+    private static function displayTDBetu(): void
     {
         $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null,null,
             null,null,"lastWeek",null,null);
@@ -315,8 +315,10 @@ class ControllerTDB extends ControllerGenerique {
     private static function displayTDBetuGestion(): void
     {
         $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user=(new EtudiantRepository())->getByEmail($mail);
+        $rep = new EtudiantRepository();
+        $user= $rep->getByEmail($mail);
         $convention=(new ConventionRepository())->getConventionAvecEtudiant($user->getNumEtudiant());
+        $alternant = $rep->etudiantPossedeActuellementAlternance($user->getNumEtudiant());
         self::afficheVue(
             'view.php',
             [
@@ -324,7 +326,8 @@ class ControllerTDB extends ControllerGenerique {
                 'cheminVueBody' => 'user/tableauDeBord/etudiant.php',
                 'TDBView' => 'user/tableauDeBord/etudiant/gestionEtudiant.php',
                 'user'=>$user,
-                'convention'=>$convention
+                'convention'=>$convention,
+                'alternant' => $alternant
             ]
         );
     }
