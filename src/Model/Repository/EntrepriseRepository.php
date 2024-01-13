@@ -199,10 +199,10 @@ class EntrepriseRepository extends AbstractRepository
     {
         parent::archiver($valeurClePrimaire);
         $pdo = Model::getPdo();
-        $table = "Annotation";
+        $table = "Annotations";
         $tableArchives = $table . "Archives";
         $clePrimaire = "idAnnotation";
-        $sql = "INSERT INTO $tableArchives SELECT $clePrimaire FROM $table WHERE $table.$clePrimaire = :clePrimaireTag";
+        $sql = "INSERT INTO $tableArchives SELECT * FROM $table WHERE $table.$clePrimaire = :clePrimaireTag";
         $values = array("clePrimaireTag" => $valeurClePrimaire);
         $requeteStatement = $pdo->prepare($sql);
         $requeteStatement->execute($values);
