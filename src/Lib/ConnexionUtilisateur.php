@@ -6,6 +6,7 @@ use App\SAE\Model\HTTP\Session;
 use App\SAE\Model\Repository\EnseignantRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
+use App\SAE\Model\Repository\PersonnelRepository;
 
 /**
  * Classe ConnexionUtilisateur gérant les fonctionnalités de connexion, déconnexion et vérification du statut utilisateur.
@@ -94,6 +95,13 @@ class ConnexionUtilisateur {
     {
         if (self::estConnecte())
             return (bool)(new EntrepriseRepository())->getEntrepriseAvecEtatFiltree(null, self::getLoginUtilisateurConnecte());
+        return false;
+    }
+
+    public static function estPersonnel(): bool
+    {
+        if (self::estConnecte())
+            return (bool)(new PersonnelRepository())->getByEmail(self::getLoginUtilisateurConnecte());
         return false;
     }
 

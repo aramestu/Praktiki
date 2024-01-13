@@ -2,13 +2,7 @@
 /*
  https://webinfo.iutmontp.univ-montp2.fr/~audouyt/sae_web_s1/web/frontController.php?action=afficherFormulaireModification&controller=ExpPro&experiencePro=1
  */
-$typeExperience = 'Alternance';
-if (is_a($expPro, 'App\SAE\Model\DataObject\Stage')) { // Si c'est un stage
-    $typeExperience = 'Stage';
-    $gratification = $expPro->getGratificationStage();
-} else {//si c'est une offre non défini
-    $typeExperience = 'OffreNonDefini';
-}
+$typeExperience = $expPro->getNomExperienceProfessionnel();
 ?>
 <link rel="stylesheet" href="assets/css/connect.css">
 <script src="assets/javascript/showHideToggle.js"></script>
