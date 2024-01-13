@@ -170,7 +170,7 @@ class ControllerTDB extends ControllerGenerique {
     /**
      * Met à jour les informations du ppersonnel depuis le tableau de bord.
      *
-     * Cette méthode récupère l'personnel connecté, utilise le service Personnel
+     * Cette méthode récupère du personnel connecté, utilise le service Personnel
      * pour mettre à jour ses informations avec des attributs vides (aucune modification spécifiée).
      * Enfin, elle redirige l'utilisateur vers le tableau de bord avec un message de succès.
      *
@@ -188,7 +188,7 @@ class ControllerTDB extends ControllerGenerique {
         (new ServicePersonnel())->mettreAJour($personnel, []);
 
         // Rediriger vers le tableau de bord avec un message de succès
-        self::redirectionVersURL("success", "L'personnel a été mis à jour", "displayTDB&controller=TDB");
+        self::redirectionVersURL("success", "L'utilisateur a été mis à jour", "displayTDB&controller=TDB");
     }
     
 
