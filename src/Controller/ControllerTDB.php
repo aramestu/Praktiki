@@ -168,7 +168,7 @@ class ControllerTDB extends ControllerGenerique {
 
 
     /**
-     * Met à jour les informations de l'personnel depuis le tableau de bord.
+     * Met à jour les informations du ppersonnel depuis le tableau de bord.
      *
      * Cette méthode récupère l'personnel connecté, utilise le service Personnel
      * pour mettre à jour ses informations avec des attributs vides (aucune modification spécifiée).
@@ -178,7 +178,7 @@ class ControllerTDB extends ControllerGenerique {
      */
     public static function displayTDBpersMettreAJour(): void
     {
-        // Récupérer l'adresse e-mail de l'utilisateur connecté
+        // Récupérer l'adresse e-mail du putilisateur connecté
         $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
 
         // Récupérer l'objet personnel correspondant à l'adresse e-mail
