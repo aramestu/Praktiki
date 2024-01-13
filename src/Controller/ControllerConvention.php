@@ -132,7 +132,7 @@ class ControllerConvention extends ControllerGenerique
             $attributs["nomSignataire"] = $_POST["nomSignataire"];
         }
         if(isset($_POST["prenomSignataire"])){
-            $attributs["nomSignataire"] = $_POST["nomSignataire"];
+            $attributs["prenomSignataire"] = $_POST["prenomSignataire"];
         }
         if(isset($_POST["nomEnseignant"])){
             $attributs["nomEnseignant"] = $_POST["nomEnseignant"];
@@ -143,7 +143,7 @@ class ControllerConvention extends ControllerGenerique
         if(isset($_POST["mailEnseignant"])){
             $attributs["mailEnseignant"] = $_POST["mailEnseignant"];
         }
-
+        $attributs["raisonRefus"] = "";
         (new ServiceConvention())->mettreAJour($convention, $attributs);
         self::redirectionVersURL("success", "Convention sauvergardée", "displayTDB&controller=TDB&tdbAction=gestion");
     }
