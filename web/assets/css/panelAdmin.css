@@ -48,8 +48,8 @@
         width: 100%;
     }
 
-    .entityInformation > .top{
-            padding-left: 5%;
+    .entityInformation > .top {
+        padding-left: 5%;
     }
 }
 
@@ -103,8 +103,8 @@
         width: 100%;
     }
 
-    .entityInformation > .top{
-            padding-left: 5%;
+    .entityInformation > .top {
+        padding-left: 5%;
     }
 }
 
@@ -176,7 +176,7 @@
         width: 100%;
     }
 
-    .entityInformation > .top{
+    .entityInformation > .top {
         font-size: 2.5em;
         flex-direction: column;
         padding: 0;

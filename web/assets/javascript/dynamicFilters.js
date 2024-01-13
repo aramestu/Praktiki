@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function revealElements() {
         const smallElements = document.querySelectorAll('.small');
-        smallElements.forEach(function(element, index) {
+        smallElements.forEach(function (element, index) {
             element.style.animationDelay = index * 0.06 + "s";
         });
     }
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 750);
     });
 
-    resetButton.addEventListener('click', ()=>{
+    resetButton.addEventListener('click', () => {
         resetFilters();
     });
 
