@@ -18,7 +18,7 @@ use App\SAE\Lib\ConversionMajuscule;
         <?php
         if(ConnexionUtilisateur::estAdministrateur()){
             echo'
-            <a class="button" href="frontController.php?controller=PanelAdmin&action=panelListeEtudiants">Panel Admin</a>
+            <a id="adminButton" class="button" href="frontController.php?controller=PanelAdmin&action=panelListeEtudiants">Panel Admin</a>
             ';
         }
         ?>

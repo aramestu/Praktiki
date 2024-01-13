@@ -1,3 +1,209 @@
+@media (max-width: 41200px) {
+    #option {
+        width: 20%;
+    }
+
+    #option .button {
+        margin-left: -25px;
+        width: fit-content;
+        color: var(--darkBlue2);
+    }
+
+    #mainContent {
+        width: 77%;
+        left: 20%;
+        height: 85vh;
+    }
+
+    #search-bar {
+        width: 55%;
+    }
+
+    .down {
+        flex-direction: row;
+    }
+
+    .down:first-child {
+        max-width: 40%;
+    }
+
+    .down > .VBox {
+        max-width: 60%;
+    }
+
+    .lineSujetOffre {
+        left: 13%;
+        width: 35%;
+    }
+
+    .input-row {
+        width: 100%;
+    }
+
+    input[type="file"] {
+        margin-left: 10px;
+    }
+
+    .entityInformation {
+        width: 100%;
+    }
+
+    .entityInformation > .top{
+            padding-left: 5%;
+    }
+}
+
+@media (max-width: 1300px) {
+    #option {
+        width: 20%;
+    }
+
+    #option .button {
+        margin-left: -25px;
+        width: fit-content;
+        color: var(--darkBlue2);
+    }
+
+    #mainContent {
+        width: 77%;
+        left: 20%;
+        height: 85vh;
+    }
+
+    #search-bar {
+        width: 55%;
+    }
+
+    .down {
+        flex-direction: row;
+    }
+
+    .down:first-child {
+        max-width: 40%;
+    }
+
+    .down > .VBox {
+        max-width: 60%;
+    }
+
+    .lineSujetOffre {
+        left: 13%;
+        width: 35%;
+    }
+
+    .input-row {
+        width: 100%;
+    }
+
+    input[type="file"] {
+        margin-left: 10px;
+    }
+
+    .entityInformation {
+        width: 100%;
+    }
+
+    .entityInformation > .top{
+            padding-left: 5%;
+    }
+}
+
+@media (max-width: 950px) {
+    body {
+        zoom: 87%;
+    }
+
+    #option {
+        width: 55px;
+    }
+
+    #option .button {
+        font-size: 1em;
+        white-space: nowrap;
+        overflow: hidden;
+        /*color: var(--activeGrey);*/
+        width: 45px;
+        margin-left: -20px;
+    }
+
+    #option span::before {
+        margin-right: 50px;
+    }
+
+    #mainContent {
+        width: 87%;
+        left: 10%;
+        height: 114vh;
+    }
+
+    #search-bar {
+        width: 100%;
+    }
+
+    .down {
+        flex-direction: column;
+    }
+
+    .down:first-child,
+    .down > .VBox {
+        max-width: 100%;
+        font-size: 2em;
+    }
+
+    #option > h2,
+    #adminPP,
+    #adminName,
+    #adminBackground {
+        display: none;
+    }
+
+    .lineSujetOffre {
+        left: 27%;
+        width: 25%;
+    }
+
+    .input-row {
+        width: 80%;
+        position: absolute;
+        left: 10%;
+    }
+
+    input[type="file"] {
+        margin-left: 60px;
+    }
+
+    .entityInformation {
+        width: 100%;
+    }
+
+    .entityInformation > .top{
+        font-size: 2.5em;
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .entityInformation > .top > .state {
+        font-size: 2em;
+    }
+
+    .state {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 0;
+    }
+
+    .entityInformation > .down {
+        font-size: 1.3em;
+    }
+}
+
+.entityInformation > .top > .state > .circle::before {
+    margin-left: 30%;
+}
+
 #adminPP {
     height: 100px;
     width: 100px;
@@ -8,7 +214,7 @@
     z-index: 5;
 }
 
-#adminName{
+#adminName {
     margin: 0 0 0 10px;
     font-size: 1.5em;
     font-weight: bold;
@@ -16,7 +222,7 @@
     z-index: 5;
 }
 
-#adminBackground{
+#adminBackground {
     opacity: 0;
     position: absolute;
     left: 0;
@@ -26,11 +232,11 @@
     z-index: 4;
 }
 
-.HBox{
+.HBox {
     height: auto;
 }
 
-#panel{
+#panel {
     justify-content: center;
     align-items: flex-start;
     width: 90%;
@@ -42,62 +248,58 @@
 
 /*---START SEARCH BAR---*/
 
-#searchBarParent{
-    width:100%;
+#searchBarParent {
+    width: 100%;
     margin-right: 0;
 }
 
-form #search-button{
+form #search-button {
     top: 33px;
     right: 34px;
 }
 
-#title{
+#title {
     white-space: nowrap;
     font-size: 1.8em;
     margin-left: 10px;
 }
 
-form #search-bar{
-    width: 55%;
+form #search-bar {
     margin-right: 0;
 }
 
-#searchBarParent form{
+#searchBarParent form {
     display: flex;
     justify-content: flex-end;
 }
 
 /*---END SEARCH BAR---*/
 
-#mainContent{
+#mainContent {
     padding: 0;
     position: absolute;
-    left: 20%;
     display: flex;
     flex-direction: column;
     justify-content: stretch;
     align-items: center;
-    height: 85vh;
-    width: 77%;
     margin-top: 0;
     padding-top: 10px;
-    border-top: rgba(0,0,0,0.005) solid 10px;
-    border-bottom: rgba(0,0,0,0.005) solid 10px;
+    border-top: rgba(0, 0, 0, 0.005) solid 10px;
+    border-bottom: rgba(0, 0, 0, 0.005) solid 10px;
 }
 
-#mainContent > .VBox{
+#mainContent > .VBox {
     align-items: center;
     justify-content: flex-start;
 }
 
-#mainContent > .HBox{
+#mainContent > .HBox {
     padding-left: 20px;
     padding-right: 20px;
 }
 
 #mainContent .line,
-.columnName{
+.columnName {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -106,16 +308,16 @@ form #search-bar{
     margin: 0;
     box-sizing: unset;
     position: relative;
-    border: rgba(0,0,0,0) solid 3px;
+    border: rgba(0, 0, 0, 0) solid 3px;
     transition: all 0.3s ease-in-out;
 }
 
-#dynamicList{
+#dynamicList {
     overflow: auto;
     overflow-x: hidden;
 }
 
-.line{
+.line {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
 
@@ -125,7 +327,7 @@ form #search-bar{
     border-radius: 0;
 }
 
-#mainContent .line:hover{
+#mainContent .line:hover {
     cursor: pointer;
     background: var(--activeGrey);
     border-color: var(--grey0);
@@ -133,18 +335,19 @@ form #search-bar{
     border-radius: 0;
 }
 
-#mainContent .line:nth-child(odd){
+#mainContent .line:nth-child(odd) {
     background: var(--activeGrey);
 }
-#mainContent .line:nth-child(even){
+
+#mainContent .line:nth-child(even) {
     background: var(--footer);
 }
 
-#mainContent .line{
+#mainContent .line {
     /*border-bottom: 1px solid var(--grey1);*/
 }
 
-.columnName{
+.columnName {
     background: var(--background);
     margin-top: 10px;
     border: none;
@@ -155,11 +358,11 @@ form #search-bar{
     border-bottom: var(--grey1) solid 1px;
 }
 
-.line:hover .button{
+.line:hover .button {
     opacity: 1;
 }
 
-.line .button{
+.line .button {
     background: rgba(0, 0, 0, 0.1);
     opacity: 0;
     margin: 0;
@@ -211,45 +414,42 @@ form #search-bar{
 
  */
 
-.HBox.containerDebutLine{
+.HBox.containerDebutLine {
     justify-content: flex-start;
     align-items: center;
     width: 35%;
     margin-bottom: 0;
 }
 
-#columnFirst{
-    margin : 0 0 0 10px;
+#columnFirst {
+    margin: 0 0 0 10px;
 }
 
-#columnCodePostal{
+#columnCodePostal {
     width: 10%;
 }
 
-.line label{
+.line label {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.lineNomEntreprise, .lineNomPrenomEtudiant{
+.lineNomEntreprise, .lineNomPrenomEtudiant {
     font-weight: bold;
     font-size: 16px;
 }
 
 
-
 /*---START Offer lines---*/
-.lineSujetOffre{
+.lineSujetOffre {
     font-weight: bold;
     position: absolute;
-    left: 13%;
-    width: 35%;
     text-align: left;
     text-overflow: ellipsis;
 }
 
-.lineEntrepriseOffre{
+.lineEntrepriseOffre {
     position: absolute;
     right: 30%;
     width: 15%;
@@ -257,7 +457,7 @@ form #search-bar{
     text-overflow: ellipsis;
 }
 
-.lineDateOffre{
+.lineDateOffre {
     position: absolute;
     right: 10%;
     width: 15%;
@@ -265,7 +465,7 @@ form #search-bar{
     text-overflow: ellipsis;
 }
 
-.deleteButtonOrigin{
+.deleteButtonOrigin {
     opacity: 0;
     text-decoration: none;
     color: var(--darkBlue2);
@@ -274,7 +474,7 @@ form #search-bar{
     transition: all 0.3s ease-in-out;
 }
 
-.editButton{
+.editButton {
     opacity: 0;
     text-decoration: none;
     color: var(--darkBlue2);
@@ -283,43 +483,43 @@ form #search-bar{
     transition: all 0.3s ease-in-out;
 }
 
-.line > a > span::before{
+.line > a > span::before {
     font-family: 'FontAwesome';
     margin-right: 10px;
     font-size: 1.8em;
     vertical-align: middle;
 }
 
-.deleteButtonOrigin span::before{
+.deleteButtonOrigin span::before {
     content: '\f1f8';
 }
 
 
-.editButton span::before{
+.editButton span::before {
     content: '\f044';
 }
 
 .offre:hover > .editButton,
-.offre:hover > .deleteButtonOrigin{
+.offre:hover > .deleteButtonOrigin {
     color: var(--darkBlue2);
     opacity: 0.9;
 }
 
 .offre:hover > .editButton:hover,
-.offre:hover > .deleteButtonOrigin:hover{
+.offre:hover > .deleteButtonOrigin:hover {
     color: var(--darkBlue2);
     opacity: 0.6;
 }
+
 /*---END Offer lines---*/
 
 
-
-.lineCodePostalEntreprise{
+.lineCodePostalEntreprise {
     position: absolute;
     left: 40%;
 }
 
-.columnName .lineCodePostalEntreprise{
+.columnName .lineCodePostalEntreprise {
     left: 37%;
 }
 
@@ -328,18 +528,18 @@ form #search-bar{
     left: 53%;
 }
 
-.lineSiteWebEntreprise{
+.lineSiteWebEntreprise {
     position: absolute;
     left: 70%;
 }
 
-.lineMailUniversitaireEtudidant{
+.lineMailUniversitaireEtudidant {
     position: absolute;
     left: 55%;
     width: 29.5%;
 }
 
-.lineNumEtudiant{
+.lineNumEtudiant {
     position: absolute;
     width: 15%;
     left: 35%;
@@ -351,11 +551,11 @@ form #search-bar{
     border-radius: 50%;
 }
 
-.greenColor{
+.greenColor {
     background-color: var(--lightpastelGreen);
 }
 
-.greenColor::before{
+.greenColor::before {
     content: '\f00c';
     font-family: 'FontAwesome';
     color: var(--green);
@@ -363,11 +563,11 @@ form #search-bar{
     vertical-align: middle;
 }
 
-.yellowColor{
+.yellowColor {
     background-color: var(--lightpastelYellow);
 }
 
-.yellowColor::before{
+.yellowColor::before {
     content: '\f06a';
     font-family: 'FontAwesome';
     color: var(--yellow);
@@ -375,11 +575,11 @@ form #search-bar{
     vertical-align: middle;
 }
 
-.redColor{
+.redColor {
     background-color: var(--lightpastelRed);
 }
 
-.redColor::before{
+.redColor::before {
     content: '\f00d';
     font-family: 'FontAwesome';
     color: var(--red);
@@ -390,7 +590,7 @@ form #search-bar{
 /**************************************************
 ***************** Management Panel ****************
 ***************************************************/
-.managementPanel{
+.managementPanel {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -398,7 +598,7 @@ form #search-bar{
     height: 100%;
 }
 
-.entityInformation{
+.entityInformation {
     border: var(--grey2) solid 3px;
     justify-content: space-between;
     backdrop-filter: none;
@@ -408,152 +608,139 @@ form #search-bar{
     font-size: 1vw;
 }
 
-#managementEntrepriseName, #managementEtudiantName, #managementEtudiantSurname{
+#managementEntrepriseName, #managementEtudiantName, #managementEtudiantSurname {
     font-size: 2.5em;
     font-weight: bold;
 }
 
-.managementActions{
+.managementActions {
     max-height: 30%;
     display: flex;
     flex-direction: row;
 }
 
-.managementActions .button, .managementActions input[type="submit"]{
+.managementActions .button, .managementActions input[type="submit"] {
     margin: 10px;
     font-size: 1.4em;
     border-radius: 15px;
 }
 
-#validation, .managementActions input[type="submit"]{
+#validation, .managementActions input[type="submit"] {
     background-color: var(--lightpastelGreen);
     color: var(--green);
 }
 
-#validation:hover{
+#validation:hover {
     background-color: var(--pastelGreen);
 }
 
-#invalidation{
+#invalidation {
     background-color: var(--pastelYellow);
     color: var(--darkYellow);
 }
 
-#invalidation:hover{
+#invalidation:hover {
     background-color: var(--pastelYellow);
 }
 
-#suppression{
+#suppression {
     background-color: var(--lightpastelRed);
     color: var(--red);
 }
 
-#suppression:hover{
+#suppression:hover {
     background-color: var(--pastelRed);
 }
 
-#modification{
+#modification {
     background-color: var(--lightpastelBlue);
     color: var(--blue);
 }
 
-#modification:hover{
+#modification:hover {
     background-color: var(--pastelBlue);
 }
 
-#ajoutAnnotation{
-    background-color: var(--grey0);
-    color: #2F4F4F;
-}
-
-#ajoutAnnotation:hover{
-    background-color: var(--grey1);
-}
-
-.managementActions *{
+.managementActions * {
     font-size: 1vw;
 }
 
-.entityInformation > .top{
+.entityInformation > .top {
     display: flex;
     width: 100%;
     justify-content: space-between;
-    padding-left: 5%;
     border-bottom: var(--grey1) solid 3px;
 }
 
-.entityInformation > .top > .state{
+.entityInformation > .top > .state {
     display: flex;
     flex-direction: row;
 }
 
-.entityInformation > .top > .state *{
+.entityInformation > .top > .state * {
     padding-right: 10px;
 }
 
-.entityInformation > .top > .state > .circle{
+.entityInformation > .top > .state > .circle {
     height: 1.75em;
     width: 1.75em;
 }
 
-.entityInformation label{
+.entityInformation label {
     display: inline-block;
     word-break: break-all;
 }
 
-#managementEntrepriseValidation, #managementEtudiantState{
+#managementEntrepriseValidation, #managementEtudiantState {
     font-size: 1em;
 }
 
 #managementEntrepriseSiret, #managementEntrepriseEffectif,
 #managementEntrepriseCodePostal, #managementEntrepriseMail,
-#managementEntrepriseTelephone , #managementEtudiantCodePostal,
+#managementEntrepriseTelephone, #managementEtudiantCodePostal,
 #managementEtudiantNumEtudiant, #managementEtudiantMailPerso,
-#managementEtudiantMailUniv, #managementEtudiantTelephone{
+#managementEtudiantMailUniv, #managementEtudiantTelephone {
     font-size: 1.5em;
 }
 
-.entityInformation > .down{
+.entityInformation > .down {
     display: flex;
-    flex-direction: row;
     height: 100%;
     width: 100%;
 }
 
-.entityInformation > .down > .VBox{
+.entityInformation > .down > .VBox {
     justify-content: space-around;
     align-items: flex-start;
     margin-left: 5%;
     flex-grow: 2;
-    max-width: 60%;
 }
 
-.entityInformation > .down > .VBox:first-child{
+.entityInformation > .down > .VBox:first-child {
     border-right: var(--grey1) solid 3px;
-    max-width: 40%;
 }
 
-.entityInformation > .down div{
+.entityInformation > .down div {
     display: flex;
 }
 
-.entityInformation > .down div > label:first-child{
+.entityInformation > .down div > label:first-child {
     white-space: nowrap;
     margin-right: 5px;
 }
 
-.entityInformation > .down div > label:nth-of-type(2){
+.entityInformation > .down div > label:nth-of-type(2) {
     overflow-wrap: break-word;
 }
 
 @media (max-width: 950px) {
-    #panel{
+    #panel {
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
     }
 
-    #option{
+    #option {
         flex-direction: row;
         justify-content: center;
         align-items: center;
@@ -561,40 +748,40 @@ form #search-bar{
 
     }
 
-    #option button{
+    #option button {
         font-size: 0.9vw;
     }
 
-    #panel{
+    #panel {
         height: auto;
     }
 
-    #mainContent .line, .columnName{
+    #mainContent .line, .columnName {
         width: 95%;
     }
 
-    .lineTelephoneEntreprise{
+    .lineTelephoneEntreprise {
         display: none;
     }
 
-    .lineCodePostalEntreprise{
+    .lineCodePostalEntreprise {
         display: none;
     }
 
-    .lineSiteWebEntreprise{
+    .lineSiteWebEntreprise {
         left: 55%;
     }
 
-    .HBox.containerDebutLine{
+    .HBox.containerDebutLine {
         width: 50%;
-        justify-content:flex-start;
+        justify-content: flex-start;
     }
 
-    .lineMailUniversitaireEtudidant{
+    .lineMailUniversitaireEtudidant {
         display: none;
     }
 
-    .lineNumEtudiant{
+    .lineNumEtudiant {
         left: 55%;
         width: 20%;
     }
@@ -606,12 +793,10 @@ form #search-bar{
 
 }
 
-#option{
+#option {
     position: absolute;
     top: 80px;
     left: 0;
-    min-width: 20%;
-    width: 20%;
     max-width: 25%;
     font-size: 10px;
     height: 100%;
@@ -624,21 +809,18 @@ form #search-bar{
     align-items: center;
 }
 
-#option .button{
+#option .button {
     background: none;
-    color: var(--darkBlue2);
     box-shadow: none;
     border: none;
     font-weight: bold;
     margin-top: 0;
-    margin-left: -25px;
     white-space: nowrap;
     height: 50px;
-    width: fit-content;
     margin-bottom: 10px;
 }
 
-#option .button:hover{
+#option .button:hover {
     background: rgba(0, 0, 0, 0.1);
     color: var(--darkBlue2);
     box-shadow: none;
@@ -649,7 +831,7 @@ form #search-bar{
     white-space: nowrap;
 }
 
-#option .button.active{
+#option .button.active {
     background: rgba(0, 0, 0, 0.1);
     color: var(--darkBlue2);
     box-shadow: none;
@@ -659,7 +841,7 @@ form #search-bar{
     white-space: nowrap;
 }
 
-#option .VBox{
+#option .VBox {
     width: 100%;
     height: 100%;
     justify-content: flex-start;
@@ -667,7 +849,7 @@ form #search-bar{
     flex-direction: column;
 }
 
-#option a .HBox{
+#option a .HBox {
     justify-content: flex-start;
     font-size: 1.1em;
     font-weight: bold;
@@ -676,48 +858,48 @@ form #search-bar{
 
 }
 
-#option a img{
+#option a img {
     width: 20px;
     height: 20px;
     margin-right: 10px;
 }
 
-a img:active{
+a img:active {
     background: var(--grey0);
-    color : var(--darkBlue2);
+    color: var(--darkBlue2);
     opacity: 1;
 }
 
-#title img{
+#title img {
     width: 50px;
     height: 50px;
     margin-right: 10px;
     opacity: 0.8;
 }
 
-#title .HBox{
+#title .HBox {
     margin: 0;
 }
 
 .button span::before,
-.title span::before{
+.title span::before {
     font-family: 'FontAwesome';
     margin-right: 10px;
     font-size: 1.8em;
     vertical-align: middle;
 }
 
-.title span{
+.title span {
     font-size: 1.5em;
     font-weight: bold;
     white-space: nowrap;
 }
 
-.title:hover span{
+.title:hover span {
     cursor: default;
 }
 
-.button span{
+.button span {
     font-size: 1.1em;
 }
 
@@ -774,7 +956,7 @@ a img:active{
     color: var(--darkOrange);
 }
 
-#mainContainer:hover{
+#mainContainer:hover {
     box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1), 0 4px 16px rgba(31, 38, 135, 0.1);
 }
 
@@ -785,7 +967,7 @@ a img:active{
 }
 
 .OffreNonDefini > .HBox > .typeExpPro,
-.OffreNonDefini> .header > .information > .typeExpPro {
+.OffreNonDefini > .header > .information > .typeExpPro {
     background: linear-gradient(-45deg, var(--lightpastelPurple) 0%, var(--lightpastelPurple) 50%, var(--lightpastelOrange) 50%, var(--lightpastelOrange) 100%);
     color: var(--darkBlue2);
     border-bottom-color: var(--pastelPurple);
@@ -795,7 +977,7 @@ a img:active{
 }
 
 .OffreNonDefini > .HBox > .typeExpPro > label,
-.OffreNonDefini> .header > .information > .typeExpPro > label {
+.OffreNonDefini > .header > .information > .typeExpPro > label {
     background: linear-gradient(-45deg, var(--darkPurple) 0%, var(--darkPurple) 50%, var(--darkOrange) 50%, var(--darkOrange) 100%);
     color: transparent; /* Make text transparent to apply gradient */
     border-bottom-color: var(--pastelPurple);
@@ -819,105 +1001,152 @@ a img:active{
 /*---END OFFRE---*/
 
 /*---START STATS ETUDIANT---*/
-#statBox > div{
+#statBox > div {
     padding: 15px;
     border-radius: 50px;
     font-size: 2em;
     margin-right: 0;
 }
 
-#statTotal{
+/*---START TOOLTIP---*/
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    opacity: 0;
+    width: 300%;
+    background-color: var(--darkBlue2);
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 15;
+    transition: all 0.3s ease-in-out;
+    animation: disappearTooltip 0.3s ease-in-out forwards;
+}
+
+.tooltip:hover > .tooltiptext {
+    animation: appearTooltip 0.3s ease-in-out forwards;
+}
+
+@keyframes appearTooltip {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@keyframes disappearTooltip {
+    0% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+/*---END TOOLTIP---*/
+
+#statTotal {
     background: var(--lightpastelBlue);
 }
 
-#statTotal span::before{
-    color : var(--blue);
+#statTotal span::before {
+    color: var(--blue);
     font-family: 'FontAwesome';
     margin-right: 10px;
     content: '\f0c0';
 }
 
-#statValide{
+#statValide {
     background: var(--lightpastelGreen);
 }
 
-#statValide span::before{
-    color : var(--green);
+#statValide span::before {
+    color: var(--green);
     font-family: 'FontAwesome';
     margin-right: 10px;
     content: '\f00c';
 }
 
-#statInter{
+#statInter {
     background: var(--lightpastelYellow);
 }
 
-#statInter span::before{
-    color : var(--yellow);
+#statInter span::before {
+    color: var(--yellow);
     font-family: 'FontAwesome';
     margin-right: 10px;
     content: '\f06a';
 }
 
-#statBad{
+#statBad {
     background: var(--lightpastelRed);
 }
 
-#statBad span::before{
-    color : var(--red);
+#statBad span::before {
+    color: var(--red);
     font-family: 'FontAwesome';
     margin-right: 10px;
     content: '\f00d';
 }
 
 /*---Specific for offers---*/
-#statOffreTotal{
+#statOffreTotal {
     background: var(--lightpastelBlue);
 }
 
-#statOffreTotal span::before{
-    color : var(--blue);
+#statOffreTotal span::before {
+    color: var(--blue);
     font-family: 'FontAwesome';
     margin-right: 10px;
     content: '\f03a';
 }
 
-#statStage{
+#statStage {
     background: var(--lightpastelPurple);
 }
 
-#statStage span::before{
-    color : var(--purple);
+#statStage span::before {
+    color: var(--purple);
     font-family: 'FontAwesome';
     margin-right: 10px;
     content: '\f0b1';
 }
 
-#statAlternance{
+#statAlternance {
     background: var(--lightpastelOrange);
 }
 
-#statAlternance span::before{
-    color : var(--orange);
+#statAlternance span::before {
+    color: var(--orange);
     font-family: 'FontAwesome';
     margin-right: 10px;
     content: '\f0b1';
 }
 
-#statNonDefini{
+#statNonDefini {
     background: var(--lightpastelRed);
 }
 
-#statNonDefini span::before{
-    color : var(--red);
+#statNonDefini span::before {
+    color: var(--red);
     font-family: 'FontAwesome';
     margin-right: 10px;
     content: '\f0b1';
 }
 
 /*---START Import page---*/
-input[type="file"]{
-    margin: 10px;
+input[type="file"] {
     padding: 0;
     border: none;
     background: none;
@@ -927,21 +1156,20 @@ input[type="file"]{
     cursor: pointer;
 }
 
-.input-row{
+.input-row {
     margin-top: 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     margin-bottom: 10px;
     align-items: center;
-    width: 100%;
     background: var(--lightGrey);
     padding: 25px;
     border-radius: 1.5rem;
     border: 2px dashed var(--darkBlue2);
 }
 
-.input-row > label{
+.input-row > label {
     font-size: 1.5em;
     font-weight: bold;
     color: var(--darkBlue2);
