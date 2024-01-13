@@ -730,6 +730,11 @@ a img:active{
     content: '\f093';
 }
 
+#statButton span::before,
+#titleStat span::before {
+    content: '\f080';
+}
+
 
 /*---START OFFRE---*/
 
