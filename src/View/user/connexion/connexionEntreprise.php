@@ -11,9 +11,10 @@
             <label for="password">Mot de passe</label>
         <div class="password-input">
             <input type="password" name="password" id="password" required placeholder="mot de passe">
-            <button type="button" id="showPassword"><img id="showPasswordIconConnect" src="assets/images/eye-icon.png" alt="ShowPassword"></button>
+            <button type="button" id="showPassword"></button>
             <div class="forget-password">
-                <p>Mot de passe oublié ? <a href="frontController.php?action=forgetPassword" class="link">Changer de mot de passe</a></p>
+                <p>Mot de passe oublié ? <a href="frontController.php?action=forgetPassword" class="link">Changer de mot
+                        de passe</a></p>
             </div>
         </div>
 
@@ -26,6 +27,7 @@
         </p>
     </form>
     <div class="create-account">
-        <p>Vous n'avez pas de compte? <a href="frontController.php?action=createAccount" class="link">Créer un compte</a></p>
+        <p>Vous n'avez pas de compte? <a href="frontController.php?action=createAccount" class="link">Créer un
+                compte</a></p>
     </div>
 </div>

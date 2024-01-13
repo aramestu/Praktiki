@@ -5,36 +5,22 @@ namespace App\SAE\Controller;
 use App\SAE\Config\ConfLDAP;
 use App\SAE\Lib\ConnexionUtilisateur;
 use App\SAE\Lib\ImportationData;
-use App\SAE\Lib\Ldap;
-use App\SAE\Model\DataObject\AnneeUniversitaire;
-use App\SAE\Model\DataObject\Departement;
-use App\SAE\Model\DataObject\Entreprise;
-use App\SAE\Model\DataObject\Etudiant;
-use App\SAE\Model\DataObject\Inscription;
 use App\SAE\Model\DataObject\TuteurProfessionnel;
 use App\SAE\Model\HTTP\Cookie;
-use App\SAE\Model\Repository\AbstractExperienceProfessionnelRepository;
-use App\SAE\Model\Repository\AlternanceRepository;
-use App\SAE\Model\Repository\AnneeUniversitaireRepository;
-use App\SAE\Model\Repository\DepartementRepository;
-use App\SAE\Model\Repository\EnseignantRepository;
-
-;
-
 use App\SAE\Model\Repository\EntrepriseRepository;
-use App\SAE\Model\Repository\EtudiantRepository;
-use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
-use App\SAE\Model\Repository\InscriptionRepository;
-use App\SAE\Model\Repository\Model;
-use App\SAE\Model\Repository\StageRepository;
-use App\SAE\Model\DataObject\Stage;
-use App\SAE\Model\DataObject\Enseignant;
 use App\SAE\Model\Repository\TuteurProfessionnelRepository;
 
+/**
+ * Contrôleur principal avec des méthodes liées à la gestion des comptes, réinitialisation de mot de passe, etc.
+ */
 class ControllerMain extends ControllerGenerique
 {
 
-
+    /**
+     * Affiche la vue pour créer un compte.
+     *
+     * @return void
+     */
     public static function createAccount(): void
     {
         self::afficheVue(
@@ -46,17 +32,27 @@ class ControllerMain extends ControllerGenerique
         );
     }
 
+    /**
+     * Affiche la vue pour la réinitialisation de mot de passe.
+     *
+     * @return void
+     */
     public static function forgetPassword(): void
     {
         self::afficheVue(
             'view.php',
             [
-                'pagetitle' => 'Créer un compte',
+                'pagetitle' => 'Mot de passe oublié',
                 'cheminVueBody' => 'user/forgetPassword.php',
             ]
         );
     }
 
+    /**
+     * Affiche la vue pour la réinitialisation de mot de passe.
+     *
+     * @return void
+     */
     public static function resetPassword(): void
     {
         if (ConnexionUtilisateur::estEntreprise()) {
@@ -80,6 +76,11 @@ class ControllerMain extends ControllerGenerique
         }
     }
 
+    /**
+     * Affiche la vue des préférences si l'utilisateur est connecté, sinon redirige vers la page d'accueil.
+     *
+     * @return void
+     */
     public static function preference(): void
     {
         if (ConnexionUtilisateur::estConnecte()) {
@@ -88,7 +89,7 @@ class ControllerMain extends ControllerGenerique
             self::afficheVue(
                 'view.php',
                 [
-                    'pagetitle' => 'Préférence',
+                    'pagetitle' => 'Connexion',
                     'cheminVueBody' => 'user/preference.php',
                 ]
             );
@@ -96,7 +97,11 @@ class ControllerMain extends ControllerGenerique
 
     }
 
-
+    /**
+     * Affiche la vue pour l'importation de données.
+     *
+     * @return void
+     */
     public static function import(): void
     {
         self::afficheVue(
@@ -108,6 +113,11 @@ class ControllerMain extends ControllerGenerique
         );
     }
 
+    /**
+     * Enregistre un cookie et redirige vers la page d'accueil.
+     *
+     * @return void
+     */
     public static function setCookie(): void
     {
         Cookie::enregistrer('bannerClosed', true);
@@ -115,6 +125,11 @@ class ControllerMain extends ControllerGenerique
         exit();
     }
 
+    /**
+     * Vérifie la présence du cookie et affiche un message le cas échéant.
+     *
+     * @return void
+     */
     public static function checkCookie(): void
     {
         if (!Cookie::contient('bannerClosed')) {
@@ -131,6 +146,11 @@ class ControllerMain extends ControllerGenerique
         }
     }
 
+    /**
+     * Importe des données à partir d'un fichier.
+     *
+     * @return void
+     */
     public static function importation(): void
     {
         if (isset($_POST["import"])) {
