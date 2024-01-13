@@ -736,6 +736,7 @@ legend{
     height: 173px;
     border: 1px solid;
     width: 349px;
+    max-width: 100%;
 }
 
 .jusitfyTexte{

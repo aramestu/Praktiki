@@ -12,10 +12,10 @@ use App\SAE\Model\Repository\EtudiantRepository;
 </div>
 
 <div class="HBox" id="statBox">
-    <div id="statTotal"><span class="tooltip"><?php echo (new EtudiantRepository())->count()?><span class="tooltiptext">Nombre total d'étudiants</span></span></div>
-    <div id="statValide"><span class="tooltip"><?php echo (new ControllerEtudiant())->getNbEtudiantExpProValide()?><span class="tooltiptext">Nombre d'étudiants ayant un stage avec une convention validée</span></span></div>
-    <div id="statInter"><span class="tooltip"><?php echo (new ControllerEtudiant())->getNbEtudiantExpProValideSansConvention()?><span class="tooltiptext">Nombre d'étudiants ayant une convention en cours</span></span></div>
-    <div id="statBad"><span class="tooltip"><?php echo (new ControllerEtudiant())->getNbEtudiantExpProNonValide()?><span class="tooltiptext">Nombre d'étudiants n'ayant ni stage ni convention</span></span></div>
+    <div id="statTotal" title="Nombre total d'étudiants"><span><?php echo (new EtudiantRepository())->count()?></span></div>
+    <div id="statValide" title="Nombre d'étudiants ayant un stage avec une convention validée"><span><?php echo (new ControllerEtudiant())->getNbEtudiantExpProValide()?></span></div>
+    <div id="statInter" title="Nombre d'étudiants ayant une convention en cours"><span><?php echo (new ControllerEtudiant())->getNbEtudiantExpProValideSansConvention()?></span></div>
+    <div id="statBad" title="Nombre d'étudiants n'ayant ni stage ni convention"><span><?php echo (new ControllerEtudiant())->getNbEtudiantExpProNonValide()?></span></div>
 </div>
 
 <div class="columnName">
