@@ -20,8 +20,7 @@ label {
 .column {
     margin-top: 10px;
     float: left;
-    width: 45%; /* Adjust the width as needed */
-    margin-right: 5%; /* Adjust the margin between columns as needed */
+    margin-right: 5%;
     box-sizing: border-box;
 }
 
@@ -29,22 +28,12 @@ label {
     width: 30%;
 }
 
-input[type="submit"]{
-    width: 30%;
-    margin-left: 32%;
-}
-
-
-/* Clearfix to clear the float and contain the columns */
 .containerInfo:after {
     content: "";
     display: table;
     clear: both;
 }
 
-
-/*--- START Hidden Element Styles ---*/
 .hidden {
     display: none;
 }
-/*--- END Hidden Element Styles ---*/
