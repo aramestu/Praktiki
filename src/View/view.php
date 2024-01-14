@@ -116,6 +116,8 @@ use App\SAE\Model\HTTP\Cookie;
                 </p>
             </div>
         </div>
+        <br>
+        <a href="CGU.pdf" target="_blank" class="link">Conditions Générales d'Utilisation</a>
         <p>Copyright 2023 - Tous droits réservés</p>
     </div>
 </footer>
