@@ -4,7 +4,7 @@ namespace App\SAE\Model\Repository;
 
 use App\SAE\Model\DataObject\AbstractDataObject;
 use App\SAE\Model\DataObject\ContratsAlternance;
-use App\SAE\Model\Model;
+use App\SAE\Model\Repository\Model;
 
 /**
  * Classe de gestion des opérations de base pour les contrats en alternance dans la base de données.
