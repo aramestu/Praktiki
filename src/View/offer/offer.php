@@ -84,8 +84,10 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
     else{
         echo'<a href="frontController.php?action=getExpProByDefault&controller=ExpPro" class="button secondary">Retour aux offres</a> ';
     }
+    if(ConnexionUtilisateur::estEtudiant() || ConnexionUtilisateur::estAdministrateur()){
+        echo '<button id="apply" class="button">Postuler</button>';
+    }
     ?>
-        <button id="apply" class="button">Postuler</button>
     </div>
 </div>
 
