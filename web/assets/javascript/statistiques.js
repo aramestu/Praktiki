@@ -130,6 +130,55 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+    let nomTab = [];
+    for(let i = 0; i < liste.length; i++){
+        nomTab.push(liste[i]["nomAnneeUniversitaire"]);
+    }
+
+
+
+    // Données pour la première courbe
+    const dataCourbe1 = {
+        label: 'Courbe 1',
+        data: [10, 20, 15, 25, 30],
+        borderColor: 'blue',
+        borderWidth: 2,
+        fill: false, // Pour ne pas remplir l'espace sous la courbe
+    };
+
+    // Données pour la deuxième courbe
+    const dataCourbe2 = {
+        label: 'Courbe 2',
+        data: [5, 15, 10, 20, 25],
+        borderColor: 'red',
+        borderWidth: 2,
+        fill: false,
+    };
+
+
+    const lineData = {
+        labels: nomTab,
+        datasets: [dataCourbe1, dataCourbe2],
+    };
+
+    const lineCtx = document.getElementById('dg3').getContext('2d');
+    const myLineChart = new Chart(lineCtx, {
+        type: 'line',
+        data: lineData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    beginAtZero: true,
+                },
+                y: {
+                    beginAtZero: true,
+                },
+            },
+        },
+    });
+
 
     /*const pieGlobal = document.getElementById('dg2').getContext('2d');
     const myPieChartGlobal = new Chart(pieGlobal, {
