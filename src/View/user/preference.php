@@ -7,5 +7,5 @@
         <a id="professorChoice" class="button" href="frontController.php?action=afficherConnexionPersonnel&controller=Connexion">Compte Personnel</a>
     </div>
     <br>
-    <p>En vous connectant ou en vous inscrivant, vous confirmez avoir lu et accepté les <a href="frontController.php?action=contact">Conditions Générales d'Utilisation</a> de ce site web.</p>
+    <p>En vous connectant ou en vous inscrivant, vous confirmez avoir lu et accepté les <a href="CGU.pdf" target="_blank">Conditions Générales d'Utilisation</a> de ce site web.</p>
 </div>
