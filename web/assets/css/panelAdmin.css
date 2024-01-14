@@ -1199,3 +1199,7 @@ input[type="file"] {
     color: var(--darkBlue2);
     margin: 50px;
 }
+
+#values {
+    display: none;
+}

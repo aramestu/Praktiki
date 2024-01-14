@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Récupérer le contenu de la div avec l'id "jsp"
-    var listeTexte = document.getElementById("jsp").textContent;
+    var listeTexte = document.getElementById("values").textContent;
 
     // Convertir le contenu en objet JavaScript
     var liste = JSON.parse(listeTexte);

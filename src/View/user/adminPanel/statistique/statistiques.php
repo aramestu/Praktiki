@@ -20,6 +20,6 @@
 <div class="VBox">
     <canvas id="dg3"></canvas>
 </div>
-<div id="jsp">
+<div id="values">
     <?php echo json_encode($liste); ?>
 </div>
