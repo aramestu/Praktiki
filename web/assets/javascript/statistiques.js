@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const barData = {
         labels: ['Stage', 'Alternance', 'Rien'],
         datasets: [{
-            label: 'Pourcentage',
+            label: 'Proportion pour toutes les années universitaires précédentes',
             data: [pourcentageS, pourcentageA, pourcentageR],
             backgroundColor: [stageColor, alternanceColor, nothingColor]
         }]
@@ -203,52 +203,4 @@ document.addEventListener("DOMContentLoaded", function () {
             },
         },
     });
-
-
-    /*const pieGlobal = document.getElementById('dg2').getContext('2d');
-    const myPieChartGlobal = new Chart(pieGlobal, {
-        type: 'bar',
-        data: {
-            datasets: [{
-                data: [pourcentageS, pourcentageA, pourcentageR],
-                backgroundColor: ['#f50036', '#eeb500', '#aef']
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            width: 300,
-            height: 300,
-            plugins: {
-                datalabels: {
-                    display: false, // Vous pouvez définir cette propriété à true si vous souhaitez afficher des étiquettes sur les barres
-                }
-            },
-            title: {
-                display: true,
-                text: 'Proportion depuis le début sans compter l\'année actuelle',
-                fontSize: 16
-            }
-        }
-    });*/
-
-
-
-
-
 });
-
-/*const barData = {
-    labels: ['Deuxieme', 'Premier', 'Troisieme'],
-    datasets: [{
-        label: 'gains',
-        data: [<?php echo $deuxieme[1] ?>, <?php echo $premier[1] ?>, <?php echo $troisieme[1] ?>],
-backgroundColor: '#f50036',
-}],
-};
-
-const barCtx = document.getElementById('myHorizontalBarChart').getContext('2d');
-const myHorizontalBarChart = new Chart(barCtx, {
-    type: 'bar',
-    data: barData,
-});*/
