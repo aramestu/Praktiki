@@ -28,8 +28,9 @@ backgroundColor: "rgba(11,59,159,0.6)",
 document.addEventListener("DOMContentLoaded", function () {
 
     let style = getComputedStyle(document.body);
-    let stageColor = style.getPropertyValue('--pastelPurple');
-    let alternanceColor = style.getPropertyValue('--pastelOrange');
+    let stageColor = style.getPropertyValue('--wisteria');
+    let alternanceColor = style.getPropertyValue('--orange');
+    let nothingColor = style.getPropertyValue('--yellow');
 
     function calculerPourcentage(chiffre, somme) {
         return (chiffre * 100) / somme;
@@ -74,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
             labels: ['Stage', 'Alternance', 'Rien'],
             datasets: [{
                 data: [stage, alternance, rien],
-                backgroundColor: [stageColor, alternanceColor, '#aef']
+                backgroundColor: [stageColor, alternanceColor, nothingColor]
             }]
         },
         options: {
@@ -114,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
         datasets: [{
             label: 'Pourcentage',
             data: [pourcentageS, pourcentageA, pourcentageR],
-            backgroundColor: [stageColor, alternanceColor, '#aef']
+            backgroundColor: [stageColor, alternanceColor, nothingColor]
         }]
     };
 
@@ -157,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const courbeStage = {
         label: 'Stage',
         data: tabStage,
-        borderColor: 'blue',
+        borderColor: stageColor,
         borderWidth: 2,
         fill: false, // Pour ne pas remplir l'espace sous la courbe
     };
@@ -166,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const courbeAlternance = {
         label: 'Alternance',
         data: tabAlternance,
-        borderColor: 'red',
+        borderColor: alternanceColor,
         borderWidth: 2,
         fill: false,
     };
@@ -175,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const courbeRien = {
         label: 'Rien',
         data: tabRien,
-        borderColor: 'red',
+        borderColor: nothingColor,
         borderWidth: 2,
         fill: false,
     };
