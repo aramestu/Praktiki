@@ -20,12 +20,12 @@ use App\SAE\Model\HTTP\Cookie;
     <script src="assets/javascript/navbar.js"></script>
     <link rel="stylesheet" href="assets/css/resources/font-awesome-4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="assets/css/CSB.css"/>
+    <link rel="stylesheet" href="assets/css/CSB.css">
     <script src="assets/javascript/CSBBIS.js"></script>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 
@@ -33,7 +33,7 @@ use App\SAE\Model\HTTP\Cookie;
 
 <header>
 
-    <img id="logoToggle" class="logo" src="assets/images/logo_sae_clear.png" alt="LogoUM"></a>
+    <img id="logoToggle" class="logo" src="assets/images/logo_sae_clear.png" alt="LogoUM">
 
     <div id="burgerParent">
         <div class="burger">
