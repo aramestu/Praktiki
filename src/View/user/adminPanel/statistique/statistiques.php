@@ -9,12 +9,13 @@
     <div id="titleStat" class="title"><span>Statistiques</span></div>
 </div>
 
-<div class="VBox">
-    <canvas id="dg1"></canvas>
-</div>
-
-<div class="VBox">
-    <canvas id="dg2"></canvas>
+<div class="HBox">
+    <div class="VBox">
+        <canvas id="dg1"></canvas>
+    </div>
+    <div class="VBox">
+        <canvas id="dg2"></canvas>
+    </div>
 </div>
 
 <div class="VBox">

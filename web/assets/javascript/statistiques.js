@@ -25,12 +25,18 @@ backgroundColor: "rgba(11,59,159,0.6)",
 },
 });*/
 
-document.addEventListener("DOMContentLoaded", function() {
-    function calculerPourcentage(chiffre, somme){
+document.addEventListener("DOMContentLoaded", function () {
+
+    let style = getComputedStyle(document.body);
+    let stageColor = style.getPropertyValue('--wisteria');
+    let alternanceColor = style.getPropertyValue('--orange');
+    let nothingColor = style.getPropertyValue('--blue');
+
+    function calculerPourcentage(chiffre, somme) {
         return (chiffre * 100) / somme;
     }
 
-    function calculerPourcentage3(stage,alternance,rien){
+    function calculerPourcentage3(stage, alternance, rien) {
         const somme = stage + alternance + rien;
         return [calculerPourcentage(stage, somme), calculerPourcentage(alternance, somme), calculerPourcentage(rien, somme)];
     }
@@ -47,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Je commence à 1 pour ne pas avoir le nom
     let taille = liste.length;
-    if(taille !== 0){
+    if (taille !== 0) {
         let lastList = liste[taille - 1];
 
         stage = lastList["nbStage"];
@@ -61,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     }
 
-
+    // Diagramme Fromage
     const pie = document.getElementById('dg1').getContext('2d');
     const myPieChart = new Chart(pie, {
         type: 'pie',
@@ -69,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function() {
             labels: ['Stage', 'Alternance', 'Rien'],
             datasets: [{
                 data: [stage, alternance, rien],
-                backgroundColor: ['#f50036', '#eeb500', '#aef']
+                backgroundColor: [stageColor, alternanceColor, nothingColor]
             }]
         },
         options: {
@@ -92,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let sumS = 0;
     let sumR = 0;
 
-    for(let i = 0; i < liste.length; i++){
+    for (let i = 0; i < liste.length; i++) {
         sumS = sumS + liste[i]["nbStage"];
         sumA = sumA + liste[i]["nbAlternance"];
         sumR = sumR + liste[i]["nbRien"];
@@ -103,12 +109,13 @@ document.addEventListener("DOMContentLoaded", function() {
     let pourcentageR = tab[2];
 
 
+    // Diagramme Baton
     const barData = {
         labels: ['Stage', 'Alternance', 'Rien'],
         datasets: [{
-            label: 'Pourcentage',
+            label: 'Proportion pour toutes les années universitaires précédentes',
             data: [pourcentageS, pourcentageA, pourcentageR],
-            backgroundColor: ['#f50036', '#eeb500', '#aef']
+            backgroundColor: [stageColor, alternanceColor, nothingColor]
         }]
     };
 
@@ -131,34 +138,52 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     let nomTab = [];
+    let tabStage = [];
+    let tabAlternance = [];
+    let tabRien = [];
+    let tabTemp = [];
     for(let i = 0; i < liste.length; i++){
         nomTab.push(liste[i]["nomAnneeUniversitaire"]);
+        tabTemp = calculerPourcentage3(liste[i]["nbStage"], liste[i]["nbAlternance"], liste[i]["nbRien"]);
+        tabStage.push(tabTemp[0]);
+        tabAlternance.push(tabTemp[1]);
+        tabRien.push(tabTemp[2]);
     }
 
 
 
+
+    // Diagramme courbe
     // Données pour la première courbe
-    const dataCourbe1 = {
-        label: 'Courbe 1',
-        data: [10, 20, 15, 25, 30],
-        borderColor: 'blue',
+    const courbeStage = {
+        label: 'Stage',
+        data: tabStage,
+        borderColor: stageColor,
         borderWidth: 2,
         fill: false, // Pour ne pas remplir l'espace sous la courbe
     };
 
     // Données pour la deuxième courbe
-    const dataCourbe2 = {
-        label: 'Courbe 2',
-        data: [5, 15, 10, 20, 25],
-        borderColor: 'red',
+    const courbeAlternance = {
+        label: 'Alternance',
+        data: tabAlternance,
+        borderColor: alternanceColor,
         borderWidth: 2,
         fill: false,
     };
 
+    // Données pour la deuxième courbe
+    const courbeRien = {
+        label: 'Rien',
+        data: tabRien,
+        borderColor: nothingColor,
+        borderWidth: 2,
+        fill: false,
+    };
 
     const lineData = {
         labels: nomTab,
-        datasets: [dataCourbe1, dataCourbe2],
+        datasets: [courbeStage, courbeAlternance, courbeRien],
     };
 
     const lineCtx = document.getElementById('dg3').getContext('2d');
@@ -178,52 +203,4 @@ document.addEventListener("DOMContentLoaded", function() {
             },
         },
     });
-
-
-    /*const pieGlobal = document.getElementById('dg2').getContext('2d');
-    const myPieChartGlobal = new Chart(pieGlobal, {
-        type: 'bar',
-        data: {
-            datasets: [{
-                data: [pourcentageS, pourcentageA, pourcentageR],
-                backgroundColor: ['#f50036', '#eeb500', '#aef']
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            width: 300,
-            height: 300,
-            plugins: {
-                datalabels: {
-                    display: false, // Vous pouvez définir cette propriété à true si vous souhaitez afficher des étiquettes sur les barres
-                }
-            },
-            title: {
-                display: true,
-                text: 'Proportion depuis le début sans compter l\'année actuelle',
-                fontSize: 16
-            }
-        }
-    });*/
-
-
-
-
-
 });
-
-/*const barData = {
-    labels: ['Deuxieme', 'Premier', 'Troisieme'],
-    datasets: [{
-        label: 'gains',
-        data: [<?php echo $deuxieme[1] ?>, <?php echo $premier[1] ?>, <?php echo $troisieme[1] ?>],
-backgroundColor: '#f50036',
-}],
-};
-
-const barCtx = document.getElementById('myHorizontalBarChart').getContext('2d');
-const myHorizontalBarChart = new Chart(barCtx, {
-    type: 'bar',
-    data: barData,
-});*/
