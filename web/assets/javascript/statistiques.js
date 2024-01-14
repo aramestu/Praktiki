@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let style = getComputedStyle(document.body);
     let stageColor = style.getPropertyValue('--wisteria');
     let alternanceColor = style.getPropertyValue('--orange');
-    let nothingColor = style.getPropertyValue('--yellow');
+    let nothingColor = style.getPropertyValue('--blue');
 
     function calculerPourcentage(chiffre, somme) {
         return (chiffre * 100) / somme;
