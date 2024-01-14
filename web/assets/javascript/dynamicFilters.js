@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
+    /*
+    Ce script est utilisé pour gérer les filtres dynamiques sur une page de recherche d'offres. Il récupère les valeurs des filtres, construit une requête fetch avec ces valeurs comme paramètres, puis met à jour la liste des offres en fonction de la réponse de la requête. Il comprend également une fonction pour réinitialiser tous les filtres.
+    */
     const stage = document.getElementById('stage');
     const alternance = document.getElementById('alternance');
     const datePublication = document.getElementById('datePublication');

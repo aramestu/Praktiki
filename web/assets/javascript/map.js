@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
+    /*
+    Ce script est utilisé pour afficher une carte interactive avec un marqueur pour une adresse spécifique. Il récupère l'adresse à partir d'un élément HTML, puis utilise l'API Nominatim d'OpenStreetMap pour obtenir les coordonnées de latitude et de longitude de cette adresse. Une fois les coordonnées obtenues, il initialise une carte avec la bibliothèque Leaflet, ajoute une couche de tuiles OpenStreetMap et place un marqueur à l'adresse. Si l'API ne retourne aucune donnée pour l'adresse, le script affiche une erreur 404.
+    */
     var address = document.querySelector('.codePostalID').innerHTML;
     fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${address}`)
         .then(response => response.json())
