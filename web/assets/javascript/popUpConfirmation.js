@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
         popUpConfirmation.style.zIndex = '16';
         popUpConfirmation.style.opacity = '1';
     });
+
     function closePopUpConfirmation() {
         popUpConfirmation.style.opacity = '0';
         popUpConfirmation.style.zIndex = '-1';

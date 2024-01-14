@@ -121,15 +121,13 @@ document.addEventListener("DOMContentLoaded", function () {
     let tabAlternance = [];
     let tabRien = [];
     let tabTemp = [];
-    for(let i = 0; i < liste.length; i++){
+    for (let i = 0; i < liste.length; i++) {
         nomTab.push(liste[i]["nomAnneeUniversitaire"]);
         tabTemp = calculerPourcentage3(liste[i]["nbStage"], liste[i]["nbAlternance"], liste[i]["nbRien"]);
         tabStage.push(tabTemp[0]);
         tabAlternance.push(tabTemp[1]);
         tabRien.push(tabTemp[2]);
     }
-
-
 
 
     // Diagramme courbe
