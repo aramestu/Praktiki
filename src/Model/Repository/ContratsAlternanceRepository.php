@@ -99,13 +99,5 @@ class ContratsAlternanceRepository extends AbstractRepository
     }
 
 
-    /**
-     * Retourne la liste des étudiants avec une convention validée.
-     *
-     * @return array La liste des étudiants avec une convention validée.
-     */
-    public function getEtudiantAvecConventionValidee(): array
-    {
-        return $this->getEtudiantConventionValide(true,true);
-    }
+
 }
