@@ -857,6 +857,10 @@ legend {
     color: var(--pastelBlue);
 }
 
+#showPassword {
+    border: none;
+    background: none;
+}
 /*---END MISCELLANEOUS---*/
 
 

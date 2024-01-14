@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }, 500);
         } else {
-            document.querySelector('.navbar').style = "height: 90vh";
+            document.querySelector('.navbar').style = "height: 100vh";
             for (let i = 0; i < document.querySelectorAll('.nav-item').length; i++) {
                 document.querySelectorAll('.nav-item')[i].style = "opacity: 1; margin-left: 0";
             }
