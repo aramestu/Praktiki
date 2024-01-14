@@ -77,7 +77,7 @@ class ContratsAlternanceRepository extends AbstractRepository
     {
         $nomTable = $this->getNomTable();
         $clePrimaire = $this->getNomClePrimaire();
-        $sql = "SELECT * FROM $nomTable WHERE numEtudiant = :numEtudiantTag 
+        $sql = "SELECT * from ContratsAlternances WHERE numEtudiant = :numEtudiantTag 
                                     AND idAnneeUniversitaire = :idAnneeUniversitaireTag";
         // Préparation de la requête
         $pdoStatement = Model::getPdo()->prepare($sql);
@@ -99,4 +99,36 @@ class ContratsAlternanceRepository extends AbstractRepository
             return $this->construireDepuisTableau($objetFormatTableau);
         }
     }
+
+    /**
+     * Retourne vrai si l'étudiant a une alternance pour une année universitaire. Faux sinon
+     * @param string $numEtu
+     * @param int $idAnneeUniversitaire
+     * @return bool
+     */
+    public function etudiantPossedeAlternance(string $numEtu, int $idAnneeUniversitaire): bool{
+        $sql = "SELECT COUNT(*) FROM ContratsAlternances WHERE numEtudiant= :numEtuTag AND idAnneeUniversitaire= :idAnneeTag";
+
+        $values = [
+            "numEtuTag" => $numEtu,
+            "idAnneeTag" => $idAnneeUniversitaire
+        ];
+
+        $request = Model::getPdo()->prepare($sql);
+        $request->execute($values);
+
+        $result = $request->fetchColumn();
+        return $result == 1;
+    }
+
+    /**
+     * Retoune vrai si l'étudiant a une alternance pour l'année universitaire actuelle. Faux sinon
+     * @param string $numEtu
+     * @return bool
+     */
+    public function etudiantPossedeActuellementAlternance(string $numEtu) : bool{
+        $id = (new AnneeUniversitaireRepository())->getCurrentAnneeUniversitaire()->getIdAnneeUniversitaire();
+        return $this->etudiantPossedeAlternance($numEtu, $id);
+    }
+
 }
