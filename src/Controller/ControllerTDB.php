@@ -311,7 +311,7 @@ class ControllerTDB extends ControllerGenerique
      *
      * @return void
      */
-    private static function displ1ayTDBetu(): void
+    private static function displayTDBetu(): void
     {
         $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null, null,
             null, null, "lastWeek", null, null);
@@ -356,17 +356,20 @@ class ControllerTDB extends ControllerGenerique
      */
     private static function displayTDBetuGestion(): void
     {
-        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user = (new EtudiantRepository())->getByEmail($mail);
-        $convention = (new ConventionRepository())->getConventionAvecEtudiant($user->getNumEtudiant());
+        $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $rep = new EtudiantRepository();
+        $user= $rep->getByEmail($mail);
+        $convention=(new ConventionRepository())->getConventionAvecEtudiant($user->getNumEtudiant());
+        $alternant = $rep->etudiantPossedeActuellementAlternance($user->getNumEtudiant());
         self::afficheVue(
             'view.php',
             [
                 'pagetitle' => 'Tableau de bord',
                 'cheminVueBody' => 'user/tableauDeBord/etudiant.php',
                 'TDBView' => 'user/tableauDeBord/etudiant/gestionEtudiant.php',
-                'user' => $user,
-                'convention' => $convention
+                'user'=>$user,
+                'convention'=>$convention,
+                'alternant' => $alternant
             ]
         );
     }
@@ -376,18 +379,17 @@ class ControllerTDB extends ControllerGenerique
      *
      * @return void
      */
-    public static function displayTDBetuMettreAJour(): void
-    {
+    public static function displayTDBetuMettreAJour(): void {
         $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
         $etudiant = (new EtudiantRepository())->getByEmail($mail);
         $attributs = [];
-        if (isset($_POST["mailPerso"])) {
+        if(isset($_POST["mailPerso"])){
             $attributs["mailPersoEtudiant"] = $_POST["mailPerso"];
         }
-        if (isset($_POST["telephone"])) {
+        if(isset($_POST["telephone"])){
             $attributs["telephoneEtudiant"] = $_POST["telephone"];
         }
-        if (isset($_POST["postcode"])) {
+        if(isset($_POST["postcode"])){
             $attributs["codePostalEtudiant"] = $_POST["postcode"];
         }
 
@@ -400,16 +402,69 @@ class ControllerTDB extends ControllerGenerique
      *
      * @return void
      */
-    public static function displayTDBetuEnvoyerConvention(): void
-    {
+    public static function displayTDBetuEnvoyerConvention(): void {
         $convention = (new ConventionRepository())->getConventionAvecEtudiant((new EtudiantRepository())->getByEmail(ConnexionUtilisateur::getLoginUtilisateurConnecte())->getNumEtudiant());
         if (!is_null($convention)) {
-            $convention->setEstFini(true);
-            (new ConventionRepository())->mettreAJour($convention);
-            self::redirectionVersURL("success", "Convention envoyée", "displayTDB&controller=TDB&tdbAction=gestion");
+            if (!self::verifierSiAttributsVide($convention)) {
+                $convention->setEstFini(true);
+                (new ConventionRepository())->mettreAJour($convention);
+                self::redirectionVersURL("success", "Convention envoyée", "displayTDB&controller=TDB&tdbAction=gestion");
+            }
+            else {
+                self::redirectionVersURL("warning", "Veuillez compléter votre convention en entier avant de l'envoyer", "displayTDB&controller=TDB&tdbAction=gestion");
+            }
         } else {
             self::redirectionVersURL("warning", "Cet etudiant ne possède pas de convention", "afficherFormulaireMiseAJour");
         }
+    }
+
+    /**
+     * Retourne true si au moins 1 attribut est vide, false sinon.
+     *
+     * @return bool
+     */
+    public static function verifierSiAttributsVide($convention): bool {
+        $ret = false;
+        $attributs = [
+            'mailEnseignant',
+            'nomEnseignant',
+            'prenomEnseignant',
+            'competencesADevelopper',
+            'dureeDeTravail',
+            'languesImpression',
+            'origineDeLaConvention',
+            'nbHeuresHebdo',
+            'modePaiement',
+            'dureeExperienceProfessionnel',
+            'caisseAssuranceMaladie',
+            'mailTuteurProfessionnel',
+            'prenomTuteurProfessionnel',
+            'nomTuteurProfessionnel',
+            'fonctionTuteurProfessionnel',
+            'telephoneTuteurProfessionnel',
+            'sujetExperienceProfessionnel',
+            'thematiqueExperienceProfessionnel',
+            'tachesExperienceProfessionnel',
+            'codePostalExperienceProfessionnel',
+            'adresseExperienceProfessionnel',
+            'dateDebutExperienceProfessionnel',
+            'dateFinExperienceProfessionnel',
+            'nomSignataire',
+            'prenomSignataire',
+            'siret',
+            'nomEntreprise',
+            'codePostalEntreprise',
+            'effectifEntreprise',
+            'telephoneEntreprise'
+        ];
+        foreach ($attributs as $attribut) {
+            $getter = 'get' . ucfirst($attribut);
+            echo $getter;
+            if ($convention->$getter() == "") {
+                $ret = true;
+            }
+        }
+        return $ret;
     }
 
 }

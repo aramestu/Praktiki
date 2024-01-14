@@ -64,6 +64,10 @@
     font-weight: 600;
 }
 
+.italic {
+    font-style: italic;
+}
+
 .infoEntrepriseOffer {
     font-size: 25px;
     padding-right: 10px;

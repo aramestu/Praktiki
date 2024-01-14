@@ -120,7 +120,7 @@ class ControllerMain extends ControllerGenerique
      */
     public static function setCookie(): void
     {
-        Cookie::enregistrer('bannerClosed', true);
+        Cookie::enregistrer('bannerClosed', true,10 * 365 * 24 * 60 * 60);
         header('Location: frontController.php?action=home');
         exit();
     }
@@ -158,6 +158,7 @@ class ControllerMain extends ControllerGenerique
             $fileName = $_FILES["file"]["tmp_name"];
             if ($_FILES["file"]["size"] > 0) {
                 ImportationData::importFromPstage($fileName);
+                self::redirectionVersURL("success","Importation faites avec succès", "panelListeEtudiants&controller=PanelAdmin");
             }
         }
         if (!empty($result)) {

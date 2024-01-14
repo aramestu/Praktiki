@@ -4,6 +4,7 @@ namespace App\SAE\Controller;
 
 use App\SAE\Lib\ConnexionUtilisateur;
 use App\SAE\Model\DataObject\Convention;
+use App\SAE\Model\Repository\AnneeUniversitaireRepository;
 use App\SAE\Model\Repository\ConventionRepository;
 use App\SAE\Model\Repository\EnseignantRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
@@ -149,7 +150,7 @@ class ControllerConvention extends ControllerGenerique
             $attributs["nomSignataire"] = $_POST["nomSignataire"];
         }
         if(isset($_POST["prenomSignataire"])){
-            $attributs["nomSignataire"] = $_POST["nomSignataire"];
+            $attributs["prenomSignataire"] = $_POST["prenomSignataire"];
         }
         if(isset($_POST["nomEnseignant"])){
             $attributs["nomEnseignant"] = $_POST["nomEnseignant"];
@@ -160,9 +161,9 @@ class ControllerConvention extends ControllerGenerique
         if(isset($_POST["mailEnseignant"])){
             $attributs["mailEnseignant"] = $_POST["mailEnseignant"];
         }
-
+        $attributs["raisonRefus"] = "";
         (new ServiceConvention())->mettreAJour($convention, $attributs);
-        ControllerTDB::displayTDB();
+        self::redirectionVersURL("success", "Convention sauvergardée", "displayTDB&controller=TDB&tdbAction=gestion");
     }
 
     /**
@@ -171,17 +172,22 @@ class ControllerConvention extends ControllerGenerique
     public static function creerFormulaire(): void{
         $idEtudiant = $_GET["idEtudiant"];
         $etudiant = (new EtudiantRepository())->getById($idEtudiant);
-        (new ConventionRepository())->creerConvention($idEtudiant, 3);
-        $convention = (new ConventionRepository())->getConventionAvecEtudiant($idEtudiant);
-        ControllerGenerique::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Convention',
-                'cheminVueBody' => 'SAE/convention.php',
-                'convention' => $convention,
-                'etudiant' => $etudiant
-            ]
-        );
+        $rep = new ConventionRepository();
+        // Si la convention a pu être crée
+        if($rep->creerConvention($idEtudiant, (new AnneeUniversitaireRepository())->getCurrentAnneeUniversitaire()->getIdAnneeUniversitaire())) {
+            $convention = $rep->getConventionAvecEtudiant($idEtudiant);
+            ControllerGenerique::afficheVue(
+                'view.php',
+                [
+                    'pagetitle' => 'Convention',
+                    'cheminVueBody' => 'SAE/convention.php',
+                    'convention' => $convention,
+                    'etudiant' => $etudiant
+                ]
+            );
+        }else{
+            self::redirectionVersURL("danger", "Vous avez déjà une convention ou une alternance","displayTDB&controller=TDB");
+        }
     }
 
     /**

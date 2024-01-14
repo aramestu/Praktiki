@@ -18,7 +18,7 @@ class Ldap {
     static private string $adresseServeur = "https://webinfo.iutmontp.univ-montp2.fr/~francoisn/LDAP_API.php";
 
     /**
-     * Génère les options pour la requête HTTP.
+     * Génère la requête http qui sera envoyé au serveur
      *
      * @param string $fonction La fonction LDAP à exécuter.
      * @param string $login Le login de l'utilisateur.
@@ -67,7 +67,7 @@ class Ldap {
     }
 
     /**
-     * Emule une connexion LDAP bruteforce pour le personnel en utilisant le login fourni.
+     * Emule une connexion LDAP pour les membres du personnel en utilisant le login fourni.
      *
      * @param string $login Le login de l'utilisateur.
      * @return UserInformation|false Les informations de l'utilisateur en cas de succès, false sinon.
