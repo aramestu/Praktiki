@@ -104,52 +104,11 @@ class ControllerExpPro extends ControllerGenerique
     }
 
     /**
-     * Obtient le nombre total d'expériences professionnelles.
-     *
-     * @return int Le nombre total d'expériences professionnelles.
-     */
-    public static function getNbTotal(): int
-    {
-        return (new ExperienceProfessionnelRepository())->getNbExperienceProfessionnel();
-    }
-
-    /**
-     * Obtient le nombre total de stages.
-     *
-     * @return int Le nombre total de stages.
-     */
-    public static function getNbStageTotal(): int
-    {
-        return (new StageRepository())->getNbOffre();
-    }
-
-    /**
-     * Obtient le nombre total d'alternances.
-     *
-     * @return int Le nombre total d'alternances.
-     */
-    public static function getNbAlternanceTotal(): int
-    {
-        return (new AlternanceRepository())->getNbOffre();
-    }
-
-    /**
-     * Obtient le nombre total d'offres non définies.
-     *
-     * @return int Le nombre total d'offres non définies.
-     */
-    public static function getNbOffreNonDefiniTotal(): int
-    {
-        return (new OffreNonDefiniRepository())->getNbOffre();
-    }
-
-    /**
      * Affiche les expériences professionnelles récentes.
      *
      * @return void
      */
-    public static function getExpProRecent(): void
-    {
+    public static function getExpProRecent(): void {
         $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null, null,
             null, null, "lastWeek", null, null);;
         extract($listeExpPro);
@@ -161,8 +120,7 @@ class ControllerExpPro extends ControllerGenerique
      *
      * @return void
      */
-    public static function getExpProEntreprise(): void
-    {
+    public static function getExpProEntreprise(): void {
         $listeExpPro = (new ExperienceProfessionnelRepository())->search(ConnexionUtilisateur::getLoginUtilisateurConnecte());
         extract($listeExpPro);
         require __DIR__ . "/../View/offer/offerTable.php";
@@ -174,8 +132,7 @@ class ControllerExpPro extends ControllerGenerique
      *
      * @return void
      */
-    public static function getExpProBySearch(): void
-    {
+    public static function getExpProBySearch(): void {
         $keywords = urldecode($_GET['keywords']);
         $listeExpPro = (new ExperienceProfessionnelRepository())->search($keywords);
         self::afficheVue(

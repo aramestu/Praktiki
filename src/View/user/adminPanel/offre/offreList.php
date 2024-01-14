@@ -12,10 +12,10 @@ use App\SAE\Controller\ControllerEntreprise;
 </div>
 
 <div class="HBox" id="statBox">
-    <div id="statOffreTotal" title="Nombre total d'offres"><span><?php echo (new ExperienceProfessionnelRepository())->getNbExperienceProfessionnel()?></span></div>
-    <div id="statStage" title="Nombre de stages"><span><?php echo (new ControllerExpPro())->getNbStageTotal()?></span></div>
-    <div id="statAlternance" title="Nombre d'alternances"><span><?php echo (new ControllerExpPro())->getNbAlternanceTotal()?></span></div>
-    <div id="statNonDefini" title="Nombre d'offres non défini"><span><?php echo (new ControllerExpPro())->getNbOffreNonDefiniTotal()?></span></div>
+    <div id="statOffreTotal" title="Nombre total d'offres"><span><?= $nbOffre?></span></div>
+    <div id="statStage" title="Nombre de stages"><span><?= $nbStage?></span></div>
+    <div id="statAlternance" title="Nombre d'alternances"><span><?= $nbAlternance?></span></div>
+    <div id="statNonDefini" title="Nombre d'offres non défini"><span><?= $nbNonDefini?></span></div>
 </div>
 
 <div class="columnName">
