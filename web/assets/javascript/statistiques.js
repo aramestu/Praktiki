@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-
+    // Diagramme Fromage
     const pie = document.getElementById('dg1').getContext('2d');
     const myPieChart = new Chart(pie, {
         type: 'pie',
@@ -108,6 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let pourcentageR = tab[2];
 
 
+    // Diagramme Baton
     const barData = {
         labels: ['Stage', 'Alternance', 'Rien'],
         datasets: [{
@@ -136,33 +137,52 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     let nomTab = [];
-    for (let i = 0; i < liste.length; i++) {
+    let tabStage = [];
+    let tabAlternance = [];
+    let tabRien = [];
+    let tabTemp = [];
+    for(let i = 0; i < liste.length; i++){
         nomTab.push(liste[i]["nomAnneeUniversitaire"]);
+        tabTemp = calculerPourcentage3(liste[i]["nbStage"], liste[i]["nbAlternance"], liste[i]["nbRien"]);
+        tabStage.push(tabTemp[0]);
+        tabAlternance.push(tabTemp[1]);
+        tabRien.push(tabTemp[2]);
     }
 
 
+
+
+    // Diagramme courbe
     // Données pour la première courbe
-    const dataCourbe1 = {
-        label: 'Courbe 1',
-        data: [10, 20, 15, 25, 30],
+    const courbeStage = {
+        label: 'Stage',
+        data: tabStage,
         borderColor: 'blue',
         borderWidth: 2,
         fill: false, // Pour ne pas remplir l'espace sous la courbe
     };
 
     // Données pour la deuxième courbe
-    const dataCourbe2 = {
-        label: 'Courbe 2',
-        data: [5, 15, 10, 20, 25],
+    const courbeAlternance = {
+        label: 'Alternance',
+        data: tabAlternance,
         borderColor: 'red',
         borderWidth: 2,
         fill: false,
     };
 
+    // Données pour la deuxième courbe
+    const courbeRien = {
+        label: 'Rien',
+        data: tabRien,
+        borderColor: 'red',
+        borderWidth: 2,
+        fill: false,
+    };
 
     const lineData = {
         labels: nomTab,
-        datasets: [dataCourbe1, dataCourbe2],
+        datasets: [courbeStage, courbeAlternance, courbeRien],
     };
 
     const lineCtx = document.getElementById('dg3').getContext('2d');
@@ -210,6 +230,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });*/
+
+
+
 
 
 });
