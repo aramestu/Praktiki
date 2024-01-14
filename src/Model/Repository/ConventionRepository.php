@@ -174,18 +174,27 @@ class ConventionRepository extends AbstractRepository {
     }
 
     /**
-     * Crée une nouvelle convention pour un étudiant et une année universitaire donnés.
+     * Crée une nouvelle convention pour un étudiant et une année universitaire données.
+     * Si l'étudiant a déjà une convention ou qu'il a une alternance, renvoie faux et
+     * ne crée pas la convention
      *
      * @param string $numEtudiant Le numéro de l'étudiant.
      * @param int $idAnneeUniversitaire L'identifiant de l'année universitaire.
+     * @return bool
      */
-    public function creerConvention(string $numEtudiant, int $idAnneeUniversitaire): void {
-        $sql = "CALL creationConvention(:numEtudiantTag, :idAnneeUniversitaireTag)";
+    public function creerConvention(string $numEtudiant, int $idAnneeUniversitaire): bool {
+        // Si l'étudiant ne possède pas d'alternance alors on peut lui créer une convention
+        $sql = "SELECT creationConvention(:numEtudiantTag, :idAnneeUniversitaireTag)";
 
-        $values = array("numEtudiantTag" => $numEtudiant,
-            "idAnneeUniversitaireTag" => $idAnneeUniversitaire);
+        $values = array(
+            "numEtudiantTag" => $numEtudiant,
+            "idAnneeUniversitaireTag" => $idAnneeUniversitaire
+        );
 
         $pdoStatement = Model::getPdo()->prepare($sql);
         $pdoStatement->execute($values);
+
+        return $pdoStatement->fetchColumn();
     }
+
 }

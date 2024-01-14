@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
+    /*
+    Ce script est utilisé pour gérer l'interaction avec la barre de navigation. Il ajoute la classe 'active' aux éléments de navigation correspondant à l'action ou au contrôleur courant. Il gère également l'ouverture et la fermeture du menu burger en modifiant les classes et les styles des éléments concernés.
+    */
     const currentAction = window.location.search.split('=')[1];
     const urlParams = new URLSearchParams(window.location.search);
     const currentController = urlParams.get('controller');

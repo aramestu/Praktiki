@@ -14,6 +14,38 @@ use App\SAE\Model\DataObject\Inscription;
 class EtudiantRepository extends AbstractRepository
 {
     /**
+     * Retourne vrai si l'étudiant a une alternance pour une année universitaire. Faux sinon
+     * @param string $numEtu
+     * @param int $idAnneeUniversitaire
+     * @return bool
+     */
+    public function etudiantPossedeAlternance(string $numEtu, int $idAnneeUniversitaire): bool{
+        $sql = "SELECT COUNT(*) FROM ContratsAlternances WHERE numEtudiant= :numEtuTag AND idAnneeUniversitaire= :idAnneeTag";
+
+        $values = [
+            "numEtuTag" => $numEtu,
+            "idAnneeTag" => $idAnneeUniversitaire
+        ];
+
+        $request = Model::getPdo()->prepare($sql);
+        $request->execute($values);
+
+        $result = $request->fetchColumn();
+        return $result == 1;
+    }
+
+    /**
+     * Retoune vrai si l'étudiant a une alternance pour l'année universitaire actuelle. Faux sinon
+     * @param string $numEtu
+     * @return bool
+     */
+    public function etudiantPossedeActuellementAlternance(string $numEtu) : bool{
+        $id = (new AnneeUniversitaireRepository())->getCurrentAnneeUniversitaire()->getIdAnneeUniversitaire();
+        return $this->etudiantPossedeAlternance($numEtu, $id);
+    }
+
+
+    /**
      * Retourne la liste des étudiants avec une convention validée.
      *
      * @return array La liste des étudiants avec une convention validée.
