@@ -8,7 +8,7 @@ $expPro = $experiencePro;
 $typeExperience = 'alternance';
 if (is_a($expPro, 'App\SAE\Model\DataObject\Stage')) { // Si c'est un stage
     $typeExperience = 'stage';
-    $gratif = gratification;
+    $gratif = $gratification;
 } else {//si c'est une stalerternance
     $typeExperience = 'offreNonDefini';
 }
