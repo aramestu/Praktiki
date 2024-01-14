@@ -1,6 +1,6 @@
 <?php
 use App\SAE\Model\Repository\EtudiantRepository;
-use App\SAE\Model\Repository\AnneeUniversitaireRepository;
+use App\SAE\Lib\ConversionMajuscule;
 $conventionValidee = (new EtudiantRepository())->conventionEtudiantEstValide($etudiant, $anneeUniversitaire->getIdAnneeUniversitaire());
 $etudiantAConvention = (new EtudiantRepository())->etudiantAConvention($etudiant, $anneeUniversitaire);
 $etudiantAAlternance = (new EtudiantRepository())->etudiantAAlternance($etudiant, $anneeUniversitaire);
@@ -32,7 +32,7 @@ $etudiantAAlternance = (new EtudiantRepository())->etudiantAAlternance($etudiant
                                     echo "redColor";
                                 }
                             ?>"></div>
-        <label class="lineNomPrenomEtudiant"><?=htmlspecialchars(strtoupper($etudiant->getNomEtudiant())) . " " . htmlspecialchars($etudiant->getPrenomEtudiant())?></label>
+        <label class="lineNomPrenomEtudiant"><?=htmlspecialchars(ConversionMajuscule::convertirEnMajuscules($etudiant->getNomEtudiant())) . " " . htmlspecialchars($etudiant->getPrenomEtudiant())?></label>
     </div>
     <label class="lineNumEtudiant"><?=htmlspecialchars($etudiant->getNumEtudiant())?></label>
     <label class="lineMailUniversitaireEtudidant"><a class="link" href="mailto:<?=$etudiant->getMailUniversitaireEtudiant()?>"><?=htmlspecialchars($etudiant->getMailUniversitaireEtudiant())?></a></label>
