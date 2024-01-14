@@ -196,6 +196,39 @@ class EntrepriseRepository extends AbstractRepository
     }
 
     /**
+     * Archive un enregistrement dans la table "Annotations" et supprime les enregistrements associés.
+     *
+     * @param string $valeurClePrimaire La valeur de la clé primaire pour identifier l'enregistrement à archiver.
+     *
+     * @throws \Exception En cas d'erreur lors de l'accès à la base de données.
+     */
+    public function archiver(string $valeurClePrimaire): void
+    {
+        parent::archiver($valeurClePrimaire);
+        $pdo = Model::getPdo();
+        $table = "Annotations";
+        $tableArchives = $table . "Archives";
+        $clePrimaire = "idAnnotation";
+        $sql = "INSERT INTO $tableArchives SELECT * FROM $table WHERE $table.$clePrimaire = :clePrimaireTag";
+        $values = array("clePrimaireTag" => $valeurClePrimaire);
+        $requeteStatement = $pdo->prepare($sql);
+        $requeteStatement->execute($values);
+
+        $sql = "DELETE FROM $table WHERE $clePrimaire = :clePrimaireTag";
+        $requeteStatement = $pdo->prepare($sql);
+        $requeteStatement->execute($values);
+
+        $sql = "SELECT idExperienceProfessionnel FROM ExperienceProfessionnel WHERE siret = :siretTag";
+        $value = array("siretTag" => $valeurClePrimaire);
+        $requeteStatement = $pdo->prepare($sql);
+        $requeteStatement->execute($value);
+        while ($row = $requeteStatement->fetch($pdo::FETCH_ASSOC)){
+            $id = $row['idExperienceProfessionnel'];
+            ((new ExperienceProfessionnelRepository())->supprimer($id));
+        }
+    }
+
+    /**
      * Retourne le nombre d'entreprises validées.
      *
      * @return int Le nombre d'entreprises validées.

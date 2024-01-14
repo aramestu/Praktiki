@@ -134,7 +134,6 @@ class ConventionRepository extends AbstractRepository {
      */
     public function archiver(string $valeurClePrimaire): void
     {
-        //TODO : a tester lorsque la supression sera possible
         parent::archiver($valeurClePrimaire);
         $pdo = Model::getPdo();
         $table = "ConventionStageEtudiant";

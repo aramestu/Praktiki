@@ -299,7 +299,6 @@ abstract class AbstractExperienceProfessionnelRepository extends AbstractReposit
         $values = array(
             "idTag" => $id
         );
-
         $pdoStatement->execute($values);
     }
 
