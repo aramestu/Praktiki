@@ -363,13 +363,23 @@ form #search-bar {
 }
 
 .line > .consulterButton {
-    background: rgba(0, 0, 0, 0.1);
+    background: var(--lightpastelBlue);
+    border: 2px solid var(--pastelBlue);
+    color: var(--pastelBlue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     opacity: 0;
     margin: 0;
-    width: 6em;
+    width: fit-content;
     padding: 8px 8px 8px 5px;
     font-size: 0.9em;
     transition: all 0.3s ease-in-out;
+}
+
+.line > .consulterButton:hover {
+    background: var(--pastelBlue);
+    color: var(--white);
 }
 
 /*
