@@ -357,3 +357,17 @@
     vertical-align: middle;
     color: var(--darkBlue2);
 }
+
+#listeEntrepriseButton::before {
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    font-size: 1.8em;
+    content: "\f0c0";
+    vertical-align: middle;
+    color: var(--darkBlue2);
+}
+
+#containerListeEntreprise {
+    width: 100%;
+    height: 95%;
+}
