@@ -270,7 +270,7 @@ class ControllerTDB extends ControllerGenerique {
      *
      * @return void
      */
-    private static function displ1ayTDBetu(): void
+    private static function displayTDBetu(): void
     {
         $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null,null,
             null,null,"lastWeek",null,null);
@@ -315,8 +315,10 @@ class ControllerTDB extends ControllerGenerique {
     private static function displayTDBetuGestion(): void
     {
         $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user=(new EtudiantRepository())->getByEmail($mail);
+        $rep = new EtudiantRepository();
+        $user= $rep->getByEmail($mail);
         $convention=(new ConventionRepository())->getConventionAvecEtudiant($user->getNumEtudiant());
+        $alternant = $rep->etudiantPossedeActuellementAlternance($user->getNumEtudiant());
         self::afficheVue(
             'view.php',
             [
@@ -324,7 +326,8 @@ class ControllerTDB extends ControllerGenerique {
                 'cheminVueBody' => 'user/tableauDeBord/etudiant.php',
                 'TDBView' => 'user/tableauDeBord/etudiant/gestionEtudiant.php',
                 'user'=>$user,
-                'convention'=>$convention
+                'convention'=>$convention,
+                'alternant' => $alternant
             ]
         );
     }
@@ -360,12 +363,66 @@ class ControllerTDB extends ControllerGenerique {
     public static function displayTDBetuEnvoyerConvention(): void {
         $convention = (new ConventionRepository())->getConventionAvecEtudiant((new EtudiantRepository())->getByEmail(ConnexionUtilisateur::getLoginUtilisateurConnecte())->getNumEtudiant());
         if (!is_null($convention)) {
-            $convention->setEstFini(true);
-            (new ConventionRepository())->mettreAJour($convention);
-            self::redirectionVersURL("success", "Convention envoyée", "displayTDB&controller=TDB&tdbAction=gestion");
+            if (!self::verifierSiAttributsVide($convention)) {
+                $convention->setEstFini(true);
+                (new ConventionRepository())->mettreAJour($convention);
+                self::redirectionVersURL("success", "Convention envoyée", "displayTDB&controller=TDB&tdbAction=gestion");
+            }
+            else {
+                self::redirectionVersURL("warning", "Veuillez compléter votre convention en entier avant de l'envoyer", "displayTDB&controller=TDB&tdbAction=gestion");
+            }
         } else {
             self::redirectionVersURL("warning", "Cet etudiant ne possède pas de convention", "afficherFormulaireMiseAJour");
         }
+    }
+
+    /**
+     * Retourne true si au moins 1 attribut est vide, false sinon.
+     *
+     * @return bool
+     */
+    public static function verifierSiAttributsVide($convention): bool {
+        $ret = false;
+        $attributs = [
+            'mailEnseignant',
+            'nomEnseignant',
+            'prenomEnseignant',
+            'competencesADevelopper',
+            'dureeDeTravail',
+            'languesImpression',
+            'origineDeLaConvention',
+            'nbHeuresHebdo',
+            'modePaiement',
+            'dureeExperienceProfessionnel',
+            'caisseAssuranceMaladie',
+            'mailTuteurProfessionnel',
+            'prenomTuteurProfessionnel',
+            'nomTuteurProfessionnel',
+            'fonctionTuteurProfessionnel',
+            'telephoneTuteurProfessionnel',
+            'sujetExperienceProfessionnel',
+            'thematiqueExperienceProfessionnel',
+            'tachesExperienceProfessionnel',
+            'codePostalExperienceProfessionnel',
+            'adresseExperienceProfessionnel',
+            'dateDebutExperienceProfessionnel',
+            'dateFinExperienceProfessionnel',
+            'nomSignataire',
+            'prenomSignataire',
+            'siret',
+            'nomEntreprise',
+            'codePostalEntreprise',
+            'effectifEntreprise',
+            'telephoneEntreprise'
+        ];
+        foreach ($attributs as $attribut) {
+            $getter = 'get' . ucfirst($attribut);
+            echo $getter;
+            if ($convention->$getter() == "") {
+                $ret = true;
+            }
+        }
+        return $ret;
     }
 
 }
