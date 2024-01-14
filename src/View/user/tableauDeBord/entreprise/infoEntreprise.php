@@ -16,33 +16,26 @@ $password = htmlspecialchars($user->getMdpHache());
         <h2 id="remplaceBaliseLegend">Généralités</h2>
         <div class="column">
             <p>
-                <label class="InputAddOn-item" for="siret">Siret :</label>
-                <input class="InputAddOn-field" type="text" value="<?= htmlspecialchars($siret) ?>" name="siret"
-                       id="siret" readonly>
-                <label class="InputAddOn-item" for="nom">Nom :</label>
-                <input class="InputAddOn-field" type="text" value="<?= htmlspecialchars($nom) ?>" name="nom" id="nom"
-                       required/>
-                <label class="InputAddOn-item" for="email">Email :</label>
-                <input class="InputAddOn-field" type="text" value="<?= htmlspecialchars($mail) ?>" name="mail"
-                       id="email" required>
-                <label class="InputAddOn-item" for="telephone">Telephone :</label>
-                <input class="InputAddOn-field" type="text" value="<?= htmlspecialchars($telephone) ?>" name="telephone"
-                       id="telephone" required>
+            <label class="InputAddOn-item" for="siret">Siret :</label> 
+            <input class="InputAddOn-field" type="text" value="<?= htmlspecialchars($siret) ?>" name="siret" id="siret" readonly>
+            <label class="InputAddOn-item" for="nom">Nom :</label> 
+            <input class="InputAddOn-field" type="text" maxlength="50" value="<?= htmlspecialchars($nom) ?>" name="nom" id="nom" required/>
+            <label class="InputAddOn-item" for="email">Email :</label>
+            <input class="InputAddOn-field" type="text" maxlength="50" value="<?= htmlspecialchars($mail) ?>" name="mail" id="email" required>
+            <label class="InputAddOn-item" for="telephone">Telephone :</label>
+            <input class="InputAddOn-field" type="text" maxlength="10" minlength="10" value="<?= htmlspecialchars($telephone) ?>" name="telephone" id="telephone" required>
             </p>
 
         </div>
 
         <div class="column">
             <p>
-                <label class="InputAddOn-item" for="postcode">Code Postal :</label>
-                <input class="InputAddOn-field" type="text" value="<?= htmlspecialchars($codePostal) ?>" name="postcode"
-                       id="postcode" required>
-                <label class="InputAddOn-item" for="website">Site Web :</label>
-                <input class="InputAddOn-field" type="text" value="<?= htmlspecialchars($siteWeb) ?>" name="website"
-                       id="website" required>
-                <label class="InputAddOn-item" for="effectif">Effectif : </label>
-                <input class="InputAddOn-field" type="text" value="<?= htmlspecialchars($effectif) ?>" name="effectif"
-                       id="effectif" required>
+            <label class="InputAddOn-item" for="postcode">Code Postal :</label> 
+            <input class="InputAddOn-field" type="text" maxlength="5" value="<?= htmlspecialchars($codePostal) ?>" name="postcode" id="postcode" required>
+            <label class="InputAddOn-item" for="website">Site Web :</label>
+            <input class="InputAddOn-field" type="text" maxlength="50" value="<?= htmlspecialchars($siteWeb) ?>" name="website" id="website" required>
+            <label class="InputAddOn-item" for="effectif">Effectif : </label>
+            <input class="InputAddOn-field" type="text" min="0" max="99999" value="<?= htmlspecialchars($effectif) ?>" name="effectif" id="effectif" required>
             <div class="forget-password">
                 <p><a class="button" href="frontController.php?action=resetPassword">Changer de mot de passe</a></p>
             </div>
