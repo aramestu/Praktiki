@@ -23,7 +23,7 @@ if ($controller == 'PanelAdmin' && !ConnexionUtilisateur::estAdministrateur()) {
     ControllerMain::redirectionVersURL("danger", "Vous n'avez pas les droits pour afficher le tableau de bord", "home");
 } elseif ($controller == 'ExpPro' && !ConnexionUtilisateur::estConnecte()) {
     ControllerMain::redirectionVersURL("danger", "Vous n'avez pas les droits pour afficher les offres", "home");
-} elseif ($controller == 'ExpPro' && ConnexionUtilisateur::estEntreprise()) {
+} elseif ($controller == 'ExpPro' && ConnexionUtilisateur::estEntreprise() && $_GET['action'] != 'createOffer') {
     $idExpPro = $_GET["experiencePro"] ?? null;
     if (is_null($idExpPro)) {
         ControllerMain::redirectionVersURL("danger", "Vous n'avez pas les droits pour afficher les offres", "home");

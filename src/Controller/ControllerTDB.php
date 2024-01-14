@@ -7,6 +7,7 @@ use App\SAE\Model\DataObject\Enseignant;
 use App\SAE\Model\DataObject\Entreprise;
 use App\SAE\Model\DataObject\Etudiant;
 use App\SAE\Model\DataObject\Personnel;
+use App\SAE\Model\Repository\ContratsAlternanceRepository;
 use App\SAE\Model\Repository\ConventionRepository;
 use App\SAE\Model\Repository\EnseignantRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
@@ -360,7 +361,7 @@ class ControllerTDB extends ControllerGenerique
         $rep = new EtudiantRepository();
         $user= $rep->getByEmail($mail);
         $convention=(new ConventionRepository())->getConventionAvecEtudiant($user->getNumEtudiant());
-        $alternant = $rep->etudiantPossedeActuellementAlternance($user->getNumEtudiant());
+        $alternant = (new ContratsAlternanceRepository())->etudiantPossedeActuellementAlternance($user->getNumEtudiant());
         self::afficheVue(
             'view.php',
             [
