@@ -7,6 +7,9 @@ use App\SAE\Model\DataObject\ContratsAlternance;
 use App\SAE\Model\Repository\ContratsAlternanceRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
 
+/**
+ * Classe ImportationStudea gérant l'importation de données depuis un fichier Studea.
+ */
 class ImportationStudea extends IImportation
 {
     /**
