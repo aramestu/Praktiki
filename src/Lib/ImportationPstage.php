@@ -2,22 +2,23 @@
 
 namespace App\SAE\Lib;
 
+use App\SAE\Model\DataObject\AbstractDataObject;
 use App\SAE\Model\Repository\AnneeUniversitaireRepository;
 use App\SAE\Model\Repository\ConventionRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
 use App\SAE\Service\ServiceConvention;
 
 /**
- * Classe ImportationData gérant l'importation de données depuis un fichier Pstage.
+ * Classe ImportationPstage gérant l'importation de données depuis un fichier Pstage.
  */
-class ImportationData {
+class ImportationPstage extends IImportation {
 
     /**
      * Importe des données depuis un fichier Pstage.
      *
      * @param string $fileName Le nom du fichier à importer.
      */
-    public static function importFromPstage(string $fileName): void {
+    public static function import(string $fileName): void {
         $file = fopen($fileName, "r");
 
         // Récupération de l'année universitaire courante
@@ -59,5 +60,17 @@ class ImportationData {
 
         // Fermer le fichier après traitement
         fclose($file);
+    }
+
+    /**
+     * Retourne un étudiant si son numEtudiant existe, null sinon
+     * @param array $column
+     * @return AbstractDataObject|null
+     */
+    protected function verifier(array $column): ?AbstractDataObject
+    {
+        // Vérifier si l'étudiant existe dans la base de données
+        return (new EtudiantRepository())->getById($column[1]);
+
     }
 }
