@@ -11,10 +11,10 @@ use App\SAE\Model\Repository\EntrepriseRepository;
 </div>
 
 <div class="HBox" id="statBox">
-    <div id="statTotal" title="Nombre total d'entreprises (entreprises refusées exclu)"><span><?= $nbEntreprise?></span></div>
-    <div id="statValide" title="Nombre d'entreprises validées"><span><?= $nbEntrepriseValide?></span></div>
-    <div id="statInter" title="Nombre d'entreprises en attente de validation"><span><?= $nbEntrepriseAttente?></span></div>
-    <div id="statBad" title="Nombre d'entreprises refusées"><span><?= $nbEntrepriseRefuse ?></span></div>
+    <div id="statTotal" title="Nombre total d'entreprises (entreprises refusées exclu)"><span><?= htmlspecialchars($nbEntreprise)?></span></div>
+    <div id="statValide" title="Nombre d'entreprises validées"><span><?= htmlspecialchars($nbEntrepriseValide)?></span></div>
+    <div id="statInter" title="Nombre d'entreprises en attente de validation"><span><?= htmlspecialchars($nbEntrepriseAttente)?></span></div>
+    <div id="statBad" title="Nombre d'entreprises refusées"><span><?= htmlspecialchars($nbEntrepriseRefuse) ?></span></div>
 </div>
 
 <div class="columnName">

@@ -12,10 +12,10 @@ use App\SAE\Model\Repository\EtudiantRepository;
 </div>
 
 <div class="HBox" id="statBox">
-    <div id="statTotal" title="Nombre total d'étudiants"><span><?= $nbEtudiant?></span></div>
-    <div id="statValide" title="Nombre d'étudiants ayant un stage avec une convention validée depuis Pstage ou une alternance depuis Studea"><span><?= $nbEtudiantExpProValide ?></span></div>
-    <div id="statInter" title="Nombre d'étudiants ayant une convention en cours"><span><?= $nbEtudiantConventionEnCours?></span></div>
-    <div id="statBad" title="Nombre d'étudiants n'ayant ni stage ni convention"><span><?= $nbEtudiantNiStageNiAlternance?></span></div>
+    <div id="statTotal" title="Nombre total d'étudiants"><span><?= htmlspecialchars($nbEtudiant)?></span></div>
+    <div id="statValide" title="Nombre d'étudiants ayant un stage avec une convention validée depuis Pstage ou une alternance depuis Studea"><span><?= htmlspecialchars($nbEtudiantExpProValide )?></span></div>
+    <div id="statInter" title="Nombre d'étudiants ayant une convention en cours"><span><?= htmlspecialchars($nbEtudiantConventionEnCours)?></span></div>
+    <div id="statBad" title="Nombre d'étudiants n'ayant ni stage ni convention"><span><?= htmlspecialchars($nbEtudiantNiStageNiAlternance)?></span></div>
 </div>
 
 <div class="columnName">
