@@ -8,6 +8,7 @@ use App\SAE\Model\DataObject\ExperienceProfessionnel;
 use App\SAE\Model\DataObject\OffreNonDefini;
 use App\SAE\Model\Repository\AbstractExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\AlternanceRepository;
+use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\Model;
 use App\SAE\Model\Repository\OffreNonDefiniRepository;
 use App\SAE\Model\Repository\StageRepository;
@@ -547,6 +548,16 @@ class ControllerExpPro extends ControllerGenerique
             $msg = "Offre crée avec succés !";
             if (ConnexionUtilisateur::estAdministrateur()){
                 $siret = $_POST["siret"];
+                $entreprise = (new EntrepriseRepository())->getEntrepriseAvecEtatFiltree();
+                $i=null;
+                foreach ($entreprise as $t){
+                    if($t->getSiret() == $siret){
+                        $i = $t->getSiret();
+                    }
+                }
+                if($i == null){
+                    self::redirectionVersURL("danger", "Cette entreprise n'existe pas", "createOffer&controller=ExpPro");
+                }
             }
             else if (ConnexionUtilisateur::estConnecte()) {
                 $siret = ConnexionUtilisateur::getLoginUtilisateurConnecte();

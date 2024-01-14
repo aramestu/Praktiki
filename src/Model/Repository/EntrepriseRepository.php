@@ -195,21 +195,6 @@ class EntrepriseRepository extends AbstractRepository
         $requete->execute($values);
     }
 
-    /**
-     * Change l'état d'une entreprise lorsqu'elle a été refusée.
-     *
-     * @param string $siret Le siret de l'entreprise à refuser.
-     */
-    public static function creermdp($mdp): void
-    {
-        $sql="update Entreprises set mdpHache=:mdpHacheTag where siret=:siretTag";
-        $pdoStatement = Model::getPdo()->prepare($sql);
-        $values = array(
-            "mdpHacheTag" => MotDePasse::hacher($mdp),
-            "siretTag" => '01234567890123'
-        );
-        $pdoStatement->execute($values);
-    }
 
     /**
      * Retourne le nombre d'entreprises validées.
