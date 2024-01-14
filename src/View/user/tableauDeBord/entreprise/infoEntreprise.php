@@ -35,7 +35,7 @@ $password = htmlspecialchars($user->getMdpHache());
             <label class="InputAddOn-item" for="website">Site Web :</label>
             <input class="InputAddOn-field" type="text" maxlength="50" value="<?= htmlspecialchars($siteWeb) ?>" name="website" id="website" required>
             <label class="InputAddOn-item" for="effectif">Effectif : </label>
-            <input class="InputAddOn-field" type="text" min="0" max="99999" value="<?= htmlspecialchars($effectif) ?>" name="effectif" id="effectif" required>
+            <input class="InputAddOn-field" type="text" minlength="0" maxlength="5" value="<?= htmlspecialchars($effectif) ?>" name="effectif" id="effectif" required>
             <div class="forget-password">
                 <p><a class="button" href="frontController.php?action=resetPassword">Changer de mot de passe</a></p>
             </div>
