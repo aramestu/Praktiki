@@ -1,0 +1,82 @@
+\doxysection{Message\+Flash Class Reference}
+\hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_message_flash}{}\label{class_app_1_1_s_a_e_1_1_lib_1_1_message_flash}\index{MessageFlash@{MessageFlash}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_message_flash_ae2545fc68915d49a0a7635185d31c5ef}{ajouter}} (string \$type, string \$message)
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_message_flash_a2c3345354337bc537740ad4c9c8b4a27}{contient\+Message}} (string \$type)
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_message_flash_a408fa0f7d23ebdd8cbdbb54110f63d72}{lire\+Messages}} (string \$type)
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_message_flash_a5ecec0277659753851a7c61ab70620e2}{lire\+Tous\+Messages}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe Message\+Flash gérant les messages flash enregistrés en session. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_message_flash_ae2545fc68915d49a0a7635185d31c5ef}\label{class_app_1_1_s_a_e_1_1_lib_1_1_message_flash_ae2545fc68915d49a0a7635185d31c5ef} 
+\index{MessageFlash@{MessageFlash}!ajouter@{ajouter}}
+\index{ajouter@{ajouter}!MessageFlash@{MessageFlash}}
+\doxysubsubsection{\texorpdfstring{ajouter()}{ajouter()}}
+{\footnotesize\ttfamily static ajouter (\begin{DoxyParamCaption}\item[{string}]{\$type,  }\item[{string}]{\$message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Ajoute un message flash de type spécifié.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$type} & Le type du message flash ("{}success"{}, "{}info"{}, "{}warning"{} ou "{}danger"{}). \\
+\hline
+string & {\em \$message} & Le message à ajouter. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_message_flash_a2c3345354337bc537740ad4c9c8b4a27}\label{class_app_1_1_s_a_e_1_1_lib_1_1_message_flash_a2c3345354337bc537740ad4c9c8b4a27} 
+\index{MessageFlash@{MessageFlash}!contientMessage@{contientMessage}}
+\index{contientMessage@{contientMessage}!MessageFlash@{MessageFlash}}
+\doxysubsubsection{\texorpdfstring{contientMessage()}{contientMessage()}}
+{\footnotesize\ttfamily static contient\+Message (\begin{DoxyParamCaption}\item[{string}]{\$type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Vérifie si un message flash du type spécifié existe.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$type} & Le type du message flash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool True si un message flash du type spécifié existe, false sinon. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_message_flash_a408fa0f7d23ebdd8cbdbb54110f63d72}\label{class_app_1_1_s_a_e_1_1_lib_1_1_message_flash_a408fa0f7d23ebdd8cbdbb54110f63d72} 
+\index{MessageFlash@{MessageFlash}!lireMessages@{lireMessages}}
+\index{lireMessages@{lireMessages}!MessageFlash@{MessageFlash}}
+\doxysubsubsection{\texorpdfstring{lireMessages()}{lireMessages()}}
+{\footnotesize\ttfamily static lire\+Messages (\begin{DoxyParamCaption}\item[{string}]{\$type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Lit les messages flash du type spécifié et les détruit.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$type} & Le type du message flash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array Les messages flash du type spécifié. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_message_flash_a5ecec0277659753851a7c61ab70620e2}\label{class_app_1_1_s_a_e_1_1_lib_1_1_message_flash_a5ecec0277659753851a7c61ab70620e2} 
+\index{MessageFlash@{MessageFlash}!lireTousMessages@{lireTousMessages}}
+\index{lireTousMessages@{lireTousMessages}!MessageFlash@{MessageFlash}}
+\doxysubsubsection{\texorpdfstring{lireTousMessages()}{lireTousMessages()}}
+{\footnotesize\ttfamily static lire\+Tous\+Messages (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Lit tous les messages flash et les détruit.
+
+\begin{DoxyReturn}{Returns}
+array Tous les messages flash enregistrés. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Lib/Message\+Flash.\+php\end{DoxyCompactItemize}

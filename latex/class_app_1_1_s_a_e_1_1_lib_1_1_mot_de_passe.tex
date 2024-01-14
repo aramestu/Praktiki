@@ -1,0 +1,77 @@
+\doxysection{Mot\+De\+Passe Class Reference}
+\hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_mot_de_passe}{}\label{class_app_1_1_s_a_e_1_1_lib_1_1_mot_de_passe}\index{MotDePasse@{MotDePasse}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_mot_de_passe_a822631786dfbdbb5ce16ec623096f732}{hacher}} (string \$mdp\+Clair)
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_mot_de_passe_a43de8669837aeedb01c6ac1f206ff71f}{verifier}} (string \$mdp\+Clair, string \$mdp\+Hache)
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_mot_de_passe_a5d40a93269daf09ea94ab8a475f867ea}{generer\+Chaine\+Aleatoire}} (int \$nb\+Caracteres=22)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe Mot\+De\+Passe gérant le hachage et la vérification des mots de passe. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_mot_de_passe_a5d40a93269daf09ea94ab8a475f867ea}\label{class_app_1_1_s_a_e_1_1_lib_1_1_mot_de_passe_a5d40a93269daf09ea94ab8a475f867ea} 
+\index{MotDePasse@{MotDePasse}!genererChaineAleatoire@{genererChaineAleatoire}}
+\index{genererChaineAleatoire@{genererChaineAleatoire}!MotDePasse@{MotDePasse}}
+\doxysubsubsection{\texorpdfstring{genererChaineAleatoire()}{genererChaineAleatoire()}}
+{\footnotesize\ttfamily static generer\+Chaine\+Aleatoire (\begin{DoxyParamCaption}\item[{int}]{\$nb\+Caracteres = {\ttfamily 22} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Génère une chaîne aléatoire pour être utilisée comme poivre.
+
+
+\begin{DoxyParams}[1]{Parameters}
+int & {\em \$nb\+Caracteres} & Le nombre de caractères de la chaîne générée. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string La chaîne aléatoire générée. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_mot_de_passe_a822631786dfbdbb5ce16ec623096f732}\label{class_app_1_1_s_a_e_1_1_lib_1_1_mot_de_passe_a822631786dfbdbb5ce16ec623096f732} 
+\index{MotDePasse@{MotDePasse}!hacher@{hacher}}
+\index{hacher@{hacher}!MotDePasse@{MotDePasse}}
+\doxysubsubsection{\texorpdfstring{hacher()}{hacher()}}
+{\footnotesize\ttfamily static hacher (\begin{DoxyParamCaption}\item[{string}]{\$mdp\+Clair }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Hache le mot de passe clair en utilisant le poivre.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$mdp\+Clair} & Le mot de passe en clair. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string Le mot de passe haché. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_mot_de_passe_a43de8669837aeedb01c6ac1f206ff71f}\label{class_app_1_1_s_a_e_1_1_lib_1_1_mot_de_passe_a43de8669837aeedb01c6ac1f206ff71f} 
+\index{MotDePasse@{MotDePasse}!verifier@{verifier}}
+\index{verifier@{verifier}!MotDePasse@{MotDePasse}}
+\doxysubsubsection{\texorpdfstring{verifier()}{verifier()}}
+{\footnotesize\ttfamily static verifier (\begin{DoxyParamCaption}\item[{string}]{\$mdp\+Clair,  }\item[{string}]{\$mdp\+Hache }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Vérifie si le mot de passe clair correspond au mot de passe haché.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$mdp\+Clair} & Le mot de passe en clair. \\
+\hline
+string & {\em \$mdp\+Hache} & Le mot de passe haché à vérifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool True si le mot de passe clair correspond au mot de passe haché, false sinon. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Lib/Mot\+De\+Passe.\+php\end{DoxyCompactItemize}

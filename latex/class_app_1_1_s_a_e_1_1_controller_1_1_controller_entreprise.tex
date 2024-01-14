@@ -1,0 +1,194 @@
+\doxysection{Controller\+Entreprise Class Reference}
+\hypertarget{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise}{}\label{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise}\index{ControllerEntreprise@{ControllerEntreprise}}
+Inheritance diagram for Controller\+Entreprise\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a3ed89d965aa02cf80daf4d0a684754a0}{connect}} ()
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a018e5b8bf65d94898a8296a34ba86ba7}{afficher\+Liste\+Entreprise\+Valide\+Filtree}} ()
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a98cc7077b5378f7c01b83f0ff59fb039}{afficher\+Liste\+Entreprise\+En\+Attente\+Filtree}} ()
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a5fea9f8c75868a3819a69a01184c89cf}{accepter}} ()
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a72a7db9f2803802e73954a92aed7586e}{refuser}} ()
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a0dd845fcbb7a5d6288dedbe39c7ddf2c}{keywords\+Existe}} ()
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a4a8430f7b76ed7b91308eb3c65a2e985}{code\+Postal\+Existe}} ()
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_aeb7b5a85799c2dcac69f5205646cbb05}{effectif\+Existe}} ()
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a029bf28ec2b9b7a84858b670c76023ac}{creer\+Depuis\+Formulaire}} ()
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_ad69121d51a63b01bab0e942cb9657358}{valider\+Email}} ()
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a4b94a0d36200536099a59164527d243d}{change\+Password}} ()
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_abe69a848aebb6f35005e47400f47166f}{reset\+Password}} ()
+\item 
+\Hypertarget{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a7b81b0baa3d27535ad40af8afb5d49f4}\label{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a7b81b0baa3d27535ad40af8afb5d49f4} 
+static {\bfseries verif\+Nonce} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_controller_1_1_controller_generique}{Controller\+Generique}}}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_controller_1_1_controller_generique_a88bed67b3e6333587f630f887d828dd7}{home}} ()
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_controller_1_1_controller_generique_abe69456ff0815712cd1c71a6db48b100}{error}} (string \$message\+Erreur)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Protected Member Functions inherited from \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_controller_1_1_controller_generique}{Controller\+Generique}}}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_controller_1_1_controller_generique_af5ec2a6caa4f2d696b42c234bc7d23d4}{affiche\+Vue}} (string \$chemin\+Vue, array \$parametres=\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contrôleur gérant les actions liées aux entreprises. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a5fea9f8c75868a3819a69a01184c89cf}\label{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a5fea9f8c75868a3819a69a01184c89cf} 
+\index{ControllerEntreprise@{ControllerEntreprise}!accepter@{accepter}}
+\index{accepter@{accepter}!ControllerEntreprise@{ControllerEntreprise}}
+\doxysubsubsection{\texorpdfstring{accepter()}{accepter()}}
+{\footnotesize\ttfamily static accepter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Accepte une entreprise en attente.
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a98cc7077b5378f7c01b83f0ff59fb039}\label{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a98cc7077b5378f7c01b83f0ff59fb039} 
+\index{ControllerEntreprise@{ControllerEntreprise}!afficherListeEntrepriseEnAttenteFiltree@{afficherListeEntrepriseEnAttenteFiltree}}
+\index{afficherListeEntrepriseEnAttenteFiltree@{afficherListeEntrepriseEnAttenteFiltree}!ControllerEntreprise@{ControllerEntreprise}}
+\doxysubsubsection{\texorpdfstring{afficherListeEntrepriseEnAttenteFiltree()}{afficherListeEntrepriseEnAttenteFiltree()}}
+{\footnotesize\ttfamily static afficher\+Liste\+Entreprise\+En\+Attente\+Filtree (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Affiche la liste des entreprises en attente avec des filtres.
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a018e5b8bf65d94898a8296a34ba86ba7}\label{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a018e5b8bf65d94898a8296a34ba86ba7} 
+\index{ControllerEntreprise@{ControllerEntreprise}!afficherListeEntrepriseValideFiltree@{afficherListeEntrepriseValideFiltree}}
+\index{afficherListeEntrepriseValideFiltree@{afficherListeEntrepriseValideFiltree}!ControllerEntreprise@{ControllerEntreprise}}
+\doxysubsubsection{\texorpdfstring{afficherListeEntrepriseValideFiltree()}{afficherListeEntrepriseValideFiltree()}}
+{\footnotesize\ttfamily static afficher\+Liste\+Entreprise\+Valide\+Filtree (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Affiche la liste des entreprises validées avec des filtres.
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a4b94a0d36200536099a59164527d243d}\label{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a4b94a0d36200536099a59164527d243d} 
+\index{ControllerEntreprise@{ControllerEntreprise}!changePassword@{changePassword}}
+\index{changePassword@{changePassword}!ControllerEntreprise@{ControllerEntreprise}}
+\doxysubsubsection{\texorpdfstring{changePassword()}{changePassword()}}
+{\footnotesize\ttfamily static change\+Password (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Change le mot de passe d\textquotesingle{}une entreprise.
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a4a8430f7b76ed7b91308eb3c65a2e985}\label{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a4a8430f7b76ed7b91308eb3c65a2e985} 
+\index{ControllerEntreprise@{ControllerEntreprise}!codePostalExiste@{codePostalExiste}}
+\index{codePostalExiste@{codePostalExiste}!ControllerEntreprise@{ControllerEntreprise}}
+\doxysubsubsection{\texorpdfstring{codePostalExiste()}{codePostalExiste()}}
+{\footnotesize\ttfamily static code\+Postal\+Existe (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Obtient le code postal de filtre pour les entreprises.
+
+\begin{DoxyReturn}{Returns}
+mixed Le code postal ou null si non défini. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a3ed89d965aa02cf80daf4d0a684754a0}\label{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a3ed89d965aa02cf80daf4d0a684754a0} 
+\index{ControllerEntreprise@{ControllerEntreprise}!connect@{connect}}
+\index{connect@{connect}!ControllerEntreprise@{ControllerEntreprise}}
+\doxysubsubsection{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily static connect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Affiche la vue de connexion.
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a029bf28ec2b9b7a84858b670c76023ac}\label{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a029bf28ec2b9b7a84858b670c76023ac} 
+\index{ControllerEntreprise@{ControllerEntreprise}!creerDepuisFormulaire@{creerDepuisFormulaire}}
+\index{creerDepuisFormulaire@{creerDepuisFormulaire}!ControllerEntreprise@{ControllerEntreprise}}
+\doxysubsubsection{\texorpdfstring{creerDepuisFormulaire()}{creerDepuisFormulaire()}}
+{\footnotesize\ttfamily static creer\+Depuis\+Formulaire (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Crée une entreprise à partir des données d\textquotesingle{}un formulaire.
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_aeb7b5a85799c2dcac69f5205646cbb05}\label{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_aeb7b5a85799c2dcac69f5205646cbb05} 
+\index{ControllerEntreprise@{ControllerEntreprise}!effectifExiste@{effectifExiste}}
+\index{effectifExiste@{effectifExiste}!ControllerEntreprise@{ControllerEntreprise}}
+\doxysubsubsection{\texorpdfstring{effectifExiste()}{effectifExiste()}}
+{\footnotesize\ttfamily static effectif\+Existe (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Obtient l\textquotesingle{}effectif de filtre pour les entreprises.
+
+\begin{DoxyReturn}{Returns}
+mixed L\textquotesingle{}effectif ou null si non défini. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a0dd845fcbb7a5d6288dedbe39c7ddf2c}\label{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a0dd845fcbb7a5d6288dedbe39c7ddf2c} 
+\index{ControllerEntreprise@{ControllerEntreprise}!keywordsExiste@{keywordsExiste}}
+\index{keywordsExiste@{keywordsExiste}!ControllerEntreprise@{ControllerEntreprise}}
+\doxysubsubsection{\texorpdfstring{keywordsExiste()}{keywordsExiste()}}
+{\footnotesize\ttfamily static keywords\+Existe (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Obtient les mots-\/clés de filtre pour les entreprises.
+
+\begin{DoxyReturn}{Returns}
+mixed Les mots-\/clés ou null si non définis. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a72a7db9f2803802e73954a92aed7586e}\label{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_a72a7db9f2803802e73954a92aed7586e} 
+\index{ControllerEntreprise@{ControllerEntreprise}!refuser@{refuser}}
+\index{refuser@{refuser}!ControllerEntreprise@{ControllerEntreprise}}
+\doxysubsubsection{\texorpdfstring{refuser()}{refuser()}}
+{\footnotesize\ttfamily static refuser (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Refuse une entreprise en attente.
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_abe69a848aebb6f35005e47400f47166f}\label{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_abe69a848aebb6f35005e47400f47166f} 
+\index{ControllerEntreprise@{ControllerEntreprise}!resetPassword@{resetPassword}}
+\index{resetPassword@{resetPassword}!ControllerEntreprise@{ControllerEntreprise}}
+\doxysubsubsection{\texorpdfstring{resetPassword()}{resetPassword()}}
+{\footnotesize\ttfamily static reset\+Password (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Réinitialise le mot de passe d\textquotesingle{}une entreprise.
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_ad69121d51a63b01bab0e942cb9657358}\label{class_app_1_1_s_a_e_1_1_controller_1_1_controller_entreprise_ad69121d51a63b01bab0e942cb9657358} 
+\index{ControllerEntreprise@{ControllerEntreprise}!validerEmail@{validerEmail}}
+\index{validerEmail@{validerEmail}!ControllerEntreprise@{ControllerEntreprise}}
+\doxysubsubsection{\texorpdfstring{validerEmail()}{validerEmail()}}
+{\footnotesize\ttfamily static valider\+Email (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Valide l\textquotesingle{}adresse e-\/mail d\textquotesingle{}une entreprise.
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Controller/Controller\+Entreprise.\+php\end{DoxyCompactItemize}

@@ -1,0 +1,54 @@
+\doxysection{Ldap Class Reference}
+\hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_ldap}{}\label{class_app_1_1_s_a_e_1_1_lib_1_1_ldap}\index{Ldap@{Ldap}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_ldap_a91934994e09c9f12473731997060afe3}{connection}} (string \$login, string \$password)
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_ldap_adaa6aa44de31f2bd4d0c33c4f868193a}{connection\+Brut\+Force\+Personnel}} (string \$login)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe Ldap gérant les interactions avec un serveur LDAP. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_ldap_a91934994e09c9f12473731997060afe3}\label{class_app_1_1_s_a_e_1_1_lib_1_1_ldap_a91934994e09c9f12473731997060afe3} 
+\index{Ldap@{Ldap}!connection@{connection}}
+\index{connection@{connection}!Ldap@{Ldap}}
+\doxysubsubsection{\texorpdfstring{connection()}{connection()}}
+{\footnotesize\ttfamily static connection (\begin{DoxyParamCaption}\item[{string}]{\$login,  }\item[{string}]{\$password }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Établit une connexion LDAP en utilisant le login et le mot de passe fournis.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$login} & Le login de l\textquotesingle{}utilisateur. \\
+\hline
+string & {\em \$password} & Le mot de passe de l\textquotesingle{}utilisateur. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+User\+Information\texorpdfstring{$\vert$}{|}false Les informations de l\textquotesingle{}utilisateur en cas de succès, false sinon. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_ldap_adaa6aa44de31f2bd4d0c33c4f868193a}\label{class_app_1_1_s_a_e_1_1_lib_1_1_ldap_adaa6aa44de31f2bd4d0c33c4f868193a} 
+\index{Ldap@{Ldap}!connectionBrutForcePersonnel@{connectionBrutForcePersonnel}}
+\index{connectionBrutForcePersonnel@{connectionBrutForcePersonnel}!Ldap@{Ldap}}
+\doxysubsubsection{\texorpdfstring{connectionBrutForcePersonnel()}{connectionBrutForcePersonnel()}}
+{\footnotesize\ttfamily static connection\+Brut\+Force\+Personnel (\begin{DoxyParamCaption}\item[{string}]{\$login }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Emule une connexion LDAP pour les membres du personnel en utilisant le login fourni.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$login} & Le login de l\textquotesingle{}utilisateur. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+User\+Information\texorpdfstring{$\vert$}{|}false Les informations de l\textquotesingle{}utilisateur en cas de succès, false sinon. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Lib/Ldap.\+php\end{DoxyCompactItemize}

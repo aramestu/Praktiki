@@ -1,0 +1,88 @@
+\doxysection{IImportation Class Reference}
+\hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_i_importation}{}\label{class_app_1_1_s_a_e_1_1_lib_1_1_i_importation}\index{IImportation@{IImportation}}
+Inheritance diagram for IImportation\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_app_1_1_s_a_e_1_1_lib_1_1_i_importation}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_i_importation_aa470f5c486062613a4451e35e2b1a26a}{import}} (string \$file\+Name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_i_importation_a57b85ec6b3e84a88c4104209c048c18a}{verifier\+Et\+Creer}} (array \$column, int \$id\+Annee\+Universitaire)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_i_importation_a20d4b680a194effecff41c0685c5f3e9}{mettre\+AJour}} (array \$column, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_data_object_1_1_abstract_data_object}{Abstract\+Data\+Object}} \$data\+Object)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_i_importation_aa470f5c486062613a4451e35e2b1a26a}\label{class_app_1_1_s_a_e_1_1_lib_1_1_i_importation_aa470f5c486062613a4451e35e2b1a26a} 
+\index{IImportation@{IImportation}!import@{import}}
+\index{import@{import}!IImportation@{IImportation}}
+\doxysubsubsection{\texorpdfstring{import()}{import()}}
+{\footnotesize\ttfamily import (\begin{DoxyParamCaption}\item[{string}]{\$file\+Name }\end{DoxyParamCaption})}
+
+Importe des données à partir d\textquotesingle{}un fichier.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$file\+Name} & Le chemin du fichier à importer.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_i_importation_a20d4b680a194effecff41c0685c5f3e9}\label{class_app_1_1_s_a_e_1_1_lib_1_1_i_importation_a20d4b680a194effecff41c0685c5f3e9} 
+\index{IImportation@{IImportation}!mettreAJour@{mettreAJour}}
+\index{mettreAJour@{mettreAJour}!IImportation@{IImportation}}
+\doxysubsubsection{\texorpdfstring{mettreAJour()}{mettreAJour()}}
+{\footnotesize\ttfamily mettre\+AJour (\begin{DoxyParamCaption}\item[{array}]{\$column,  }\item[{\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_data_object_1_1_abstract_data_object}{Abstract\+Data\+Object}}}]{\$data\+Object }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}, {\ttfamily [protected]}}
+
+Met à jour un objet de données existant avec les données de la ligne du fichier.
+
+
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$column} & Les données de la ligne du fichier. \\
+\hline
+Abstract\+Data\+Object & {\em \$data\+Object} & L\textquotesingle{}objet de données à mettre à jour.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_importation_pstage_a20d4b680a194effecff41c0685c5f3e9}{Importation\+Pstage}}, and \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_importation_studea_a20d4b680a194effecff41c0685c5f3e9}{Importation\+Studea}}.
+
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_i_importation_a57b85ec6b3e84a88c4104209c048c18a}\label{class_app_1_1_s_a_e_1_1_lib_1_1_i_importation_a57b85ec6b3e84a88c4104209c048c18a} 
+\index{IImportation@{IImportation}!verifierEtCreer@{verifierEtCreer}}
+\index{verifierEtCreer@{verifierEtCreer}!IImportation@{IImportation}}
+\doxysubsubsection{\texorpdfstring{verifierEtCreer()}{verifierEtCreer()}}
+{\footnotesize\ttfamily verifier\+Et\+Creer (\begin{DoxyParamCaption}\item[{array}]{\$column,  }\item[{int}]{\$id\+Annee\+Universitaire }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}, {\ttfamily [protected]}}
+
+Vérifie et crée un objet de données à partir d\textquotesingle{}une ligne du fichier.
+
+
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$column} & Les données de la ligne du fichier. \\
+\hline
+int & {\em \$id\+Annee\+Universitaire} & L\textquotesingle{}ID de l\textquotesingle{}année universitaire en cours.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Abstract\+Data\+Object\texorpdfstring{$\vert$}{|}null L\textquotesingle{}objet de données créé ou null si la vérification échoue. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_importation_pstage_a57b85ec6b3e84a88c4104209c048c18a}{Importation\+Pstage}}, and \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_importation_studea_a57b85ec6b3e84a88c4104209c048c18a}{Importation\+Studea}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Lib/IImportation.\+php\end{DoxyCompactItemize}

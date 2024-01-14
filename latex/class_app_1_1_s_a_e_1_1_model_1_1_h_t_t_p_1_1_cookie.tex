@@ -1,0 +1,83 @@
+\doxysection{Cookie Class Reference}
+\hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_cookie}{}\label{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_cookie}\index{Cookie@{Cookie}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_cookie_a1d66178d978dbc09a9a001e86a5c0b71}{enregistrer}} (string \$cle, \$valeur, ?int \$duree\+Expiration=null)
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_cookie_a186cbd09946041db59907729e9e94a08}{lire}} (string \$cle)
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_cookie_a36c5495110662128c850643296fa5568}{contient}} (\$cle)
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_cookie_ab426cf5462347df6e66915cb5d39e337}{supprimer}} (\$cle)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_cookie_a36c5495110662128c850643296fa5568}\label{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_cookie_a36c5495110662128c850643296fa5568} 
+\index{Cookie@{Cookie}!contient@{contient}}
+\index{contient@{contient}!Cookie@{Cookie}}
+\doxysubsubsection{\texorpdfstring{contient()}{contient()}}
+{\footnotesize\ttfamily static contient (\begin{DoxyParamCaption}\item[{}]{\$cle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Vérifie si un cookie avec la clé spécifiée existe.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$cle} & La clé du cookie à vérifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool True si le cookie existe, sinon false. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_cookie_a1d66178d978dbc09a9a001e86a5c0b71}\label{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_cookie_a1d66178d978dbc09a9a001e86a5c0b71} 
+\index{Cookie@{Cookie}!enregistrer@{enregistrer}}
+\index{enregistrer@{enregistrer}!Cookie@{Cookie}}
+\doxysubsubsection{\texorpdfstring{enregistrer()}{enregistrer()}}
+{\footnotesize\ttfamily static enregistrer (\begin{DoxyParamCaption}\item[{string}]{\$cle,  }\item[{}]{\$valeur,  }\item[{?int}]{\$duree\+Expiration = {\ttfamily null} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Enregistre un cookie avec une clé, une valeur, et éventuellement une durée d\textquotesingle{}expiration.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$cle} & La clé du cookie. \\
+\hline
+mixed & {\em \$valeur} & La valeur à enregistrer. \\
+\hline
+int | null & {\em \$duree\+Expiration} & La durée d\textquotesingle{}expiration en secondes (optionnelle). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_cookie_a186cbd09946041db59907729e9e94a08}\label{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_cookie_a186cbd09946041db59907729e9e94a08} 
+\index{Cookie@{Cookie}!lire@{lire}}
+\index{lire@{lire}!Cookie@{Cookie}}
+\doxysubsubsection{\texorpdfstring{lire()}{lire()}}
+{\footnotesize\ttfamily static lire (\begin{DoxyParamCaption}\item[{string}]{\$cle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Lit la valeur d\textquotesingle{}un cookie enregistré avec la clé spécifiée.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$cle} & La clé du cookie à lire. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mixed\texorpdfstring{$\vert$}{|}null La valeur du cookie, ou null si le cookie n\textquotesingle{}existe pas. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_cookie_ab426cf5462347df6e66915cb5d39e337}\label{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_cookie_ab426cf5462347df6e66915cb5d39e337} 
+\index{Cookie@{Cookie}!supprimer@{supprimer}}
+\index{supprimer@{supprimer}!Cookie@{Cookie}}
+\doxysubsubsection{\texorpdfstring{supprimer()}{supprimer()}}
+{\footnotesize\ttfamily static supprimer (\begin{DoxyParamCaption}\item[{}]{\$cle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Supprime un cookie avec la clé spécifiée.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$cle} & La clé du cookie à supprimer. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Model/\+HTTP/Cookie.\+php\end{DoxyCompactItemize}

@@ -1,0 +1,72 @@
+\doxysection{Importation\+Pstage Class Reference}
+\hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_importation_pstage}{}\label{class_app_1_1_s_a_e_1_1_lib_1_1_importation_pstage}\index{ImportationPstage@{ImportationPstage}}
+Inheritance diagram for Importation\+Pstage\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_app_1_1_s_a_e_1_1_lib_1_1_importation_pstage}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_importation_pstage_a57b85ec6b3e84a88c4104209c048c18a}{verifier\+Et\+Creer}} (array \$column, int \$id\+Annee\+Universitaire)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_importation_pstage_a20d4b680a194effecff41c0685c5f3e9}{mettre\+AJour}} (array \$column, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_data_object_1_1_abstract_data_object}{Abstract\+Data\+Object}} \$data\+Object)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_i_importation}{IImportation}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_i_importation_aa470f5c486062613a4451e35e2b1a26a}{import}} (string \$file\+Name)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe Importation\+Pstage gérant l\textquotesingle{}importation de données depuis un fichier Pstage. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_importation_pstage_a20d4b680a194effecff41c0685c5f3e9}\label{class_app_1_1_s_a_e_1_1_lib_1_1_importation_pstage_a20d4b680a194effecff41c0685c5f3e9} 
+\index{ImportationPstage@{ImportationPstage}!mettreAJour@{mettreAJour}}
+\index{mettreAJour@{mettreAJour}!ImportationPstage@{ImportationPstage}}
+\doxysubsubsection{\texorpdfstring{mettreAJour()}{mettreAJour()}}
+{\footnotesize\ttfamily mettre\+AJour (\begin{DoxyParamCaption}\item[{array}]{\$column,  }\item[{\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_data_object_1_1_abstract_data_object}{Abstract\+Data\+Object}}}]{\$data\+Object }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Retourne les attributs à mettre à jour dans la convention 
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$column} & \\
+\hline
+Abstract\+Data\+Object & {\em \$data\+Object} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_i_importation_a20d4b680a194effecff41c0685c5f3e9}{IImportation}}.
+
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_importation_pstage_a57b85ec6b3e84a88c4104209c048c18a}\label{class_app_1_1_s_a_e_1_1_lib_1_1_importation_pstage_a57b85ec6b3e84a88c4104209c048c18a} 
+\index{ImportationPstage@{ImportationPstage}!verifierEtCreer@{verifierEtCreer}}
+\index{verifierEtCreer@{verifierEtCreer}!ImportationPstage@{ImportationPstage}}
+\doxysubsubsection{\texorpdfstring{verifierEtCreer()}{verifierEtCreer()}}
+{\footnotesize\ttfamily verifier\+Et\+Creer (\begin{DoxyParamCaption}\item[{array}]{\$column,  }\item[{int}]{\$id\+Annee\+Universitaire }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Crée une convention si l\textquotesingle{}étudiant (s\textquotesingle{}il existe) n\textquotesingle{}en a pas et qu\textquotesingle{}il n\textquotesingle{}a pas d\textquotesingle{}alternance. Return null sinon 
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$column} & \\
+\hline
+int & {\em \$id\+Annee\+Universitaire} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Abstract\+Data\+Object\texorpdfstring{$\vert$}{|}null 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_i_importation_a57b85ec6b3e84a88c4104209c048c18a}{IImportation}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Lib/Importation\+Pstage.\+php\end{DoxyCompactItemize}

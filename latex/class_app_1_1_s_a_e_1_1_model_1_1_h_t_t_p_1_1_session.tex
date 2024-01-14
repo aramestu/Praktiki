@@ -1,0 +1,113 @@
+\doxysection{Session Class Reference}
+\hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session}{}\label{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session}\index{Session@{Session}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session_abd25eb84e6dc2137e7f92d07f610563b}{contient}} (\$name)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session_ab122f25342cb5e5a74b999047ca013b5}{enregistrer}} (string \$name, \$value)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session_a80c5afebc7ef4807afc86b9e74e21b1e}{lire}} (string \$name)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session_a0dc0a9d9cf9d0c4ff824d8be4e1a18b7}{supprimer}} (\$name)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session_a140bc48721ca2e11c42effea56418ff6}{detruire}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session_ac93fbec81f07e5d15f80db907e63dc10}{get\+Instance}} ()
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session_abd14803938724cf9f7069b094e591b57}{verifier\+Derniere\+Activite}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session_abd25eb84e6dc2137e7f92d07f610563b}\label{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session_abd25eb84e6dc2137e7f92d07f610563b} 
+\index{Session@{Session}!contient@{contient}}
+\index{contient@{contient}!Session@{Session}}
+\doxysubsubsection{\texorpdfstring{contient()}{contient()}}
+{\footnotesize\ttfamily contient (\begin{DoxyParamCaption}\item[{}]{\$name }\end{DoxyParamCaption})}
+
+Vérifie si la session contient une variable avec le nom spécifié.
+
+
+\begin{DoxyParams}[1]{Parameters}
+mixed & {\em \$name} & Le nom de la variable à vérifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool True si la variable existe, sinon false. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session_a140bc48721ca2e11c42effea56418ff6}\label{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session_a140bc48721ca2e11c42effea56418ff6} 
+\index{Session@{Session}!detruire@{detruire}}
+\index{detruire@{detruire}!Session@{Session}}
+\doxysubsubsection{\texorpdfstring{detruire()}{detruire()}}
+{\footnotesize\ttfamily detruire (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Détruit la session en cours. \Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session_ab122f25342cb5e5a74b999047ca013b5}\label{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session_ab122f25342cb5e5a74b999047ca013b5} 
+\index{Session@{Session}!enregistrer@{enregistrer}}
+\index{enregistrer@{enregistrer}!Session@{Session}}
+\doxysubsubsection{\texorpdfstring{enregistrer()}{enregistrer()}}
+{\footnotesize\ttfamily enregistrer (\begin{DoxyParamCaption}\item[{string}]{\$name,  }\item[{}]{\$value }\end{DoxyParamCaption})}
+
+Enregistre une variable dans la session.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$name} & Le nom de la variable. \\
+\hline
+mixed & {\em \$value} & La valeur de la variable. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session_ac93fbec81f07e5d15f80db907e63dc10}\label{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session_ac93fbec81f07e5d15f80db907e63dc10} 
+\index{Session@{Session}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!Session@{Session}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily static get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Obtient l\textquotesingle{}instance unique de la classe Session.
+
+\begin{DoxyReturn}{Returns}
+Session L\textquotesingle{}instance de la classe Session. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session_a80c5afebc7ef4807afc86b9e74e21b1e}\label{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session_a80c5afebc7ef4807afc86b9e74e21b1e} 
+\index{Session@{Session}!lire@{lire}}
+\index{lire@{lire}!Session@{Session}}
+\doxysubsubsection{\texorpdfstring{lire()}{lire()}}
+{\footnotesize\ttfamily lire (\begin{DoxyParamCaption}\item[{string}]{\$name }\end{DoxyParamCaption})}
+
+Lit la valeur d\textquotesingle{}une variable dans la session.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$name} & Le nom de la variable à lire. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mixed La valeur de la variable. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session_a0dc0a9d9cf9d0c4ff824d8be4e1a18b7}\label{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session_a0dc0a9d9cf9d0c4ff824d8be4e1a18b7} 
+\index{Session@{Session}!supprimer@{supprimer}}
+\index{supprimer@{supprimer}!Session@{Session}}
+\doxysubsubsection{\texorpdfstring{supprimer()}{supprimer()}}
+{\footnotesize\ttfamily supprimer (\begin{DoxyParamCaption}\item[{}]{\$name }\end{DoxyParamCaption})}
+
+Supprime une variable de la session.
+
+
+\begin{DoxyParams}[1]{Parameters}
+mixed & {\em \$name} & Le nom de la variable à supprimer. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session_abd14803938724cf9f7069b094e591b57}\label{class_app_1_1_s_a_e_1_1_model_1_1_h_t_t_p_1_1_session_abd14803938724cf9f7069b094e591b57} 
+\index{Session@{Session}!verifierDerniereActivite@{verifierDerniereActivite}}
+\index{verifierDerniereActivite@{verifierDerniereActivite}!Session@{Session}}
+\doxysubsubsection{\texorpdfstring{verifierDerniereActivite()}{verifierDerniereActivite()}}
+{\footnotesize\ttfamily static verifier\+Derniere\+Activite (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Vérifie la dernière activité de la session et déconnecte l\textquotesingle{}utilisateur si nécessaire. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Model/\+HTTP/Session.\+php\end{DoxyCompactItemize}

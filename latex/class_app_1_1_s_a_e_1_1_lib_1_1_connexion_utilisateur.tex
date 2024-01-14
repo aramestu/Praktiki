@@ -1,0 +1,138 @@
+\doxysection{Connexion\+Utilisateur Class Reference}
+\hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur}{}\label{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur}\index{ConnexionUtilisateur@{ConnexionUtilisateur}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_af8b0a022dd63c30e2f9baf2d62677333}{connecter}} (string \$login\+Utilisateur)
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_a8a463da07194091f2fb0465ceef73c89}{est\+Connecte}} ()
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_a8f137230b9e82bb8d55af72219433a42}{deconnecter}} ()
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_ac8be62e169c0746c2eacc45b30bbd7ee}{get\+Login\+Utilisateur\+Connecte}} ()
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_ac89ce7fe33dffe6d8ae3148bde9ebaf1}{est\+Utilisateur}} (string \$login)
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_ac78bc477e8a4dc6f19a781d619f3c16f}{est\+Etudiant}} ()
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_a885aa21a29f0441cb65cb5f468688d96}{est\+Entreprise}} ()
+\item 
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_a0238065c47d66b86fd05e9cf334100cf}\label{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_a0238065c47d66b86fd05e9cf334100cf} 
+static {\bfseries est\+Personnel} ()
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_a069011321035b96c37d34a3c62d0e8db}{est\+Enseignant}} ()
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_adad93c3dce4e4c66009b064dc1c75b91}{est\+Administrateur}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe Connexion\+Utilisateur gérant les fonctionnalités de connexion, déconnexion et vérification du statut utilisateur. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_af8b0a022dd63c30e2f9baf2d62677333}\label{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_af8b0a022dd63c30e2f9baf2d62677333} 
+\index{ConnexionUtilisateur@{ConnexionUtilisateur}!connecter@{connecter}}
+\index{connecter@{connecter}!ConnexionUtilisateur@{ConnexionUtilisateur}}
+\doxysubsubsection{\texorpdfstring{connecter()}{connecter()}}
+{\footnotesize\ttfamily static connecter (\begin{DoxyParamCaption}\item[{string}]{\$login\+Utilisateur }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Connecte un utilisateur en enregistrant son login en session.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$login\+Utilisateur} & Le login de l\textquotesingle{}utilisateur à connecter. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_a8f137230b9e82bb8d55af72219433a42}\label{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_a8f137230b9e82bb8d55af72219433a42} 
+\index{ConnexionUtilisateur@{ConnexionUtilisateur}!deconnecter@{deconnecter}}
+\index{deconnecter@{deconnecter}!ConnexionUtilisateur@{ConnexionUtilisateur}}
+\doxysubsubsection{\texorpdfstring{deconnecter()}{deconnecter()}}
+{\footnotesize\ttfamily static deconnecter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Déconnecte l\textquotesingle{}utilisateur en supprimant son login de la session. \Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_adad93c3dce4e4c66009b064dc1c75b91}\label{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_adad93c3dce4e4c66009b064dc1c75b91} 
+\index{ConnexionUtilisateur@{ConnexionUtilisateur}!estAdministrateur@{estAdministrateur}}
+\index{estAdministrateur@{estAdministrateur}!ConnexionUtilisateur@{ConnexionUtilisateur}}
+\doxysubsubsection{\texorpdfstring{estAdministrateur()}{estAdministrateur()}}
+{\footnotesize\ttfamily static est\+Administrateur (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Vérifie si l\textquotesingle{}utilisateur connecté est un administrateur.
+
+\begin{DoxyReturn}{Returns}
+bool True si l\textquotesingle{}utilisateur connecté est un administrateur, false sinon. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_a8a463da07194091f2fb0465ceef73c89}\label{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_a8a463da07194091f2fb0465ceef73c89} 
+\index{ConnexionUtilisateur@{ConnexionUtilisateur}!estConnecte@{estConnecte}}
+\index{estConnecte@{estConnecte}!ConnexionUtilisateur@{ConnexionUtilisateur}}
+\doxysubsubsection{\texorpdfstring{estConnecte()}{estConnecte()}}
+{\footnotesize\ttfamily static est\+Connecte (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Vérifie si un utilisateur est connecté.
+
+\begin{DoxyReturn}{Returns}
+bool True si un utilisateur est connecté, false sinon. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_a069011321035b96c37d34a3c62d0e8db}\label{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_a069011321035b96c37d34a3c62d0e8db} 
+\index{ConnexionUtilisateur@{ConnexionUtilisateur}!estEnseignant@{estEnseignant}}
+\index{estEnseignant@{estEnseignant}!ConnexionUtilisateur@{ConnexionUtilisateur}}
+\doxysubsubsection{\texorpdfstring{estEnseignant()}{estEnseignant()}}
+{\footnotesize\ttfamily static est\+Enseignant (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Vérifie si l\textquotesingle{}utilisateur connecté est un enseignant.
+
+\begin{DoxyReturn}{Returns}
+bool True si l\textquotesingle{}utilisateur connecté est un enseignant, false sinon. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_a885aa21a29f0441cb65cb5f468688d96}\label{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_a885aa21a29f0441cb65cb5f468688d96} 
+\index{ConnexionUtilisateur@{ConnexionUtilisateur}!estEntreprise@{estEntreprise}}
+\index{estEntreprise@{estEntreprise}!ConnexionUtilisateur@{ConnexionUtilisateur}}
+\doxysubsubsection{\texorpdfstring{estEntreprise()}{estEntreprise()}}
+{\footnotesize\ttfamily static est\+Entreprise (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Vérifie si l\textquotesingle{}utilisateur connecté est une entreprise.
+
+\begin{DoxyReturn}{Returns}
+bool True si l\textquotesingle{}utilisateur connecté est une entreprise, false sinon. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_ac78bc477e8a4dc6f19a781d619f3c16f}\label{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_ac78bc477e8a4dc6f19a781d619f3c16f} 
+\index{ConnexionUtilisateur@{ConnexionUtilisateur}!estEtudiant@{estEtudiant}}
+\index{estEtudiant@{estEtudiant}!ConnexionUtilisateur@{ConnexionUtilisateur}}
+\doxysubsubsection{\texorpdfstring{estEtudiant()}{estEtudiant()}}
+{\footnotesize\ttfamily static est\+Etudiant (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Vérifie si l\textquotesingle{}utilisateur connecté est un étudiant.
+
+\begin{DoxyReturn}{Returns}
+bool True si l\textquotesingle{}utilisateur connecté est un étudiant, false sinon. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_ac89ce7fe33dffe6d8ae3148bde9ebaf1}\label{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_ac89ce7fe33dffe6d8ae3148bde9ebaf1} 
+\index{ConnexionUtilisateur@{ConnexionUtilisateur}!estUtilisateur@{estUtilisateur}}
+\index{estUtilisateur@{estUtilisateur}!ConnexionUtilisateur@{ConnexionUtilisateur}}
+\doxysubsubsection{\texorpdfstring{estUtilisateur()}{estUtilisateur()}}
+{\footnotesize\ttfamily static est\+Utilisateur (\begin{DoxyParamCaption}\item[{string}]{\$login }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Vérifie si l\textquotesingle{}utilisateur connecté est celui spécifié.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$login} & Le login à vérifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool True si l\textquotesingle{}utilisateur connecté correspond au login spécifié, false sinon. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_ac8be62e169c0746c2eacc45b30bbd7ee}\label{class_app_1_1_s_a_e_1_1_lib_1_1_connexion_utilisateur_ac8be62e169c0746c2eacc45b30bbd7ee} 
+\index{ConnexionUtilisateur@{ConnexionUtilisateur}!getLoginUtilisateurConnecte@{getLoginUtilisateurConnecte}}
+\index{getLoginUtilisateurConnecte@{getLoginUtilisateurConnecte}!ConnexionUtilisateur@{ConnexionUtilisateur}}
+\doxysubsubsection{\texorpdfstring{getLoginUtilisateurConnecte()}{getLoginUtilisateurConnecte()}}
+{\footnotesize\ttfamily static get\+Login\+Utilisateur\+Connecte (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Obtient le login de l\textquotesingle{}utilisateur connecté.
+
+\begin{DoxyReturn}{Returns}
+string\texorpdfstring{$\vert$}{|}null Le login de l\textquotesingle{}utilisateur connecté, ou null s\textquotesingle{}il n\textquotesingle{}est pas connecté. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Lib/Connexion\+Utilisateur.\+php\end{DoxyCompactItemize}

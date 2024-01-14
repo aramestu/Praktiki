@@ -1,0 +1,92 @@
+\doxysection{Verification\+Email Class Reference}
+\hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_verification_email}{}\label{class_app_1_1_s_a_e_1_1_lib_1_1_verification_email}\index{VerificationEmail@{VerificationEmail}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_verification_email_a7b64f14e739e826aaedab8e26d74bd5c}{envoi\+Email\+Validation}} (\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_data_object_1_1_entreprise}{Entreprise}} \$\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_data_object_1_1_entreprise}{Entreprise}})
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_verification_email_ac7b06f1b5620aeac28e7f6e1f1e84337}{envoi\+Email\+Changement\+Password}} (\$entreprise)
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_verification_email_a30e7b87027cba5184aef36e59175f639}{traiter\+Email\+Validation}} (string \$login, string \$nonce)
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_verification_email_a59ca92ada72ccb23df99eb2737fb6fc5}{a\+Valide\+Email}} (\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_data_object_1_1_entreprise}{Entreprise}} \$\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_data_object_1_1_entreprise}{Entreprise}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+La classe Verification\+Email gère l\textquotesingle{}envoi d\textquotesingle{}e-\/mails de validation et de changement de mot de passe. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_verification_email_a59ca92ada72ccb23df99eb2737fb6fc5}\label{class_app_1_1_s_a_e_1_1_lib_1_1_verification_email_a59ca92ada72ccb23df99eb2737fb6fc5} 
+\index{VerificationEmail@{VerificationEmail}!aValideEmail@{aValideEmail}}
+\index{aValideEmail@{aValideEmail}!VerificationEmail@{VerificationEmail}}
+\doxysubsubsection{\texorpdfstring{aValideEmail()}{aValideEmail()}}
+{\footnotesize\ttfamily static a\+Valide\+Email (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_data_object_1_1_entreprise}{Entreprise}}}]{\$\+Entreprise }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Vérifie si l\textquotesingle{}entreprise a déjà validé son e-\/mail.
+
+
+\begin{DoxyParams}[1]{Parameters}
+Entreprise & {\em \$\+Entreprise} & L\textquotesingle{}objet Entreprise à vérifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool True si l\textquotesingle{}e-\/mail est validé, false sinon. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_verification_email_ac7b06f1b5620aeac28e7f6e1f1e84337}\label{class_app_1_1_s_a_e_1_1_lib_1_1_verification_email_ac7b06f1b5620aeac28e7f6e1f1e84337} 
+\index{VerificationEmail@{VerificationEmail}!envoiEmailChangementPassword@{envoiEmailChangementPassword}}
+\index{envoiEmailChangementPassword@{envoiEmailChangementPassword}!VerificationEmail@{VerificationEmail}}
+\doxysubsubsection{\texorpdfstring{envoiEmailChangementPassword()}{envoiEmailChangementPassword()}}
+{\footnotesize\ttfamily static envoi\+Email\+Changement\+Password (\begin{DoxyParamCaption}\item[{}]{\$entreprise }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Envoie un e-\/mail de changement de mot de passe.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$login} & Le login de l\textquotesingle{}utilisateur pour lequel le mot de passe est changé. \\
+\hline
+string & {\em \$mail} & L\textquotesingle{}adresse e-\/mail à laquelle envoyer l\textquotesingle{}e-\/mail. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_verification_email_a7b64f14e739e826aaedab8e26d74bd5c}\label{class_app_1_1_s_a_e_1_1_lib_1_1_verification_email_a7b64f14e739e826aaedab8e26d74bd5c} 
+\index{VerificationEmail@{VerificationEmail}!envoiEmailValidation@{envoiEmailValidation}}
+\index{envoiEmailValidation@{envoiEmailValidation}!VerificationEmail@{VerificationEmail}}
+\doxysubsubsection{\texorpdfstring{envoiEmailValidation()}{envoiEmailValidation()}}
+{\footnotesize\ttfamily static envoi\+Email\+Validation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_data_object_1_1_entreprise}{Entreprise}}}]{\$\+Entreprise }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Envoie un e-\/mail de validation pour l\textquotesingle{}entreprise donnée.
+
+
+\begin{DoxyParams}[1]{Parameters}
+Entreprise & {\em \$\+Entreprise} & L\textquotesingle{}objet Entreprise pour lequel l\textquotesingle{}e-\/mail de validation est envoyé. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_verification_email_a30e7b87027cba5184aef36e59175f639}\label{class_app_1_1_s_a_e_1_1_lib_1_1_verification_email_a30e7b87027cba5184aef36e59175f639} 
+\index{VerificationEmail@{VerificationEmail}!traiterEmailValidation@{traiterEmailValidation}}
+\index{traiterEmailValidation@{traiterEmailValidation}!VerificationEmail@{VerificationEmail}}
+\doxysubsubsection{\texorpdfstring{traiterEmailValidation()}{traiterEmailValidation()}}
+{\footnotesize\ttfamily static traiter\+Email\+Validation (\begin{DoxyParamCaption}\item[{string}]{\$login,  }\item[{string}]{\$nonce }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Traite la validation de l\textquotesingle{}e-\/mail en fonction du login et du nonce.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$login} & Le login de l\textquotesingle{}entreprise. \\
+\hline
+string & {\em \$nonce} & Le nonce associé à l\textquotesingle{}e-\/mail de validation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool True si la validation est réussie, false sinon. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Lib/Verification\+Email.\+php\end{DoxyCompactItemize}

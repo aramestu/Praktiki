@@ -1,0 +1,140 @@
+\doxysection{Personnel\+Repository Class Reference}
+\hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_personnel_repository}{}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_personnel_repository}\index{PersonnelRepository@{PersonnelRepository}}
+Inheritance diagram for Personnel\+Repository\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_personnel_repository}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_personnel_repository_a4b49ac250bd8f867bd866e023a6768ff}{construire\+Depuis\+Tableau}} (array \$personnel\+Format\+Tableau)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_personnel_repository_ad06dcfe171fa0d9c1097d0652be5e211}{get\+By\+Email}} (string \$valeur\+Email)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository}{Abstract\+Repository}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_aba0d5b303383fb5b1fabb5fd01cd3800}{get\+All}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_ac751e87b3d4c4bf2feb03bee8b092755}{count}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_acbf29433b098b320add79a0140ed6357}{get\+By\+Id}} (string \$valeur\+Cle\+Primaire)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a308be9131f4143a8629979773d6b4df1}{supprimer}} (string \$valeur\+Cle\+Primaire)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a25579e78a09b9ba63a0a23f82f86c7b1}{mettre\+AJour}} (\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_data_object_1_1_abstract_data_object}{Abstract\+Data\+Object}} \$object)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a585f05a608ac7f42392d6b4879d0ee74}{save}} (\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_data_object_1_1_abstract_data_object}{Abstract\+Data\+Object}} \$object)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_aeeeb33a317cbb4fd00f2501990f15fff}{archiver}} (string \$valeur\+Cle\+Primaire)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_aaae55b0757713484ed11454e779eac50}{searchs}} (string \$keywords=null, array \$colonnes=null, string \$colonne\+Trie=null, bool \$ordre=null)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_personnel_repository_ae0d3ed75ff173fc22843605acf4974b4}{get\+Nom\+Table}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_personnel_repository_a6236d87df87167394ab71e2e44537c46}{get\+Nom\+Cle\+Primaire}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_personnel_repository_af645a4f5ffca533622b41c65c94e9b48}{get\+Noms\+Colonnes}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository}{Abstract\+Repository}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a63a40b7ccfeb38655d8ed38a58dea3fe}{colonne\+To\+Search}} (array \$colonnes=null)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Repository pour la gestion des personnels. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_personnel_repository_a4b49ac250bd8f867bd866e023a6768ff}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_personnel_repository_a4b49ac250bd8f867bd866e023a6768ff} 
+\index{PersonnelRepository@{PersonnelRepository}!construireDepuisTableau@{construireDepuisTableau}}
+\index{construireDepuisTableau@{construireDepuisTableau}!PersonnelRepository@{PersonnelRepository}}
+\doxysubsubsection{\texorpdfstring{construireDepuisTableau()}{construireDepuisTableau()}}
+{\footnotesize\ttfamily construire\+Depuis\+Tableau (\begin{DoxyParamCaption}\item[{array}]{\$personnel\+Format\+Tableau }\end{DoxyParamCaption})}
+
+Construit un objet Personnel à partir d\textquotesingle{}un tableau de données formaté.
+
+
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$personnel\+Format\+Tableau} & Le tableau de données du ppersonnel. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Personnel L\textquotesingle{}objet Personnel créé. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_aa82369b07beaf959edee1e18fac85f82}{Abstract\+Repository}}.
+
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_personnel_repository_ad06dcfe171fa0d9c1097d0652be5e211}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_personnel_repository_ad06dcfe171fa0d9c1097d0652be5e211} 
+\index{PersonnelRepository@{PersonnelRepository}!getByEmail@{getByEmail}}
+\index{getByEmail@{getByEmail}!PersonnelRepository@{PersonnelRepository}}
+\doxysubsubsection{\texorpdfstring{getByEmail()}{getByEmail()}}
+{\footnotesize\ttfamily get\+By\+Email (\begin{DoxyParamCaption}\item[{string}]{\$valeur\+Email }\end{DoxyParamCaption})}
+
+Récupère un personnel par son adresse e-\/mail.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$valeur\+Email} & L\textquotesingle{}adresse e-\/mail du ppersonnel à récupérer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Personnel\texorpdfstring{$\vert$}{|}null L\textquotesingle{}objet Personnel ou null s\textquotesingle{}il n\textquotesingle{}existe pas. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_personnel_repository_a6236d87df87167394ab71e2e44537c46}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_personnel_repository_a6236d87df87167394ab71e2e44537c46} 
+\index{PersonnelRepository@{PersonnelRepository}!getNomClePrimaire@{getNomClePrimaire}}
+\index{getNomClePrimaire@{getNomClePrimaire}!PersonnelRepository@{PersonnelRepository}}
+\doxysubsubsection{\texorpdfstring{getNomClePrimaire()}{getNomClePrimaire()}}
+{\footnotesize\ttfamily get\+Nom\+Cle\+Primaire (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Retourne le nom de la clé primaire de la table des personnels.
+
+\begin{DoxyReturn}{Returns}
+string Le nom de la clé primaire. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a6236d87df87167394ab71e2e44537c46}{Abstract\+Repository}}.
+
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_personnel_repository_af645a4f5ffca533622b41c65c94e9b48}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_personnel_repository_af645a4f5ffca533622b41c65c94e9b48} 
+\index{PersonnelRepository@{PersonnelRepository}!getNomsColonnes@{getNomsColonnes}}
+\index{getNomsColonnes@{getNomsColonnes}!PersonnelRepository@{PersonnelRepository}}
+\doxysubsubsection{\texorpdfstring{getNomsColonnes()}{getNomsColonnes()}}
+{\footnotesize\ttfamily get\+Noms\+Colonnes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Retourne les noms des colonnes de la table des personnels.
+
+\begin{DoxyReturn}{Returns}
+array Les noms des colonnes. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_af645a4f5ffca533622b41c65c94e9b48}{Abstract\+Repository}}.
+
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_personnel_repository_ae0d3ed75ff173fc22843605acf4974b4}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_personnel_repository_ae0d3ed75ff173fc22843605acf4974b4} 
+\index{PersonnelRepository@{PersonnelRepository}!getNomTable@{getNomTable}}
+\index{getNomTable@{getNomTable}!PersonnelRepository@{PersonnelRepository}}
+\doxysubsubsection{\texorpdfstring{getNomTable()}{getNomTable()}}
+{\footnotesize\ttfamily get\+Nom\+Table (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Retourne le nom de la table des personnels.
+
+\begin{DoxyReturn}{Returns}
+string Le nom de la table des personnels. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_ae0d3ed75ff173fc22843605acf4974b4}{Abstract\+Repository}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Model/\+Repository/Personnel\+Repository.\+php\end{DoxyCompactItemize}

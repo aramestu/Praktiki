@@ -1,0 +1,145 @@
+\doxysection{Psr4\+Autoloader\+Class Class Reference}
+\hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_psr4_autoloader_class}{}\label{class_app_1_1_s_a_e_1_1_lib_1_1_psr4_autoloader_class}\index{Psr4AutoloaderClass@{Psr4AutoloaderClass}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_psr4_autoloader_class_acc294a6cc8e69743746820e3d15e3f78}{register}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_psr4_autoloader_class_a6a3af58bd9610ff9f43b323fd6f23ae8}{add\+Namespace}} (string \$prefix, string \$base\+\_\+dir, bool \$prepend=false)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_psr4_autoloader_class_a9d266fce5af17ada17e072769b11b00a}{load\+Class}} (string \$class)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_psr4_autoloader_class_aca42d956a62ac39aac275dd62a6588ab}{load\+Mapped\+File}} (string \$prefix, string \$relative\+\_\+class)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_lib_1_1_psr4_autoloader_class_a1e46f6b224042152758342ed97d33afc}{require\+File}} (string \$file)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_psr4_autoloader_class_a75bd058d741f9fffbbc5018353f4d766}\label{class_app_1_1_s_a_e_1_1_lib_1_1_psr4_autoloader_class_a75bd058d741f9fffbbc5018353f4d766} 
+array {\bfseries \$prefixes} = array()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An example of a general-\/purpose implementation that includes the optional functionality of allowing multiple base directories for a single namespace prefix.
+
+Given a foo-\/bar package of classes in the file system at the following paths ... \begin{DoxyVerb}/path/to/packages/foo-bar/
+    src/
+        Baz.php             # Foo\Bar\Baz
+        Qux/
+            Quux.php        # Foo\Bar\Qux\Quux
+    tests/
+        BazTest.php         # Foo\Bar\BazTest
+        Qux/
+            QuuxTest.php    # Foo\Bar\Qux\QuuxTest
+\end{DoxyVerb}
+ ... add the path to the class files for the \textbackslash{}\+Foo\textbackslash{}\+Bar\textbackslash{} namespace prefix as follows\+: \begin{DoxyVerb} <?php
+ // instantiate the loader
+ $loader = new \Example\Psr4AutoloaderClass;
+
+ // register the autoloader
+ $loader->register();
+
+ // register the base directories for the namespace prefix
+ $loader->addNamespace('Foo\Bar', '/path/to/packages/foo-bar/src');
+ $loader->addNamespace('Foo\Bar', '/path/to/packages/foo-bar/tests');
+\end{DoxyVerb}
+ The following line would cause the autoloader to attempt to load the \textbackslash{}\+Foo\textbackslash{}\+Bar\textbackslash{}\+Qux\textbackslash{}\+Quux class from /path/to/packages/foo-\/bar/src/\+Qux/\+Quux.php\+: \begin{DoxyVerb} <?php
+ new \Foo\Bar\Qux\Quux;
+\end{DoxyVerb}
+ The following line would cause the autoloader to attempt to load the \textbackslash{}\+Foo\textbackslash{}\+Bar\textbackslash{}\+Qux\textbackslash{}\+Quux\+Test class from /path/to/packages/foo-\/bar/tests/\+Qux/\+Quux\+Test.php\+: \begin{DoxyVerb} <?php
+ new \Foo\Bar\Qux\QuuxTest;
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_psr4_autoloader_class_a6a3af58bd9610ff9f43b323fd6f23ae8}\label{class_app_1_1_s_a_e_1_1_lib_1_1_psr4_autoloader_class_a6a3af58bd9610ff9f43b323fd6f23ae8} 
+\index{Psr4AutoloaderClass@{Psr4AutoloaderClass}!addNamespace@{addNamespace}}
+\index{addNamespace@{addNamespace}!Psr4AutoloaderClass@{Psr4AutoloaderClass}}
+\doxysubsubsection{\texorpdfstring{addNamespace()}{addNamespace()}}
+{\footnotesize\ttfamily add\+Namespace (\begin{DoxyParamCaption}\item[{string}]{\$prefix,  }\item[{string}]{\$base\+\_\+dir,  }\item[{bool}]{\$prepend = {\ttfamily false} }\end{DoxyParamCaption})}
+
+Adds a base directory for a namespace prefix.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$prefix} & The namespace prefix. \\
+\hline
+string & {\em \$base\+\_\+dir} & A base directory for class files in the namespace. \\
+\hline
+bool & {\em \$prepend} & If true, prepend the base directory to the stack instead of appending it; this causes it to be searched first rather than last. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_psr4_autoloader_class_a9d266fce5af17ada17e072769b11b00a}\label{class_app_1_1_s_a_e_1_1_lib_1_1_psr4_autoloader_class_a9d266fce5af17ada17e072769b11b00a} 
+\index{Psr4AutoloaderClass@{Psr4AutoloaderClass}!loadClass@{loadClass}}
+\index{loadClass@{loadClass}!Psr4AutoloaderClass@{Psr4AutoloaderClass}}
+\doxysubsubsection{\texorpdfstring{loadClass()}{loadClass()}}
+{\footnotesize\ttfamily load\+Class (\begin{DoxyParamCaption}\item[{string}]{\$class }\end{DoxyParamCaption})}
+
+Loads the class file for a given class name.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$class} & The fully-\/qualified class name. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mixed The mapped file name on success, or boolean false on failure. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_psr4_autoloader_class_aca42d956a62ac39aac275dd62a6588ab}\label{class_app_1_1_s_a_e_1_1_lib_1_1_psr4_autoloader_class_aca42d956a62ac39aac275dd62a6588ab} 
+\index{Psr4AutoloaderClass@{Psr4AutoloaderClass}!loadMappedFile@{loadMappedFile}}
+\index{loadMappedFile@{loadMappedFile}!Psr4AutoloaderClass@{Psr4AutoloaderClass}}
+\doxysubsubsection{\texorpdfstring{loadMappedFile()}{loadMappedFile()}}
+{\footnotesize\ttfamily load\+Mapped\+File (\begin{DoxyParamCaption}\item[{string}]{\$prefix,  }\item[{string}]{\$relative\+\_\+class }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Load the mapped file for a namespace prefix and relative class.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$prefix} & The namespace prefix. \\
+\hline
+string & {\em \$relative\+\_\+class} & The relative class name. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mixed Boolean false if no mapped file can be loaded, or the name of the mapped file that was loaded. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_psr4_autoloader_class_acc294a6cc8e69743746820e3d15e3f78}\label{class_app_1_1_s_a_e_1_1_lib_1_1_psr4_autoloader_class_acc294a6cc8e69743746820e3d15e3f78} 
+\index{Psr4AutoloaderClass@{Psr4AutoloaderClass}!register@{register}}
+\index{register@{register}!Psr4AutoloaderClass@{Psr4AutoloaderClass}}
+\doxysubsubsection{\texorpdfstring{register()}{register()}}
+{\footnotesize\ttfamily register (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Register loader with SPL autoloader stack.
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_lib_1_1_psr4_autoloader_class_a1e46f6b224042152758342ed97d33afc}\label{class_app_1_1_s_a_e_1_1_lib_1_1_psr4_autoloader_class_a1e46f6b224042152758342ed97d33afc} 
+\index{Psr4AutoloaderClass@{Psr4AutoloaderClass}!requireFile@{requireFile}}
+\index{requireFile@{requireFile}!Psr4AutoloaderClass@{Psr4AutoloaderClass}}
+\doxysubsubsection{\texorpdfstring{requireFile()}{requireFile()}}
+{\footnotesize\ttfamily require\+File (\begin{DoxyParamCaption}\item[{string}]{\$file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+If a file exists, require it from the file system.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$file} & The file to require. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool True if the file exists, false if not. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Lib/Psr4\+Autoloader\+Class.\+php\end{DoxyCompactItemize}

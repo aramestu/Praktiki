@@ -1,0 +1,108 @@
+\doxysection{Experience\+Professionnel\+Repository Class Reference}
+\hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_experience_professionnel_repository}{}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_experience_professionnel_repository}\index{ExperienceProfessionnelRepository@{ExperienceProfessionnelRepository}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_experience_professionnel_repository_aba0d5b303383fb5b1fabb5fd01cd3800}{get\+All}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_experience_professionnel_repository_a2b10230e79a71acb5c60e67ce9484f42}{mettre\+AJour}} (\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_data_object_1_1_experience_professionnel}{Experience\+Professionnel}} \$experience\+Professionnel)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_experience_professionnel_repository_a77cb5c5cfb1e4ff3ca3e2b209620cf3c}{supprimer}} (string \$id)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_experience_professionnel_repository_af488c63d228b56177d668aab0cfc21b1}{search}} (?string \$keywords=null, ?string \$date\+Debut=null, ?string \$date\+Fin=null, ?string \$option\+Tri=null, ?string \$stage=null, ?string \$alternance=null, ?string \$code\+Postal=null, ?string \$date\+Publication=null, ?string \$BUT2=null, ?string \$BUT3=null)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_experience_professionnel_repository_a6356f56a477c228064eae20e57a3a128}{get\+Nb\+Experience\+Professionnel}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Repository pour les différentes Experience\+Professionels 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_experience_professionnel_repository_aba0d5b303383fb5b1fabb5fd01cd3800}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_experience_professionnel_repository_aba0d5b303383fb5b1fabb5fd01cd3800} 
+\index{ExperienceProfessionnelRepository@{ExperienceProfessionnelRepository}!getAll@{getAll}}
+\index{getAll@{getAll}!ExperienceProfessionnelRepository@{ExperienceProfessionnelRepository}}
+\doxysubsubsection{\texorpdfstring{getAll()}{getAll()}}
+{\footnotesize\ttfamily get\+All (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Récupère toutes les expériences professionnelles (stages, alternances, offres non définies).
+
+\begin{DoxyReturn}{Returns}
+array La liste de toutes les expériences professionnelles. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_experience_professionnel_repository_a6356f56a477c228064eae20e57a3a128}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_experience_professionnel_repository_a6356f56a477c228064eae20e57a3a128} 
+\index{ExperienceProfessionnelRepository@{ExperienceProfessionnelRepository}!getNbExperienceProfessionnel@{getNbExperienceProfessionnel}}
+\index{getNbExperienceProfessionnel@{getNbExperienceProfessionnel}!ExperienceProfessionnelRepository@{ExperienceProfessionnelRepository}}
+\doxysubsubsection{\texorpdfstring{getNbExperienceProfessionnel()}{getNbExperienceProfessionnel()}}
+{\footnotesize\ttfamily get\+Nb\+Experience\+Professionnel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Obtient le nombre total d\textquotesingle{}expériences professionnelles.
+
+\begin{DoxyReturn}{Returns}
+int Le nombre total d\textquotesingle{}expériences professionnelles. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_experience_professionnel_repository_a2b10230e79a71acb5c60e67ce9484f42}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_experience_professionnel_repository_a2b10230e79a71acb5c60e67ce9484f42} 
+\index{ExperienceProfessionnelRepository@{ExperienceProfessionnelRepository}!mettreAJour@{mettreAJour}}
+\index{mettreAJour@{mettreAJour}!ExperienceProfessionnelRepository@{ExperienceProfessionnelRepository}}
+\doxysubsubsection{\texorpdfstring{mettreAJour()}{mettreAJour()}}
+{\footnotesize\ttfamily mettre\+AJour (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_data_object_1_1_experience_professionnel}{Experience\+Professionnel}}}]{\$experience\+Professionnel }\end{DoxyParamCaption})}
+
+Met à jour une expérience professionnelle.
+
+
+\begin{DoxyParams}[1]{Parameters}
+Experience\+Professionnel & {\em \$experience\+Professionnel} & L\textquotesingle{}expérience professionnelle à mettre à jour. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_experience_professionnel_repository_af488c63d228b56177d668aab0cfc21b1}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_experience_professionnel_repository_af488c63d228b56177d668aab0cfc21b1} 
+\index{ExperienceProfessionnelRepository@{ExperienceProfessionnelRepository}!search@{search}}
+\index{search@{search}!ExperienceProfessionnelRepository@{ExperienceProfessionnelRepository}}
+\doxysubsubsection{\texorpdfstring{search()}{search()}}
+{\footnotesize\ttfamily search (\begin{DoxyParamCaption}\item[{?string}]{\$keywords = {\ttfamily null},  }\item[{?string}]{\$date\+Debut = {\ttfamily null},  }\item[{?string}]{\$date\+Fin = {\ttfamily null},  }\item[{?string}]{\$option\+Tri = {\ttfamily null},  }\item[{?string}]{\$stage = {\ttfamily null},  }\item[{?string}]{\$alternance = {\ttfamily null},  }\item[{?string}]{\$code\+Postal = {\ttfamily null},  }\item[{?string}]{\$date\+Publication = {\ttfamily null},  }\item[{?string}]{\$\+BUT2 = {\ttfamily null},  }\item[{?string}]{\$\+BUT3 = {\ttfamily null} }\end{DoxyParamCaption})}
+
+Recherche des expériences professionnelles en fonction des critères fournis.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string | null & {\em \$keywords} & Les mots-\/clés de recherche. \\
+\hline
+string | null & {\em \$date\+Debut} & La date de début de l\textquotesingle{}expérience. \\
+\hline
+string | null & {\em \$date\+Fin} & La date de fin de l\textquotesingle{}expérience. \\
+\hline
+string | null & {\em \$option\+Tri} & L\textquotesingle{}option de tri à appliquer. \\
+\hline
+string | null & {\em \$stage} & Filtre pour les stages. \\
+\hline
+string | null & {\em \$alternance} & Filtre pour les alternances. \\
+\hline
+string | null & {\em \$code\+Postal} & Le code postal pour la recherche. \\
+\hline
+string | null & {\em \$date\+Publication} & La date de publication. \\
+\hline
+string | null & {\em \$\+BUT2} & Filtre pour les étudiants de BUT2. \\
+\hline
+string | null & {\em \$\+BUT3} & Filtre pour les étudiants de BUT3. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array La liste des expériences professionnelles filtrée. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_experience_professionnel_repository_a77cb5c5cfb1e4ff3ca3e2b209620cf3c}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_experience_professionnel_repository_a77cb5c5cfb1e4ff3ca3e2b209620cf3c} 
+\index{ExperienceProfessionnelRepository@{ExperienceProfessionnelRepository}!supprimer@{supprimer}}
+\index{supprimer@{supprimer}!ExperienceProfessionnelRepository@{ExperienceProfessionnelRepository}}
+\doxysubsubsection{\texorpdfstring{supprimer()}{supprimer()}}
+{\footnotesize\ttfamily supprimer (\begin{DoxyParamCaption}\item[{string}]{\$id }\end{DoxyParamCaption})}
+
+Supprime une expérience professionnelle en fonction de son identifiant.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$id} & L\textquotesingle{}identifiant de l\textquotesingle{}expérience professionnelle à supprimer. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Model/\+Repository/Experience\+Professionnel\+Repository.\+php\end{DoxyCompactItemize}

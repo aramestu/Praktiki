@@ -1,0 +1,280 @@
+\doxysection{Abstract\+Repository Class Reference}
+\hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository}{}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository}\index{AbstractRepository@{AbstractRepository}}
+Inheritance diagram for Abstract\+Repository\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=12.000000cm]{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_aba0d5b303383fb5b1fabb5fd01cd3800}{get\+All}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_ac751e87b3d4c4bf2feb03bee8b092755}{count}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_acbf29433b098b320add79a0140ed6357}{get\+By\+Id}} (string \$valeur\+Cle\+Primaire)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a308be9131f4143a8629979773d6b4df1}{supprimer}} (string \$valeur\+Cle\+Primaire)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a25579e78a09b9ba63a0a23f82f86c7b1}{mettre\+AJour}} (\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_data_object_1_1_abstract_data_object}{Abstract\+Data\+Object}} \$object)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a585f05a608ac7f42392d6b4879d0ee74}{save}} (\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_data_object_1_1_abstract_data_object}{Abstract\+Data\+Object}} \$object)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_aeeeb33a317cbb4fd00f2501990f15fff}{archiver}} (string \$valeur\+Cle\+Primaire)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_aaae55b0757713484ed11454e779eac50}{searchs}} (string \$keywords=null, array \$colonnes=null, string \$colonne\+Trie=null, bool \$ordre=null)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_aa82369b07beaf959edee1e18fac85f82}{construire\+Depuis\+Tableau}} (array \$objet\+Format\+Tableau)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a63a40b7ccfeb38655d8ed38a58dea3fe}{colonne\+To\+Search}} (array \$colonnes=null)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_ae0d3ed75ff173fc22843605acf4974b4}{get\+Nom\+Table}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a6236d87df87167394ab71e2e44537c46}{get\+Nom\+Cle\+Primaire}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_af645a4f5ffca533622b41c65c94e9b48}{get\+Noms\+Colonnes}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe abstraite représentant un repository générique pour les objets de données. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_aeeeb33a317cbb4fd00f2501990f15fff}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_aeeeb33a317cbb4fd00f2501990f15fff} 
+\index{AbstractRepository@{AbstractRepository}!archiver@{archiver}}
+\index{archiver@{archiver}!AbstractRepository@{AbstractRepository}}
+\doxysubsubsection{\texorpdfstring{archiver()}{archiver()}}
+{\footnotesize\ttfamily archiver (\begin{DoxyParamCaption}\item[{string}]{\$valeur\+Cle\+Primaire }\end{DoxyParamCaption})}
+
+Archive un objet en le déplaçant vers une table d\textquotesingle{}archives.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$valeur\+Cle\+Primaire} & La valeur de la clé primaire. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_experience_professionnel_repository_aeeeb33a317cbb4fd00f2501990f15fff}{Abstract\+Experience\+Professionnel\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_convention_repository_aeeeb33a317cbb4fd00f2501990f15fff}{Convention\+Repository}}, and \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_aeeeb33a317cbb4fd00f2501990f15fff}{Entreprise\+Repository}}.
+
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a63a40b7ccfeb38655d8ed38a58dea3fe}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a63a40b7ccfeb38655d8ed38a58dea3fe} 
+\index{AbstractRepository@{AbstractRepository}!colonneToSearch@{colonneToSearch}}
+\index{colonneToSearch@{colonneToSearch}!AbstractRepository@{AbstractRepository}}
+\doxysubsubsection{\texorpdfstring{colonneToSearch()}{colonneToSearch()}}
+{\footnotesize\ttfamily colonne\+To\+Search (\begin{DoxyParamCaption}\item[{array}]{\$colonnes = {\ttfamily null} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Construit la partie WHERE d\textquotesingle{}une requête SQL de recherche avec LIKE.
+
+
+\begin{DoxyParams}[1]{Parameters}
+array | null & {\em \$colonnes} & Les colonnes sur lesquelles effectuer la recherche. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string La partie WHERE construite. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_aa82369b07beaf959edee1e18fac85f82}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_aa82369b07beaf959edee1e18fac85f82} 
+\index{AbstractRepository@{AbstractRepository}!construireDepuisTableau@{construireDepuisTableau}}
+\index{construireDepuisTableau@{construireDepuisTableau}!AbstractRepository@{AbstractRepository}}
+\doxysubsubsection{\texorpdfstring{construireDepuisTableau()}{construireDepuisTableau()}}
+{\footnotesize\ttfamily construire\+Depuis\+Tableau (\begin{DoxyParamCaption}\item[{array}]{\$objet\+Format\+Tableau }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
+
+Méthode abstraite pour construire un objet de données depuis un tableau formaté.
+
+
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$objet\+Format\+Tableau} & Le tableau formaté représentant l\textquotesingle{}objet. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Abstract\+Data\+Object L\textquotesingle{}objet de données construit. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_annee_universitaire_repository_a0ad57ef25df5c7cd59696b908a4d0fe9}{Annee\+Universitaire\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_annotation_repository_a05669ad487d0751fde2305982542ce41}{Annotation\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_convention_repository_a91c547509384a4871028dbb837306815}{Convention\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_departement_repository_a0d1dc20f015060dc7d5428f7a4298416}{Departement\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_enseignant_repository_ab26145efaffe7d0e01b9453de168eddb}{Enseignant\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a3154de776741b0a6aabc3df5a746b58e}{Entreprise\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_etudiant_repository_a7031a77ae186fd6729e3978c913a3f6d}{Etudiant\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_alternance_repository_a9e4c02d31cc19fa5728a273d82628d9a}{Alternance\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_offre_non_defini_repository_a9e4c02d31cc19fa5728a273d82628d9a}{Offre\+Non\+Defini\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_stage_repository_a9e4c02d31cc19fa5728a273d82628d9a}{Stage\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_inscription_repository_a791bc5866f4af006827c4de9b7e74de7}{Inscription\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_experience_professionnel_repository_aa82369b07beaf959edee1e18fac85f82}{Abstract\+Experience\+Professionnel\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_contrats_alternance_repository_aa82369b07beaf959edee1e18fac85f82}{Contrats\+Alternance\+Repository}}, and \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_personnel_repository_a4b49ac250bd8f867bd866e023a6768ff}{Personnel\+Repository}}.
+
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_ac751e87b3d4c4bf2feb03bee8b092755}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_ac751e87b3d4c4bf2feb03bee8b092755} 
+\index{AbstractRepository@{AbstractRepository}!count@{count}}
+\index{count@{count}!AbstractRepository@{AbstractRepository}}
+\doxysubsubsection{\texorpdfstring{count()}{count()}}
+{\footnotesize\ttfamily count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Compte le nombre total d\textquotesingle{}objets dans la table associée.
+
+\begin{DoxyReturn}{Returns}
+int Nombre total d\textquotesingle{}objets. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_aba0d5b303383fb5b1fabb5fd01cd3800}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_aba0d5b303383fb5b1fabb5fd01cd3800} 
+\index{AbstractRepository@{AbstractRepository}!getAll@{getAll}}
+\index{getAll@{getAll}!AbstractRepository@{AbstractRepository}}
+\doxysubsubsection{\texorpdfstring{getAll()}{getAll()}}
+{\footnotesize\ttfamily get\+All (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Récupère tous les objets de la table associée.
+
+\begin{DoxyReturn}{Returns}
+array Tableau d\textquotesingle{}objets de données. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_experience_professionnel_repository_aba0d5b303383fb5b1fabb5fd01cd3800}{Abstract\+Experience\+Professionnel\+Repository}}.
+
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_acbf29433b098b320add79a0140ed6357}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_acbf29433b098b320add79a0140ed6357} 
+\index{AbstractRepository@{AbstractRepository}!getById@{getById}}
+\index{getById@{getById}!AbstractRepository@{AbstractRepository}}
+\doxysubsubsection{\texorpdfstring{getById()}{getById()}}
+{\footnotesize\ttfamily get\+By\+Id (\begin{DoxyParamCaption}\item[{string}]{\$valeur\+Cle\+Primaire }\end{DoxyParamCaption})}
+
+Récupère un objet par son identifiant primaire.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$valeur\+Cle\+Primaire} & La valeur de la clé primaire. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Abstract\+Data\+Object\texorpdfstring{$\vert$}{|}null L\textquotesingle{}objet associé ou null s\textquotesingle{}il n\textquotesingle{}existe pas. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_experience_professionnel_repository_ac48e542235629d2d16dcef8c5a2e0fdd}{Abstract\+Experience\+Professionnel\+Repository}}, and \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_contrats_alternance_repository_acbf29433b098b320add79a0140ed6357}{Contrats\+Alternance\+Repository}}.
+
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a6236d87df87167394ab71e2e44537c46}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a6236d87df87167394ab71e2e44537c46} 
+\index{AbstractRepository@{AbstractRepository}!getNomClePrimaire@{getNomClePrimaire}}
+\index{getNomClePrimaire@{getNomClePrimaire}!AbstractRepository@{AbstractRepository}}
+\doxysubsubsection{\texorpdfstring{getNomClePrimaire()}{getNomClePrimaire()}}
+{\footnotesize\ttfamily get\+Nom\+Cle\+Primaire (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}, {\ttfamily [protected]}}
+
+Méthode abstraite pour obtenir le nom de la clé primaire de la table.
+
+\begin{DoxyReturn}{Returns}
+string Nom de la clé primaire. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_experience_professionnel_repository_a6236d87df87167394ab71e2e44537c46}{Abstract\+Experience\+Professionnel\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_alternance_repository_a6236d87df87167394ab71e2e44537c46}{Alternance\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_annee_universitaire_repository_a6236d87df87167394ab71e2e44537c46}{Annee\+Universitaire\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_annotation_repository_a6236d87df87167394ab71e2e44537c46}{Annotation\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_contrats_alternance_repository_a6236d87df87167394ab71e2e44537c46}{Contrats\+Alternance\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_convention_repository_a6236d87df87167394ab71e2e44537c46}{Convention\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_departement_repository_a6236d87df87167394ab71e2e44537c46}{Departement\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_enseignant_repository_a6236d87df87167394ab71e2e44537c46}{Enseignant\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a6236d87df87167394ab71e2e44537c46}{Entreprise\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_etudiant_repository_a6236d87df87167394ab71e2e44537c46}{Etudiant\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_inscription_repository_a6236d87df87167394ab71e2e44537c46}{Inscription\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_offre_non_defini_repository_a6236d87df87167394ab71e2e44537c46}{Offre\+Non\+Defini\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_personnel_repository_a6236d87df87167394ab71e2e44537c46}{Personnel\+Repository}}, and \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_stage_repository_a6236d87df87167394ab71e2e44537c46}{Stage\+Repository}}.
+
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_af645a4f5ffca533622b41c65c94e9b48}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_af645a4f5ffca533622b41c65c94e9b48} 
+\index{AbstractRepository@{AbstractRepository}!getNomsColonnes@{getNomsColonnes}}
+\index{getNomsColonnes@{getNomsColonnes}!AbstractRepository@{AbstractRepository}}
+\doxysubsubsection{\texorpdfstring{getNomsColonnes()}{getNomsColonnes()}}
+{\footnotesize\ttfamily get\+Noms\+Colonnes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}, {\ttfamily [protected]}}
+
+Méthode abstraite pour obtenir les noms des colonnes de la table.
+
+\begin{DoxyReturn}{Returns}
+array Noms des colonnes. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_experience_professionnel_repository_af645a4f5ffca533622b41c65c94e9b48}{Abstract\+Experience\+Professionnel\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_annee_universitaire_repository_af645a4f5ffca533622b41c65c94e9b48}{Annee\+Universitaire\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_annotation_repository_af645a4f5ffca533622b41c65c94e9b48}{Annotation\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_contrats_alternance_repository_af645a4f5ffca533622b41c65c94e9b48}{Contrats\+Alternance\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_convention_repository_af645a4f5ffca533622b41c65c94e9b48}{Convention\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_departement_repository_af645a4f5ffca533622b41c65c94e9b48}{Departement\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_enseignant_repository_af645a4f5ffca533622b41c65c94e9b48}{Enseignant\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_af645a4f5ffca533622b41c65c94e9b48}{Entreprise\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_etudiant_repository_af645a4f5ffca533622b41c65c94e9b48}{Etudiant\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_inscription_repository_af645a4f5ffca533622b41c65c94e9b48}{Inscription\+Repository}}, and \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_personnel_repository_af645a4f5ffca533622b41c65c94e9b48}{Personnel\+Repository}}.
+
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_ae0d3ed75ff173fc22843605acf4974b4}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_ae0d3ed75ff173fc22843605acf4974b4} 
+\index{AbstractRepository@{AbstractRepository}!getNomTable@{getNomTable}}
+\index{getNomTable@{getNomTable}!AbstractRepository@{AbstractRepository}}
+\doxysubsubsection{\texorpdfstring{getNomTable()}{getNomTable()}}
+{\footnotesize\ttfamily get\+Nom\+Table (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}, {\ttfamily [protected]}}
+
+Méthode abstraite pour obtenir le nom de la table associée.
+
+\begin{DoxyReturn}{Returns}
+string Nom de la table. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_experience_professionnel_repository_ae0d3ed75ff173fc22843605acf4974b4}{Abstract\+Experience\+Professionnel\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_alternance_repository_ae0d3ed75ff173fc22843605acf4974b4}{Alternance\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_annee_universitaire_repository_ae0d3ed75ff173fc22843605acf4974b4}{Annee\+Universitaire\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_annotation_repository_ae0d3ed75ff173fc22843605acf4974b4}{Annotation\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_contrats_alternance_repository_ae0d3ed75ff173fc22843605acf4974b4}{Contrats\+Alternance\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_convention_repository_ae0d3ed75ff173fc22843605acf4974b4}{Convention\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_departement_repository_ae0d3ed75ff173fc22843605acf4974b4}{Departement\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_enseignant_repository_ae0d3ed75ff173fc22843605acf4974b4}{Enseignant\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_ae0d3ed75ff173fc22843605acf4974b4}{Entreprise\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_etudiant_repository_ae0d3ed75ff173fc22843605acf4974b4}{Etudiant\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_inscription_repository_ae0d3ed75ff173fc22843605acf4974b4}{Inscription\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_offre_non_defini_repository_ae0d3ed75ff173fc22843605acf4974b4}{Offre\+Non\+Defini\+Repository}}, \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_personnel_repository_ae0d3ed75ff173fc22843605acf4974b4}{Personnel\+Repository}}, and \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_stage_repository_ae0d3ed75ff173fc22843605acf4974b4}{Stage\+Repository}}.
+
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a25579e78a09b9ba63a0a23f82f86c7b1}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a25579e78a09b9ba63a0a23f82f86c7b1} 
+\index{AbstractRepository@{AbstractRepository}!mettreAJour@{mettreAJour}}
+\index{mettreAJour@{mettreAJour}!AbstractRepository@{AbstractRepository}}
+\doxysubsubsection{\texorpdfstring{mettreAJour()}{mettreAJour()}}
+{\footnotesize\ttfamily mettre\+AJour (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_data_object_1_1_abstract_data_object}{Abstract\+Data\+Object}}}]{\$object }\end{DoxyParamCaption})}
+
+Met à jour un objet dans la base de données.
+
+
+\begin{DoxyParams}[1]{Parameters}
+Abstract\+Data\+Object & {\em \$object} & L\textquotesingle{}objet à mettre à jour. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_experience_professionnel_repository_acecc5fd2e4e395459ac154484c567422}{Abstract\+Experience\+Professionnel\+Repository}}.
+
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a585f05a608ac7f42392d6b4879d0ee74}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a585f05a608ac7f42392d6b4879d0ee74} 
+\index{AbstractRepository@{AbstractRepository}!save@{save}}
+\index{save@{save}!AbstractRepository@{AbstractRepository}}
+\doxysubsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily save (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_data_object_1_1_abstract_data_object}{Abstract\+Data\+Object}}}]{\$object }\end{DoxyParamCaption})}
+
+Sauvegarde un nouvel objet dans la base de données.
+
+
+\begin{DoxyParams}[1]{Parameters}
+Abstract\+Data\+Object & {\em \$object} & L\textquotesingle{}objet à sauvegarder. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool True si la sauvegarde est réussie, sinon false. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_experience_professionnel_repository_adfeb964b379b36495012632c0c8ef056}{Abstract\+Experience\+Professionnel\+Repository}}.
+
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_aaae55b0757713484ed11454e779eac50}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_aaae55b0757713484ed11454e779eac50} 
+\index{AbstractRepository@{AbstractRepository}!searchs@{searchs}}
+\index{searchs@{searchs}!AbstractRepository@{AbstractRepository}}
+\doxysubsubsection{\texorpdfstring{searchs()}{searchs()}}
+{\footnotesize\ttfamily searchs (\begin{DoxyParamCaption}\item[{string}]{\$keywords = {\ttfamily null},  }\item[{array}]{\$colonnes = {\ttfamily null},  }\item[{string}]{\$colonne\+Trie = {\ttfamily null},  }\item[{bool}]{\$ordre = {\ttfamily null} }\end{DoxyParamCaption})}
+
+Recherche des objets basés sur des mots-\/clés, colonnes spécifiques et options de tri.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string | null & {\em \$keywords} & Les mots-\/clés à rechercher. \\
+\hline
+array | null & {\em \$colonnes} & Les colonnes sur lesquelles effectuer la recherche. \\
+\hline
+string | null & {\em \$colonne\+Trie} & La colonne selon laquelle trier les résultats. \\
+\hline
+bool | null & {\em \$ordre} & True pour un tri décroissant, false pour un tri croissant. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array Tableau d\textquotesingle{}objets de données résultants de la recherche. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a308be9131f4143a8629979773d6b4df1}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a308be9131f4143a8629979773d6b4df1} 
+\index{AbstractRepository@{AbstractRepository}!supprimer@{supprimer}}
+\index{supprimer@{supprimer}!AbstractRepository@{AbstractRepository}}
+\doxysubsubsection{\texorpdfstring{supprimer()}{supprimer()}}
+{\footnotesize\ttfamily supprimer (\begin{DoxyParamCaption}\item[{string}]{\$valeur\+Cle\+Primaire }\end{DoxyParamCaption})}
+
+Supprime un objet par son identifiant primaire et archive l\textquotesingle{}objet avant suppression.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$valeur\+Cle\+Primaire} & La valeur de la clé primaire. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_experience_professionnel_repository_a77cb5c5cfb1e4ff3ca3e2b209620cf3c}{Abstract\+Experience\+Professionnel\+Repository}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Model/\+Repository/Abstract\+Repository.\+php\end{DoxyCompactItemize}

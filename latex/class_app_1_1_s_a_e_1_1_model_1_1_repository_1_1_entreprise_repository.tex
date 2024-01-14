@@ -1,0 +1,286 @@
+\doxysection{Entreprise\+Repository Class Reference}
+\hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository}{}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository}\index{EntrepriseRepository@{EntrepriseRepository}}
+Inheritance diagram for Entreprise\+Repository\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a3154de776741b0a6aabc3df5a746b58e}{construire\+Depuis\+Tableau}} (array \$entreprise\+Format\+Tableau)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_ae77ca8559b94705439d8c808040b55f2}{get\+Entreprise\+Avec\+Etat\+Filtree}} (bool \$etat=null, string \$keywords=null, string \$code\+Postal\+Entreprise=null, string \$effectif\+Entreprise=null)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a2767ea0a67511474b0d8e3f02ed6cb25}{get\+Entreprise\+En\+Attente\+Filtree}} (string \$keywords=null, string \$code\+Postal\+Entreprise=null, string \$effectif\+Entreprise=null)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_aa42479a6c1d0d02fee96390a6462f088}{get\+Entreprise\+Valide\+Filtree}} (string \$keywords=null, string \$code\+Postal\+Entreprise=null, string \$effectif\+Entreprise=null)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_aeeeb33a317cbb4fd00f2501990f15fff}{archiver}} (string \$valeur\+Cle\+Primaire)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a85556ea97e93f5ace1a9724cc69e4bb9}{get\+Nb\+Entreprise\+Valide}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a7c1125fd4eedc4a411af5188d137a9a8}{get\+Nb\+Entreprise\+Attente}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a13d7dffa9d7fbfa04475dba6cd9e24e0}{get\+Nb\+Entrprise\+Refusee}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository}{Abstract\+Repository}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_aba0d5b303383fb5b1fabb5fd01cd3800}{get\+All}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_ac751e87b3d4c4bf2feb03bee8b092755}{count}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_acbf29433b098b320add79a0140ed6357}{get\+By\+Id}} (string \$valeur\+Cle\+Primaire)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a308be9131f4143a8629979773d6b4df1}{supprimer}} (string \$valeur\+Cle\+Primaire)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a25579e78a09b9ba63a0a23f82f86c7b1}{mettre\+AJour}} (\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_data_object_1_1_abstract_data_object}{Abstract\+Data\+Object}} \$object)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a585f05a608ac7f42392d6b4879d0ee74}{save}} (\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_data_object_1_1_abstract_data_object}{Abstract\+Data\+Object}} \$object)
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_aaae55b0757713484ed11454e779eac50}{searchs}} (string \$keywords=null, array \$colonnes=null, string \$colonne\+Trie=null, bool \$ordre=null)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a36d68acaff1da9c8e52dd50797696279}{accepter}} (string \$siret)
+\item 
+static \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_acda4714bd96922fd9171b62e934f6eab}{refuser}} (string \$siret)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_ae0d3ed75ff173fc22843605acf4974b4}{get\+Nom\+Table}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a6236d87df87167394ab71e2e44537c46}{get\+Nom\+Cle\+Primaire}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_af645a4f5ffca533622b41c65c94e9b48}{get\+Noms\+Colonnes}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository}{Abstract\+Repository}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a63a40b7ccfeb38655d8ed38a58dea3fe}{colonne\+To\+Search}} (array \$colonnes=null)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Repository pour la gestion des entreprises. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a36d68acaff1da9c8e52dd50797696279}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a36d68acaff1da9c8e52dd50797696279} 
+\index{EntrepriseRepository@{EntrepriseRepository}!accepter@{accepter}}
+\index{accepter@{accepter}!EntrepriseRepository@{EntrepriseRepository}}
+\doxysubsubsection{\texorpdfstring{accepter()}{accepter()}}
+{\footnotesize\ttfamily static accepter (\begin{DoxyParamCaption}\item[{string}]{\$siret }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Modifie l\textquotesingle{}état d\textquotesingle{}une entreprise, c\textquotesingle{}est-\/à-\/dire qu\textquotesingle{}elle peut être \+:
+\begin{DoxyItemize}
+\item acceptée ou validée (true/1)
+\item en attente (false/0).
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$siret} & Le siret de l\textquotesingle{}entreprise. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_aeeeb33a317cbb4fd00f2501990f15fff}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_aeeeb33a317cbb4fd00f2501990f15fff} 
+\index{EntrepriseRepository@{EntrepriseRepository}!archiver@{archiver}}
+\index{archiver@{archiver}!EntrepriseRepository@{EntrepriseRepository}}
+\doxysubsubsection{\texorpdfstring{archiver()}{archiver()}}
+{\footnotesize\ttfamily archiver (\begin{DoxyParamCaption}\item[{string}]{\$valeur\+Cle\+Primaire }\end{DoxyParamCaption})}
+
+Archive un enregistrement dans la table "{}\+Annotations"{} et supprime les enregistrements associés.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$valeur\+Cle\+Primaire} & La valeur de la clé primaire pour identifier l\textquotesingle{}enregistrement à archiver.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em } & \\
+\hline
+\end{DoxyExceptions}
+Exception En cas d\textquotesingle{}erreur lors de l\textquotesingle{}accès à la base de données. 
+
+Reimplemented from \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_aeeeb33a317cbb4fd00f2501990f15fff}{Abstract\+Repository}}.
+
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a3154de776741b0a6aabc3df5a746b58e}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a3154de776741b0a6aabc3df5a746b58e} 
+\index{EntrepriseRepository@{EntrepriseRepository}!construireDepuisTableau@{construireDepuisTableau}}
+\index{construireDepuisTableau@{construireDepuisTableau}!EntrepriseRepository@{EntrepriseRepository}}
+\doxysubsubsection{\texorpdfstring{construireDepuisTableau()}{construireDepuisTableau()}}
+{\footnotesize\ttfamily construire\+Depuis\+Tableau (\begin{DoxyParamCaption}\item[{array}]{\$entreprise\+Format\+Tableau }\end{DoxyParamCaption})}
+
+Construit un objet Entreprise à partir d\textquotesingle{}un tableau de données formaté.
+
+
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$entreprise\+Format\+Tableau} & Le tableau de données de l\textquotesingle{}entreprise. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Entreprise L\textquotesingle{}objet Entreprise créé. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_aa82369b07beaf959edee1e18fac85f82}{Abstract\+Repository}}.
+
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_ae77ca8559b94705439d8c808040b55f2}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_ae77ca8559b94705439d8c808040b55f2} 
+\index{EntrepriseRepository@{EntrepriseRepository}!getEntrepriseAvecEtatFiltree@{getEntrepriseAvecEtatFiltree}}
+\index{getEntrepriseAvecEtatFiltree@{getEntrepriseAvecEtatFiltree}!EntrepriseRepository@{EntrepriseRepository}}
+\doxysubsubsection{\texorpdfstring{getEntrepriseAvecEtatFiltree()}{getEntrepriseAvecEtatFiltree()}}
+{\footnotesize\ttfamily get\+Entreprise\+Avec\+Etat\+Filtree (\begin{DoxyParamCaption}\item[{bool}]{\$etat = {\ttfamily null},  }\item[{string}]{\$keywords = {\ttfamily null},  }\item[{string}]{\$code\+Postal\+Entreprise = {\ttfamily null},  }\item[{string}]{\$effectif\+Entreprise = {\ttfamily null} }\end{DoxyParamCaption})}
+
+Retourne la liste des entreprises qui n\textquotesingle{}ont pas encore été validées + filtre.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string | null & {\em \$keywords} & Les mots-\/clés de recherche. \\
+\hline
+string | null & {\em \$code\+Postal\+Entreprise} & Le code postal de l\textquotesingle{}entreprise. \\
+\hline
+string | null & {\em \$effectif\+Entreprise} & L\textquotesingle{}effectif de l\textquotesingle{}entreprise. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array La liste des entreprises en attente. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a2767ea0a67511474b0d8e3f02ed6cb25}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a2767ea0a67511474b0d8e3f02ed6cb25} 
+\index{EntrepriseRepository@{EntrepriseRepository}!getEntrepriseEnAttenteFiltree@{getEntrepriseEnAttenteFiltree}}
+\index{getEntrepriseEnAttenteFiltree@{getEntrepriseEnAttenteFiltree}!EntrepriseRepository@{EntrepriseRepository}}
+\doxysubsubsection{\texorpdfstring{getEntrepriseEnAttenteFiltree()}{getEntrepriseEnAttenteFiltree()}}
+{\footnotesize\ttfamily get\+Entreprise\+En\+Attente\+Filtree (\begin{DoxyParamCaption}\item[{string}]{\$keywords = {\ttfamily null},  }\item[{string}]{\$code\+Postal\+Entreprise = {\ttfamily null},  }\item[{string}]{\$effectif\+Entreprise = {\ttfamily null} }\end{DoxyParamCaption})}
+
+Retourne la liste des entreprises en attente de validation + filtre.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string | null & {\em \$keywords} & Les mots-\/clés de recherche. \\
+\hline
+string | null & {\em \$code\+Postal\+Entreprise} & Le code postal de l\textquotesingle{}entreprise. \\
+\hline
+string | null & {\em \$effectif\+Entreprise} & L\textquotesingle{}effectif de l\textquotesingle{}entreprise. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array La liste des entreprises en attente de validation. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_aa42479a6c1d0d02fee96390a6462f088}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_aa42479a6c1d0d02fee96390a6462f088} 
+\index{EntrepriseRepository@{EntrepriseRepository}!getEntrepriseValideFiltree@{getEntrepriseValideFiltree}}
+\index{getEntrepriseValideFiltree@{getEntrepriseValideFiltree}!EntrepriseRepository@{EntrepriseRepository}}
+\doxysubsubsection{\texorpdfstring{getEntrepriseValideFiltree()}{getEntrepriseValideFiltree()}}
+{\footnotesize\ttfamily get\+Entreprise\+Valide\+Filtree (\begin{DoxyParamCaption}\item[{string}]{\$keywords = {\ttfamily null},  }\item[{string}]{\$code\+Postal\+Entreprise = {\ttfamily null},  }\item[{string}]{\$effectif\+Entreprise = {\ttfamily null} }\end{DoxyParamCaption})}
+
+Retourne la liste des entreprises validées + filtre.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string | null & {\em \$keywords} & Les mots-\/clés de recherche. \\
+\hline
+string | null & {\em \$code\+Postal\+Entreprise} & Le code postal de l\textquotesingle{}entreprise. \\
+\hline
+string | null & {\em \$effectif\+Entreprise} & L\textquotesingle{}effectif de l\textquotesingle{}entreprise. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array La liste des entreprises validées. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a7c1125fd4eedc4a411af5188d137a9a8}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a7c1125fd4eedc4a411af5188d137a9a8} 
+\index{EntrepriseRepository@{EntrepriseRepository}!getNbEntrepriseAttente@{getNbEntrepriseAttente}}
+\index{getNbEntrepriseAttente@{getNbEntrepriseAttente}!EntrepriseRepository@{EntrepriseRepository}}
+\doxysubsubsection{\texorpdfstring{getNbEntrepriseAttente()}{getNbEntrepriseAttente()}}
+{\footnotesize\ttfamily get\+Nb\+Entreprise\+Attente (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Retourne le nombre d\textquotesingle{}entreprises en attente de validation.
+
+\begin{DoxyReturn}{Returns}
+int Le nombre d\textquotesingle{}entreprises en attente de validation. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a85556ea97e93f5ace1a9724cc69e4bb9}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a85556ea97e93f5ace1a9724cc69e4bb9} 
+\index{EntrepriseRepository@{EntrepriseRepository}!getNbEntrepriseValide@{getNbEntrepriseValide}}
+\index{getNbEntrepriseValide@{getNbEntrepriseValide}!EntrepriseRepository@{EntrepriseRepository}}
+\doxysubsubsection{\texorpdfstring{getNbEntrepriseValide()}{getNbEntrepriseValide()}}
+{\footnotesize\ttfamily get\+Nb\+Entreprise\+Valide (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Retourne le nombre d\textquotesingle{}entreprises validées.
+
+\begin{DoxyReturn}{Returns}
+int Le nombre d\textquotesingle{}entreprises validées. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a13d7dffa9d7fbfa04475dba6cd9e24e0}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a13d7dffa9d7fbfa04475dba6cd9e24e0} 
+\index{EntrepriseRepository@{EntrepriseRepository}!getNbEntrpriseRefusee@{getNbEntrpriseRefusee}}
+\index{getNbEntrpriseRefusee@{getNbEntrpriseRefusee}!EntrepriseRepository@{EntrepriseRepository}}
+\doxysubsubsection{\texorpdfstring{getNbEntrpriseRefusee()}{getNbEntrpriseRefusee()}}
+{\footnotesize\ttfamily get\+Nb\+Entrprise\+Refusee (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Retourne le nombre d\textquotesingle{}entreprises refusées (archivées).
+
+\begin{DoxyReturn}{Returns}
+int Le nombre d\textquotesingle{}entreprises refusées. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a6236d87df87167394ab71e2e44537c46}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_a6236d87df87167394ab71e2e44537c46} 
+\index{EntrepriseRepository@{EntrepriseRepository}!getNomClePrimaire@{getNomClePrimaire}}
+\index{getNomClePrimaire@{getNomClePrimaire}!EntrepriseRepository@{EntrepriseRepository}}
+\doxysubsubsection{\texorpdfstring{getNomClePrimaire()}{getNomClePrimaire()}}
+{\footnotesize\ttfamily get\+Nom\+Cle\+Primaire (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Retourne le nom de la clé primaire de la table des entreprises.
+
+\begin{DoxyReturn}{Returns}
+string Le nom de la clé primaire. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_a6236d87df87167394ab71e2e44537c46}{Abstract\+Repository}}.
+
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_af645a4f5ffca533622b41c65c94e9b48}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_af645a4f5ffca533622b41c65c94e9b48} 
+\index{EntrepriseRepository@{EntrepriseRepository}!getNomsColonnes@{getNomsColonnes}}
+\index{getNomsColonnes@{getNomsColonnes}!EntrepriseRepository@{EntrepriseRepository}}
+\doxysubsubsection{\texorpdfstring{getNomsColonnes()}{getNomsColonnes()}}
+{\footnotesize\ttfamily get\+Noms\+Colonnes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Retourne les noms des colonnes de la table des entreprises.
+
+\begin{DoxyReturn}{Returns}
+array Les noms des colonnes. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_af645a4f5ffca533622b41c65c94e9b48}{Abstract\+Repository}}.
+
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_ae0d3ed75ff173fc22843605acf4974b4}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_ae0d3ed75ff173fc22843605acf4974b4} 
+\index{EntrepriseRepository@{EntrepriseRepository}!getNomTable@{getNomTable}}
+\index{getNomTable@{getNomTable}!EntrepriseRepository@{EntrepriseRepository}}
+\doxysubsubsection{\texorpdfstring{getNomTable()}{getNomTable()}}
+{\footnotesize\ttfamily get\+Nom\+Table (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Retourne le nom de la table des entreprises.
+
+\begin{DoxyReturn}{Returns}
+string Le nom de la table des entreprises. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_abstract_repository_ae0d3ed75ff173fc22843605acf4974b4}{Abstract\+Repository}}.
+
+\Hypertarget{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_acda4714bd96922fd9171b62e934f6eab}\label{class_app_1_1_s_a_e_1_1_model_1_1_repository_1_1_entreprise_repository_acda4714bd96922fd9171b62e934f6eab} 
+\index{EntrepriseRepository@{EntrepriseRepository}!refuser@{refuser}}
+\index{refuser@{refuser}!EntrepriseRepository@{EntrepriseRepository}}
+\doxysubsubsection{\texorpdfstring{refuser()}{refuser()}}
+{\footnotesize\ttfamily static refuser (\begin{DoxyParamCaption}\item[{string}]{\$siret }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Change l\textquotesingle{}état d\textquotesingle{}une entreprise lorsqu\textquotesingle{}elle a été refusée.
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$siret} & Le siret de l\textquotesingle{}entreprise à refuser. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Model/\+Repository/Entreprise\+Repository.\+php\end{DoxyCompactItemize}
