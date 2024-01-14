@@ -46,8 +46,8 @@ class ControllerTDB extends ControllerGenerique
         } elseif (ConnexionUtilisateur::estPersonnel()) {
             $methode = 'displayTDBpers';
         } else {
+            ConnexionUtilisateur::deconnecter();
             self::redirectionVersURL("danger", "Utilisateur non enregistré dans la base de données", "home");
-            return;
         }
         $methode = $methode . $tdbAction;
         if ($reflexion->hasMethod($methode)) {
