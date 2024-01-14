@@ -91,7 +91,11 @@ class ControllerPanelAdmin extends ControllerGenerique {
                                                 'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
                                                 'adminPanelView' => 'user/adminPanel/entreprise/entrepriseList.php',
                                                 'listEntreprises' => $listEntreprises,
-                                                'keywords' => $keywords]);
+                                                'keywords' => $keywords,
+                                                'nbEntreprise' => (new EntrepriseRepository())->count(),
+                                                'nbEntrepriseValide' => (new EntrepriseRepository())->getNbEntrepriseValide(),
+                                                'nbEntrepriseAttente' => (new EntrepriseRepository())->getNbEntrepriseAttente(),
+                                                'nbEntrepriseRefuse' => (new EntrepriseRepository())->getNbEntrpriseRefusee()]);
     }
 
     /**

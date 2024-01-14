@@ -33,56 +33,11 @@ class ControllerEntreprise extends ControllerGenerique
     }
 
     /**
-     * Obtient le nombre total d'entreprises.
-     *
-     * @return int Le nombre total d'entreprises.
-     */
-    public static function getNbEntrepriseTotal(): int
-    {
-        $listEntreprises = (new EntrepriseRepository())->getAll();
-        return count($listEntreprises);
-    }
-
-    /**
-     * Obtient le nombre d'entreprises validées.
-     *
-     * @return int Le nombre d'entreprises validées.
-     */
-    public static function getNbEntrepriseValide(): int
-    {
-        return (new EntrepriseRepository())->getNbEntrepriseValide();
-    }
-
-    /*
-     * Obtient le nombre d'entrprise en attente.
-     */
-    public static function getNbEntrepriseEnAttente(): int
-    {
-        return (new EntrepriseRepository())->getNbEntrepriseAttente();
-    }
-
-    /*
-     * Obtient le nombre d'entreprise refusée.
-     */
-    public static function getNbEntrepriseRefuse(): int
-    {
-        //        $listEntreprises = ;
-//        foreach ($listEntreprises as $entreprise) {
-//            if ($entreprise->getEstValide() == -1) {
-//                $nbEntrepriseRefuse++;
-//            }
-//        }
-        //TODO : verifier quand archive presente
-        return (new EntrepriseRepository())->getNbEntrpriseRefusee();
-    }
-
-    /**
      * Affiche la liste des entreprises validées avec des filtres.
      *
      * @return void
      */
-    public static function afficherListeEntrepriseValideFiltree(): void
-    {
+    public static function afficherListeEntrepriseValideFiltree(): void {
         $keywords = self::keywordsExiste();
         $codePostalEntreprise = self::codePostalExiste();
         $effectifEntreprise = self::effectifExiste();
