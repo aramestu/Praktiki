@@ -51,7 +51,6 @@ use App\SAE\Model\HTTP\Cookie;
                 echo'<a href="frontController.php?controller=TDB&action=displayTDB" class="nav-item" data-action="tdbEtudiant">Mes infos</a>
                 ';
         }
-        echo '<a href="frontController.php?action=contact" class="nav-item" data-action="contact">Contact</a>';
         if (!ConnexionUtilisateur::estConnecte()) {
             echo '
                 <a href="frontController.php?action=preference" class="nav-item" data-action="connect">Connexion</a>
@@ -63,7 +62,6 @@ use App\SAE\Model\HTTP\Cookie;
                 ';
             }
         ?>
-
     </nav>
 </header>
 
