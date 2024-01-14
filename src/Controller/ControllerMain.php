@@ -4,11 +4,9 @@ namespace App\SAE\Controller;
 
 use App\SAE\Config\ConfLDAP;
 use App\SAE\Lib\ConnexionUtilisateur;
-use App\SAE\Lib\ImportationData;
-use App\SAE\Model\DataObject\TuteurProfessionnel;
+use App\SAE\Lib\ImportationPstage;
 use App\SAE\Model\HTTP\Cookie;
 use App\SAE\Model\Repository\EntrepriseRepository;
-use App\SAE\Model\Repository\TuteurProfessionnelRepository;
 
 /**
  * Contrôleur principal avec des méthodes liées à la gestion des comptes, réinitialisation de mot de passe, etc.
@@ -154,10 +152,9 @@ class ControllerMain extends ControllerGenerique
     public static function importation(): void
     {
         if (isset($_POST["import"])) {
-            $isFirstLine = true;
             $fileName = $_FILES["file"]["tmp_name"];
             if ($_FILES["file"]["size"] > 0) {
-                ImportationData::importFromPstage($fileName);
+                ImportationPstage::importFromPstage($fileName);
                 self::redirectionVersURL("success","Importation faites avec succès", "panelListeEtudiants&controller=PanelAdmin");
             }
         }
