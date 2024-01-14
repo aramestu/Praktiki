@@ -3,9 +3,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /*
-    background-image: url("https://www.fermedebeaumont.com/31606-very_large_default/canard-mignon-blanc-canard-cane-de-race-vente-elevage.jpg");
-    background: grey;*/
     background: var(--white);
     background-position: center;
     background-size: cover;

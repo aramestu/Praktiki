@@ -1,17 +1,17 @@
 @media (max-width: 41200px) {
-    #createOffer{
+    #createOffer {
         min-width: 800px;
         max-width: 800px;
     }
 
-    textarea{
-        width:400px;
-        height:520px;
+    textarea {
+        width: 400px;
+        height: 520px;
         max-height: 520px;
-        margin-right:15px;
+        margin-right: 15px;
     }
 
-    #submitButton{
+    #submitButton {
         width: 400px;
         height: 46px;
         margin-top: 0;
@@ -19,39 +19,35 @@
     }
 
     #dateDebut,
-    #dateFin{
+    #dateFin {
         width: 175px;
         margin-bottom: 54px;
     }
 
-    #siret{
-        /*margin-bottom: 85px;*/
-    }
-
     input[type="text"],
     input[type="number"],
     input[type="password"],
     input[type='date'],
-    select{
+    select {
         width: 300px;
-        margin-right:15px;
+        margin-right: 15px;
     }
 }
 
 @media (max-width: 1300px) {
-    #createOffer{
+    #createOffer {
         min-width: 800px;
         max-width: 800px;
     }
 
-    textarea{
-        width:400px;
-        height:420px;
+    textarea {
+        width: 400px;
+        height: 420px;
         max-height: 515px;
-        margin-right:15px;
+        margin-right: 15px;
     }
 
-    #submitButton{
+    #submitButton {
         width: 400px;
         height: 46px;
         margin-top: 0;
@@ -59,49 +55,45 @@
     }
 
     #dateDebut,
-    #dateFin{
+    #dateFin {
         width: 175px;
         margin-bottom: 65px;
-    }
-
-    #siret{
-        /*margin-bottom: 85px;*/
     }
 
     input[type="text"],
     input[type="number"],
     input[type="password"],
     input[type='date'],
-    select{
+    select {
         width: 300px;
-        margin-right:15px;
+        margin-right: 15px;
     }
 }
 
 @media (max-width: 950px) {
-    #createOffer{
+    #createOffer {
         min-width: 330px;
         max-width: 330px;
     }
 
-    textarea{
-        height:420px;
+    textarea {
+        height: 420px;
     }
 
-    #submitButton{
+    #submitButton {
         width: 266px;
         margin-left: -20px;
     }
 
-    #dateDebut{
+    #dateDebut {
         margin-bottom: 0px;
     }
 
-    #dateFin{
+    #dateFin {
         margin-bottom: 45px;
     }
 
-    #siret{
+    #siret {
         margin-bottom: 15px;
     }
 
@@ -113,7 +105,7 @@
     select,
     textarea,
     #dateDebut,
-    #dateFin{
+    #dateFin {
         width: 266px;
         margin-right: 0px;
     }
