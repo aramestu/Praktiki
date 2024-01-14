@@ -18,7 +18,7 @@ use App\SAE\Lib\ConversionMajuscule;
         <a id="listeEntrepriseButton" class="button <?= isset($_GET["action"]) && $_GET["action"]=="displayTDBensListeEntreprise" ? " active" : ""?>" href="frontController.php?action=displayTDBensListeEntreprise&controller=TDB">Liste Entreprise</a>
         <?php
         if(ConnexionUtilisateur::estAdministrateur()){?>
-            <a class="button<?= isset($_GET["tdbAction"]) && $_GET["tdbAction"]=="gestion" ? " active" : ""?>" href="frontController.php?controller=ExpPro&action=createOffer">Créer une Offre</a>
+            <a id="createButton" class="button<?= isset($_GET["tdbAction"]) && $_GET["tdbAction"]=="gestion" ? " active" : ""?>" href="frontController.php?controller=ExpPro&action=createOffer">Créer une Offre</a>
             <a id="adminButton" class="button" href="frontController.php?controller=PanelAdmin&action=panelListeEtudiants">Panel Admin</a>
             <?php
         }
