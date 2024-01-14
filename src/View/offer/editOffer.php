@@ -8,7 +8,7 @@ $expPro = $experiencePro;
 $typeExperience = 'alternance';
 if (is_a($expPro, 'App\SAE\Model\DataObject\Stage')) { // Si c'est un stage
     $typeExperience = 'stage';
-    $gratif=gratification;
+    $gratif = gratification;
 } else {//si c'est une stalerternance
     $typeExperience = 'offreNonDefini';
 }
@@ -55,9 +55,13 @@ if (is_a($expPro, 'App\SAE\Model\DataObject\Stage')) { // Si c'est un stage
         <p>
             <label for="niveau">Niveau Requis</label>
             <select name="niveau" id="niveau" required>
-                <option disabled value> -- Veuillez choisir une option -- </option>
-                <option value="BUT2" <?php if (htmlspecialchars($NiveauExperienceProfessionnel) == "BUT2") echo "selected"; ?>>BUT2</option>
-                <option value="BUT3" <?php if (htmlspecialchars($NiveauExperienceProfessionnel) == "BUT3") echo "selected"; ?>>BUT3</option>
+                <option disabled value> -- Veuillez choisir une option --</option>
+                <option value="BUT2" <?php if (htmlspecialchars($NiveauExperienceProfessionnel) == "BUT2") echo "selected"; ?>>
+                    BUT2
+                </option>
+                <option value="BUT3" <?php if (htmlspecialchars($NiveauExperienceProfessionnel) == "BUT3") echo "selected"; ?>>
+                    BUT3
+                </option>
             </select>
         </p>
         <p>

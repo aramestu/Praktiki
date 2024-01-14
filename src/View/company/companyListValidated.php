@@ -7,9 +7,7 @@
 <!-- BARRE DE RECHERCHE -->
 <?php /*$action = "afficherListeEntrepriseValideFiltree";
 $controller = "Entreprise";
-require_once __DIR__ . '/../utilitaire/searchBar.php';*/?>
-
-
+require_once __DIR__ . '/../utilitaire/searchBar.php';*/ ?>
 
 
 <!-- FILTRE -->
@@ -17,13 +15,16 @@ require_once __DIR__ . '/../utilitaire/searchBar.php';*/?>
     <div class="container VBox" id="sideFilter">
         <form method="get" action="frontController.php">
             <label for="keywords">Siret ou nom</label>
-            <input type="text" id="keywords" name="keywords" placeholder="Recherche" value="<?php if(isset($_GET["keywords"])) echo $_GET["keywords"]; ?>">
+            <input type="text" id="keywords" name="keywords" placeholder="Recherche"
+                   value="<?php if (isset($_GET["keywords"])) echo $_GET["keywords"]; ?>">
 
             <label for="codePostal">Code Postal</label>
-            <input type="number" id="codePostal" name="codePostal" pattern="[0-9]{5}" maxlength="5" placeholder="34090" value="<?php if(isset($_GET["codePostal"])) echo $_GET["codePostal"]; ?>">
+            <input type="number" id="codePostal" name="codePostal" pattern="[0-9]{5}" maxlength="5" placeholder="34090"
+                   value="<?php if (isset($_GET["codePostal"])) echo $_GET["codePostal"]; ?>">
 
             <label for="effectif">Effectif maximum</label>
-            <input type="number" id="effectif" name="effectif" placeholder="50" value="<?php if(isset($_GET["effectif"])) echo $_GET["effectif"]; ?>">
+            <input type="number" id="effectif" name="effectif" placeholder="50"
+                   value="<?php if (isset($_GET["effectif"])) echo $_GET["effectif"]; ?>">
 
             <button type="reset" id="reset">Tout effacer</button>
             <input type="hidden" name="action" value="afficherListeEntrepriseValideFiltree">

@@ -1,33 +1,33 @@
 @media (max-width: 41200px) {
-    #map{
+    #map {
         height: 400px;
     }
 
-    #infoCompany{
+    #infoCompany {
         border-left: solid;
     }
 }
 
 @media (max-width: 1300px) {
-    #map{
+    #map {
         height: 400px;
     }
 
-    #infoCompany{
+    #infoCompany {
         border-left: solid;
     }
 }
 
 @media (max-width: 950px) {
-    #map{
+    #map {
         height: 200px;
     }
 
-    #main{
+    #main {
         flex-direction: column;
     }
 
-    #infoCompany{
+    #infoCompany {
         border-left: none;
     }
 }
@@ -174,8 +174,8 @@ td {
 
 .small:hover {
     cursor: pointer;
-    box-shadow: 2px 4px 16px rgba(0,0,0,.16);
-    transform: scale3d(1.01,1.01,1.01);
+    box-shadow: 2px 4px 16px rgba(0, 0, 0, .16);
+    transform: scale3d(1.01, 1.01, 1.01);
 }
 
 .small div {
@@ -226,7 +226,7 @@ h3 {
 #editIcon,
 #deleteIcon,
 #backIcon,
-#closeIcon{
+#closeIcon {
     width: 30px;
     height: 30px;
     margin-right: 5px;
@@ -285,7 +285,7 @@ h3 {
     }
 }
 
-#commentaireIcon::before{
+#commentaireIcon::before {
     font-family: 'FontAwesome';
     margin-right: 10px;
     font-size: 1.8em;
@@ -293,7 +293,7 @@ h3 {
     vertical-align: middle;
 }
 
-#deleteIcon, #commentaireIcon{
+#deleteIcon, #commentaireIcon {
     height: 35px;
     width: 35px;
 }
@@ -307,7 +307,7 @@ h3 {
 }
 
 #commentaireIcon {
-    top : 14px;
+    top: 14px;
     right: 8%;
 }
 
@@ -347,8 +347,8 @@ h3 {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-#mainContainer:hover{
-    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
+#mainContainer:hover {
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, .08);
 }
 
 .Stage > .header > .left > .typeExpPro,
@@ -358,8 +358,8 @@ h3 {
     color: var(--darkPurple);
 }
 
-.Stage:hover > .header > .left > .typeExpPro{
-    box-shadow: 0px 0px 90px 70px  #D1C6D6;
+.Stage:hover > .header > .left > .typeExpPro {
+    box-shadow: 0px 0px 90px 70px #D1C6D6;
 }
 
 .Stage:hover {
@@ -375,7 +375,7 @@ h3 {
     color: var(--darkOrange);
 }
 
-.Alternance:hover > .header > .left > .typeExpPro{
+.Alternance:hover > .header > .left > .typeExpPro {
     box-shadow: 0px 0px 90px 70px #f3dbc2;
 }
 
@@ -387,7 +387,7 @@ h3 {
 
 
 .OffreNonDefini > .header > .left > .typeExpPro,
-.OffreNonDefini> .header > .information > .typeExpPro {
+.OffreNonDefini > .header > .information > .typeExpPro {
     background: linear-gradient(-45deg, var(--lightpastelPurple) 0%, var(--lightpastelPurple) 50%, var(--lightpastelOrange) 50%, var(--lightpastelOrange) 100%);
     color: var(--darkBlue2);
     border-bottom-color: var(--pastelPurple);
@@ -397,28 +397,27 @@ h3 {
 }
 
 .OffreNonDefini > .header > .left > .typeExpPro > label,
-.OffreNonDefini> .header > .information > .typeExpPro > label {
+.OffreNonDefini > .header > .information > .typeExpPro > label {
     background: linear-gradient(-45deg, var(--darkPurple) 0%, var(--darkPurple) 50%, var(--darkOrange) 50%, var(--darkOrange) 100%);
-    color: transparent; /* Make text transparent to apply gradient */
+    color: transparent;
     border-bottom-color: var(--pastelPurple);
     border-left-color: var(--pastelOrange);
     border-right-color: var(--pastelPurple);
     border-top-color: var(--pastelOrange);
-    display: inline-block; /* Ensure the gradient is applied to the text */
+    display: inline-block;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .small:hover,
-.small{
+.small {
     border: none;
 }
 
 .OffreNonDefini:hover > .header > .left > .typeExpPro {
-    box-shadow:50px 30px 45px 35px #D1C6D6,
+    box-shadow: 50px 30px 45px 35px #D1C6D6,
     -50px -30px 45px 35px #f3dbc2;
 }
-
 
 
 .OffreNonDefini:hover {
@@ -429,10 +428,11 @@ h3 {
     box-shadow: 10px 10px 10px #00000025,
     -10px -10px 10px #F8C9A025;
 }
+
 /*--- END SMALL OFFER ---*/
 
 /*--- START POP UP ---*/
-#popUpDelete{
+#popUpDelete {
     opacity: 0;
     position: absolute;
     top: 45%;
@@ -450,12 +450,12 @@ h3 {
 }
 
 #popUpDeleteNo,
-#popUpDeleteYes{
+#popUpDeleteYes {
     margin: 20px;
 }
 
 @media (max-width: 41200px) {
-    #popUpDelete{
+    #popUpDelete {
         min-width: 400px;
         max-width: 550px;
         min-height: 169px;
@@ -463,14 +463,14 @@ h3 {
         max-height: 400px;
     }
 
-    .popUpDeleteButton > a{
+    .popUpDeleteButton > a {
         width: 200px;
         height: 50px;
     }
 }
 
 @media (max-width: 1300px) {
-    #popUpDelete{
+    #popUpDelete {
         min-width: 400px;
         max-width: 550px;
         min-height: 169px;
@@ -478,45 +478,45 @@ h3 {
         max-height: 400px;
     }
 
-    .popUpDeleteButton > a{
+    .popUpDeleteButton > a {
         width: 200px;
         height: 50px;
     }
 }
 
 @media (max-width: 950px) {
-    #popUpDelete{
+    #popUpDelete {
         min-width: 280px;
         max-width: 550px;
         height: 350px;
         max-height: 350px;
     }
 
-    #popUpDeleteContent > p{
+    #popUpDeleteContent > p {
         margin-top: 20px;
         margin-left: 4%;
         margin-right: 4%;
     }
 
-    .popUpDeleteButton > a{
+    .popUpDeleteButton > a {
         width: 80%;
         height: 59px;
     }
 }
 
-#popUpDelete > p{
+#popUpDelete > p {
     margin: 10px;
     margin-top: 20px;
 }
 
-#popUpDeleteContent{
+#popUpDeleteContent {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
 }
 
-.popUpDeleteButton > a{
+.popUpDeleteButton > a {
     font-size: 1.2em;
     margin: 20px;
     border-radius: 1rem;
@@ -526,28 +526,29 @@ h3 {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-#popUpDeleteNo:hover{
+#popUpDeleteNo:hover {
     background-color: var(--lightpastelRed);
     color: var(--red);
 }
 
-#popUpDeleteNo{
+#popUpDeleteNo {
     background-color: var(--lightpastelRed);
     color: var(--darkRed);
 }
 
-#popUpDeleteYes:hover{
+#popUpDeleteYes:hover {
     background-color: var(--lightpastelGreen);
     color: var(--green);
 }
 
-#popUpDeleteYes{
+#popUpDeleteYes {
     background-color: var(--lightpastelGreen);
     color: var(--darkGreen);
 }
+
 /*--- END POP UP ---*/
 
-.codePostalID::before{
+.codePostalID::before {
     content: '\f041';
     font-family: FontAwesome;
     font-weight: 900;

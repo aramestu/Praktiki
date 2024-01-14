@@ -69,11 +69,11 @@
     margin-top: 15px;
 }
 
-#annotationRelative{
+#annotationRelative {
     position: relative;
 }
 
-#backIconAnnotation{
+#backIconAnnotation {
     position: absolute;
     top: 0.5%;
     left: 5%;

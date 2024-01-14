@@ -3,7 +3,6 @@
 <script src="assets/javascript/showHideToggle.js"></script>
 
 
-
 <div class="container" id="createOffer">
     <form method="post" action="frontController.php?controller=ExpPro&action=creerOffreDepuisFormulaire">
         <h2 id="remplaceBaliseLegend">Création d'Offre</h2>
@@ -12,8 +11,8 @@
                 <p>
                     <label for="typeOffre">Type d'Offre</label>
                     <select name="typeOffre" id="typeOffre" required>
-                        <option disabled selected value> -- Veuillez choisir une option -- </option>
-                        <option value="offreNonDefini" >Non définie</option>
+                        <option disabled selected value> -- Veuillez choisir une option --</option>
+                        <option value="offreNonDefini">Non définie</option>
                         <option value="stage">Stage</option>
                         <option value="alternance">Alternance</option>
                     </select>
@@ -45,7 +44,7 @@
                 <p>
                     <label for="niveau">Niveau Requis</label>
                     <select name="niveau" id="niveau" required>
-                        <option disabled selected value> -- Veuillez choisir une option -- </option>
+                        <option disabled selected value> -- Veuillez choisir une option --</option>
                         <option value="BUT2">BUT2</option>
                         <option value="BUT3">BUT3</option>
                     </select>
@@ -65,15 +64,14 @@
                 <p>
                     <label for="siret">Siret</label>
                     <?php
-                    if (\App\SAE\Lib\ConnexionUtilisateur::estAdministrateur()){
+                    if (\App\SAE\Lib\ConnexionUtilisateur::estAdministrateur()) {
                         echo '<input type="text" name="siret" id="siret" placeholder="offreAdmin" required>';
-                    }
-                    else if (\App\SAE\Lib\ConnexionUtilisateur::estConnecte()){
-                        $siret= \App\SAE\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte();
-                        echo'<input type="number" name="siret" id="siret" required readonly value='.$siret.'>';
-                    }else{
-                        echo'<input type="number" name="siret" id="siret" required placeholder="Siret" value="01234567890123">';
-                    }?>
+                    } else if (\App\SAE\Lib\ConnexionUtilisateur::estConnecte()) {
+                        $siret = \App\SAE\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte();
+                        echo '<input type="number" name="siret" id="siret" required readonly value=' . $siret . '>';
+                    } else {
+                        echo '<input type="number" name="siret" id="siret" required placeholder="Siret" value="01234567890123">';
+                    } ?>
                 </p>
 
             </div>

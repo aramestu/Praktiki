@@ -1,21 +1,21 @@
 @media (max-width: 41200px) {
-    .welcomeLogo{
+    .welcomeLogo {
         width: 300px;
         height: 300px;
     }
 
-    #bgLogo{
+    #bgLogo {
         width: 225px;
         height: 225px;
     }
 
     .container,
-    .subContainer{
+    .subContainer {
         width: 69%;
         padding: 2%;
     }
 
-    .blob-cont{
+    .blob-cont {
         height: 500px;
         width: 500px;
         right: 5em;
@@ -23,23 +23,23 @@
 }
 
 @media (max-width: 1300px) {
-    .welcomeLogo{
+    .welcomeLogo {
         width: 250px;
         height: 250px;
     }
 
-    #bgLogo{
+    #bgLogo {
         width: 188px;
         height: 188px;
     }
 
     .container,
-    .subContainer{
+    .subContainer {
         width: 69%;
         padding: 2%;
     }
 
-    .blob-cont{
+    .blob-cont {
         height: 500px;
         width: 500px;
         right: 5em;
@@ -47,23 +47,23 @@
 }
 
 @media (max-width: 950px) {
-    .welcomeLogo{
+    .welcomeLogo {
         width: 200px;
         height: 200px;
     }
 
-    #bgLogo{
+    #bgLogo {
         width: 150px;
         height: 150px;
     }
 
     .container,
-    .subContainer{
+    .subContainer {
         width: 95%;
         padding: 5%;
     }
 
-    .blob-cont{
+    .blob-cont {
         height: 200px;
         width: 100%;
         right: 0;

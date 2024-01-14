@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
         popUpDelete.style.zIndex = '16';
         popUpDelete.style.opacity = '1';
     });
+
     function closePopUpDelete() {
         popUpDelete.style.opacity = '0';
         popUpDelete.style.zIndex = '-1';
