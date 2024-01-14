@@ -6,17 +6,28 @@ use App\SAE\Lib\ConnexionUtilisateur;
 use App\SAE\Model\DataObject\Enseignant;
 use App\SAE\Model\DataObject\Entreprise;
 use App\SAE\Model\DataObject\Etudiant;
+use App\SAE\Model\DataObject\Personnel;
 use App\SAE\Model\Repository\ConventionRepository;
 use App\SAE\Model\Repository\EnseignantRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
+use App\SAE\Model\Repository\PersonnelRepository;
 use App\SAE\Service\ServiceEnseignant;
 use App\SAE\Service\ServiceEntreprise;
 use App\SAE\Service\ServiceEtudiant;
+use App\SAE\Service\ServicePersonnel;
 
+/**
+ * Contrôleur pour l'affichage du tableau de bord des utilisateurs.
+ */
 class ControllerTDB extends ControllerGenerique {
 
+    /**
+     * Affiche le tableau de bord en fonction du type d'utilisateur.
+     *
+     * @return void
+     */
     public static function displayTDB():void{
         if (!ConnexionUtilisateur::estConnecte()){
             self::redirectionVersURL("warning", "Veuillez vous connecter pour acceder à cette page", "home");
@@ -30,6 +41,8 @@ class ControllerTDB extends ControllerGenerique {
             $methode = 'displayTDBens';
         } elseif (ConnexionUtilisateur::estEntreprise()) {
             $methode = 'displayTDBentreprise';
+        } elseif (ConnexionUtilisateur::estPersonnel()) {
+            $methode = 'displayTDBpers';
         } else {
             self::redirectionVersURL("danger", "Utilisateur non enregistré dans la base de données", "home");
             return;
@@ -41,7 +54,14 @@ class ControllerTDB extends ControllerGenerique {
             self::error("");
         }
     }
-    private static function displayTDBens() {
+
+    /**
+     * Affiche le tableau de bord pour un enseignant.
+     *
+     * @return void
+     */
+    private static function displayTDBens(): void
+    {
         $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null,null,
             null,null,"lastWeek",null,null);
         $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
@@ -58,7 +78,13 @@ class ControllerTDB extends ControllerGenerique {
         );
     }
 
-    private static function displayTDBensInfo() {
+    /**
+     * Affiche les informations du tableau de bord pour un enseignant.
+     *
+     * @return void
+     */
+    private static function displayTDBensInfo(): void
+    {
         $siret=ConnexionUtilisateur::getLoginUtilisateurConnecte();
         $user=(new EnseignantRepository())->getById($siret);
         self::afficheVue(
@@ -72,15 +98,105 @@ class ControllerTDB extends ControllerGenerique {
         );
     }
 
+
+    /**
+     * Met à jour les informations de l'enseignant depuis le tableau de bord.
+     *
+     * Cette méthode récupère l'enseignant connecté, utilise le service Enseignant
+     * pour mettre à jour ses informations avec des attributs vides (aucune modification spécifiée).
+     * Enfin, elle redirige l'utilisateur vers le tableau de bord avec un message de succès.
+     *
+     * @return void
+     */
     public static function displayTDBensMettreAJour(): void
     {
+        // Récupérer l'adresse e-mail de l'utilisateur connecté
         $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+
+        // Récupérer l'objet enseignant correspondant à l'adresse e-mail
         $enseignant = (new EnseignantRepository())->getByEmail($mail);
 
+        // Utiliser le service Enseignant pour mettre à jour les informations (avec attributs vides)
         (new ServiceEnseignant())->mettreAJour($enseignant, []);
+
+        // Rediriger vers le tableau de bord avec un message de succès
         self::redirectionVersURL("success", "L'enseignant a été mis à jour", "displayTDB&controller=TDB");
     }
 
+    /**
+     * Affiche le tableau de bord pour un personnel.
+     *
+     * @return void
+     */
+    private static function displayTDBpers(): void
+    {
+        $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null,null,
+            null,null,"lastWeek",null,null);
+        $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user=(new PersonnelRepository())->getByEmail($mail);
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Tableau de bord',
+                'user'=>$user,
+                'cheminVueBody' => 'user/tableauDeBord/personnel.php',
+                'TDBView' => 'user/tableauDeBord/personnel/accueilPersonnel.php',
+                'listeExpPro' => $listeExpPro
+            ]
+        );
+    }
+
+    /**
+     * Affiche les informations du tableau de bord pour un personnel.
+     *
+     * @return void
+     */
+    private static function displayTDBpersInfo(): void
+    {
+        $siret=ConnexionUtilisateur::getLoginUtilisateurConnecte();
+        $user=(new PersonnelRepository())->getById($siret);
+        self::afficheVue(
+            'view.php',
+            [
+                'pagetitle' => 'Tableau de bord',
+                'cheminVueBody' => 'user/tableauDeBord/personnel.php',
+                'TDBView' => 'user/tableauDeBord/personnel/infoPersonnel.php',
+                'user'=>$user
+            ]
+        );
+    }
+
+
+    /**
+     * Met à jour les informations du ppersonnel depuis le tableau de bord.
+     *
+     * Cette méthode récupère du personnel connecté, utilise le service Personnel
+     * pour mettre à jour ses informations avec des attributs vides (aucune modification spécifiée).
+     * Enfin, elle redirige l'utilisateur vers le tableau de bord avec un message de succès.
+     *
+     * @return void
+     */
+    public static function displayTDBpersMettreAJour(): void
+    {
+        // Récupérer l'adresse e-mail du putilisateur connecté
+        $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+
+        // Récupérer l'objet personnel correspondant à l'adresse e-mail
+        $personnel = (new PersonnelRepository())->getByEmail($mail);
+
+        // Utiliser le service Personnel pour mettre à jour les informations (avec attributs vides)
+        (new ServicePersonnel())->mettreAJour($personnel, []);
+
+        // Rediriger vers le tableau de bord avec un message de succès
+        self::redirectionVersURL("success", "L'utilisateur a été mis à jour", "displayTDB&controller=TDB");
+    }
+    
+
+    /**
+     * Affiche le tableau de bord pour une entreprise.
+     *
+     * @return void
+     */
     private static function displayTDBentreprise(): void {
         $listeExpPro =  (new ExperienceProfessionnelRepository())->search(ConnexionUtilisateur::getLoginUtilisateurConnecte());
         $siret=ConnexionUtilisateur::getLoginUtilisateurConnecte();
@@ -97,7 +213,13 @@ class ControllerTDB extends ControllerGenerique {
         );
     }
 
-    private static function displayTDBentrepriseInfo() {
+    /**
+     * Affiche les informations du tableau de bord pour une entreprise.
+     *
+     * @return void
+     */
+    private static function displayTDBentrepriseInfo(): void
+    {
         $siret=ConnexionUtilisateur::getLoginUtilisateurConnecte();
         $user=(new EntrepriseRepository())->getById($siret);
         self::afficheVue(
@@ -111,6 +233,11 @@ class ControllerTDB extends ControllerGenerique {
         );
     }
 
+    /**
+     * Met à jour les informations d'une entreprise depuis le tableau de bord.
+     *
+     * @return void
+     */
     public static function displayTDBentrepriseMettreAJour(): void {
         $siret = ConnexionUtilisateur::getLoginUtilisateurConnecte();
         $entreprise = (new entrepriseRepository())->getById($siret);
@@ -138,7 +265,13 @@ class ControllerTDB extends ControllerGenerique {
         self::redirectionVersURL("success", "L'entreprise a été mis à jour", "displayTDB&controller=TDB");
     }
 
-    private static function displayTDBetu() {
+    /**
+     * Affiche le tableau de bord pour un étudiant.
+     *
+     * @return void
+     */
+    private static function displayTDBetu(): void
+    {
         $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null,null,
             null,null,"lastWeek",null,null);
         $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
@@ -155,7 +288,12 @@ class ControllerTDB extends ControllerGenerique {
         );
     }
 
-    private static function displayTDBetuInfo() {
+    /**
+     * Affiche les informations du tableau de bord pour un étudiant.
+     *
+     * @return void
+     */
+    private static function displayTDBetuInfo() : void{
         $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
         $user=(new EtudiantRepository())->getByEmail($mail);
         self::afficheVue(
@@ -169,10 +307,18 @@ class ControllerTDB extends ControllerGenerique {
         );
     }
 
-    private static function displayTDBetuGestion() {
+    /**
+     * Affiche le tableau de bord de gestion pour un étudiant.
+     *
+     * @return void
+     */
+    private static function displayTDBetuGestion(): void
+    {
         $mail=ConnexionUtilisateur::getLoginUtilisateurConnecte();
-        $user=(new EtudiantRepository())->getByEmail($mail);
+        $rep = new EtudiantRepository();
+        $user= $rep->getByEmail($mail);
         $convention=(new ConventionRepository())->getConventionAvecEtudiant($user->getNumEtudiant());
+        $alternant = $rep->etudiantPossedeActuellementAlternance($user->getNumEtudiant());
         self::afficheVue(
             'view.php',
             [
@@ -180,11 +326,17 @@ class ControllerTDB extends ControllerGenerique {
                 'cheminVueBody' => 'user/tableauDeBord/etudiant.php',
                 'TDBView' => 'user/tableauDeBord/etudiant/gestionEtudiant.php',
                 'user'=>$user,
-                'convention'=>$convention
+                'convention'=>$convention,
+                'alternant' => $alternant
             ]
         );
     }
 
+    /**
+     * Met à jour les informations d'un étudiant depuis le tableau de bord.
+     *
+     * @return void
+     */
     public static function displayTDBetuMettreAJour(): void {
         $mail = ConnexionUtilisateur::getLoginUtilisateurConnecte();
         $etudiant = (new EtudiantRepository())->getByEmail($mail);
@@ -203,15 +355,74 @@ class ControllerTDB extends ControllerGenerique {
         self::redirectionVersURL("success", "L'etudiant a été mis à jour", "displayTDB&controller=TDB");
     }
 
+    /**
+     * Envoie une convention depuis le tableau de bord d'un étudiant.
+     *
+     * @return void
+     */
     public static function displayTDBetuEnvoyerConvention(): void {
         $convention = (new ConventionRepository())->getConventionAvecEtudiant((new EtudiantRepository())->getByEmail(ConnexionUtilisateur::getLoginUtilisateurConnecte())->getNumEtudiant());
         if (!is_null($convention)) {
-            $convention->setEstFini(true);
-            (new ConventionRepository())->mettreAJour($convention);
-            self::redirectionVersURL("success", "Convention envoyée", "displayTDB&controller=TDB&tdbAction=gestion");
+            if (!self::verifierSiAttributsVide($convention)) {
+                $convention->setEstFini(true);
+                (new ConventionRepository())->mettreAJour($convention);
+                self::redirectionVersURL("success", "Convention envoyée", "displayTDB&controller=TDB&tdbAction=gestion");
+            }
+            else {
+                self::redirectionVersURL("warning", "Veuillez compléter votre convention en entier avant de l'envoyer", "displayTDB&controller=TDB&tdbAction=gestion");
+            }
         } else {
             self::redirectionVersURL("warning", "Cet etudiant ne possède pas de convention", "afficherFormulaireMiseAJour");
         }
+    }
+
+    /**
+     * Retourne true si au moins 1 attribut est vide, false sinon.
+     *
+     * @return bool
+     */
+    public static function verifierSiAttributsVide($convention): bool {
+        $ret = false;
+        $attributs = [
+            'mailEnseignant',
+            'nomEnseignant',
+            'prenomEnseignant',
+            'competencesADevelopper',
+            'dureeDeTravail',
+            'languesImpression',
+            'origineDeLaConvention',
+            'nbHeuresHebdo',
+            'modePaiement',
+            'dureeExperienceProfessionnel',
+            'caisseAssuranceMaladie',
+            'mailTuteurProfessionnel',
+            'prenomTuteurProfessionnel',
+            'nomTuteurProfessionnel',
+            'fonctionTuteurProfessionnel',
+            'telephoneTuteurProfessionnel',
+            'sujetExperienceProfessionnel',
+            'thematiqueExperienceProfessionnel',
+            'tachesExperienceProfessionnel',
+            'codePostalExperienceProfessionnel',
+            'adresseExperienceProfessionnel',
+            'dateDebutExperienceProfessionnel',
+            'dateFinExperienceProfessionnel',
+            'nomSignataire',
+            'prenomSignataire',
+            'siret',
+            'nomEntreprise',
+            'codePostalEntreprise',
+            'effectifEntreprise',
+            'telephoneEntreprise'
+        ];
+        foreach ($attributs as $attribut) {
+            $getter = 'get' . ucfirst($attribut);
+            echo $getter;
+            if ($convention->$getter() == "") {
+                $ret = true;
+            }
+        }
+        return $ret;
     }
 
 }

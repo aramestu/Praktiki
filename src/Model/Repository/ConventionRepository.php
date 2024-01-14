@@ -5,12 +5,26 @@ namespace App\SAE\Model\Repository;
 use App\SAE\Model\DataObject\AbstractDataObject;
 use App\SAE\Model\DataObject\Convention;
 
+/**
+ * Repository pour la gestion des objets "Convention" en base de données.
+ */
 class ConventionRepository extends AbstractRepository {
 
+    /**
+     * Retourne le nom de la table associée à ce repository.
+     *
+     * @return string Nom de la table.
+     */
     protected function getNomTable(): string{
         return "Conventions";
     }
 
+    /**
+     * Construit un objet "Convention" à partir d'un tableau formaté.
+     *
+     * @param array $conventionFormatTableau Le tableau formaté représentant l'objet.
+     * @return Convention Objet "Convention" construit.
+     */
     public function construireDepuisTableau(array $conventionFormatTableau): Convention {
         if (!isset($conventionFormatTableau["sujetEstConfidentiel"])) {
             $conventionFormatTableau["sujetEstConfidentiel"] = false;
@@ -50,11 +64,21 @@ class ConventionRepository extends AbstractRepository {
         return $convention;
     }
 
+    /**
+     * Retourne le nom de la clé primaire de la table associée à ce repository.
+     *
+     * @return string Nom de la clé primaire.
+     */
     protected function getNomClePrimaire(): string
     {
         return "idConvention";
     }
 
+    /**
+     * Retourne les noms des colonnes de la table associée à ce repository.
+     *
+     * @return array Tableau contenant les noms des colonnes.
+     */
     protected function getNomsColonnes(): array
     {
         return array("idConvention", "mailEnseignant", "nomEnseignant", "prenomEnseignant",
@@ -68,6 +92,12 @@ class ConventionRepository extends AbstractRepository {
             "codePostalEntreprise", "effectifEntreprise", "telephoneEntreprise", "estFini", "estValideeAdmin", "estValideeSecretariat", "estValideePstage", "raisonRefus", "estSignee");
     }
 
+    /**
+     * Enregistre un objet "Convention" en base de données.
+     *
+     * @param AbstractDataObject|Convention $convention L'objet à enregistrer.
+     * @return bool True si l'enregistrement a réussi, false sinon.
+     */
     public function save(AbstractDataObject|Convention $convention): bool
     {
         try {
@@ -97,6 +127,11 @@ class ConventionRepository extends AbstractRepository {
         }
     }
 
+    /**
+     * Archive une convention en la déplaçant vers une table d'archives.
+     *
+     * @param string $valeurClePrimaire La valeur de la clé primaire de la convention à archiver.
+     */
     public function archiver(string $valeurClePrimaire): void
     {
         //TODO : a tester lorsque la supression sera possible
@@ -111,6 +146,13 @@ class ConventionRepository extends AbstractRepository {
         $requeteStatement->execute($values);
     }
 
+    /**
+     * Récupère une convention avec un étudiant associé pour une année universitaire donnée.
+     *
+     * @param string $idEtudiant L'identifiant de l'étudiant.
+     * @param int $idAnneeUniversitaire L'identifiant de l'année universitaire.
+     * @return Convention|null Objet "Convention" ou null s'il n'existe pas.
+     */
     public function getConventionAvecEtudiant(string $idEtudiant, int $idAnneeUniversitaire = 3) : ?Convention{
         $sql = "SELECT * FROM ConventionsStageEtudiant cse
                 JOIN Conventions c ON c.idConvention = cse.idConvention
@@ -131,13 +173,28 @@ class ConventionRepository extends AbstractRepository {
         return $this->construireDepuisTableau($result);
     }
 
-    public function creerConvention(string $numEtudiant, int $idAnneeUniversitaire): void {
-        $sql = "CALL creationConvention(:numEtudiantTag, :idAnneeUniversitaireTag)";
+    /**
+     * Crée une nouvelle convention pour un étudiant et une année universitaire données.
+     * Si l'étudiant a déjà une convention ou qu'il a une alternance, renvoie faux et
+     * ne crée pas la convention
+     *
+     * @param string $numEtudiant Le numéro de l'étudiant.
+     * @param int $idAnneeUniversitaire L'identifiant de l'année universitaire.
+     * @return bool
+     */
+    public function creerConvention(string $numEtudiant, int $idAnneeUniversitaire): bool {
+        // Si l'étudiant ne possède pas d'alternance alors on peut lui créer une convention
+        $sql = "SELECT creationConvention(:numEtudiantTag, :idAnneeUniversitaireTag)";
 
-        $values = array("numEtudiantTag" => $numEtudiant,
-            "idAnneeUniversitaireTag" => $idAnneeUniversitaire);
+        $values = array(
+            "numEtudiantTag" => $numEtudiant,
+            "idAnneeUniversitaireTag" => $idAnneeUniversitaire
+        );
 
         $pdoStatement = Model::getPdo()->prepare($sql);
         $pdoStatement->execute($values);
+
+        return $pdoStatement->fetchColumn();
     }
+
 }

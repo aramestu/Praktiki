@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
+    /*
+    Ce script est utilisé pour gérer l'affichage d'une fenêtre de confirmation de suppression pop-up. Lorsqu'un utilisateur clique sur le bouton de suppression, une fenêtre pop-up apparaît avec un effet de flou en arrière-plan. L'utilisateur a alors la possibilité de fermer la fenêtre pop-up en cliquant sur le bouton 'Non', sur l'icône de fermeture ou en dehors de la fenêtre pop-up. Dans tous ces cas, la fenêtre pop-up est fermée et l'effet de flou en arrière-plan est supprimé.
+    */
     const deleteButtonOrigin = document.getElementById('deleteButtonOrigin');
     const transitionOverlay = document.getElementById('transition-overlay');
     const popUpDelete = document.getElementById('popUpDelete');

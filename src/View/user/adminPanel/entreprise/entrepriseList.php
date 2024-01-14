@@ -11,10 +11,10 @@ use App\SAE\Model\Repository\EntrepriseRepository;
 </div>
 
 <div class="HBox" id="statBox">
-    <div id="statTotal"><span><?php echo (new EntrepriseRepository())->count()?></span></div>
-    <div id="statValide"><span><?php echo (new ControllerEntreprise())->getNbEntrepriseValide()?></span></div>
-    <div id="statInter"><span><?php echo (new ControllerEntreprise())->getNbEntrepriseEnAttente()?></span></div>
-    <div id="statBad"><span><?php echo (new ControllerEntreprise())->getNbEntrepriseRefuse()?></span></div>
+    <div id="statTotal" title="Nombre total d'entreprises"><span><?php echo (new EntrepriseRepository())->count()?></span></div>
+    <div id="statValide" title="Nombre d'entreprises validées"><span><?php echo (new ControllerEntreprise())->getNbEntrepriseValide()?></span></div>
+    <div id="statInter" title="Nombre d'entreprises en attente de validation"><span><?php echo (new ControllerEntreprise())->getNbEntrepriseEnAttente()?></span></div>
+    <div id="statBad" title="Nombre d'entreprises refusées"><span><?php echo (new ControllerEntreprise())->getNbEntrepriseRefuse()?></span></div>
 </div>
 
 <div class="columnName">

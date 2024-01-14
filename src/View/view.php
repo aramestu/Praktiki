@@ -15,15 +15,17 @@ use App\SAE\Model\HTTP\Cookie;
     <link id="theme" rel="stylesheet" type="text/css" href="assets/css/mainIUT.css">
     <link rel="stylesheet" href="assets/css/charte-graphique-UM.css">
     <link rel="stylesheet" href="assets/css/button.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
 
     <script src="assets/javascript/navbar.js"></script>
     <link rel="stylesheet" href="assets/css/resources/font-awesome-4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="assets/css/CSB.css"/>
-    <script src="assets/javascript/CSB.js"></script>
+    <script src="assets/javascript/CSBBIS.js"></script>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 </head>
 <body>
 

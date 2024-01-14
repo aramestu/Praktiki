@@ -10,8 +10,16 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 use App\SAE\Service\ServiceEntreprise;
 use App\SAE\Service\ServiceEtudiant;
 
+/**
+ * Contrôleur administratif avec des méthodes liées à la gestion des étudiants, des entreprises, des offres, etc.
+ */
 class ControllerPanelAdmin extends ControllerGenerique {
 
+    /**
+     * Affiche le panel des étudiants pour l'administration.
+     *
+     * @return void
+     */
     public static function panelEtudiants(): void {
         $listEtudiants = (new EtudiantRepository())->getAll();
         self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
@@ -20,6 +28,11 @@ class ControllerPanelAdmin extends ControllerGenerique {
                                                 'listEtudiants' => $listEtudiants]);
     }
 
+    /**
+     * Affiche le panel des entreprises en attente de validation pour l'administration.
+     *
+     * @return void
+     */
     public static function panelEntreprises(): void {
         $keywords = ControllerEntreprise::keywordsExiste();
         $codePostalEntreprise = ControllerEntreprise::codePostalExiste();
@@ -31,6 +44,11 @@ class ControllerPanelAdmin extends ControllerGenerique {
                                                 'listEntreprises' => $listEntreprises ]);
     }
 
+    /**
+     * Affiche le panel des offres pour l'administration.
+     *
+     * @return void
+     */
     public static function panelOffres(): void {
         $keywords = ControllerExpPro::keywordsExiste();
         $dateDebut = ControllerExpPro::dateDebutExiste();
@@ -46,12 +64,22 @@ class ControllerPanelAdmin extends ControllerGenerique {
                                                 'listOffres' => $listOffres ]);
     }
 
+    /**
+     * Affiche le panel d'importation des données pour l'administration.
+     *
+     * @return void
+     */
     public static function panelImportPstage(): void{
         self::afficheVue('view.php', ['pagetitle' => 'Importation des données',
             'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
             'adminPanelView' => 'user/adminPanel/import/index.php']);
     }
 
+    /**
+     * Affiche le panel de la liste des entreprises pour l'administration.
+     *
+     * @return void
+     */
     public static function panelListeEntreprises(): void {
         $keywords = "";
         if(isset($_GET["keywords"])){
@@ -65,6 +93,11 @@ class ControllerPanelAdmin extends ControllerGenerique {
                                                 'keywords' => $keywords]);
     }
 
+    /**
+     * Affiche le panel de la liste des étudiants pour l'administration.
+     *
+     * @return void
+     */
     public static function panelListeEtudiants(): void {
         $keywords = "";
         if(isset($_GET["keywords"])){
@@ -77,6 +110,11 @@ class ControllerPanelAdmin extends ControllerGenerique {
                                                 'listEtudiants' => $listEtudiants ]);
     }
 
+    /**
+     * Affiche le panel de la liste des offres pour l'administration.
+     *
+     * @return void
+     */
     public static function panelListeOffres(): void {
         $keywords = "";
         if(isset($_GET["keywords"])){
@@ -89,6 +127,11 @@ class ControllerPanelAdmin extends ControllerGenerique {
                                                 'listOffres' => $listOffres ]);
     }
 
+    /**
+     * Affiche le panel de gestion d'une entreprise pour l'administration.
+     *
+     * @return void
+     */
     public static function panelGestionEntreprise(): void {
         if(!isset($_GET["siret"])){
             self::error("Entreprise non défini");
@@ -101,6 +144,11 @@ class ControllerPanelAdmin extends ControllerGenerique {
                                                 'entreprise' => $entreprise ]);
     }
 
+    /**
+     * Valide une entreprise pour l'administration.
+     *
+     * @return void
+     */
     public static function validerEntreprise(): void{
         if(!isset($_GET["siret"])){
             self::error("Entreprise non défini");
@@ -112,6 +160,11 @@ class ControllerPanelAdmin extends ControllerGenerique {
         self::panelGestionEntreprise();
     }
 
+    /**
+     * Invalide une entreprise pour l'administration.
+     *
+     * @return void
+     */
     public static function invaliderEntreprise(): void{
         if(!isset($_GET["siret"])){
             self::error("Entreprise non défini");
@@ -123,6 +176,11 @@ class ControllerPanelAdmin extends ControllerGenerique {
         self::panelGestionEntreprise();
     }
 
+    /**
+     * Supprime une entreprise pour l'administration.
+     *
+     * @return void
+     */
     public static function supprimerEntreprise(): void{
         if(!isset($_GET["siret"])){
             self::error("Entreprise non défini");
@@ -132,6 +190,11 @@ class ControllerPanelAdmin extends ControllerGenerique {
         self::panelListeEntreprises();
     }
 
+    /**
+     * Affiche le panel de modification d'une entreprise pour l'administration.
+     *
+     * @return void
+     */
     public static function panelModificationEntreprise(): void{
         if(!isset($_GET["siret"])){
             self::error("Entreprise non défini");
@@ -144,6 +207,11 @@ class ControllerPanelAdmin extends ControllerGenerique {
             'entreprise' => $entreprise ]);
     }
 
+    /**
+     * Modifie une entreprise pour l'administration.
+     *
+     * @return void
+     */
     public static function modifierEntreprise(): void{
         $attributs = [];
         if(!isset($_POST["siret"])){
@@ -177,6 +245,11 @@ class ControllerPanelAdmin extends ControllerGenerique {
         self::panelGestionEntreprise();
     }
 
+    /**
+     * Affiche le panel de gestion d'un étudiant pour l'administration.
+     *
+     * @return void
+     */
     public static function panelGestionEtudiant(): void {
         if(!isset($_GET["numEtudiant"])){
             self::error("Etudiant non défini");
@@ -189,6 +262,11 @@ class ControllerPanelAdmin extends ControllerGenerique {
                                                                 'etudiant' => $etudiant ]);
     }
 
+    /**
+     * Supprime un étudiant pour l'administration.
+     *
+     * @return void
+     */
     public static function supprimerEtudiant(): void{
         if(!isset($_GET["numEtudiant"])){
             self::error("Etudiant non défini");
@@ -198,6 +276,11 @@ class ControllerPanelAdmin extends ControllerGenerique {
         self::panelListeEtudiants();
     }
 
+    /**
+     * Affiche le panel de modification d'un étudiant pour l'administration.
+     *
+     * @return void
+     */
     public static function panelModificationEtudiant(): void{
         if(!isset($_GET["numEtudiant"])){
             self::error("Etudiant non défini");
@@ -210,6 +293,11 @@ class ControllerPanelAdmin extends ControllerGenerique {
                                                                 'etudiant' => $etudiant ]);
     }
 
+    /**
+     * Modifie un étudiant pour l'administration.
+     *
+     * @return void
+     */
     public static function modifierEtudiant(): void{
         $attributs = [];
         if(!isset($_POST["numEtudiant"])){
