@@ -36,5 +36,5 @@ $etudiantAAlternance = (new EtudiantRepository())->etudiantAAlternance($etudiant
     </div>
     <label class="lineNumEtudiant"><?=htmlspecialchars($etudiant->getNumEtudiant())?></label>
     <label class="lineMailUniversitaireEtudidant"><a class="link" href="mailto:<?=$etudiant->getMailUniversitaireEtudiant()?>"><?=htmlspecialchars($etudiant->getMailUniversitaireEtudiant())?></a></label>
-    <a class="button" href="frontController.php?action=panelGestionEtudiant&controller=PanelAdmin&numEtudiant=<?=rawurlencode($etudiant->getNumEtudiant())?>">Consulter</a>
+    <a class="button consulterButton" href="frontController.php?action=panelGestionEtudiant&controller=PanelAdmin&numEtudiant=<?=rawurlencode($etudiant->getNumEtudiant())?>">Consulter</a>
 </div>
