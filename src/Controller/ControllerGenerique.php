@@ -58,16 +58,6 @@ abstract class ControllerGenerique
     }
 
     /**
-     * Affiche la zone de test.
-     *
-     * @return void
-     */
-    public static function zoneDetest(): void{
-        self::afficheVue('view.php', ['pagetitle' => 'Zone de test', 'cheminVueBody' => 'SAE/zoneDeTest.php']);
-    }
-
-
-    /**
      * Effectue une redirection vers une URL spécifiée avec un message flash.
      *
      * @param string $type Le type du message flash (success, danger, warning, etc.).

@@ -141,7 +141,9 @@ class ControllerMain extends ControllerGenerique
     /**
      * Importe des données à partir d'un fichier.
      *
-     * @param IImportation $importation
+     * Cette méthode prend en charge l'importation de données en fonction du type d'offre spécifié.
+     * Elle utilise une interface d'importation (IImportation) pour effectuer l'importation des données.
+     *
      * @return void
      */
     public static function importation(): void
@@ -169,10 +171,20 @@ class ControllerMain extends ControllerGenerique
         }
     }
 
+    /**
+     * Importe des données à partir d'un fichier en utilisant la classe d'importation Pstage.
+     *
+     * @return void
+     */
     public static function importationPstage(): void{
         self::importation(new ImportationPstage());
     }
 
+    /**
+     * Importe des données à partir d'un fichier en utilisant la classe d'importation Studea.
+     *
+     * @return void
+     */
     public static function importationStudea(): void{
         self::importation(new ImportationStudea());
     }

@@ -2,43 +2,77 @@
 
 namespace App\SAE\Model\Repository;
 
-use App\SAE\Controller\ControllerGenerique;
 use App\SAE\Model\DataObject\AbstractDataObject;
 use App\SAE\Model\DataObject\ContratsAlternance;
+use App\SAE\Model\Model;
 
+/**
+ * Classe de gestion des opérations de base pour les contrats en alternance dans la base de données.
+ *
+ * @package App\SAE\Model\Repository
+ */
 class ContratsAlternanceRepository extends AbstractRepository
 {
 
+    /**
+     * Retourne le nom de la table associée aux contrats en alternance.
+     *
+     * @return string Le nom de la table.
+     */
     protected function getNomTable(): string
     {
         return "ContratsAlternances";
     }
 
+    /**
+     * Construit un objet ContratsAlternance à partir d'un tableau de données formaté.
+     *
+     * @param array $objetFormatTableau Le tableau de données formaté.
+     * @return ContratsAlternance L'objet ContratsAlternance construit.
+     */
     public function construireDepuisTableau(array $objetFormatTableau): AbstractDataObject
     {
         return new ContratsAlternance($objetFormatTableau["numEtudiant"], $objetFormatTableau["idAnneeUniversitaire"]);
     }
 
+    /**
+     * Retourne le nom de la clé primaire associée aux contrats en alternance.
+     *
+     * @return string Le nom de la clé primaire.
+     */
     protected function getNomClePrimaire(): string
     {
         return "numEtudiant, idAnneeUniversitaire";
     }
 
+    /**
+     * Retourne les noms des colonnes associées aux contrats en alternance.
+     *
+     * @return array Les noms des colonnes.
+     */
     protected function getNomsColonnes(): array
     {
         return ["numEtudiant", "idAnneeUniversitaire"];
     }
 
     /**
-     * Retourne toujours null car ne peut pas être executé pour cette table
-     * @param string $valeurClePrimaire
-     * @return AbstractDataObject|null
+     * Retourne toujours null car ne peut pas être exécuté pour cette table.
+     *
+     * @param string $valeurClePrimaire La valeur de la clé primaire.
+     * @return AbstractDataObject|null Toujours null pour cette table.
      */
     public function getById(string $valeurClePrimaire): ?AbstractDataObject
     {
         return null;
     }
 
+    /**
+     * Obtient un objet ContratsAlternance par ses identifiants.
+     *
+     * @param string $numEtudiant Le numéro de l'étudiant.
+     * @param int $idAnneeUniversitaire L'ID de l'année universitaire.
+     * @return ContratsAlternance|null L'objet ContratsAlternance ou null s'il n'existe pas.
+     */
     public function getByIds(string $numEtudiant, int $idAnneeUniversitaire): ?AbstractDataObject
     {
         $nomTable = $this->getNomTable();
@@ -48,10 +82,10 @@ class ContratsAlternanceRepository extends AbstractRepository
         // Préparation de la requête
         $pdoStatement = Model::getPdo()->prepare($sql);
 
-        $values = array(
+        $values = [
             "numEtudiantTag" => $numEtudiant,
             "idAnneeUniversitaireTag" => $idAnneeUniversitaire
-        );
+        ];
 
         $pdoStatement->execute($values);
 
@@ -59,10 +93,9 @@ class ContratsAlternanceRepository extends AbstractRepository
         // Note: fetch() renvoie false si pas de objet correspondante
         $objetFormatTableau = $pdoStatement->fetch();
 
-        if(!$objetFormatTableau){
+        if (!$objetFormatTableau) {
             return null;
-        }
-        else{
+        } else {
             return $this->construireDepuisTableau($objetFormatTableau);
         }
     }

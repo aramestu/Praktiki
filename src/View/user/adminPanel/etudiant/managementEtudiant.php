@@ -1,16 +1,18 @@
 <?php
 use App\SAE\Model\Repository\EtudiantRepository;
 use App\SAE\Model\Repository\AnneeUniversitaireRepository;
+use App\SAE\Lib\ConversionMajuscule;
 $anneeUniversitaire = (new AnneeUniversitaireRepository())->getCurrentAnneeUniversitaire();
 $conventionValidee = (new EtudiantRepository())->conventionEtudiantEstValide($etudiant, $anneeUniversitaire->getIdAnneeUniversitaire());
 $etudiantAConvention = (new EtudiantRepository())->etudiantAConvention($etudiant, $anneeUniversitaire);
 $etudiantAAlternance = (new EtudiantRepository())->etudiantAAlternance($etudiant, $anneeUniversitaire);
+
 ?>
 
 <div class="managementPanel">
     <div class="container VBox entityInformation">
         <div class="top">
-            <label id="managementEtudiantName"><?=htmlspecialchars(strtoupper($etudiant->getNomEtudiant()) . " " .$etudiant->getPrenomEtudiant())?></label>
+            <label id="managementEtudiantName"><?=htmlspecialchars( ConversionMajuscule::convertirEnMajuscules(($etudiant->getNomEtudiant()) . " " .$etudiant->getPrenomEtudiant()))?></label>
             <div class="state">
                 <label id="managementEtudiantState"><?php
                                                         if($conventionValidee || $etudiantAAlternance){

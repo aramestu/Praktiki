@@ -40,6 +40,14 @@ class ControllerExpPro extends ControllerGenerique
         );
     }
 
+    /**
+     * Affiche la page d'ajout de commentaire pour une offre.
+     *
+     * Cette méthode vérifie les droits de l'utilisateur et affiche la page d'ajout de commentaire
+     * pour une offre spécifique. Les informations sur l'offre sont récupérées à partir des paramètres GET.
+     *
+     * @throws \Exception En cas d'erreur lors de la récupération de l'offre ou si l'utilisateur n'a pas les droits.
+     */
     public static function afficherAjoutCommentaire() : void{
         $id = $_GET["id"];
         $type = $_GET["type"];
@@ -76,6 +84,14 @@ class ControllerExpPro extends ControllerGenerique
         }
     }
 
+    /**
+     * Ajoute un commentaire à une offre.
+     *
+     * Cette méthode vérifie les droits de l'utilisateur et met à jour le commentaire de l'offre
+     * spécifiée dans les paramètres POST.
+     *
+     * @throws \Exception En cas d'erreur lors de la mise à jour du commentaire ou si l'utilisateur n'a pas les droits.
+     */
     public static function ajouterCommentaire() : void{
         $id = $_POST["id"];
         $typeOffre = $_POST["typeOffre"];

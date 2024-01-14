@@ -1,4 +1,4 @@
-<div class="tableResponsive">
+<div class="tableResponsive" id="centeredTable">
     <?php
     if(empty($listeExpPro)){
         require 'noOfferFound.php';

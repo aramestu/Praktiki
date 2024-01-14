@@ -21,7 +21,6 @@ class MessageFlash
      * @param string $type Le type du message flash ("success", "info", "warning" ou "danger").
      * @param string $message Le message à ajouter.
      */
-    //TODO si y'a plusieurs messageFlash du même type, ne fonctionne pas
     public static function ajouter(string $type, string $message): void
     {
         $array = array(

@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const burger = document.querySelector('.burger');
 
-    burger.addEventListener('click', () => {
+    document.getElementById("burgerParent").addEventListener('click', () => {
         burger.classList.toggle('active');
         document.querySelector('.navbar').classList.toggle('active');
         if (!document.querySelector('.navbar').classList.contains('active')) {
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }, 500);
         } else {
-            document.querySelector('.navbar').style = "height: 90vh";
+            document.querySelector('.navbar').style = "height: 100vh";
             for (let i = 0; i < document.querySelectorAll('.nav-item').length; i++) {
                 document.querySelectorAll('.nav-item')[i].style = "opacity: 1; margin-left: 0";
             }

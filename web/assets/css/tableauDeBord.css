@@ -358,6 +358,9 @@
     color: var(--darkBlue2);
 }
 
+#centeredTable {
+    justify-content: center;
+}
 #listeEntrepriseButton::before {
     font-family: 'FontAwesome';
     margin-right: 10px;

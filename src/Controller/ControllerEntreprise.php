@@ -135,7 +135,7 @@ class ControllerEntreprise extends ControllerGenerique
      */
     public static function creerDepuisFormulaire(): void
     {
-        if (($_REQUEST["siret"]) > 0) {
+        if (strlen($_REQUEST["siret"])==14) {
             $user = (new EntrepriseRepository())->getById($_REQUEST["siret"]);
             if (is_null($user)) {
                 if ($_REQUEST["postcode"] >= 01000 & $_REQUEST["postcode"] <= 98890) {

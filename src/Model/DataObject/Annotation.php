@@ -36,7 +36,7 @@ class Annotation extends AbstractDataObject
     /**
      * Getter pour l'identifiant de l'annotation.
      *
-     * @return string L'identifiant de l'annotation.
+     * @return int L'identifiant de l'annotation.
      */
     public function getIdAnnotation(): int
     {

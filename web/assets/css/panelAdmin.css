@@ -51,6 +51,10 @@
     .entityInformation > .top {
         padding-left: 5%;
     }
+
+    .managementActions {
+        flex-direction: row;
+    }
 }
 
 @media (max-width: 1300px) {
@@ -105,6 +109,10 @@
 
     .entityInformation > .top {
         padding-left: 5%;
+    }
+
+    .managementActions {
+        flex-direction: row;
     }
 }
 
@@ -197,6 +205,14 @@
 
     .entityInformation > .down {
         font-size: 1.3em;
+    }
+
+    .managementActions {
+        flex-direction: column;
+    }
+
+    .managementActions .button {
+        width: 94%;
     }
 }
 
@@ -626,7 +642,6 @@ form #search-bar {
 .managementActions {
     max-height: 30%;
     display: flex;
-    flex-direction: row;
 }
 
 .managementActions .button, .managementActions input[type="submit"] {
@@ -671,12 +686,12 @@ form #search-bar {
     background-color: var(--pastelBlue);
 }
 
-#ajoutAnnotation{
+#ajoutAnnotation {
     background-color: var(--grey0);
     color: #2F4F4F;
 }
 
-#ajoutAnnotation:hover{
+#ajoutAnnotation:hover {
     background-color: var(--grey1);
 }
 
