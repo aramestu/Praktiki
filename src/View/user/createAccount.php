@@ -6,19 +6,19 @@
         <h2 id="remplaceBaliseLegend">Inscription Entreprise</h2>
         <p>
             <label for="nom">Nom de l'entreprise</label>
-            <input type="text" name="nom" id="nom" required placeholder="Nom de votre entreprise" autofocus>
+            <input type="text" maxlength="50" name="nom" id="nom" required placeholder="Nom de votre entreprise" autofocus>
         </p>
         <p>
             <label for="website">Site Web</label>
-            <input type="text" name="website" id="website" required placeholder="entreprise.com">
+            <input type="text" maxlength="50" name="website" id="website" required placeholder="entreprise.com">
         </p>
         <p>
             <label for="siret">N° de Siret</label>
-            <input type="text" name="siret" id="siret" required placeholder="N° de Siret">
+            <input type="text" maxlength="50" name="siret" id="siret" required placeholder="N° de Siret">
         </p>
         <p>
             <label for="postcode">Code postal</label>
-            <input type="text" name="postcode" id="postcode" required placeholder="34090">
+            <input type="text" maxlength="5" name="postcode" id="postcode" required placeholder="34090">
         </p>
         <p>
             <label for="effectif">Effectif</label>
@@ -30,22 +30,21 @@
         </p>
         <p>
             <label for="mail">Email</label>
-            <input type="text" name="mail" id="mail" required placeholder="votre.email@entreprise.com">
+            <input type="text" maxlength="50" name="mail" id="mail" required placeholder="votre.email@entreprise.com">
         </p>
         <p>
             <label for="password">Mot de passe</label>
         <div class="password-input">
-            <input type="password" name="password" id="password" required placeholder="mot de passe">
+            <input type="password" maxlength="30" name="password" id="password" required placeholder="mot de passe">
             <div class="password-strength">
                 <div class="strength-bar"></div>
             </div>
             <p id="passwordHelp">Entrez un mot de passe</p>
-            <button type="button" id="showPassword"><img id="showPasswordIconRegister" src="assets/images/eye-icon.png"
-                                                         alt="ShowPassword"></button>
+            <button type="button" id="showPassword"></button>
         </div>
         <p>
             <label for="passwordConfirmation">Confirmer mot de passe</label>
-            <input type="password" name="confirmPassword" id="passwordConfirmation" required placeholder="Confirmer le mot de passe">
+            <input type="password" maxlength="30" name="confirmPassword" id="passwordConfirmation" required placeholder="Confirmer le mot de passe">
         </p>
 
         <p>

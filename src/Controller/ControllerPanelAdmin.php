@@ -4,32 +4,61 @@ namespace App\SAE\Controller;
 
 use App\SAE\Lib\MessageFlash;
 use App\SAE\Model\DataObject\Etudiant;
+use App\SAE\Model\DataObject\Stage;
+use App\SAE\Model\Repository\AlternanceRepository;
+use App\SAE\Model\Repository\AnneeUniversitaireRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
+use App\SAE\Model\Repository\OffreNonDefiniRepository;
+use App\SAE\Model\Repository\StageRepository;
+use App\SAE\Service\ServiceEntreprise;
+use App\SAE\Service\ServiceEtudiant;
 
-class ControllerPanelAdmin extends ControllerGenerique {
+/**
+ * Contrôleur administratif avec des méthodes liées à la gestion des étudiants, des entreprises, des offres, etc.
+ */
+class ControllerPanelAdmin extends ControllerGenerique
+{
 
-    public static function panelEtudiants(): void {
+    /**
+     * Affiche le panel des étudiants pour l'administration.
+     *
+     * @return void
+     */
+    public static function panelEtudiants(): void
+    {
         $listEtudiants = (new EtudiantRepository())->getAll();
         self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
-                                                'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
-                                                'adminPanelView' => 'student/studentList.php',
-                                                'listEtudiants' => $listEtudiants]);
+            'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
+            'adminPanelView' => 'student/studentList.php',
+            'listEtudiants' => $listEtudiants]);
     }
 
-    public static function panelEntreprises(): void {
+    /**
+     * Affiche le panel des entreprises en attente de validation pour l'administration.
+     *
+     * @return void
+     */
+    public static function panelEntreprises(): void
+    {
         $keywords = ControllerEntreprise::keywordsExiste();
         $codePostalEntreprise = ControllerEntreprise::codePostalExiste();
         $effectifEntreprise = ControllerEntreprise::effectifExiste();
         $listEntreprises = (new EntrepriseRepository)->getEntrepriseEnAttenteFiltree($keywords, $codePostalEntreprise, $effectifEntreprise);
         self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
-                                                'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
-                                                'adminPanelView' => 'company/companyListWaiting.php',
-                                                'listEntreprises' => $listEntreprises ]);
+            'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
+            'adminPanelView' => 'company/companyListWaiting.php',
+            'listEntreprises' => $listEntreprises]);
     }
 
-    public static function panelOffres(): void {
+    /**
+     * Affiche le panel des offres pour l'administration.
+     *
+     * @return void
+     */
+    public static function panelOffres(): void
+    {
         $keywords = ControllerExpPro::keywordsExiste();
         $dateDebut = ControllerExpPro::dateDebutExiste();
         $dateFin = ControllerExpPro::dateFinExiste();
@@ -39,68 +68,118 @@ class ControllerPanelAdmin extends ControllerGenerique {
         $optionTri = ControllerExpPro::optionTriExiste();
         $listOffres = (new ExperienceProfessionnelRepository())->getExpProFiltree($keywords, $dateDebut, $dateFin, $typeContrat, $niveauEtude, $codePostal, $optionTri);
         self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
-                                                'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
-                                                'adminPanelView' => 'offre/offerList.php',
-                                                'listOffres' => $listOffres ]);
+            'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
+            'adminPanelView' => 'offre/offerList.php',
+            'listOffres' => $listOffres]);
     }
 
-    public static function panelImportPstage(): void{
+    /**
+     * Affiche le panel d'importation des données pour l'administration.
+     *
+     * @return void
+     */
+    public static function panelImportPstage(): void
+    {
         self::afficheVue('view.php', ['pagetitle' => 'Importation des données',
             'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
             'adminPanelView' => 'user/adminPanel/import/index.php']);
     }
 
-    public static function panelListeEntreprises(): void {
+    /**
+     * Affiche le panel de la liste des entreprises pour l'administration.
+     *
+     * @return void
+     */
+    public static function panelListeEntreprises(): void
+    {
         $keywords = "";
-        if(isset($_GET["keywords"])){
+        if (isset($_GET["keywords"])) {
             $keywords .= $_GET["keywords"];
         }
-        $listEntreprises = (new EntrepriseRepository)->getEntrepriseAvecEtatFiltree(null,$keywords);
+        $listEntreprises = (new EntrepriseRepository)->getEntrepriseAvecEtatFiltree(null, $keywords);
         self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
-                                                'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
-                                                'adminPanelView' => 'user/adminPanel/entreprise/entrepriseList.php',
-                                                'listEntreprises' => $listEntreprises,
-                                                'keywords' => $keywords]);
+            'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
+            'adminPanelView' => 'user/adminPanel/entreprise/entrepriseList.php',
+            'listEntreprises' => $listEntreprises,
+            'keywords' => $keywords,
+            'nbEntreprise' => (new EntrepriseRepository())->count(),
+            'nbEntrepriseValide' => (new EntrepriseRepository())->getNbEntrepriseValide(),
+            'nbEntrepriseAttente' => (new EntrepriseRepository())->getNbEntrepriseAttente(),
+            'nbEntrepriseRefuse' => (new EntrepriseRepository())->getNbEntrpriseRefusee()]);
     }
 
-    public static function panelListeEtudiants(): void {
+    /**
+     * Affiche le panel de la liste des étudiants pour l'administration.
+     *
+     * @return void
+     */
+    public static function panelListeEtudiants(): void
+    {
         $keywords = "";
-        if(isset($_GET["keywords"])){
+        if (isset($_GET["keywords"])) {
             $keywords .= $_GET["keywords"];
         }
         $listEtudiants = (new EtudiantRepository())->searchs($keywords);
+        $anneeUniversitaire = (new AnneeUniversitaireRepository())->getCurrentAnneeUniversitaire();
         self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
-                                                'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
-                                                'adminPanelView' => 'user/adminPanel/etudiant/etudiantList.php',
-                                                'listEtudiants' => $listEtudiants ]);
+            'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
+            'adminPanelView' => 'user/adminPanel/etudiant/etudiantList.php',
+            'listEtudiants' => $listEtudiants,
+            'anneeUniversitaire' => $anneeUniversitaire,
+            'nbEtudiant' => (new EtudiantRepository())->count(),
+            'nbEtudiantExpProValide' => (new EtudiantRepository())->getNbEtudiantExpProValide($anneeUniversitaire),
+            'nbEtudiantConventionEnCours' => (new EtudiantRepository())->getNbEtudiantConventionAttente($anneeUniversitaire),
+            'nbEtudiantNiStageNiAlternance' => (new EtudiantRepository())->getNbEtudiantSansConventionNiAlternance($anneeUniversitaire)]);
     }
 
-    public static function panelListeOffres(): void {
+    /**
+     * Affiche le panel de la liste des offres pour l'administration.
+     *
+     * @return void
+     */
+    public static function panelListeOffres(): void
+    {
         $keywords = "";
-        if(isset($_GET["keywords"])){
+        if (isset($_GET["keywords"])) {
             $keywords .= $_GET["keywords"];
         }
         $listOffres = (new ExperienceProfessionnelRepository())->search($keywords);
         self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
-                                                'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
-                                                'adminPanelView' => 'user/adminPanel/offre/offreList.php',
-                                                'listOffres' => $listOffres ]);
+            'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
+            'adminPanelView' => 'user/adminPanel/offre/offreList.php',
+            'listOffres' => $listOffres,
+            'nbOffre' => (new ExperienceProfessionnelRepository())->getNbExperienceProfessionnel(),
+            'nbStage' => (new StageRepository())->count(),
+            'nbAlternance' => (new AlternanceRepository())->count(),
+            'nbNonDefini' => (new OffreNonDefiniRepository())->count()]);
     }
 
-    public static function panelGestionEntreprise(): void {
-        if(!isset($_GET["siret"])){
+    /**
+     * Affiche le panel de gestion d'une entreprise pour l'administration.
+     *
+     * @return void
+     */
+    public static function panelGestionEntreprise(): void
+    {
+        if (!isset($_GET["siret"])) {
             self::error("Entreprise non défini");
             return;
         }
         $entreprise = (new EntrepriseRepository())->getById(rawurldecode($_GET["siret"]));
         self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
-                                                'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
-                                                'adminPanelView' => 'user/adminPanel/entreprise/managementEntreprise.php',
-                                                'entreprise' => $entreprise ]);
+            'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
+            'adminPanelView' => 'user/adminPanel/entreprise/managementEntreprise.php',
+            'entreprise' => $entreprise]);
     }
 
-    public static function validerEntreprise(): void{
-        if(!isset($_GET["siret"])){
+    /**
+     * Valide une entreprise pour l'administration.
+     *
+     * @return void
+     */
+    public static function validerEntreprise(): void
+    {
+        if (!isset($_GET["siret"])) {
             self::error("Entreprise non défini");
             return;
         }
@@ -110,8 +189,14 @@ class ControllerPanelAdmin extends ControllerGenerique {
         self::panelGestionEntreprise();
     }
 
-    public static function invaliderEntreprise(): void{
-        if(!isset($_GET["siret"])){
+    /**
+     * Invalide une entreprise pour l'administration.
+     *
+     * @return void
+     */
+    public static function invaliderEntreprise(): void
+    {
+        if (!isset($_GET["siret"])) {
             self::error("Entreprise non défini");
             return;
         }
@@ -121,8 +206,14 @@ class ControllerPanelAdmin extends ControllerGenerique {
         self::panelGestionEntreprise();
     }
 
-    public static function supprimerEntreprise(): void{
-        if(!isset($_GET["siret"])){
+    /**
+     * Supprime une entreprise pour l'administration.
+     *
+     * @return void
+     */
+    public static function supprimerEntreprise(): void
+    {
+        if (!isset($_GET["siret"])) {
             self::error("Entreprise non défini");
             return;
         }
@@ -130,8 +221,14 @@ class ControllerPanelAdmin extends ControllerGenerique {
         self::panelListeEntreprises();
     }
 
-    public static function panelModificationEntreprise(): void{
-        if(!isset($_GET["siret"])){
+    /**
+     * Affiche le panel de modification d'une entreprise pour l'administration.
+     *
+     * @return void
+     */
+    public static function panelModificationEntreprise(): void
+    {
+        if (!isset($_GET["siret"])) {
             self::error("Entreprise non défini");
             return;
         }
@@ -139,115 +236,138 @@ class ControllerPanelAdmin extends ControllerGenerique {
         self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
             'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
             'adminPanelView' => 'user/adminPanel/entreprise/modificationEntreprise.php',
-            'entreprise' => $entreprise ]);
+            'entreprise' => $entreprise]);
     }
 
-    public static function modifierEntreprise(): void{
-        if(!isset($_POST["siret"])){
-            self::error("siret non défini");
+    /**
+     * Modifie une entreprise pour l'administration.
+     *
+     * @return void
+     */
+    public static function modifierEntreprise(): void
+    {
+        $attributs = [];
+        if (!isset($_POST["siret"])) {
+            self::redirectionVersURL("warning", "aucun siret fourni, impossible d'identifier l'entreprise", "panelListeEntreprises&controller=PanelAdmin");
             return;
         }
-        if(!isset($_POST["nom"])){
-            self::error("nom non défini");
-            return;
+        if (isset($_POST["nom"])) {
+            $attributs["nomEntreprise"] = $_POST["nom"];
         }
-        if(!isset($_POST["telephone"])){
-            self::error("telephone non défini");
-            return;
+        if (isset($_POST["mail"])) {
+            $attributs["mailEntreprise"] = $_POST["mail"];
         }
-        if(!isset($_POST["mail"])){
-            self::error("mail non défini");
-            return;
+        if (isset($_POST["telephone"])) {
+            $attributs["telephoneEntreprise"] = $_POST["telephone"];
         }
-        if(!isset($_POST["effectif"])){
-            self::error("effectif non défini");
-            return;
+        if (isset($_POST["codePostal"])) {
+            $attributs["codePostalEntreprise"] = $_POST["codePostal"];
         }
-        if(!isset($_POST["codePostal"])){
-            self::error("code postal non défini");
-            return;
+        if (isset($_POST["website"])) {
+            $attributs["siteWebEntreprise"] = $_POST["website"];
+        }
+        if (isset($_POST["effectif"])) {
+            $attributs["effectifEntreprise"] = $_POST["effectif"];
         }
         $entreprise = (new EntrepriseRepository())->getById($_POST["siret"]);
-        $entreprise->setNomEntreprise($_POST["nom"]);
-        $entreprise->setTelephoneEntreprise($_POST["telephone"]);
-        $entreprise->setEmailEntreprise($_POST["mail"]);
-        $entreprise->setEffectifEntreprise($_POST["effectif"]);
-        $entreprise->setCodePostalEntreprise($_POST["codePostal"]);
-        (new EntrepriseRepository())->mettreAJour($entreprise);
+        if ($entreprise == null) {
+            self::redirectionVersURL("warning", "aucune entreprise ne correspond à ce siret", "panelListeEntreprises&controller=PanelAdmin");
+            return;
+        }
+        (new ServiceEntreprise())->mettreAJour($entreprise, $attributs);
         self::panelGestionEntreprise();
     }
 
-    public static function panelGestionEtudiant(): void {
-        if(!isset($_GET["numEtudiant"])){
+    /**
+     * Affiche le panel de gestion d'un étudiant pour l'administration.
+     *
+     * @return void
+     */
+    public static function panelGestionEtudiant(): void
+    {
+        if (!isset($_GET["numEtudiant"])) {
             self::error("Etudiant non défini");
             return;
         }
         $etudiant = (new EtudiantRepository())->getById(rawurldecode($_GET["numEtudiant"]));
         self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
-                                                                'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
-                                                                'adminPanelView' => 'user/adminPanel/etudiant/managementEtudiant.php',
-                                                                'etudiant' => $etudiant ]);
+            'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
+            'adminPanelView' => 'user/adminPanel/etudiant/managementEtudiant.php',
+            'etudiant' => $etudiant]);
     }
 
-    public static function supprimerEtudiant(): void{
-        if(!isset($_GET["numEtudiant"])){
-            self::error("Etudiant non défini");
-            return;
-        }
-        (new EtudiantRepository())->supprimer(rawurldecode($_GET["numEtudiant"]));
-        self::panelListeEtudiants();
-    }
-
-    public static function panelModificationEtudiant(): void{
-        if(!isset($_GET["numEtudiant"])){
+    /**
+     * Affiche le panel de modification d'un étudiant pour l'administration.
+     *
+     * @return void
+     */
+    public static function panelModificationEtudiant(): void
+    {
+        if (!isset($_GET["numEtudiant"])) {
             self::error("Etudiant non défini");
             return;
         }
         $etudiant = (new EtudiantRepository())->getById(rawurldecode($_GET["numEtudiant"]));
         self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
-                                                                'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
-                                                                'adminPanelView' => 'user/adminPanel/etudiant/modificationEtudiant.php',
-                                                                'etudiant' => $etudiant ]);
+            'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
+            'adminPanelView' => 'user/adminPanel/etudiant/modificationEtudiant.php',
+            'etudiant' => $etudiant]);
     }
 
-    public static function modifierEtudiant(): void{
-        if(!isset($_POST["numEtudiant"])){
-            self::error("siret non défini");
+    /**
+     * Modifie un étudiant pour l'administration.
+     *
+     * @return void
+     */
+    public static function modifierEtudiant(): void
+    {
+        $attributs = [];
+        if (!isset($_POST["numEtudiant"])) {
+            self::redirectionVersURL("warning", "aucun numEtudiant fourni, impossible d'identifier l'étudiant", "panelListeEtudiants&controller=PanelAdmin");
             return;
         }
-        if(!isset($_POST["nom"])){
-            self::error("nom non défini");
-            return;
+        if (isset($_POST["mailPerso"])) {
+            $attributs["mailPersoEtudiant"] = $_POST["mailPerso"];
         }
-        if(!isset($_POST["prenom"])){
-            self::error("prenom non défini");
-            return;
+        if (isset($_POST["telephone"])) {
+            $attributs["telephoneEtudiant"] = $_POST["telephone"];
         }
-        if(!isset($_POST["telephone"])){
-            self::error("telephone non défini");
-            return;
+        if (isset($_POST["codePostal"])) {
+            $attributs["codePostalEtudiant"] = $_POST["codePostal"];
         }
-        if(!isset($_POST["mailUniv"])){
-            self::error("mail Univ non défini");
-            return;
+        if (isset($_POST["nom"])) {
+            $attributs["nomEtudiant"] = $_POST["nom"];
         }
-        if(!isset($_POST["mailPerso"])){
-            self::error("mail Perso non défini");
-            return;
+        if (isset($_POST["prenom"])) {
+            $attributs["prenomEtudiant"] = $_POST["prenom"];
         }
-        if(!isset($_POST["codePostal"])){
-            self::error("code postal non défini");
-            return;
+        if (isset($_POST["telephone"])) {
+            $attributs["telephoneEtudiant"] = $_POST["telephone"];
+        }
+        if (isset($_POST["mailUniv"])) {
+            $attributs["mailUniversitaireEtudidant"] = $_POST["mailUniv"];
         }
         $etudiant = (new EtudiantRepository())->getById($_POST["numEtudiant"]);
-        $etudiant->setNomEtudiant($_POST["nom"]);
-        $etudiant->setPrenomEtudiant($_POST["prenom"]);
-        $etudiant->setTelephoneEtudiant($_POST["telephone"]);
-        $etudiant->setMailUniversitaireEtudiant($_POST["mailUniv"]);
-        $etudiant->setMailPersoEtudiant($_POST["mailPerso"]);
-        $etudiant->setCodePostalEtudiant($_POST["codePostal"]);
-        (new EtudiantRepository())->mettreAJour($etudiant);
+        if ($etudiant == null) {
+            self::redirectionVersURL("warning", "aucun etudiant ne possède se numEtudiant", "panelListeEtudiants&controller=PanelAdmin");
+        }
+        (new ServiceEtudiant())->mettreAJour($etudiant, $attributs);
         self::panelGestionEtudiant();
+    }
+
+    /**
+     * Affiche le panel des statistiques pour l'administrateur.
+     *
+     * @return void
+     */
+    public static function panelStatistique(): void
+    {
+        $liste = (new AnneeUniversitaireRepository())->getNomStageAlternanceRienExistant();
+        self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
+            'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
+            'adminPanelView' => 'user/adminPanel/statistique/statistiques.php',
+            'liste' => $liste
+        ]);
     }
 
 }

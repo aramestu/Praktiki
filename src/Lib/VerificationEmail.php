@@ -9,8 +9,18 @@ use App\SAE\Model\DataObject\AbstractDataObject;
 use App\SAE\Model\DataObject\Entreprise;
 use App\SAE\Model\Repository\EntrepriseRepository;
 
+/**
+ * La classe VerificationEmail gère l'envoi d'e-mails de validation et de changement de mot de passe.
+ */
 class VerificationEmail
 {
+
+    /**
+     * Envoie un e-mail de validation pour l'entreprise donnée.
+     *
+     * @param Entreprise $Entreprise L'objet Entreprise pour lequel l'e-mail de validation est envoyé.
+     * @return void
+     */
     public static function envoiEmailValidation(Entreprise $Entreprise): void
     {
 
@@ -69,7 +79,7 @@ class VerificationEmail
         $headers.= 'Content-Type:text/html; charset="utf-8"'."\n";
         $headers.= 'Content-Transfert-Encoding: 8bit';
 
-        mail($Entreprise->getEmailAValider(), "Validation de votre email",
+        mail($Entreprise->getMailAValider(), "Validation de votre email",
             $message, $headers);
 
 
@@ -77,11 +87,18 @@ class VerificationEmail
         MessageFlash::ajouter("success", $corpsEmail);
     }
 
-    public static function envoiEmailChangementPassword($login,$mail): void{
-        $loginURL = rawurlencode($login);
+    /**
+     * Envoie un e-mail de changement de mot de passe.
+     *
+     * @param string $login Le login de l'utilisateur pour lequel le mot de passe est changé.
+     * @param string $mail L'adresse e-mail à laquelle envoyer l'e-mail.
+     * @return void
+     */
+    public static function envoiEmailChangementPassword($entreprise): void{
+        $loginURL = rawurlencode($entreprise->getSiret());
+        $nonceURL = rawurlencode($entreprise->getNonce());
         $absoluteURL = Conf::getAbsoluteURL();
-        $lienChangementPassword = "$absoluteURL?action=resetPassword&siret=$loginURL";
-        $corpsEmail = "<a href=\"$lienChangementPassword\">Validation</a>";
+        $lienChangementPassword = "$absoluteURL?action=verifNonce&controller=Entreprise&siret=$loginURL&nonce=$nonceURL";
         $message = '
 <!DOCTYPE html>
 <html lang="fr">
@@ -136,20 +153,25 @@ class VerificationEmail
         $headers .= "Cc: IUT-Montpellier-Sete\r\n";
         $headers.= 'Content-Type:text/html; charset="utf-8"'."\n";
         $headers.= 'Content-Transfert-Encoding: 8bit';
-        mail($mail, "Changement de votre mot de passe",
+        mail($entreprise->getMailEntreprise(), "Changement de votre mot de passe",
             $message, $headers);
-
-        MessageFlash::ajouter("success", $corpsEmail);
     }
 
+    /**
+     * Traite la validation de l'e-mail en fonction du login et du nonce.
+     *
+     * @param string $login Le login de l'entreprise.
+     * @param string $nonce Le nonce associé à l'e-mail de validation.
+     * @return bool True si la validation est réussie, false sinon.
+     */
 
-    public static function traiterEmailValidation($login, $nonce): bool
+    public static function traiterEmailValidation(string $login, string $nonce): bool
     {
         $user = (new EntrepriseRepository())->getById($login);
         if (!is_null($user)) {
             if ($user->formatTableau()["nonceTag"] == $nonce) {
-                $user->setEmailEntreprise($user->getEmailAValider());
-                $user->setEmailAValider("");
+                $user->setMailEntreprise($user->getMailAValider());
+                $user->setMailAValider("");
                 $user->setNonce("");
                 (new EntrepriseRepository())->mettreAJour($user);
                 return true;
@@ -158,8 +180,15 @@ class VerificationEmail
         return false;
     }
 
+    /**
+     * Vérifie si l'entreprise a déjà validé son e-mail.
+     *
+     * @param Entreprise $Entreprise L'objet Entreprise à vérifier.
+     * @return bool True si l'e-mail est validé, false sinon.
+     */
+
     public static function aValideEmail(Entreprise $Entreprise): bool
     {
-        return (bool) $Entreprise->getEmailEntreprise();
+        return (bool) $Entreprise->getMailEntreprise();
     }
 }

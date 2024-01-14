@@ -9,15 +9,28 @@ use App\SAE\Model\Repository\EtudiantRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\Model;
 
-class ControllerEtudiant extends ControllerGenerique{
-
-    public static function afficherListeEtudiant(){
+/**
+ * Contrôleur gérant les actions liées aux étudiants.
+ */
+class ControllerEtudiant extends ControllerGenerique
+{
+    /**
+     * Affiche la liste des étudiants.
+     *
+     * @return void
+     */
+    public static function afficherListeEtudiant() : void{
         self::afficheVue("view.php", [
             "pagetitle" => "Liste des étudiants",
             "cheminVueBody" => "student/studentList.php"
         ]);
     }
 
+    /**
+     * Obtient la liste des étudiants en fonction de la recherche par mots-clés.
+     *
+     * @return void
+     */
     public static function getEtudiantBySearch(): void
     {
         $keywords = "";
@@ -34,20 +47,4 @@ class ControllerEtudiant extends ControllerGenerique{
             ]
         );
     }
-
-    public static function getNbEtudiantExpProValide(): int
-    {
-        return ((new EtudiantRepository())->getNbEtudiantConventionValide());
-    }
-
-    public static function getNbEtudiantExpProValideSansConvention(): int
-    {
-        return ((new EtudiantRepository)->getNbEtudiantConventionAttente());
-    }
-
-    public static function getNbEtudiantExpProNonValide(): int
-    {
-        return ((new EtudiantRepository())->getNbEtudiantSansConvention());
-    }
-
 }

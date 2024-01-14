@@ -3,6 +3,7 @@
 use App\SAE\Model\Repository\AbstractExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
+
 ?>
 <a href="frontController.php?controller=ExpPro&action=afficherOffre&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel()) ?>"
    style="text-decoration:none">
@@ -10,15 +11,14 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
         <div class="header">
             <div class="left">
                 <p class="bold typeExpPro">
-                    <!--TODO: soren change tes labels-->
                     <label><?php
-                    $expPro->getNomExperienceProfessionnel();
-                    if ($expPro->getNomExperienceProfessionnel() == "Stalternance") {
-                        echo "Non définie";
-                    } else {
-                        echo htmlspecialchars($expPro->getNomExperienceProfessionnel());
-                    }
-                    ?>
+                        $expPro->getNomExperienceProfessionnel();
+                        if ($expPro->getNomExperienceProfessionnel() == "Stalternance") {
+                            echo "Non définie";
+                        } else {
+                            echo htmlspecialchars($expPro->getNomExperienceProfessionnel());
+                        }
+                        ?>
                     </label>
                 </p>
                 <p><?php echo AbstractExperienceProfessionnelRepository::getDelayDatePublication($expPro) ?></p>
@@ -33,7 +33,8 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
             <p><?php $entreprise = (new EntrepriseRepository())->getById($expPro->getSiret());
                 echo(htmlspecialchars($entreprise->getNomEntreprise()));
                 ?></p>
-            <p><span class="codePostalID"><?php echo htmlspecialchars($expPro->getCodePostalExperienceProfessionnel()); ?></span>
+            <p>
+                <span class="codePostalID"><?php echo htmlspecialchars($expPro->getCodePostalExperienceProfessionnel()); ?></span>
             </p>
         </div>
     </div>

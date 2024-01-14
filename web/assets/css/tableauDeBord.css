@@ -1,9 +1,119 @@
+@media (max-width: 41200px) {
+    .sidebar {
+        width: auto;
+    }
 
+    .sidebar > a {
+        color: var(--darkBlue2);
+    }
 
-#recentOffers {
-    width: 69%;
-    border-left: 2px solid var(--grey1);
-    height: 400px;
+    .sidebar > a:hover {
+        color: var(--darkBlue2);
+    }
+
+    .accueilContainer {
+        flex-direction: row;
+    }
+
+    .column {
+        width: 45%;
+    }
+
+    input[type="submit"] {
+        width: 30%;
+        margin-left: 32%;
+    }
+
+    #recentOffers {
+        width: 69%;
+        border-left: 2px solid var(--grey1);
+        height: 400px;
+    }
+}
+
+@media (max-width: 1300px) {
+    .sidebar {
+        width: auto;
+    }
+
+    .sidebar > a {
+        color: var(--darkBlue2);
+    }
+
+    .sidebar > a:hover {
+        color: var(--darkBlue2);
+    }
+
+    .accueilContainer {
+        flex-direction: row;
+    }
+
+    .column {
+        width: 45%;
+    }
+
+    input[type="submit"] {
+        width: 30%;
+        margin-left: 32%;
+    }
+
+    #recentOffers {
+        width: 69%;
+        border-left: 2px solid var(--grey1);
+        height: 400px;
+    }
+}
+
+@media (max-width: 950px) {
+    .sidebar {
+        width: 55px;
+    }
+
+    .sidebar > a {
+        font-size: 1em;
+        white-space: nowrap;
+        overflow: hidden;
+        color: var(--activeGrey);
+        width: 45px;
+        margin-left: -15px;
+    }
+
+    .sidebar > a:hover,
+    .sidebar > a.active {
+        color: var(--lightGrey);
+    }
+
+    .sidebar > h2 {
+        display: none;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    .accueilContainer {
+        flex-direction: column;
+    }
+
+    .infoUtilisateur {
+        margin-bottom: 20px;
+    }
+
+    .column {
+        width: 120%;
+        margin-left: -50px;
+    }
+
+    input[type="submit"] {
+        width: 120%;
+        margin-left: -50px;
+    }
+
+    #recentOffers {
+        width: 100%;
+        border-left: none;
+        height: 100%;
+    }
 }
 
 #infoEtu {
@@ -16,10 +126,6 @@
 
 #infoEtu p {
     text-align: left;
-}
-
-.container {
-    width: auto;
 }
 
 .TDB {
@@ -37,9 +143,8 @@
     border-top-left-radius: 0;
 }
 
-.sidebar > a.active{
+.sidebar > a.active {
     background: var(--lightGrey);
-    color: var(--darkBlue2);
     box-shadow: none;
     text-align: left;
 }
@@ -83,7 +188,6 @@
 
 .accueilContainer {
     display: flex;
-    flex-direction: row;
     align-items: flex-start;
     padding-top: 5%;
     height: 100%;
@@ -204,9 +308,8 @@
     color: var(--white);
 }
 
-.sidebar > a{
+.sidebar > a {
     background: none;
-    color: var(--darkBlue2);
     box-shadow: none;
     text-align: left;
     margin-top: 10px;
@@ -214,7 +317,6 @@
 
 .sidebar > a:hover {
     background: var(--lightGrey);
-    color: var(--darkBlue2);
     box-shadow: none;
     text-align: left;
     transform: translateX(5px);
@@ -226,6 +328,7 @@
     font-size: 1.8em;
     content: "\f015";
     vertical-align: middle;
+    color: var(--darkBlue2);
 }
 
 #infoButton::before {
@@ -234,6 +337,7 @@
     font-size: 1.8em;
     content: "\f05a";
     vertical-align: middle;
+    color: var(--darkBlue2);
 }
 
 #stageButton::before {
@@ -242,4 +346,92 @@
     font-size: 1.8em;
     content: "\f0b1";
     vertical-align: middle;
+    color: var(--darkBlue2);
+}
+
+#adminButton::before {
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    font-size: 1.8em;
+    content: "\f0ad";
+    vertical-align: middle;
+    color: var(--darkBlue2);
+}
+
+#centeredTable {
+    justify-content: center;
+}
+
+#listeEntrepriseButton::before {
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    font-size: 1.8em;
+    content: "\f0c0";
+    vertical-align: middle;
+    color: var(--darkBlue2);
+}
+
+#createButton::before {
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    font-size: 1.8em;
+    content: "\f067";
+    vertical-align: middle;
+    color: var(--darkBlue2);
+}
+
+#containerListeEntreprise {
+    width: 100%;
+    height: 95%;
+}
+
+.line {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.line > .annotationButton {
+    width: fit-content;
+    position: absolute;
+    right: 2%;
+    top: 0;
+    opacity: 0;
+    height: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--lightpastelBlue);
+    border: 2px solid var(--pastelBlue);
+    color: var(--pastelBlue);
+    margin: 10px;
+    border-radius: 1rem;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.line > .annotationButton:hover {
+    background: var(--pastelBlue);
+    color: var(--white);
+}
+
+.line:hover {
+    background-color: var(--lightGrey);
+}
+
+.line:nth-child(2n) {
+    background-color: var(--header);
+}
+
+.line:first-child {
+    margin-top: 50px;
+}
+
+.columnName {
+    margin-top: 0;
+}
+
+.content {
+    overflow-y: hidden;
 }

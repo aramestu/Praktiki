@@ -12,12 +12,20 @@
             <div id="adminBackground"></div>
         </div>
         <div class="VBox">
-        <a href="frontController.php?controller=PanelAdmin&action=PanelListeEtudiants" class="button<?=$_GET["action"]=="PanelListeEtudiants" || $_GET["action"]=="panelListeEtudiants" ? " active" : ""?>" id="studentListButton"><span>Liste des Étudiants</span></a>
-        <a href="frontController.php?controller=PanelAdmin&action=panelListeEntreprises" class="button<?=$_GET["action"]=="panelListeEntreprises" ? " active" : ""?>" id="companyListButton"><span>Liste des Entreprises</span></a>
-        <a href="frontController.php?controller=PanelAdmin&action=panelListeOffres" class="button<?=$_GET["action"]=="panelListeOffres" ? " active" : ""?>" id="offerListButton"><span>Liste des Offres</span></a>
-        <a href="frontController.php?controller=PanelAdmin&action=panelImportPstage" class="button<?=$_GET["action"]=="panelImportPstage" ? " active" : ""?>" id="importDataButton"><span>Importation des données</span></a>
+            <a href="frontController.php?controller=PanelAdmin&action=PanelListeEtudiants"
+               class="button<?= $_GET["action"] == "PanelListeEtudiants" || $_GET["action"] == "panelListeEtudiants" ? " active" : "" ?>"
+               id="studentListButton"><span>Liste des Étudiants</span></a>
+            <a href="frontController.php?controller=PanelAdmin&action=panelListeEntreprises"
+               class="button<?= $_GET["action"] == "panelListeEntreprises" ? " active" : "" ?>"
+               id="companyListButton"><span>Liste des Entreprises</span></a>
+            <a href="frontController.php?controller=PanelAdmin&action=panelListeOffres"
+               class="button<?= $_GET["action"] == "panelListeOffres" ? " active" : "" ?>" id="offerListButton"><span>Liste des Offres</span></a>
+            <a href="frontController.php?controller=PanelAdmin&action=panelImportPstage"
+               class="button<?= $_GET["action"] == "panelImportPstage" ? " active" : "" ?>" id="importDataButton"><span>Importation des données</span></a>
+            <a href="frontController.php?controller=PanelAdmin&action=panelStatistique"
+               class="button<?= $_GET["action"] == "panelStatistique" ? " active" : "" ?>" id="statButton"><span>Statistiques</span></a>
         </div>
-        </div>
+    </div>
     <div class="container" id="mainContent">
         <?php
         require __DIR__ . "/../../$adminPanelView";

@@ -1,19 +1,48 @@
-.container{
-    min-width: 580px;
-    max-width: 60%;
+@media (max-width: 41200px) {
+    .container {
+        min-width: 580px;
+        max-width: 60%;
+    }
+
+    .button {
+        min-width: 170px;
+        max-width: 30%;
+        height: 170px;
+    }
 }
 
-.button{
-    min-width: 170px;
-    max-width: 30%;
-    height: 170px;
+@media (max-width: 1300px) {
+    .container {
+        min-width: 580px;
+        max-width: 60%;
+    }
+
+    .button {
+        min-width: 170px;
+        max-width: 30%;
+        height: 170px;
+    }
 }
 
-h2{
+@media (max-width: 950px) {
+    .container {
+        min-width: 95%;
+        max-width: 95%;
+    }
+
+    .button {
+        min-width: 250px;
+        max-width: 69%;
+        height: 190px;
+        font-size: 1.4em;
+    }
+}
+
+h2 {
     margin-bottom: 20px;
 }
 
-#studentChoice::before{
+#studentChoice::before {
     font-family: 'FontAwesome';
     font-size: 5em;
     content: '\f19d';
@@ -22,7 +51,7 @@ h2{
     vertical-align: middle;
 }
 
-#companyChoice::before{
+#companyChoice::before {
     font-family: 'FontAwesome';
     font-size: 5em;
     content: '\f0b1';
@@ -31,7 +60,7 @@ h2{
     vertical-align: middle;
 }
 
-#professorChoice::before{
+#professorChoice::before {
     font-family: 'FontAwesome';
     font-size: 5em;
     content: '\f007';

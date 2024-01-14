@@ -11,10 +11,16 @@ use App\SAE\Model\Repository\AbstractExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 use mysql_xdevapi\Table;
-
+/**
+ * Contrôleur gérant les actions liées aux entreprises.
+ */
 class ControllerEntreprise extends ControllerGenerique
 {
-
+    /**
+     * Affiche la vue de connexion.
+     *
+     * @return void
+     */
     public static function connect(): void
     {
         self::afficheVue(
@@ -26,36 +32,12 @@ class ControllerEntreprise extends ControllerGenerique
         );
     }
 
-    public static function getNbEntrepriseTotal(): int
-    {
-        $listEntreprises = (new EntrepriseRepository())->getAll();
-        return count($listEntreprises);
-    }
-
-    public static function getNbEntrepriseValide(): int
-    {
-        return (new EntrepriseRepository())->getNbEntrepriseValide();
-    }
-
-    public static function getNbEntrepriseEnAttente(): int
-    {
-        return (new EntrepriseRepository())->getNbEntrepriseAttente();
-    }
-
-    public static function getNbEntrepriseRefuse(): int
-    {
-        //        $listEntreprises = ;
-//        foreach ($listEntreprises as $entreprise) {
-//            if ($entreprise->getEstValide() == -1) {
-//                $nbEntrepriseRefuse++;
-//            }
-//        }
-        //TODO : verifier quand archive presente
-        return (new EntrepriseRepository())->getNbEntrpriseRefusee();
-    }
-
-    public static function afficherListeEntrepriseValideFiltree(): void
-    {
+    /**
+     * Affiche la liste des entreprises validées avec des filtres.
+     *
+     * @return void
+     */
+    public static function afficherListeEntrepriseValideFiltree(): void {
         $keywords = self::keywordsExiste();
         $codePostalEntreprise = self::codePostalExiste();
         $effectifEntreprise = self::effectifExiste();
@@ -67,6 +49,11 @@ class ControllerEntreprise extends ControllerGenerique
         ]);
     }
 
+    /**
+     * Affiche la liste des entreprises en attente avec des filtres.
+     *
+     * @return void
+     */
     public static function afficherListeEntrepriseEnAttenteFiltree(): void
     {
         $keywords = self::keywordsExiste();
@@ -80,19 +67,33 @@ class ControllerEntreprise extends ControllerGenerique
         ]);
     }
 
-    public static function accepter()
+    /**
+     * Accepte une entreprise en attente.
+     *
+     * @return void
+     */
+    public static function accepter() : void
     {
         EntrepriseRepository::accepter($_GET["siret"]);
         self::afficherListeEntrepriseEnAttenteFiltree();
     }
 
-    public static function refuser()
+    /**
+     * Refuse une entreprise en attente.
+     *
+     * @return void
+     */
+    public static function refuser() : void
     {
         EntrepriseRepository::refuser($_GET["siret"]);
         self::afficherListeEntrepriseEnAttenteFiltree();
     }
 
-
+    /**
+     * Obtient les mots-clés de filtre pour les entreprises.
+     *
+     * @return mixed Les mots-clés ou null si non définis.
+     */
     public static function keywordsExiste()
     {
         if (isset($_GET["keywords"])) {
@@ -101,6 +102,11 @@ class ControllerEntreprise extends ControllerGenerique
         return null;
     }
 
+    /**
+     * Obtient le code postal de filtre pour les entreprises.
+     *
+     * @return mixed Le code postal ou null si non défini.
+     */
     public static function codePostalExiste()
     {
         if (isset($_GET["codePostal"])) {
@@ -109,6 +115,11 @@ class ControllerEntreprise extends ControllerGenerique
         return null;
     }
 
+    /**
+     * Obtient l'effectif de filtre pour les entreprises.
+     *
+     * @return mixed L'effectif ou null si non défini.
+     */
     public static function effectifExiste()
     {
         if (isset($_GET["effectif"])) {
@@ -117,9 +128,14 @@ class ControllerEntreprise extends ControllerGenerique
         return null;
     }
 
+    /**
+     * Crée une entreprise à partir des données d'un formulaire.
+     *
+     * @return void
+     */
     public static function creerDepuisFormulaire(): void
     {
-        if (($_REQUEST["siret"]) > 0) {
+        if (strlen($_REQUEST["siret"])==14) {
             $user = (new EntrepriseRepository())->getById($_REQUEST["siret"]);
             if (is_null($user)) {
                 if ($_REQUEST["postcode"] >= 01000 & $_REQUEST["postcode"] <= 98890) {
@@ -151,6 +167,11 @@ class ControllerEntreprise extends ControllerGenerique
         }
     }
 
+    /**
+     * Valide l'adresse e-mail d'une entreprise.
+     *
+     * @return void
+     */
     public static function validerEmail(): void
     {
         if (isset($_GET["siret"], $_GET["nonce"])) {
@@ -165,8 +186,12 @@ class ControllerEntreprise extends ControllerGenerique
         }
     }
 
-    public
-    static function changePassword(): void
+    /**
+     * Change le mot de passe d'une entreprise.
+     *
+     * @return void
+     */
+    public static function changePassword(): void
     {
         if (isset($_REQUEST["siret"], $_REQUEST["mail"]) || ConnexionUtilisateur::estConnecte()) {
             if(ConnexionUtilisateur::estConnecte()){
@@ -175,8 +200,10 @@ class ControllerEntreprise extends ControllerGenerique
                 $user = (new EntrepriseRepository())->getById($_REQUEST["siret"]);
             }
             if (!is_null($user)) {
-                if ($user->getEmailEntreprise() == $_REQUEST["mail"] || ConnexionUtilisateur::estConnecte()) {
-                    VerificationEmail::envoiEmailChangementPassword($user->getSiret(), $user->getEmailEntreprise());
+                if ($user->getMailEntreprise() == $_REQUEST["mail"] || ConnexionUtilisateur::estConnecte()) {
+                    $user->setNonce(MotDePasse::genererChaineAleatoire());
+                    (new EntrepriseRepository())->mettreAJour($user);
+                    VerificationEmail::envoiEmailChangementPassword($user);
                     self::redirectionVersURL("success", "Vous allez recevoir un mail", "home");
                 } else {
                     self::redirectionVersURL("warning", "mail incorrect", "forgetPassword");
@@ -189,8 +216,12 @@ class ControllerEntreprise extends ControllerGenerique
         }
     }
 
-    public
-    static function resetPassword(): void
+    /**
+     * Réinitialise le mot de passe d'une entreprise.
+     *
+     * @return void
+     */
+    public static function resetPassword(): void
     {
         if (isset($_REQUEST["siret"], $_REQUEST["newPassword"], $_REQUEST["confirmNewMdp"])) {
             if(ConnexionUtilisateur::estEntreprise() && !isset($_REQUEST["ancienMdp"])){
@@ -203,6 +234,7 @@ class ControllerEntreprise extends ControllerGenerique
                         self::redirectionVersURL("warning", "Ancien mot de passe incorrect", "displayTDB&controller=TDB");
                     }
                     $user->setMdpHache($_REQUEST["newPassword"]);
+                    $user->setNonce("");
                     (new EntrepriseRepository())->mettreAJour($user);
                     if(ConnexionUtilisateur::estEntreprise()){
                         self::redirectionVersURL("success", "Mot de passe changé", "displayTDB&controller=TDB");
@@ -216,6 +248,21 @@ class ControllerEntreprise extends ControllerGenerique
             }
         } else {
             self::redirectionVersURL("warning", "Variable non remplit", "resetPassword");
+        }
+    }
+
+    public static function verifNonce(): void
+    {
+        $user = (new EntrepriseRepository())->getById($_REQUEST["siret"]);
+        if($user->FormatTableau()["nonceTag"] != $_REQUEST["nonce"]){
+            self::redirectionVersURL("warning", "Vous ne pouvez pas réutiliser le même mail", "home");
+        }else{
+            self::afficheVue("view.php", [
+                "pagetitle" => "Changement de mot de passe",
+                "cheminVueBody" => "user/resetPassword.php",
+                "siret" => $_REQUEST["siret"],
+                "nonce" => $_REQUEST["nonce"]
+            ]);
         }
     }
 

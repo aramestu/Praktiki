@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
+    /*
+    Ce script est utilisé pour gérer l'affichage de la force du mot de passe lors de la saisie par l'utilisateur. Il vérifie si le mot de passe respecte certains critères (longueur, présence de lettres majuscules, minuscules, chiffres et caractères spéciaux), puis met à jour la barre de force du mot de passe et le message d'aide en fonction du nombre de critères respectés. Il gère également l'affichage et la masquage du mot de passe lors du clic sur le bouton d'affichage du mot de passe.
+    */
     const passwordInput = document.getElementById('password');
     const showPasswordButton = document.getElementById('showPassword');
     const strengthBar = document.querySelector('.strength-bar');
