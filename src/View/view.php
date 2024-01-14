@@ -36,8 +36,10 @@ use App\SAE\Model\HTTP\Cookie;
     <a href="frontController.php?action=zoneDetest"><img id="logoToggle" class="logo"
                                                          src="assets/images/logo_sae_clear.png" alt="LogoUM"></a>
 
-    <div class="burger">
-        <span></span>
+    <div id="burgerParent">
+        <div class="burger">
+            <span></span>
+        </div>
     </div>
 
     <nav class="navbar">

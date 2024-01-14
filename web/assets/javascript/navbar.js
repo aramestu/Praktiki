@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const burger = document.querySelector('.burger');
 
-    burger.addEventListener('click', () => {
+    document.getElementById("burgerParent").addEventListener('click', () => {
         burger.classList.toggle('active');
         document.querySelector('.navbar').classList.toggle('active');
         if (!document.querySelector('.navbar').classList.contains('active')) {
