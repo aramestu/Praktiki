@@ -1,8 +1,10 @@
 <?php
 use App\SAE\Model\Repository\EtudiantRepository;
-$conventionValidee = (new EtudiantRepository())->conventionEtudiantEstValide($etudiant);
-$etudiantAStage = (new EtudiantRepository())->etudiantAStage($etudiant);
-$etudiantAAlternance = (new EtudiantRepository())->etudiantAAlternance($etudiant);
+use App\SAE\Model\Repository\AnneeUniversitaireRepository;
+$anneeUniversitaire = (new AnneeUniversitaireRepository())->getCurrentAnneeUniversitaire();
+$conventionValidee = (new EtudiantRepository())->conventionEtudiantEstValide($etudiant, $anneeUniversitaire->getIdAnneeUniversitaire());
+$etudiantAConvention = (new EtudiantRepository())->etudiantAConvention($etudiant, $anneeUniversitaire);
+$etudiantAAlternance = (new EtudiantRepository())->etudiantAAlternance($etudiant, $anneeUniversitaire);
 ?>
 
 <div class="managementPanel">
@@ -11,18 +13,18 @@ $etudiantAAlternance = (new EtudiantRepository())->etudiantAAlternance($etudiant
             <label id="managementEtudiantName"><?=htmlspecialchars(strtoupper($etudiant->getNomEtudiant()) . " " .$etudiant->getPrenomEtudiant())?></label>
             <div class="state">
                 <label id="managementEtudiantState"><?php
-                                                        if(($conventionValidee && $etudiantAStage) || $etudiantAAlternance){
+                                                        if($conventionValidee || $etudiantAAlternance){
                                                             echo "Procédure finalisée";
-                                                        }elseif ($etudiantAStage){
+                                                        }elseif ($etudiantAConvention){
                                                             echo "En attente de convention";
                                                         }else{
                                                             echo "En recherche";
                                                         }
                                                     ?></label>
                 <div class="circle <?php
-                                        if(($conventionValidee && $etudiantAStage) || $etudiantAAlternance){
+                                        if($conventionValidee || $etudiantAAlternance){
                                             echo "greenColor";
-                                        }elseif ($etudiantAStage){
+                                        }elseif ($etudiantAConvention){
                                             echo "yellowColor";
                                         }else{
                                             echo "redColor";

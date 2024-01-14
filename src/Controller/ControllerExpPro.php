@@ -8,6 +8,7 @@ use App\SAE\Model\DataObject\ExperienceProfessionnel;
 use App\SAE\Model\DataObject\OffreNonDefini;
 use App\SAE\Model\Repository\AbstractExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\AlternanceRepository;
+use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\Model;
 use App\SAE\Model\Repository\OffreNonDefiniRepository;
 use App\SAE\Model\Repository\StageRepository;
@@ -64,7 +65,9 @@ class ControllerExpPro extends ControllerGenerique
 
             self::afficheVue('view.php',[
                 'pagetitle' => 'Ajout commentaire offre',
-                'expPro' => $expPro,
+                'CommentaireProfesseur'=>$expPro->getCommentaireProfesseur(),
+                'ExperienceProfessionnel'=>$expPro->getIdExperienceProfessionnel(),
+                'typeExperience'=>$expPro->getNomExperienceProfessionnel(),
                 'cheminVueBody' => 'offer/commentaireProfesseur.php',
             ]);
         }
@@ -104,52 +107,11 @@ class ControllerExpPro extends ControllerGenerique
     }
 
     /**
-     * Obtient le nombre total d'expériences professionnelles.
-     *
-     * @return int Le nombre total d'expériences professionnelles.
-     */
-    public static function getNbTotal(): int
-    {
-        return (new ExperienceProfessionnelRepository())->getNbExperienceProfessionnel();
-    }
-
-    /**
-     * Obtient le nombre total de stages.
-     *
-     * @return int Le nombre total de stages.
-     */
-    public static function getNbStageTotal(): int
-    {
-        return (new StageRepository())->getNbOffre();
-    }
-
-    /**
-     * Obtient le nombre total d'alternances.
-     *
-     * @return int Le nombre total d'alternances.
-     */
-    public static function getNbAlternanceTotal(): int
-    {
-        return (new AlternanceRepository())->getNbOffre();
-    }
-
-    /**
-     * Obtient le nombre total d'offres non définies.
-     *
-     * @return int Le nombre total d'offres non définies.
-     */
-    public static function getNbOffreNonDefiniTotal(): int
-    {
-        return (new OffreNonDefiniRepository())->getNbOffre();
-    }
-
-    /**
      * Affiche les expériences professionnelles récentes.
      *
      * @return void
      */
-    public static function getExpProRecent(): void
-    {
+    public static function getExpProRecent(): void {
         $listeExpPro = (new ExperienceProfessionnelRepository())->search(null, null, null, null, null,
             null, null, "lastWeek", null, null);;
         extract($listeExpPro);
@@ -161,8 +123,7 @@ class ControllerExpPro extends ControllerGenerique
      *
      * @return void
      */
-    public static function getExpProEntreprise(): void
-    {
+    public static function getExpProEntreprise(): void {
         $listeExpPro = (new ExperienceProfessionnelRepository())->search(ConnexionUtilisateur::getLoginUtilisateurConnecte());
         extract($listeExpPro);
         require __DIR__ . "/../View/offer/offerTable.php";
@@ -174,8 +135,7 @@ class ControllerExpPro extends ControllerGenerique
      *
      * @return void
      */
-    public static function getExpProBySearch(): void
-    {
+    public static function getExpProBySearch(): void {
         $keywords = urldecode($_GET['keywords']);
         $listeExpPro = (new ExperienceProfessionnelRepository())->search($keywords);
         self::afficheVue(
@@ -439,7 +399,17 @@ class ControllerExpPro extends ControllerGenerique
                 ControllerGenerique::afficheVue('view.php', [
                     "pagetitle" => $pagetitle,
                     "cheminVueBody" => $cheminVueBody,
-                    "experiencePro" => $stage
+                    "experiencePro" => $stage,
+                    "gratification" => $stage->getGratificationStage(),
+                    "SujetExperienceProfessionnel"=>$stage->getSujetExperienceProfessionnel(),
+                    "ThematiqueExperienceProfessionnel"=>$stage->getThematiqueExperienceProfessionnel(),
+                    "TachesExperienceProfessionnel"=>$stage->getTachesExperienceProfessionnel(),
+                    "NiveauExperienceProfessionnel"=>$stage->getNiveauExperienceProfessionnel(),
+                    "CodePostalExperienceProfessionnel"=>$stage->getCodePostalExperienceProfessionnel(),
+                    "AdresseExperienceProfessionnel"=>$stage->getAdresseExperienceProfessionnel(),
+                    "DateDebutExperienceProfessionnel"=>$stage->getDateDebutExperienceProfessionnel(),
+                    "DateFinExperienceProfessionnel"=>$stage->getDateFinExperienceProfessionnel(),
+                    "IdExperienceProfessionnel"=>$stage->getIdExperienceProfessionnel()
                 ]);
             } else {
                 self::redirectionVersURL("danger", "Vous n'avez pas les droits pour modifier cette offre", "home");
@@ -450,28 +420,12 @@ class ControllerExpPro extends ControllerGenerique
             $rep = new AlternanceRepository();
             $alternance = $rep->getById($idExpPro); //Dans un else pour éviter de faire 2 requêtes s'il n'y a pas besoin
             if (!is_null($alternance)) {
-                if (ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::getLoginUtilisateurConnecte() == $alternance->getSiret()) {
-                    ControllerGenerique::afficheVue('view.php', [
-                        "pagetitle" => $pagetitle,
-                        "cheminVueBody" => $cheminVueBody,
-                        "experiencePro" => $alternance
-                    ]);
-                } else {
-                    self::redirectionVersURL("danger", "Vous n'avez pas les droits pour modifier cette offre", "home");
-                }
+                self::affichage($alternance, $pagetitle, $cheminVueBody);
             } else {
                 $rep = new OffreNonDefiniRepository();
                 $offreNonDefini = $rep->getById($idExpPro);
                 if (!is_null($offreNonDefini)) {
-                    if (ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::getLoginUtilisateurConnecte() == $offreNonDefini->getSiret()) {
-                        ControllerGenerique::afficheVue('view.php', [
-                            "pagetitle" => $pagetitle,
-                            "cheminVueBody" => $cheminVueBody,
-                            "experiencePro" => $offreNonDefini
-                        ]);
-                    } else {
-                        self::redirectionVersURL("danger", "Vous n'avez pas les droits pour modifier cette offre", "home");
-                    }
+                    self::affichage($offreNonDefini, $pagetitle, $cheminVueBody);
                 } else {
                     $messageErreur = 'Cette offre n existe pas !';
                     ControllerGenerique::error($messageErreur);
@@ -493,39 +447,94 @@ class ControllerExpPro extends ControllerGenerique
         $stage = $rep->getById($idExpPro);
 
         if (!is_null($stage)) {
-            if (!ConnexionUtilisateur::getLoginUtilisateurConnecte() == $stage->getSiret() && ConnexionUtilisateur::estEntreprise()) {
+            if (ConnexionUtilisateur::getLoginUtilisateurConnecte() != $stage->getSiret() && ConnexionUtilisateur::estEntreprise()) {
                 self::redirectionVersURL("danger", "Vous n'avez pas les droits pour afficher cette offre", "home");
             }else{
+                $entreprise = (new EntrepriseRepository())->getById($stage->getSiret());
                 ControllerGenerique::afficheVue('view.php', [
                 "pagetitle" => "Stage",
                 "cheminVueBody" => "offer/offer.php",
-                "expPro" => $stage
+                "expPro" => $stage,
+                    "NomExperienceProfessionnel"=>$stage->getNomExperienceProfessionnel(),
+                    "gratification" => $stage->getGratificationStage(),
+                    "SujetExperienceProfessionnel" => $stage->getSujetExperienceProfessionnel(),
+                    "ThematiqueExperienceProfessionnel" => $stage->getThematiqueExperienceProfessionnel(),
+                    "TachesExperienceProfessionnel" => $stage->getTachesExperienceProfessionnel(),
+                    "NiveauExperienceProfessionnel" => $stage->getNiveauExperienceProfessionnel(),
+                    "CodePostalExperienceProfessionnel" => $stage->getCodePostalExperienceProfessionnel(),
+                    "AdresseExperienceProfessionnel" => $stage->getAdresseExperienceProfessionnel(),
+                    "DateDebutExperienceProfessionnel" => $stage->getDateDebutExperienceProfessionnel(),
+                    "DateFinExperienceProfessionnel" => $stage->getDateFinExperienceProfessionnel(),
+                    "IdExperienceProfessionnel" => $stage->getIdExperienceProfessionnel(),
+                    "DatePublication"=>$stage->getDatePublication(),
+                    "CommentaireProfesseur"=>$stage->getCommentaireProfesseur(),
+                    "Siret"=>$entreprise->getSiret(),
+                    "NomEntreprise"=>$entreprise->getNomEntreprise(),
+                    "EffectifEntreprise"=>$entreprise->getEffectifEntreprise(),
+                    "TelephoneEntreprise"=>$entreprise->getTelephoneEntreprise(),
+                    "SiteWebEntreprise"=>$entreprise->getSiteWebEntreprise()
             ]);
             }
         } else {
             $rep = new AlternanceRepository();
             $alternance = $rep->getById($idExpPro);
             if (!is_null($alternance)) {
-                if (!ConnexionUtilisateur::getLoginUtilisateurConnecte() == $alternance->getSiret() && ConnexionUtilisateur::estEntreprise()) {
+                if (ConnexionUtilisateur::getLoginUtilisateurConnecte() != $alternance->getSiret() && ConnexionUtilisateur::estEntreprise()) {
                     self::redirectionVersURL("danger", "Vous n'avez pas les droits pour afficher cette offre", "home");
                 }else {
+                    $entreprise = (new EntrepriseRepository())->getById($alternance->getSiret());
                     ControllerGenerique::afficheVue('view.php', [
                         "pagetitle" => "Alternance",
                         "cheminVueBody" => "offer/offer.php",
-                        "expPro" => $alternance
+                        "expPro" => $alternance,
+                        "NomExperienceProfessionnel"=>$alternance->getNomExperienceProfessionnel(),
+                        "SujetExperienceProfessionnel" => $alternance->getSujetExperienceProfessionnel(),
+                        "ThematiqueExperienceProfessionnel" => $alternance->getThematiqueExperienceProfessionnel(),
+                        "TachesExperienceProfessionnel" => $alternance->getTachesExperienceProfessionnel(),
+                        "NiveauExperienceProfessionnel" => $alternance->getNiveauExperienceProfessionnel(),
+                        "CodePostalExperienceProfessionnel" => $alternance->getCodePostalExperienceProfessionnel(),
+                        "AdresseExperienceProfessionnel" => $alternance->getAdresseExperienceProfessionnel(),
+                        "DateDebutExperienceProfessionnel" => $alternance->getDateDebutExperienceProfessionnel(),
+                        "DateFinExperienceProfessionnel" => $alternance->getDateFinExperienceProfessionnel(),
+                        "IdExperienceProfessionnel" => $alternance->getIdExperienceProfessionnel(),
+                        "DatePublication"=>$alternance->getDatePublication(),
+                        "CommentaireProfesseur"=>$alternance->getCommentaireProfesseur(),
+                        "Siret"=>$entreprise->getSiret(),
+                        "NomEntreprise"=>$entreprise->getNomEntreprise(),
+                        "EffectifEntreprise"=>$entreprise->getEffectifEntreprise(),
+                        "TelephoneEntreprise"=>$entreprise->getTelephoneEntreprise(),
+                        "SiteWebEntreprise"=>$entreprise->getSiteWebEntreprise()
                     ]);
                 }
             } else {
                 $rep = new OffreNonDefiniRepository();
                 $offreNonDefini = $rep->getById($idExpPro);
                 if (!is_null($offreNonDefini)) {
-                    if (!ConnexionUtilisateur::getLoginUtilisateurConnecte() == $offreNonDefini->getSiret() && ConnexionUtilisateur::estEntreprise()) {
+                    if (ConnexionUtilisateur::getLoginUtilisateurConnecte() != $offreNonDefini->getSiret() && ConnexionUtilisateur::estEntreprise()) {
                         self::redirectionVersURL("danger", "Vous n'avez pas les droits pour afficher cette offre", "home");
                     }else {
+                        $entreprise = (new EntrepriseRepository())->getById($offreNonDefini->getSiret());
                         ControllerGenerique::afficheVue('view.php', [
                             "pagetitle" => "Offre non définie",
                             "cheminVueBody" => "offer/offer.php",
-                            "expPro" => $offreNonDefini
+                            "expPro" => $offreNonDefini,
+                            "NomExperienceProfessionnel"=>$offreNonDefini->getNomExperienceProfessionnel(),
+                            "SujetExperienceProfessionnel" => $offreNonDefini->getSujetExperienceProfessionnel(),
+                            "ThematiqueExperienceProfessionnel" => $offreNonDefini->getThematiqueExperienceProfessionnel(),
+                            "TachesExperienceProfessionnel" => $offreNonDefini->getTachesExperienceProfessionnel(),
+                            "NiveauExperienceProfessionnel" => $offreNonDefini->getNiveauExperienceProfessionnel(),
+                            "CodePostalExperienceProfessionnel" => $offreNonDefini->getCodePostalExperienceProfessionnel(),
+                            "AdresseExperienceProfessionnel" => $offreNonDefini->getAdresseExperienceProfessionnel(),
+                            "DateDebutExperienceProfessionnel" => $offreNonDefini->getDateDebutExperienceProfessionnel(),
+                            "DateFinExperienceProfessionnel" => $offreNonDefini->getDateFinExperienceProfessionnel(),
+                            "IdExperienceProfessionnel" => $offreNonDefini->getIdExperienceProfessionnel(),
+                            "DatePublication"=>$offreNonDefini->getDatePublication(),
+                            "CommentaireProfesseur"=>$offreNonDefini->getCommentaireProfesseur(),
+                            "Siret"=>$entreprise->getSiret(),
+                            "NomEntreprise"=>$entreprise->getNomEntreprise(),
+                            "EffectifEntreprise"=>$entreprise->getEffectifEntreprise(),
+                            "TelephoneEntreprise"=>$entreprise->getTelephoneEntreprise(),
+                            "SiteWebEntreprise"=>$entreprise->getSiteWebEntreprise()
                         ]);
                     }
                 } else {
@@ -545,9 +554,23 @@ class ControllerExpPro extends ControllerGenerique
     {
         if (ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::estEntreprise()) {
             $msg = "Offre crée avec succés !";
-            if (ConnexionUtilisateur::estConnecte()) {
+            if (ConnexionUtilisateur::estAdministrateur()){
+                $siret = $_POST["siret"];
+                $entreprise = (new EntrepriseRepository())->getEntrepriseAvecEtatFiltree();
+                $i=null;
+                foreach ($entreprise as $t){
+                    if($t->getSiret() == $siret){
+                        $i = $t->getSiret();
+                    }
+                }
+                if($i == null){
+                    self::redirectionVersURL("danger", "Cette entreprise n'existe pas", "createOffer&controller=ExpPro");
+                }
+            }
+            else if (ConnexionUtilisateur::estConnecte()) {
                 $siret = ConnexionUtilisateur::getLoginUtilisateurConnecte();
-            } else {
+            }
+            else {
                 $siret = $_POST["siret"];
             }
             $tabInfo = [
@@ -676,6 +699,34 @@ class ControllerExpPro extends ControllerGenerique
             self::afficherVueEndOffer($msg);
         } else {
             self::error("L'offre n'a pas pu être créeé");
+        }
+    }
+
+    /**
+     * @param ExperienceProfessionnel $offre
+     * @param string $pagetitle
+     * @param string $cheminVueBody
+     * @return void
+     */
+    public static function affichage(ExperienceProfessionnel $offre, string $pagetitle, string $cheminVueBody): void
+    {
+        if (ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::getLoginUtilisateurConnecte() == $offre->getSiret()) {
+            ControllerGenerique::afficheVue('view.php', [
+                "pagetitle" => $pagetitle,
+                "cheminVueBody" => $cheminVueBody,
+                "experiencePro" => $offre,
+                "SujetExperienceProfessionnel" => $offre->getSujetExperienceProfessionnel(),
+                "ThematiqueExperienceProfessionnel" => $offre->getThematiqueExperienceProfessionnel(),
+                "TachesExperienceProfessionnel" => $offre->getTachesExperienceProfessionnel(),
+                "NiveauExperienceProfessionnel" => $offre->getNiveauExperienceProfessionnel(),
+                "CodePostalExperienceProfessionnel" => $offre->getCodePostalExperienceProfessionnel(),
+                "AdresseExperienceProfessionnel" => $offre->getAdresseExperienceProfessionnel(),
+                "DateDebutExperienceProfessionnel" => $offre->getDateDebutExperienceProfessionnel(),
+                "DateFinExperienceProfessionnel" => $offre->getDateFinExperienceProfessionnel(),
+                "IdExperienceProfessionnel" => $offre->getIdExperienceProfessionnel()
+            ]);
+        } else {
+            self::redirectionVersURL("danger", "Vous n'avez pas les droits pour modifier cette offre", "home");
         }
     }
 }

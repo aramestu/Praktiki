@@ -196,31 +196,36 @@ class EntrepriseRepository extends AbstractRepository
     }
 
     /**
-     * Crée ou met à jour le mot de passe haché d'une entreprise dans la base de données.
+     * Archive un enregistrement dans la table "Annotations" et supprime les enregistrements associés.
      *
-     * Cette méthode prend un mot de passe en clair, le hache à l'aide de la classe MotDePasse,
-     * puis exécute une requête SQL pour mettre à jour le mot de passe haché de l'entreprise
-     * ayant le siret spécifié.
+     * @param string $valeurClePrimaire La valeur de la clé primaire pour identifier l'enregistrement à archiver.
      *
-     * @param string $mdp Le mot de passe en clair à hacher et enregistrer.
-     * @return void
+     * @throws \Exception En cas d'erreur lors de l'accès à la base de données.
      */
-    public static function creermdp(string $mdp): void
+    public function archiver(string $valeurClePrimaire): void
     {
-        // Requête SQL pour mettre à jour le mot de passe haché de l'entreprise dans la base de données
-        $sql = "UPDATE Entreprises SET mdpHache=:mdpHacheTag WHERE siret=:siretTag";
+        parent::archiver($valeurClePrimaire);
+        $pdo = Model::getPdo();
+        $table = "Annotations";
+        $tableArchives = $table . "Archives";
+        $clePrimaire = "idAnnotation";
+        $sql = "INSERT INTO $tableArchives SELECT * FROM $table WHERE $table.$clePrimaire = :clePrimaireTag";
+        $values = array("clePrimaireTag" => $valeurClePrimaire);
+        $requeteStatement = $pdo->prepare($sql);
+        $requeteStatement->execute($values);
 
-        // Préparation de la requête SQL avec PDO
-        $pdoStatement = Model::getPdo()->prepare($sql);
+        $sql = "DELETE FROM $table WHERE $clePrimaire = :clePrimaireTag";
+        $requeteStatement = $pdo->prepare($sql);
+        $requeteStatement->execute($values);
 
-        // Paramètres à lier dans la requête SQL
-        $values = array(
-            "mdpHacheTag" => MotDePasse::hacher($mdp), // Hacher le mot de passe
-            "siretTag" => '01234567890123' // Siret de l'entreprise concernée (remplacez-le par le bon siret)
-        );
-
-        // Exécution de la requête SQL avec les valeurs spécifiées
-        $pdoStatement->execute($values);
+        $sql = "SELECT idExperienceProfessionnel FROM ExperienceProfessionnel WHERE siret = :siretTag";
+        $value = array("siretTag" => $valeurClePrimaire);
+        $requeteStatement = $pdo->prepare($sql);
+        $requeteStatement->execute($value);
+        while ($row = $requeteStatement->fetch($pdo::FETCH_ASSOC)){
+            $id = $row['idExperienceProfessionnel'];
+            ((new ExperienceProfessionnelRepository())->supprimer($id));
+        }
     }
 
     /**

@@ -70,8 +70,8 @@ class EtudiantRepository extends AbstractRepository
      * @param int $idAnneeUniversitaire L'identifiant de l'année universitaire.
      * @return bool True si la convention est validée, sinon false.
      */
-    public function conventionEtudiantEstValide(Etudiant $etudiant, int $idAnneeUniversitaire=3): bool{ //TODO : enlever la valeur par defaut de l'année universitaire quand le pannel admin sera mit à jour
-        $sql = "SELECT estValideeAdmin FROM Etudiants etu
+    public function conventionEtudiantEstValide(Etudiant $etudiant, int $idAnneeUniversitaire=3): bool{
+        $sql = "SELECT estValideePstage FROM Etudiants etu
                 JOIN ConventionsStageEtudiant cse ON cse.numEtudiant = etu.numEtudiant
                 JOIN Conventions c ON c.idConvention = cse.idConvention
                 WHERE etu.numEtudiant = :numEtudiantTag
@@ -84,10 +84,10 @@ class EtudiantRepository extends AbstractRepository
         );
         $request->execute($values);
         $result = $request->fetch();
-        if($result==false){
+        if(!$result){
             return false;
         }
-        elseif($result["estValideeAdmin"] == 1){
+        elseif($result["estValideePstage"] == 1){
             return true;
         }else{
             return false;
@@ -131,8 +131,23 @@ class EtudiantRepository extends AbstractRepository
      * @param Etudiant $etudiant L'objet étudiant.
      * @return bool True si l'étudiant a un stage, sinon false.
      */
-    public function etudiantAStage(Etudiant $etudiant): bool{
-        return $this->conventionEtudiantEstValide($etudiant);
+    public function etudiantAConvention(Etudiant $etudiant, AnneeUniversitaire $anneeUniversitaire): bool{
+        $pdo = Model::getPdo();
+        $sql = "SELECT * FROM ConventionsStageEtudiant cse
+                WHERE numEtudiant = :numEtudiantTag
+                AND cse.idAnneeUniversitaire = :idAnneeUniversitaire";
+        $requestStatement = $pdo->prepare($sql);
+        $values = [
+            "numEtudiantTag" => $etudiant->getNumEtudiant(),
+            "idAnneeUniversitaire" => $anneeUniversitaire->getIdAnneeUniversitaire()
+        ];
+        $requestStatement->execute($values);
+        $result = $requestStatement->fetch();
+        if(!$result){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     /**
@@ -141,8 +156,23 @@ class EtudiantRepository extends AbstractRepository
      * @param Etudiant $etudiant L'objet étudiant.
      * @return bool False pour l'instant, à revoir quand l'appartenance à une alternance sera implémentée.
      */
-    public function etudiantAAlternance(Etudiant $etudiant): bool{ //TODO : refaire quand l'appartenance à une alternance sera implémentée
-        return false;
+    public function etudiantAAlternance(Etudiant $etudiant, AnneeUniversitaire $anneeUniversitaire): bool{
+        $pdo = Model::getPdo();
+        $sql = "SELECT * FROM ContratsAlternances
+                WHERE numEtudiant = :numEtudiantTag
+                AND idAnneeUniversitaire = :idAnneeUniversitaireTag";
+        $requestStatement = $pdo->prepare($sql);
+        $values = array(
+            "numEtudiantTag" => $etudiant->getNumEtudiant(),
+            "idAnneeUniversitaireTag" => $anneeUniversitaire->getIdAnneeUniversitaire()
+        );
+        $requestStatement->execute($values);
+        $result = $requestStatement->fetch();
+        if(!$result){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     /**
@@ -294,12 +324,28 @@ class EtudiantRepository extends AbstractRepository
      *
      * @return int Le nombre d'étudiants avec une convention validée.
      */
-    public function getNbEtudiantConventionValide(): int{
-        $sql = "SELECT COUNT(*) FROM Etudiants e JOIN ConventionsStageEtudiant cse ON e.numEtudiant = cse.numEtudiant JOIN Conventions c ON c.idConvention = cse.idConvention 
-                WHERE estValideeAdmin = 1";
+    public function getNbEtudiantExpProValide(AnneeUniversitaire $anneeUniversitaire): int{
+        $values = [
+            "idAnneeUniversitaireTag" => $anneeUniversitaire->getIdAnneeUniversitaire()
+        ];
+
+        $sql = "SELECT COUNT(*) FROM Etudiants e 
+                JOIN ConventionsStageEtudiant cse ON e.numEtudiant = cse.numEtudiant 
+                JOIN Conventions c ON c.idConvention = cse.idConvention
+                WHERE estValideePstage = 1
+                AND cse.idAnneeUniversitaire = :idAnneeUniversitaireTag";
         $requestStatement = Model::getPdo()->prepare($sql);
-        $requestStatement->execute();
-        return $requestStatement->fetchColumn();
+        $requestStatement->execute($values);
+        $nbEtudiantAvecStage = $requestStatement->fetchColumn();
+
+        $sql = "SELECT COUNT(*) FROM Etudiants e
+                JOIN ContratsAlternances c ON c.numEtudiant = e.numEtudiant
+                WHERE c.idAnneeUniversitaire = :idAnneeUniversitaireTag";
+        $requestStatement = Model::getPdo()->prepare($sql);
+        $requestStatement->execute($values);
+        $nbEtudiantAvecAlternance = $requestStatement->fetchColumn();
+
+        return $nbEtudiantAvecAlternance + $nbEtudiantAvecStage;
     }
 
     /**
@@ -307,10 +353,16 @@ class EtudiantRepository extends AbstractRepository
      *
      * @return int Le nombre d'étudiants avec une convention en attente.
      */
-    public function getNbEtudiantConventionAttente(): int{
-        $sql = "SELECT COUNT(*) FROM Etudiants e JOIN ConventionsStageEtudiant cse ON e.numEtudiant = cse.numEtudiant";
+    public function getNbEtudiantConventionAttente(AnneeUniversitaire $anneeUniversitaire): int{
+        $values = [
+            "idAnneeUniversitaireTag" => $anneeUniversitaire->getIdAnneeUniversitaire()
+        ];
+        $sql = "SELECT COUNT(*) FROM Etudiants e 
+                JOIN ConventionsStageEtudiant cse ON e.numEtudiant = cse.numEtudiant
+                JOIN Conventions c ON c.idConvention = cse.idConvention
+                WHERE idAnneeUniversitaire = :idAnneeUniversitaireTag";
         $requestStatement = Model::getPdo()->prepare($sql);
-        $requestStatement->execute();
+        $requestStatement->execute($values);
         return $requestStatement->fetchColumn();
     }
 
@@ -319,10 +371,20 @@ class EtudiantRepository extends AbstractRepository
      *
      * @return int Le nombre d'étudiants sans convention.
      */
-    public function getNbEtudiantSansConvention(): int{
-        $sql = "SELECT COUNT(*) FROM Etudiants e WHERE NOT EXISTS (SELECT * FROM ConventionsStageEtudiant cse WHERE e.numEtudiant = cse.numEtudiant);";
+    public function getNbEtudiantSansConventionNiAlternance(AnneeUniversitaire $anneeUniversitaire): int{
+        $values = [
+            "idAnneeUniversitaireTag" => $anneeUniversitaire->getIdAnneeUniversitaire()
+        ];
+
+        $sql = "SELECT COUNT(*) FROM Etudiants e 
+                WHERE NOT EXISTS (SELECT * FROM ConventionsStageEtudiant cse 
+                                  WHERE e.numEtudiant = cse.numEtudiant
+                                  AND cse.idAnneeUniversitaire = :idAnneeUniversitaireTag)
+                AND NOT EXISTS( SELECT * FROM ContratsAlternances ca
+                                WHERE ca.numEtudiant = e.numEtudiant
+                                AND ca.idAnneeUniversitaire = :idAnneeUniversitaireTag)";
         $requestStatement = Model::getPdo()->prepare($sql);
-        $requestStatement->execute();
+        $requestStatement->execute($values);
         return $requestStatement->fetchColumn();
     }
 }
