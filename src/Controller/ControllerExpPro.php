@@ -64,7 +64,9 @@ class ControllerExpPro extends ControllerGenerique
 
             self::afficheVue('view.php',[
                 'pagetitle' => 'Ajout commentaire offre',
-                'expPro' => $expPro,
+                'CommentaireProfesseur'=>$expPro->getCommentaireProfesseur(),
+                'ExperienceProfessionnel'=>$expPro->getIdExperienceProfessionnel(),
+                'typeExperience'=>$expPro->getNomExperienceProfessionnel(),
                 'cheminVueBody' => 'offer/commentaireProfesseur.php',
             ]);
         }
