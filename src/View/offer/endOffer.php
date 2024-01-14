@@ -4,6 +4,6 @@
     <br>
     <br>
     <p>
-        <a href="frontController.php?action=home" class="button"> Retourner à l'acceuil</a>
+        <a href="frontController.php?action=home" class="button"> Retourner à l'accueil</a>
     </p>
 </div>
