@@ -8,10 +8,10 @@ namespace App\SAE\Lib;
 class ConversionMajuscule {
 
     /**
-     * Convertit une chaîne en majuscules en prenant en compte les accents.
+     * Convertit une chaîne en majuscules en prenant en compte les carractères accentués.
      *
      * @param string $string La chaîne à convertir.
-     * @return string La chaîne convertie en majuscules avec gestion des accents.
+     * @return string La chaîne convertie en majuscules avec gestion des accentuation.
      */
     public static function convertirEnMajuscules(string $string): string
     {
