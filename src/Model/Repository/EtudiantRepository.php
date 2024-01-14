@@ -62,7 +62,7 @@ class EtudiantRepository extends AbstractRepository
      * @param bool $estValide Indique si la convention est validée.
      * @return array La liste des étudiants avec une convention en fonction des critères donnés.
      */
-    public function getEtudiantConventionValide(bool $estSigne, bool $estValide): array{ //TODO mettre à jour pour les nouvelles conventions
+    public function getEtudiantConventionValide(bool $estSigne, bool $estValide): array{
             $sql = "SELECT * FROM Etudiants e 
                 JOIN Conventions c ON c.idStage = e.idStage ";
 
@@ -348,8 +348,6 @@ class EtudiantRepository extends AbstractRepository
             "telephoneEtudiant", "codePostalEtudiant"
         );
     }
-
-    //TODO : a revoir quand les conventions seront bien implemanté
     /**
      * Obtient le nombre d'étudiants avec une convention validée.
      *
