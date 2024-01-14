@@ -17,10 +17,10 @@ use App\SAE\Lib\ConversionMajuscule;
         <a id="infoButton" class="button<?= isset($_GET["tdbAction"]) && $_GET["tdbAction"]=="info" ? " active" : ""?>" href="frontController.php?action=displayTDB&controller=TDB&tdbAction=info">Mes Informations</a>
         <a id="listeEntrepriseButton" class="button <?= isset($_GET["action"]) && $_GET["action"]=="displayTDBensListeEntreprise" ? " active" : ""?>" href="frontController.php?action=displayTDBensListeEntreprise&controller=TDB">Liste Entreprise</a>
         <?php
-        if(ConnexionUtilisateur::estAdministrateur()){
-            echo'
+        if(ConnexionUtilisateur::estAdministrateur()){?>
+            <a class="button<?= isset($_GET["tdbAction"]) && $_GET["tdbAction"]=="gestion" ? " active" : ""?>" href="frontController.php?controller=ExpPro&action=createOffer">Créer une Offre</a>
             <a id="adminButton" class="button" href="frontController.php?controller=PanelAdmin&action=panelListeEtudiants">Panel Admin</a>
-            ';
+            <?php
         }
         ?>
     </div>

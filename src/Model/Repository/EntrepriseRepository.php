@@ -228,35 +228,6 @@ class EntrepriseRepository extends AbstractRepository
         }
     }
 
-
-    /**
-     * Crée ou met à jour le mot de passe haché d'une entreprise dans la base de données.
-     *
-     * Cette méthode prend un mot de passe en clair, le hache à l'aide de la classe MotDePasse,
-     * puis exécute une requête SQL pour mettre à jour le mot de passe haché de l'entreprise
-     * ayant le siret spécifié.
-     *
-     * @param string $mdp Le mot de passe en clair à hacher et enregistrer.
-     * @return void
-     */
-    public static function creermdp(string $mdp): void
-    {
-        // Requête SQL pour mettre à jour le mot de passe haché de l'entreprise dans la base de données
-        $sql = "UPDATE Entreprises SET mdpHache=:mdpHacheTag WHERE siret=:siretTag";
-
-        // Préparation de la requête SQL avec PDO
-        $pdoStatement = Model::getPdo()->prepare($sql);
-
-        // Paramètres à lier dans la requête SQL
-        $values = array(
-            "mdpHacheTag" => MotDePasse::hacher($mdp), // Hacher le mot de passe
-            "siretTag" => '01234567890123' // Siret de l'entreprise concernée (remplacez-le par le bon siret)
-        );
-
-        // Exécution de la requête SQL avec les valeurs spécifiées
-        $pdoStatement->execute($values);
-    }
-
     /**
      * Retourne le nombre d'entreprises validées.
      *

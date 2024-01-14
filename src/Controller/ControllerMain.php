@@ -23,33 +23,41 @@ class ControllerMain extends ControllerGenerique
      */
     public static function createAccount(): void
     {
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Créer un compte',
-                'cheminVueBody' => 'user/createAccount.php',
-            ]
-        );
+        if (ConnexionUtilisateur::estConnecte()) {
+            self::home();
+        } else {
+            self::afficheVue(
+                'view.php',
+                [
+                    'pagetitle' => 'Créer un compte',
+                    'cheminVueBody' => 'user/createAccount.php',
+                ]
+            );
+        }
     }
 
     /**
-     * Affiche la vue pour la réinitialisation de mot de passe.
+     * Affiche la vue pour la réinitialisation de mot de passe avant de ce connecter.
      *
      * @return void
      */
     public static function forgetPassword(): void
     {
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Mot de passe oublié',
-                'cheminVueBody' => 'user/forgetPassword.php',
-            ]
-        );
+        if (ConnexionUtilisateur::estConnecte()) {
+            self::home();
+        } else {
+            self::afficheVue(
+                'view.php',
+                [
+                    'pagetitle' => 'Mot de passe oublié',
+                    'cheminVueBody' => 'user/forgetPassword.php',
+                ]
+            );
+        }
     }
 
     /**
-     * Affiche la vue pour la réinitialisation de mot de passe.
+     * Affiche la vue pour la réinitialisation de mot de passe une fois connecté en tant qu'entreprise.
      *
      * @return void
      */
@@ -95,22 +103,6 @@ class ControllerMain extends ControllerGenerique
             );
         }
 
-    }
-
-    /**
-     * Affiche la vue pour l'importation de données.
-     *
-     * @return void
-     */
-    public static function import(): void
-    {
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Importer',
-                'cheminVueBody' => 'SAE/index.php',
-            ]
-        );
     }
 
     /**

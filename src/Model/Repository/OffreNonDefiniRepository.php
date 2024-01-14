@@ -5,7 +5,7 @@ use App\SAE\Model\DataObject\OffreNonDefini;
 use App\SAE\Model\DataObject\ExperienceProfessionnel;
 
 /**
- * Repository corcernant les offresNonDefini
+ * Repository conrcernant les offresNonDefini
  */
 class OffreNonDefiniRepository extends AbstractExperienceProfessionnelRepository {
 
