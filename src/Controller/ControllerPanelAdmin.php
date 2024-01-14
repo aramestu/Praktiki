@@ -297,21 +297,6 @@ class ControllerPanelAdmin extends ControllerGenerique
     }
 
     /**
-     * Supprime un étudiant pour l'administration.
-     *
-     * @return void
-     */
-    public static function supprimerEtudiant(): void
-    {
-        if (!isset($_GET["numEtudiant"])) {
-            self::error("Etudiant non défini");
-            return;
-        }
-        (new EtudiantRepository())->supprimer(rawurldecode($_GET["numEtudiant"]));
-        self::panelListeEtudiants();
-    }
-
-    /**
      * Affiche le panel de modification d'un étudiant pour l'administration.
      *
      * @return void

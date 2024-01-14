@@ -67,8 +67,6 @@ $etudiantAAlternance = (new EtudiantRepository())->etudiantAAlternance($etudiant
         </div>
     </div>
     <div class="managementActions">
-        <a class="button" id="suppression"
-           href="frontController.php?action=supprimerEtudiant&controller=PanelAdmin&numEtudiant=<?= rawurlencode($etudiant->getNumEtudiant()) ?>">Supprimer</a>
         <a class="button" id="modification"
            href="frontController.php?action=panelModificationEtudiant&controller=PanelAdmin&numEtudiant=<?= rawurlencode($etudiant->getNumEtudiant()) ?>">Modifier</a>
     </div>
