@@ -40,8 +40,7 @@
                 <div class="strength-bar"></div>
             </div>
             <p id="passwordHelp">Entrez un mot de passe</p>
-            <button type="button" id="showPassword"><img id="showPasswordIconRegister" src="assets/images/eye-icon.png"
-                                                         alt="ShowPassword"></button>
+            <button type="button" id="showPassword"></button>
         </div>
         <p>
             <label for="passwordConfirmation">Confirmer mot de passe</label>
