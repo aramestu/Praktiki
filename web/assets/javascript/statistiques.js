@@ -86,27 +86,54 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     });
-    console.log("HEY");
+
 
     let sumA = 0;
     let sumS = 0;
     let sumR = 0;
 
     for(let i = 0; i < liste.length; i++){
-        let sumS = sumS + liste[1]["nbStage"];
-        let sumA = sumA + liste[2]["nbAlternance"];
-        let sumR = sumR + liste[3]["nbRien"];
+        sumS = sumS + liste[i]["nbStage"];
+        sumA = sumA + liste[i]["nbAlternance"];
+        sumR = sumR + liste[i]["nbRien"];
     }
     let tab = calculerPourcentage3(sumS, sumA, sumR);
     let pourcentageS = tab[0];
     let pourcentageA = tab[1];
     let pourcentageR = tab[2];
 
-    console.log(pourcentageA);
 
-    const pieGlobal = document.getElementById('dg2').getContext('2d');
+    const barData = {
+        labels: ['Stage', 'Alternance', 'Rien'],
+        datasets: [{
+            label: 'Pourcentage',
+            data: [pourcentageS, pourcentageA, pourcentageR],
+            backgroundColor: ['#f50036', '#eeb500', '#aef']
+        }]
+    };
+
+    const barCtx = document.getElementById('dg2').getContext('2d');
+    const myHorizontalBarChart = new Chart(barCtx, {
+        type: 'bar',
+        data: barData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    beginAtZero: true
+                },
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+
+    /*const pieGlobal = document.getElementById('dg2').getContext('2d');
     const myPieChartGlobal = new Chart(pieGlobal, {
-        type: 'pie',
+        type: 'bar',
         data: {
             datasets: [{
                 data: [pourcentageS, pourcentageA, pourcentageR],
@@ -119,38 +146,23 @@ document.addEventListener("DOMContentLoaded", function() {
             width: 300,
             height: 300,
             plugins: {
-                title: {
-                    display: true,
-                    text: 'Proportion depuis le début sans compter l\'année actuelle',
-                    fontSize: 16
+                datalabels: {
+                    display: false, // Vous pouvez définir cette propriété à true si vous souhaitez afficher des étiquettes sur les barres
                 }
+            },
+            title: {
+                display: true,
+                text: 'Proportion depuis le début sans compter l\'année actuelle',
+                fontSize: 16
             }
         }
-    });
+    });*/
+
 
 
 
 
 });
-
-/*const pie = document.getElementById('test').getContext('2d');
-const myPieChart = new Chart(pie, {
-    type: 'pie',
-    data: {
-        labels: ['Stage', 'Alternance', 'Rien'],
-        datasets: [{
-            data: [0.3,0.3,0.3],
-            backgroundColor: ['#f50036', '#eeb500', '#aef']
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        width: 300,
-        height: 300
-    }
-});*/
-
 
 /*const barData = {
     labels: ['Deuxieme', 'Premier', 'Troisieme'],
