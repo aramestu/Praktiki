@@ -10,9 +10,7 @@ use App\SAE\Service\ServiceConvention;
 
 abstract class IImportation
 {
-
-    protected abstract function verifier(array $column): ?AbstractDataObject;
-    protected abstract function creer(array $column, int $idAnneeUniversitaire): ?AbstractDataObject;
+    protected abstract function verifierEtCreer(array $column, int $idAnneeUniversitaire): ?AbstractDataObject;
     protected abstract function mettreAJour(array $column, AbstractDataObject $dataObject): void;
     public function import(string $fileName): void {
         $file = fopen($fileName, "r");
@@ -21,23 +19,17 @@ abstract class IImportation
         $anneeUniversitaireCourante = (new AnneeUniversitaireRepository())->getCurrentAnneeUniversitaire();
 
         $isFirstLine = true;
-        while (($column = fgetcsv($file, 10000, ";")) !== false) {
+        while (($column = fgetcsv($file, 10000, ",")) !== false) {
             // Ignorer la première ligne du fichier
             if ($isFirstLine) {
                 $isFirstLine = false;
                 continue;
             }
-
-            // Vérifier si l'étudiant existe dans la base de données
-            if ($this->verifier($column) == null) {
-                continue;
-            }
-
-            $dataObject = $this->creer($column, $anneeUniversitaireCourante->getIdAnneeUniversitaire());
+            $dataObject = $this->verifierEtCreer($column, $anneeUniversitaireCourante->getIdAnneeUniversitaire());
             if($dataObject == null){
                 continue;
             }
-
+            var_dump("MAJ");
             $this->mettreAJour($column, $dataObject);
         }
 

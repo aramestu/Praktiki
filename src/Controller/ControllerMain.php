@@ -4,7 +4,9 @@ namespace App\SAE\Controller;
 
 use App\SAE\Config\ConfLDAP;
 use App\SAE\Lib\ConnexionUtilisateur;
+use App\SAE\Lib\IImportation;
 use App\SAE\Lib\ImportationPstage;
+use App\SAE\Lib\ImportationStudea;
 use App\SAE\Model\HTTP\Cookie;
 use App\SAE\Model\Repository\EntrepriseRepository;
 
@@ -147,14 +149,23 @@ class ControllerMain extends ControllerGenerique
     /**
      * Importe des données à partir d'un fichier.
      *
+     * @param IImportation $importation
      * @return void
      */
     public static function importation(): void
     {
+        if(isset($_POST["typeOffre"])){
+            $typeOffre = $_POST["typeOffre"];
+            $importation = new ("App\SAE\Lib\Importation" . $typeOffre);
+        }
+        else{
+            self::redirectionVersURL("danger","Ce type d'importation n'existe pas", "panelListeEtudiants&controller=PanelAdmin");
+        }
+
         if (isset($_POST["import"])) {
             $fileName = $_FILES["file"]["tmp_name"];
             if ($_FILES["file"]["size"] > 0) {
-                (new ImportationPstage())->import($fileName);
+                $importation->import($fileName);
                 self::redirectionVersURL("success","Importation faites avec succès", "panelListeEtudiants&controller=PanelAdmin");
             }
         }
@@ -164,5 +175,13 @@ class ControllerMain extends ControllerGenerique
         } else {
             self::home();
         }
+    }
+
+    public static function importationPstage(): void{
+        self::importation(new ImportationPstage());
+    }
+
+    public static function importationStudea(): void{
+        self::importation(new ImportationStudea());
     }
 }
