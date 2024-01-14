@@ -129,7 +129,6 @@
         font-size: 1em;
         white-space: nowrap;
         overflow: hidden;
-        /*color: var(--activeGrey);*/
         width: 45px;
         margin-left: -20px;
     }
@@ -359,10 +358,6 @@ form #search-bar {
     background: var(--footer);
 }
 
-#mainContent .line {
-    /*border-bottom: 1px solid var(--grey1);*/
-}
-
 .columnName {
     background: var(--background);
     margin-top: 10px;
@@ -397,48 +392,6 @@ form #search-bar {
     background: var(--pastelBlue);
     color: var(--white);
 }
-
-/*
-#mainContent .greenHover:hover{
-    border-color: var(--green);
-    box-shadow : 10px 10px 10px #00000025,
-    -10px -10px 10px #27AE6025;
-}
-
-#mainContent .yellowHover:hover{
-    border-color: var(--yellow);
-    box-shadow : 10px 10px 10px #00000025,
-    -10px -10px 10px #F1C40F25;
-}
-
-#mainContent .redHover:hover{
-    border-color: var(--red);
-    box-shadow : 10px 10px 10px #00000025,
-    -10px -10px 10px #E74C3C25;
-}
-
-#mainContent .Alternance:hover{
-    border-color: var(--orange);
-    box-shadow : 10px 10px 10px #00000025,
-    -10px -10px 10px #E67E2225;
-}
-
-#mainContent .Stage:hover{
-    border-color: var(--wisteria);
-    box-shadow : 10px 10px 10px #00000025,
-    -10px -10px 10px #8E44AD25;
-}
-
-#mainContent .OffreNonDefini:hover{
-    border-bottom-color: var(--wisteria);
-    border-left-color: var(--orange);
-    border-right-color: var(--wisteria);
-    border-top-color: var(--orange);
-    box-shadow: 10px 10px 10px #00000025,
-    -10px -10px 10px #E67E2225;
-}
-
- */
 
 .HBox.containerDebutLine {
     justify-content: flex-start;
@@ -1018,12 +971,12 @@ a img:active {
 .OffreNonDefini > .HBox > .typeExpPro > label,
 .OffreNonDefini > .header > .information > .typeExpPro > label {
     background: linear-gradient(-45deg, var(--darkPurple) 0%, var(--darkPurple) 50%, var(--darkOrange) 50%, var(--darkOrange) 100%);
-    color: transparent; /* Make text transparent to apply gradient */
+    color: transparent;
     border-bottom-color: var(--pastelPurple);
     border-left-color: var(--pastelOrange);
     border-right-color: var(--pastelPurple);
     border-top-color: var(--pastelOrange);
-    display: inline-block; /* Ensure the gradient is applied to the text */
+    display: inline-block;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }

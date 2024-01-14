@@ -1,67 +1,67 @@
-#center{
+#center {
     position: relative;
-    width:69%;
+    width: 69%;
     align-items: flex-start;
     justify-content: flex-start;
 }
 
-#sideFilter{
+#sideFilter {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     float: left;
-    margin:0;
+    margin: 0;
 }
 
-#datePublication{
+#datePublication {
     width: 200px;
 }
 
-#optionTri{
+#optionTri {
     width: 200px;
 }
 
-input[type="date"]{
-    width:50%;
+input[type="date"] {
+    width: 50%;
 }
 
-#reset{
+#reset {
     background: var(--white);
     color: var(--grey0);
-    border : 2px solid var(--lightGrey);
+    border: 2px solid var(--lightGrey);
     width: 100%;
     height: 44px;
     padding: 11px 0;
     border-radius: 15px;
     cursor: pointer;
     font-weight: bold;
-    font-size : 1.2em;
+    font-size: 1.2em;
     transition: all 0.3s ease-in-out;
 }
 
-#reset:not(.active) span:hover{
+#reset:not(.active) span:hover {
     cursor: default;
 }
 
-#reset:hover{
+#reset:hover {
     color: var(--grey0);
     cursor: default;
 }
 
-#reset:not(.active):hover span{
+#reset:not(.active):hover span {
     color: var(--grey0);
     cursor: default;
 }
 
-#reset.active:hover{
+#reset.active:hover {
     background: var(--lightpastelOrange);
     border-color: var(--lightpastelOrange);
     color: var(--darkOrange);
     cursor: pointer;
 }
 
-#reset.active{
+#reset.active {
     background: var(--lightpastelYellow);
     border-color: var(--lightpastelYellow);
     color: var(--darkYellow);
@@ -75,7 +75,7 @@ input[type="date"]{
     margin-top: 2px;
 }
 
-.tableResponsive{
+.tableResponsive {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -83,17 +83,17 @@ input[type="date"]{
     gap: 15px;
 }
 
-.tableResponsive > a{
+.tableResponsive > a {
     text-decoration: none;
 }
 
-.tableResponsive:nth-child(2) > .subContainer{
-    color : var(--green);
+.tableResponsive:nth-child(2) > .subContainer {
+    color: var(--green);
 }
 
-#search-button{
-    width:20px;
-    height:20px;
+#search-button {
+    width: 20px;
+    height: 20px;
     border-radius: 0;
     position: absolute;
     top: 51%;
@@ -116,7 +116,7 @@ input[type="date"]{
 }
 
 
-.button-checkbox{
+.button-checkbox {
     background-color: var(--white);
     padding: 0 0;
     border-radius: 15px;
@@ -125,11 +125,11 @@ input[type="date"]{
     display: block;
     width: 170px;
     height: 44px;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
-    border : 2px solid var(--lightpastelBlue);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
+    border: 2px solid var(--lightpastelBlue);
 }
 
-.button-checkbox input:checked{
+.button-checkbox input:checked {
     box-shadow: 10px 10px 20px #00000020,
     -10px -10px 20px #ffffff45;
     border-color: var(--lightpastelBlue);
@@ -137,9 +137,9 @@ input[type="date"]{
 
 .button-checkbox label {
     line-height: 3.0em;
-    width : 12.0em;
+    width: 12.0em;
     height: 3.0em;
-    user-select : none;
+    user-select: none;
 }
 
 .button-checkbox label span {
@@ -170,21 +170,21 @@ input[type="date"]{
     content: '\f068';
 }
 
-.stage input:checked{
+.stage input:checked {
     border-color: 5px solid var(--lightpastelBlue);
 }
 
-.stage input:checked + span{
+.stage input:checked + span {
     background-color: var(--lightpastelBlue);
-    color :var(--pastelBlue);
+    color: var(--pastelBlue);
     font-weight: bold;
     box-shadow: 10px 10px 20px #00000020,
     -10px -10px 20px #ffffff45;
 }
 
-.alternance input:checked + span{
+.alternance input:checked + span {
     background-color: var(--lightpastelBlue);
-    color :var(--pastelBlue);
+    color: var(--pastelBlue);
     font-weight: bold;
 
 }
@@ -214,10 +214,6 @@ input[type="date"]{
     background-color: var(--white);
     -webkit-appearance: none;
     -moz-appearance: textfield;
-    /*
-    box-shadow: inset 10px 10px 20px #00000020, inset -10px -10px 20px #ffffff45;
-
-     */
     color: var(--darkBlue1);
 }
 
@@ -267,7 +263,7 @@ input[type="date"]{
 }
 
 @media (max-width: 41200px) {
-    .HBox{
+    .HBox {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
@@ -281,13 +277,13 @@ input[type="date"]{
     }
 
     #datePublication,
-    #optionTri{
+    #optionTri {
         width: 100%;
     }
 }
 
 @media (max-width: 1300px) {
-    .HBox{
+    .HBox {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
@@ -301,14 +297,14 @@ input[type="date"]{
     }
 
     #datePublication,
-    #optionTri{
+    #optionTri {
         width: 100%;
     }
 }
 
 @media (max-width: 950px) {
 
-    .HBox{
+    .HBox {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
@@ -333,9 +329,10 @@ input[type="date"]{
     #optionTri,
     #dateDebut,
     #dateFin,
-    .button-checkbox{
+    .button-checkbox {
         width: 110px;
     }
 }
+
 /*---END SIDE FILTER---*/
 

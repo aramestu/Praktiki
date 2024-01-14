@@ -160,6 +160,7 @@ header:hover::after {
 .burger > * {
     margin-top: 15px;
 }
+
 /*---END BURGER---*/
 
 #transition-overlay {
@@ -167,7 +168,6 @@ header:hover::after {
     width: 100%;
     height: 100%;
     z-index: -1;
-    /*animation: enter-transition-overlay .4s ease-in-out;*/
 }
 
 @keyframes enter-transition-overlay {
@@ -868,6 +868,7 @@ legend {
     border: none;
     background: none;
 }
+
 /*---END MISCELLANEOUS---*/
 
 
@@ -911,7 +912,6 @@ footer > VBox {
     top: 90px;
     padding: 15px;
     margin-bottom: 20px;
-    /*border: 1px solid transparent;*/
     border-radius: 1.5rem;
     z-index: 5;
     animation: slideDown 1s, fadeOut 9.5s 1s;
