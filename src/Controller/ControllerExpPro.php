@@ -398,7 +398,17 @@ class ControllerExpPro extends ControllerGenerique
                 ControllerGenerique::afficheVue('view.php', [
                     "pagetitle" => $pagetitle,
                     "cheminVueBody" => $cheminVueBody,
-                    "experiencePro" => $stage
+                    "experiencePro" => $stage,
+                    "gratification" => $stage->getGratificationStage(),
+                    "SujetExperienceProfessionnel"=>$stage->getSujetExperienceProfessionnel(),
+                    "ThematiqueExperienceProfessionnel"=>$stage->getThematiqueExperienceProfessionnel(),
+                    "TachesExperienceProfessionnel"=>$stage->getTachesExperienceProfessionnel(),
+                    "NiveauExperienceProfessionnel"=>$stage->getNiveauExperienceProfessionnel(),
+                    "CodePostalExperienceProfessionnel"=>$stage->getCodePostalExperienceProfessionnel(),
+                    "AdresseExperienceProfessionnel"=>$stage->getAdresseExperienceProfessionnel(),
+                    "DateDebutExperienceProfessionnel"=>$stage->getDateDebutExperienceProfessionnel(),
+                    "DateFinExperienceProfessionnel"=>$stage->getDateFinExperienceProfessionnel(),
+                    "IdExperienceProfessionnel"=>$stage->getIdExperienceProfessionnel()
                 ]);
             } else {
                 self::redirectionVersURL("danger", "Vous n'avez pas les droits pour modifier cette offre", "home");
@@ -413,7 +423,16 @@ class ControllerExpPro extends ControllerGenerique
                     ControllerGenerique::afficheVue('view.php', [
                         "pagetitle" => $pagetitle,
                         "cheminVueBody" => $cheminVueBody,
-                        "experiencePro" => $alternance
+                        "experiencePro" => $alternance,
+                        "SujetExperienceProfessionnel"=>$alternance->getSujetExperienceProfessionnel(),
+                        "ThematiqueExperienceProfessionnel"=>$alternance->getThematiqueExperienceProfessionnel(),
+                        "TachesExperienceProfessionnel"=>$alternance->getTachesExperienceProfessionnel(),
+                        "NiveauExperienceProfessionnel"=>$alternance->getNiveauExperienceProfessionnel(),
+                        "CodePostalExperienceProfessionnel"=>$alternance->getCodePostalExperienceProfessionnel(),
+                        "AdresseExperienceProfessionnel"=>$alternance->getAdresseExperienceProfessionnel(),
+                        "DateDebutExperienceProfessionnel"=>$alternance->getDateDebutExperienceProfessionnel(),
+                        "DateFinExperienceProfessionnel"=>$alternance->getDateFinExperienceProfessionnel(),
+                        "IdExperienceProfessionnel"=>$alternance->getIdExperienceProfessionnel()
                     ]);
                 } else {
                     self::redirectionVersURL("danger", "Vous n'avez pas les droits pour modifier cette offre", "home");
@@ -426,7 +445,16 @@ class ControllerExpPro extends ControllerGenerique
                         ControllerGenerique::afficheVue('view.php', [
                             "pagetitle" => $pagetitle,
                             "cheminVueBody" => $cheminVueBody,
-                            "experiencePro" => $offreNonDefini
+                            "experiencePro" => $offreNonDefini,
+                            "SujetExperienceProfessionnel"=>$offreNonDefini->getSujetExperienceProfessionnel(),
+                            "ThematiqueExperienceProfessionnel"=>$offreNonDefini->getThematiqueExperienceProfessionnel(),
+                            "TachesExperienceProfessionnel"=>$offreNonDefini->getTachesExperienceProfessionnel(),
+                            "NiveauExperienceProfessionnel"=>$offreNonDefini->getNiveauExperienceProfessionnel(),
+                            "CodePostalExperienceProfessionnel"=>$offreNonDefini->getCodePostalExperienceProfessionnel(),
+                            "AdresseExperienceProfessionnel"=>$offreNonDefini->getAdresseExperienceProfessionnel(),
+                            "DateDebutExperienceProfessionnel"=>$offreNonDefini->getDateDebutExperienceProfessionnel(),
+                            "DateFinExperienceProfessionnel"=>$offreNonDefini->getDateFinExperienceProfessionnel(),
+                            "IdExperienceProfessionnel"=>$offreNonDefini->getIdExperienceProfessionnel()
                         ]);
                     } else {
                         self::redirectionVersURL("danger", "Vous n'avez pas les droits pour modifier cette offre", "home");
