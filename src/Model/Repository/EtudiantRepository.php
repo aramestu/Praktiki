@@ -325,12 +325,29 @@ class EtudiantRepository extends AbstractRepository
      *
      * @return int Le nombre d'étudiants avec une convention validée.
      */
-    public function getNbEtudiantConventionValide(): int{
-        $sql = "SELECT COUNT(*) FROM Etudiants e JOIN ConventionsStageEtudiant cse ON e.numEtudiant = cse.numEtudiant JOIN Conventions c ON c.idConvention = cse.idConvention 
-                WHERE estValideeAdmin = 1";
+    public function getNbEtudiantExpProValide(AnneeUniversitaire $anneeUniversitaire): int{
+        $values = [
+            "idAnneeUniversitaireTag" => $anneeUniversitaire->getIdAnneeUniversitaire()
+        ];
+
+        $sql = "SELECT COUNT(*) FROM Etudiants e 
+                JOIN ConventionsStageEtudiant cse ON e.numEtudiant = cse.numEtudiant 
+                JOIN Conventions c ON c.idConvention = cse.idConvention 
+                JOIN ConventionsStageEtudiant
+                WHERE estValideePstage = 1
+                AND cse.idAnneeUniversitaire = :idAnneeUniversitaireTag";
         $requestStatement = Model::getPdo()->prepare($sql);
-        $requestStatement->execute();
-        return $requestStatement->fetchColumn();
+        $requestStatement->execute($values);
+        $nbEtudiantAvecStage = $requestStatement->fetchColumn();
+
+        $sql = "SELECT COUNT(*) FROM Etudiants e
+                JOIN ContratsAlternances c ON c.numEtudiant = e.numEtudiant
+                WHERE c.idAnneeUniversitaire = :idAnneeUniversitaireTag";
+        $requestStatement = Model::getPdo()->prepare($sql);
+        $requestStatement->execute($values);
+        $nbEtudiantAvecAlternance = $requestStatement->fetchColumn();
+
+        return $nbEtudiantAvecAlternance + $nbEtudiantAvecStage;
     }
 
     /**
@@ -338,10 +355,16 @@ class EtudiantRepository extends AbstractRepository
      *
      * @return int Le nombre d'étudiants avec une convention en attente.
      */
-    public function getNbEtudiantConventionAttente(): int{
-        $sql = "SELECT COUNT(*) FROM Etudiants e JOIN ConventionsStageEtudiant cse ON e.numEtudiant = cse.numEtudiant";
+    public function getNbEtudiantConventionAttente(AnneeUniversitaire $anneeUniversitaire): int{
+        $values = [
+            "idAnneeUniversitaireTag" => $anneeUniversitaire->getIdAnneeUniversitaire()
+        ];
+        $sql = "SELECT COUNT(*) FROM Etudiants e 
+                JOIN ConventionsStageEtudiant cse ON e.numEtudiant = cse.numEtudiant
+                JOIN Conventions c ON c.idConvention = cse.idConvention
+                WHERE idAnneeUniversitaire = :idAnneeUniversitaireTag";
         $requestStatement = Model::getPdo()->prepare($sql);
-        $requestStatement->execute();
+        $requestStatement->execute($values);
         return $requestStatement->fetchColumn();
     }
 
@@ -350,10 +373,20 @@ class EtudiantRepository extends AbstractRepository
      *
      * @return int Le nombre d'étudiants sans convention.
      */
-    public function getNbEtudiantSansConvention(): int{
-        $sql = "SELECT COUNT(*) FROM Etudiants e WHERE NOT EXISTS (SELECT * FROM ConventionsStageEtudiant cse WHERE e.numEtudiant = cse.numEtudiant);";
+    public function getNbEtudiantSansConventionNiAlternance(AnneeUniversitaire $anneeUniversitaire): int{
+        $values = [
+            "idAnneeUniversitaireTag" => $anneeUniversitaire->getIdAnneeUniversitaire()
+        ];
+
+        $sql = "SELECT COUNT(*) FROM Etudiants e 
+                WHERE NOT EXISTS (SELECT * FROM ConventionsStageEtudiant cse 
+                                  WHERE e.numEtudiant = cse.numEtudiant
+                                  AND cse.idAnneeUniversitaire = :idAnneeUniversitaireTag)
+                AND NOT EXISTS( SELECT * FROM ContratsAlternances ca
+                                WHERE ca.numEtudiant = e.numEtudiant
+                                AND ca.idAnneeUniversitaire = :idAnneeUniversitaireTag)";
         $requestStatement = Model::getPdo()->prepare($sql);
-        $requestStatement->execute();
+        $requestStatement->execute($values);
         return $requestStatement->fetchColumn();
     }
 }

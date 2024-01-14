@@ -49,26 +49,6 @@ class ControllerEtudiant extends ControllerGenerique
     }
 
     /**
-     * Obtient le nombre d'étudiants avec une expérience professionnelle validée.
-     *
-     * @return int Le nombre d'étudiants.
-     */
-    public static function getNbEtudiantExpProValide(): int
-    {
-        return ((new EtudiantRepository())->getNbEtudiantConventionValide());
-    }
-
-    /**
-     * Obtient le nombre d'étudiants avec une expérience professionnelle validée sans convention.
-     *
-     * @return int Le nombre d'étudiants.
-     */
-    public static function getNbEtudiantExpProValideSansConvention(): int
-    {
-        return ((new EtudiantRepository)->getNbEtudiantConventionAttente());
-    }
-
-    /**
      * Obtient le nombre d'étudiants avec une expérience professionnelle non validée.
      *
      * @return int Le nombre d'étudiants.

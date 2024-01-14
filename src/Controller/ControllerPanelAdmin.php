@@ -4,6 +4,7 @@ namespace App\SAE\Controller;
 
 use App\SAE\Lib\MessageFlash;
 use App\SAE\Model\DataObject\Etudiant;
+use App\SAE\Model\Repository\AnneeUniversitaireRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
@@ -104,10 +105,15 @@ class ControllerPanelAdmin extends ControllerGenerique {
             $keywords .= $_GET["keywords"];
         }
         $listEtudiants = (new EtudiantRepository())->searchs($keywords);
+        $anneeUniversitaire = (new AnneeUniversitaireRepository())->getCurrentAnneeUniversitaire();
         self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
                                                 'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
                                                 'adminPanelView' => 'user/adminPanel/etudiant/etudiantList.php',
-                                                'listEtudiants' => $listEtudiants ]);
+                                                'listEtudiants' => $listEtudiants,
+                                                'nbEtudiant' => (new EtudiantRepository())->count(),
+                                                'nbEtudiantExpProValide' => (new EtudiantRepository())->getNbEtudiantExpProValide($anneeUniversitaire),
+                                                'nbEtudiantConventionEnCours' => (new EtudiantRepository())->getNbEtudiantConventionAttente($anneeUniversitaire),
+                                                'nbEtudiantNiStageNiAlternance' => (new EtudiantRepository())->getNbEtudiantSansConventionNiAlternance($anneeUniversitaire)]);
     }
 
     /**
