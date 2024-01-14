@@ -1,31 +1,32 @@
 <?php
 use App\SAE\Model\Repository\EtudiantRepository;
-$conventionValidee = (new EtudiantRepository())->conventionEtudiantEstValide($etudiant);
-$etudiantAStage = (new EtudiantRepository())->etudiantAStage($etudiant);
-$etudiantAAlternance = (new EtudiantRepository())->etudiantAAlternance($etudiant);
+use App\SAE\Model\Repository\AnneeUniversitaireRepository;
+$conventionValidee = (new EtudiantRepository())->conventionEtudiantEstValide($etudiant, $anneeUniversitaire->getIdAnneeUniversitaire());
+$etudiantAConvention = (new EtudiantRepository())->etudiantAConvention($etudiant, $anneeUniversitaire);
+$etudiantAAlternance = (new EtudiantRepository())->etudiantAAlternance($etudiant, $anneeUniversitaire);
 ?>
 <div class="container line <?php
-                                if(($conventionValidee && $etudiantAStage) || $etudiantAAlternance){
+                                if($conventionValidee || $etudiantAAlternance){
                                     echo "greenHover";
-                                }elseif ($etudiantAStage){
+                                }elseif ($etudiantAConvention){
                                     echo "yellowHover";
                                 }else{
                                     echo "redHover";
                                 }
                                 ?>">
     <div class="HBox containerDebutLine" title="<?php
-                                                    if(($conventionValidee && $etudiantAStage) || $etudiantAAlternance){
+                                                    if($conventionValidee  || $etudiantAAlternance){
                                                         echo "Procédure finalisée";
-                                                    }elseif ($etudiantAStage){
+                                                    }elseif ($etudiantAConvention){
                                                         echo "Convention de stage non validée";
                                                     }else{
                                                         echo "Cette étudiant n'a trouvé ni stage ni alternance";
                                                     }
                                                 ?>">
         <div class="circle  <?php
-                                if(($conventionValidee && $etudiantAStage) || $etudiantAAlternance){
+                                if($conventionValidee || $etudiantAAlternance){
                                     echo "greenColor";
-                                }elseif ($etudiantAStage){
+                                }elseif ($etudiantAConvention){
                                     echo "yellowColor";
                                 }else{
                                     echo "redColor";

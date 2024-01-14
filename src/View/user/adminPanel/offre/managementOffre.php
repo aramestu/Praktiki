@@ -1,8 +1,11 @@
 <?php
+
+use App\SAE\Model\Repository\AnneeUniversitaireRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
-$conventionValidee = (new EtudiantRepository())->conventionEtudiantEstValide($etudiant);
-$etudiantAStage = (new EtudiantRepository())->etudiantAStage($etudiant);
-$etudiantAAlternance = (new EtudiantRepository())->etudiantAAlternance($etudiant);
+$anneeUniversitaire = (new AnneeUniversitaireRepository())->getCurrentAnneeUniversitaire();
+$conventionValidee = (new EtudiantRepository())->conventionEtudiantEstValide($etudiant, $anneeUniversitaire->getIdAnneeUniversitaire());
+$etudiantAStage = (new EtudiantRepository())->etudiantAConvention($etudiant, $anneeUniversitaire);
+$etudiantAAlternance = (new EtudiantRepository())->etudiantAAlternance($etudiant, $anneeUniversitaire);
 ?>
 
 <div class="managementPanel">

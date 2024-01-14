@@ -118,6 +118,7 @@ class ControllerPanelAdmin extends ControllerGenerique {
                                                 'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
                                                 'adminPanelView' => 'user/adminPanel/etudiant/etudiantList.php',
                                                 'listEtudiants' => $listEtudiants,
+                                                'anneeUniversitaire' => $anneeUniversitaire,
                                                 'nbEtudiant' => (new EtudiantRepository())->count(),
                                                 'nbEtudiantExpProValide' => (new EtudiantRepository())->getNbEtudiantExpProValide($anneeUniversitaire),
                                                 'nbEtudiantConventionEnCours' => (new EtudiantRepository())->getNbEtudiantConventionAttente($anneeUniversitaire),
