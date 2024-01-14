@@ -14,9 +14,9 @@ $prenom = htmlspecialchars($user->getPrenomPersonnel());
         <div class="column">
             <p>
                 <label class="InputAddOn-item" for="mail">Adresse mail :</label>
-                <input class="InputAddOn-field" type="text" value=<?= $mail ?> name="mail" id="mail" readonly>
+                <input class="InputAddOn-field" type="text" value="<?= $mail ?>" name="mail" id="mail" readonly>
                 <label class="InputAddOn-item" for="nom">Nom :</label>
-                <input class="InputAddOn-field" type="text" value=<?= $nom ?> name="nom" id="nom" readonly/>
+                <input class="InputAddOn-field" type="text" value="<?= $nom ?>" name="nom" id="nom" readonly/>
 
             </p>
         </div>

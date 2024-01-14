@@ -2,9 +2,9 @@
 <div class="accueilContainer">
     <div class="infoUtilisateur">
         <h2>Informations personnelles:</h2>
-        <p>Nom : <?php echo $user->getNomPersonnel();?></p>
-        <p>Prenom : <?php echo $user->getPrenomPersonnel();?></p>
-        <p>Adresse Mail : <?php echo $user->getMailPersonnel();?></p>
+        <p>Nom : <?= htmlspecialchars($user->getNomPersonnel())?></p>
+        <p>Prenom : <?= htmlspecialchars($user->getPrenomPersonnel())?></p>
+        <p>Adresse Mail : <?= htmlspecialchars($user->getMailPersonnel())?></p>
     </div>
     <div id="recentOffers">
         <h2>Offres récentes</h2>
