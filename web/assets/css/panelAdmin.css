@@ -957,6 +957,11 @@ a img:active {
     content: '\f093';
 }
 
+#statButton span::before,
+#titleStat span::before {
+    content: '\f080';
+}
+
 
 /*---START OFFRE---*/
 
@@ -1208,4 +1213,12 @@ input[type="file"] {
     font-weight: bold;
     color: var(--darkBlue2);
     margin: 50px;
+}
+
+#values {
+    display: none;
+}
+
+#dg3 {
+    margin-top: 50px;
 }
