@@ -25,12 +25,17 @@ backgroundColor: "rgba(11,59,159,0.6)",
 },
 });*/
 
-document.addEventListener("DOMContentLoaded", function() {
-    function calculerPourcentage(chiffre, somme){
+document.addEventListener("DOMContentLoaded", function () {
+
+    let style = getComputedStyle(document.body);
+    let stageColor = style.getPropertyValue('--pastelPurple');
+    let alternanceColor = style.getPropertyValue('--pastelOrange');
+
+    function calculerPourcentage(chiffre, somme) {
         return (chiffre * 100) / somme;
     }
 
-    function calculerPourcentage3(stage,alternance,rien){
+    function calculerPourcentage3(stage, alternance, rien) {
         const somme = stage + alternance + rien;
         return [calculerPourcentage(stage, somme), calculerPourcentage(alternance, somme), calculerPourcentage(rien, somme)];
     }
@@ -47,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Je commence à 1 pour ne pas avoir le nom
     let taille = liste.length;
-    if(taille !== 0){
+    if (taille !== 0) {
         let lastList = liste[taille - 1];
 
         stage = lastList["nbStage"];
@@ -69,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function() {
             labels: ['Stage', 'Alternance', 'Rien'],
             datasets: [{
                 data: [stage, alternance, rien],
-                backgroundColor: ['#f50036', '#eeb500', '#aef']
+                backgroundColor: [stageColor, alternanceColor, '#aef']
             }]
         },
         options: {
@@ -92,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let sumS = 0;
     let sumR = 0;
 
-    for(let i = 0; i < liste.length; i++){
+    for (let i = 0; i < liste.length; i++) {
         sumS = sumS + liste[i]["nbStage"];
         sumA = sumA + liste[i]["nbAlternance"];
         sumR = sumR + liste[i]["nbRien"];
@@ -108,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function() {
         datasets: [{
             label: 'Pourcentage',
             data: [pourcentageS, pourcentageA, pourcentageR],
-            backgroundColor: ['#f50036', '#eeb500', '#aef']
+            backgroundColor: [stageColor, alternanceColor, '#aef']
         }]
     };
 
@@ -131,10 +136,9 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     let nomTab = [];
-    for(let i = 0; i < liste.length; i++){
+    for (let i = 0; i < liste.length; i++) {
         nomTab.push(liste[i]["nomAnneeUniversitaire"]);
     }
-
 
 
     // Données pour la première courbe
@@ -206,9 +210,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     });*/
-
-
-
 
 
 });
