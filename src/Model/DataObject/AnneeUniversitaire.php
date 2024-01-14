@@ -12,6 +12,15 @@ class AnneeUniversitaire extends AbstractDataObject
     private string $dateFinAnneeUniversitaire;
     private string $dateDebutAnneeUniversitaire;
 
+    // Nombre d'étudiant ayant un stage en fonction de l'année universitaire
+    private int $nbStage;
+
+    // Nombre d'étudiant ayant une alternance en fonction de l'année universitaire
+    private int $nbAlternance;
+
+    // Nombre d'étudiant n'ayant ni un stage ni une alternance en fonction de l'année universitaire
+    private int $nbRien;
+
     /**
      * Constructeur de la classe AnneeUniversitaire.
      *
@@ -19,11 +28,64 @@ class AnneeUniversitaire extends AbstractDataObject
      * @param string $dateFinAnneeUniversitaire La date de fin de l'année universitaire.
      * @param string $dateDebutAnneeUniversitaire La date de début de l'année universitaire.
      */
-    public function __construct(string $nomAnneeUniversitaire, string $dateFinAnneeUniversitaire, string $dateDebutAnneeUniversitaire)
+    public function __construct(string $nomAnneeUniversitaire, string $dateFinAnneeUniversitaire, string $dateDebutAnneeUniversitaire, int $nbStage, int $nbAlternance, int $nbRien)
     {
         $this->nomAnneeUniversitaire = $nomAnneeUniversitaire;
         $this->dateFinAnneeUniversitaire = $dateFinAnneeUniversitaire;
         $this->dateDebutAnneeUniversitaire = $dateDebutAnneeUniversitaire;
+        $this->nbStage = $nbStage;
+        $this->nbAlternance = $nbAlternance;
+        $this->nbRien = $nbRien;
+    }
+
+    /**
+     * Retourne le nombre d'étudiant qui ont des stages pour l'année universitaire
+     * @return int
+     */
+    public function getNbStage(): int
+    {
+        return $this->nbStage;
+    }
+    /**
+    public function setNbStage(int $nbStage): void
+    {
+        $this->nbStage = $nbStage;
+    }
+
+    /**
+     * Retourne le nombre d'étudiant qui ont des alternances pour l'année universitaire
+     * @return int
+     */
+    public function getNbAlternance(): int
+    {
+        return $this->nbAlternance;
+    }
+
+    /**
+     * @param int $nbAlternance
+     * @return void
+     */
+    public function setNbAlternance(int $nbAlternance): void
+    {
+        $this->nbAlternance = $nbAlternance;
+    }
+
+    /**
+     * Retourne le nombre d'étudiant qui n'ont ni stage ni alternance des stages pour l'année universitaire
+     * @return int
+     */
+    public function getNbRien(): int
+    {
+        return $this->nbRien;
+    }
+
+    /**
+     * @param int $nbRien
+     * @return void
+     */
+    public function setNbRien(int $nbRien): void
+    {
+        $this->nbRien = $nbRien;
     }
 
     /**
@@ -117,7 +179,10 @@ class AnneeUniversitaire extends AbstractDataObject
             "idAnneeUniversitaireTag" => $this->idAnneeUniversitaire,
             "nomAnneeUniversitaireTag" => $this->nomAnneeUniversitaire,
             "dateFinAnneeUniversitaireTag" => $this->dateFinAnneeUniversitaire,
-            "dateDebutAnneeUniversitaireTag" => $this->dateDebutAnneeUniversitaire
+            "dateDebutAnneeUniversitaireTag" => $this->dateDebutAnneeUniversitaire,
+            "nbStageTag" => $this->nbStage,
+            "nbAlternanceTag" => $this->nbAlternance,
+            "nbRien" => $this->nbRien
         ];
     }
 
@@ -132,7 +197,10 @@ class AnneeUniversitaire extends AbstractDataObject
             "idAnneeUniversitaire" => "setIdAnneeUniversitaire",
             "nomAnneeUniversitaire" => "setNomAnneeUniversitaire",
             "dateFinAnneeUniversitaire" => "setDateFinAnneeUniversitaire",
-            "dateDebutAnneeUniversitaire" => "setDateDebutAnneeUniversitaire"
+            "dateDebutAnneeUniversitaire" => "setDateDebutAnneeUniversitaire",
+            "nbStage" => "setNbStage",
+            "nbAlternance" => "setNbAlternance",
+            "nbRien" => "setNbRien"
         ];
     }
 }
