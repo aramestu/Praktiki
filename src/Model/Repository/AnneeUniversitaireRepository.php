@@ -4,6 +4,8 @@ namespace App\SAE\Model\Repository;
 
 use App\SAE\Model\DataObject\AnneeUniversitaire;
 use App\SAE\Model\DataObject\AbstractDataObject;
+use PDO;
+
 /**
  * Repository pour la gestion des objets "AnneeUniversitaire" en base de données.
  */
@@ -78,6 +80,30 @@ class AnneeUniversitaireRepository extends AbstractRepository
         }
         return $anneeUniversitaire;
     }
+
+
+
+
+    /**
+     * Retourne la liste [[nom,stage,alternance,rien], [nom,stage,alternance,rien], ...] de chaque année universitaire jusqu'à celle d'aujourd'hui comprise
+     * @return array
+     */
+    public function getNomStageAlternanceRienExistant(): array{
+        $pdo = Model::getPdo();
+        $sql = "SELECT nomAnneeUniversitaire, nbStage, nbAlternance, nbRien FROM AnneeUniversitaire
+                WHERE dateDebutAnneeUniversitaire <= (SELECT MAX(dateDebutAnneeUniversitaire) FROM (SELECT * FROM AnneeUniversitaire
+                                                                                                   WHERE dateDebutAnneeUniversitaire <= :currentDateTag) as A2)";
+        $requestStatement = $pdo->prepare($sql);
+        $values = [
+            "currentDateTag" => date("Y-m-d")
+        ];
+        $requestStatement->execute($values);
+        $result = $requestStatement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+
+
 
     /**
      * Récupère l'année universitaire en cours.

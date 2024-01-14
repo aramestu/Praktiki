@@ -4,6 +4,7 @@ namespace App\SAE\Controller;
 
 use App\SAE\Lib\MessageFlash;
 use App\SAE\Model\DataObject\Etudiant;
+use App\SAE\Model\Repository\AnneeUniversitaireRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
@@ -334,9 +335,12 @@ class ControllerPanelAdmin extends ControllerGenerique {
     }
 
     public static function panelStatistique(){
+        $liste = (new AnneeUniversitaireRepository())->getNomStageAlternanceRienExistant();
         self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
             'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
-            'adminPanelView' => 'user/adminPanel/statistique/statistiques.php']);
+            'adminPanelView' => 'user/adminPanel/statistique/statistiques.php',
+            'liste' => $liste
+        ]);
     }
 
 }

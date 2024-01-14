@@ -98,6 +98,4 @@ class ContratsAlternanceRepository extends AbstractRepository
         return $this->etudiantPossedeAlternance($numEtu, $id);
     }
 
-
-
 }
