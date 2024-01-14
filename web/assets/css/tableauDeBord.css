@@ -357,3 +357,7 @@
     vertical-align: middle;
     color: var(--darkBlue2);
 }
+
+#centeredTable {
+    justify-content: center;
+}
