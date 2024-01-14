@@ -1,30 +1,3 @@
-//import Chart from 'chart.js/auto';
-
-/*const ctx = document.getElementById("myChart").getContext("2d");
-const myChart = new Chart(ctx, {
-    type: "line",
-    data: {
-        labels: [
-            "Lundi",
-            "Mardi",
-            "Mercredi",
-            "Jeudi",
-            "Vendredi",
-            "Samedi",
-            "Dimanche",
-        ],
-        datasets: [{
-            label: "frequentation de la semaine",
-            data: [
-                <?php foreach ($frequentation as $jour => $nombreJoueurs): ?>
-<?php echo $nombreJoueurs; ?>,
-<?php endforeach; ?>
-],
-backgroundColor: "rgba(11,59,159,0.6)",
-}],
-},
-});*/
-
 document.addEventListener("DOMContentLoaded", function () {
 
     let style = getComputedStyle(document.body);
@@ -113,7 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const barData = {
         labels: ['Stage', 'Alternance', 'Rien'],
         datasets: [{
-            label: 'Proportion pour toutes les années universitaires précédentes',
             data: [pourcentageS, pourcentageA, pourcentageR],
             backgroundColor: [stageColor, alternanceColor, nothingColor]
         }]
@@ -132,6 +104,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 y: {
                     beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Proportion pour toutes les années universitaires précédentes',
+                    fontSize: 16
                 }
             }
         }
