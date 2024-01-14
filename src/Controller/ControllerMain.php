@@ -4,11 +4,11 @@ namespace App\SAE\Controller;
 
 use App\SAE\Config\ConfLDAP;
 use App\SAE\Lib\ConnexionUtilisateur;
-use App\SAE\Lib\ImportationData;
-use App\SAE\Model\DataObject\TuteurProfessionnel;
+use App\SAE\Lib\IImportation;
+use App\SAE\Lib\ImportationPstage;
+use App\SAE\Lib\ImportationStudea;
 use App\SAE\Model\HTTP\Cookie;
 use App\SAE\Model\Repository\EntrepriseRepository;
-use App\SAE\Model\Repository\TuteurProfessionnelRepository;
 
 /**
  * Contrôleur principal avec des méthodes liées à la gestion des comptes, réinitialisation de mot de passe, etc.
@@ -23,33 +23,41 @@ class ControllerMain extends ControllerGenerique
      */
     public static function createAccount(): void
     {
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Créer un compte',
-                'cheminVueBody' => 'user/createAccount.php',
-            ]
-        );
+        if (ConnexionUtilisateur::estConnecte()) {
+            self::home();
+        } else {
+            self::afficheVue(
+                'view.php',
+                [
+                    'pagetitle' => 'Créer un compte',
+                    'cheminVueBody' => 'user/createAccount.php',
+                ]
+            );
+        }
     }
 
     /**
-     * Affiche la vue pour la réinitialisation de mot de passe.
+     * Affiche la vue pour la réinitialisation de mot de passe avant de ce connecter.
      *
      * @return void
      */
     public static function forgetPassword(): void
     {
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Mot de passe oublié',
-                'cheminVueBody' => 'user/forgetPassword.php',
-            ]
-        );
+        if (ConnexionUtilisateur::estConnecte()) {
+            self::home();
+        } else {
+            self::afficheVue(
+                'view.php',
+                [
+                    'pagetitle' => 'Mot de passe oublié',
+                    'cheminVueBody' => 'user/forgetPassword.php',
+                ]
+            );
+        }
     }
 
     /**
-     * Affiche la vue pour la réinitialisation de mot de passe.
+     * Affiche la vue pour la réinitialisation de mot de passe une fois connecté en tant qu'entreprise.
      *
      * @return void
      */
@@ -98,22 +106,6 @@ class ControllerMain extends ControllerGenerique
     }
 
     /**
-     * Affiche la vue pour l'importation de données.
-     *
-     * @return void
-     */
-    public static function import(): void
-    {
-        self::afficheVue(
-            'view.php',
-            [
-                'pagetitle' => 'Importer',
-                'cheminVueBody' => 'SAE/index.php',
-            ]
-        );
-    }
-
-    /**
      * Enregistre un cookie et redirige vers la page d'accueil.
      *
      * @return void
@@ -149,15 +141,23 @@ class ControllerMain extends ControllerGenerique
     /**
      * Importe des données à partir d'un fichier.
      *
+     * @param IImportation $importation
      * @return void
      */
     public static function importation(): void
     {
+        if(isset($_POST["typeOffre"])){
+            $typeOffre = $_POST["typeOffre"];
+            $importation = new ("App\SAE\Lib\Importation" . $typeOffre);
+        }
+        else{
+            self::redirectionVersURL("danger","Ce type d'importation n'existe pas", "panelListeEtudiants&controller=PanelAdmin");
+        }
+
         if (isset($_POST["import"])) {
-            $isFirstLine = true;
             $fileName = $_FILES["file"]["tmp_name"];
             if ($_FILES["file"]["size"] > 0) {
-                ImportationData::importFromPstage($fileName);
+                $importation->import($fileName);
                 self::redirectionVersURL("success","Importation faites avec succès", "panelListeEtudiants&controller=PanelAdmin");
             }
         }
@@ -167,5 +167,13 @@ class ControllerMain extends ControllerGenerique
         } else {
             self::home();
         }
+    }
+
+    public static function importationPstage(): void{
+        self::importation(new ImportationPstage());
+    }
+
+    public static function importationStudea(): void{
+        self::importation(new ImportationStudea());
     }
 }

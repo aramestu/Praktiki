@@ -43,7 +43,7 @@ class ContratsAlternance extends AbstractDataObject
     public function formatTableau(): array
     {
         return array("numEtudiantTag" => $this->numEtudiant,
-            "idAnneeUniversitaire" => $this->idAnneeUniversitaire);
+            "idAnneeUniversitaireTag" => $this->idAnneeUniversitaire);
     }
 
     public function getSetters(): array

@@ -43,9 +43,12 @@ use App\SAE\Model\HTTP\Cookie;
     <nav class="navbar">
         <a href="frontController.php?action=home" class="nav-item" data-action="home">Accueil</a>
         <?php if (ConnexionUtilisateur::estConnecte()) {
+            if(!ConnexionUtilisateur::estEntreprise()){
             echo '
                 <a href="frontController.php?action=getExpProByDefault&controller=ExpPro" class="nav-item" data-action="offre">Offres</a>
-                <a href="frontController.php?controller=TDB&action=displayTDB" class="nav-item" data-action="tdbEtudiant">Mes infos</a>
+                ';
+            }
+                echo'<a href="frontController.php?controller=TDB&action=displayTDB" class="nav-item" data-action="tdbEtudiant">Mes infos</a>
                 ';
         }
         echo '<a href="frontController.php?action=contact" class="nav-item" data-action="contact">Contact</a>';
@@ -116,6 +119,8 @@ use App\SAE\Model\HTTP\Cookie;
                 </p>
             </div>
         </div>
+        <br>
+        <a href="CGU.pdf" target="_blank" class="link">Conditions Générales d'Utilisation</a>
         <p>Copyright 2023 - Tous droits réservés</p>
     </div>
 </footer>

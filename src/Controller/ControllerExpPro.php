@@ -8,6 +8,7 @@ use App\SAE\Model\DataObject\ExperienceProfessionnel;
 use App\SAE\Model\DataObject\OffreNonDefini;
 use App\SAE\Model\Repository\AbstractExperienceProfessionnelRepository;
 use App\SAE\Model\Repository\AlternanceRepository;
+use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\Model;
 use App\SAE\Model\Repository\OffreNonDefiniRepository;
 use App\SAE\Model\Repository\StageRepository;
@@ -480,7 +481,7 @@ class ControllerExpPro extends ControllerGenerique
         $stage = $rep->getById($idExpPro);
 
         if (!is_null($stage)) {
-            if (!ConnexionUtilisateur::getLoginUtilisateurConnecte() == $stage->getSiret() && ConnexionUtilisateur::estEntreprise()) {
+            if (ConnexionUtilisateur::getLoginUtilisateurConnecte() != $stage->getSiret() && ConnexionUtilisateur::estEntreprise()) {
                 self::redirectionVersURL("danger", "Vous n'avez pas les droits pour afficher cette offre", "home");
             }else{
                 ControllerGenerique::afficheVue('view.php', [
@@ -493,7 +494,7 @@ class ControllerExpPro extends ControllerGenerique
             $rep = new AlternanceRepository();
             $alternance = $rep->getById($idExpPro);
             if (!is_null($alternance)) {
-                if (!ConnexionUtilisateur::getLoginUtilisateurConnecte() == $alternance->getSiret() && ConnexionUtilisateur::estEntreprise()) {
+                if (ConnexionUtilisateur::getLoginUtilisateurConnecte() != $alternance->getSiret() && ConnexionUtilisateur::estEntreprise()) {
                     self::redirectionVersURL("danger", "Vous n'avez pas les droits pour afficher cette offre", "home");
                 }else {
                     ControllerGenerique::afficheVue('view.php', [
@@ -506,7 +507,7 @@ class ControllerExpPro extends ControllerGenerique
                 $rep = new OffreNonDefiniRepository();
                 $offreNonDefini = $rep->getById($idExpPro);
                 if (!is_null($offreNonDefini)) {
-                    if (!ConnexionUtilisateur::getLoginUtilisateurConnecte() == $offreNonDefini->getSiret() && ConnexionUtilisateur::estEntreprise()) {
+                    if (ConnexionUtilisateur::getLoginUtilisateurConnecte() != $offreNonDefini->getSiret() && ConnexionUtilisateur::estEntreprise()) {
                         self::redirectionVersURL("danger", "Vous n'avez pas les droits pour afficher cette offre", "home");
                     }else {
                         ControllerGenerique::afficheVue('view.php', [
@@ -532,9 +533,23 @@ class ControllerExpPro extends ControllerGenerique
     {
         if (ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::estEntreprise()) {
             $msg = "Offre crée avec succés !";
-            if (ConnexionUtilisateur::estConnecte()) {
+            if (ConnexionUtilisateur::estAdministrateur()){
+                $siret = $_POST["siret"];
+                $entreprise = (new EntrepriseRepository())->getEntrepriseAvecEtatFiltree();
+                $i=null;
+                foreach ($entreprise as $t){
+                    if($t->getSiret() == $siret){
+                        $i = $t->getSiret();
+                    }
+                }
+                if($i == null){
+                    self::redirectionVersURL("danger", "Cette entreprise n'existe pas", "createOffer&controller=ExpPro");
+                }
+            }
+            else if (ConnexionUtilisateur::estConnecte()) {
                 $siret = ConnexionUtilisateur::getLoginUtilisateurConnecte();
-            } else {
+            }
+            else {
                 $siret = $_POST["siret"];
             }
             $tabInfo = [

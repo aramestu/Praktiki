@@ -201,7 +201,9 @@ class ControllerEntreprise extends ControllerGenerique
             }
             if (!is_null($user)) {
                 if ($user->getMailEntreprise() == $_REQUEST["mail"] || ConnexionUtilisateur::estConnecte()) {
-                    VerificationEmail::envoiEmailChangementPassword($user->getSiret(), $user->getMailEntreprise());
+                    $user->setNonce(MotDePasse::genererChaineAleatoire());
+                    (new EntrepriseRepository())->mettreAJour($user);
+                    VerificationEmail::envoiEmailChangementPassword($user);
                     self::redirectionVersURL("success", "Vous allez recevoir un mail", "home");
                 } else {
                     self::redirectionVersURL("warning", "mail incorrect", "forgetPassword");
@@ -232,6 +234,7 @@ class ControllerEntreprise extends ControllerGenerique
                         self::redirectionVersURL("warning", "Ancien mot de passe incorrect", "displayTDB&controller=TDB");
                     }
                     $user->setMdpHache($_REQUEST["newPassword"]);
+                    $user->setNonce("");
                     (new EntrepriseRepository())->mettreAJour($user);
                     if(ConnexionUtilisateur::estEntreprise()){
                         self::redirectionVersURL("success", "Mot de passe changé", "displayTDB&controller=TDB");
@@ -245,6 +248,21 @@ class ControllerEntreprise extends ControllerGenerique
             }
         } else {
             self::redirectionVersURL("warning", "Variable non remplit", "resetPassword");
+        }
+    }
+
+    public static function verifNonce(): void
+    {
+        $user = (new EntrepriseRepository())->getById($_REQUEST["siret"]);
+        if($user->FormatTableau()["nonceTag"] != $_REQUEST["nonce"]){
+            self::redirectionVersURL("warning", "Vous ne pouvez pas réutiliser le même mail", "home");
+        }else{
+            self::afficheVue("view.php", [
+                "pagetitle" => "Changement de mot de passe",
+                "cheminVueBody" => "user/resetPassword.php",
+                "siret" => $_REQUEST["siret"],
+                "nonce" => $_REQUEST["nonce"]
+            ]);
         }
     }
 
