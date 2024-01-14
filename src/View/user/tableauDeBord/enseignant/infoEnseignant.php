@@ -15,9 +15,11 @@ $admin = htmlspecialchars($user->isEstAdmin());
         <div class="column">
             <p>
                 <label class="InputAddOn-item" for="mail">Adresse mail :</label>
-                <input class="InputAddOn-field" type="text" value="<?= htmlspecialchars($mail) ?>" name="mail" id="mail" readonly>
+                <input class="InputAddOn-field" type="text" value="<?= htmlspecialchars($mail) ?>" name="mail" id="mail"
+                       readonly>
                 <label class="InputAddOn-item" for="nom">Nom :</label>
-                <input class="InputAddOn-field" type="text" value="<?= htmlspecialchars($nom) ?>" name="nom" id="nom" readonly/>
+                <input class="InputAddOn-field" type="text" value="<?= htmlspecialchars($nom) ?>" name="nom" id="nom"
+                       readonly/>
 
             </p>
         </div>
@@ -25,7 +27,8 @@ $admin = htmlspecialchars($user->isEstAdmin());
         <div class="column">
             <p>
                 <label class="InputAddOn-item" for="prenom">Prenom : </label>
-                <input class="InputAddOn-field" type="text" value="<?= htmlspecialchars($prenom) ?>" name="prenom" id="prenom" readonly>
+                <input class="InputAddOn-field" type="text" value="<?= htmlspecialchars($prenom) ?>" name="prenom"
+                       id="prenom" readonly>
                 <input type="hidden" value="' . $admin . '" name="admin" id="admin" required>
             </p>
         </div>
