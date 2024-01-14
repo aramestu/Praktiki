@@ -9,6 +9,7 @@ use App\SAE\Lib\ConnexionUtilisateur;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\StageRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
+
 ?>
 
 <div id="mainContainer" class="subContainer <?php echo $NomExperienceProfessionnel; ?>">
@@ -42,7 +43,7 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
             <p>Thématique : <?= htmlspecialchars($ThematiqueExperienceProfessionnel) ?></p>
             <p>Tâches : <?= htmlspecialchars($TachesExperienceProfessionnel) ?></p>
             <p>Année minimum demandée : <?= htmlspecialchars($NiveauExperienceProfessionnel) ?></p>
-            <?php if($CommentaireProfesseur != ""){ ?>
+            <?php if ($CommentaireProfesseur != "") { ?>
                 <p> Commentaire professeur : <?php echo htmlspecialchars($CommentaireProfesseur); ?> </p> <?php } ?>
         </div>
 
@@ -57,18 +58,19 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 
     </div>
     <?php
-        if(ConnexionUtilisateur::estEnseignant() || ConnexionUtilisateur::estAdministrateur()){
-    ?>
-    <a id="commentaireIcon" href="frontController.php?controller=ExpPro&action=afficherAjoutCommentaire&id=<?php echo htmlspecialchars($IdExperienceProfessionnel)?>&type=<?php echo htmlspecialchars($NomExperienceProfessionnel)?>">
+    if (ConnexionUtilisateur::estEnseignant() || ConnexionUtilisateur::estAdministrateur()) {
+        ?>
+        <a id="commentaireIcon"
+           href="frontController.php?controller=ExpPro&action=afficherAjoutCommentaire&id=<?php echo htmlspecialchars($IdExperienceProfessionnel) ?>&type=<?php echo htmlspecialchars($NomExperienceProfessionnel) ?>">
         </a>
     <?php } ?>
     <?php
-    if (ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::getLoginUtilisateurConnecte()==$Siret) {
+    if (ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::getLoginUtilisateurConnecte() == $Siret) {
         ?>
-    <a id="deleteButtonOrigin"><img src="assets/images/bin-icon.png" id="deleteIcon" alt="Bin"></a>
-    <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($IdExperienceProfessionnel)?>"><img
-                src="assets/images/edit-icon.png" id="editIcon" alt="EditButton"></a>
-    <?php
+        <a id="deleteButtonOrigin"><img src="assets/images/bin-icon.png" id="deleteIcon" alt="Bin"></a>
+        <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($IdExperienceProfessionnel) ?>"><img
+                    src="assets/images/edit-icon.png" id="editIcon" alt="EditButton"></a>
+        <?php
     }
     ?>
 
@@ -76,16 +78,15 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
     <div class="HBox">
         <?php
 
-    if(ConnexionUtilisateur::estEntreprise()){
-        echo'<a href="frontController.php?controller=TDB&action=displayTDB" class="button secondary">Retour au tableau de bord</a> ';
-    }
-    else{
-        echo'<a href="frontController.php?action=getExpProByDefault&controller=ExpPro" class="button secondary">Retour aux offres</a> ';
-    }
-    if(ConnexionUtilisateur::estEtudiant() || ConnexionUtilisateur::estAdministrateur()){
-        echo '<button id="apply" class="button">Postuler</button>';
-    }
-    ?>
+        if (ConnexionUtilisateur::estEntreprise()) {
+            echo '<a href="frontController.php?controller=TDB&action=displayTDB" class="button secondary">Retour au tableau de bord</a> ';
+        } else {
+            echo '<a href="frontController.php?action=getExpProByDefault&controller=ExpPro" class="button secondary">Retour aux offres</a> ';
+        }
+        if (ConnexionUtilisateur::estEtudiant() || ConnexionUtilisateur::estAdministrateur()) {
+            echo '<button id="apply" class="button">Postuler</button>';
+        }
+        ?>
     </div>
 </div>
 

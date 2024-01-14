@@ -10,12 +10,12 @@
 <div class="container">
     <form method="post" action="frontController.php?controller=ExpPro&action=ajouterCommentaire">
 
-        <?php if(\App\SAE\Lib\ConnexionUtilisateur::estAdministrateur() || \App\SAE\Lib\ConnexionUtilisateur::estEnseignant()){ ?>
-        <p>
-            <label for="commentaireProfesseur">Commentaire Professeur</label>
-            <textarea name="commentaireProfesseur" id="commentaireProfesseur" cols="30" rows="10" maxlength="500"
-                      placeholder="Commentaire Professeur"><?php echo htmlspecialchars($CommentaireProfesseur); ?></textarea>
-        </p>
+        <?php if (\App\SAE\Lib\ConnexionUtilisateur::estAdministrateur() || \App\SAE\Lib\ConnexionUtilisateur::estEnseignant()) { ?>
+            <p>
+                <label for="commentaireProfesseur">Commentaire Professeur</label>
+                <textarea name="commentaireProfesseur" id="commentaireProfesseur" cols="30" rows="10" maxlength="500"
+                          placeholder="Commentaire Professeur"><?php echo htmlspecialchars($CommentaireProfesseur); ?></textarea>
+            </p>
         <?php } ?>
 
         <p>
