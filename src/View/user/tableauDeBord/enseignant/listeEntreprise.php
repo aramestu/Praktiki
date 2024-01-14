@@ -6,9 +6,6 @@
             <div>Etat</div>
             <label class="lineNomEntreprise">Nom Entreprise</label>
         </div>
-        <label id="columnCodePostal" class="lineCodePostalEntreprise">CodePostal</label>
-        <label class="lineTelephoneEntreprise">Téléphone</label>
-        <label class="lineSiteWebEntreprise">Site web</label>
     </div>
     <div class="VBox" id="dynamicList">
         <?php

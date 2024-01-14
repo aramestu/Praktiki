@@ -8,5 +8,5 @@
     <label class="lineTelephoneEntreprise"><a class="link" href="tel:<?=$entreprise->getTelephoneEntreprise()?>"><?=htmlspecialchars($entreprise->getTelephoneEntreprise())?></a></label>
     <label class="lineSiteWebEntreprise"><a class="link" href="https://<?= rawurlencode($entreprise->getSiteWebEntreprise())?>">Site web</a></label>
     -->
-    <a class="button" href="frontController.php?controller=Annotation&action=afficherAllAnnotationEntreprise&siret=<?=rawurlencode($entreprise->getSiret())?>">Annotations</a>
+    <a class="annotationButton button" href="frontController.php?controller=Annotation&action=afficherAllAnnotationEntreprise&siret=<?=rawurlencode($entreprise->getSiret())?>">Annotations</a>
 </div>
