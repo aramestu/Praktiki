@@ -352,4 +352,13 @@ class ControllerPanelAdmin extends ControllerGenerique {
         self::panelGestionEtudiant();
     }
 
+    public static function panelStatistique(){
+        $liste = (new AnneeUniversitaireRepository())->getNomStageAlternanceRienExistant();
+        self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
+            'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
+            'adminPanelView' => 'user/adminPanel/statistique/statistiques.php',
+            'liste' => $liste
+        ]);
+    }
+
 }
