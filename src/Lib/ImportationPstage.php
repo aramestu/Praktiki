@@ -14,55 +14,6 @@ use App\SAE\Service\ServiceConvention;
 class ImportationPstage extends IImportation {
 
     /**
-     * Importe des données depuis un fichier Pstage.
-     *
-     * @param string $fileName Le nom du fichier à importer.
-     */
-    public static function import(string $fileName): void {
-        $file = fopen($fileName, "r");
-
-        // Récupération de l'année universitaire courante
-        $anneeUniversitaireCourante = (new AnneeUniversitaireRepository())->getCurrentAnneeUniversitaire();
-
-        $isFirstLine = true;
-        while (($column = fgetcsv($file, 10000, ";")) !== false) {
-            // Ignorer la première ligne du fichier
-            if ($isFirstLine) {
-                $isFirstLine = false;
-                continue;
-            }
-
-            // Vérifier si l'étudiant existe dans la base de données
-            if ((new EtudiantRepository())->getById($column[1]) == null) {
-                continue;
-            }
-
-            // Récupérer ou créer la convention pour l'étudiant et l'année universitaire courante
-            $convention = (new ConventionRepository())->getConventionAvecEtudiant($column[1], $anneeUniversitaireCourante->getIdAnneeUniversitaire());
-            if ($convention == null) {
-                // Si l'étudiant n'a pas déjà une alternance alors la convention peut être crée (true)
-                if((new ConventionRepository())->creerConvention($column[1], $anneeUniversitaireCourante->getIdAnneeUniversitaire())) {
-                    $convention = (new ConventionRepository())->getConventionAvecEtudiant($column[1], $anneeUniversitaireCourante->getIdAnneeUniversitaire());
-                }
-                else{
-                    continue;
-                }
-            }
-
-            // Attributs à mettre à jour dans la convention
-            $attributs = [
-                "estValideePstage" => $column[28] == "Oui"
-            ];
-
-            // Mettre à jour la convention avec les attributs spécifiés
-            (new ServiceConvention())->mettreAJour($convention, $attributs);
-        }
-
-        // Fermer le fichier après traitement
-        fclose($file);
-    }
-
-    /**
      * Retourne un étudiant si son numEtudiant existe, null sinon
      * @param array $column
      * @return AbstractDataObject|null
@@ -72,5 +23,39 @@ class ImportationPstage extends IImportation {
         // Vérifier si l'étudiant existe dans la base de données
         return (new EtudiantRepository())->getById($column[1]);
 
+    }
+
+    /**
+     * Crée une convention si l'étudiant n'en a pas et qu'il n'a pas d'alternance. Return null sinon
+     * @param array $column
+     * @param int $idAnneeUniversitaire
+     * @return AbstractDataObject|null
+     */
+    protected function creer(array $column, int $idAnneeUniversitaire): ?AbstractDataObject
+    {
+        // Récupérer ou créer la convention pour l'étudiant et l'année universitaire courante
+        $convention = (new ConventionRepository())->getConventionAvecEtudiant($column[1], $idAnneeUniversitaire);
+        if ($convention == null) {
+            // Si l'étudiant n'a pas déjà une alternance alors la convention peut être crée (true)
+            if((new ConventionRepository())->creerConvention($column[1], $idAnneeUniversitaire)) {
+                $convention = (new ConventionRepository())->getConventionAvecEtudiant($column[1], $idAnneeUniversitaire);
+            }
+        }
+        return $convention;
+    }
+
+    /**
+     * Retourne les attributs à mettre à jour dans la convention
+     * @param array $column
+     * @return array
+     */
+    protected function mettreAJour(array $column, AbstractDataObject $dataObject): void
+    {
+        $attributs = [
+            "estValideePstage" => $column[28] == "Oui"
+        ];
+
+        // Mettre à jour la convention avec les attributs spécifiés
+        (new ServiceConvention())->mettreAJour($dataObject, $attributs);
     }
 }

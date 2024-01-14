@@ -13,7 +13,8 @@ abstract class IImportation
 
     protected abstract function verifier(array $column): ?AbstractDataObject;
     protected abstract function creer(array $column, int $idAnneeUniversitaire): ?AbstractDataObject;
-    public function import(string $fileName, int $indiceNumEtudiant): void {
+    protected abstract function mettreAJour(array $column, AbstractDataObject $dataObject): void;
+    public function import(string $fileName): void {
         $file = fopen($fileName, "r");
 
         // Récupération de l'année universitaire courante
@@ -32,25 +33,12 @@ abstract class IImportation
                 continue;
             }
 
-            // Récupérer ou créer la convention pour l'étudiant et l'année universitaire courante
-            $convention = (new ConventionRepository())->getConventionAvecEtudiant($column[1], $anneeUniversitaireCourante->getIdAnneeUniversitaire());
-            if ($convention == null) {
-                // Si l'étudiant n'a pas déjà une alternance alors la convention peut être crée (true)
-                if((new ConventionRepository())->creerConvention($column[1], $anneeUniversitaireCourante->getIdAnneeUniversitaire())) {
-                    $convention = (new ConventionRepository())->getConventionAvecEtudiant($column[1], $anneeUniversitaireCourante->getIdAnneeUniversitaire());
-                }
-                else{
-                    continue;
-                }
+            $dataObject = $this->creer($column, $anneeUniversitaireCourante->getIdAnneeUniversitaire());
+            if($dataObject == null){
+                continue;
             }
 
-            // Attributs à mettre à jour dans la convention
-            $attributs = [
-                "estValideePstage" => $column[28] == "Oui"
-            ];
-
-            // Mettre à jour la convention avec les attributs spécifiés
-            (new ServiceConvention())->mettreAJour($convention, $attributs);
+            $this->mettreAJour($column, $dataObject);
         }
 
         // Fermer le fichier après traitement

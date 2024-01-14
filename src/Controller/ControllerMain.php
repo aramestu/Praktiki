@@ -154,7 +154,7 @@ class ControllerMain extends ControllerGenerique
         if (isset($_POST["import"])) {
             $fileName = $_FILES["file"]["tmp_name"];
             if ($_FILES["file"]["size"] > 0) {
-                ImportationPstage::importFromPstage($fileName);
+                (new ImportationPstage())->import($fileName);
                 self::redirectionVersURL("success","Importation faites avec succès", "panelListeEtudiants&controller=PanelAdmin");
             }
         }
