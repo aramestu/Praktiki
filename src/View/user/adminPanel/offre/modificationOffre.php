@@ -1,8 +1,10 @@
 <?php
 use App\SAE\Model\Repository\EtudiantRepository;
-$conventionValidee = (new EtudiantRepository())->conventionEtudiantEstValide($etudiant);
-$etudiantAStage = (new EtudiantRepository())->etudiantAStage($etudiant);
-$etudiantAAlternance = (new EtudiantRepository())->etudiantAAlternance($etudiant);
+use App\SAE\Model\Repository\AnneeUniversitaireRepository;
+$anneeUniversitaire = (new AnneeUniversitaireRepository())->getCurrentAnneeUniversitaire();
+$conventionValidee = (new EtudiantRepository())->conventionEtudiantEstValide($etudiant, $anneeUniversitaire->getIdAnneeUniversitaire());
+$etudiantAStage = (new EtudiantRepository())->etudiantAConvention($etudiant, $anneeUniversitaire);
+$etudiantAAlternance = (new EtudiantRepository())->etudiantAAlternance($etudiant, $anneeUniversitaire);
 ?>
 
 <form class="managementPanel" action="frontController.php?action=modifierEtudiant&controller=PanelAdmin&numEtudiant=<?=rawurlencode($etudiant->getNumEtudiant())?>" method="post">

@@ -11,48 +11,46 @@ use App\SAE\Model\Repository\StageRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
 ?>
 
-<div id="mainContainer" class="subContainer <?php echo $expPro->getNomExperienceProfessionnel(); ?>">
+<div id="mainContainer" class="subContainer <?php echo $NomExperienceProfessionnel; ?>">
     <div class="header">
         <div class="information">
-            <p class="bold typeExpPro"><label><?php echo $expPro->getNomExperienceProfessionnel(); ?></label></p>
-            <p>du <?= htmlspecialchars($expPro->getDateDebutExperienceProfessionnel()) ?></p>
-            <p>au <?= htmlspecialchars($expPro->getDateFinExperienceProfessionnel()) ?></p>
+            <p class="bold typeExpPro"><label><?php echo htmlspecialchars($NomExperienceProfessionnel); ?></label></p>
+            <p>du <?= htmlspecialchars($DateDebutExperienceProfessionnel) ?></p>
+            <p>au <?= htmlspecialchars($DateFinExperienceProfessionnel) ?></p>
         </div>
         <div class="company">
             <h2 class="infoEntrepriseOffer"><?php
-                $entreprise = (new EntrepriseRepository())->getById($expPro->getSiret());
-                echo(htmlspecialchars($entreprise->getNomEntreprise()));
+                echo(htmlspecialchars($NomEntreprise));
                 ?></h2>
-            <label class="codePostalID"><?= htmlspecialchars($expPro->getAdresseExperienceProfessionnel()) ?>
-                / <?= htmlspecialchars($expPro->getCodePostalExperienceProfessionnel()) ?></label>
+            <label class="codePostalID"><?= htmlspecialchars($AdresseExperienceProfessionnel) ?>
+                / <?= htmlspecialchars($CodePostalExperienceProfessionnel) ?></label>
         </div>
     </div>
     <div id="main">
         <div id="infoOffer">
-            <p><?php echo $expPro->getDatePublication() ?></p>
-            <p class="bold">Sujet : <?= htmlspecialchars($expPro->getSujetExperienceProfessionnel()) ?></p>
+            <p><?php echo $DatePublication ?></p>
+            <p class="bold">Sujet : <?= htmlspecialchars($SujetExperienceProfessionnel) ?></p>
             <?php
-            if ($expPro->getNomExperienceProfessionnel() == "Stage") {
+            if ($NomExperienceProfessionnel == "Stage") {
                 ?>
                 <p>Gratification : <?php
-                    $stage = (new StageRepository())->getById($expPro->getIdExperienceProfessionnel());
-                    echo(htmlspecialchars($stage->getGratificationStage()));
+                    echo(htmlspecialchars($gratification));
                     ?>€</p>
                 <?php
             }
             ?>
-            <p>Thématique : <?= htmlspecialchars($expPro->getThematiqueExperienceProfessionnel()) ?></p>
-            <p>Tâches : <?= htmlspecialchars($expPro->getTachesExperienceProfessionnel()) ?></p>
-            <p>Année minimum demandée : <?= htmlspecialchars($expPro->getNiveauExperienceProfessionnel()) ?></p>
-            <?php if($expPro->getCommentaireProfesseur() != ""){ ?>
-                <p> Commentaire professeur : <?php echo htmlspecialchars($expPro->getCommentaireProfesseur()); ?> </p> <?php } ?>
+            <p>Thématique : <?= htmlspecialchars($ThematiqueExperienceProfessionnel) ?></p>
+            <p>Tâches : <?= htmlspecialchars($TachesExperienceProfessionnel) ?></p>
+            <p>Année minimum demandée : <?= htmlspecialchars($NiveauExperienceProfessionnel) ?></p>
+            <?php if($CommentaireProfesseur != ""){ ?>
+                <p> Commentaire professeur : <?php echo htmlspecialchars($CommentaireProfesseur); ?> </p> <?php } ?>
         </div>
 
         <div id="infoCompany">
             <ul>
-                <li>Effectifs : <?php echo(htmlspecialchars($entreprise->getEffectifEntreprise())); ?></li>
-                <li>Téléphone : <?php echo(htmlspecialchars($entreprise->getTelephoneEntreprise())); ?></li>
-                <li><a href="https://<?php echo(htmlspecialchars($entreprise->getSiteWebEntreprise())); ?>"
+                <li>Effectifs : <?php echo(htmlspecialchars($EffectifEntreprise)); ?></li>
+                <li>Téléphone : <?php echo(htmlspecialchars($TelephoneEntreprise)); ?></li>
+                <li><a href="https://<?php echo(htmlspecialchars($SiteWebEntreprise)); ?>"
                        class="link">Site web</a></li>
             </ul>
         </div>
@@ -61,14 +59,14 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
     <?php
         if(ConnexionUtilisateur::estEnseignant() || ConnexionUtilisateur::estAdministrateur()){
     ?>
-    <a id="commentaireIcon" href="frontController.php?controller=ExpPro&action=afficherAjoutCommentaire&id=<?php echo $expPro->getIdExperienceProfessionnel()?>&type=<?php echo $expPro->getNomExperienceProfessionnel()?>">
+    <a id="commentaireIcon" href="frontController.php?controller=ExpPro&action=afficherAjoutCommentaire&id=<?php echo htmlspecialchars($IdExperienceProfessionnel)?>&type=<?php echo htmlspecialchars($NomExperienceProfessionnel)?>">
         </a>
     <?php } ?>
     <?php
-    if (ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::getLoginUtilisateurConnecte()==$entreprise->getSiret()) {
+    if (ConnexionUtilisateur::estAdministrateur() || ConnexionUtilisateur::getLoginUtilisateurConnecte()==$Siret) {
         ?>
     <a id="deleteButtonOrigin"><img src="assets/images/bin-icon.png" id="deleteIcon" alt="Bin"></a>
-    <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel())?>"><img
+    <a href="frontController.php?controller=ExpPro&action=afficherFormulaireModification&experiencePro=<?php echo rawurlencode($IdExperienceProfessionnel)?>"><img
                 src="assets/images/edit-icon.png" id="editIcon" alt="EditButton"></a>
     <?php
     }
@@ -98,7 +96,7 @@ use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
         <div class="HBox">
             <a class="button popUpDeleteButton" id="popUpDeleteNo">Non</a>
             <a class="button popUpDeleteButton" id="popUpDeleteYes"
-               href="frontController.php?controller=ExpPro&action=supprimerOffre&experiencePro=<?php echo rawurlencode($expPro->getIdExperienceProfessionnel()) ?>">Oui</a>
+               href="frontController.php?controller=ExpPro&action=supprimerOffre&experiencePro=<?php echo rawurlencode($IdExperienceProfessionnel) ?>">Oui</a>
         </div>
     </div>
 </div>

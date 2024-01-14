@@ -4,9 +4,14 @@ namespace App\SAE\Controller;
 
 use App\SAE\Lib\MessageFlash;
 use App\SAE\Model\DataObject\Etudiant;
+use App\SAE\Model\DataObject\Stage;
+use App\SAE\Model\Repository\AlternanceRepository;
+use App\SAE\Model\Repository\AnneeUniversitaireRepository;
 use App\SAE\Model\Repository\EntrepriseRepository;
 use App\SAE\Model\Repository\EtudiantRepository;
 use App\SAE\Model\Repository\ExperienceProfessionnelRepository;
+use App\SAE\Model\Repository\OffreNonDefiniRepository;
+use App\SAE\Model\Repository\StageRepository;
 use App\SAE\Service\ServiceEntreprise;
 use App\SAE\Service\ServiceEtudiant;
 
@@ -90,7 +95,11 @@ class ControllerPanelAdmin extends ControllerGenerique {
                                                 'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
                                                 'adminPanelView' => 'user/adminPanel/entreprise/entrepriseList.php',
                                                 'listEntreprises' => $listEntreprises,
-                                                'keywords' => $keywords]);
+                                                'keywords' => $keywords,
+                                                'nbEntreprise' => (new EntrepriseRepository())->count(),
+                                                'nbEntrepriseValide' => (new EntrepriseRepository())->getNbEntrepriseValide(),
+                                                'nbEntrepriseAttente' => (new EntrepriseRepository())->getNbEntrepriseAttente(),
+                                                'nbEntrepriseRefuse' => (new EntrepriseRepository())->getNbEntrpriseRefusee()]);
     }
 
     /**
@@ -104,10 +113,16 @@ class ControllerPanelAdmin extends ControllerGenerique {
             $keywords .= $_GET["keywords"];
         }
         $listEtudiants = (new EtudiantRepository())->searchs($keywords);
+        $anneeUniversitaire = (new AnneeUniversitaireRepository())->getCurrentAnneeUniversitaire();
         self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
                                                 'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
                                                 'adminPanelView' => 'user/adminPanel/etudiant/etudiantList.php',
-                                                'listEtudiants' => $listEtudiants ]);
+                                                'listEtudiants' => $listEtudiants,
+                                                'anneeUniversitaire' => $anneeUniversitaire,
+                                                'nbEtudiant' => (new EtudiantRepository())->count(),
+                                                'nbEtudiantExpProValide' => (new EtudiantRepository())->getNbEtudiantExpProValide($anneeUniversitaire),
+                                                'nbEtudiantConventionEnCours' => (new EtudiantRepository())->getNbEtudiantConventionAttente($anneeUniversitaire),
+                                                'nbEtudiantNiStageNiAlternance' => (new EtudiantRepository())->getNbEtudiantSansConventionNiAlternance($anneeUniversitaire)]);
     }
 
     /**
@@ -124,7 +139,11 @@ class ControllerPanelAdmin extends ControllerGenerique {
         self::afficheVue('view.php', ['pagetitle' => 'Panel Administrateur',
                                                 'cheminVueBody' => 'user/adminPanel/panelAdmin.php',
                                                 'adminPanelView' => 'user/adminPanel/offre/offreList.php',
-                                                'listOffres' => $listOffres ]);
+                                                'listOffres' => $listOffres,
+                                                'nbOffre' => (new ExperienceProfessionnelRepository())->getNbExperienceProfessionnel(),
+                                                'nbStage' => (new StageRepository())->count(),
+                                                'nbAlternance' => (new AlternanceRepository())->count(),
+                                                'nbNonDefini' => (new OffreNonDefiniRepository())->count()]);
     }
 
     /**

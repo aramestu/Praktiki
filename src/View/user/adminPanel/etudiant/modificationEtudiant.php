@@ -1,10 +1,3 @@
-<?php
-use App\SAE\Model\Repository\EtudiantRepository;
-$conventionValidee = (new EtudiantRepository())->conventionEtudiantEstValide($etudiant);
-$etudiantAStage = (new EtudiantRepository())->etudiantAStage($etudiant);
-$etudiantAAlternance = (new EtudiantRepository())->etudiantAAlternance($etudiant);
-?>
-
 <form class="managementPanel" action="frontController.php?action=modifierEtudiant&controller=PanelAdmin&numEtudiant=<?=rawurlencode($etudiant->getNumEtudiant())?>" method="post">
     <div class="container VBox entityInformation">
         <div class="top">
