@@ -153,6 +153,13 @@ header:hover::after {
     transform: rotateZ(-45deg) translateY(0);
 }
 
+#burgerParent {
+    height: 30px;
+}
+
+.burger > * {
+    margin-top: 15px;
+}
 /*---END BURGER---*/
 
 #transition-overlay {
@@ -857,6 +864,10 @@ legend {
     color: var(--pastelBlue);
 }
 
+#showPassword {
+    border: none;
+    background: none;
+}
 /*---END MISCELLANEOUS---*/
 
 
