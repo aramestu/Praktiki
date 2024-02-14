@@ -1,4 +1,4 @@
-# sae_web_s1
+# Prakitki / Projet concernant la Sae du semestre 3
 
 Projet réalisée a but d'apprentisage lors de ma deuxième année au BUT informtique
 
