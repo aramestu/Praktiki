@@ -1,7 +1,9 @@
 # sae_web_s1
 
+Projet réalisée a but d'apprentisage lors de ma deuxième année au BUT informtique
+
 Accès à la documentation :
 
-    -Se mettre sur la banche docs depuis l'IDE
-    -Lancer un serveur localhost avec MAMP/XAMP/PHP
-    -Aller sur file:///emplacement du dossier git/sae_web_s1/html/annotated.html
+    -Acceder au fichier sur la branche Docs
+    -Ouvrir dans un navigateur le fichier html/annoted.html
+    Lien absolu : file:///emplacement du dossier git/Praktiki/html/annotated.html
