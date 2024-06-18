@@ -8,6 +8,7 @@ Accès à la documentation :
     -Ouvrir dans un navigateur le fichier html/annoted.html
     Lien absolu : file:///emplacement du dossier git/Praktiki/html/annotated.html
 
-Login de test admin : 
+Login de test admin :
+
     - connxexion personnel
     - identifiant : trombetonni  Mot de passe : n'importe quel suite de charactère 
